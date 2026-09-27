@@ -1,122 +1,205 @@
 {
   "illustrations": {
-    "sleeping.png": { "emoji": "😴", "irasutoya": "ぐっすり眠る人" },
-    "clock.png": { "emoji": "⏳", "irasutoya": "時計 / 砂時計" },
-    "dolphin.png": { "emoji": "🐬", "irasutoya": "イルカ" },
-    "tetsuya.png": { "emoji": "🥱", "irasutoya": "徹夜する人" },
-    "dream.png": { "emoji": "💭", "irasutoya": "夢を見る人" },
-    "bikutto.png": { "emoji": "⚡", "irasutoya": "びっくりする人" },
-    "smartphone_bed.png": { "emoji": "📱", "irasutoya": "寝る前にスマホを見る人" },
-    "futoru.png": { "emoji": "🍔", "irasutoya": "太った人 / 夜食を食べる人" },
-    "nedame.png": { "emoji": "🛌", "irasutoya": "休日に寝坊する人" },
-    "koala.png": { "emoji": "🐨", "irasutoya": "コアラ" },
-    "ofuro.png": { "emoji": "🛁", "irasutoya": "お風呂に入る人" },
-    "oyasumi.png": { "emoji": "🌙", "irasutoya": "おやすみなさい" }
+    "sleep_bed.png": {
+      "emoji": "😴",
+      "irasutoya": "ベッドで寝る人のイラスト（男性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi51Ggf7URvCeKr_ctWihcqf32loftNS9EV2ztUdsOwC366SneSbl5n5oDyW3rM2c3JwakGtVkaT4yJxb85MuXX4mEgqXe95R8NnoXpn8lE2AGY7I8QZMvd1C8meDLrpAC4nfrbYY3EOGnw/s800/sleep_bed.png"
+    },
+    "ojiisan_bed.png": {
+      "emoji": "👴",
+      "irasutoya": "介護のイラスト「ベッドに寝るおじいさん」",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhRmu0zubnTqhUAtIFOaCxPIU0Dtfg3TGbHZDdPkuljIAfOR5pjciMNOWc11aTAGpoRc9s3Vh8ScdRaICAIOIIu_kmuwwEb02EzGj3_AWjRMNBvyiGuW-QBitlwOUXA2cPwjT-5g2vvitE/s800/ojiisan_bed.png"
+    },
+    "animal_dolphin.png": {
+      "emoji": "🐬",
+      "irasutoya": "イルカのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTXg0sLpN2GDu5Xb2UowfkjLlKUmGx07Q4Ba2eMCNJiOVHUhMnrQK24DUGDNm3FudM0-j8BQ_91ECCR1C6AgapOT4qo6ryERik3ZocQY_fHV-KbcqDJxdrZcuuNEORkCMAL7NDDT_PcUzk/s800/animal_dolphin.png"
+    },
+    "nebusoku_tetsuya_ake.png": {
+      "emoji": "🥱",
+      "irasutoya": "徹夜明けのイラスト（男性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcqgqhKrF1ZOuDuSxE5MHKbqBnhEO1WISM3n0wlqE4kkjafeOiXAaSaGlGSFPuUUp9wVQAB8whCqmDbcKhHvQLU6ZUV2TSm4fdOG3E31V_qLS-PR0qrJY1WcyPJwpKEhV88arLI4gIYabE/s800/nebusoku_tetsuya_ake.png"
+    },
+    "nebusoku_tetsuya_ake_man_smile.png": {
+      "emoji": "🥱",
+      "irasutoya": "徹夜明けの笑顔のイラスト（男性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjBDr7E1Ldv6uDKl-zZkSdMfjOdDzlS3oYQ97vm0XUzCWHmfE7jVrIb7kXBrpIe2IUStUSGnmvyb6NHPecgbCsdv_yYBBdbKoXTGV1xrT2S3189EMplqNHfd1gZ80YVZUbMZRuS3zoYEJTF/s800/nebusoku_tetsuya_ake_man_smile.png"
+    },
+    "medical_doctor_stop.png": {
+      "emoji": "⚠️",
+      "irasutoya": "ドクターストップのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgq4LEiJszBE_fjgeV1nPVvC57udxQwkc2uYJxaHgUME3QNwx_vi5Zw5ex6vp5I7jdK_D9Mue8VsyADsjAwZM4iNQt1keHZuiWPca4WiPvNI-tpf1jTKH64Zfm_WssSRIgbXqY1SAOIp6AI/s800/medical_doctor_stop.png"
+    },
+    "yume_man.png": {
+      "emoji": "💭",
+      "irasutoya": "夢を見ている人のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEitaZecLs4auey-B5PGVO-m1q8E9D5s6PzmnjVkhkRKJgf0WsVN0OVzSgnJ59LsC4u0NXgY9pNZJQ6k-ca119t43a8bg-CzGDomh5Mh3GPqXlUsu5AzkyW0ilpzGWhyphenhyphenKIVauAkdf8TG5RWJ/s800/yume_man.png"
+    },
+    "suimin_rem.png": {
+      "emoji": "💤",
+      "irasutoya": "レム睡眠のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnt-JPKtiEuy5RSx1CwgewSoC-vwXRBaiq5dg0fBAzgQzA9BCQxy2rB1W1gZAElk-3_sk8N0LhCLSlHPGmlKd6mPlEpxaK2gAPeLOWyiX5julUE112lX_nK3HNSmLpCtQ4JyyiCTi9txmq/s800/suimin_rem.png"
+    },
+    "bed_boy_wake.png": {
+      "emoji": "⏰",
+      "irasutoya": "起きた男の子のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiAKGyTHVMBTFAQ6d5M9CBJ7HEYz3JENwD7thZc6c8hxaJ_nkM4kf-SodcLHqKDvvYSJdzivtune1VbcmprJp_CWZmujfaDYkxV5QZQY0XahqBq9kFrj7O_4Qdu8J6HV-Qw5FR3pfYjg99X/s800/bed_boy_wake.png"
+    },
+    "study_book_neochi_man.png": {
+      "emoji": "⚡",
+      "irasutoya": "勉強中に寝落ちした人のイラスト（男性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmnKJu-zTDaNzsJEtwdEHE32MZqCfpqeAmAKPVEApSeBKl7_KNheGmJXhKdMEUx8Q5OStBXMLXQqhBEaIzHVOzr8hUZcMuGP2LzB8dxf6hZDd397Bfz_RUr59qaW2HJHySnNOJh3Zk4K6J/s800/study_book_neochi_man.png"
+    },
+    "nedoko_smartphone.png": {
+      "emoji": "📱",
+      "irasutoya": "暗闇でスマートフォンを使う人のイラスト（男性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXu13ftURQ6Uyn518Ll-IfvA5Kw9WZ6IdaepgEwPF8WWuVXe5f8EzNIqqs6-8ScigCKHxypPd1Z6I-H-3IRuQdJgppRjkPaEySQHfkVuBv-KeiF4xOM4OrplpxvD0N8ijWBqgsQkJRn3k/s800/nedoko_smartphone.png"
+    },
+    "taijukei3_himan_man.png": {
+      "emoji": "⚖️",
+      "irasutoya": "体重計に乗る人のイラスト（男性・肥満）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhKZTYogH3j6dfd_fgQFxF5cRLpxCIEEnH5FQtbO24rbCMWp-dOSRWoY2z4NIMYX-tlixmtR9NZJb4HJFeSYYAmX1QyC4nR0uNvTBkwH99jCbUIjvEJfclvvFDHloD8UIRJUOl6clG4GX9m/s800/taijukei3_himan_man.png"
+    },
+    "syokuji_yasyoku.png": {
+      "emoji": "🍜",
+      "irasutoya": "夜食のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEije3VarA7lvky7SWVZ_MwSB0qUR8moQ8G7vA9JE7vRC5yCxZlGdjmssggnTzlmzcr2YOQ3fteOSiF2Gya-wbwLl5K3gr35OfgsX9j6Tqyjo6Jfu_w42HIgE9Ox2NwysO-4Pl04rVsSiPbG/s800/syokuji_yasyoku.png"
+    },
+    "nidone_man.png": {
+      "emoji": "🛌",
+      "irasutoya": "二度寝のイラスト（男性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghM5BjGgU_hWI1BJMzirH_hnc2GHl9F9YpbkafYUufuE2CO7ikR5FrvMqz9QHc6_GHg8aA4dxMiodKnaP_wL7LOjIDAynPlvyxOvfdt5Q3qobEh4v07gWvI7P4EkJ7m5dRdQ8UuddFOuAA/s800/nidone_man.png"
+    },
+    "nebou_man.png": {
+      "emoji": "🛌",
+      "irasutoya": "寝坊をした人のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpT94DZnNzG-GhSlbziMtxdfzQtR6QOh_K5VDPRQDBgHP-_riw2OY38G-N7B22sPFofJ29RQfuAIPT7ZVfxhWLaKIgYDPCbIe3ytMnIUviF6fswo9NTK-DpaLjYEejPeBU6bHNEZDMbpMR/s800/nebou_man.png"
+    },
+    "animal_koala_oyako.png": {
+      "emoji": "🐨",
+      "irasutoya": "コアラの親子のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgi7pTq103aK5t99UhgolUJooeVuHJiIhPytqKkp8-wwJPtr7jq8PwBQDb11cyQpYV22sq_CPFqaTrP8KN4fGPtmSFTQBcXfa7lIU_aLZ3DelWEpRwtANXUuXrCPDzZ-6qtj2qrWVYDL5Q/s800/animal_koala_oyako.png"
+    },
+    "ofuro_nyuyokuzai_woman.png": {
+      "emoji": "🛁",
+      "irasutoya": "入浴剤のお風呂に入っている人のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTCqssB9ZbZPBc9KgUWbf-2T5goAAZ9OoWyu59RPM3nXVCVleCfrOWJZrqofnZ6y3qHtOnhZeUxCEeTMNqFxonKImnbcAZ4YitMMhkokWfMRn57rGDiiGgOtjFx8oPM12W_Rwap1dbNn0/s800/ofuro_nyuyokuzai_woman.png"
+    },
+    "furoagari_man.png": {
+      "emoji": "♨️",
+      "irasutoya": "お風呂あがりの男性のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgf0_89FyVAjW6UNFxKbxt8wwBhYTfKZVqHwKPP-sf-LmwDkOcbll9M0xqzKfoJ-NdACkGsyj5MMScB_PhiMbuTTXebNPRMU9P2dT1-Dkcpq8TdGO8fgranukJM1212kY6XpELwIQoIkR5Z/s800/furoagari_man.png"
+    },
+    "sleep_animal_dog.png": {
+      "emoji": "🐶",
+      "irasutoya": "寝る犬のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7hnZusaJT-QuL0Yszhs-oBpdaJXQtLGr-ir-72YSUdYt3LkYu5Z2WstBcGSFNObAmhBYDCrxeYwxxVV8F2T_UBdWZ5RK-3N3n7Qb6H5Fno8fM6racjl6dqauJbWj-K2bxXElNGilNrO4i/s800/sleep_animal_dog.png"
+    }
   },
   "slides": [
     {
       "text": "知っていると誰かに話したくなる、睡眠の雑学を紹介します。",
-      "image": "sleeping.png"
+      "image": "sleep_bed.png"
     },
     {
       "text": "人は人生のおよそ3分の1を、眠って過ごしています。",
       "speech": "人は、人生のおよそ三分の一を、眠って過ごしています。",
-      "image": "sleeping.png"
+      "image": "sleep_bed.png"
     },
     {
       "text": "1日8時間眠る人が90歳まで生きると、約30年も寝ている計算です。",
       "speech": "一日八時間眠る人が、九十歳まで生きると、約三十年も寝ている計算です。",
-      "image": "clock.png"
+      "image": "ojiisan_bed.png"
     },
     {
       "text": "イルカは、脳を半分ずつ眠らせることができます。",
-      "image": "dolphin.png"
+      "image": "animal_dolphin.png"
     },
     {
       "text": "片方の脳が休んでいる間も、もう片方で呼吸や見張りを続けているのです。",
-      "image": "dolphin.png"
+      "image": "animal_dolphin.png"
     },
     {
       "text": "人が眠らずに起き続けた最長記録は、およそ11日間です。",
       "speech": "人が眠らずに起き続けた最長記録は、およそ十一日間です。",
-      "image": "tetsuya.png"
+      "image": "nebusoku_tetsuya_ake.png"
     },
     {
       "text": "1964年、アメリカの高校生が264時間も起き続けました。",
       "speech": "千九百六十四年、アメリカの高校生が、二百六十四時間も起き続けました。",
-      "image": "tetsuya.png"
+      "image": "nebusoku_tetsuya_ake_man_smile.png"
     },
     {
       "text": "ただし体に危険なため、現在ギネスはこの記録の認定をやめています。",
-      "image": "tetsuya.png"
+      "image": "medical_doctor_stop.png"
     },
     {
       "text": "「夢を見なかった」という日も、実は毎晩夢を見ています。",
-      "image": "dream.png"
+      "image": "yume_man.png"
     },
     {
       "text": "一晩に4〜5回やってくるレム睡眠のたびに、夢を見ていると言われています。",
       "speech": "一晩に、四回から五回やってくるレム睡眠のたびに、夢を見ていると言われています。",
-      "image": "dream.png"
+      "image": "suimin_rem.png"
     },
     {
       "text": "覚えていないのは、目覚めたときにすぐ忘れてしまうからです。",
-      "image": "dream.png"
+      "image": "bed_boy_wake.png"
     },
     {
       "text": "眠りに落ちる瞬間、体が「ビクッ」となったことはありませんか？",
       "speech": "眠りに落ちる瞬間、体がビクッとなったことはありませんか？",
-      "image": "bikutto.png"
+      "image": "study_book_neochi_man.png"
     },
     {
       "text": "これは「ジャーキング」と呼ばれる、ごく普通の現象です。",
-      "image": "bikutto.png"
+      "image": "study_book_neochi_man.png"
     },
     {
       "text": "寝る前にスマホを見ると、眠りにくくなってしまいます。",
-      "image": "smartphone_bed.png"
+      "image": "nedoko_smartphone.png"
     },
     {
       "text": "画面の光が、眠気をうながすホルモン「メラトニン」を減らしてしまうからです。",
-      "image": "smartphone_bed.png"
+      "image": "nedoko_smartphone.png"
     },
     {
       "text": "さらに、寝不足が続くと太りやすくなります。",
-      "image": "futoru.png"
+      "image": "taijukei3_himan_man.png"
     },
     {
       "text": "食欲を増やすホルモンが増え、満腹を感じるホルモンが減ってしまうためです。",
-      "image": "futoru.png"
+      "image": "syokuji_yasyoku.png"
     },
     {
       "text": "休日の「寝だめ」で、平日の寝不足を取り返すことはできません。",
-      "image": "nedame.png"
+      "image": "nidone_man.png"
     },
     {
       "text": "たまった寝不足は「睡眠負債」と呼ばれ、毎日少しずつ返していくしかないのです。",
-      "image": "nedame.png"
+      "image": "nebou_man.png"
     },
     {
       "text": "コアラは、1日におよそ20時間も眠ります。",
       "speech": "コアラは、一日におよそ二十時間も眠ります。",
-      "image": "koala.png"
+      "image": "animal_koala_oyako.png"
     },
     {
       "text": "主食のユーカリは栄養が少ないので、眠ってエネルギーを節約しているのです。",
-      "image": "koala.png"
+      "image": "animal_koala_oyako.png"
     },
     {
       "text": "ぐっすり眠りたい日は、寝る1〜2時間前にお風呂に入るのがおすすめです。",
       "speech": "ぐっすり眠りたい日は、寝る一時間から二時間前に、お風呂に入るのがおすすめです。",
-      "image": "ofuro.png"
+      "image": "ofuro_nyuyokuzai_woman.png"
     },
     {
       "text": "温まった体温が下がっていくタイミングで、自然と眠くなるからです。",
-      "image": "ofuro.png"
+      "image": "furoagari_man.png"
     },
     {
       "text": "今夜はぐっすり眠れますように。最後までご覧いただき、ありがとうございました。",
-      "image": "oyasumi.png"
+      "image": "sleep_animal_dog.png"
     }
   ]
 }

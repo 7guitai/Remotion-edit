@@ -11,6 +11,7 @@
 npm install
 pip install pyopenjtalk numpy   # 音声・BGM を作り直すときだけ必要
 
+npm run illustrations   # いらすとやの画像を public/illustrations/ にダウンロード（最初に1回）
 npm run voice   # src/script.json のテロップを読み上げて public/voice/*.wav を作成
 npm run bgm     # public/bgm/bgm.mp3（オリジナルBGM）を作成
 npm run dev     # Remotion Studio でプレビュー
@@ -40,8 +41,9 @@ npm run build   # out/sleep-trivia.mp4 を書き出し
 
 ## イラスト（いらすとや）
 
-`src/script.json` の `illustrations` に、ファイル名と探す画像の目安が書いてあります。
-[いらすとや](https://www.irasutoya.com/) から画像を保存し、同じファイル名で `public/illustrations/` に置いてください。
+使うイラスト（19点）は `src/script.json` の `illustrations` に、いらすとやでの名前と画像URLつきで書いてあります。
+`npm run illustrations` でまとめて `public/illustrations/` に保存されます。
+別のイラストに変えたいときは、画像を `public/illustrations/` に置いて各スライドの `image` をそのファイル名にしてください。
 画像がないスライドは絵文字の仮イラストになります（Studio ではどの画像を置くかも表示されます）。
 
 > いらすとやの素材は再配布が禁止されているため、`public/illustrations/` の画像は `.gitignore` でコミット対象外にしています。

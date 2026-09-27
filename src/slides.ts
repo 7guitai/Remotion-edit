@@ -10,6 +10,7 @@ const TAIL = 12;
 export type Illustration = {
   emoji: string;
   irasutoya: string;
+  url?: string;
 };
 
 export type ResolvedSlide = {
