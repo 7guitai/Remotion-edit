@@ -1,0 +1,428 @@
+{
+  "id": "charger-power-split",
+  "title": "PCとスマホを同時充電する充電器の選び方｜65W・100W・140W比較",
+  "pr": true,
+  "source": {
+    "name": "OCHA NOTE",
+    "url": "https://ochanote.com/articles/laptop-phone-charger-power-split/"
+  },
+  "bgm": {
+    "file": "simplestyle.mp3",
+    "title": "シンプルスタイル",
+    "credit": "甘茶の音楽工房",
+    "page": "https://amachamusic.chagasi.com/music_simplestyle.html",
+    "url": "https://amachamusic.chagasi.com/mp3/simplestyle.mp3"
+  },
+  "readings": {
+    "OCHA NOTE": "オチャノート",
+    "MacBook Air": "マックブックエアー",
+    "Anker": "アンカー",
+    "USB PD": "ユーエスビーピーディー",
+    "USB-C": "ユーエスビーシー",
+    "AC": "エーシー",
+    "PC": "ピーシー",
+    "C1": "シーワン",
+    "C2": "シーツー",
+    "C3": "シースリー",
+    "2口": "ふたくち",
+    "＋": "と",
+    "何W": "なんワット"
+  },
+  "illustrations": {
+    "pc_smartphone_battery_juuden.png": {
+      "emoji": "🔌",
+      "irasutoya": "通信機器の充電のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQXrmcco8Ig-u_g33P_XmUsW0ssxmlZ7F63Axd9a6GL4jlNv8ebZ7MDrfx7cWOdPcrB0t0yLio0JPa2f3eKv-F_gsmb8hD-uTBKPycZB-8oGW1Tm7wUyZ4iQQTHwOyWMd6D8M9FF5YBEH8/s800/pc_smartphone_battery_juuden.png"
+    },
+    "battery_juudenki.png": {
+      "emoji": "🔋",
+      "irasutoya": "充電器のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6sz5uWJM7iREhGyvTFwIVc_HfPr255Ggp-V3TWOGVFGm4IwDYCPwsyM8ZvNvylg6SeoFBxFLmaWVy0Nkw9tuCG1aIr1mm0H7uiW-xy3r0mrqE4lLDUG2fqeME3bG3vgNDgtTGS1cKnhI/s800/battery_juudenki.png"
+    },
+    "study_daigakusei_woman.png": {
+      "emoji": "👩‍🎓",
+      "irasutoya": "勉強をしている人のイラスト（女性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGrR46yFXe4Czs6smGcJhVInuQa6Ktz34kVUoxG89wjh8zikCJBiYdf0b7Vz3pQwseIaSNX3y-LkGMAsrZkSTbpwx3gMC3xBExk8_JHZrwqFjexVH0EjkVMLeaDmzJncRUyZJVw6FEuAE/s800/study_daigakusei_woman.png"
+    },
+    "computer_laptop.png": {
+      "emoji": "💻",
+      "irasutoya": "ノートパソコンのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg1njivV-RMRSlV6fL2dVGG9cj39Gy7ZUbIZ0Jk4qzfLno2x-gd6QpCbjD9vG0dqxt_KeOsT0YEzhHJfkZMVXN4BBOzkfaBWLLXiCAkrKGdQusT1aJ3JjRV7jj5EZzeKRWOxz8d9Y5u7soN/s800/computer_laptop.png"
+    },
+    "setsumeisyo_man.png": {
+      "emoji": "📖",
+      "irasutoya": "説明書を読む人のイラスト（男性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjmcwF7Ohb78tu5ximB70V8xEdUMR0jl748ctk4_Z_IbGoAHDObaZltGr9pk-jn0ilmepSRNRtSbpJDhKU-cMZh7BUQf5iTN787zAhVR6XpFpx-Yle5P0rQXormNefqhCHlY0z7J06Aqk-h/s800/setsumeisyo_man.png"
+    },
+    "computer_adapter.png": {
+      "emoji": "🔌",
+      "irasutoya": "ACアダプターのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghk7xHzGrOuwPwQ2s8luNuCfJChbTNnmjutgEUSIa8-dSwHlp5E0UpLVuii5LpH0lcFwYf5WkCPgB4UcmhhgVXVqgJCGhgsDss8mF8bgBxM11nUHie8wdctv47ZYlqyuQACsmaRMgbihDL/s800/computer_adapter.png"
+    },
+    "smartphone_battery_off.png": {
+      "emoji": "🪫",
+      "irasutoya": "スマートフォンのバッテリー切れのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHbWDZ0MTbqQJ5lHiWWOl9jz-nT9YXLAmx95f13dMnwxbuVTqZivtKolFku-vYCM3ns6DoyXpzj6VQ1ZQIULEtajUowZTM3IrAQkqF1b0uYH-zk3lpA-oUlKLMQnbBj8qV3tAH5KBuXxU/s800/smartphone_battery_off.png"
+    },
+    "computer_side_woman.png": {
+      "emoji": "💻",
+      "irasutoya": "ノートパソコンを使う女性のイラスト（横向き）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7ftiMRFiSRnixXKFmI1ZtM5QuwTFSiQgyoVsgsaSW_iIUj4jNZnRVPwVH9xJHYJKeO4GrdR8srhO_dRibfaWOJiRT77-X5-cntOLCjE1-PhbkEFLBQHFaEdFFikfpf-XWyZ_C_SFs4ueg/s800/computer_side_woman.png"
+    },
+    "travel_nidukuri.png": {
+      "emoji": "🧳",
+      "irasutoya": "旅行の荷物をまとめている人のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhh1c-7Yh59kggFHG4fIyVeVY5pbKX0NqRTq7m8xLSFUFMPtQ4yJ3ocZ0I1vRXve0bkGdl6XMwvBvyt2eobCv5PlQanoOE0XKlzMXio5wloefp8RmcbSWEtiONK744XiAQCwCeK8w3-ZPTv/s800/travel_nidukuri.png"
+    },
+    "omoi_businessman.png": {
+      "emoji": "🏋️",
+      "irasutoya": "重いものに苦しむ人のイラスト（会社員）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVKqteoz8DdPaYroVtVnaF785Py2SC-j-icbSTXmol62Sx0r0p3zJMRoUtFvVhtNo2szXmEfm5y_q5-GwF2G9iBvh89TcKQJ8jaskO3GLxZT785r4T7HCeu9bUkCdzFeyj8yyJLzVWVJw-/s800/omoi_businessman.png"
+    },
+    "computer_usb_cable.png": {
+      "emoji": "🔗",
+      "irasutoya": "USBケーブルのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiiNhX8u9OGtba2qlfvJItXgleFzhFzre792kf2JJvT5FOpWEY4WjUUs-LPSj9vslzId9ymmBx4jX68bUKRba92xWgfoOutxQ1IYi_l-h76FmCzgtvuPPm5I-fJq0Cdw1VxWZ9_vpZp8fM/s800/computer_usb_cable.png"
+    },
+    "pose_yubisashi_kakunin_businessman.png": {
+      "emoji": "☝️",
+      "irasutoya": "指差し確認のイラスト（男性会社員）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkuojhQBvDrJQ-dtRpcYL62XnAwejiJsRNm6hslX7kQshO2zNSbGLmPVqBgH4jt1Nr7-146e_WjaLP9zqP6lD6R_TZt7av5jVHNqKgzmrfZs2_EDEWKugqhpmmV7A3UbyHQ2Us0eyJwKKn/s800/pose_yubisashi_kakunin_businessman.png"
+    },
+    "kangaeruhito.png": {
+      "emoji": "🤔",
+      "irasutoya": "考える人のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgcuypX2JbyiD4JVxLKSb-wEau7GHS1WjK4ITmIk2QYGzwwRhYGidjl1FWbb6OeBRYS2bJEQEDxjnMvsGuB895DBHn9bb_2L5BfBTnNRkkO2TTWu94h7TAHYt38pX2pwnBRfg9Npy9EUySq/s800/kangaeruhito.png"
+    },
+    "pop_osusume.png": {
+      "emoji": "👍",
+      "irasutoya": "「おすすめ」のPOPイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjYRi79Cz6UuGP35v92FGY1jbn4P84R8GDct3zWspSs07rJjmAiFUDidYEKnWgIB66_UHP6v8jATdbzXOgBC4wRKOuitB2vnjTUTqUH4fhJieJZFVbaCVjO2hmdYTbEc9TSFAT-WfvhT651/s800/pop_osusume.png"
+    },
+    "banner_yokuaru_goshitsumon.png": {
+      "emoji": "❓",
+      "irasutoya": "「よくあるご質問」のイラスト文字・バナー",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi2Rh8SnC_j42AYcHkoTgqfz67vfy-s9Z9Ukxmu4eT311w-6W7Aq4XVR-5zK9s7hPd7R8ayBypO7KiOVELmuelKjD8izKGDjOEikDika3SwAWoR67pu5BHdaTzsLRApUBSD0bI7FLoRDJP0/s800/banner_yokuaru_goshitsumon.png"
+    },
+    "mark_chuui.png": {
+      "emoji": "⚠️",
+      "irasutoya": "注意のマーク",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzMqkpQ7vLUKvumbm6AFwTLQiCe7tlDb2Q0MAiISLsesZHnhj0kbRjB4U3se3UrDIHfIy0hlahyphenhyphenQu-V2tOR2LcV_lX7U8P5a8jtqPYv3Ah4L-JoYi8PhoaoehumGIdp2vrsX0rRyhXqwA/s800/mark_chuui.png"
+    },
+    "smartphone_juuden.png": {
+      "emoji": "📱",
+      "irasutoya": "スマートフォンの充電のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZjl_Jtcuz9MaDSgyJFr_51IzNEabMFnJ48uoDVx7IPuejhTNl9Y7qJOdM0B4dkIV6xSqYvkpVXVN9Smwz9Z_n4Y8ZxZfFlsFLxVhVS2eF-ZYlThp-EHrAuuE7P-zLJ4lQDKIDkiJnMFA/s800/smartphone_juuden.png"
+    },
+    "tv_video_hensyu_hard.png": {
+      "emoji": "🎬",
+      "irasutoya": "徹夜で動画編集をする人のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTKjaWyNcCBxDob86li6Wfi3Or6quzA0jON9_kHhqbP5oe9fLVj2rbjB95IPXAE14q4WlGNdJv4to8kus8BqI3LzGZoIyy6Js19imyRG6F91P8DdYy6mEJ55Fra7YIqKGV6UhhyphenhyphenkVVdrE/s800/tv_video_hensyu_hard.png"
+    },
+    "computer_nekorogaru_woman.png": {
+      "emoji": "💻",
+      "irasutoya": "寝転がってノートパソコンを使っている人のイラスト（女性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuefGut6GuBqrFFDc0aRI5suY8U0zImQz2P8908EIvFLvfK8kNacuaCzxK8KpKMiYcMeLvaXYunYX9ZaYFTTyPbIK5K_BAvIoO-LrKQul2OiI3wVia4zICjIKnwp6BvLBdHZ7Zo27k91p5/s800/computer_nekorogaru_woman.png"
+    }
+  },
+  "slides": [
+    {
+      "text": "PCとスマホを同時に充電したい人へ。\n充電器の選び方を解説するのだ！",
+      "image": "pc_smartphone_battery_juuden.png",
+      "chapter": "はじめに"
+    },
+    {
+      "text": "大事なのは、充電器に書かれた「最大100W」の数字ではないのだ。",
+      "image": "battery_juudenki.png"
+    },
+    {
+      "text": "2台つないだときに、PC側へ何W残るか。\nここを見るのが大切なのだ。",
+      "image": "study_daigakusei_woman.png"
+    },
+    {
+      "type": "points",
+      "text": "先に結論なのだ！",
+      "items": [
+        {
+          "label": "65W級",
+          "body": "軽さ重視・軽い作業が中心の人"
+        },
+        {
+          "label": "100W級",
+          "body": "迷ったらこれ・使い方の幅が広い"
+        },
+        {
+          "label": "140W級",
+          "body": "2台同時でもPCに100W送りたい人"
+        }
+      ],
+      "speech": "先に結論を言うと、軽い作業が中心なら65W級、迷ったら100W級、2台同時でもPCに100W送りたいなら140W級が候補なのだ。",
+      "chapter": "先に結論"
+    },
+    {
+      "text": "まずは、PCがUSB-Cで充電できるかを確認するのだ。",
+      "image": "computer_laptop.png",
+      "chapter": "PCの充電方式と必要電力を確認"
+    },
+    {
+      "text": "USB-C端子があっても、そこから充電できるとは限らないのだ。",
+      "image": "computer_laptop.png"
+    },
+    {
+      "text": "メーカーの仕様書で「USB PD」での充電に対応しているか確かめるのだ。",
+      "image": "setsumeisyo_man.png"
+    },
+    {
+      "text": "次に、PCに付いているACアダプタのW数をチェックするのだ。",
+      "image": "computer_adapter.png"
+    },
+    {
+      "text": "65Wのアダプタが付いたPCでも、2台同時だとPCに45Wしか来ない充電器があるのだ。",
+      "image": "computer_adapter.png"
+    },
+    {
+      "text": "すると、使いながらの充電が遅くなったり、残量が減ったりすることもあるのだ。",
+      "image": "smartphone_battery_off.png"
+    },
+    {
+      "text": "MacBook Airも、モデルによって推奨W数が30Wから70Wまで違うのだ。",
+      "image": "computer_side_woman.png"
+    },
+    {
+      "type": "bars",
+      "text": "では、Ankerの3製品で「2台同時の配分」を比べるのだ。",
+      "bars": [
+        {
+          "label": "65W級",
+          "sub": "PowerPort III 3-Port 65W Pod",
+          "pc": 45,
+          "phone": 20
+        },
+        {
+          "label": "100W級",
+          "sub": "Charger (100W, 3 Ports)",
+          "pc": 70,
+          "phone": 30
+        },
+        {
+          "label": "140W級",
+          "sub": "Charger (140W, 4 Ports)\nPCはC1/C2・スマホはC3",
+          "pc": 100,
+          "phone": 40
+        }
+      ],
+      "note": "Anker公式の公称値（2台同時の最大配分）。実際の電力は機器や充電状態で変わります",
+      "chapter": "2台同時の電力配分を比較"
+    },
+    {
+      "type": "bars",
+      "text": "同じ「2台同時」でも、PCに回る電力はこんなに違うのだ！",
+      "bars": [
+        {
+          "label": "65W級",
+          "sub": "PowerPort III 3-Port 65W Pod",
+          "pc": 45,
+          "phone": 20
+        },
+        {
+          "label": "100W級",
+          "sub": "Charger (100W, 3 Ports)",
+          "pc": 70,
+          "phone": 30
+        },
+        {
+          "label": "140W級",
+          "sub": "Charger (140W, 4 Ports)\nPCはC1/C2・スマホはC3",
+          "pc": 100,
+          "phone": 40
+        }
+      ],
+      "note": "Anker公式の公称値（2台同時の最大配分）。実際の電力は機器や充電状態で変わります"
+    },
+    {
+      "type": "table",
+      "text": "価格と重さもまとめたのだ。",
+      "columns": [
+        "",
+        "PC＋スマホ",
+        "PCだけ",
+        "重さ",
+        "公式価格"
+      ],
+      "rows": [
+        [
+          "65W級",
+          "45W＋20W",
+          "最大65W",
+          "約130g",
+          "6,990円"
+        ],
+        [
+          "100W級",
+          "70W＋30W",
+          "最大100W",
+          "約220g",
+          "9,990円"
+        ],
+        [
+          "140W級",
+          "100W＋40W",
+          "最大140W",
+          "約275g",
+          "12,990円"
+        ]
+      ],
+      "note": "2026年9月27日 Anker Japan公式オンラインストアで確認した価格と公称値。価格は販売店や時期で変わります",
+      "speech": "価格と重さも表にまとめたのだ。価格は時期や販売店で変わるから、買う前に確認してほしいのだ。"
+    },
+    {
+      "text": "65W級は、約130gと軽いのが魅力なのだ。",
+      "image": "travel_nidukuri.png",
+      "chapter": "65W級"
+    },
+    {
+      "text": "2台同時だとPC側は最大45W。\n資料を読んだり文章を書いたりなら困りにくいのだ。",
+      "image": "study_daigakusei_woman.png"
+    },
+    {
+      "text": "でも、付属アダプタが65W以上のPCで重い作業をするなら、慎重に考えるのだ。",
+      "image": "tv_video_hensyu_hard.png"
+    },
+    {
+      "text": "100W級は、USB-Cを2口同時に使うと70W＋30Wが基本なのだ。",
+      "image": "battery_juudenki.png",
+      "chapter": "100W級"
+    },
+    {
+      "text": "もう片方の機器がほとんど電力を使っていないと、PCに95Wを回す仕組みもあるのだ。",
+      "image": "smartphone_juuden.png"
+    },
+    {
+      "text": "MacBook Airとスマホをまとめたい人の、第一候補なのだ！",
+      "image": "pop_osusume.png"
+    },
+    {
+      "text": "ただし、付属アダプタが90W以上のPCなら、140W級のほうが条件を読み取りやすいのだ。",
+      "image": "kangaeruhito.png"
+    },
+    {
+      "text": "140W級は、PCをC1かC2、スマホをC3につなぐと100W＋40Wになるのだ。",
+      "image": "battery_juudenki.png",
+      "chapter": "140W級"
+    },
+    {
+      "text": "C1とC2の2口を使うと、70W＋70Wに変わるから注意なのだ。",
+      "image": "mark_chuui.png"
+    },
+    {
+      "text": "そのかわり約275gで、65W級より約145g重くなるのだ。",
+      "image": "omoi_businessman.png"
+    },
+    {
+      "text": "「最大140W」は、スマホをつないだままPCに140W送れるという意味ではないのだ。",
+      "image": "mark_chuui.png"
+    },
+    {
+      "type": "points",
+      "text": "買う前に見落としやすい3つのポイントなのだ。",
+      "items": [
+        {
+          "label": "1",
+          "body": "使うポートを決めておく"
+        },
+        {
+          "label": "2",
+          "body": "ケーブルの対応W数を確認する"
+        },
+        {
+          "label": "3",
+          "body": "PCの付属アダプタと比べる"
+        }
+      ],
+      "speech": "買う前に見落としやすいポイントは3つ。使うポートを決めておくこと、ケーブルの対応ワット数、そしてPCの付属アダプタと比べることなのだ。",
+      "chapter": "買う前に見落としやすい3点"
+    },
+    {
+      "text": "60Wを超える充電には、100Wや240Wと書かれたUSB-Cケーブルが必要なのだ。",
+      "image": "computer_usb_cable.png"
+    },
+    {
+      "text": "100Wを超えるなら、240W対応のケーブルを選ぶのだ。",
+      "image": "computer_usb_cable.png"
+    },
+    {
+      "text": "45Wで充電するPCに140Wの充電器を使っても、140Wで充電されるわけではないのだ。",
+      "image": "pose_yubisashi_kakunin_businessman.png"
+    },
+    {
+      "type": "points",
+      "text": "どれを選ぶか、まとめるのだ！",
+      "items": [
+        {
+          "label": "65W級",
+          "body": "軽さ最優先。PC側45Wで困らない人"
+        },
+        {
+          "label": "100W級",
+          "body": "PCとスマホをまとめたい、一般的な使い方の人"
+        },
+        {
+          "label": "140W級",
+          "body": "2台同時でもPCに最大100W送りたい人"
+        }
+      ],
+      "speech": "まとめると、軽さ最優先なら65W級、一般的な使い方なら100W級、2台同時でもPCに100W送りたいなら140W級なのだ。",
+      "chapter": "どれを選ぶか"
+    },
+    {
+      "text": "ひとつに絞るなら、100W級がおすすめなのだ！",
+      "image": "pop_osusume.png"
+    },
+    {
+      "text": "ただし付属アダプタが90W以上のPCなら、先に型番とUSB-Cでの充電条件を確認してほしいのだ。",
+      "image": "pose_yubisashi_kakunin_businessman.png"
+    },
+    {
+      "text": "最後に、よくある疑問に答えるのだ。",
+      "image": "banner_yokuaru_goshitsumon.png",
+      "chapter": "よくある疑問"
+    },
+    {
+      "text": "100Wの充電器をスマホにつないでも、壊れないのだ？",
+      "image": "smartphone_juuden.png"
+    },
+    {
+      "text": "100Wは充電器が出せる上限。\n機器と話し合って、必要な分だけ送る仕組みなのだ。",
+      "image": "smartphone_juuden.png"
+    },
+    {
+      "text": "高い出力で使うと、充電器は熱くなるのだ。\n布で覆わず、風通しのいい場所で使うのだ。",
+      "image": "mark_chuui.png"
+    },
+    {
+      "text": "もっと詳しい内容は、OCHA NOTEの記事で解説しているのだ。\n概要欄から見てほしいのだ！",
+      "image": "computer_nekorogaru_woman.png"
+    }
+  ],
+  "description": "PCとスマホを1つの充電器で同時に充電したい人向けに、65W・100W・140W級の充電器の選び方を、ずんだもんが解説するのだ。\n最大出力だけでは分からない「2台同時のときにPCへ何W届くか」を、Ankerの3製品で比べています。",
+  "links": [
+    {
+      "label": "Anker PowerPort III 3-Port 65W Pod",
+      "url": "https://link.amazon/B0cGbRUff"
+    },
+    {
+      "label": "Anker Charger (100W, 3 Ports)",
+      "url": "https://link.amazon/B05L5ZlbC"
+    },
+    {
+      "label": "Anker Charger (140W, 4 Ports)",
+      "url": "https://amzn.asia/d/0cv3OK8V"
+    }
+  ],
+  "hashtags": [
+    "充電器",
+    "ガジェット",
+    "Anker",
+    "ずんだもん"
+  ]
+}

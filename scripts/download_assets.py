@@ -1,4 +1,4 @@
-"""src/script.json に書かれた素材をダウンロードする。
+"""src/episodes/*.json に書かれた素材をダウンロードする。
 
 - いらすとや の画像 → public/illustrations/
 - フリーBGM（甘茶の音楽工房）→ public/bgm/
@@ -11,7 +11,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SCRIPT = ROOT / "src" / "script.json"
+EPISODES = ROOT / "src" / "episodes"
 
 
 def download(url: str, out: Path, label: str) -> None:
@@ -26,17 +26,19 @@ def download(url: str, out: Path, label: str) -> None:
 
 
 def main() -> None:
-    script = json.loads(SCRIPT.read_text(encoding="utf-8"))
+    for path in sorted(EPISODES.glob("*.json")):
+        episode = json.loads(path.read_text(encoding="utf-8"))
+        print(f"[{episode['id']}]")
 
-    bgm = script["bgm"]
-    download(bgm["url"], ROOT / "public" / "bgm" / bgm["file"], f"{bgm['title']}（{bgm['credit']}）")
+        bgm = episode["bgm"]
+        download(bgm["url"], ROOT / "public" / "bgm" / bgm["file"], f"{bgm['title']}（{bgm['credit']}）")
 
-    for name, info in script["illustrations"].items():
-        url = info.get("url")
-        if not url:
-            print(f"  (URLなし) {name}  … いらすとやで「{info['irasutoya']}」を探して保存してください")
-            continue
-        download(url, ROOT / "public" / "illustrations" / name, info["irasutoya"])
+        for name, info in episode["illustrations"].items():
+            url = info.get("url")
+            if not url:
+                print(f"  (URLなし) {name}  … いらすとやで「{info['irasutoya']}」を探して保存してください")
+                continue
+            download(url, ROOT / "public" / "illustrations" / name, info["irasutoya"])
 
 
 if __name__ == "__main__":

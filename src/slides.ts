@@ -1,22 +1,15 @@
 import { CalculateMetadataFunction, staticFile } from "remotion";
 import { getAudioDurationInSeconds } from "@remotion/media-utils";
-import script from "./script.json";
+import { getEpisode, Illustration, ScriptSlide } from "./episodes";
 
 export const FPS = 30;
 // ナレーションの前後に入れる間（フレーム）
 const LEAD_IN = 6;
 const TAIL = 12;
 
-export type Illustration = {
-  emoji: string;
-  irasutoya: string;
-  url?: string;
-};
-
 export type ResolvedSlide = {
-  text: string;
-  image: string;
-  illustration: Illustration;
+  slide: ScriptSlide;
+  illustration: Illustration | null;
   hasImage: boolean;
   voice: string | null;
   voiceStart: number;
@@ -24,10 +17,9 @@ export type ResolvedSlide = {
 };
 
 export type VideoProps = {
+  episodeId: string;
   slides: ResolvedSlide[];
 };
-
-const ILLUSTRATIONS: Record<string, Illustration> = script.illustrations;
 
 const exists = async (path: string) => {
   try {
@@ -40,23 +32,23 @@ const exists = async (path: string) => {
 
 // public/ にある音声・イラストを調べて、各スライドの長さを決める。
 // 音声がないスライドは文字数から長さを見積もる。
-export const resolveSlides = async (): Promise<ResolvedSlide[]> => {
+const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
+  const episode = getEpisode(episodeId);
   return Promise.all(
-    script.slides.map(async (slide, i) => {
-      const voicePath = `voice/${String(i).padStart(3, "0")}.wav`;
+    episode.slides.map(async (slide, i) => {
+      const voicePath = `voice/${episode.id}/${String(i).padStart(3, "0")}.wav`;
       const hasVoice = await exists(voicePath);
       const seconds = hasVoice
         ? await getAudioDurationInSeconds(staticFile(voicePath))
-        : 1 + slide.text.length * 0.13;
-      const illustration = ILLUSTRATIONS[slide.image] ?? {
-        emoji: "💤",
-        irasutoya: slide.image,
-      };
+        : 1 + (slide.speech ?? slide.text).length * 0.13;
+      const image = slide.type === undefined || slide.type === "illust" ? slide.image : null;
+      const illustration = image
+        ? (episode.illustrations[image] ?? { emoji: "💤", irasutoya: image })
+        : null;
       return {
-        text: slide.text,
-        image: slide.image,
+        slide,
         illustration,
-        hasImage: await exists(`illustrations/${slide.image}`),
+        hasImage: image ? await exists(`illustrations/${image}`) : false,
         voice: hasVoice ? voicePath : null,
         voiceStart: LEAD_IN,
         durationInFrames: LEAD_IN + Math.ceil(seconds * FPS) + TAIL,
@@ -65,11 +57,12 @@ export const resolveSlides = async (): Promise<ResolvedSlide[]> => {
   );
 };
 
-export const calculateMetadata: CalculateMetadataFunction<VideoProps> =
-  async () => {
-    const slides = await resolveSlides();
-    return {
-      durationInFrames: slides.reduce((sum, s) => sum + s.durationInFrames, 0),
-      props: { slides },
-    };
+export const calculateMetadata: CalculateMetadataFunction<VideoProps> = async ({
+  props,
+}) => {
+  const slides = await resolveSlides(props.episodeId);
+  return {
+    durationInFrames: slides.reduce((sum, s) => sum + s.durationInFrames, 0),
+    props: { ...props, slides },
   };
+};

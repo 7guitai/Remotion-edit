@@ -1,63 +1,78 @@
-# 睡眠の雑学（Remotion）
+# ずんだもん解説動画（Remotion）
 
-白い背景に **テロップ（上）＋イラスト（中央）** を置き、**AI音声がテロップを読み上げ**、**BGM** が流れるシンプルな雑学動画です。
+白い背景に **テロップ（上）＋イラストや図（中央）** を置き、**ずんだもん（VOICEVOX）が読み上げ**、**BGM** が流れる解説動画を作るプロジェクトです。
 
-- コンポジション: `SleepTrivia`（1920×1080 / 30fps）
-- 動画の長さは読み上げ音声の長さから自動で決まります（現在 約2分9秒・24枚）
+`src/episodes/<id>.json` の1ファイルが1本の動画です（コンポジションIDは `id`）。
+
+| id | 内容 | 長さ |
+| --- | --- | --- |
+| `sleep-trivia` | 睡眠の雑学 | 約2分9秒 |
+| `charger-power-split` | PCとスマホを同時充電する充電器の選び方（[OCHA NOTE の記事](https://ochanote.com/articles/laptop-phone-charger-power-split/)を動画化） | 約4分12秒 |
 
 ## 使い方
 
 ```bash
 npm install
-npm run assets  # いらすとやの画像とフリーBGMをダウンロード（最初に1回）
-npm run voice   # テロップを ずんだもん で読み上げて public/voice/*.wav を作成（VOICEVOX を起動しておく）
-npm run dev     # Remotion Studio でプレビュー
-npm run build   # out/sleep-trivia.mp4 を書き出し
+npm run assets                          # いらすとやの画像とフリーBGMをダウンロード（最初に1回）
+npm run voice -- charger-power-split    # ずんだもんで読み上げ音声を作成（VOICEVOX を起動しておく）
+npm run dev                             # Remotion Studio でプレビュー
+npx remotion render charger-power-split out/charger-power-split.mp4
+npm run description -- charger-power-split   # 概要欄（目次・クレジット付き）を out/ に作成
 ```
 
-## 台本を変える
+## 新しい動画を作る
 
-`src/script.json` の `slides` を編集します。1要素が1枚（1テロップ）です。
+1. `src/episodes/` に JSON を追加し、`src/episodes/index.ts` の `EPISODES` に登録する
+2. `npm run assets` → `npm run voice -- <id>` → レンダリング
+
+### エピソード JSON
 
 | キー | 内容 |
 | --- | --- |
-| `text` | 画面に出すテロップ |
-| `speech` | （任意）読み上げ用の文。数字や記号の読みを直したいときに使う |
-| `image` | `public/illustrations/` に置く画像ファイル名 |
+| `id` / `title` | コンポジションID / 動画タイトル |
+| `pr` | `true` なら画面左上に「PR」を表示し、概要欄に広告表記を入れる（アフィリエイトを含む動画は必須） |
+| `source` | 元記事（概要欄にリンク） |
+| `bgm` | BGM（ファイル名・曲名・クレジット・取得URL） |
+| `readings` | 読み上げの読み替え（例: `"USB-C": "ユーエスビーシー"`）。`65W`→「65ワット」、`130g`→「130グラム」は自動 |
+| `illustrations` | いらすとや の画像（ファイル名 → 名前・URL・仮表示の絵文字） |
+| `slides` | スライドの配列（下記） |
+| `description` / `links` / `hashtags` | 概要欄に入れる紹介文・商品リンク・ハッシュタグ |
 
-編集したら `npm run voice` で音声を作り直してください。
+### スライドの種類
+
+どのスライドも `text`（テロップ）と任意の `speech`（読み上げ文）、`chapter`（概要欄の目次見出し）を持てます。
+テロップは `\n` で改行でき、3行以上になりそうなときは自動で文字が小さくなります。
+
+| `type` | 中央に表示するもの | 追加のキー |
+| --- | --- | --- |
+| （省略）/ `illust` | イラスト | `image` |
+| `bars` | PC／スマホの配分などを比べる積み上げ横棒グラフ | `bars: [{label, sub, pc, phone}]`, `note` |
+| `table` | 比較表 | `columns`, `rows`, `note` |
+| `points` | ラベル付きの箇条書き（結論・チェックポイント） | `items: [{label, body}]` |
 
 ## AI音声（ずんだもん）
 
-ナレーションは [VOICEVOX](https://voicevox.hiroshiba.jp/) の **ずんだもん（ノーマル）**、話す速さ **1.2倍** です。
-VOICEVOX アプリを起動した状態で `npm run voice` を実行すると作り直せます。
+[VOICEVOX](https://voicevox.hiroshiba.jp/) の **ずんだもん（ノーマル）**、話す速さ **1.2倍** です。
 
 ```bash
-python3 scripts/generate_voice.py --speed 1.3     # もっと速く
-python3 scripts/generate_voice.py --speaker 1     # ずんだもん（あまあま）
-python3 scripts/generate_voice.py --speaker 2     # 四国めたん（ノーマル）
+python3 scripts/generate_voice.py <id> --speed 1.3     # もっと速く
+python3 scripts/generate_voice.py <id> --speaker 1     # ずんだもん（あまあま）
 ```
 
-**公開時は概要欄に `VOICEVOX:ずんだもん` のクレジットが必要です。**
+**公開時は概要欄に `VOICEVOX:ずんだもん` のクレジットが必要です**（`npm run description` の出力に含まれます）。
 VOICEVOX が起動していないときは Open JTalk（`pip install pyopenjtalk numpy`）で代わりに読み上げます。
 
 ## イラスト（いらすとや）
 
-使うイラスト（19点）は `src/script.json` の `illustrations` に、いらすとやでの名前と画像URLつきで書いてあります。
-`npm run assets` でまとめて `public/illustrations/` に保存されます。
-別のイラストに変えたいときは、画像を `public/illustrations/` に置いて各スライドの `image` をそのファイル名にしてください。
-画像がないスライドは絵文字の仮イラストになります（Studio ではどの画像を置くかも表示されます）。
+`npm run assets` で `public/illustrations/` に保存されます。
+商用利用は 1 作品につき 20 点までなど規約があるので、[利用規約](https://www.irasutoya.com/p/terms.html) を確認してください。
+素材の再配布は禁止のため、画像は `.gitignore` でコミット対象外にしています。
 
-> いらすとやの素材は再配布が禁止されているため、`public/illustrations/` の画像は `.gitignore` でコミット対象外にしています。
-> 商用利用は 1 作品につき 20 点までなど規約があるので、[利用規約](https://www.irasutoya.com/p/terms.html) を確認してください。
+## BGM（甘茶の音楽工房）
 
-## BGM
-
-[甘茶の音楽工房](https://amachamusic.chagasi.com/) の「[天使の夢](https://amachamusic.chagasi.com/music_tenshinoyume.html)」（オルゴール・癒し）を使っています。
-商用利用可・クレジット表記は任意です（書く場合は「甘茶の音楽工房」）。
+[甘茶の音楽工房](https://amachamusic.chagasi.com/) の曲を使っています（商用利用可・クレジット任意）。
 再配布は禁止のため Git には含めず、`npm run assets` で `public/bgm/` にダウンロードします。
-
-曲を変えるときは `src/script.json` の `bgm` を書き換えてください。音量は `src/theme.ts` の `BGM_VOLUME` です。
+この曲を使った動画を YouTube の Content ID に登録することは禁止されています。
 
 ## フォント
 

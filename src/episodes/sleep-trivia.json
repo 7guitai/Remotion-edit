@@ -1,4 +1,7 @@
 {
+  "id": "sleep-trivia",
+  "title": "睡眠の雑学",
+  "pr": false,
   "bgm": {
     "file": "tenshinoyume.mp3",
     "title": "天使の夢",

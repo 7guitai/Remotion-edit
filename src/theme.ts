@@ -20,6 +20,11 @@ export const COLORS = {
   text: "#3a3a3a",
   placeholder: "#f3f3f3",
   note: "#9a9a9a",
+  border: "#dddddd",
+  panel: "#f6f6f6",
+  // グラフの2系列（PC / スマホ）
+  primary: "#3d7cc9",
+  secondary: "#f0a53a",
 };
 
 // BGM の音量（ナレーションは 1.0）

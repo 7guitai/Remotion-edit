@@ -1,9 +1,9 @@
-"""src/script.json のテロップを読み上げ音声にして public/voice/NNN.wav に書き出す。
+"""src/episodes/<id>.json のテロップを読み上げ音声にして public/voice/<id>/NNN.wav に書き出す。
 
 使い方:
-  python3 scripts/generate_voice.py                 # VOICEVOX が起動していれば VOICEVOX、なければ Open JTalk
-  python3 scripts/generate_voice.py --engine voicevox --speaker 3   # ずんだもん（ノーマル）
-  python3 scripts/generate_voice.py --engine openjtalk
+  python3 scripts/generate_voice.py charger-power-split     # VOICEVOX が起動していれば VOICEVOX、なければ Open JTalk
+  python3 scripts/generate_voice.py charger-power-split --speaker 3 --speed 1.2
+  python3 scripts/generate_voice.py charger-power-split --engine openjtalk
 
 VOICEVOX を使う場合は、VOICEVOX アプリ（または voicevox_engine）を起動しておくこと。
 動画の概要欄に「VOICEVOX:ずんだもん」などのクレジット表記が必要。
@@ -11,6 +11,7 @@ VOICEVOX を使う場合は、VOICEVOX アプリ（または voicevox_engine）�
 
 import argparse
 import json
+import re
 import sys
 import urllib.parse
 import urllib.request
@@ -18,8 +19,18 @@ import wave
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SCRIPT = ROOT / "src" / "script.json"
-OUT_DIR = ROOT / "public" / "voice"
+EPISODES = ROOT / "src" / "episodes"
+
+
+def to_speech(text: str, readings: dict[str, str]) -> str:
+    """テロップを読み上げ用の文に直す（改行を除き、単位や英字の読みを置き換える）"""
+    text = text.replace("\n", "")
+    for word in sorted(readings, key=len, reverse=True):
+        text = text.replace(word, readings[word])
+    text = re.sub(r"(\d+)W", r"\1ワット", text)
+    text = text.replace("W数", "ワット数")
+    text = re.sub(r"(\d+)g", r"\1グラム", text)
+    return text
 
 
 def voicevox_available(url: str) -> bool:
@@ -63,6 +74,7 @@ def synth_openjtalk(text: str, out: Path, speed: float) -> None:
 
 def main() -> None:
     p = argparse.ArgumentParser()
+    p.add_argument("episode", help="src/episodes/ のファイル名（拡張子なし）")
     p.add_argument("--engine", choices=["auto", "voicevox", "openjtalk"], default="auto")
     p.add_argument("--voicevox-url", default="http://127.0.0.1:50021")
     p.add_argument("--speaker", type=int, default=3, help="VOICEVOX の話者ID（3=ずんだもん ノーマル）")
@@ -76,13 +88,15 @@ def main() -> None:
         sys.exit(f"VOICEVOX エンジンに接続できません: {args.voicevox_url}")
     print(f"engine: {engine}")
 
-    slides = json.loads(SCRIPT.read_text(encoding="utf-8"))["slides"]
+    episode = json.loads((EPISODES / f"{args.episode}.json").read_text(encoding="utf-8"))
+    readings = episode.get("readings", {})
+    OUT_DIR = ROOT / "public" / "voice" / episode["id"]
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for old in OUT_DIR.glob("*.wav"):
         old.unlink()
 
-    for i, slide in enumerate(slides):
-        text = (slide.get("speech") or slide["text"]).replace("\n", "")
+    for i, slide in enumerate(episode["slides"]):
+        text = to_speech(slide.get("speech") or slide["text"], readings)
         out = OUT_DIR / f"{i:03d}.wav"
         if engine == "voicevox":
             synth_voicevox(text, out, args.voicevox_url, args.speaker, args.speed)

@@ -2,13 +2,14 @@
   "name": "sleep-trivia-video",
   "version": "1.0.0",
   "private": true,
-  "description": "睡眠の雑学動画（テロップ＋イラスト＋AI音声＋BGM）",
+  "description": "ずんだもんが解説するテロップ＋イラスト動画（Remotion）",
   "scripts": {
     "dev": "remotion studio",
     "assets": "python3 scripts/download_assets.py",
     "voice": "python3 scripts/generate_voice.py",
-    "build": "remotion render SleepTrivia out/sleep-trivia.mp4",
-    "lint": "tsc --noEmit"
+    "build": "remotion render",
+    "lint": "tsc --noEmit",
+    "description": "python3 scripts/make_description.py"
   },
   "dependencies": {
     "@remotion/cli": "4.0.529",
