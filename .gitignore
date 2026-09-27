@@ -1,3 +1,6 @@
 node_modules
 out
 .DS_Store
+# いらすとやの素材は再配布禁止のためコミットしない
+public/illustrations/*
+!public/illustrations/README.md

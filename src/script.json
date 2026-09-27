@@ -1,0 +1,122 @@
+{
+  "illustrations": {
+    "sleeping.png": { "emoji": "😴", "irasutoya": "ぐっすり眠る人" },
+    "clock.png": { "emoji": "⏳", "irasutoya": "時計 / 砂時計" },
+    "dolphin.png": { "emoji": "🐬", "irasutoya": "イルカ" },
+    "tetsuya.png": { "emoji": "🥱", "irasutoya": "徹夜する人" },
+    "dream.png": { "emoji": "💭", "irasutoya": "夢を見る人" },
+    "bikutto.png": { "emoji": "⚡", "irasutoya": "びっくりする人" },
+    "smartphone_bed.png": { "emoji": "📱", "irasutoya": "寝る前にスマホを見る人" },
+    "futoru.png": { "emoji": "🍔", "irasutoya": "太った人 / 夜食を食べる人" },
+    "nedame.png": { "emoji": "🛌", "irasutoya": "休日に寝坊する人" },
+    "koala.png": { "emoji": "🐨", "irasutoya": "コアラ" },
+    "ofuro.png": { "emoji": "🛁", "irasutoya": "お風呂に入る人" },
+    "oyasumi.png": { "emoji": "🌙", "irasutoya": "おやすみなさい" }
+  },
+  "slides": [
+    {
+      "text": "知っていると誰かに話したくなる、睡眠の雑学を紹介します。",
+      "image": "sleeping.png"
+    },
+    {
+      "text": "人は人生のおよそ3分の1を、眠って過ごしています。",
+      "speech": "人は、人生のおよそ三分の一を、眠って過ごしています。",
+      "image": "sleeping.png"
+    },
+    {
+      "text": "1日8時間眠る人が90歳まで生きると、約30年も寝ている計算です。",
+      "speech": "一日八時間眠る人が、九十歳まで生きると、約三十年も寝ている計算です。",
+      "image": "clock.png"
+    },
+    {
+      "text": "イルカは、脳を半分ずつ眠らせることができます。",
+      "image": "dolphin.png"
+    },
+    {
+      "text": "片方の脳が休んでいる間も、もう片方で呼吸や見張りを続けているのです。",
+      "image": "dolphin.png"
+    },
+    {
+      "text": "人が眠らずに起き続けた最長記録は、およそ11日間です。",
+      "speech": "人が眠らずに起き続けた最長記録は、およそ十一日間です。",
+      "image": "tetsuya.png"
+    },
+    {
+      "text": "1964年、アメリカの高校生が264時間も起き続けました。",
+      "speech": "千九百六十四年、アメリカの高校生が、二百六十四時間も起き続けました。",
+      "image": "tetsuya.png"
+    },
+    {
+      "text": "ただし体に危険なため、現在ギネスはこの記録の認定をやめています。",
+      "image": "tetsuya.png"
+    },
+    {
+      "text": "「夢を見なかった」という日も、実は毎晩夢を見ています。",
+      "image": "dream.png"
+    },
+    {
+      "text": "一晩に4〜5回やってくるレム睡眠のたびに、夢を見ていると言われています。",
+      "speech": "一晩に、四回から五回やってくるレム睡眠のたびに、夢を見ていると言われています。",
+      "image": "dream.png"
+    },
+    {
+      "text": "覚えていないのは、目覚めたときにすぐ忘れてしまうからです。",
+      "image": "dream.png"
+    },
+    {
+      "text": "眠りに落ちる瞬間、体が「ビクッ」となったことはありませんか？",
+      "speech": "眠りに落ちる瞬間、体がビクッとなったことはありませんか？",
+      "image": "bikutto.png"
+    },
+    {
+      "text": "これは「ジャーキング」と呼ばれる、ごく普通の現象です。",
+      "image": "bikutto.png"
+    },
+    {
+      "text": "寝る前にスマホを見ると、眠りにくくなってしまいます。",
+      "image": "smartphone_bed.png"
+    },
+    {
+      "text": "画面の光が、眠気をうながすホルモン「メラトニン」を減らしてしまうからです。",
+      "image": "smartphone_bed.png"
+    },
+    {
+      "text": "さらに、寝不足が続くと太りやすくなります。",
+      "image": "futoru.png"
+    },
+    {
+      "text": "食欲を増やすホルモンが増え、満腹を感じるホルモンが減ってしまうためです。",
+      "image": "futoru.png"
+    },
+    {
+      "text": "休日の「寝だめ」で、平日の寝不足を取り返すことはできません。",
+      "image": "nedame.png"
+    },
+    {
+      "text": "たまった寝不足は「睡眠負債」と呼ばれ、毎日少しずつ返していくしかないのです。",
+      "image": "nedame.png"
+    },
+    {
+      "text": "コアラは、1日におよそ20時間も眠ります。",
+      "speech": "コアラは、一日におよそ二十時間も眠ります。",
+      "image": "koala.png"
+    },
+    {
+      "text": "主食のユーカリは栄養が少ないので、眠ってエネルギーを節約しているのです。",
+      "image": "koala.png"
+    },
+    {
+      "text": "ぐっすり眠りたい日は、寝る1〜2時間前にお風呂に入るのがおすすめです。",
+      "speech": "ぐっすり眠りたい日は、寝る一時間から二時間前に、お風呂に入るのがおすすめです。",
+      "image": "ofuro.png"
+    },
+    {
+      "text": "温まった体温が下がっていくタイミングで、自然と眠くなるからです。",
+      "image": "ofuro.png"
+    },
+    {
+      "text": "今夜はぐっすり眠れますように。最後までご覧いただき、ありがとうございました。",
+      "image": "oyasumi.png"
+    }
+  ]
+}

@@ -2,16 +2,18 @@
   "name": "sleep-trivia-video",
   "version": "1.0.0",
   "private": true,
-  "description": "睡眠に関する雑学動画 (Remotion)",
+  "description": "睡眠の雑学動画（テロップ＋イラスト＋AI音声＋BGM）",
   "scripts": {
     "dev": "remotion studio",
+    "voice": "python3 scripts/generate_voice.py",
+    "bgm": "python3 scripts/generate_bgm.py",
     "build": "remotion render SleepTrivia out/sleep-trivia.mp4",
-    "build:shorts": "remotion render SleepTriviaShorts out/sleep-trivia-shorts.mp4",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
     "@remotion/cli": "4.0.529",
     "@remotion/fonts": "^4.0.529",
+    "@remotion/media-utils": "^4.0.529",
     "@remotion/transitions": "4.0.529",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
