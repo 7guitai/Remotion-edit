@@ -32,6 +32,7 @@ export const Slide: React.FC<{ slide: ResolvedSlide }> = ({ slide }) => {
           letterSpacing: "0.03em",
           color: COLORS.text,
           textAlign: "center",
+          whiteSpace: "pre-line",
           wordBreak: "keep-all",
           overflowWrap: "anywhere",
         }}

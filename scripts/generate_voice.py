@@ -82,7 +82,7 @@ def main() -> None:
         old.unlink()
 
     for i, slide in enumerate(slides):
-        text = slide.get("speech") or slide["text"]
+        text = (slide.get("speech") or slide["text"]).replace("\n", "")
         out = OUT_DIR / f"{i:03d}.wav"
         if engine == "voicevox":
             synth_voicevox(text, out, args.voicevox_url, args.speaker, args.speed)
