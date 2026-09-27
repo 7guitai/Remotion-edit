@@ -5,9 +5,8 @@
   "description": "睡眠の雑学動画（テロップ＋イラスト＋AI音声＋BGM）",
   "scripts": {
     "dev": "remotion studio",
-    "illustrations": "python3 scripts/download_illustrations.py",
+    "assets": "python3 scripts/download_assets.py",
     "voice": "python3 scripts/generate_voice.py",
-    "bgm": "python3 scripts/generate_bgm.py",
     "build": "remotion render SleepTrivia out/sleep-trivia.mp4",
     "lint": "tsc --noEmit"
   },

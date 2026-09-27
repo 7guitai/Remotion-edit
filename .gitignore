@@ -4,3 +4,5 @@ out
 # いらすとやの素材は再配布禁止のためコミットしない
 public/illustrations/*
 !public/illustrations/README.md
+# フリーBGMも再配布禁止のためコミットしない（npm run assets で取得）
+public/bgm/

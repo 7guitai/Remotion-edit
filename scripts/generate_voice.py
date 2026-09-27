@@ -66,7 +66,7 @@ def main() -> None:
     p.add_argument("--engine", choices=["auto", "voicevox", "openjtalk"], default="auto")
     p.add_argument("--voicevox-url", default="http://127.0.0.1:50021")
     p.add_argument("--speaker", type=int, default=3, help="VOICEVOX の話者ID（3=ずんだもん ノーマル）")
-    p.add_argument("--speed", type=float, default=1.1)
+    p.add_argument("--speed", type=float, default=1.2, help="話す速さ（1.0 が標準）")
     args = p.parse_args()
 
     engine = args.engine

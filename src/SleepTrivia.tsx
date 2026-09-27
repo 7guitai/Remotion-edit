@@ -9,6 +9,7 @@ import {
   useVideoConfig,
 } from "remotion";
 import { Slide } from "./components/Slide";
+import script from "./script.json";
 import { VideoProps } from "./slides";
 import { BGM_VOLUME, COLORS } from "./theme";
 
@@ -38,7 +39,7 @@ export const SleepTrivia: React.FC<VideoProps> = ({ slides }) => {
         ))}
       </Series>
       <Audio
-        src={staticFile("bgm/bgm.mp3")}
+        src={staticFile(`bgm/${script.bgm.file}`)}
         volume={bgmVolume}
         loop
         loopVolumeCurveBehavior="extend"

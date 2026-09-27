@@ -1,4 +1,11 @@
 {
+  "bgm": {
+    "file": "tenshinoyume.mp3",
+    "title": "天使の夢",
+    "credit": "甘茶の音楽工房",
+    "page": "https://amachamusic.chagasi.com/music_tenshinoyume.html",
+    "url": "https://amachamusic.chagasi.com/mp3/tenshinoyume.mp3"
+  },
   "illustrations": {
     "sleep_bed.png": {
       "emoji": "😴",
