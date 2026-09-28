@@ -24,7 +24,7 @@ EPISODES = ROOT / "src" / "episodes"
 
 def to_speech(text: str, readings: dict[str, str]) -> str:
     """テロップを読み上げ用の文に直す（改行を除き、単位や英字の読みを置き換える）"""
-    text = text.replace("\n", "")
+    text = text.replace("\n", "").replace("**", "")
     for word in sorted(readings, key=len, reverse=True):
         text = text.replace(word, readings[word])
     text = re.sub(r"(\d+)W", r"\1ワット", text)

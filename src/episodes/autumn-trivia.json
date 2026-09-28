@@ -1,0 +1,263 @@
+{
+  "id": "autumn-trivia",
+  "title": "秋の雑学",
+  "pr": false,
+  "bgm": {
+    "file": "tsukinokobune.mp3",
+    "title": "月の小舟",
+    "credit": "甘茶の音楽工房",
+    "page": "https://amachamusic.chagasi.com/music_tsukinokobune.html",
+    "url": "https://amachamusic.chagasi.com/mp3/tsukinokobune.mp3"
+  },
+  "readings": {
+    "黄色は": "きいろは",
+    "日照時間": "にっしょうじかん",
+    "馬肥ゆる": "うまこゆる"
+  },
+  "illustrations": {
+    "pyoko9_akinomikaku.png": {
+      "emoji": "🍠",
+      "irasutoya": "秋の味覚のイラスト（ぴょこ）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhb4g1fNFZ1ZJpYhfVXMydOLowwn4ZCh3TzJensXrhEMnP19upqm5nKBJlxLbEmY-IR67ykma3nf8Sd_Q_foCh4aosBhrfwmtCYNj6x6QsMPQ33YuSfi1TK0HfvFXanEw4zf1Zb3uVcytA/s800/pyoko9_akinomikaku.png"
+    },
+    "kouyou_tree.png": {
+      "emoji": "🍁",
+      "irasutoya": "紅葉のイラスト「紅葉した森」",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhJcDbc8m-8N272agxxY_OxD_wx8Yd7ej-a1oLvbkqY_vV-pedJTucl31tMyUxFQ4_urlaCS9cxNa5J95wutPcwxWXrgQhYv508_7YVZ02XyU8fi6r8xGlC5GbrSCFRQqhgxwxbSZCmZJ8/s800/kouyou_tree.png"
+    },
+    "kouyou_ichou.png": {
+      "emoji": "🍂",
+      "irasutoya": "紅葉のイラスト「黄色いイチョウ」",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNCPLm50KXeu7xDB6iKipZP6nwUYfHJ-kWdpHtlAVw-LEd7_jANDaUyWQPwctcwZs0ZwRzQ6kDfXoXFT9BS-o5O1v_xT1O0zG5Zdmfm3KR9xkho2IGt1Kz5NvU0MybljDxmd4T4OQRl8o/s800/kouyou_ichou.png"
+    },
+    "kouyou_momiji.png": {
+      "emoji": "🍁",
+      "irasutoya": "紅葉のイラスト「赤いもみじ」",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTs_GCaM3j_p22ZxhMLsisVchBP0BKzg0FyCnfy-gWIxyr6R-eQNTMwyVS-lZC8Yn-uuW5l6kv5FaMjhhFUApaZ4IE3VgvDwQF5d6HRa1mlEPP53BCDAloXu2_YvzzD4MCp7Lh_8jd_Co/s800/kouyou_momiji.png"
+    },
+    "tsukimi_jugoya_usagi.png": {
+      "emoji": "🌕",
+      "irasutoya": "十五夜のイラスト「ウサギのお月見」",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEsny3ts7WrPiX5WdO27LwJmRznoOjL3NvncBvV9JH6MGg7DaEruKpZWIfyHit92Q-NJsnEONxVCltiJNuuak2UcGaoxGaKV5l-cOPGsjkZJ37yE8om9q9sTQCA6lDDtAnYzzslA_if_2u/s800/tsukimi_jugoya_usagi.png"
+    },
+    "suzumushi.png": {
+      "emoji": "🦗",
+      "irasutoya": "鈴虫のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNzFIfa4mRSLEouTdo9F1pfKDU5UNzPzFo4dKEFtvBvs14MHn0z_imuc5-BAnqPUtItCEwIDRgrDbMuaC6_dQ6MuWtIprZbrAeLOb0gPsVyzQtuGIevBBJo3lFq7zxFjsS5O6-m2jzMjEZ/s800/suzumushi.png"
+    },
+    "fish_sakana_sanma.png": {
+      "emoji": "🐟",
+      "irasutoya": "サンマのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi8X2Dhl0lSxddeyJeZenbEx7q_Xl81pRWnT9Csm0oxEMijU-wnLxDb_f37aY-13P0xnTpNSm2h9H_wB_U-Dmf0Ekb00FmAX5uiWFqYoHvuCL73F_bIYHttQ4vviy2-KvGSvD4lroql9Fl3/s800/fish_sakana_sanma.png"
+    },
+    "japan_nihontou.png": {
+      "emoji": "🗡️",
+      "irasutoya": "日本刀のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi3cXG_cJBkXBU01wS3Hbu_oNcySPXWhtuZuvHKfUYoHB0HcIGgFBZjN345YvN5EMic2Sjtj2EeAos9A05zyX3ge78PSoXkTnq-U9xuOcXVkoPDLfABjYEhsKMzoLYmXivAbDKWTBkQIfs/s800/japan_nihontou.png"
+    },
+    "wasyoku_yakizakana.png": {
+      "emoji": "🍽️",
+      "irasutoya": "焼き魚のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgNpODJ2-PTbDIwKIvsz0LoErh0TTTtAylKg9MOACyYeHMDylqiKvByhjImpJX6xWsT72Ab5LGZRpku03X6v2dOiGU7X8RBB6x289t2JakrEpLkF792QVPtN8u2DeHL5k-_EnKL-c-bvZo/s800/wasyoku_yakizakana.png"
+    },
+    "syokuji_tabesugi_man.png": {
+      "emoji": "😋",
+      "irasutoya": "食べ過ぎの人のイラスト（男性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiSylxJheTs-zrcQUE62C7VbyE64Bwn5D-i9hAW1HP-ooZPFdbwTAJbDUz0ZI8DCRcz9OBMnY1n05pqh2H00ykb9enWpz2JLWvOzYTDlHKNLutj_a_GZZ0jUOAx4KSGLd2jbMZ9N4vtHms/s800/syokuji_tabesugi_man.png"
+    },
+    "space01_sun.png": {
+      "emoji": "☀️",
+      "irasutoya": "太陽のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgk0I1BenSgs-KfJ8YthzcSUJUh0_y2MLHM6IJZ7b1txMj1XHZ5Y5D5u_mCR_JT7WmZsGdN3o0BrkbmpwB6Lt09aRohWQE1uLUQHAKLXX70g4Kk6VxdmSybHyI9RM4ZzR5kKuFtlCXuOng/s800/space01_sun.png"
+    },
+    "food_kurigohan.png": {
+      "emoji": "🍚",
+      "irasutoya": "栗ご飯・芋ご飯のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizNKVzrCLCD3d8AM6jn96HkWNwmyt_664hjvKK_DovQYRstnF9FIjfI4TV_KLOU9xMx1gatxiRndonolbFywqpcqVYrol_G0va95TN8Hzi1DscXt294SgfPjcI8BHoQUMtDX6MApx7Jt2x/s800/food_kurigohan.png"
+    },
+    "mongol_yubokumin.png": {
+      "emoji": "🐎",
+      "irasutoya": "モンゴルの遊牧民のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJ6Cs4-gUmls5XxIwYRuSiwWRJE0mGJOyLVOZegMHL6S_7cGuydve6gVG0jIH0u0RprXMSl3sMZDqonwh2xEo41_KTV5kI-5I8ZjhOOOgCFmJP255PZEh0KlKTWklz-tlP3dhW_WYgc3B5/s800/mongol_yubokumin.png"
+    },
+    "syukujitsu14_syuubun_nohi.png": {
+      "emoji": "🌓",
+      "irasutoya": "「秋分の日」のイラスト文字",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjREo8Z9DJ6zl0KIoVKOuhNOEnmtQGFlZQ7N9vuWVjI8HMiyodfbKp7dWruwGRzvQkldK8AExEbuiZQz0fx4wbFDmOSDDI-Xg-TwU41SuhXb9rqeXjKgwvdUNiOlG8YTNlVgIDTpGFdl4k/s800/syukujitsu14_syuubun_nohi.png"
+    },
+    "dokusyo_aki_man.png": {
+      "emoji": "📖",
+      "irasutoya": "読書の秋のイラスト（男性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfjPQm_tclIdceOn0RImVyQTOH9i4HdNNH5zrzwlCiNakrzCCczse7klkAbTl4zuZ12GhUL3ERtxNLLK9e8SUqTVmMkaUL9f2EP1mRGT6QNAV3ueUtrgsPZ276_2Jgl6kUaOQtgqn8et6g/s800/dokusyo_aki_man.png"
+    },
+    "bug_character_suzumushi.png": {
+      "emoji": "🦗",
+      "irasutoya": "スズムシのキャラクター（虫）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqTlDhbLnadrntMNWNsR22-L9aqIBVswIGLYU_52FAFeChBVg4iI22XCXboXdhTN1ORIgBMHUCDVB0rTAaKY-uuDLrRvPEr2J04UpouSOV1hYlOdx_f49YMZptfIntQr3PxHPZ11Ic3uvs/s800/bug_character_suzumushi.png"
+    }
+  },
+  "slides": [
+    {
+      "text": "ボクはずんだもんなのだ。\n今日は、**秋の雑学**を7つ紹介するのだ！",
+      "speech": "ボクはずんだもんなのだ。今日は、秋の雑学を、七つ紹介するのだ！",
+      "chapter": "オープニング",
+      "image": "pyoko9_akinomikaku.png"
+    },
+    {
+      "text": "途中で**クイズ**も出すから、\nいっしょに考えてほしいのだ！",
+      "image": "kouyou_tree.png"
+    },
+    {
+      "text": "秋になると、葉っぱが**赤**や**黄色**に色づくのはなぜなのだ？",
+      "no": 1,
+      "chapter": "① 紅葉で葉っぱの色が変わるワケ",
+      "image": "kouyou_tree.png"
+    },
+    {
+      "text": "**黄色**は、もともと葉っぱに隠れていた色なのだ。\n緑の色素が分解されて、見えてくるのだ。",
+      "image": "kouyou_ichou.png"
+    },
+    {
+      "text": "**赤**は、秋になってから葉っぱの中で\n新しく作られる色なのだ！",
+      "image": "kouyou_momiji.png"
+    },
+    {
+      "type": "quiz",
+      "text": "Q. 十五夜のお月さまは、\n必ず**満月**になる？",
+      "choices": [
+        "必ず満月になる",
+        "満月じゃない年もある"
+      ],
+      "no": 2,
+      "speech": "ここでクイズなのだ！十五夜のお月さまは、必ず満月になるのだ？それとも、満月じゃない年もあるのだ？",
+      "chapter": "② クイズ：十五夜は満月？"
+    },
+    {
+      "type": "quiz",
+      "text": "正解は…「**満月じゃない年もある**」なのだ！",
+      "choices": [
+        "必ず満月になる",
+        "満月じゃない年もある"
+      ],
+      "answer": 1,
+      "speech": "正解は、満月じゃない年もある、なのだ！"
+    },
+    {
+      "text": "今年も、十五夜は**9月25日**、\n満月は**9月27日**で、ずれていたのだ。",
+      "speech": "今年も、十五夜は九月二十五日、満月は九月二十七日で、ずれていたのだ。",
+      "image": "tsukimi_jugoya_usagi.png"
+    },
+    {
+      "type": "quiz",
+      "text": "Q. スズムシは、体のどこで\n**音**を出している？",
+      "choices": [
+        "口",
+        "羽",
+        "足"
+      ],
+      "no": 3,
+      "speech": "次のクイズなのだ！スズムシは、体のどこで、リーンリーンという音を出しているのだ？口、羽、足、どれなのだ？",
+      "chapter": "③ クイズ：スズムシの鳴き声"
+    },
+    {
+      "type": "quiz",
+      "text": "正解は…「**羽**」なのだ！",
+      "choices": [
+        "口",
+        "羽",
+        "足"
+      ],
+      "answer": 1,
+      "speech": "正解は、羽、なのだ！"
+    },
+    {
+      "text": "左右の羽をこすり合わせて鳴らしているのだ。\n鳴くのは**オスだけ**なのだ。",
+      "speech": "左右の羽をこすり合わせて、鳴らしているのだ。鳴くのは、オスだけなのだ。",
+      "image": "suzumushi.png"
+    },
+    {
+      "text": "サンマは、漢字で「**秋刀魚**」と書くのだ。",
+      "no": 4,
+      "speech": "サンマは、漢字で、あき、かたな、さかな、と書くのだ。",
+      "chapter": "④ サンマが「秋刀魚」と書くワケ",
+      "image": "fish_sakana_sanma.png"
+    },
+    {
+      "text": "秋にとれて、体が**刀**のように\n細長く光っているからなのだ。",
+      "speech": "秋にとれて、体がかたなのように、細長く光っているからなのだ。",
+      "image": "japan_nihontou.png"
+    },
+    {
+      "text": "脂がのった秋のサンマは、\n塩焼きが最高なのだ！",
+      "image": "wasyoku_yakizakana.png"
+    },
+    {
+      "text": "秋になると、ついつい\n**食べすぎて**しまうのだ。",
+      "no": 5,
+      "chapter": "⑤ 「食欲の秋」のワケ",
+      "image": "syokuji_tabesugi_man.png"
+    },
+    {
+      "text": "日照時間が短くなると、心を落ち着かせる\n「**セロトニン**」が減ってしまうのだ。",
+      "image": "space01_sun.png"
+    },
+    {
+      "text": "それを補おうとして、体が炭水化物を\n欲しがる、という説があるのだ。",
+      "image": "food_kurigohan.png"
+    },
+    {
+      "type": "quiz",
+      "text": "Q. 「天高く馬肥ゆる秋」、\nもともとはどんな意味？",
+      "choices": [
+        "過ごしやすい季節だなぁ",
+        "おなかがすいたなぁ",
+        "敵に気をつけろ！"
+      ],
+      "no": 6,
+      "speech": "最後のクイズなのだ！天高く、馬肥ゆる秋。もともとはどんな意味なのだ？過ごしやすい季節だなぁ、おなかがすいたなぁ、敵に気をつけろ、どれなのだ？",
+      "chapter": "⑥ クイズ：天高く馬肥ゆる秋"
+    },
+    {
+      "type": "quiz",
+      "text": "正解は…「**敵に気をつけろ！**」なのだ！",
+      "choices": [
+        "過ごしやすい季節だなぁ",
+        "おなかがすいたなぁ",
+        "敵に気をつけろ！"
+      ],
+      "answer": 2,
+      "speech": "正解は、敵に気をつけろ、なのだ！"
+    },
+    {
+      "text": "昔の中国では、馬が太る秋になると、\n北の**遊牧民**が攻めてきたのだ。",
+      "speech": "昔の中国では、馬が太る秋になると、北の遊牧民が、攻めてきたのだ。",
+      "image": "mongol_yubokumin.png"
+    },
+    {
+      "text": "**秋分の日**を過ぎると、\n昼より夜のほうが長くなっていくのだ。",
+      "no": 7,
+      "chapter": "⑦ 「秋の夜長」と読書の秋",
+      "image": "syukujitsu14_syuubun_nohi.png"
+    },
+    {
+      "text": "涼しくて夜が長い秋は、\n**読書**にもぴったりなのだ。",
+      "image": "dokusyo_aki_man.png"
+    },
+    {
+      "text": "クイズは**何問**わかったのだ？\nコメントで教えてほしいのだ！",
+      "chapter": "エンディング",
+      "image": "bug_character_suzumushi.png"
+    },
+    {
+      "text": "秋を思いっきり楽しむのだ。\n最後まで見てくれてありがとうなのだ！",
+      "image": "kouyou_momiji.png"
+    }
+  ],
+  "description": "紅葉の色が変わるワケ、十五夜と満月のズレ、スズムシの鳴き声のヒミツなど、秋の雑学を7つ、クイズもまじえてずんだもんが紹介するのだ！",
+  "hashtags": [
+    "雑学",
+    "秋",
+    "ずんだもん",
+    "クイズ"
+  ]
+}

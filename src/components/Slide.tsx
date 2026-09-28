@@ -4,12 +4,15 @@ import {
   getRemotionEnvironment,
   Img,
   interpolate,
+  spring,
   staticFile,
   useCurrentFrame,
+  useVideoConfig,
 } from "remotion";
 import { ResolvedSlide } from "../slides";
 import { COLORS, fontFamily } from "../theme";
 import { Bars, Points, Table } from "./Charts";
+import { Quiz } from "./Quiz";
 
 const TELOP_WIDTH = 1520;
 const TELOP_MAX_LINES = 2;
@@ -31,6 +34,78 @@ const telopFontSize = (text: string) =>
   [68, 62, 56].find((size) => estimateLines(text, size) <= TELOP_MAX_LINES) ??
   56;
 
+// **〜** で囲んだ部分を色付き＋マーカーで強調し、少し遅れてポンと出す
+const Telop: React.FC<{ text: string }> = ({ text }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const pop = spring({ frame: frame - 8, fps, config: { damping: 10 } });
+  return (
+    <>
+      {text.split(/\*\*(.+?)\*\*/).map((part, i) =>
+        i % 2 === 0 ? (
+          part
+        ) : (
+          <span
+            key={i}
+            style={{
+              color: COLORS.accent,
+              display: "inline-block",
+              transform: `scale(${interpolate(pop, [0, 1], [0.7, 1])})`,
+              background: `linear-gradient(transparent 62%, ${COLORS.marker} 62%)`,
+              backgroundSize: `${Math.min(1, pop) * 100}% 100%`,
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            {part}
+          </span>
+        ),
+      )}
+    </>
+  );
+};
+
+// 左上の「雑学 No.3」と、全体のうち何本目かを示すドット
+const Counter: React.FC<{ no: number; total: number }> = ({ no, total }) => (
+  <div
+    style={{
+      position: "absolute",
+      top: 30,
+      left: 40,
+      fontFamily,
+      fontWeight: 800,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: 10,
+    }}
+  >
+    <div
+      style={{
+        fontSize: 34,
+        color: "#ffffff",
+        background: COLORS.accent,
+        borderRadius: 999,
+        padding: "4px 26px",
+      }}
+    >
+      雑学 No.{no}
+    </div>
+    <div style={{ display: "flex", gap: 8 }}>
+      {Array.from({ length: total }, (_, i) => (
+        <div
+          key={i}
+          style={{
+            width: 14,
+            height: 14,
+            borderRadius: "50%",
+            background: i < no ? COLORS.accent : COLORS.border,
+          }}
+        />
+      ))}
+    </div>
+  </div>
+);
+
 // 上部テロップ＋中央のコンテンツ（イラスト / グラフ / 表 / 箇条書き）
 export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
   const { slide } = resolved;
@@ -49,7 +124,7 @@ export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
           right: 200,
           fontFamily,
           fontWeight: 800,
-          fontSize: telopFontSize(slide.text),
+          fontSize: telopFontSize(slide.text.replace(/\*\*/g, "")),
           lineHeight: 1.4,
           letterSpacing: "0.03em",
           color: COLORS.text,
@@ -59,8 +134,11 @@ export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
           overflowWrap: "anywhere",
         }}
       >
-        {slide.text}
+        <Telop text={slide.text} />
       </div>
+      {resolved.no !== null ? (
+        <Counter no={resolved.no} total={resolved.total} />
+      ) : null}
 
       <div
         style={{
@@ -82,6 +160,8 @@ export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
           <Table slide={slide} />
         ) : slide.type === "points" ? (
           <Points slide={slide} />
+        ) : slide.type === "quiz" ? (
+          <Quiz slide={slide} countdownStart={resolved.countdownStart} />
         ) : resolved.hasImage ? (
           <Img
             src={staticFile(`illustrations/${slide.image}`)}

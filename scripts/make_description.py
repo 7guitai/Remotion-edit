@@ -14,12 +14,14 @@ ROOT = Path(__file__).resolve().parent.parent
 FPS = 30
 LEAD_IN = 6
 TAIL = 12
+COUNTDOWN = 3 * FPS  # クイズ出題のあとの考える時間
 
 
-def slide_frames(voice: Path) -> int:
+def slide_frames(voice: Path, slide: dict) -> int:
     with wave.open(str(voice)) as w:
         seconds = w.getnframes() / w.getframerate()
-    return LEAD_IN + math.ceil(seconds * FPS) + TAIL
+    question = slide.get("type") == "quiz" and "answer" not in slide
+    return LEAD_IN + math.ceil(seconds * FPS) + TAIL + (COUNTDOWN if question else 0)
 
 
 def timestamp(frames: int) -> str:
@@ -40,7 +42,7 @@ def main() -> None:
     for i, slide in enumerate(ep["slides"]):
         if slide.get("chapter"):
             chapters.append(f"{timestamp(frame)} {slide['chapter']}")
-        frame += slide_frames(voice_dir / f"{i:03d}.wav")
+        frame += slide_frames(voice_dir / f"{i:03d}.wav", slide)
 
     lines = []
     if ep.get("pr"):

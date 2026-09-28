@@ -10,7 +10,7 @@ import {
 } from "remotion";
 import { Slide } from "./components/Slide";
 import { getEpisode } from "./episodes";
-import { VideoProps } from "./slides";
+import { COUNTDOWN, ResolvedSlide, VideoProps } from "./slides";
 import { BGM_VOLUME, COLORS, fontFamily } from "./theme";
 
 export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
@@ -36,6 +36,7 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
                 <Audio src={staticFile(s.voice)} />
               </Sequence>
             ) : null}
+            <QuizSfx resolved={s} />
           </Series.Sequence>
         ))}
       </Series>
@@ -47,6 +48,31 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
         loopVolumeCurveBehavior="extend"
       />
     </AbsoluteFill>
+  );
+};
+
+// クイズの効果音（カウントダウンの「コッ」と正解の「ピンポーン」）
+const QuizSfx: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
+  const { fps } = useVideoConfig();
+  const { slide, countdownStart } = resolved;
+  if (slide.type !== "quiz") {
+    return null;
+  }
+  if (countdownStart === null) {
+    return (
+      <Sequence from={2}>
+        <Audio src={staticFile("sfx/correct.wav")} volume={0.6} />
+      </Sequence>
+    );
+  }
+  return (
+    <>
+      {Array.from({ length: COUNTDOWN / fps }, (_, i) => (
+        <Sequence key={i} from={countdownStart + i * fps} durationInFrames={fps}>
+          <Audio src={staticFile("sfx/tick.wav")} volume={0.7} />
+        </Sequence>
+      ))}
+    </>
   );
 };
 

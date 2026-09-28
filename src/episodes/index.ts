@@ -1,3 +1,4 @@
+import autumnTrivia from "./autumn-trivia.json";
 import chargerPowerSplit from "./charger-power-split.json";
 import sleepTrivia from "./sleep-trivia.json";
 
@@ -42,9 +43,28 @@ export type PointsSlide = {
   items: { label: string; body: string }[];
 };
 
-// chapter を付けたスライドの開始時刻が、概要欄のチャプターになる
-export type ScriptSlide = (IllustSlide | BarsSlide | TableSlide | PointsSlide) & {
+// 三択などのクイズ。answer がなければ出題（読み上げ後にカウントダウン）、
+// あれば正解発表（answer 番目の選択肢を強調）
+export type QuizSlide = {
+  type: "quiz";
+  text: string;
+  speech?: string;
+  choices: string[];
+  answer?: number;
+};
+
+// chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
+// no を付けたスライドから次の chapter まで、画面左上に「雑学 No.○」を表示する。
+// テロップの **〜** は強調表示（読み上げでは記号を除く）
+export type ScriptSlide = (
+  | IllustSlide
+  | BarsSlide
+  | TableSlide
+  | PointsSlide
+  | QuizSlide
+) & {
   chapter?: string;
+  no?: number;
 };
 
 export type Episode = {
@@ -60,6 +80,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  autumnTrivia as Episode,
   sleepTrivia as Episode,
   chargerPowerSplit as Episode,
 ];

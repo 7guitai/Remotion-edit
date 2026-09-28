@@ -25,6 +25,11 @@ export const COLORS = {
   // グラフの2系列（PC / スマホ）
   primary: "#3d7cc9",
   secondary: "#f0a53a",
+  // テロップの **強調** と、その下に引くマーカー
+  accent: "#e0602b",
+  marker: "#ffe08a",
+  // クイズの正解
+  correct: "#e8453c",
 };
 
 // BGM の音量（ナレーションは 1.0）
