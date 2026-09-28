@@ -1,5 +1,6 @@
 import autumnTrivia from "./autumn-trivia.json";
 import loveTriviaShort from "./love-trivia-short.json";
+import moneyTriviaShort from "./money-trivia-short.json";
 import chargerPowerSplit from "./charger-power-split.json";
 import sleepTrivia from "./sleep-trivia.json";
 
@@ -54,6 +55,18 @@ export type QuizSlide = {
   answer?: number;
 };
 
+// 1ページ1雑学（ショート向け）。text（上の振り）を読んだあと、
+// 少し間をあけて answer（下の答え）を表示して読み上げる。note は読み上げない補足
+export type TriviaSlide = {
+  type: "trivia";
+  text: string;
+  speech?: string;
+  image: string;
+  answer?: string;
+  answerSpeech?: string;
+  note?: string;
+};
+
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
 // no を付けたスライドから次の chapter まで、画面左上に「雑学 No.○」を表示する。
 // テロップの **〜** は強調表示（読み上げでは記号を除く）
@@ -63,6 +76,7 @@ export type ScriptSlide = (
   | TableSlide
   | PointsSlide
   | QuizSlide
+  | TriviaSlide
 ) & {
   chapter?: string;
   no?: number;
@@ -75,17 +89,31 @@ export type Episode = {
   pr: boolean;
   // "short" で縦型（1080×1920）の YouTube ショート
   format?: "landscape" | "short";
+  // ショートの上部のタイトル帯（省略時は表示）
+  titleBand?: boolean;
+  // 背景色（省略時は白）
+  background?: string;
+  // 読み上げの声（省略時はずんだもん・1.2倍）。name は概要欄のクレジットに使う
+  voice?: { speaker: number; speed: number; name: string };
   // 強調色（省略時は theme.ts の COLORS.accent / marker）
   accent?: string;
   marker?: string;
   source?: { name: string; url: string };
-  bgm: { file: string; title: string; credit: string; url: string };
+  // url の代わりに opentracks（OpenTracks の曲番号）でも取得できる
+  bgm: {
+    file: string;
+    title: string;
+    credit: string;
+    url?: string;
+    opentracks?: number;
+  };
   readings?: Record<string, string>;
   illustrations: Record<string, Illustration>;
   slides: ScriptSlide[];
 };
 
 export const EPISODES: Episode[] = [
+  moneyTriviaShort as Episode,
   loveTriviaShort as Episode,
   autumnTrivia as Episode,
   sleepTrivia as Episode,

@@ -9,6 +9,7 @@
 | `sleep-trivia` | 睡眠の雑学 | 約2分9秒 |
 | `autumn-trivia` | 秋の雑学（クイズ3問入り） | 約2分22秒 |
 | `love-trivia-short` | 恋愛の雑学（縦型ショート・クイズ1問入り） | 約50秒 |
+| `money-trivia-short` | お金の雑学7選（縦型ショート・1ページ1雑学、声は青山龍星） | 約44秒 |
 | `charger-power-split` | PCとスマホを同時充電する充電器の選び方（[OCHA NOTE の記事](https://ochanote.com/articles/laptop-phone-charger-power-split/)を動画化） | 約4分12秒 |
 
 ## 使い方
@@ -33,10 +34,13 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 | --- | --- |
 | `id` / `title` | コンポジションID / 動画タイトル |
 | `format` | `"short"` で縦型（1080×1920）の YouTube ショート。画面上部にタイトルの帯が出て、テロップは3行まで |
+| `titleBand` | `false` でショート上部のタイトル帯を消す |
+| `background` | 背景色（省略時は白） |
+| `voice` | 読み上げの声 `{speaker, speed, name}`（省略時はずんだもん・1.2倍）。`name` は概要欄のクレジットに入る |
 | `accent` / `marker` | 強調の色（テロップの強調・番号・カウントダウン・ショートのタイトル帯）。省略するとオレンジ |
 | `pr` | `true` なら画面左上に「PR」を表示し、概要欄に広告表記を入れる（アフィリエイトを含む動画は必須） |
 | `source` | 元記事（概要欄にリンク） |
-| `bgm` | BGM（ファイル名・曲名・クレジット・取得URL） |
+| `bgm` | BGM（ファイル名・曲名・クレジット・取得URL）。OpenTracks（旧DOVA-SYNDROME）の曲は `url` の代わりに `opentracks`（曲番号）を書く |
 | `readings` | 読み上げの読み替え（例: `"USB-C": "ユーエスビーシー"`）。`65W`→「65ワット」、`130g`→「130グラム」は自動 |
 | `illustrations` | いらすとや の画像（ファイル名 → 名前・URL・仮表示の絵文字） |
 | `slides` | スライドの配列（下記） |
@@ -54,6 +58,7 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 | `table` | 比較表 | `columns`, `rows`, `note` |
 | `points` | ラベル付きの箇条書き（結論・チェックポイント） | `items: [{label, body}]` |
 | `quiz` | クイズの選択肢（A/B/C…） | `choices`, `answer`（正解の番号。0 始まり） |
+| `trivia` | 1ページ1雑学（ショート向け）。上に `text`（振り）、中央にイラスト、読み上げのあと下に `answer`（答え）を出す。文字は黒＋白フチの極太 | `image`, `answer`, `answerSpeech`, `note`（読み上げない補足） |
 
 - **クイズ**：`answer` のない `quiz` は出題スライドで、読み上げのあとに3秒のカウントダウン（「考えてみて！」＋効果音）が入ります。
   次のスライドを同じ `choices` と `answer` 付きの `quiz` にすると、正解の選択肢が赤くなり「〇」と「ピンポーン」で発表します。
@@ -78,6 +83,11 @@ VOICEVOX が起動していないときは Open JTalk（`pip install pyopenjtalk
 商用利用は 1 作品につき 20 点までなど規約があるので、[利用規約](https://www.irasutoya.com/p/terms.html) を確認してください。
 素材の再配布は禁止のため、画像は `.gitignore` でコミット対象外にしています。
 
+## BGM（OpenTracks（旧DOVA-SYNDROME））
+
+`money-trivia-short` は もっぴーさうんど「Escort」を使っています。OpenTracks の[音源利用ライセンス](https://opentracks.com/)に沿って使ってください（クレジット表記は任意）。
+再配布は禁止のため Git には含めず、`npm run assets` でダウンロードします。
+
 ## BGM（甘茶の音楽工房）
 
 [甘茶の音楽工房](https://amachamusic.chagasi.com/) の曲を使っています（商用利用可・クレジット任意）。
@@ -90,4 +100,4 @@ VOICEVOX が起動していないときは Open JTalk（`pip install pyopenjtalk
 
 ## フォント
 
-`public/fonts/` に M PLUS Rounded 1c を同梱（SIL Open Font License 1.1）。
+`public/fonts/` に M PLUS Rounded 1c（Medium / ExtraBold / Black）を同梱（SIL Open Font License 1.1）。

@@ -1,0 +1,139 @@
+{
+  "id": "money-trivia-short",
+  "title": "お金の雑学7選",
+  "format": "short",
+  "titleBand": false,
+  "background": "#bbbdcb",
+  "pr": false,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.15,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "escort.mp3",
+    "title": "Escort",
+    "credit": "もっぴーさうんど",
+    "page": "https://opentracks.com/bgm/detail/12633",
+    "opentracks": 12633
+  },
+  "illustrations": {
+    "money_satsutaba2.png": {
+      "emoji": "💴",
+      "irasutoya": "山積みの札束のイラスト（お金）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiPSYBh-BultpVUa9-CVhPqLTJEagwV9PSoaO_QiOhyphenhyphenqeeKRXQK3JJASRw-I3aI2nsiV9nvt202VP8DmA_A-hSUkGAFlpIgUsHgCcXIIgs8I0Q6f4gfe8gyVf93KZFEfwyRk-siLyiF3rw/s800/money_satsutaba2.png"
+    },
+    "money_10000.png": {
+      "emoji": "💴",
+      "irasutoya": "一万円札のイラスト（お金・紙幣）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpXgZmDS_7SvP7o1Cvt_q26PYawcdRag_tzFzFtV7XlZCo_D79Q0AvfRhbXrRXBd8ShEoGYNZdPwkDcxesNsU4rVEdHUly8-G3-Qd9fR5EzmP7GgV1TaeDq_L6s26ipVoY7e7y1xDFVxs/s800/money_10000.png"
+    },
+    "money_yabure.png": {
+      "emoji": "🧾",
+      "irasutoya": "破れたお札のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEguVJboebni0iyPODE-Oq0Ja0t8eeG9UKZQt46-LKcEooCnKBDQOIWOYyj3xydO3vRZE-ouapSalWijBAkxw3D9yIml1FsK4eV7AUnp_hlvH9ykZxAVhoX0aqev8yTNSQ8wFhLqOci76paC/s800/money_yabure.png"
+    },
+    "ryougae_kozeni.png": {
+      "emoji": "🪙",
+      "irasutoya": "両替のイラスト「小銭とお札のイラスト」",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwlkgxHo7T26jG-u3PN72fKKLpzEcmrFkH0jsIV5caNQOXX_2CKbxF_otSa9Z1n5UJVNFQ-3kv91WogumTAR8qUp2guXd9k-iim7c2jJzzHo-3kbPHlDKD6X6thfaF0kv4XxAXgiPhNo2V/s800/ryougae_kozeni.png"
+    },
+    "takarakuji.png": {
+      "emoji": "🎫",
+      "irasutoya": "宝くじのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj2Jpukj5qlgQw5Xi3n58TQTyvcUDlpZ9cZZYB_2BYH3AuyKH3ejcYoOf54BHBEOUkjNgGcvTDD2AFs4Z5-vB9yI6H13CnkkIFEeNuS1kD5ZqfF2-3MLBQyb1kg_LEkCCXwbYcOlU60Sgsd/s800/takarakuji.png"
+    },
+    "money_nisesatsu_10000_yen.png": {
+      "emoji": "🕵️",
+      "irasutoya": "偽札のイラスト（一万円札）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-_8bnYhyphenhyphenUaBYFZhyYRtsNmXIVzV8N1_lM-icPbe8RJC35q8nohNu3sTcmirSgR3EckNq-5XYUGqpWwQLrm5z9BGIeENHMnNzvYm9T99o0cXwD16ySrS-Gur8IRl32w25peHwbK2ocOm7S/s800/money_nisesatsu_10000_yen.png"
+    },
+    "washi_paper.png": {
+      "emoji": "🌿",
+      "irasutoya": "和紙のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1G3IFZIbPfsc5yXg2G8ryJNBMT8GLR_dXpGVaiQKogiADeBhEVPrOEl9jhdr7paFQS2mNEYUMJXz4UaXepP972ew5AtobupIKFo9ukPjbR6gbo-peTiPeXX_ZhJvDh6PnrxV91B5acvw8/s800/washi_paper.png"
+    },
+    "money_kusyakusya.png": {
+      "emoji": "💸",
+      "irasutoya": "くしゃくしゃのお札のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5H7bQ1uVMmCwy0901zz2JmkX7_C5-_VfkTdpFuUxWL45LnCWdr44aHk9ux7jntHC9qtp7xTqKYRaqzvxSpHfaY36gC-jE6809VrGYMnpvYcpvSK1ol31fwWwNiaedRXC9ZeTJVSka7BEw/s800/money_kusyakusya.png"
+    }
+  },
+  "slides": [
+    {
+      "type": "trivia",
+      "text": "知らないと損する\nお金の雑学7選",
+      "speech": "知らないと損する、お金の雑学、七選",
+      "image": "money_satsutaba2.png"
+    },
+    {
+      "type": "trivia",
+      "text": "お札1枚を作るのに\nかかるお金は",
+      "speech": "お札一枚を作るのにかかるお金は",
+      "image": "money_10000.png",
+      "answer": "約20円\nといわれている",
+      "answerSpeech": "約二十円と言われている",
+      "no": 1
+    },
+    {
+      "type": "trivia",
+      "text": "破れたお札は",
+      "image": "money_yabure.png",
+      "answer": "3分の2以上残っていれば\n全額と交換できる",
+      "answerSpeech": "三分の二以上残っていれば、全額と交換できる",
+      "note": "※5分の2以上なら半額",
+      "no": 2
+    },
+    {
+      "type": "trivia",
+      "text": "同じ硬貨を\n21枚以上出すと",
+      "speech": "同じ硬貨を、二十一枚以上出すと",
+      "image": "ryougae_kozeni.png",
+      "answer": "お店は受け取りを\n断ることができる",
+      "note": "※法律で20枚までと決まっている",
+      "no": 3
+    },
+    {
+      "type": "trivia",
+      "text": "年末ジャンボの\n1等が当たる確率は",
+      "speech": "年末ジャンボの一等が当たる確率は",
+      "image": "takarakuji.png",
+      "answer": "約2000万分の1",
+      "answerSpeech": "約二千万分の一",
+      "no": 4
+    },
+    {
+      "type": "trivia",
+      "text": "お札に人の顔が\n描かれているのは",
+      "image": "money_nisesatsu_10000_yen.png",
+      "answer": "ニセ札を\n見分けやすくするため",
+      "note": "※顔のわずかな違いに人は気づきやすい",
+      "no": 5
+    },
+    {
+      "type": "trivia",
+      "text": "お札の原料は",
+      "image": "washi_paper.png",
+      "answer": "ミツマタやマニラ麻など\n植物からできている",
+      "no": 6
+    },
+    {
+      "type": "trivia",
+      "text": "1万円札の寿命は",
+      "speech": "一万円札の寿命は",
+      "image": "money_kusyakusya.png",
+      "answer": "約4〜5年",
+      "answerSpeech": "約四年から五年",
+      "note": "※千円札は1〜2年ほど",
+      "no": 7
+    }
+  ],
+  "description": "お金に関する雑学",
+  "hashtags": [
+    "雑学",
+    "豆知識",
+    "トリビア",
+    "お金",
+    "Shorts"
+  ]
+}

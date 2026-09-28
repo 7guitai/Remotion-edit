@@ -15,6 +15,11 @@ loadFont({
   url: staticFile("fonts/MPLUSRounded1c-ExtraBold.ttf"),
   weight: "800",
 });
+loadFont({
+  family: fontFamily,
+  url: staticFile("fonts/MPLUSRounded1c-Black.ttf"),
+  weight: "900",
+});
 
 export const COLORS = {
   background: "#ffffff",

@@ -14,6 +14,7 @@ import { Layout, useLayout } from "../layout";
 import { COLORS, fontFamily, useAccent } from "../theme";
 import { Bars, Points, Table } from "./Charts";
 import { Quiz } from "./Quiz";
+import { TriviaPage } from "./TriviaPage";
 
 // 全角=1、半角=0.55 として、各行の幅から折り返し後の行数を見積もる
 const estimateLines = (text: string, fontSize: number, telopWidth: number) => {
@@ -126,6 +127,10 @@ export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
   const appear = interpolate(frame, [0, 8], [0, 1], {
     extrapolateRight: "clamp",
   });
+
+  if (slide.type === "trivia") {
+    return <TriviaPage resolved={resolved} slide={slide} />;
+  }
 
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.background }}>

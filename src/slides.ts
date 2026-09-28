@@ -6,6 +6,9 @@ export const FPS = 30;
 // ナレーションの前後に入れる間（フレーム）
 const LEAD_IN = 6;
 const TAIL = 12;
+// 1ページ1雑学：振りを読み終えてから答えを出すまでの間と、答えのあとの余韻
+const ANSWER_PAUSE = 30;
+const ANSWER_TAIL = 24;
 // クイズの出題後、考える時間として入れるカウントダウン（フレーム）
 export const COUNTDOWN = 3 * FPS;
 
@@ -15,6 +18,9 @@ export type ResolvedSlide = {
   hasImage: boolean;
   voice: string | null;
   voiceStart: number;
+  // 1ページ1雑学の答え（表示と読み上げを始めるフレーム）
+  answerVoice: string | null;
+  answerStart: number | null;
   // 読み上げが終わってからカウントダウンが始まるまで（クイズ出題のみ）
   countdownStart: number | null;
   // 画面左上に出す「雑学 No.○ / 全○」
@@ -55,18 +61,48 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
       const seconds = hasVoice
         ? await getAudioDurationInSeconds(staticFile(voicePath))
         : 1 + (slide.speech ?? slide.text).length * 0.13;
-      const image = slide.type === undefined || slide.type === "illust" ? slide.image : null;
+      const image =
+        slide.type === undefined || slide.type === "illust" || slide.type === "trivia"
+          ? slide.image
+          : null;
       const illustration = image
         ? (episode.illustrations[image] ?? { emoji: "💤", irasutoya: image })
         : null;
       const voiceFrames = Math.ceil(seconds * FPS);
       const isQuestion = slide.type === "quiz" && slide.answer === undefined;
+      const common = {
+        slide,
+        illustration,
+        hasImage: image ? await exists(`illustrations/${image}`) : false,
+        voice: hasVoice ? voicePath : null,
+        voiceStart: LEAD_IN,
+        no: numbers[i],
+        total,
+      };
+      if (slide.type === "trivia" && slide.answer) {
+        const answerPath = voicePath.replace(".wav", "-answer.wav");
+        const hasAnswer = await exists(answerPath);
+        const answerSeconds = hasAnswer
+          ? await getAudioDurationInSeconds(staticFile(answerPath))
+          : 1 + (slide.answerSpeech ?? slide.answer).length * 0.13;
+        const answerStart = LEAD_IN + voiceFrames + ANSWER_PAUSE;
+        return {
+          ...common,
+          answerVoice: hasAnswer ? answerPath : null,
+          answerStart,
+          countdownStart: null,
+          durationInFrames:
+            answerStart + Math.ceil(answerSeconds * FPS) + ANSWER_TAIL,
+        };
+      }
       return {
         slide,
         illustration,
         hasImage: image ? await exists(`illustrations/${image}`) : false,
         voice: hasVoice ? voicePath : null,
         voiceStart: LEAD_IN,
+        answerVoice: null,
+        answerStart: null,
         countdownStart: isQuestion ? LEAD_IN + voiceFrames : null,
         no: numbers[i],
         total,

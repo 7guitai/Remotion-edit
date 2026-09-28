@@ -33,7 +33,9 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
 
   return (
     <AccentContext.Provider value={accent}>
-      <AbsoluteFill style={{ backgroundColor: COLORS.background }}>
+      <AbsoluteFill
+        style={{ backgroundColor: episode.background ?? COLORS.background }}
+      >
         <Series>
           {slides.map((s, i) => (
             <Series.Sequence key={i} durationInFrames={s.durationInFrames}>
@@ -43,11 +45,18 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
                   <Audio src={staticFile(s.voice)} />
                 </Sequence>
               ) : null}
+              {s.answerVoice && s.answerStart !== null ? (
+                <Sequence from={s.answerStart}>
+                  <Audio src={staticFile(s.answerVoice)} />
+                </Sequence>
+              ) : null}
               <QuizSfx resolved={s} />
             </Series.Sequence>
           ))}
         </Series>
-        <TitleBand title={episode.title} />
+        {episode.titleBand === false ? null : (
+          <TitleBand title={episode.title} />
+        )}
         {episode.pr ? <PrBadge /> : null}
         <Audio
           src={staticFile(`bgm/${episode.bgm.file}`)}

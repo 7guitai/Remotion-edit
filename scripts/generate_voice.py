@@ -77,8 +77,8 @@ def main() -> None:
     p.add_argument("episode", help="src/episodes/ のファイル名（拡張子なし）")
     p.add_argument("--engine", choices=["auto", "voicevox", "openjtalk"], default="auto")
     p.add_argument("--voicevox-url", default="http://127.0.0.1:50021")
-    p.add_argument("--speaker", type=int, default=3, help="VOICEVOX の話者ID（3=ずんだもん ノーマル）")
-    p.add_argument("--speed", type=float, default=1.2, help="話す速さ（1.0 が標準）")
+    p.add_argument("--speaker", type=int, help="VOICEVOX の話者ID（省略時はエピソードの voice、なければ 3=ずんだもん）")
+    p.add_argument("--speed", type=float, help="話す速さ（省略時はエピソードの voice、なければ 1.2）")
     args = p.parse_args()
 
     engine = args.engine
@@ -89,6 +89,9 @@ def main() -> None:
     print(f"engine: {engine}")
 
     episode = json.loads((EPISODES / f"{args.episode}.json").read_text(encoding="utf-8"))
+    voice = episode.get("voice", {})
+    speaker = args.speaker if args.speaker is not None else voice.get("speaker", 3)
+    speed = args.speed if args.speed is not None else voice.get("speed", 1.2)
     readings = episode.get("readings", {})
     OUT_DIR = ROOT / "public" / "voice" / episode["id"]
     OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -96,13 +99,18 @@ def main() -> None:
         old.unlink()
 
     for i, slide in enumerate(episode["slides"]):
-        text = to_speech(slide.get("speech") or slide["text"], readings)
-        out = OUT_DIR / f"{i:03d}.wav"
-        if engine == "voicevox":
-            synth_voicevox(text, out, args.voicevox_url, args.speaker, args.speed)
-        else:
-            synth_openjtalk(text, out, args.speed)
-        print(f"  {out.name}  {text}")
+        # 1ページ1雑学は、振り（NNN.wav）と答え（NNN-answer.wav）を別々に作る
+        parts = [(f"{i:03d}.wav", slide.get("speech") or slide["text"])]
+        if slide.get("answer"):
+            parts.append((f"{i:03d}-answer.wav", slide.get("answerSpeech") or slide["answer"]))
+        for name, raw in parts:
+            text = to_speech(raw, readings)
+            out = OUT_DIR / name
+            if engine == "voicevox":
+                synth_voicevox(text, out, args.voicevox_url, speaker, speed)
+            else:
+                synth_openjtalk(text, out, speed)
+            print(f"  {out.name}  {text}")
 
 
 if __name__ == "__main__":

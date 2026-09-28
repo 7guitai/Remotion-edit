@@ -15,13 +15,22 @@ FPS = 30
 LEAD_IN = 6
 TAIL = 12
 COUNTDOWN = 3 * FPS  # クイズ出題のあとの考える時間
+ANSWER_PAUSE = 30  # 1ページ1雑学：振りのあと答えを出すまで
+ANSWER_TAIL = 24
+
+
+def seconds(voice: Path) -> float:
+    with wave.open(str(voice)) as w:
+        return w.getnframes() / w.getframerate()
 
 
 def slide_frames(voice: Path, slide: dict) -> int:
-    with wave.open(str(voice)) as w:
-        seconds = w.getnframes() / w.getframerate()
+    if slide.get("type") == "trivia" and slide.get("answer"):
+        answer = voice.with_name(voice.stem + "-answer.wav")
+        start = LEAD_IN + math.ceil(seconds(voice) * FPS) + ANSWER_PAUSE
+        return start + math.ceil(seconds(answer) * FPS) + ANSWER_TAIL
     question = slide.get("type") == "quiz" and "answer" not in slide
-    return LEAD_IN + math.ceil(seconds * FPS) + TAIL + (COUNTDOWN if question else 0)
+    return LEAD_IN + math.ceil(seconds(voice) * FPS) + TAIL + (COUNTDOWN if question else 0)
 
 
 def timestamp(frames: int) -> str:
@@ -61,7 +70,7 @@ def main() -> None:
         lines += ["▼ 目次", *chapters, ""]
     lines += [
         "▼ 使用素材",
-        "音声：VOICEVOX:ずんだもん",
+        f"音声：VOICEVOX:{ep.get('voice', {}).get('name', 'ずんだもん')}",
         f"BGM：{ep['bgm']['credit']}「{ep['bgm']['title']}」",
         "イラスト：いらすとや",
         "",
