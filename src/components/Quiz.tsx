@@ -1,13 +1,9 @@
 import React from "react";
-import {
-  interpolate,
-  spring,
-  useCurrentFrame,
-  useVideoConfig,
-} from "remotion";
+import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { QuizSlide } from "../episodes";
 import { COUNTDOWN } from "../slides";
-import { COLORS, fontFamily } from "../theme";
+import { useLayout } from "../layout";
+import { COLORS, fontFamily, useAccent } from "../theme";
 
 const LABELS = ["A", "B", "C", "D"];
 
@@ -18,6 +14,7 @@ export const Quiz: React.FC<{
 }> = ({ slide, countdownStart }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const layout = useLayout();
   const reveal =
     slide.answer === undefined
       ? 0
@@ -30,8 +27,10 @@ export const Quiz: React.FC<{
         display: "flex",
         flexDirection: "column",
         gap: 28,
-        width: 1180,
+        width: layout.quizWidth,
         position: "relative",
+        // ショートは下にカウントダウンを置くぶん上に寄せる
+        marginTop: layout.vertical ? -240 : 0,
       }}
     >
       {slide.choices.map((choice, i) => (
@@ -135,6 +134,8 @@ const Stamp: React.FC<{ progress: number }> = ({ progress }) => (
 const Countdown: React.FC<{ start: number }> = ({ start }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const { vertical } = useLayout();
+  const { accent } = useAccent();
   const t = frame - start;
   const appear = spring({ frame: t, fps, config: { damping: 14 } });
   const remaining = Math.max(1, Math.ceil((COUNTDOWN - Math.max(0, t)) / fps));
@@ -143,7 +144,10 @@ const Countdown: React.FC<{ start: number }> = ({ start }) => {
     extrapolateRight: "clamp",
   });
   // 1秒ごとに数字が少し跳ねる
-  const beat = t >= 0 ? interpolate(t % fps, [0, 6], [1.25, 1], { extrapolateRight: "clamp" }) : 1;
+  const beat =
+    t >= 0
+      ? interpolate(t % fps, [0, 6], [1.25, 1], { extrapolateRight: "clamp" })
+      : 1;
   const size = 170;
   const r = size / 2 - 10;
   const circumference = 2 * Math.PI * r;
@@ -152,8 +156,10 @@ const Countdown: React.FC<{ start: number }> = ({ start }) => {
     <div
       style={{
         position: "absolute",
-        right: -300,
-        bottom: -10,
+        // 横長は選択肢の右、ショートは選択肢の下
+        ...(vertical
+          ? { left: "50%", marginLeft: -size / 2, bottom: -size - 90 }
+          : { right: -300, bottom: -10 }),
         width: size,
         height: size,
         opacity: t < 0 ? 0 : appear,
@@ -161,13 +167,20 @@ const Countdown: React.FC<{ start: number }> = ({ start }) => {
       }}
     >
       <svg width={size} height={size} style={{ position: "absolute" }}>
-        <circle cx={size / 2} cy={size / 2} r={r} fill="#ffffff" stroke={COLORS.border} strokeWidth={14} />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          fill="#ffffff"
+          stroke={COLORS.border}
+          strokeWidth={14}
+        />
         <circle
           cx={size / 2}
           cy={size / 2}
           r={r}
           fill="none"
-          stroke={COLORS.accent}
+          stroke={accent}
           strokeWidth={14}
           strokeLinecap="round"
           strokeDasharray={circumference}
@@ -184,7 +197,7 @@ const Countdown: React.FC<{ start: number }> = ({ start }) => {
           alignItems: "center",
           fontWeight: 800,
           fontSize: 84,
-          color: COLORS.accent,
+          color: accent,
           transform: `scale(${beat})`,
         }}
       >

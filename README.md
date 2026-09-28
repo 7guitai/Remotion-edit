@@ -8,6 +8,7 @@
 | --- | --- | --- |
 | `sleep-trivia` | 睡眠の雑学 | 約2分9秒 |
 | `autumn-trivia` | 秋の雑学（クイズ3問入り） | 約2分22秒 |
+| `love-trivia-short` | 恋愛の雑学（縦型ショート・クイズ1問入り） | 約50秒 |
 | `charger-power-split` | PCとスマホを同時充電する充電器の選び方（[OCHA NOTE の記事](https://ochanote.com/articles/laptop-phone-charger-power-split/)を動画化） | 約4分12秒 |
 
 ## 使い方
@@ -31,6 +32,8 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 | キー | 内容 |
 | --- | --- |
 | `id` / `title` | コンポジションID / 動画タイトル |
+| `format` | `"short"` で縦型（1080×1920）の YouTube ショート。画面上部にタイトルの帯が出て、テロップは3行まで |
+| `accent` / `marker` | 強調の色（テロップの強調・番号・カウントダウン・ショートのタイトル帯）。省略するとオレンジ |
 | `pr` | `true` なら画面左上に「PR」を表示し、概要欄に広告表記を入れる（アフィリエイトを含む動画は必須） |
 | `source` | 元記事（概要欄にリンク） |
 | `bgm` | BGM（ファイル名・曲名・クレジット・取得URL） |

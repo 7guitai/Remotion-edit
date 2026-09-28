@@ -56,7 +56,8 @@ def main() -> None:
         lines += ["▼ 紹介した製品"]
         lines += [f"・{l['label']}\n  {l['url'] or '（リンクを入れる）'}" for l in links]
         lines += [""]
-    if chapters:
+    # ショートにはチャプターが付かないので目次は出さない
+    if chapters and ep.get("format") != "short":
         lines += ["▼ 目次", *chapters, ""]
     lines += [
         "▼ 使用素材",

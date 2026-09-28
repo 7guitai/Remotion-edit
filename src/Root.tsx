@@ -16,8 +16,8 @@ export const RemotionRoot: React.FC = () => {
           // 実際の長さは音声ファイルの長さから calculateMetadata で決まる
           durationInFrames={FPS}
           fps={FPS}
-          width={1920}
-          height={1080}
+          width={ep.format === "short" ? 1080 : 1920}
+          height={ep.format === "short" ? 1920 : 1080}
           defaultProps={{ episodeId: ep.id, slides: [] }}
           calculateMetadata={calculateMetadata}
         />

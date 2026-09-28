@@ -11,7 +11,8 @@ import {
 import { Slide } from "./components/Slide";
 import { getEpisode } from "./episodes";
 import { COUNTDOWN, ResolvedSlide, VideoProps } from "./slides";
-import { BGM_VOLUME, COLORS, fontFamily } from "./theme";
+import { AccentContext, BGM_VOLUME, COLORS, fontFamily } from "./theme";
+import { TitleBand } from "./components/TitleBand";
 
 export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
   const episode = getEpisode(episodeId);
@@ -25,29 +26,37 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
       { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
     );
 
+  const accent = {
+    accent: episode.accent ?? COLORS.accent,
+    marker: episode.marker ?? COLORS.marker,
+  };
+
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.background }}>
-      <Series>
-        {slides.map((s, i) => (
-          <Series.Sequence key={i} durationInFrames={s.durationInFrames}>
-            <Slide resolved={s} />
-            {s.voice ? (
-              <Sequence from={s.voiceStart}>
-                <Audio src={staticFile(s.voice)} />
-              </Sequence>
-            ) : null}
-            <QuizSfx resolved={s} />
-          </Series.Sequence>
-        ))}
-      </Series>
-      {episode.pr ? <PrBadge /> : null}
-      <Audio
-        src={staticFile(`bgm/${episode.bgm.file}`)}
-        volume={bgmVolume}
-        loop
-        loopVolumeCurveBehavior="extend"
-      />
-    </AbsoluteFill>
+    <AccentContext.Provider value={accent}>
+      <AbsoluteFill style={{ backgroundColor: COLORS.background }}>
+        <Series>
+          {slides.map((s, i) => (
+            <Series.Sequence key={i} durationInFrames={s.durationInFrames}>
+              <Slide resolved={s} />
+              {s.voice ? (
+                <Sequence from={s.voiceStart}>
+                  <Audio src={staticFile(s.voice)} />
+                </Sequence>
+              ) : null}
+              <QuizSfx resolved={s} />
+            </Series.Sequence>
+          ))}
+        </Series>
+        <TitleBand title={episode.title} />
+        {episode.pr ? <PrBadge /> : null}
+        <Audio
+          src={staticFile(`bgm/${episode.bgm.file}`)}
+          volume={bgmVolume}
+          loop
+          loopVolumeCurveBehavior="extend"
+        />
+      </AbsoluteFill>
+    </AccentContext.Provider>
   );
 };
 
@@ -68,7 +77,11 @@ const QuizSfx: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
   return (
     <>
       {Array.from({ length: COUNTDOWN / fps }, (_, i) => (
-        <Sequence key={i} from={countdownStart + i * fps} durationInFrames={fps}>
+        <Sequence
+          key={i}
+          from={countdownStart + i * fps}
+          durationInFrames={fps}
+        >
           <Audio src={staticFile("sfx/tick.wav")} volume={0.7} />
         </Sequence>
       ))}

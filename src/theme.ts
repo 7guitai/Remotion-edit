@@ -1,4 +1,5 @@
 import { loadFont } from "@remotion/fonts";
+import { createContext, useContext } from "react";
 import { staticFile } from "remotion";
 
 // フォントは public/fonts に同梱（ネットワーク不要でレンダリングできる）
@@ -34,3 +35,11 @@ export const COLORS = {
 
 // BGM の音量（ナレーションは 1.0）
 export const BGM_VOLUME = 0.12;
+
+// エピソードごとに差し替えられる強調色（テロップの強調・番号・カウントダウン）
+export type Accent = { accent: string; marker: string };
+export const AccentContext = createContext<Accent>({
+  accent: COLORS.accent,
+  marker: COLORS.marker,
+});
+export const useAccent = () => useContext(AccentContext);

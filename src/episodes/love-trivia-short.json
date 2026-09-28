@@ -1,0 +1,130 @@
+{
+  "id": "love-trivia-short",
+  "title": "恋愛の雑学",
+  "format": "short",
+  "pr": false,
+  "accent": "#e8578a",
+  "marker": "#ffd3e2",
+  "bgm": {
+    "file": "lovelyflower.mp3",
+    "title": "ラブリーフラワー",
+    "credit": "甘茶の音楽工房",
+    "page": "https://amachamusic.chagasi.com/music_lovelyflower.html",
+    "url": "https://amachamusic.chagasi.com/mp3/lovelyflower.mp3"
+  },
+  "illustrations": {
+    "renai3_young.png": {
+      "emoji": "💘",
+      "irasutoya": "恋愛のイラスト（若者）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiF0L77Unwr5JKmKbzd4Xs-6gxkvJAdG-XfimAfFJYUqYbckuKsAIbE3MlykkcO2lsnOX0g6jfvGP-bY74ktcvVEP0x3hZUx0BkRAriwZCRPP6ddM6ab8I2g59HRJu5fjPufaQUYS76W-nL/s800/renai3_young.png"
+    },
+    "renai2_school.png": {
+      "emoji": "👀",
+      "irasutoya": "恋愛のイラスト（学生）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmYccB6z_Lpf_iPP92rdvfknzjy8sm3ABgNtkAU5EnDDytJI1q0-fAyETX_LySs88MK5ZrEjqGU0W-CsG4N5WyFWMh8ldhPrkL5T4wIc2xo_L163QWClwRVEWiB3e47f9624NONJozAvom/s800/renai2_school.png"
+    },
+    "hashi_tsuribashi.png": {
+      "emoji": "🌉",
+      "irasutoya": "吊り橋のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4SxpwckffJzs1XZH5o8rJ4z1M3QX3sqA5uZUYQx_26mfzArq_AY11JNKW5qKHa9bprolkWUPF88G7w6Fur61Iz8k3w5PHfVjhhg8Lr1yStOF60RpMtGL2M1UOyb6um8DsOkaKKhBuSNI/s800/hashi_tsuribashi.png"
+    },
+    "kinchou_man.png": {
+      "emoji": "💓",
+      "irasutoya": "緊張している男性のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTAL_gJ2HDBQxk_34wqhG3nZ5vptJDvhdRTO7XFobCyaLogFjzOypsjOddG-K0RZ2JhMGL1I-LEpIydfAsR7dz8V6YdORgEaM18GD9yBXxvb6y41pw_hoYfowTx4u-VyKEz_Jd5itQBDM/s800/kinchou_man.png"
+    },
+    "school_kataomoi_kyoushitsu_girl.png": {
+      "emoji": "🏫",
+      "irasutoya": "クラスメートに片思いをする女子生徒のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhv0AD74STuoEofjyybt1lctDnVsVSCnTg1lQ4JjX23o5dFYqnltLNmtk0Y61QskwNfpL4pp6zd1_LcbHRsYCyLJLFHDYiT0ARRaqA0LZBmD6VrivperIhkKzeOhp8gswYXsXO4k8dYiR1Y/s800/school_kataomoi_kyoushitsu_girl.png"
+    },
+    "couple_date.png": {
+      "emoji": "👫",
+      "irasutoya": "デートをするカップルのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhn8gueJ2NLhYOeYHEVR__1LGfm2W8vfe5e75YA4-0nbvFZlAW_M0kS9tUdM5a9bW1I6CaiJJ8E3NKoP37o341WLWtfk3-yFz5iBrnmW-6vNDoeD8NS798Y4adDyEoe0zkdrHniNim1Ml-L/s800/couple_date.png"
+    },
+    "renai_koi_moumoku_woman.png": {
+      "emoji": "🙈",
+      "irasutoya": "恋は盲目のイラスト（女性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgHFgMawf4YCLP3TYpo9hA0qHo8le_tdid1iwWk0PvPSUVbsZBXx9qg_ZNBNfEyhOAB4JuQDlmkNW_Yox_RSU7acgeaULCzlKcLzLqxNKjhmd6Z9hT2HksPImNvcBN2-dqq93HQg9J-zPSv/s800/renai_koi_moumoku_woman.png"
+    },
+    "button_channel_touroku.png": {
+      "emoji": "🔔",
+      "irasutoya": "「チャンネル登録」のイラスト文字",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6hfYnuQibKqMG6BBobZXBq_W-BDgIqW3N5XGfKuCBvtN8eJgYJkgwaIpbdcsl4v9Xk9ppEZujcv_ZOQX8VgXz6PA4XR0608f4U0BMKmfVJedfFknrAUhIfjcFWvh_ZGKoioaLRSmboOPm/s800/button_channel_touroku.png"
+    }
+  },
+  "slides": [
+    {
+      "text": "知らないと損する！\n**恋愛の雑学**なのだ！",
+      "speech": "知らないと損する、恋愛の雑学なのだ！",
+      "image": "renai3_young.png"
+    },
+    {
+      "type": "quiz",
+      "text": "Q. 第一印象が決まるのは\n会って**何秒**？",
+      "choices": [
+        "0.1秒",
+        "3秒",
+        "30秒"
+      ],
+      "no": 1,
+      "speech": "第一印象が決まるのは、会って何秒なのだ？"
+    },
+    {
+      "type": "quiz",
+      "text": "正解は…「**0.1秒**」なのだ！",
+      "choices": [
+        "0.1秒",
+        "3秒",
+        "30秒"
+      ],
+      "answer": 0,
+      "speech": "正解は、れいてんいちびょう、なのだ！"
+    },
+    {
+      "text": "顔を見たたった0.1秒で、\n好感や信頼を判断している\nという研究があるのだ。",
+      "speech": "顔を見た、たった、れいてんいちびょうで、好感や信頼を判断している、という研究があるのだ。",
+      "image": "renai2_school.png"
+    },
+    {
+      "text": "揺れる**つり橋**の上で出会うと、\n恋に落ちやすいのだ。",
+      "no": 2,
+      "speech": "揺れるつり橋の上で出会うと、恋に落ちやすいのだ。",
+      "image": "hashi_tsuribashi.png"
+    },
+    {
+      "text": "怖さのドキドキを、\n**恋のドキドキ**と\n勘違いしてしまうのだ。",
+      "image": "kinchou_man.png"
+    },
+    {
+      "text": "**会う回数**が多いほど、\n相手を好きになりやすいのだ。",
+      "no": 3,
+      "image": "school_kataomoi_kyoushitsu_girl.png"
+    },
+    {
+      "text": "相手と**同じしぐさ**をすると、\n好感を持たれやすいのだ。",
+      "no": 4,
+      "image": "couple_date.png"
+    },
+    {
+      "text": "恋をすると、相手の欠点に\n気づきにくくなるのだ。\n「**恋は盲目**」は本当なのだ！",
+      "no": 5,
+      "speech": "恋をすると、相手の欠点に気づきにくくなるのだ。恋は盲目は、本当なのだ！",
+      "image": "renai_koi_moumoku_woman.png"
+    },
+    {
+      "text": "ほかの雑学も見たい人は、\n**チャンネル登録**してほしいのだ！",
+      "chapter": "エンディング",
+      "image": "button_channel_touroku.png"
+    }
+  ],
+  "description": "第一印象は0.1秒で決まる？つり橋効果って本当？恋愛の雑学をずんだもんが1分以内で紹介するのだ！",
+  "hashtags": [
+    "Shorts",
+    "雑学",
+    "恋愛",
+    "ずんだもん",
+    "心理学"
+  ]
+}

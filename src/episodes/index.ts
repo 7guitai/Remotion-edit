@@ -1,4 +1,5 @@
 import autumnTrivia from "./autumn-trivia.json";
+import loveTriviaShort from "./love-trivia-short.json";
 import chargerPowerSplit from "./charger-power-split.json";
 import sleepTrivia from "./sleep-trivia.json";
 
@@ -72,6 +73,11 @@ export type Episode = {
   title: string;
   // アフィリエイト等を含む動画は画面に「PR」を表示する（ステマ規制対応）
   pr: boolean;
+  // "short" で縦型（1080×1920）の YouTube ショート
+  format?: "landscape" | "short";
+  // 強調色（省略時は theme.ts の COLORS.accent / marker）
+  accent?: string;
+  marker?: string;
   source?: { name: string; url: string };
   bgm: { file: string; title: string; credit: string; url: string };
   readings?: Record<string, string>;
@@ -80,6 +86,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  loveTriviaShort as Episode,
   autumnTrivia as Episode,
   sleepTrivia as Episode,
   chargerPowerSplit as Episode,

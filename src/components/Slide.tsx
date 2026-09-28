@@ -10,16 +10,14 @@ import {
   useVideoConfig,
 } from "remotion";
 import { ResolvedSlide } from "../slides";
-import { COLORS, fontFamily } from "../theme";
+import { Layout, useLayout } from "../layout";
+import { COLORS, fontFamily, useAccent } from "../theme";
 import { Bars, Points, Table } from "./Charts";
 import { Quiz } from "./Quiz";
 
-const TELOP_WIDTH = 1520;
-const TELOP_MAX_LINES = 2;
-
 // 全角=1、半角=0.55 として、各行の幅から折り返し後の行数を見積もる
-const estimateLines = (text: string, fontSize: number) => {
-  const perLine = TELOP_WIDTH / (fontSize * 1.03);
+const estimateLines = (text: string, fontSize: number, telopWidth: number) => {
+  const perLine = telopWidth / (fontSize * 1.03);
   return text.split("\n").reduce((sum, line) => {
     const width = [...line].reduce(
       (w, ch) => w + (/[\x20-\x7e]/.test(ch) ? 0.55 : 1),
@@ -29,16 +27,22 @@ const estimateLines = (text: string, fontSize: number) => {
   }, 0);
 };
 
-// 3行以上になりそうなテロップは文字を小さくして2行に収める
-const telopFontSize = (text: string) =>
-  [68, 62, 56].find((size) => estimateLines(text, size) <= TELOP_MAX_LINES) ??
-  56;
+// 行数が多くなりそうなテロップは文字を小さくして収める（横長は2行、ショートは3行まで）
+const telopFontSize = (text: string, layout: Layout, width: number) => {
+  const { sizes, maxLines, side } = layout.telop;
+  return (
+    sizes.find(
+      (size) => estimateLines(text, size, width - side * 2) <= maxLines,
+    ) ?? sizes[sizes.length - 1]
+  );
+};
 
 // **〜** で囲んだ部分を色付き＋マーカーで強調し、少し遅れてポンと出す
 const Telop: React.FC<{ text: string }> = ({ text }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const pop = spring({ frame: frame - 8, fps, config: { damping: 10 } });
+  const { accent, marker } = useAccent();
   return (
     <>
       {text.split(/\*\*(.+?)\*\*/).map((part, i) =>
@@ -48,10 +52,10 @@ const Telop: React.FC<{ text: string }> = ({ text }) => {
           <span
             key={i}
             style={{
-              color: COLORS.accent,
+              color: accent,
               display: "inline-block",
               transform: `scale(${interpolate(pop, [0, 1], [0.7, 1])})`,
-              background: `linear-gradient(transparent 62%, ${COLORS.marker} 62%)`,
+              background: `linear-gradient(transparent 62%, ${marker} 62%)`,
               backgroundSize: `${Math.min(1, pop) * 100}% 100%`,
               backgroundRepeat: "no-repeat",
             }}
@@ -65,51 +69,60 @@ const Telop: React.FC<{ text: string }> = ({ text }) => {
 };
 
 // 左上の「雑学 No.3」と、全体のうち何本目かを示すドット
-const Counter: React.FC<{ no: number; total: number }> = ({ no, total }) => (
-  <div
-    style={{
-      position: "absolute",
-      top: 30,
-      left: 40,
-      fontFamily,
-      fontWeight: 800,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      gap: 10,
-    }}
-  >
+const Counter: React.FC<{ no: number; total: number }> = ({ no, total }) => {
+  const { counter } = useLayout();
+  const { accent } = useAccent();
+  return (
     <div
       style={{
-        fontSize: 34,
-        color: "#ffffff",
-        background: COLORS.accent,
-        borderRadius: 999,
-        padding: "4px 26px",
+        position: "absolute",
+        top: counter.top,
+        // left がなければ中央（ショート）
+        ...(counter.left === null
+          ? { left: 0, right: 0 }
+          : { left: counter.left }),
+        fontFamily,
+        fontWeight: 800,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 10,
       }}
     >
-      雑学 No.{no}
+      <div
+        style={{
+          fontSize: 34,
+          color: "#ffffff",
+          background: accent,
+          borderRadius: 999,
+          padding: "4px 26px",
+        }}
+      >
+        雑学 No.{no}
+      </div>
+      <div style={{ display: "flex", gap: 8 }}>
+        {Array.from({ length: total }, (_, i) => (
+          <div
+            key={i}
+            style={{
+              width: 14,
+              height: 14,
+              borderRadius: "50%",
+              background: i < no ? accent : COLORS.border,
+            }}
+          />
+        ))}
+      </div>
     </div>
-    <div style={{ display: "flex", gap: 8 }}>
-      {Array.from({ length: total }, (_, i) => (
-        <div
-          key={i}
-          style={{
-            width: 14,
-            height: 14,
-            borderRadius: "50%",
-            background: i < no ? COLORS.accent : COLORS.border,
-          }}
-        />
-      ))}
-    </div>
-  </div>
-);
+  );
+};
 
 // 上部テロップ＋中央のコンテンツ（イラスト / グラフ / 表 / 箇条書き）
 export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
   const { slide } = resolved;
   const frame = useCurrentFrame();
+  const { width } = useVideoConfig();
+  const layout = useLayout();
   const appear = interpolate(frame, [0, 8], [0, 1], {
     extrapolateRight: "clamp",
   });
@@ -119,12 +132,16 @@ export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
       <div
         style={{
           position: "absolute",
-          top: 90,
-          left: 200,
-          right: 200,
+          top: layout.telop.top,
+          left: layout.telop.side,
+          right: layout.telop.side,
           fontFamily,
           fontWeight: 800,
-          fontSize: telopFontSize(slide.text.replace(/\*\*/g, "")),
+          fontSize: telopFontSize(
+            slide.text.replace(/\*\*/g, ""),
+            layout,
+            width,
+          ),
           lineHeight: 1.4,
           letterSpacing: "0.03em",
           color: COLORS.text,
@@ -143,10 +160,10 @@ export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
       <div
         style={{
           position: "absolute",
-          top: 330,
+          top: layout.content.top,
           left: 0,
           right: 0,
-          height: 620,
+          height: layout.content.height,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -165,7 +182,7 @@ export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
         ) : resolved.hasImage ? (
           <Img
             src={staticFile(`illustrations/${slide.image}`)}
-            style={{ maxWidth: 900, maxHeight: 560, objectFit: "contain" }}
+            style={{ ...layout.image, objectFit: "contain" }}
           />
         ) : (
           <Placeholder resolved={resolved} />
