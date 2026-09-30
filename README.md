@@ -9,6 +9,7 @@
 | `sleep-trivia` | 睡眠の雑学 | 約2分9秒 |
 | `autumn-trivia` | 秋の雑学（クイズ3問入り） | 約2分22秒 |
 | `love-trivia-short` | 恋愛の雑学（縦型ショート・クイズ1問入り） | 約50秒 |
+| `animal-trivia-long` | 寝る前に聞きたい 動物の雑学63選（横長・1ページ1雑学＋解説、全6章） | 約8分44秒 |
 | `money-trivia-short` | お金の雑学7選（縦型ショート・1ページ1雑学、声は青山龍星） | 約44秒 |
 | `charger-power-split` | PCとスマホを同時充電する充電器の選び方（[OCHA NOTE の記事](https://ochanote.com/articles/laptop-phone-charger-power-split/)を動画化） | 約4分12秒 |
 
@@ -58,7 +59,7 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 | `table` | 比較表 | `columns`, `rows`, `note` |
 | `points` | ラベル付きの箇条書き（結論・チェックポイント） | `items: [{label, body}]` |
 | `quiz` | クイズの選択肢（A/B/C…） | `choices`, `answer`（正解の番号。0 始まり） |
-| `trivia` | 1ページ1雑学（ショート向け）。上に `text`（振り）、中央にイラスト、読み上げのあと下に `answer`（答え）を出す。文字は黒＋白フチの極太 | `image`, `answer`, `answerSpeech`, `note`（読み上げない補足） |
+| `trivia` | 1ページ1雑学（ショート向け）。上に `text`（振り）、中央にイラスト、読み上げのあと下に `answer`（答え）を出す。文字は黒＋白フチの極太 | `image`, `answer`, `answerSpeech`, `note`（読み上げない補足）, `explain` / `explainSpeech`（答えのあとに読み上げる解説） |
 
 - **クイズ**：`answer` のない `quiz` は出題スライドで、読み上げのあとに3秒のカウントダウン（「考えてみて！」＋効果音）が入ります。
   次のスライドを同じ `choices` と `answer` 付きの `quiz` にすると、正解の選択肢が赤くなり「〇」と「ピンポーン」で発表します。
@@ -76,6 +77,11 @@ python3 scripts/generate_voice.py <id> --speaker 1     # ずんだもん（あ�
 
 **公開時は概要欄に `VOICEVOX:ずんだもん` のクレジットが必要です**（`npm run description` の出力に含まれます）。
 VOICEVOX が起動していないときは Open JTalk（`pip install pyopenjtalk numpy`）で代わりに読み上げます。
+
+## イラスト（Microsoft Fluent Emoji）
+
+いらすとやは商用利用だと1作品20点までなので、それ以上必要な動画では [Fluent Emoji](https://github.com/microsoft/fluentui-emoji)（MIT License）の「Color」SVG も使っています。
+`illustrations` に `credit` を書いた素材は、概要欄のクレジットにまとめて表示されます。
 
 ## イラスト（いらすとや）
 

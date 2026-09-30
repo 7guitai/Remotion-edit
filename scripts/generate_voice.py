@@ -103,6 +103,8 @@ def main() -> None:
         parts = [(f"{i:03d}.wav", slide.get("speech") or slide["text"])]
         if slide.get("answer"):
             parts.append((f"{i:03d}-answer.wav", slide.get("answerSpeech") or slide["answer"]))
+        if slide.get("explain"):
+            parts.append((f"{i:03d}-explain.wav", slide.get("explainSpeech") or slide["explain"]))
         for name, raw in parts:
             text = to_speech(raw, readings)
             out = OUT_DIR / name

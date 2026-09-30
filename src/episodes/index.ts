@@ -1,3 +1,4 @@
+import animalTriviaLong from "./animal-trivia-long.json";
 import autumnTrivia from "./autumn-trivia.json";
 import loveTriviaShort from "./love-trivia-short.json";
 import moneyTriviaShort from "./money-trivia-short.json";
@@ -6,8 +7,11 @@ import sleepTrivia from "./sleep-trivia.json";
 
 export type Illustration = {
   emoji: string;
+  // 素材の名前（いらすとや以外も含む）
   irasutoya: string;
   url?: string;
+  // 素材の配布元（概要欄のクレジット。省略時は「いらすとや」）
+  credit?: string;
 };
 
 // テロップ＋イラスト
@@ -65,6 +69,9 @@ export type TriviaSlide = {
   answer?: string;
   answerSpeech?: string;
   note?: string;
+  // 答えのあとに読み上げる解説（画面には答えの下に小さく出す）
+  explain?: string;
+  explainSpeech?: string;
 };
 
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
@@ -113,6 +120,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  animalTriviaLong as Episode,
   moneyTriviaShort as Episode,
   loveTriviaShort as Episode,
   autumnTrivia as Episode,

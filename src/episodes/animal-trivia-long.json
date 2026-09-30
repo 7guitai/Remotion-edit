@@ -1,0 +1,945 @@
+{
+  "id": "animal-trivia-long",
+  "title": "寝る前に聞きたい 動物の雑学63選",
+  "titleBand": false,
+  "background": "#bbbdcb",
+  "pr": false,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.15,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "escort.mp3",
+    "title": "Escort",
+    "credit": "もっぴーさうんど",
+    "page": "https://opentracks.com/bgm/detail/12633",
+    "opentracks": 12633
+  },
+  "illustrations": {
+    "party_animal.png": {
+      "emoji": "🐾",
+      "irasutoya": "楽しそうにパーティーを開いている動物たちのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzDCdjhyqrdPcdeITLambZRvBOt-rsqApDzn0qOQRXFOQ6QPG3ntXIlzPOXDCLuQn5esM_xAziX9_wtQqw5kMs-sXuauaiUrmb5gbjDGepN8hMqtiEScDTBIrbRe4faiOnGnfZLxyMzwCG/s800/party_animal.png"
+    },
+    "fe_spouting_whale.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Spouting whale」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Spouting%20whale/Color/spouting_whale_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_octopus.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Octopus」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Octopus/Color/octopus_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "animal_rakko_tewotsunagu.png": {
+      "emoji": "🐾",
+      "irasutoya": "手をつないで寝るラッコのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjIbYFzanFEG033Woe1rnovlcJC8D1LAEHpJYCv4AuM699vqQSANMwcG4GaIQxlsTmcUHYMw_QRJxPHqsfENTGtlwHV9Rb3pR76xWSEsyvMpt237fihHiQ_Zt0knmdLbgO50QSwvHTYN5s/s800/animal_rakko_tewotsunagu.png"
+    },
+    "fe_dolphin.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Dolphin」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Dolphin/Color/dolphin_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "kumanomi.png": {
+      "emoji": "🐾",
+      "irasutoya": "熱帯魚のイラスト「クマノミ」",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4aavvKTqB_JwcwJ7HTYqMa8KTLfD894x4yhdSBLctjPMyLeDCneAhNUWZap3JNYHVq4ps_ntXoAxjcg5w1Q3x1pvw5EAf4X-IneuiT7R_b19zTgsZ-Ah6r0Hezcz8eyyo3_VsVVuD8nmy/s800/kumanomi.png"
+    },
+    "fe_shark.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Shark」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Shark/Color/shark_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "whale_01_shironagasukujira.png": {
+      "emoji": "🐾",
+      "irasutoya": "シロナガスクジラのイラスト（鯨）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiKLAO16YujpS3lGODSzN-e_MDiEbkydRZSZ_rt_RHisXS4Iwn9bCOJcSkeLKKJr13-4HOdIe0-60UtieHlWQFYhyj0CA2h6Lw_MntSbM_VT2NX9VZ_cRa_DtlcilRnLW2YGDfVqC-FY88/s800/whale_01_shironagasukujira.png"
+    },
+    "animal_syachi.png": {
+      "emoji": "🐾",
+      "irasutoya": "シャチのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiOUOEIiKWFYiMqRP5Rrigy4gZCmHlLBBfY-CbjMfUj0KLnikqV8qVI5wk5v-M457apvEHf6CVqMnCEKDOy1ZpuaUVrJOONHVyf8xHwLLfrvkpOcnxPxWZvk6ztMPuTtQ_VbjplbsNLhHc/s800/animal_syachi.png"
+    },
+    "fish_benikurage.png": {
+      "emoji": "🐾",
+      "irasutoya": "ベニクラゲのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXaqVmfveniCYjBwiyuqc6sXJU4dAqb0UR9RdaavaWtRR6rpJPrBj9f-KGxgo4I_QqeMWIEhvLghOAuKEz7WhBEg9v1XSWHqZSnLPA0gvWEj1Fbqun5WoZHhaXi5m9APkHiVaiDIA4Irzw/s800/fish_benikurage.png"
+    },
+    "fe_jellyfish.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Jellyfish」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Jellyfish/Color/jellyfish_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fish_unagi2.png": {
+      "emoji": "🐾",
+      "irasutoya": "うなぎのイラスト（魚）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuMbqN1UR3o6spva3RE_sJc9cetH9KE2L2T64Iuao5nJDeraxfCraGDvogiqUdCa9ZBMn8trz4XgHg0VDJb6ifolUErAv7XFg3xKIzcW4lNDRy_YlI7iegBA8GDl2zT4rQ9aScyyvJY23y/s800/fish_unagi2.png"
+    },
+    "fe_elephant.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Elephant」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Elephant/Color/elephant_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_hippopotamus.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Hippopotamus」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Hippopotamus/Color/hippopotamus_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_zebra.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Zebra」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Zebra/Color/zebra_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_polar_bear.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Polar bear」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Polar%20bear/Color/polar_bear_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_giraffe.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Giraffe」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Giraffe/Color/giraffe_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_two_hump_camel.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Two-hump camel」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Two-hump%20camel/Color/two-hump_camel_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_kangaroo.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Kangaroo」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Kangaroo/Color/kangaroo_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "animalface_cheetah.png": {
+      "emoji": "🐾",
+      "irasutoya": "チーターの顔のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6T6Qt3OBS-lXYXVFP3bCjwM95CdIe7YCPDh3NPhfVBtgBLtcyrGLYZcKWY9Hu9yjjVM9FW_YIgfnIrlREhE4UJhcueg2kcOrts3Osneo4Y5k53VsRQ1oq6VxFsjKfJeQUdijoYJ4avCSK/s800/animalface_cheetah.png"
+    },
+    "fe_panda.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Panda」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Panda/Color/panda_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_sloth.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Sloth」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Sloth/Color/sloth_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "animal_kamonohashi.png": {
+      "emoji": "🐾",
+      "irasutoya": "カモノハシのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDOF5NICsGfau5rvoYwuyA8ghZ8QcmwWadG7-aqftbSXN33PIQHiQhxUYBM9I0ErStva4JFFmeEuIWnf5QNs_DJyXejLgdaPfbEHNKu-ATrQmNwxrAVEzNHNZqDi6-c1RfDli6gqks8uc/s800/animal_kamonohashi.png"
+    },
+    "capybara.png": {
+      "emoji": "🐾",
+      "irasutoya": "カピバラのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXNk0bYdOEPmmYDihlyiWiLPdrrxFea1ol6_UC9weYYqd7DA1T8iDUjQQQ9LzOl1t6di8d8JkzmaIP80HmPS87NV66Ke9NLC634tpIq4PYcgfIvJNBnshqy9hlIRV3v7i4nGjmvQm5Gss/s800/capybara.png"
+    },
+    "fe_crocodile.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Crocodile」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Crocodile/Color/crocodile_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_snake.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Snake」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Snake/Color/snake_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "animal_chameleon.png": {
+      "emoji": "🐾",
+      "irasutoya": "カメレオンのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoLCgU_hl7bg40oOKYi3krZPfHneAGCMLX4mGpCqLfjqW9_6INZj3JF4g4gcZEc_vX3ZlOWgvKdxxeBiIu9jk8xe512tIzCjQKkz1N5ZAdgynrqPaBf4Ij4brjT6ga3J08DHDwuWATdAE/s800/animal_chameleon.png"
+    },
+    "fe_frog.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Frog」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Frog/Color/frog_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_koala.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Koala」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Koala/Color/koala_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_bird.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Bird」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Bird/Color/bird_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_blackbird.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Blackbird」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Blackbird/Color/blackbird_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "bird_hachidori.png": {
+      "emoji": "🐾",
+      "irasutoya": "ハチドリのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi508zooqGBsycr_6CDmJ2LVUGH5StnIxq1ViXbiTXY4ZEvCdwOlhyeVHxBFp5eLOp5_SpxTzk02fWH1eJ2Og-Elp9t_yV7LIOfC1RcMmrHrAmZMrme4N5tD6qcEcgXm7CvWSsdPG9yoB4/s800/bird_hachidori.png"
+    },
+    "fe_penguin.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Penguin」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Penguin/Color/penguin_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "bird_dachou.png": {
+      "emoji": "🐾",
+      "irasutoya": "ダチョウのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEgr26yZEfmGpbpBmBMszqFcM7OPoc1lGjWTMARlWZorLwJ-3nY2VxGYvzJ5NFWDzzL4Zxa2rJ8wZkw1sPxH_bdcxyM06xQK0Ihkrmpp0E5Zy2q54kuGjx0l-EKgToBN87KBrdl8x6Zqnr4os23kmqKo6yDNjzriabjt2DRzqnNfbl0S1fVn7rEbUohJ5w=s800"
+    },
+    "fe_flamingo.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Flamingo」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Flamingo/Color/flamingo_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_owl.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Owl」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Owl/Color/owl_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "bird_kitsutsuki.png": {
+      "emoji": "🐾",
+      "irasutoya": "キツツキのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjK03gkUTFdlaHV_xBiMkv3ctXl2s9NUqTI_SyeoNNk4k2GURL3X2w_KnOGO2ZrcS6uC5P1MvEYKzhoWlLPc6edvPYBd49pPGcGokJEr0sG156wui7sGwN7w0B5ZSprtKWBFrH72-9D20Q/s800/bird_kitsutsuki.png"
+    },
+    "fe_chicken.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Chicken」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Chicken/Color/chicken_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_honeybee.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Honeybee」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Honeybee/Color/honeybee_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_snail.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Snail」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Snail/Color/snail_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_ant.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Ant」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Ant/Color/ant_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_mosquito.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Mosquito」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Mosquito/Color/mosquito_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_butterfly.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Butterfly」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Butterfly/Color/butterfly_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "mushi_hotaru.png": {
+      "emoji": "🐾",
+      "irasutoya": "ホタルのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEje7G9JIs0OBAKlonw0-hKleSuRj4JcCQnWnHUwsJTZmRaAaK56d64mkXAb2Kcyh7HjAsCc2etNKrkC4rUx_xiNw3WncdPVpEXH-ELc14HLM6JUckw7Qv5PXTmYaQp6yPnJQFShljZQfMeB/s800/mushi_hotaru.png"
+    },
+    "mushi_oniyanma.png": {
+      "emoji": "🐾",
+      "irasutoya": "オニヤンマのイラスト（トンボ）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEie0eyZPLXY57HxQSk4GSjhrJq7qXR7GU2vdQLtS45PE1Ogb6Gt14gTIcgRI_Oc17mLbv6KOHHVSU6hNzGs7d0Xxw9iWldud5Ds9hCKD5KLbOuD65-1t4MqiQfCoMok8XLySr7g4FD-RTwV/s800/mushi_oniyanma.png"
+    },
+    "fe_cat.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Cat」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Cat/Color/cat_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_dog.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Dog」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Dog/Color/dog_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_pig.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Pig」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Pig/Color/pig_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_hamster.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Hamster」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Hamster/Color/hamster_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_rabbit.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Rabbit」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Rabbit/Color/rabbit_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_cow.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Cow」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Cow/Color/cow_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_horse.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Horse」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Horse/Color/horse_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_goat.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Goat」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Goat/Color/goat_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "animal_hitsuji_suffolk.png": {
+      "emoji": "🐾",
+      "irasutoya": "サフォークのイラスト（羊）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEirKzlEeFPaJYXEE22U3C91_m66Bluj5FABVoJuej6IYo5FqLe_oJgDoBdY6yLMVRPgyztb3BUqCtgPilhNL4ANxLcARCToeQjdDotA-vHni6t1zTfxgYLByQAMQgrpekCCY-393Aeicr6-/s800/animal_hitsuji_suffolk.png"
+    },
+    "fish_kingyo2.png": {
+      "emoji": "🐾",
+      "irasutoya": "金魚のイラスト（魚）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQ5m9kqF_UJusWMRzKEekz5mQ9Fw6832tl5x4IYJE7qq0dZZcnLxkgC44qNjsRLCMgqDQYmApj6lsPKvhzE1UWpx59shylRhBWXlhgBgirhWUxn3QWtv8SSCZI7qol0uRnurosHHr3uHw5/s800/fish_kingyo2.png"
+    },
+    "fe_hedgehog.svg": {
+      "emoji": "🐾",
+      "irasutoya": "Fluent Emoji「Hedgehog」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Hedgehog/Color/hedgehog_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "sleep_animal_dog.png": {
+      "emoji": "🐾",
+      "irasutoya": "寝る犬のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7hnZusaJT-QuL0Yszhs-oBpdaJXQtLGr-ir-72YSUdYt3LkYu5Z2WstBcGSFNObAmhBYDCrxeYwxxVV8F2T_UBdWZ5RK-3N3n7Qb6H5Fno8fM6racjl6dqauJbWj-K2bxXElNGilNrO4i/s800/sleep_animal_dog.png"
+    }
+  },
+  "slides": [
+    {
+      "type": "trivia",
+      "text": "寝る前に聞きたい\n動物の雑学63選",
+      "speech": "寝る前に聞きたい、動物の雑学、63選",
+      "image": "party_animal.png",
+      "chapter": "オープニング"
+    },
+    {
+      "type": "trivia",
+      "text": "第1章\n海の生き物",
+      "speech": "第一章、海の生き物",
+      "image": "fe_spouting_whale.svg",
+      "chapter": "第1章　海の生き物"
+    },
+    {
+      "type": "trivia",
+      "text": "タコの心臓は",
+      "image": "fe_octopus.svg",
+      "answer": "3つある",
+      "explain": "エラに血を送る心臓が2つと\n全身に血を送る心臓が1つあるんだ",
+      "no": 1,
+      "answerSpeech": "三つある",
+      "explainSpeech": "エラに血を送る心臓が二つと、全身に血を送る心臓が一つあるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "タコの血の色は",
+      "image": "fe_octopus.svg",
+      "answer": "青い",
+      "explain": "血の中の銅をふくむ成分が\n酸素と結びつくと青く見えるんだ",
+      "no": 2
+    },
+    {
+      "type": "trivia",
+      "text": "ラッコは寝るとき",
+      "image": "animal_rakko_tewotsunagu.png",
+      "answer": "仲間と手をつなぐことがある",
+      "explain": "眠っている間に波で\n流されないためだといわれているよ",
+      "no": 3
+    },
+    {
+      "type": "trivia",
+      "text": "イルカは",
+      "image": "fe_dolphin.svg",
+      "answer": "脳を半分ずつ眠らせる",
+      "explain": "片方の脳が休んでいる間も\nもう片方で呼吸や見張りを続けているんだ",
+      "no": 4
+    },
+    {
+      "type": "trivia",
+      "text": "クマノミは",
+      "image": "kumanomi.png",
+      "answer": "オスからメスに変わる",
+      "explain": "群れでいちばん体の大きいクマノミが\nメスになるんだ",
+      "no": 5
+    },
+    {
+      "type": "trivia",
+      "text": "サメの歯は",
+      "image": "fe_shark.svg",
+      "answer": "何度でも生え変わる",
+      "explain": "抜けてもすぐ後ろの歯が前に出てきて\n一生で何千本も生え変わるんだ",
+      "no": 6,
+      "explainSpeech": "抜けてもすぐ後ろの歯が前に出てきて、一生で何千本も生え変わるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "シロナガスクジラは",
+      "image": "whale_01_shironagasukujira.png",
+      "answer": "地球の歴史上\nいちばん大きな動物",
+      "explain": "体の長さは30メートル近くになり\n恐竜よりも大きいんだ",
+      "no": 7,
+      "explainSpeech": "体の長さは三十メートル近くになり、恐竜よりも大きいんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "シャチは",
+      "image": "animal_syachi.png",
+      "answer": "イルカの仲間",
+      "explain": "英語ではキラーホエールと呼ばれるけれど\n分類ではマイルカ科に入るんだ",
+      "no": 8
+    },
+    {
+      "type": "trivia",
+      "text": "ベニクラゲは",
+      "image": "fish_benikurage.png",
+      "answer": "若返ることができる",
+      "explain": "年をとると赤ちゃんのような姿に戻り\nまた成長をやり直せるんだ",
+      "no": 9
+    },
+    {
+      "type": "trivia",
+      "text": "クラゲには",
+      "image": "fe_jellyfish.svg",
+      "answer": "脳も心臓もない",
+      "explain": "体のほとんどが水でできていて\n神経のネットワークで動いているんだ",
+      "no": 10
+    },
+    {
+      "type": "trivia",
+      "text": "ニホンウナギが卵を産む場所は",
+      "image": "fish_unagi2.png",
+      "answer": "日本から約2000km離れた\nマリアナ諸島の近くの海",
+      "explain": "生まれた赤ちゃんは海流に乗って\n日本まで旅をしてくるんだ",
+      "no": 11,
+      "answerSpeech": "日本から約二千キロ離れた、マリアナ諸島の近くの海"
+    },
+    {
+      "type": "trivia",
+      "text": "第2章\n大きな動物たち",
+      "speech": "第二章、大きな動物たち",
+      "image": "fe_elephant.svg",
+      "chapter": "第2章　大きな動物たち"
+    },
+    {
+      "type": "trivia",
+      "text": "ゾウの鼻には",
+      "image": "fe_elephant.svg",
+      "answer": "約4万もの筋肉がある",
+      "explain": "だから小さな物をつまんだり\n水を吸い上げたりできるんだ",
+      "no": 12,
+      "answerSpeech": "約四万もの筋肉がある"
+    },
+    {
+      "type": "trivia",
+      "text": "ゾウは",
+      "image": "fe_elephant.svg",
+      "answer": "ジャンプができない",
+      "explain": "体がとても重いうえに\n足の骨のつくりが跳ぶのに向いていないんだ",
+      "no": 13
+    },
+    {
+      "type": "trivia",
+      "text": "カバは",
+      "image": "fe_hippopotamus.svg",
+      "answer": "赤い汗のような液体を出す",
+      "explain": "この液体は日焼け止めや\nばい菌よけの役目をしているんだ",
+      "no": 14
+    },
+    {
+      "type": "trivia",
+      "text": "シマウマのしま模様の下の皮膚は",
+      "image": "fe_zebra.svg",
+      "answer": "黒い",
+      "explain": "白い毛と黒い毛が生えていて\n皮膚そのものは黒っぽいんだ",
+      "no": 15
+    },
+    {
+      "type": "trivia",
+      "text": "ホッキョクグマの毛は",
+      "image": "fe_polar_bear.svg",
+      "answer": "本当は透明",
+      "explain": "光が反射して白く見えているだけで\n皮膚は黒いんだ",
+      "no": 16
+    },
+    {
+      "type": "trivia",
+      "text": "キリンの首の骨の数は",
+      "image": "fe_giraffe.svg",
+      "answer": "人間と同じ7個",
+      "explain": "骨の数は同じでも\n1個1個がとても長いんだ",
+      "no": 17,
+      "answerSpeech": "人間と同じ七個",
+      "explainSpeech": "骨の数は同じでも、一個一個がとても長いんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "キリンの舌は",
+      "image": "fe_giraffe.svg",
+      "answer": "黒っぽい紫色",
+      "explain": "日焼けを防ぐためではないか\nといわれているよ",
+      "no": 18
+    },
+    {
+      "type": "trivia",
+      "text": "ラクダのこぶの中身は",
+      "image": "fe_two_hump_camel.svg",
+      "answer": "水ではなく脂肪",
+      "explain": "食べ物が少ないときの\nエネルギーのたくわえになるんだ",
+      "no": 19
+    },
+    {
+      "type": "trivia",
+      "text": "カンガルーは",
+      "image": "fe_kangaroo.svg",
+      "answer": "後ろ向きに歩くのが苦手",
+      "explain": "大きなしっぽと後ろ足のつくりのせいで\n前に進むのが得意なんだ",
+      "no": 20
+    },
+    {
+      "type": "trivia",
+      "text": "チーターは",
+      "image": "animalface_cheetah.png",
+      "answer": "時速100km近くで走れる",
+      "explain": "でも全力で走れるのは\nほんの数百メートルだけなんだ",
+      "no": 21,
+      "answerSpeech": "時速百キロ近くで走れる",
+      "explainSpeech": "でも全力で走れるのは、ほんの数百メートルだけなんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "パンダの赤ちゃんは",
+      "image": "fe_panda.svg",
+      "answer": "お母さんの約900分の1の重さ",
+      "explain": "生まれたときは100gほどで\nてのひらに乗るくらい小さいんだ",
+      "no": 22,
+      "answerSpeech": "お母さんの約九百分の一の重さ",
+      "explainSpeech": "生まれたときは百グラムほどで、てのひらに乗るくらい小さいんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "第3章\nふしぎな動物たち",
+      "speech": "第三章、ふしぎな動物たち",
+      "image": "fe_sloth.svg",
+      "chapter": "第3章　ふしぎな動物たち"
+    },
+    {
+      "type": "trivia",
+      "text": "パンダの手には",
+      "image": "fe_panda.svg",
+      "answer": "6本目の指のようなでっぱりがある",
+      "explain": "骨が発達したこのでっぱりで\n竹をしっかりつかめるんだ",
+      "no": 23,
+      "answerSpeech": "六本目の指のような、でっぱりがある"
+    },
+    {
+      "type": "trivia",
+      "text": "パンダは",
+      "image": "fe_panda.svg",
+      "answer": "1日の半分近くを食事に使う",
+      "explain": "竹は栄養が少ないので\nたくさん食べる必要があるんだ",
+      "no": 24,
+      "answerSpeech": "一日の半分近くを、食事に使う"
+    },
+    {
+      "type": "trivia",
+      "text": "ナマケモノが木から降りるのは",
+      "image": "fe_sloth.svg",
+      "answer": "1週間に1回ほど",
+      "explain": "トイレのときだけ\nわざわざ地面まで降りてくるんだ",
+      "no": 25,
+      "answerSpeech": "一週間に一回ほど"
+    },
+    {
+      "type": "trivia",
+      "text": "カモノハシは",
+      "image": "animal_kamonohashi.png",
+      "answer": "哺乳類なのに卵を産む",
+      "explain": "卵からかえった赤ちゃんは\nお母さんのお乳で育つんだ",
+      "no": 26
+    },
+    {
+      "type": "trivia",
+      "text": "カピバラは",
+      "image": "capybara.png",
+      "answer": "世界でいちばん大きなネズミの仲間",
+      "explain": "大きいものは体重が50kgを超えることもあるんだ",
+      "no": 27,
+      "explainSpeech": "大きいものは体重が五十キロを超えることもあるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "ワニは",
+      "image": "fe_crocodile.svg",
+      "answer": "舌を口の外に出せない",
+      "explain": "舌が口の底にくっついているからなんだ",
+      "no": 28
+    },
+    {
+      "type": "trivia",
+      "text": "ヘビには",
+      "image": "fe_snake.svg",
+      "answer": "まぶたがない",
+      "explain": "目は透明なうろこで守られていて\n目を開けたまま眠るんだ",
+      "no": 29
+    },
+    {
+      "type": "trivia",
+      "text": "カメレオンの体の色は",
+      "image": "animal_chameleon.png",
+      "answer": "気分や体温でも変わる",
+      "explain": "まわりに合わせて隠れるためだけでなく\n仲間へのサインにもなっているんだ",
+      "no": 30
+    },
+    {
+      "type": "trivia",
+      "text": "カエルは食べ物を飲み込むとき",
+      "image": "fe_frog.svg",
+      "answer": "目玉を使う",
+      "explain": "目玉を口の中に引っ込めて\n食べ物を押し込んでいるんだ",
+      "no": 31
+    },
+    {
+      "type": "trivia",
+      "text": "コアラは",
+      "image": "fe_koala.svg",
+      "answer": "1日に約20時間も眠る",
+      "explain": "主食のユーカリは栄養が少ないので\n眠ってエネルギーを節約しているんだ",
+      "no": 32,
+      "answerSpeech": "一日に約二十時間も眠る"
+    },
+    {
+      "type": "trivia",
+      "text": "第4章\n鳥のひみつ",
+      "speech": "第四章、鳥のひみつ",
+      "image": "fe_bird.svg",
+      "chapter": "第4章　鳥のひみつ"
+    },
+    {
+      "type": "trivia",
+      "text": "カラスは",
+      "image": "fe_blackbird.svg",
+      "answer": "人の顔を覚えられる",
+      "explain": "いやなことをした人の顔を\n何年も覚えているという研究もあるんだ",
+      "no": 33
+    },
+    {
+      "type": "trivia",
+      "text": "ハチドリは",
+      "image": "bird_hachidori.png",
+      "answer": "後ろ向きにも飛べる",
+      "explain": "1秒に数十回も羽ばたいて\n空中で止まることもできるんだ",
+      "no": 34,
+      "explainSpeech": "一秒に数十回も羽ばたいて、空中で止まることもできるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "ペンギンには",
+      "image": "fe_penguin.svg",
+      "answer": "ひざがある",
+      "explain": "足の大部分が体の中に隠れているので\n見えないだけなんだ",
+      "no": 35
+    },
+    {
+      "type": "trivia",
+      "text": "ダチョウの目は",
+      "image": "bird_dachou.png",
+      "answer": "脳よりも大きい",
+      "explain": "陸の動物の中でも\nいちばん大きな目を持っているといわれるよ",
+      "no": 36
+    },
+    {
+      "type": "trivia",
+      "text": "ダチョウの卵1個は",
+      "image": "bird_dachou.png",
+      "answer": "ニワトリの卵約20個分",
+      "explain": "殻がとても固くて\n人が乗っても割れにくいんだ",
+      "no": 37,
+      "speech": "ダチョウの卵一個は",
+      "answerSpeech": "ニワトリの卵、約二十個分"
+    },
+    {
+      "type": "trivia",
+      "text": "フラミンゴがピンク色なのは",
+      "image": "fe_flamingo.svg",
+      "answer": "食べ物の色のせい",
+      "explain": "エサの藻やエビにふくまれる色素で\nピンク色になるんだ",
+      "no": 38
+    },
+    {
+      "type": "trivia",
+      "text": "フクロウは",
+      "image": "fe_owl.svg",
+      "answer": "首を約270度も回せる",
+      "explain": "目を動かせないかわりに\n首を大きく回してまわりを見るんだ",
+      "no": 39,
+      "answerSpeech": "首を約二百七十度も回せる"
+    },
+    {
+      "type": "trivia",
+      "text": "キツツキの長い舌は",
+      "image": "bird_kitsutsuki.png",
+      "answer": "頭の骨をぐるりと包んでいる",
+      "explain": "木をつつくときの衝撃から\n脳を守るのに役立つといわれているよ",
+      "no": 40
+    },
+    {
+      "type": "trivia",
+      "text": "ニワトリは",
+      "image": "fe_chicken.svg",
+      "answer": "恐竜の子孫",
+      "explain": "鳥は恐竜から進化した\n生き残りだと考えられているんだ",
+      "no": 41
+    },
+    {
+      "type": "trivia",
+      "text": "第5章\n虫のひみつ",
+      "speech": "第五章、虫のひみつ",
+      "image": "fe_honeybee.svg",
+      "chapter": "第5章　虫のひみつ"
+    },
+    {
+      "type": "trivia",
+      "text": "カタツムリの歯は",
+      "image": "fe_snail.svg",
+      "answer": "1万本以上ある",
+      "explain": "やすりのような舌に\n小さな歯がびっしり並んでいるんだ",
+      "no": 42,
+      "answerSpeech": "一万本以上ある"
+    },
+    {
+      "type": "trivia",
+      "text": "ミツバチ1匹が一生で集める蜂蜜は",
+      "image": "fe_honeybee.svg",
+      "answer": "ティースプーン1杯にも満たない",
+      "explain": "1びんの蜂蜜は\nたくさんのミツバチの努力のかたまりなんだ",
+      "no": 43,
+      "speech": "ミツバチ一匹が一生で集める蜂蜜は",
+      "answerSpeech": "ティースプーン一杯にも満たない",
+      "explainSpeech": "ひとびんの蜂蜜は、たくさんのミツバチの努力のかたまりなんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "ミツバチは",
+      "image": "fe_honeybee.svg",
+      "answer": "ダンスで花の場所を伝える",
+      "explain": "おしりをふる向きと長さで\n方向と距離を仲間に教えるんだ",
+      "no": 44
+    },
+    {
+      "type": "trivia",
+      "text": "アリは",
+      "image": "fe_ant.svg",
+      "answer": "自分の体重の何十倍もの物を運べる",
+      "explain": "体が小さいほど\n体重のわりに力が強くなるんだ",
+      "no": 45
+    },
+    {
+      "type": "trivia",
+      "text": "人の血を吸う蚊は",
+      "image": "fe_mosquito.svg",
+      "answer": "メスだけ",
+      "explain": "卵を育てる栄養にするために\n血を吸っているんだ",
+      "no": 46
+    },
+    {
+      "type": "trivia",
+      "text": "チョウは",
+      "image": "fe_butterfly.svg",
+      "answer": "足で味を感じる",
+      "explain": "葉っぱにとまって味を確かめ\n卵を産む場所を選んでいるんだ",
+      "no": 47
+    },
+    {
+      "type": "trivia",
+      "text": "ホタルの光は",
+      "image": "mushi_hotaru.png",
+      "answer": "ほとんど熱くない",
+      "explain": "光を出す仕組みがとても効率的で\n冷たい光とも呼ばれるんだ",
+      "no": 48,
+      "speech": "ホタルのひかりは"
+    },
+    {
+      "type": "trivia",
+      "text": "トンボの大きな目は",
+      "image": "mushi_oniyanma.png",
+      "answer": "数万個の小さな目の集まり",
+      "explain": "だからほぼ真後ろまで\n見渡すことができるんだ",
+      "no": 49
+    },
+    {
+      "type": "trivia",
+      "text": "第6章\n身近な動物たち",
+      "speech": "第六章、身近な動物たち",
+      "image": "fe_cat.svg",
+      "chapter": "第6章　身近な動物たち"
+    },
+    {
+      "type": "trivia",
+      "text": "ネコは",
+      "image": "fe_cat.svg",
+      "answer": "甘い味を感じない",
+      "explain": "甘みを感じる仕組みが\nうまく働いていないんだ",
+      "no": 50
+    },
+    {
+      "type": "trivia",
+      "text": "ネコのひげは",
+      "image": "fe_cat.svg",
+      "answer": "すき間を通れるか測るセンサー",
+      "explain": "ひげの先が触れる幅で\n体が通れるかを判断しているんだ",
+      "no": 51
+    },
+    {
+      "type": "trivia",
+      "text": "ネコは",
+      "image": "fe_cat.svg",
+      "answer": "1日の半分以上を寝て過ごす",
+      "explain": "子ネコやお年寄りのネコは\nもっと長く眠ることもあるんだ",
+      "no": 52,
+      "answerSpeech": "一日の半分以上を寝て過ごす"
+    },
+    {
+      "type": "trivia",
+      "text": "イヌの鼻の模様は",
+      "image": "fe_dog.svg",
+      "answer": "1匹ずつ違う",
+      "explain": "人の指紋のように\n「鼻紋」で見分けることができるんだ",
+      "no": 53,
+      "answerSpeech": "一匹ずつ違う",
+      "explainSpeech": "人の指紋のように、びもんで見分けることができるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "イヌが汗をかくのは",
+      "image": "fe_dog.svg",
+      "answer": "主に肉球",
+      "explain": "体の熱は主に\nハアハアという息で逃がしているんだ",
+      "no": 54
+    },
+    {
+      "type": "trivia",
+      "text": "ブタは",
+      "image": "fe_pig.svg",
+      "answer": "汗をほとんどかけない",
+      "explain": "だから泥あびをして\n体を冷やしているんだ",
+      "no": 55
+    },
+    {
+      "type": "trivia",
+      "text": "ハムスターのほお袋は",
+      "image": "fe_hamster.svg",
+      "answer": "肩のあたりまで広がる",
+      "explain": "エサをたくさん詰め込んで\n巣まで運ぶんだ",
+      "no": 56
+    },
+    {
+      "type": "trivia",
+      "text": "ウサギは",
+      "image": "fe_rabbit.svg",
+      "answer": "自分のフンを食べる",
+      "explain": "やわらかいフンには栄養がたっぷり残っていて\nもう一度取り込んでいるんだ",
+      "no": 57
+    },
+    {
+      "type": "trivia",
+      "text": "ウシの胃は",
+      "image": "fe_cow.svg",
+      "answer": "4つある",
+      "explain": "一度飲み込んだ草を口に戻して\nかみ直しながら消化するんだ",
+      "no": 58,
+      "answerSpeech": "四つある"
+    },
+    {
+      "type": "trivia",
+      "text": "ウマは",
+      "image": "fe_horse.svg",
+      "answer": "立ったままでも眠れる",
+      "explain": "足を固定できる仕組みがあって\n倒れずにうとうとできるんだ",
+      "no": 59
+    },
+    {
+      "type": "trivia",
+      "text": "ヤギの瞳は",
+      "image": "fe_goat.svg",
+      "answer": "横長",
+      "explain": "広い範囲を見渡して\n敵をすばやく見つけるためなんだ",
+      "no": 60
+    },
+    {
+      "type": "trivia",
+      "text": "ヒツジは",
+      "image": "animal_hitsuji_suffolk.png",
+      "answer": "仲間や人の顔を覚えられる",
+      "explain": "何十頭もの顔を\n見分けたという研究もあるんだ",
+      "no": 61
+    },
+    {
+      "type": "trivia",
+      "text": "金魚の記憶は3秒",
+      "image": "fish_kingyo2.png",
+      "answer": "というのはウソ",
+      "explain": "何か月も前のことを\n覚えていたという実験があるんだ",
+      "no": 62,
+      "speech": "金魚の記憶は、三秒"
+    },
+    {
+      "type": "trivia",
+      "text": "ハリネズミの針は",
+      "image": "fe_hedgehog.svg",
+      "answer": "数千本ある",
+      "explain": "針は毛が固くなったもので\n抜けても生え変わるんだ",
+      "no": 63
+    },
+    {
+      "type": "trivia",
+      "text": "今日も最後まで\n聞いてくれてありがとう",
+      "speech": "今日も最後まで聞いてくれて、ありがとう。おやすみなさい。",
+      "image": "sleep_animal_dog.png",
+      "chapter": "エンディング"
+    }
+  ],
+  "description": "寝る前にぼーっと聞ける、動物の雑学を63個まとめました。海の生き物から身近なペットまで、思わず人に話したくなる雑学ばかりです。",
+  "hashtags": [
+    "雑学",
+    "豆知識",
+    "トリビア",
+    "動物",
+    "睡眠用"
+  ]
+}

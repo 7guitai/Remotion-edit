@@ -9,6 +9,8 @@ const TAIL = 12;
 // 1ページ1雑学：振りを読み終えてから答えを出すまでの間と、答えのあとの余韻
 const ANSWER_PAUSE = 30;
 const ANSWER_TAIL = 24;
+// 答えを読み終えてから解説を読み始めるまで
+const EXPLAIN_PAUSE = 12;
 // クイズの出題後、考える時間として入れるカウントダウン（フレーム）
 export const COUNTDOWN = 3 * FPS;
 
@@ -21,6 +23,8 @@ export type ResolvedSlide = {
   // 1ページ1雑学の答え（表示と読み上げを始めるフレーム）
   answerVoice: string | null;
   answerStart: number | null;
+  explainVoice: string | null;
+  explainStart: number | null;
   // 読み上げが終わってからカウントダウンが始まるまで（クイズ出題のみ）
   countdownStart: number | null;
   // 画面左上に出す「雑学 No.○ / 全○」
@@ -62,7 +66,9 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
         ? await getAudioDurationInSeconds(staticFile(voicePath))
         : 1 + (slide.speech ?? slide.text).length * 0.13;
       const image =
-        slide.type === undefined || slide.type === "illust" || slide.type === "trivia"
+        slide.type === undefined ||
+        slide.type === "illust" ||
+        slide.type === "trivia"
           ? slide.image
           : null;
       const illustration = image
@@ -86,13 +92,26 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
           ? await getAudioDurationInSeconds(staticFile(answerPath))
           : 1 + (slide.answerSpeech ?? slide.answer).length * 0.13;
         const answerStart = LEAD_IN + voiceFrames + ANSWER_PAUSE;
+        const answerEnd = answerStart + Math.ceil(answerSeconds * FPS);
+        const explainPath = voicePath.replace(".wav", "-explain.wav");
+        const hasExplain = slide.explain ? await exists(explainPath) : false;
+        const explainSeconds = !slide.explain
+          ? 0
+          : hasExplain
+            ? await getAudioDurationInSeconds(staticFile(explainPath))
+            : 1 + (slide.explainSpeech ?? slide.explain).length * 0.13;
+        const explainStart = slide.explain ? answerEnd + EXPLAIN_PAUSE : null;
         return {
           ...common,
           answerVoice: hasAnswer ? answerPath : null,
           answerStart,
+          explainVoice: hasExplain ? explainPath : null,
+          explainStart,
           countdownStart: null,
           durationInFrames:
-            answerStart + Math.ceil(answerSeconds * FPS) + ANSWER_TAIL,
+            (explainStart === null
+              ? answerEnd
+              : explainStart + Math.ceil(explainSeconds * FPS)) + ANSWER_TAIL,
         };
       }
       return {
@@ -103,6 +122,8 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
         voiceStart: LEAD_IN,
         answerVoice: null,
         answerStart: null,
+        explainVoice: null,
+        explainStart: null,
         countdownStart: isQuestion ? LEAD_IN + voiceFrames : null,
         no: numbers[i],
         total,

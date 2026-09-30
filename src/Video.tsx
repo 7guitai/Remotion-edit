@@ -50,6 +50,11 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
                   <Audio src={staticFile(s.answerVoice)} />
                 </Sequence>
               ) : null}
+              {s.explainVoice && s.explainStart !== null ? (
+                <Sequence from={s.explainStart}>
+                  <Audio src={staticFile(s.explainVoice)} />
+                </Sequence>
+              ) : null}
               <QuizSfx resolved={s} />
             </Series.Sequence>
           ))}

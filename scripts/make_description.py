@@ -17,6 +17,7 @@ TAIL = 12
 COUNTDOWN = 3 * FPS  # クイズ出題のあとの考える時間
 ANSWER_PAUSE = 30  # 1ページ1雑学：振りのあと答えを出すまで
 ANSWER_TAIL = 24
+EXPLAIN_PAUSE = 12  # 答えのあと解説を読むまで
 
 
 def seconds(voice: Path) -> float:
@@ -28,7 +29,11 @@ def slide_frames(voice: Path, slide: dict) -> int:
     if slide.get("type") == "trivia" and slide.get("answer"):
         answer = voice.with_name(voice.stem + "-answer.wav")
         start = LEAD_IN + math.ceil(seconds(voice) * FPS) + ANSWER_PAUSE
-        return start + math.ceil(seconds(answer) * FPS) + ANSWER_TAIL
+        end = start + math.ceil(seconds(answer) * FPS)
+        if slide.get("explain"):
+            explain = voice.with_name(voice.stem + "-explain.wav")
+            end += EXPLAIN_PAUSE + math.ceil(seconds(explain) * FPS)
+        return end + ANSWER_TAIL
     question = slide.get("type") == "quiz" and "answer" not in slide
     return LEAD_IN + math.ceil(seconds(voice) * FPS) + TAIL + (COUNTDOWN if question else 0)
 
@@ -72,7 +77,7 @@ def main() -> None:
         "▼ 使用素材",
         f"音声：VOICEVOX:{ep.get('voice', {}).get('name', 'ずんだもん')}",
         f"BGM：{ep['bgm']['credit']}「{ep['bgm']['title']}」",
-        "イラスト：いらすとや",
+        "イラスト：" + "、".join(dict.fromkeys(i.get("credit", "いらすとや") for i in ep["illustrations"].values())),
         "",
     ]
     if ep.get("hashtags"):
