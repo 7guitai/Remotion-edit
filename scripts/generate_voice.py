@@ -103,15 +103,23 @@ def main() -> None:
         parts = [(f"{i:03d}.wav", slide.get("speech") or slide["text"])]
         if slide.get("answer"):
             parts.append((f"{i:03d}-answer.wav", slide.get("answerSpeech") or slide["answer"]))
+        # 2ch風のレスは、レスの順番で replyVoices の声を交互に使う
+        for k, reply in enumerate(slide.get("replies", [])):
+            parts.append((f"{i:03d}-r{k}.wav", reply.get("speech") or reply["text"]))
         if slide.get("explain"):
             parts.append((f"{i:03d}-explain.wav", slide.get("explainSpeech") or slide["explain"]))
         for name, raw in parts:
             text = to_speech(raw, readings)
             out = OUT_DIR / name
+            spk, spd = speaker, speed
+            reply_voices = episode.get("replyVoices") or []
+            if "-r" in name and reply_voices and args.speaker is None:
+                v = reply_voices[int(name.split("-r")[1][:-4]) % len(reply_voices)]
+                spk, spd = v["speaker"], v.get("speed", speed)
             if engine == "voicevox":
-                synth_voicevox(text, out, args.voicevox_url, speaker, speed)
+                synth_voicevox(text, out, args.voicevox_url, spk, spd)
             else:
-                synth_openjtalk(text, out, speed)
+                synth_openjtalk(text, out, spd)
             print(f"  {out.name}  {text}")
 
 

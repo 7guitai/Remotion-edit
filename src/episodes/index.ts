@@ -2,6 +2,7 @@ import animalTriviaLong from "./animal-trivia-long.json";
 import autumnTrivia from "./autumn-trivia.json";
 import loveTriviaShort from "./love-trivia-short.json";
 import moneyTriviaShort from "./money-trivia-short.json";
+import savings2chShort from "./savings-2ch-short.json";
 import chargerPowerSplit from "./charger-power-split.json";
 import sleepTrivia from "./sleep-trivia.json";
 
@@ -74,6 +75,16 @@ export type TriviaSlide = {
   explainSpeech?: string;
 };
 
+// 2ch風ショート：集中線の背景に大きな見出し（スレタイや要点）、イラストの上にレスが順番に出る。
+// 見出し（NNN.wav）とレス（NNN-rK.wav）を別の声で読み上げる
+export type ThreadSlide = {
+  type: "thread";
+  text: string;
+  speech?: string;
+  image: string;
+  replies?: { text: string; speech?: string; color?: string }[];
+};
+
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
 // no を付けたスライドから次の chapter まで、画面左上に「雑学 No.○」を表示する。
 // テロップの **〜** は強調表示（読み上げでは記号を除く）
@@ -84,6 +95,7 @@ export type ScriptSlide = (
   | PointsSlide
   | QuizSlide
   | TriviaSlide
+  | ThreadSlide
 ) & {
   chapter?: string;
   no?: number;
@@ -102,6 +114,8 @@ export type Episode = {
   background?: string;
   // 読み上げの声（省略時はずんだもん・1.2倍）。name は概要欄のクレジットに使う
   voice?: { speaker: number; speed: number; name: string };
+  // 2ch風のレスを読む声（レスの順番で交互に使う）
+  replyVoices?: { speaker: number; speed: number; name: string }[];
   // 強調色（省略時は theme.ts の COLORS.accent / marker）
   accent?: string;
   marker?: string;
@@ -120,6 +134,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  savings2chShort as Episode,
   animalTriviaLong as Episode,
   moneyTriviaShort as Episode,
   loveTriviaShort as Episode,

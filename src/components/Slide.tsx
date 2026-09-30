@@ -14,6 +14,7 @@ import { Layout, useLayout } from "../layout";
 import { COLORS, fontFamily, useAccent } from "../theme";
 import { Bars, Points, Table } from "./Charts";
 import { Quiz } from "./Quiz";
+import { ThreadPage } from "./ThreadPage";
 import { TriviaPage } from "./TriviaPage";
 
 // 全角=1、半角=0.55 として、各行の幅から折り返し後の行数を見積もる
@@ -128,6 +129,9 @@ export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
     extrapolateRight: "clamp",
   });
 
+  if (slide.type === "thread") {
+    return <ThreadPage resolved={resolved} slide={slide} />;
+  }
   if (slide.type === "trivia") {
     return <TriviaPage resolved={resolved} slide={slide} />;
   }

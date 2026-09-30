@@ -25,7 +25,16 @@ def seconds(voice: Path) -> float:
         return w.getnframes() / w.getframerate()
 
 
+REPLY_GAP = 10  # 2ch風：見出しとレス、レスとレスの間
+
+
 def slide_frames(voice: Path, slide: dict) -> int:
+    if slide.get("type") == "thread":
+        cursor = LEAD_IN + math.ceil(seconds(voice) * FPS)
+        for k in range(len(slide.get("replies", []))):
+            reply = voice.with_name(f"{voice.stem}-r{k}.wav")
+            cursor += REPLY_GAP + math.ceil(seconds(reply) * FPS)
+        return cursor + ANSWER_TAIL
     if slide.get("type") == "trivia" and slide.get("answer"):
         answer = voice.with_name(voice.stem + "-answer.wav")
         start = LEAD_IN + math.ceil(seconds(voice) * FPS) + ANSWER_PAUSE
@@ -75,7 +84,13 @@ def main() -> None:
         lines += ["▼ 目次", *chapters, ""]
     lines += [
         "▼ 使用素材",
-        f"音声：VOICEVOX:{ep.get('voice', {}).get('name', 'ずんだもん')}",
+        "音声：" + "、".join(
+            f"VOICEVOX:{n}"
+            for n in dict.fromkeys(
+                [ep.get("voice", {}).get("name", "ずんだもん")]
+                + [v["name"] for v in ep.get("replyVoices", [])]
+            )
+        ),
         f"BGM：{ep['bgm']['credit']}「{ep['bgm']['title']}」",
         "イラスト：" + "、".join(dict.fromkeys(i.get("credit", "いらすとや") for i in ep["illustrations"].values())),
         "",

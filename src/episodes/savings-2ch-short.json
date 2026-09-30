@@ -1,0 +1,186 @@
+{
+  "id": "savings-2ch-short",
+  "title": "【2ch風】貯金1000万貯めて分かったこと",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "replyVoices": [
+    {
+      "speaker": 11,
+      "speed": 1.2,
+      "name": "玄野武宏"
+    },
+    {
+      "speaker": 8,
+      "speed": 1.2,
+      "name": "春日部つむぎ"
+    }
+  ],
+  "readings": {
+    "新NISA": "しんニーサ"
+  },
+  "bgm": {
+    "file": "pappa_parappa.mp3",
+    "title": "Pappa Parappa",
+    "credit": "Phalene",
+    "page": "https://opentracks.com/bgm/detail/9671",
+    "opentracks": 9671
+  },
+  "illustrations": {
+    "money_tsuchou_happy_woman.png": {
+      "emoji": "💰",
+      "irasutoya": "通帳を見て喜ぶ人のイラスト（女性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8CL_vdHmiVUy4hFHxk0o-SGxPULSNnxR3IF98MA8NI-aL384LM_8aZSyBZO2vP-9kMrCUib2DXsvjh7dlEsa9demqdmCPbgEWh9cDLtQ8v6r7AemEzaMZSlvIxZfF2PXmdkYGBI3IiJgm/s800/money_tsuchou_happy_woman.png"
+    },
+    "kyuryou_bonus_man2.png": {
+      "emoji": "💰",
+      "irasutoya": "給料日・ボーナス日のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIqHjjHic1jJ3H8LbsUlISPg7aI4_NHM943FQNC-LFJHEUAlHBHv85Tyyhc-k1XQcln69LdYZZ8NFEC3DgaI8OQm_M11LVMjruHSJhGylrtX3KmuFZheFGj8vesE0wEuzLRIE5GZ4cXqmp/s800/kyuryou_bonus_man2.png"
+    },
+    "money_hokensyouken.png": {
+      "emoji": "💰",
+      "irasutoya": "保険証券のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8cK6xCr_U8_05ADFZu6ohR-soth-ONFlmli_yPV3-LuTPxT9euorEgWgYmHMy5rVgNJgayZ73zsExNtOZExOe4RnVhqgS2liJrignjKg3aQuzxrdeicwYgZOrOJdAQ7cFA9yq4t_cJmCG/s800/money_hokensyouken.png"
+    },
+    "reji_cashier_supermarket_man.png": {
+      "emoji": "💰",
+      "irasutoya": "コンビニ・スーパーマーケットのレジのイラスト（男性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhucHPCC8UPdolhu105Kwi8k0-qG7ZVcjdKDJ0YMmg6ABYv-25nCsFZvYAB1oQxWGWvZDO7Rn_Wg6A_Y9SIdnS72TvT627Zf_JxeAsNANlEvPBdHBVLTc245uSjqzjRey-8Nm4hyphenhyphenDR7jQW9/s800/reji_cashier_supermarket_man.png"
+    },
+    "shopping_brand_goods.png": {
+      "emoji": "💰",
+      "irasutoya": "ブランド品のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh5FvebZD2N7kdLYTFaDbM_yt8ubv4XoIx8e166AN0MXGTfQwcV0iIPMmfP_K3ike8VuAK1pOXic_wTUrMKbNj90P7DRA5R78ia2eh-Ax93PE3Gb-zRc2idske4WxJeomBAr1I_5B8OLGmi/s800/shopping_brand_goods.png"
+    },
+    "tsumitate_man.png": {
+      "emoji": "💰",
+      "irasutoya": "積み立てのイラスト（男性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGjXn_F8f9jeQBotvSxEB0kHsDje6g2KVU2ULWVPUtD8KE1RXDuraSVo7lhtfbK0CqWxISk4K6anQ0AZD46y3zlHxIQcwAHjWishUBPc7JejrYrosCZnQe_s0wtxzFItYfklU3QUCDyF4/s800/tsumitate_man.png"
+    },
+    "money_chokinbako.png": {
+      "emoji": "💰",
+      "irasutoya": "ブタの貯金箱のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCC1SlWaYikwCmoV7cDhhBuKO_YRD44l82P8rui9HpIFTPz3fKbSXlnpgl1GVsyiEAW4lB13HtFqKYFgBCP1QTn-neW2cCJ4VaifjOwu_NrB3lkRHAM0nbG8tzTY9pw84DMNKNlzlXkm8/s800/money_chokinbako.png"
+    },
+    "money_chokin_seikou_woman.png": {
+      "emoji": "💰",
+      "irasutoya": "貯金に成功した人のイラスト（女性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgkHDinpz-Xlxl3jUnez49C4cW3AJgC3HbkXHqpVRC5mYlBlA3GmU6iIgQ3Y2meskt9QKJeUGa9wOqtaWki7S04YHlXMviACXVbZ5atNTLro_8snIDP0FampiQ34GntiqrnBjFd-2g2PTc/s800/money_chokin_seikou_woman.png"
+    }
+  },
+  "slides": [
+    {
+      "type": "thread",
+      "text": "貯金1000万\n貯めて\n分かったこと\n書いてく",
+      "image": "money_tsuchou_happy_woman.png",
+      "speech": "貯金一千万貯めて、分かったこと書いてく"
+    },
+    {
+      "type": "thread",
+      "text": "先取り貯金が\n最強",
+      "image": "kyuryou_bonus_man2.png",
+      "replies": [
+        {
+          "text": "給料日に別口座へ\n自動で移すだけ"
+        },
+        {
+          "text": "「余ったら貯金」は\n一生貯まらんぞ"
+        }
+      ]
+    },
+    {
+      "type": "thread",
+      "text": "固定費から\n削れ",
+      "image": "money_hokensyouken.png",
+      "replies": [
+        {
+          "text": "格安SIMにしたら\n月5000円浮いた",
+          "speech": "格安シムにしたら、月五千円浮いた"
+        },
+        {
+          "text": "保険も見直したら\n入りすぎてたわ"
+        }
+      ]
+    },
+    {
+      "type": "thread",
+      "text": "コンビニに\n毎日寄るな",
+      "image": "reji_cashier_supermarket_man.png",
+      "replies": [
+        {
+          "text": "1日500円でも\n年間18万円やぞ",
+          "speech": "一日五百円でも、年間十八万円やぞ"
+        },
+        {
+          "text": "マイボトルに変えた\nだけで全然違う"
+        }
+      ]
+    },
+    {
+      "type": "thread",
+      "text": "見栄を張るのを\nやめろ",
+      "image": "shopping_brand_goods.png",
+      "replies": [
+        {
+          "text": "車は中古で十分",
+          "speech": "車は中古でじゅうぶん"
+        },
+        {
+          "text": "ブランド物なんて\n誰も見てないぞ",
+          "speech": "ブランドものなんて誰も見てないぞ"
+        }
+      ]
+    },
+    {
+      "type": "thread",
+      "text": "新NISAは\nやっとけ",
+      "image": "tsumitate_man.png",
+      "speech": "新ニーサは、やっとけ",
+      "replies": [
+        {
+          "text": "長期・積立・分散が\n基本やで"
+        },
+        {
+          "text": "ただし生活防衛資金を\n先に貯めてからな"
+        }
+      ]
+    },
+    {
+      "type": "thread",
+      "text": "結局は\n続けたやつが\n勝つ",
+      "image": "money_chokinbako.png",
+      "replies": [
+        {
+          "text": "最初の100万が\nいちばんキツい",
+          "speech": "最初の百万が、いちばんキツい"
+        },
+        {
+          "text": "当たり前のことを\n淡々と続けるだけ"
+        }
+      ]
+    },
+    {
+      "type": "thread",
+      "text": "参考になったら\n高評価\nたのむ",
+      "image": "money_chokin_seikou_woman.png",
+      "replies": [
+        {
+          "text": "チャンネル登録も\nよろしくな"
+        }
+      ]
+    }
+  ],
+  "description": "貯金1000万円を貯めた人の気づきを、2ch風のスレッドにまとめました。\n※この動画は2ch風に演出したフィクションです。投資には元本割れのリスクがあります。",
+  "hashtags": [
+    "2ch",
+    "お金",
+    "貯金",
+    "節約",
+    "Shorts"
+  ]
+}

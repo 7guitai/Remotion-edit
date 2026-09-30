@@ -9,6 +9,8 @@ const TAIL = 12;
 // 1ページ1雑学：振りを読み終えてから答えを出すまでの間と、答えのあとの余韻
 const ANSWER_PAUSE = 30;
 const ANSWER_TAIL = 24;
+// 2ch風：見出しのあと最初のレスまで、レスとレスの間
+const REPLY_GAP = 10;
 // 答えを読み終えてから解説を読み始めるまで
 const EXPLAIN_PAUSE = 12;
 // クイズの出題後、考える時間として入れるカウントダウン（フレーム）
@@ -25,6 +27,8 @@ export type ResolvedSlide = {
   answerStart: number | null;
   explainVoice: string | null;
   explainStart: number | null;
+  // 2ch風のレス（表示と読み上げを始めるフレーム）
+  replies: { voice: string | null; start: number }[];
   // 読み上げが終わってからカウントダウンが始まるまで（クイズ出題のみ）
   countdownStart: number | null;
   // 画面左上に出す「雑学 No.○ / 全○」
@@ -68,7 +72,8 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
       const image =
         slide.type === undefined ||
         slide.type === "illust" ||
-        slide.type === "trivia"
+        slide.type === "trivia" ||
+        slide.type === "thread"
           ? slide.image
           : null;
       const illustration = image
@@ -84,7 +89,32 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
         voiceStart: LEAD_IN,
         no: numbers[i],
         total,
+        replies: [] as { voice: string | null; start: number }[],
       };
+      if (slide.type === "thread") {
+        let cursor = LEAD_IN + voiceFrames;
+        const replies = [];
+        for (const [k, reply] of (slide.replies ?? []).entries()) {
+          const path = voicePath.replace(".wav", `-r${k}.wav`);
+          const has = await exists(path);
+          const secs = has
+            ? await getAudioDurationInSeconds(staticFile(path))
+            : 1 + (reply.speech ?? reply.text).length * 0.13;
+          const start = cursor + REPLY_GAP;
+          replies.push({ voice: has ? path : null, start });
+          cursor = start + Math.ceil(secs * FPS);
+        }
+        return {
+          ...common,
+          replies,
+          answerVoice: null,
+          answerStart: null,
+          explainVoice: null,
+          explainStart: null,
+          countdownStart: null,
+          durationInFrames: cursor + ANSWER_TAIL,
+        };
+      }
       if (slide.type === "trivia" && slide.answer) {
         const answerPath = voicePath.replace(".wav", "-answer.wav");
         const hasAnswer = await exists(answerPath);
@@ -120,6 +150,7 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
         hasImage: image ? await exists(`illustrations/${image}`) : false,
         voice: hasVoice ? voicePath : null,
         voiceStart: LEAD_IN,
+        replies: [],
         answerVoice: null,
         answerStart: null,
         explainVoice: null,

@@ -55,6 +55,12 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
                   <Audio src={staticFile(s.explainVoice)} />
                 </Sequence>
               ) : null}
+              {s.replies.map((r, k) => (
+                <Sequence key={k} from={r.start}>
+                  <Audio src={staticFile("sfx/pop.wav")} volume={0.5} />
+                  {r.voice ? <Audio src={staticFile(r.voice)} /> : null}
+                </Sequence>
+              ))}
               <QuizSfx resolved={s} />
             </Series.Sequence>
           ))}

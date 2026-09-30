@@ -10,6 +10,7 @@
 | `autumn-trivia` | 秋の雑学（クイズ3問入り） | 約2分22秒 |
 | `love-trivia-short` | 恋愛の雑学（縦型ショート・クイズ1問入り） | 約50秒 |
 | `animal-trivia-long` | 寝る前に聞きたい 動物の雑学63選（横長・1ページ1雑学＋解説、全6章） | 約8分44秒 |
+| `savings-2ch-short` | 【2ch風】貯金1000万貯めて分かったこと（縦型ショート・スレ風の見出し＋レス） | 約52秒 |
 | `money-trivia-short` | お金の雑学7選（縦型ショート・1ページ1雑学、声は青山龍星） | 約44秒 |
 | `charger-power-split` | PCとスマホを同時充電する充電器の選び方（[OCHA NOTE の記事](https://ochanote.com/articles/laptop-phone-charger-power-split/)を動画化） | 約4分12秒 |
 
@@ -37,6 +38,7 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 | `format` | `"short"` で縦型（1080×1920）の YouTube ショート。画面上部にタイトルの帯が出て、テロップは3行まで |
 | `titleBand` | `false` でショート上部のタイトル帯を消す |
 | `background` | 背景色（省略時は白） |
+| `replyVoices` | 2ch風のレスを読む声の配列（レスの順番で交互に使う） |
 | `voice` | 読み上げの声 `{speaker, speed, name}`（省略時はずんだもん・1.2倍）。`name` は概要欄のクレジットに入る |
 | `accent` / `marker` | 強調の色（テロップの強調・番号・カウントダウン・ショートのタイトル帯）。省略するとオレンジ |
 | `pr` | `true` なら画面左上に「PR」を表示し、概要欄に広告表記を入れる（アフィリエイトを含む動画は必須） |
@@ -59,6 +61,7 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 | `table` | 比較表 | `columns`, `rows`, `note` |
 | `points` | ラベル付きの箇条書き（結論・チェックポイント） | `items: [{label, body}]` |
 | `quiz` | クイズの選択肢（A/B/C…） | `choices`, `answer`（正解の番号。0 始まり） |
+| `thread` | 2ch風。集中線の背景に赤グラデ＋白黒フチの大きな見出し、イラストの上にレスの吹き出しが順番に出る（「ポンッ」の効果音つき）。レスは `replyVoices` の声で交互に読む | `image`, `replies: [{text, speech, color}]` |
 | `trivia` | 1ページ1雑学（ショート向け）。上に `text`（振り）、中央にイラスト、読み上げのあと下に `answer`（答え）を出す。文字は黒＋白フチの極太 | `image`, `answer`, `answerSpeech`, `note`（読み上げない補足）, `explain` / `explainSpeech`（答えのあとに読み上げる解説） |
 
 - **クイズ**：`answer` のない `quiz` は出題スライドで、読み上げのあとに3秒のカウントダウン（「考えてみて！」＋効果音）が入ります。
