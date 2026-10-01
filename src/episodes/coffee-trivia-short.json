@@ -1,0 +1,141 @@
+{
+  "id": "coffee-trivia-short",
+  "title": "コーヒーの雑学7選",
+  "format": "short",
+  "titleBand": false,
+  "background": "#bbbdcb",
+  "pr": false,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.15,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "escort.mp3",
+    "title": "Escort",
+    "credit": "もっぴーさうんど",
+    "page": "https://opentracks.com/bgm/detail/12633",
+    "opentracks": 12633
+  },
+  "illustrations": {
+    "drink_coffee.png": {
+      "emoji": "☕",
+      "irasutoya": "コーヒーメーカーとコーヒーカップのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhSz-bZVeah5lHgzSG8R1u1uINbh5La2EyzYdhamHx1y5Iaat59EAc-gNUURlpxZCemB8XIyP2LyrQB8E2LP_ucdIjhhuhRPo3ORONZfNZR6Mbb2DTz2eTIMvAujYQsoESad23zaJb85CN-/s800/drink_coffee.png"
+    },
+    "fruit_coffee.png": {
+      "emoji": "☕",
+      "irasutoya": "コーヒーの実のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgujwNAXjN1Xg9K18wNPmKb3jO79g7Ap2Jdn73wQ3nnv0adZVO-LgjHQj31sGT9yg5Iguw4K8E9Thyvde2cIqRI-UxPuVk7H5nb4E4ETbqOYidsLvsO7rID3nIdtw6XRZ7SM_NwsbbbXvQ/s800/fruit_coffee.png"
+    },
+    "animal_koyagi.png": {
+      "emoji": "☕",
+      "irasutoya": "子ヤギのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiO3-hWtTyasl82GuvvbPL31buQ0oi1i-xvJ0syg5SBw_CQ1hOdYN7jwQJLMmQ4Ksc-QQz3JZ6IPFg4Aip9l5T7NY4fkylieFcaYviemdCMciKNvxn6W2PBFE-8Us3EndZI7xdVfrFl6_ZR/s800/animal_koyagi.png"
+    },
+    "can_coffee.png": {
+      "emoji": "☕",
+      "irasutoya": "缶コーヒーのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEib5IpCv8quD_IxTbheeTJbwr3eXPxDgtLa7tkWIQwpPwVAde_cWiDH0hagljupF5NbEtELSI6A7bj8Snit7XESdGdvkWvCSSZ3Wwx-R6uJabliP9NoEyX7bajDvUPxbuXF1m8MVv9QkuNB/s800/can_coffee.png"
+    },
+    "calender_woman.png": {
+      "emoji": "☕",
+      "irasutoya": "カレンダーを見る人のイラスト（女性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJOZpuYbxZJuxj2XHBc6MdKAsabSJMYierQUKTV8h5-kG9xUfE12zHnxg0rZIJ1_3Y8QJEVmDcUc3EgAe_QWIHNXGrr3ZTQRGUf-CHepKojS_yq7fg96zPI0Q6F7f0t-H2bH3bow7mp_Y/s800/calender_woman.png"
+    },
+    "chikyuugi.png": {
+      "emoji": "☕",
+      "irasutoya": "地球儀のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7E0UUVbE_r0sO193cYdv82_0FAFtU6rynolwkY4ToaCO4JV7NA_iMSuJxT1zMrqktv8r0-3NwKJ5LxrF9blC7JMKyGCPvKtRJHcOL2WW-PoOASni1D5YR9yFdQELB3d0rXiBSyK6u8HA/s800/chikyuugi.png"
+    },
+    "drink_coffee_tea_woman.png": {
+      "emoji": "☕",
+      "irasutoya": "コーヒーを飲む人のイラスト（女性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZ4TYrcnwn6TDEH7kMLxlC7F9pc4pGHuou0dImyy3trOX_7_b2EHtd6Apnh5Z9P3FRs9c7DlhbPvNbuW89q0QcQZ7sBVkITeKtXJABgWU3RT-NlqBTAqPyXJkCajqyNKdbdm3cfy_5100/s800/drink_coffee_tea_woman.png"
+    },
+    "espresso_maker.png": {
+      "emoji": "☕",
+      "irasutoya": "エスプレッソメーカーのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi5I8AmeT9eDdUYEEPjiigZp30W1XEkxQ89kvKbUMf_vpJkz25x1UV5vS-TGcUtNgRJ6OsX66WR1auNH6J65YrEhWWH-NU23RKL1RCafKf_dp1fU1swCy_2qqPC6n7oUet4qvDq2UVDFdKo/s800/espresso_maker.png"
+    }
+  },
+  "slides": [
+    {
+      "type": "trivia",
+      "text": "10月1日はコーヒーの日\nコーヒーの雑学7選",
+      "speech": "十月一日は、コーヒーの日。コーヒーの雑学、七選",
+      "image": "drink_coffee.png"
+    },
+    {
+      "type": "trivia",
+      "text": "コーヒー豆は",
+      "image": "fruit_coffee.png",
+      "answer": "豆ではなく\n赤い実の種",
+      "note": "※コーヒーチェリーと呼ばれる",
+      "no": 1
+    },
+    {
+      "type": "trivia",
+      "text": "コーヒーが見つかったのは",
+      "image": "animal_koyagi.png",
+      "answer": "ヤギのおかげ\nという伝説がある",
+      "note": "※実を食べたヤギが元気に跳ね回った",
+      "no": 2
+    },
+    {
+      "type": "trivia",
+      "text": "ミルク入り缶コーヒーを\n世界で初めて作った国は",
+      "speech": "ミルク入り缶コーヒーを、世界で初めて作った国は",
+      "image": "can_coffee.png",
+      "answer": "日本といわれている",
+      "note": "※1969年に発売",
+      "no": 3
+    },
+    {
+      "type": "trivia",
+      "text": "コーヒーの日が\n10月1日なのは",
+      "speech": "コーヒーの日が、十月一日なのは",
+      "image": "calender_woman.png",
+      "answer": "コーヒーの1年が\n始まる日だから",
+      "answerSpeech": "コーヒーの一年が、始まる日だから",
+      "note": "※国際コーヒー協定で10月から新年度",
+      "no": 4
+    },
+    {
+      "type": "trivia",
+      "text": "コーヒーの生産量\n世界一の国は",
+      "speech": "コーヒーの生産量、世界一の国は",
+      "image": "chikyuugi.png",
+      "answer": "ブラジル",
+      "note": "※世界の約3分の1を生産",
+      "no": 5
+    },
+    {
+      "type": "trivia",
+      "text": "コーヒーの香りをかぐと",
+      "image": "drink_coffee_tea_woman.png",
+      "answer": "リラックスできる\nという研究がある",
+      "note": "※豆の種類によって効果は違う",
+      "no": 6
+    },
+    {
+      "type": "trivia",
+      "text": "エスプレッソ1杯の\nカフェインは",
+      "speech": "エスプレッソ一杯のカフェインは",
+      "image": "espresso_maker.png",
+      "answer": "ドリップコーヒー1杯より\n少ないことが多い",
+      "answerSpeech": "ドリップコーヒー一杯より、少ないことが多い",
+      "note": "※量が少ないため",
+      "no": 7
+    }
+  ],
+  "description": "10月1日はコーヒーの日。コーヒーに関する雑学",
+  "hashtags": [
+    "雑学",
+    "豆知識",
+    "トリビア",
+    "コーヒー",
+    "コーヒーの日",
+    "Shorts"
+  ]
+}
