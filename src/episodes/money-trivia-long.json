@@ -1,0 +1,950 @@
+{
+  "id": "money-trivia-long",
+  "title": "知っておきたい お金の雑学62選",
+  "titleBand": false,
+  "background": "#bbbdcb",
+  "pr": false,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.15,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "escort.mp3",
+    "title": "Escort",
+    "credit": "もっぴーさうんど",
+    "page": "https://opentracks.com/bgm/detail/12633",
+    "opentracks": 12633
+  },
+  "illustrations": {
+    "money_satsutaba2.png": {
+      "emoji": "💴",
+      "irasutoya": "山積みの札束のイラスト（お金）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiPSYBh-BultpVUa9-CVhPqLTJEagwV9PSoaO_QiOhyphenhyphenqeeKRXQK3JJASRw-I3aI2nsiV9nvt202VP8DmA_A-hSUkGAFlpIgUsHgCcXIIgs8I0Q6f4gfe8gyVf93KZFEfwyRk-siLyiF3rw/s800/money_satsutaba2.png"
+    },
+    "fe_yen_banknote.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Yen banknote」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Yen%20banknote/Color/yen_banknote_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "money_yabure.png": {
+      "emoji": "💴",
+      "irasutoya": "破れたお札のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEguVJboebni0iyPODE-Oq0Ja0t8eeG9UKZQt46-LKcEooCnKBDQOIWOYyj3xydO3vRZE-ouapSalWijBAkxw3D9yIml1FsK4eV7AUnp_hlvH9ykZxAVhoX0aqev8yTNSQ8wFhLqOci76paC/s800/money_yabure.png"
+    },
+    "fe_seedling.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Seedling」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Seedling/Color/seedling_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "money_kusyakusya.png": {
+      "emoji": "💴",
+      "irasutoya": "くしゃくしゃのお札のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5H7bQ1uVMmCwy0901zz2JmkX7_C5-_VfkTdpFuUxWL45LnCWdr44aHk9ux7jntHC9qtp7xTqKYRaqzvxSpHfaY36gC-jE6809VrGYMnpvYcpvSK1ol31fwWwNiaedRXC9ZeTJVSka7BEw/s800/money_kusyakusya.png"
+    },
+    "fe_magnifying_glass_tilted_left.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Magnifying glass tilted left」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Magnifying%20glass%20tilted%20left/Color/magnifying_glass_tilted_left_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "money_10000.png": {
+      "emoji": "💴",
+      "irasutoya": "一万円札のイラスト（お金・紙幣）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpXgZmDS_7SvP7o1Cvt_q26PYawcdRag_tzFzFtV7XlZCo_D79Q0AvfRhbXrRXBd8ShEoGYNZdPwkDcxesNsU4rVEdHUly8-G3-Qd9fR5EzmP7GgV1TaeDq_L6s26ipVoY7e7y1xDFVxs/s800/money_10000.png"
+    },
+    "fe_sparkles.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Sparkles」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Sparkles/Color/sparkles_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "nigaoe_shibusawa_eiichi.png": {
+      "emoji": "💴",
+      "irasutoya": "渋沢栄一の似顔絵イラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjoGSkO4BXxasIDInHQN7E8tNZHctImTQ-M06w2WcmgeCK6a5yW_mBm3PMgo1LymL9Xa675CWcmty-Kj4Q0xY_S2sNxVl611Ey2XcVGUsJRPStd7pRDCutJJtqk59L4Y_qwQo_DPiDoWD8/s800/nigaoe_shibusawa_eiichi.png"
+    },
+    "nigaoe_tsuda_umeko.png": {
+      "emoji": "💴",
+      "irasutoya": "津田梅子の似顔絵イラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh6yTjP8nlOCajlrqWkN6-SMBeoANXHmRmTmiJ0SNlrsIEltS2C24WBjjsgLlRKHc8Gto0h3XsZjBe3UqNRGdMQc93xVaJb1VSrWMHXkO24zYXUPEOHwweLwu9NvrAatUcKcmvWl3pwGiDm/s800/nigaoe_tsuda_umeko.png"
+    },
+    "nigaoe_kitazato_shibasaburou.png": {
+      "emoji": "💴",
+      "irasutoya": "北里柴三郎の似顔絵イラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhnlhIpsWXWYUCpCTRT-cF1Nd0_YqxH9FF8AeoJdkbduyrDYPL3JS2RPvPJN3e27YOPWDKvHPiKfpPvD5ZJfawDLOJcWi2m55K_iZUh5ezKtU0Mn71dQ-dT2UwDhM6Nyqv89BdLen-KJ3bJ/s800/nigaoe_kitazato_shibasaburou.png"
+    },
+    "money_2000.png": {
+      "emoji": "💴",
+      "irasutoya": "二千円札のイラスト（お金・紙幣）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhqhXIYMzPx_DIBN_0d4hODfISGAdtz46hyphenhyphensdoZPni7GciSvqcvFE4fpHidZkNXbM0xUj_3G7VnX1_23iGU1k-nSyxYeuh6Hh09HzEKfkQbzwYdH_TULdFf5atacF5RM1QtKnUkNcooz2M/s800/money_2000.png"
+    },
+    "fe_ledger.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Ledger」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Ledger/Color/ledger_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_magnifying_glass_tilted_right.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Magnifying glass tilted right」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Magnifying%20glass%20tilted%20right/Color/magnifying_glass_tilted_right_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_coin.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Coin」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Coin/Color/coin_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "money_1.png": {
+      "emoji": "💴",
+      "irasutoya": "一円玉のイラスト（お金・硬貨）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbru1aHuAgApseSndqL_yC66kbIzw6_JPUQqHl2XTbaEu5CI3yQd4FbjSqP2vGwEvNuxxQbl59AuUk6ItOH5XFpEEvpQQ68tg45zCD9iFAwBzMDkHFXmD0s3AGVh9MNt9LP-BodZBUIHY/s800/money_1.png"
+    },
+    "money_5.png": {
+      "emoji": "💴",
+      "irasutoya": "五円玉のイラスト（お金・硬貨）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2ngMvGh7oEVCMlpjaP5mwN7S1c0HQT1gJKGwA0HfIFfldn1ewSJQBmoaTUESFnL_hcNowmp3lgUyzMWR6CdA8RMJtJqNKIGwcKpLUEvy_9vrWt0hd2vfv-TR6kc-fRWck1bpl7RH2OsQ/s800/money_5.png"
+    },
+    "kankou_byodoin.png": {
+      "emoji": "💴",
+      "irasutoya": "平等院鳳凰堂のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-gW_wqaM9uAPvWJ0MEYb3KTDiHsb9mIImXb9JcrY8fvP0PFvKzmnTSXNCoXChShZhaiTfq3irI-xBYspnDY7kMU6Q7BbWsFbxinW3ycPZFdJGcXus7A9lnEcCV1G2GFtWgkgBNjw-xFlC/s800/kankou_byodoin.png"
+    },
+    "money_coin_gizajuu.png": {
+      "emoji": "💴",
+      "irasutoya": "ギザ10のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgrrgz82GWtoeo5OYA-hK8Y1vY9sk1DIHkqNSncYEhv9roN-d_-zkhWH6Ocrruj2DQQv6bcolxln-1h3EeRQi_4ro-sHy1zIJCUkKPhtSaoRwm8Q5B_oSTi1pGjy1B5FdMavwTO6P8B98EF/s800/money_coin_gizajuu.png"
+    },
+    "money_500.png": {
+      "emoji": "💴",
+      "irasutoya": "五百円玉のイラスト（お金・硬貨）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLvu3MGm_vDJzs2EJdkGZVSU7Y8gPrT33arMzrH-VPst1ll3QNiD-WUuusBjQHNfAZKdYlc5LstpdwZQ6dy0qq1N1a4nzb8RMH2sNM9TUbzHD36FbT8Jpxb1rOyTLb-lmyCpVPSorOM0o/s800/money_500.png"
+    },
+    "fe_bank.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Bank」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Bank/Color/bank_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_scroll.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Scroll」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Scroll/Color/scroll_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "money_wadoukaichin_wadoukaihou.png": {
+      "emoji": "💴",
+      "irasutoya": "和同開珎のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibyJ2SKR0ovyliTUbATLOoiSYzRX9uGOZXJ0ct4RZ4snmIuEnyrGKIsNXK5pGP6GuP-nQ4lPSdu4NdzkGMZFcpgK2uvAEziafmfxW8cSlMyc2Wa_3UjrxkDeDutuWNDEqwIyvcbm4Rpjs/s800/money_wadoukaichin_wadoukaihou.png"
+    },
+    "fe_chart_increasing_with_yen.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Chart increasing with yen」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Chart%20increasing%20with%20yen/Color/chart_increasing_with_yen_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_money_bag.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Money bag」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Money%20bag/Color/money_bag_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_globe_showing_europe_africa.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Globe showing europe-africa」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Globe%20showing%20europe-africa/Color/globe_showing_europe-africa_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_classical_building.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Classical building」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Classical%20building/Color/classical_building_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_receipt.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Receipt」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Receipt/Color/receipt_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_salt.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Salt」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Salt/Color/salt_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_bar_chart.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Bar chart」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Bar%20chart/Color/bar_chart_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "takarakuji.png": {
+      "emoji": "💴",
+      "irasutoya": "宝くじのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj2Jpukj5qlgQw5Xi3n58TQTyvcUDlpZ9cZZYB_2BYH3AuyKH3ejcYoOf54BHBEOUkjNgGcvTDD2AFs4Z5-vB9yI6H13CnkkIFEeNuS1kD5ZqfF2-3MLBQyb1kg_LEkCCXwbYcOlU60Sgsd/s800/takarakuji.png"
+    },
+    "fe_ticket.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Ticket」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Ticket/Color/ticket_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_building_construction.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Building construction」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Building%20construction/Color/building_construction_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "furusato_nouzei.png": {
+      "emoji": "💴",
+      "irasutoya": "ふるさと納税のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjs8Oa99UMSP6nB2nQZkkJfk2eCViSoKyZRcsvx-4QwmYlUTwYBFVygpxVrPnvShRxcsX2LCzUvbSNgL2mz20OfAnKXoo3yfLAbLOD6WrYrtPwS24nHzPcwUe0fyS_ATPfdf5JEeEg5ZSel/s800/furusato_nouzei.png"
+    },
+    "fe_locked.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Locked」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Locked/Color/locked_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_globe_showing_americas.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Globe showing americas」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Globe%20showing%20americas/Color/globe_showing_americas_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_dollar_banknote.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Dollar banknote」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Dollar%20banknote/Color/dollar_banknote_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_euro_banknote.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Euro banknote」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Euro%20banknote/Color/euro_banknote_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "money_100_trillion_zimbabwe_dollars.png": {
+      "emoji": "💴",
+      "irasutoya": "100兆ジンバブエドルのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZWRsJ3Lq93ND4RUZTXPO8AfnZ-SdEdVZqidbzf-FMpo-pLxuNW3p8StUwHZ3YDg55iXELXXa7PJ4ARyJ3i3DdiVsL4O-SMymjCs2qiwb-bDHqS5ZqOh7sEIh3Jrn1ZER1fizMI-pZ14A4/s800/money_100_trillion_zimbabwe_dollars.png"
+    },
+    "fe_gem_stone.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Gem stone」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Gem%20stone/Color/gem_stone_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_credit_card.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Credit card」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Credit%20card/Color/credit_card_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_pizza.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Pizza」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Pizza/Color/pizza_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_pound_banknote.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Pound banknote」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Pound%20banknote/Color/pound_banknote_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "money_chokinbako.png": {
+      "emoji": "💴",
+      "irasutoya": "ブタの貯金箱のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjCC1SlWaYikwCmoV7cDhhBuKO_YRD44l82P8rui9HpIFTPz3fKbSXlnpgl1GVsyiEAW4lB13HtFqKYFgBCP1QTn-neW2cCJ4VaifjOwu_NrB3lkRHAM0nbG8tzTY9pw84DMNKNlzlXkm8/s800/money_chokinbako.png"
+    },
+    "fe_abacus.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Abacus」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Abacus/Color/abacus_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_chart_increasing.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Chart increasing」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Chart%20increasing/Color/chart_increasing_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_hot_beverage.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Hot beverage」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Hot%20beverage/Color/hot_beverage_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "money_saifu_naga.png": {
+      "emoji": "💴",
+      "irasutoya": "長財布のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgFgymKxOR-XD0xQjIt7ovO_ErggyTs-XES_ygXo69IuZfQdMwJBxlqK1_WzWXmlhXE9g1FBKwSn8-F0zM-Ffa-lhkOZz4pzbiK2Cuyqp5MsX3Xl91aWJvVZF4SZX0j-lQ_geRIDPPo51M/s800/money_saifu_naga.png"
+    },
+    "fe_money_with_wings.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Money with wings」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Money%20with%20wings/Color/money_with_wings_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_purse.svg": {
+      "emoji": "💴",
+      "irasutoya": "Fluent Emoji「Purse」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Purse/Color/purse_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "money_chokin_seikou_woman.png": {
+      "emoji": "💴",
+      "irasutoya": "貯金に成功した人のイラスト（女性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgkHDinpz-Xlxl3jUnez49C4cW3AJgC3HbkXHqpVRC5mYlBlA3GmU6iIgQ3Y2meskt9QKJeUGa9wOqtaWki7S04YHlXMviACXVbZ5atNTLro_8snIDP0FampiQ34GntiqrnBjFd-2g2PTc/s800/money_chokin_seikou_woman.png"
+    }
+  },
+  "slides": [
+    {
+      "type": "trivia",
+      "text": "知っておきたい\nお金の雑学62選",
+      "speech": "知っておきたい、お金の雑学、62選",
+      "image": "money_satsutaba2.png",
+      "chapter": "オープニング"
+    },
+    {
+      "type": "trivia",
+      "text": "第1章\nお札のひみつ",
+      "speech": "第一章、お札のひみつ",
+      "image": "fe_yen_banknote.svg",
+      "chapter": "第1章　お札のひみつ"
+    },
+    {
+      "type": "trivia",
+      "text": "破れたお札は",
+      "image": "money_yabure.png",
+      "answer": "3分の2以上残っていれば\n全額と交換できる",
+      "explain": "5分の2以上なら半額と交換でき\n日本銀行の窓口で取り替えてもらえるんだ",
+      "no": 1,
+      "answerSpeech": "三分の二以上残っていれば、全額と交換できる",
+      "explainSpeech": "五分の二以上なら半額と交換でき、日本銀行の窓口で取り替えてもらえるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "お札の原料は",
+      "image": "fe_seedling.svg",
+      "answer": "ミツマタやマニラ麻",
+      "explain": "植物の繊維が長くて丈夫なので\n洗濯しても破れにくいんだ",
+      "no": 2
+    },
+    {
+      "type": "trivia",
+      "text": "1万円札の寿命は",
+      "image": "money_kusyakusya.png",
+      "answer": "約4〜5年",
+      "explain": "千円札や五千円札は1〜2年ほど\nよく使われるお札ほど早く傷むんだ",
+      "no": 3,
+      "speech": "一万円札の寿命は",
+      "answerSpeech": "約四年から五年",
+      "explainSpeech": "千円札や五千円札は、一年から二年ほど。よく使われるお札ほど早く傷むんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "お札に人の顔が描かれているのは",
+      "image": "fe_magnifying_glass_tilted_left.svg",
+      "answer": "ニセ札を防ぐため",
+      "explain": "人は顔のわずかな違いに\n気づきやすいからなんだ",
+      "no": 4
+    },
+    {
+      "type": "trivia",
+      "text": "お札を光にかざすと",
+      "image": "money_10000.png",
+      "answer": "肖像の「すかし」が見える",
+      "explain": "紙の厚さを変えて模様を作る\n日本が得意な偽造防止の技術なんだ",
+      "no": 5
+    },
+    {
+      "type": "trivia",
+      "text": "2024年の新しいお札には",
+      "image": "fe_sparkles.svg",
+      "answer": "肖像が回転して見える\n3Dホログラムがある",
+      "explain": "お札にこの技術を使ったのは\n世界で初めてなんだ",
+      "no": 6,
+      "speech": "二千二十四年の新しいお札には"
+    },
+    {
+      "type": "trivia",
+      "text": "新しい1万円札の渋沢栄一は",
+      "image": "nigaoe_shibusawa_eiichi.png",
+      "answer": "約500もの会社に\n関わった人",
+      "explain": "「日本の資本主義の父」と呼ばれ\n銀行や鉄道の会社を作ったんだ",
+      "no": 7,
+      "speech": "新しい一万円札の、渋沢栄一は",
+      "answerSpeech": "約五百もの会社に関わった人"
+    },
+    {
+      "type": "trivia",
+      "text": "新しい5000円札の津田梅子は",
+      "image": "nigaoe_tsuda_umeko.png",
+      "answer": "津田塾大学をつくった人",
+      "explain": "わずか6歳でアメリカに留学し\n女性の教育に力を注いだんだ",
+      "no": 8,
+      "speech": "新しい五千円札の、津田梅子は",
+      "explainSpeech": "わずか六歳でアメリカに留学し、女性の教育に力を注いだんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "新しい1000円札の北里柴三郎は",
+      "image": "nigaoe_kitazato_shibasaburou.png",
+      "answer": "「近代日本医学の父」",
+      "explain": "破傷風の治療法を見つけ\n多くの命を救ったんだ",
+      "no": 9,
+      "speech": "新しい千円札の、北里柴三郎は"
+    },
+    {
+      "type": "trivia",
+      "text": "2000円札は",
+      "image": "money_2000.png",
+      "answer": "今でも使える",
+      "explain": "沖縄の守礼門が描かれていて\n沖縄では比較的よく見かけるんだ",
+      "no": 10,
+      "speech": "二千円札は"
+    },
+    {
+      "type": "trivia",
+      "text": "お札の左右の下にある\nざらざらした印は",
+      "image": "fe_ledger.svg",
+      "answer": "指で触って\nお札を見分けるための印",
+      "explain": "目の不自由な人のために\nお札ごとに形が違うんだ",
+      "no": 11
+    },
+    {
+      "type": "trivia",
+      "text": "お札に印刷されている番号は",
+      "image": "fe_magnifying_glass_tilted_right.svg",
+      "answer": "1枚ずつ全部違う",
+      "explain": "アルファベットと数字の組み合わせで\n同じ番号のお札はないんだ",
+      "no": 12
+    },
+    {
+      "type": "trivia",
+      "text": "第2章\n硬貨のひみつ",
+      "speech": "第二章、硬貨のひみつ",
+      "image": "fe_coin.svg",
+      "chapter": "第2章　硬貨のひみつ"
+    },
+    {
+      "type": "trivia",
+      "text": "同じ硬貨を一度に使えるのは",
+      "image": "fe_coin.svg",
+      "answer": "20枚まで",
+      "explain": "法律で決まっていて\n21枚以上は受け取りを断られることがあるんだ",
+      "no": 13,
+      "answerSpeech": "二十枚まで",
+      "explainSpeech": "法律で決まっていて、二十一枚以上は受け取りを断られることがあるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "1円玉の重さは",
+      "image": "money_1.png",
+      "answer": "ちょうど1g",
+      "explain": "直径もちょうど2cmなので\nはかりや定規の代わりになるんだ",
+      "no": 14,
+      "speech": "一円玉の重さは",
+      "answerSpeech": "ちょうど一グラム",
+      "explainSpeech": "直径もちょうど二センチなので、はかりや定規の代わりになるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "1円玉は",
+      "image": "money_1.png",
+      "answer": "水に浮かべられる",
+      "explain": "とても軽いので\nそっと置くと水の表面張力で浮くんだ",
+      "no": 15,
+      "speech": "一円玉は"
+    },
+    {
+      "type": "trivia",
+      "text": "1円玉の材料は",
+      "image": "money_1.png",
+      "answer": "アルミニウム100%",
+      "explain": "混じりけのないアルミだけで\n作られている珍しい硬貨なんだ",
+      "no": 16,
+      "speech": "一円玉の材料は",
+      "answerSpeech": "アルミニウム百パーセント"
+    },
+    {
+      "type": "trivia",
+      "text": "5円玉と50円玉に穴があるのは",
+      "image": "money_5.png",
+      "answer": "ほかの硬貨と\n見分けやすくするため",
+      "explain": "穴の分だけ材料を\n節約できるともいわれているよ",
+      "no": 17,
+      "speech": "五円玉と五十円玉に穴があるのは"
+    },
+    {
+      "type": "trivia",
+      "text": "硬貨の表と裏は",
+      "image": "fe_coin.svg",
+      "answer": "製造年が書いてある方が裏",
+      "explain": "造幣局では\n年が入っている方を裏としているんだ",
+      "no": 18
+    },
+    {
+      "type": "trivia",
+      "text": "10円玉に描かれている建物は",
+      "image": "kankou_byodoin.png",
+      "answer": "平等院鳳凰堂",
+      "explain": "京都府宇治市にあり\n世界遺産にもなっているお寺なんだ",
+      "no": 19,
+      "speech": "十円玉に描かれている建物は"
+    },
+    {
+      "type": "trivia",
+      "text": "昔の10円玉には",
+      "image": "money_coin_gizajuu.png",
+      "answer": "ふちにギザギザがあった",
+      "explain": "「ギザ10」と呼ばれていて\n1951年から1958年まで作られたんだ",
+      "no": 20,
+      "speech": "昔の十円玉には",
+      "explainSpeech": "ギザジュウと呼ばれていて、千九百五十一年から千九百五十八年まで作られたんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "今の500円玉は",
+      "image": "money_500.png",
+      "answer": "2色の金属でできている",
+      "explain": "2021年から作られていて\nニセ物を作りにくくしているんだ",
+      "no": 21,
+      "speech": "今の五百円玉は",
+      "explainSpeech": "二千二十一年から作られていて、ニセ物を作りにくくしているんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "硬貨とお札は",
+      "image": "fe_bank.svg",
+      "answer": "発行しているところが違う",
+      "explain": "硬貨は国、お札は日本銀行が\n発行しているんだ",
+      "no": 22
+    },
+    {
+      "type": "trivia",
+      "text": "第3章\nお金の歴史",
+      "speech": "第三章、お金の歴史",
+      "image": "fe_scroll.svg",
+      "chapter": "第3章　お金の歴史"
+    },
+    {
+      "type": "trivia",
+      "text": "日本でいちばん古いお金は",
+      "image": "fe_scroll.svg",
+      "answer": "富本銭といわれている",
+      "explain": "和同開珎よりも古い\n7世紀後半ごろのお金なんだ",
+      "no": 23,
+      "explainSpeech": "わどうかいちんよりも古い、七世紀後半ごろのお金なんだ",
+      "answerSpeech": "ふほんせんと言われている"
+    },
+    {
+      "type": "trivia",
+      "text": "和同開珎が作られたのは",
+      "image": "money_wadoukaichin_wadoukaihou.png",
+      "answer": "708年",
+      "explain": "奈良の都ができる\n少し前のことなんだ",
+      "no": 24,
+      "speech": "わどうかいちんが作られたのは",
+      "answerSpeech": "七百八年"
+    },
+    {
+      "type": "trivia",
+      "text": "お金の単位「円」が\n生まれたのは",
+      "image": "fe_yen_banknote.svg",
+      "answer": "1871年",
+      "explain": "明治時代に「両」から\n「円」に変わったんだ",
+      "no": 25,
+      "speech": "お金の単位、円が生まれたのは",
+      "answerSpeech": "千八百七十一年"
+    },
+    {
+      "type": "trivia",
+      "text": "1円の100分の1の「銭」は",
+      "image": "fe_chart_increasing_with_yen.svg",
+      "answer": "今も為替や株で使われている",
+      "explain": "硬貨はなくなったけれど\n単位としては残っているんだ",
+      "no": 26,
+      "speech": "一円の百分の一の、銭は"
+    },
+    {
+      "type": "trivia",
+      "text": "「円」という名前は",
+      "image": "fe_coin.svg",
+      "answer": "丸い形から来ている\nといわれている",
+      "explain": "それまでの四角いお金と違い\n丸い硬貨になったからという説があるよ",
+      "no": 27
+    },
+    {
+      "type": "trivia",
+      "text": "江戸時代の1両は",
+      "image": "fe_money_bag.svg",
+      "answer": "今のお金で約4万〜40万円",
+      "explain": "お米の値段で考えるか\n給料で考えるかで大きく変わるんだ",
+      "no": 28,
+      "speech": "江戸時代の一両は",
+      "answerSpeech": "今のお金で、約四万円から四十万円",
+      "explainSpeech": "おこめの値段で考えるか、給料で考えるかで大きく変わるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "世界でいちばん古い硬貨は",
+      "image": "fe_globe_showing_europe_africa.svg",
+      "answer": "約2600年前のリディア王国のもの",
+      "explain": "今のトルコのあたりにあった国で\n金と銀を混ぜて作られたんだ",
+      "no": 29,
+      "answerSpeech": "約二千六百年前の、リディア王国のもの"
+    },
+    {
+      "type": "trivia",
+      "text": "世界でいちばん古いお札は",
+      "image": "fe_classical_building.svg",
+      "answer": "約1000年前の中国のもの",
+      "explain": "宋の時代の「交子」というお札で\n重い硬貨の代わりに使われたんだ",
+      "no": 30,
+      "answerSpeech": "約千年前の、中国のもの",
+      "explainSpeech": "宋の時代の、こうしというお札で、重い硬貨の代わりに使われたんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "日本でいちばん古いお札は",
+      "image": "fe_receipt.svg",
+      "answer": "江戸時代の「山田羽書」",
+      "explain": "伊勢の商人たちが\nおつりの代わりに使ったのが始まりなんだ",
+      "no": 31,
+      "answerSpeech": "江戸時代の、やまだはがき"
+    },
+    {
+      "type": "trivia",
+      "text": "給料を意味するサラリーの語源は",
+      "image": "fe_salt.svg",
+      "answer": "ラテン語の「塩」",
+      "explain": "古代ローマで塩がとても\n大切なものだったことに由来するといわれるよ",
+      "no": 32
+    },
+    {
+      "type": "trivia",
+      "text": "第4章\n税金としくみ",
+      "speech": "第四章、税金としくみ",
+      "image": "fe_classical_building.svg",
+      "chapter": "第4章　税金としくみ"
+    },
+    {
+      "type": "trivia",
+      "text": "消費税が始まったのは",
+      "image": "fe_receipt.svg",
+      "answer": "1989年で税率は3%",
+      "explain": "その後5%、8%と上がり\n今は10%になっているんだ",
+      "no": 33,
+      "answerSpeech": "千九百八十九年で、税率は三パーセント",
+      "explainSpeech": "その後、五パーセント、八パーセントと上がり、今は十パーセントになっているんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "日本でいちばん税収が多い税は",
+      "image": "fe_bar_chart.svg",
+      "answer": "消費税",
+      "explain": "2020年度から\n所得税を抜いて1位になったんだ",
+      "no": 34,
+      "explainSpeech": "二千二十年度から、所得税を抜いて一位になったんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "所得税が始まったのは",
+      "image": "fe_ledger.svg",
+      "answer": "1887年",
+      "explain": "最初はお金持ちだけが\n払う税金だったんだ",
+      "no": 35,
+      "answerSpeech": "千八百八十七年"
+    },
+    {
+      "type": "trivia",
+      "text": "宝くじの当せん金は",
+      "image": "takarakuji.png",
+      "answer": "税金がかからない",
+      "explain": "1等が当たっても\nそのまま全額受け取れるんだ",
+      "no": 36,
+      "explainSpeech": "一等が当たっても、そのまま全額受け取れるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "年末ジャンボの1等が当たる確率は",
+      "image": "fe_ticket.svg",
+      "answer": "約2000万分の1",
+      "explain": "東京ドームを満員にしても\n1人も当たらない計算なんだ",
+      "no": 37,
+      "speech": "年末ジャンボの一等が当たる確率は",
+      "answerSpeech": "約二千万分の一",
+      "explainSpeech": "東京ドームを満員にしても、ひとりも当たらない計算なんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "宝くじの売り上げのうち\n約4割は",
+      "image": "fe_building_construction.svg",
+      "answer": "公共事業などに使われる",
+      "explain": "道路や公園など\nみんなのために役立てられているんだ",
+      "no": 38,
+      "speech": "宝くじの売り上げのうち、約四割は"
+    },
+    {
+      "type": "trivia",
+      "text": "1円玉を1枚作るのにかかる費用は",
+      "image": "money_1.png",
+      "answer": "1円より高いといわれる",
+      "explain": "材料費や人件費がかかるので\n作るほど赤字になるんだ",
+      "no": 39,
+      "speech": "一円玉を一枚作るのにかかる費用は"
+    },
+    {
+      "type": "trivia",
+      "text": "ふるさと納税が始まったのは",
+      "image": "furusato_nouzei.png",
+      "answer": "2008年",
+      "explain": "応援したい町に寄付をすると\nお礼の品がもらえる仕組みなんだ",
+      "no": 40,
+      "answerSpeech": "二千八年"
+    },
+    {
+      "type": "trivia",
+      "text": "銀行が倒産しても",
+      "image": "fe_locked.svg",
+      "answer": "1000万円とその利息までは守られる",
+      "explain": "預金保険という仕組みで\n1つの銀行ごとに守られるんだ",
+      "no": 41,
+      "answerSpeech": "一千万円と、その利息までは守られる",
+      "explainSpeech": "預金保険という仕組みで、ひとつの銀行ごとに守られるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "第5章\n世界のお金",
+      "speech": "第五章、世界のお金",
+      "image": "fe_globe_showing_americas.svg",
+      "chapter": "第5章　世界のお金"
+    },
+    {
+      "type": "trivia",
+      "text": "世界でいちばん取引されている通貨は",
+      "image": "fe_dollar_banknote.svg",
+      "answer": "アメリカのドル",
+      "explain": "世界の外国為替取引の\n約9割にドルが関わっているんだ",
+      "no": 42,
+      "explainSpeech": "世界の外国為替取引の、約九割にドルが関わっているんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "ユーロを使っている国は",
+      "image": "fe_euro_banknote.svg",
+      "answer": "20か国以上",
+      "explain": "ヨーロッパの多くの国が\n同じお金を使っているんだ",
+      "no": 43,
+      "answerSpeech": "二十か国以上"
+    },
+    {
+      "type": "trivia",
+      "text": "アメリカの1セント硬貨は",
+      "image": "fe_coin.svg",
+      "answer": "2025年に製造が終わった",
+      "explain": "1枚作るのに1セント以上かかり\n赤字になっていたからなんだ",
+      "no": 44,
+      "speech": "アメリカの一セント硬貨は",
+      "answerSpeech": "二千二十五年に製造が終わった",
+      "explainSpeech": "一枚作るのに一セント以上かかり、赤字になっていたからなんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "1ドル札の寿命は",
+      "image": "fe_dollar_banknote.svg",
+      "answer": "約6〜7年",
+      "explain": "日本の1万円札よりも\n長持ちするんだ",
+      "no": 45,
+      "speech": "一ドル札の寿命は",
+      "answerSpeech": "約六年から七年",
+      "explainSpeech": "日本の一万円札よりも、長持ちするんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "ジンバブエでは昔",
+      "image": "money_100_trillion_zimbabwe_dollars.png",
+      "answer": "100兆ドル札が作られた",
+      "explain": "物の値段がものすごい速さで上がる\nハイパーインフレが起きたんだ",
+      "no": 46,
+      "answerSpeech": "百兆ドル札が作られた"
+    },
+    {
+      "type": "trivia",
+      "text": "世界でいちばん価値が高い\nお金の単位は",
+      "image": "fe_gem_stone.svg",
+      "answer": "クウェート・ディナール",
+      "explain": "1ディナールで\n約3ドル以上の価値があるんだ",
+      "no": 47,
+      "explainSpeech": "一ディナールで、約三ドル以上の価値があるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "スウェーデンでは",
+      "image": "fe_credit_card.svg",
+      "answer": "現金で払う人が1割ほど",
+      "explain": "カードやスマホでの支払いが\nほとんどの国なんだ",
+      "no": 48,
+      "answerSpeech": "現金で払う人が一割ほど",
+      "explainSpeech": "カードやスマホでの支払いが、ほとんどのくになんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "ビットコインで初めて買われた物は",
+      "image": "fe_pizza.svg",
+      "answer": "ピザ2枚",
+      "explain": "1万ビットコインで買われ\n今の価値では数百億円以上になるんだ",
+      "no": 49,
+      "answerSpeech": "ピザ二枚",
+      "explainSpeech": "一万ビットコインで買われ、今の価値では数百億円以上になるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "「ドル」という名前の由来は",
+      "image": "fe_dollar_banknote.svg",
+      "answer": "ドイツの「ターラー」という銀貨",
+      "explain": "ターラーがなまって\nドルになったといわれているよ",
+      "no": 50
+    },
+    {
+      "type": "trivia",
+      "text": "イギリスのお札には",
+      "image": "fe_pound_banknote.svg",
+      "answer": "国王の肖像が描かれている",
+      "explain": "2024年から\nチャールズ国王のお札が使われ始めたんだ",
+      "no": 51,
+      "explainSpeech": "二千二十四年から、チャールズ国王のお札が使われ始めたんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "クレジットカードの始まりは",
+      "image": "fe_credit_card.svg",
+      "answer": "1950年のダイナースクラブ",
+      "explain": "レストランで使えるカードとして\nアメリカで生まれたんだ",
+      "no": 52,
+      "answerSpeech": "千九百五十年の、ダイナースクラブ"
+    },
+    {
+      "type": "trivia",
+      "text": "第6章\nお金が貯まる雑学",
+      "speech": "第六章、お金が貯まる雑学",
+      "image": "money_chokinbako.png",
+      "chapter": "第6章　お金が貯まる雑学"
+    },
+    {
+      "type": "trivia",
+      "text": "「72の法則」とは",
+      "image": "fe_abacus.svg",
+      "answer": "お金が2倍になる年数の目安",
+      "explain": "72を年利で割ると\nおおよその年数がわかるんだ",
+      "no": 53,
+      "speech": "七十二の法則とは",
+      "answerSpeech": "お金が二倍になる年数の目安",
+      "explainSpeech": "七十二を年利で割ると、おおよその年数がわかるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "年利6%で増やすと",
+      "image": "fe_chart_increasing.svg",
+      "answer": "約12年で2倍になる",
+      "explain": "72÷6＝12で\nすぐに計算できるんだ",
+      "no": 54,
+      "speech": "年利六パーセントで増やすと",
+      "answerSpeech": "約十二年で二倍になる",
+      "explainSpeech": "七十二わる六は十二で、すぐに計算できるんだ"
+    },
+    {
+      "type": "trivia",
+      "text": "「複利」とは",
+      "image": "fe_seedling.svg",
+      "answer": "利息にも利息がつくこと",
+      "explain": "長い期間で続けるほど\n増え方が大きくなるんだ",
+      "no": 55
+    },
+    {
+      "type": "trivia",
+      "text": "毎日500円ずつ貯金すると",
+      "image": "money_chokinbako.png",
+      "answer": "1年で18万2500円",
+      "explain": "小さな額でも\n続ければ大きな金額になるんだ",
+      "no": 56,
+      "speech": "毎日五百円ずつ貯金すると",
+      "answerSpeech": "一年で十八万二千五百円"
+    },
+    {
+      "type": "trivia",
+      "text": "貯金箱がブタの形なのは",
+      "image": "money_chokinbako.png",
+      "answer": "昔の材料の名前から\nという説がある",
+      "explain": "「ピッグ」という粘土で作った入れ物が\nブタの形になったといわれているよ",
+      "no": 57
+    },
+    {
+      "type": "trivia",
+      "text": "毎日400円のコーヒーを買うと",
+      "image": "fe_hot_beverage.svg",
+      "answer": "1年で14万6000円",
+      "explain": "こうした小さな出費は\n「ラテマネー」と呼ばれるんだ",
+      "no": 58,
+      "speech": "毎日四百円のコーヒーを買うと",
+      "answerSpeech": "一年で十四万六千円"
+    },
+    {
+      "type": "trivia",
+      "text": "お金持ちは長財布を使う",
+      "image": "money_saifu_naga.png",
+      "answer": "という説に根拠はない",
+      "explain": "財布の形より\nお金の使い方が大事なんだ",
+      "no": 59
+    },
+    {
+      "type": "trivia",
+      "text": "リボ払いの手数料は",
+      "image": "fe_money_with_wings.svg",
+      "answer": "年15%前後と高い",
+      "explain": "毎月の支払いは少なくても\n利息がどんどん増えてしまうんだ",
+      "no": 60,
+      "answerSpeech": "ねん十五パーセント前後と高い"
+    },
+    {
+      "type": "trivia",
+      "text": "日本の家計が持っている金融資産は",
+      "image": "fe_bank.svg",
+      "answer": "2000兆円以上",
+      "explain": "そのうち約半分が\n現金や預金なんだ",
+      "no": 61,
+      "answerSpeech": "二千兆円以上"
+    },
+    {
+      "type": "trivia",
+      "text": "貯金のコツは",
+      "image": "fe_purse.svg",
+      "answer": "給料が入ったらすぐ貯める",
+      "explain": "「先取り貯金」にすると\n使いすぎを防げるんだ",
+      "no": 62
+    },
+    {
+      "type": "trivia",
+      "text": "最後まで見てくれて\nありがとう",
+      "speech": "最後まで見てくれて、ありがとう。参考になったら、高評価とチャンネル登録をお願いします。",
+      "image": "money_chokin_seikou_woman.png",
+      "chapter": "エンディング"
+    }
+  ],
+  "description": "お札や硬貨のひみつから、お金の歴史、税金のしくみ、世界のお金、貯金のコツまで、知っておきたいお金の雑学を62個まとめました。\n※金額や制度は動画作成時点（2026年10月）の情報です。投資には元本割れのリスクがあります。",
+  "hashtags": [
+    "雑学",
+    "豆知識",
+    "トリビア",
+    "お金",
+    "マネー"
+  ]
+}

@@ -112,7 +112,17 @@ export const TriviaPage: React.FC<{
   const L = vertical ? LAYOUTS.vertical : LAYOUTS.landscape;
   const answerPop = usePop(resolved.answerStart);
   const explainPop = usePop(resolved.explainStart);
-  const box = slide.answer ? L.image : L.imageOnly;
+  const baseBox = slide.answer ? L.image : L.imageOnly;
+  // 振りが2行以上のときは、その分イラストを下げて小さくする（文字と重ならないように）
+  const setupSize = fitSize(slide.text, L.setup.size, L.textWidth);
+  const setupBottom =
+    L.setup.top + slide.text.split("\n").length * setupSize * 1.18 + 16;
+  const shift = Math.max(0, setupBottom - baseBox.top);
+  const box = {
+    top: baseBox.top + shift,
+    height: baseBox.height - shift,
+    max: [baseBox.max[0], baseBox.max[1] - shift],
+  };
   // 補足は、ショートでは答えと一緒に、横長では解説の読み上げに合わせて出す
   const sub = slide.explain ?? slide.note;
   const subPop = slide.explain ? explainPop : answerPop;
@@ -130,7 +140,7 @@ export const TriviaPage: React.FC<{
 
       <Outlined
         text={slide.text}
-        fontSize={fitSize(slide.text, L.setup.size, L.textWidth)}
+        fontSize={setupSize}
         stroke={22}
         style={{ position: "absolute", top: L.setup.top, left: 40, right: 40 }}
       />

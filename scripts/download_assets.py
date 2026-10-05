@@ -9,6 +9,8 @@
 import http.cookiejar
 import json
 import re
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -23,8 +25,16 @@ def download(url: str | None, out: Path, label: str) -> None:
         return
     out.parent.mkdir(parents=True, exist_ok=True)
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-    with urllib.request.urlopen(req) as res:
-        out.write_bytes(res.read())
+    # 配信サーバー（jsDelivr など）が一時的にエラーを返すことがあるので、少し待って取り直す
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(req) as res:
+                out.write_bytes(res.read())
+            break
+        except urllib.error.HTTPError:
+            if attempt == 3:
+                raise
+            time.sleep(2 * (attempt + 1))
     print(f"  saved {out.relative_to(ROOT)}  {label}")
 
 

@@ -7,6 +7,7 @@ import savings2chShort from "./savings-2ch-short.json";
 import chargerPowerSplit from "./charger-power-split.json";
 import coffeeTriviaShort from "./coffee-trivia-short.json";
 import japanTriviaShort from "./japan-trivia-short.json";
+import moneyTriviaLong from "./money-trivia-long.json";
 import sleepTrivia from "./sleep-trivia.json";
 
 export type Illustration = {
@@ -141,6 +142,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  moneyTriviaLong as Episode,
   japanTriviaShort as Episode,
   bodyTriviaShort as Episode,
   coffeeTriviaShort as Episode,
