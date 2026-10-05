@@ -81,7 +81,8 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
       const illustration = image
         ? (episode.illustrations[image] ?? { emoji: "💤", irasutoya: image })
         : null;
-      const voiceFrames = Math.ceil(seconds * FPS);
+      const fps = episode.fps ?? FPS;
+      const voiceFrames = Math.ceil(seconds * fps);
       const isQuestion = slide.type === "quiz" && slide.answer === undefined;
       const common = {
         slide,
@@ -163,7 +164,10 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
         no: numbers[i],
         total,
         durationInFrames:
-          LEAD_IN + voiceFrames + TAIL + (isQuestion ? COUNTDOWN : 0),
+          LEAD_IN +
+          voiceFrames +
+          (episode.slideGap ?? TAIL) +
+          (isQuestion ? COUNTDOWN : 0),
       };
     }),
   );
@@ -174,6 +178,7 @@ export const calculateMetadata: CalculateMetadataFunction<VideoProps> = async ({
 }) => {
   const slides = await resolveSlides(props.episodeId);
   return {
+    fps: getEpisode(props.episodeId).fps ?? FPS,
     durationInFrames: slides.reduce((sum, s) => sum + s.durationInFrames, 0),
     props: { ...props, slides },
   };

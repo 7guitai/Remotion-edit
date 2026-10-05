@@ -58,10 +58,11 @@ def main() -> None:
         episode = json.loads(path.read_text(encoding="utf-8"))
         print(f"[{episode['id']}]")
 
-        bgm = episode["bgm"]
-        out = ROOT / "public" / "bgm" / bgm["file"]
-        url = bgm.get("url") or (None if out.exists() else opentracks_url(bgm["opentracks"]))
-        download(url, ROOT / "public" / "bgm" / bgm["file"], f"{bgm['title']}（{bgm['credit']}）")
+        bgm = episode.get("bgm")
+        if bgm:
+            out = ROOT / "public" / "bgm" / bgm["file"]
+            url = bgm.get("url") or (None if out.exists() else opentracks_url(bgm["opentracks"]))
+            download(url, ROOT / "public" / "bgm" / bgm["file"], f"{bgm['title']}（{bgm['credit']}）")
 
         for name, info in episode["illustrations"].items():
             url = info.get("url")

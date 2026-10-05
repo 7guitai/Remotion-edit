@@ -4,6 +4,7 @@ import bodyTriviaShort from "./body-trivia-short.json";
 import loveTriviaShort from "./love-trivia-short.json";
 import moneyTriviaShort from "./money-trivia-short.json";
 import savings2chShort from "./savings-2ch-short.json";
+import sleepTrivia1h from "./sleep-trivia-1h.json";
 import chargerPowerSplit from "./charger-power-split.json";
 import coffeeTriviaShort from "./coffee-trivia-short.json";
 import japanTriviaShort from "./japan-trivia-short.json";
@@ -89,6 +90,15 @@ export type ThreadSlide = {
   replies?: { text: string; speech?: string; color?: string }[];
 };
 
+// 睡眠用：夜空の背景に雑学の文字をふわっと出し、speech をひと続きで読み上げる
+export type SleepSlide = {
+  type: "sleep";
+  text: string;
+  answer?: string;
+  explain?: string;
+  speech: string;
+};
+
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
 // no を付けたスライドから次の chapter まで、画面左上に「雑学 No.○」を表示する。
 // テロップの **〜** は強調表示（読み上げでは記号を除く）
@@ -100,6 +110,7 @@ export type ScriptSlide = (
   | QuizSlide
   | TriviaSlide
   | ThreadSlide
+  | SleepSlide
 ) & {
   chapter?: string;
   no?: number;
@@ -115,13 +126,26 @@ export type Episode = {
   // ショートの上部のタイトル帯（省略時は表示）
   titleBand?: boolean;
   // "flashy" で1ページ1雑学を派手な編集にする（集中線・叩きつけ文字・フラッシュ・揺れ・効果音）
-  style?: "flashy";
+  style?: "flashy" | "sleep";
+  // フレームレート（省略時は 30）。動きの少ない長時間動画は下げると書き出しが速い
+  fps?: number;
+  // 各スライドの読み上げのあとに入れる間（フレーム。省略時は 12）
+  slideGap?: number;
+  // ずっと流す環境音（雨の音など）
+  ambient?: { file: string; volume: number; name: string };
   // BGM の音量（省略時は theme.ts の BGM_VOLUME）
   bgmVolume?: number;
   // 背景色（省略時は白）
   background?: string;
   // 読み上げの声（省略時はずんだもん・1.2倍）。name は概要欄のクレジットに使う
-  voice?: { speaker: number; speed: number; name: string };
+  voice?: {
+    speaker: number;
+    speed: number;
+    name: string;
+    // 抑揚（1.0 が標準。下げると落ち着いた読み方）と声の高さ（0 が標準）
+    intonation?: number;
+    pitch?: number;
+  };
   // 2ch風のレスを読む声（レスの順番で交互に使う）
   replyVoices?: { speaker: number; speed: number; name: string }[];
   // 強調色（省略時は theme.ts の COLORS.accent / marker）
@@ -129,7 +153,7 @@ export type Episode = {
   marker?: string;
   source?: { name: string; url: string };
   // url の代わりに opentracks（OpenTracks の曲番号）でも取得できる
-  bgm: {
+  bgm?: {
     file: string;
     title: string;
     credit: string;
@@ -142,6 +166,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  sleepTrivia1h as Episode,
   moneyTriviaLong as Episode,
   japanTriviaShort as Episode,
   bodyTriviaShort as Episode,

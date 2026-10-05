@@ -1,5 +1,6 @@
 import React from "react";
-import { Composition } from "remotion";
+import { Composition, Still } from "remotion";
+import { SleepThumbnail } from "./components/SleepThumbnail";
 import { EPISODES } from "./episodes";
 import { calculateMetadata, FPS } from "./slides";
 import { Video } from "./Video";
@@ -14,14 +15,27 @@ export const RemotionRoot: React.FC = () => {
           id={ep.id}
           component={Video}
           // 実際の長さは音声ファイルの長さから calculateMetadata で決まる
-          durationInFrames={FPS}
-          fps={FPS}
+          durationInFrames={ep.fps ?? FPS}
+          fps={ep.fps ?? FPS}
           width={ep.format === "short" ? 1080 : 1920}
           height={ep.format === "short" ? 1920 : 1080}
           defaultProps={{ episodeId: ep.id, slides: [] }}
           calculateMetadata={calculateMetadata}
         />
       ))}
+      {/* 睡眠用動画のサムネイル（npx remotion still sleep-thumbnail out/thumb.png） */}
+      <Still
+        id="sleep-thumbnail"
+        component={SleepThumbnail}
+        width={1280}
+        height={720}
+        defaultProps={{
+          kicker: "即寝落ち",
+          catchCopy: "聴くだけで\nぐっすり",
+          hours: "1",
+          tag: "雨の音",
+        }}
+      />
     </>
   );
 };

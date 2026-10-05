@@ -41,12 +41,16 @@ def voicevox_available(url: str) -> bool:
         return False
 
 
-def synth_voicevox(text: str, out: Path, url: str, speaker: int, speed: float) -> None:
+def synth_voicevox(
+    text: str, out: Path, url: str, speaker: int, speed: float, intonation: float = 1.0, pitch: float = 0.0
+) -> None:
     q = urllib.parse.urlencode({"text": text, "speaker": speaker})
     req = urllib.request.Request(f"{url}/audio_query?{q}", method="POST")
     with urllib.request.urlopen(req) as res:
         query = json.load(res)
     query["speedScale"] = speed
+    query["intonationScale"] = intonation
+    query["pitchScale"] = pitch
     query["prePhonemeLength"] = 0.05
     query["postPhonemeLength"] = 0.1
     req = urllib.request.Request(
@@ -79,6 +83,7 @@ def main() -> None:
     p.add_argument("--voicevox-url", default="http://127.0.0.1:50021")
     p.add_argument("--speaker", type=int, help="VOICEVOX の話者ID（省略時はエピソードの voice、なければ 3=ずんだもん）")
     p.add_argument("--speed", type=float, help="話す速さ（省略時はエピソードの voice、なければ 1.2）")
+    p.add_argument("--resume", action="store_true", help="作成済みの音声は作り直さない（途中から続ける）")
     args = p.parse_args()
 
     engine = args.engine
@@ -95,29 +100,36 @@ def main() -> None:
     readings = episode.get("readings", {})
     OUT_DIR = ROOT / "public" / "voice" / episode["id"]
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    for old in OUT_DIR.glob("*.wav"):
-        old.unlink()
+    if not args.resume:
+        for old in OUT_DIR.glob("*.wav"):
+            old.unlink()
 
     for i, slide in enumerate(episode["slides"]):
         # 1ページ1雑学は、振り（NNN.wav）と答え（NNN-answer.wav）を別々に作る
         parts = [(f"{i:03d}.wav", slide.get("speech") or slide["text"])]
-        if slide.get("answer"):
+        # 睡眠用（sleep）は answer/explain が表示専用なので、読み上げは speech だけ
+        trivia = slide.get("type") != "sleep"
+        if trivia and slide.get("answer"):
             parts.append((f"{i:03d}-answer.wav", slide.get("answerSpeech") or slide["answer"]))
         # 2ch風のレスは、レスの順番で replyVoices の声を交互に使う
         for k, reply in enumerate(slide.get("replies", [])):
             parts.append((f"{i:03d}-r{k}.wav", reply.get("speech") or reply["text"]))
-        if slide.get("explain"):
+        if trivia and slide.get("explain"):
             parts.append((f"{i:03d}-explain.wav", slide.get("explainSpeech") or slide["explain"]))
         for name, raw in parts:
             text = to_speech(raw, readings)
             out = OUT_DIR / name
+            if args.resume and out.exists():
+                continue
             spk, spd = speaker, speed
             reply_voices = episode.get("replyVoices") or []
             if "-r" in name and reply_voices and args.speaker is None:
                 v = reply_voices[int(name.split("-r")[1][:-4]) % len(reply_voices)]
                 spk, spd = v["speaker"], v.get("speed", speed)
             if engine == "voicevox":
-                synth_voicevox(text, out, args.voicevox_url, spk, spd)
+                synth_voicevox(
+                    text, out, args.voicevox_url, spk, spd, voice.get("intonation", 1.0), voice.get("pitch", 0.0)
+                )
             else:
                 synth_openjtalk(text, out, spd)
             print(f"  {out.name}  {text}")

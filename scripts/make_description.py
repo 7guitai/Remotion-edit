@@ -28,7 +28,7 @@ def seconds(voice: Path) -> float:
 REPLY_GAP = 10  # 2ch風：見出しとレス、レスとレスの間
 
 
-def slide_frames(voice: Path, slide: dict) -> int:
+def slide_frames(voice: Path, slide: dict, gap: int = TAIL, fps: int = FPS) -> int:
     if slide.get("type") == "thread":
         cursor = LEAD_IN + math.ceil(seconds(voice) * FPS)
         for k in range(len(slide.get("replies", []))):
@@ -44,11 +44,13 @@ def slide_frames(voice: Path, slide: dict) -> int:
             end += EXPLAIN_PAUSE + math.ceil(seconds(explain) * FPS)
         return end + ANSWER_TAIL
     question = slide.get("type") == "quiz" and "answer" not in slide
-    return LEAD_IN + math.ceil(seconds(voice) * FPS) + TAIL + (COUNTDOWN if question else 0)
+    return LEAD_IN + math.ceil(seconds(voice) * fps) + gap + (COUNTDOWN if question else 0)
 
 
-def timestamp(frames: int) -> str:
-    s = frames // FPS
+def timestamp(frames: int, fps: int = FPS) -> str:
+    s = frames // fps
+    if s >= 3600:
+        return f"{s // 3600}:{s % 3600 // 60:02d}:{s % 60:02d}"
     return f"{s // 60}:{s % 60:02d}"
 
 
@@ -60,12 +62,14 @@ def main() -> None:
     ep = json.loads((ROOT / "src" / "episodes" / f"{args.episode}.json").read_text(encoding="utf-8"))
     voice_dir = ROOT / "public" / "voice" / ep["id"]
 
+    fps = ep.get("fps", FPS)
+    gap = ep.get("slideGap", TAIL)
     chapters = []
     frame = 0
     for i, slide in enumerate(ep["slides"]):
         if slide.get("chapter"):
-            chapters.append(f"{timestamp(frame)} {slide['chapter']}")
-        frame += slide_frames(voice_dir / f"{i:03d}.wav", slide)
+            chapters.append(f"{timestamp(frame, fps)} {slide['chapter']}")
+        frame += slide_frames(voice_dir / f"{i:03d}.wav", slide, gap, fps)
 
     lines = []
     if ep.get("pr"):
@@ -91,7 +95,8 @@ def main() -> None:
                 + [v["name"] for v in ep.get("replyVoices", [])]
             )
         ),
-        f"BGM：{ep['bgm']['credit']}「{ep['bgm']['title']}」",
+        *([f"BGM：{ep['bgm']['credit']}「{ep['bgm']['title']}」"] if ep.get("bgm") else []),
+        *([f"環境音：{ep['ambient']['name']}"] if ep.get("ambient") else []),
         "イラスト：" + "、".join(dict.fromkeys(i.get("credit", "いらすとや") for i in ep["illustrations"].values())),
         "",
     ]

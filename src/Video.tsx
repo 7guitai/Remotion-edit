@@ -13,11 +13,13 @@ import { getEpisode } from "./episodes";
 import { COUNTDOWN, ResolvedSlide, VideoProps } from "./slides";
 import { AccentContext, BGM_VOLUME, COLORS, fontFamily } from "./theme";
 import { TitleBand } from "./components/TitleBand";
+import { SleepBackground } from "./components/SleepPage";
 
 export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
   const episode = getEpisode(episodeId);
   const { durationInFrames } = useVideoConfig();
   const bgmLevel = episode.bgmVolume ?? BGM_VOLUME;
+  const ambientLevel = episode.ambient?.volume ?? 0;
   // BGM は最初と最後だけフェード
   const bgmVolume = (f: number) =>
     interpolate(
@@ -37,6 +39,7 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
       <AbsoluteFill
         style={{ backgroundColor: episode.background ?? COLORS.background }}
       >
+        {episode.style === "sleep" ? <SleepBackground /> : null}
         <Series>
           {slides.map((s, i) => (
             <Series.Sequence key={i} durationInFrames={s.durationInFrames}>
@@ -86,12 +89,29 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
           <TitleBand title={episode.title} />
         )}
         {episode.pr ? <PrBadge /> : null}
-        <Audio
-          src={staticFile(`bgm/${episode.bgm.file}`)}
-          volume={bgmVolume}
-          loop
-          loopVolumeCurveBehavior="extend"
-        />
+        {episode.bgm ? (
+          <Audio
+            src={staticFile(`bgm/${episode.bgm.file}`)}
+            volume={bgmVolume}
+            loop
+            loopVolumeCurveBehavior="extend"
+          />
+        ) : null}
+        {episode.ambient ? (
+          <Audio
+            src={staticFile(`sfx/${episode.ambient.file}`)}
+            volume={(f) =>
+              interpolate(
+                f,
+                [0, 60, durationInFrames - 90, durationInFrames],
+                [0, ambientLevel, ambientLevel, 0],
+                { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+              )
+            }
+            loop
+            loopVolumeCurveBehavior="extend"
+          />
+        ) : null}
       </AbsoluteFill>
     </AccentContext.Provider>
   );
