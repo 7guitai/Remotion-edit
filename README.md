@@ -9,6 +9,7 @@
 | `sleep-trivia` | 睡眠の雑学 | 約2分9秒 |
 | `autumn-trivia` | 秋の雑学（クイズ3問入り） | 約2分22秒 |
 | `love-trivia-short` | 恋愛の雑学（縦型ショート・クイズ1問入り） | 約50秒 |
+| `sleep-trivia-1h` | 【睡眠導入】ずんだもんと寝落ち 雑学1時間（夜空と雨の音、雑学192個） | 約60分 |
 | `money-trivia-long` | 知っておきたい お金の雑学62選（横長・1ページ1雑学＋解説、全6章） | 約9分58秒 |
 | `animal-trivia-long` | 寝る前に聞きたい 動物の雑学63選（横長・1ページ1雑学＋解説、全6章） | 約8分44秒 |
 | `savings-2ch-short` | 【2ch風】貯金1000万貯めて分かったこと（縦型ショート・スレ風の見出し＋レス） | 約52秒 |
@@ -41,6 +42,9 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 | `id` / `title` | コンポジションID / 動画タイトル |
 | `format` | `"short"` で縦型（1080×1920）の YouTube ショート。画面上部にタイトルの帯が出て、テロップは3行まで |
 | `style` | `"flashy"` で1ページ1雑学を派手な編集にする（ページごとに色が変わる集中線、文字の叩きつけ、答えでフラッシュ＋画面の揺れ＋集中線＋きらきら、「シュッ」「ドンッ」「キラッ」の効果音） |
+| `fps` | フレームレート（省略時は 30）。動きの少ない長時間動画は 10 などに下げると書き出しが速い |
+| `slideGap` | 読み上げのあとに入れる間（フレーム）。睡眠用は全体の長さに合わせて調整する |
+| `ambient` | ずっと流す環境音 `{file, volume, name}`（`public/sfx/`。雨の音は `python3 scripts/make_ambient.py` で合成） |
 | `bgmVolume` | BGM の音量（省略時は 0.12） |
 | `titleBand` | `false` でショート上部のタイトル帯を消す |
 | `background` | 背景色（省略時は白） |
@@ -68,6 +72,7 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 | `points` | ラベル付きの箇条書き（結論・チェックポイント） | `items: [{label, body}]` |
 | `quiz` | クイズの選択肢（A/B/C…） | `choices`, `answer`（正解の番号。0 始まり） |
 | `thread` | 2ch風。集中線の背景に赤グラデ＋白黒フチの大きな見出し、イラストの上にレスの吹き出しが順番に出る（「ポンッ」の効果音つき）。レスは `replyVoices` の声で交互に読む | `image`, `replies: [{text, speech, color}]` |
+| `sleep` | 睡眠用。夜空（星・月・雨のすじ・眠る犬）の背景に雑学の文字をふわっと出して消す。`speech` をひと続きで読み上げ、`answer`/`explain` は表示だけ | `speech`, `answer`, `explain` |
 | `trivia` | 1ページ1雑学（ショート向け）。上に `text`（振り）、中央にイラスト、読み上げのあと下に `answer`（答え）を出す。文字は黒＋白フチの極太 | `image`, `answer`, `answerSpeech`, `note`（読み上げない補足）, `explain` / `explainSpeech`（答えのあとに読み上げる解説） |
 
 - **クイズ**：`answer` のない `quiz` は出題スライドで、読み上げのあとに3秒のカウントダウン（「考えてみて！」＋効果音）が入ります。
@@ -112,6 +117,10 @@ VOICEVOX が起動していないときは Open JTalk（`pip install pyopenjtalk
 ## 効果音
 
 `public/sfx/` のクイズ用効果音は `python3 scripts/make_sfx.py` で合成した自作の音です（Git に含めています）。
+
+## サムネイル（睡眠用）
+
+`npx remotion still sleep-thumbnail out/thumb.png` で 1280×720 のサムネイルを書き出します（文字は `src/Root.tsx` の `defaultProps` で変更）。
 
 ## フォント
 
