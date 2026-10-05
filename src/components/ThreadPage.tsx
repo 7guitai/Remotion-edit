@@ -16,14 +16,34 @@ const WIDTH = 1000;
 // レスの文字色（指定がなければ順番に使う）
 const REPLY_COLORS = ["#5b3a17", "#1d9a2c", "#1f5fc4", "#d0271d"];
 
-const charWidth = (line: string) =>
+export const charWidth = (line: string) =>
   [...line].reduce((w, ch) => w + (/[\x20-\x7e]/.test(ch) ? 0.58 : 1), 0);
 
-// 黄色〜オレンジの集中線（ゆっくり回す）
-const Sunburst: React.FC = () => {
+export type SunburstColors = {
+  base: string;
+  ray1: string;
+  ray2: string;
+  // 中心の明るさと、外側の暗さ
+  center: string;
+  edge: string;
+};
+
+const YELLOW: SunburstColors = {
+  base: "#ffb300",
+  ray1: "#ffd84a",
+  ray2: "#ffae00",
+  center: "rgba(255,250,210,0.85)",
+  edge: "rgba(200,90,0,0.55)",
+};
+
+// 集中線（ゆっくり回す）。色を指定しなければ黄色〜オレンジ
+export const Sunburst: React.FC<{
+  colors?: SunburstColors;
+  speed?: number;
+}> = ({ colors = YELLOW, speed = 0.08 }) => {
   const frame = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ overflow: "hidden", background: "#ffb300" }}>
+    <AbsoluteFill style={{ overflow: "hidden", background: colors.base }}>
       <div
         style={{
           position: "absolute",
@@ -31,22 +51,20 @@ const Sunburst: React.FC = () => {
           top: -700,
           width: 2880,
           height: 3320,
-          background:
-            "repeating-conic-gradient(from 0deg at 50% 50%, #ffd84a 0deg 6deg, #ffae00 6deg 12deg)",
-          transform: `rotate(${frame * 0.08}deg)`,
+          background: `repeating-conic-gradient(from 0deg at 50% 50%, ${colors.ray1} 0deg 6deg, ${colors.ray2} 6deg 12deg)`,
+          transform: `rotate(${frame * speed}deg)`,
         }}
       />
       <AbsoluteFill
         style={{
-          background:
-            "radial-gradient(circle at 50% 45%, rgba(255,250,210,0.85) 0%, rgba(255,230,120,0.25) 28%, rgba(230,120,0,0.35) 75%, rgba(200,90,0,0.55) 100%)",
+          background: `radial-gradient(circle at 50% 45%, ${colors.center} 0%, rgba(255,255,255,0.15) 30%, rgba(0,0,0,0) 60%, ${colors.edge} 100%)`,
         }}
       />
     </AbsoluteFill>
   );
 };
 
-const blackRim = (w: number) =>
+export const blackRim = (w: number) =>
   [
     [w, 0],
     [-w, 0],

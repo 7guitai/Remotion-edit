@@ -1,0 +1,142 @@
+{
+  "id": "body-trivia-short",
+  "title": "体の雑学7選",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "flashy",
+  "bgmVolume": 0.14,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "summer_triangle.mp3",
+    "title": "SUMMER TRIANGLE",
+    "credit": "しゃろう",
+    "page": "https://opentracks.com/bgm/detail/12983",
+    "opentracks": 12983
+  },
+  "illustrations": {
+    "body_kagaku_jintai_mokei.png": {
+      "emoji": "✨",
+      "irasutoya": "人体模型のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHWCdAYtRL0v7nzVunNynWZyiC9NdWtxSGyAz_ZcM9aQr4skf9wNJRolcP0yr_H3yezBz29WDOn0R5r0Xs0fO0IHLgso5SLIbX3v8gnJKDZyLNaULFfTnEdNLwUsbS9Bf-GLWAg3P7icLx/s800/body_kagaku_jintai_mokei.png"
+    },
+    "gaikotsu_character.png": {
+      "emoji": "✨",
+      "irasutoya": "骸骨のキャラクターのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinhINhn9y9e9MIA2isohR3b2t9gjtQuqpg9CK-PaAuVRaWixsQyfiAYoAraBmib-pGhpYdx7zrZnay0R14AzhdkVT5K4ozxujlvSb02JAh2vDpanjDWaPBWdrLZZheRJp0CWL6BZVqzTA/s800/gaikotsu_character.png"
+    },
+    "sports_suibun_hokyuu_woman.png": {
+      "emoji": "✨",
+      "irasutoya": "水分補給のイラスト（女性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjZjnLKLywBsIGm1xt82CTjfGuIG0nJSf-3hNomKdI-xrhD2PrGRXwy37-Aq4dhKiZxftIEcFvsMadsNXYGLmUikTKEsOFdg-K_QNMXaoaJDqa2se1Hwowru3UikdKJdWdzTKGybY8qRRkC/s800/sports_suibun_hokyuu_woman.png"
+    },
+    "body_i.png": {
+      "emoji": "✨",
+      "irasutoya": "胃のイラスト（人体）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEioX9c1H0NyVgluqFobBfraeNJWNatihaPNrsHYUEVy8e5UPiSRTdeGS9rA7sCg-WCIs6vmlWFQDwfA7C_qAVfq5zQtSYtrNnKfajsl9PH3bWopFUNmpIlNUNI0HnxNmimQchy-NAvqDoo/s800/body_i.png"
+    },
+    "pose_kusai_woman.png": {
+      "emoji": "✨",
+      "irasutoya": "臭くて鼻をつまむ人のイラスト（女性）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgoI7EBQLBS9xg11NzTeDSARv6O65NiLLU0VvOxsBeZ9fUmTfBNM5Yp-iCpzp8sS6nanMSdW-Gbs2jt8gn1-HqqwoQrz-rZFsDMOaUgpwoQZruXXI9Md5HncXGzeTQ9OA9RRM54VKEMXhGu/s800/pose_kusai_woman.png"
+    },
+    "tsumekiri_woman.png": {
+      "emoji": "✨",
+      "irasutoya": "爪を切っている人のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjo01lSs-WbLjbm5cjDjThv6gBQ0aEzlUWI9N3n1eYs9UQeSFJWEhBEgAZRicNrFzr2ai_GZlUiwl-AwzeZkT4vxVrT1MJAnmADK1I9My9_oOLVbF-GtwYqNxB0mc0SRCsd4XR17Ka1oqQ/s800/tsumekiri_woman.png"
+    },
+    "fe_tongue.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Tongue」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Tongue/Color/tongue_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_eye.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Eye」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Eye/Color/eye_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    }
+  },
+  "slides": [
+    {
+      "type": "trivia",
+      "text": "知らないと損する\n体の雑学7選",
+      "speech": "知らないと損する、体の雑学、七選",
+      "image": "body_kagaku_jintai_mokei.png"
+    },
+    {
+      "type": "trivia",
+      "text": "大人の骨の数は",
+      "image": "gaikotsu_character.png",
+      "answer": "約206本",
+      "answerSpeech": "約二百六本",
+      "note": "※赤ちゃんは300本ほどあり成長でくっつく",
+      "no": 1
+    },
+    {
+      "type": "trivia",
+      "text": "大人の体の水分は",
+      "image": "sports_suibun_hokyuu_woman.png",
+      "answer": "体重の約60%",
+      "answerSpeech": "体重の約六十パーセント",
+      "note": "※赤ちゃんはもっと多い",
+      "no": 2
+    },
+    {
+      "type": "trivia",
+      "text": "舌の場所ごとに\n感じる味が違う",
+      "speech": "舌の場所ごとに、感じる味が違う",
+      "image": "fe_tongue.svg",
+      "answer": "というのはウソ",
+      "note": "※舌のどこでも全部の味を感じられる",
+      "no": 3
+    },
+    {
+      "type": "trivia",
+      "text": "人がまばたきする回数は",
+      "image": "fe_eye.svg",
+      "answer": "1日に1万回以上",
+      "answerSpeech": "一日に一万回以上",
+      "note": "※目の表面を乾かさないため",
+      "no": 4
+    },
+    {
+      "type": "trivia",
+      "text": "胃の内側の粘膜は",
+      "image": "body_i.png",
+      "answer": "数日で\n生まれ変わる",
+      "note": "※強い胃酸から胃を守るため",
+      "no": 5
+    },
+    {
+      "type": "trivia",
+      "text": "鼻をつまんで食べると",
+      "image": "pose_kusai_woman.png",
+      "answer": "味が\n分かりにくくなる",
+      "note": "※味の多くは香りで感じている",
+      "no": 6
+    },
+    {
+      "type": "trivia",
+      "text": "手の爪が伸びる速さは",
+      "image": "tsumekiri_woman.png",
+      "answer": "1日に約0.1mm",
+      "answerSpeech": "一日に約れいてんいちミリ",
+      "note": "※足の爪は手よりゆっくり",
+      "no": 7
+    }
+  ],
+  "description": "知らないと損する、体に関する雑学",
+  "hashtags": [
+    "雑学",
+    "豆知識",
+    "トリビア",
+    "人体",
+    "Shorts"
+  ]
+}

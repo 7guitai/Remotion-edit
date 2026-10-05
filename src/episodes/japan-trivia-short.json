@@ -1,0 +1,138 @@
+{
+  "id": "japan-trivia-short",
+  "title": "日本の雑学7選",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "flashy",
+  "bgmVolume": 0.14,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "summer_triangle.mp3",
+    "title": "SUMMER TRIANGLE",
+    "credit": "しゃろう",
+    "page": "https://opentracks.com/bgm/detail/12983",
+    "opentracks": 12983
+  },
+  "illustrations": {
+    "nihonchizu.png": {
+      "emoji": "✨",
+      "irasutoya": "日本地図のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWTz5M5rllsl2EnRyr3TbEj1-0kWUl6LAsTOE3woKBGU4Xgh_istBa0x1VQq1ARmyTmPV7IZjx4Vx8iHURejWc2XZjJTE3ngUe8z03RHkugyeEGUA5wI6kzpMat-l2iokUCHNu5sieGGUH/s800/nihonchizu.png"
+    },
+    "nishinoshim_shintou_niijima.png": {
+      "emoji": "✨",
+      "irasutoya": "西之島新島のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj64_t5P7oog8PlYgO9-VAmYRPMfrtEnBGh9xBeS1EzSJtlWZBqsn3vJFDJubx1j1UbJIQzGiWmtBldPMNIDKCubFZqETTcsQyt9_RWTYcuZejD0oUBdDstpjzJ8MQpvZVX_-V0LrPqmJgz/s800/nishinoshim_shintou_niijima.png"
+    },
+    "bird_kiji.png": {
+      "emoji": "✨",
+      "irasutoya": "キジのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjns-n8FWqejVHpkz9ETDBS8sbU_7Itjl3VKUTmC5YMlhFb0t-LI6-3_qJP6qutpCol5QC-o3f5rQdN688FBpTKOhgoIiS4mqCxx7cXeQaGMf92a0WVXefJB94q5ZzZMa6Lfj2eo0CUYVY/s800/bird_kiji.png"
+    },
+    "ohanami_sakura_zensen.png": {
+      "emoji": "✨",
+      "irasutoya": "桜前線のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOYy5xFuUW7Jp1NTpVfskPEUegqMGV_8W7PLSLlHjNDPDxzwkk9oDlwYdDSGGKIPWzRM1uU3T34eNdtwr_m9p0bnv86k5jJe4kXdc1sEcoqCBwnVGUjnzW6-yLYIWZt2UXJic-GBKVjAI/s800/ohanami_sakura_zensen.png"
+    },
+    "building_tera.png": {
+      "emoji": "✨",
+      "irasutoya": "お寺のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiNiH39_fhZhuVwWRJdgjIiOGOYibDQTQJwGrXFZZ1geQNQEZhBy_y8G6mjMPxoAt4zezPZezlaayQyiYv32mtc-XD8xCTwe45ypQhNrczkgMc06WxHN4gnAS51SLL369ne-Myk3wLzqNY/s800/building_tera.png"
+    },
+    "machine_jidouhanbaiki.png": {
+      "emoji": "✨",
+      "irasutoya": "自動販売機のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNsSdULp9eUkYVsrcPGxEVJefcX9Xxf3pGgyJSW7f-t7_tckOs4gYY5DL-rT3v4NhKVidSDyk2ojczBg18z4Tycs37OCIxMW6dXbxHNhtCQDbkpY7mZRJk_tBD4mEzd0TV8rmvHo6rr3JM/s800/machine_jidouhanbaiki.png"
+    },
+    "fujisan_shikaku.png": {
+      "emoji": "✨",
+      "irasutoya": "富士山のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgGAWZd7l80p8C9rbJC7DFrYK1XUj8_K7VKXnknUZUxyA5k_mdAmd8sLugFTpTtTpr8Q_qQzsFTvSBv0AED6OEg07_WlFEhsElshO0yl1v3hcHCSLrhLDNHSEy6hIric39hv1WuyV8NUl8/s800/fujisan_shikaku.png"
+    },
+    "denryoku_soudensen.png": {
+      "emoji": "✨",
+      "irasutoya": "送電線のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjf4W_i8RfbNjBKk76vQuPI-imrWxgXR2j2gtck-HZjmeoojGvE1BeCL6KO7KxiRuuPfV7r0-KHCqgKjRPT6KO1EKyRj-xweF5Am0I_PfinKFGgiE26ToGkeb-W9BuzdhKlVzxRsVMmdED4/s800/denryoku_soudensen.png"
+    }
+  },
+  "slides": [
+    {
+      "type": "trivia",
+      "text": "知らないと損する\n日本の雑学7選",
+      "speech": "知らないと損する、日本の雑学、七選",
+      "image": "nihonchizu.png"
+    },
+    {
+      "type": "trivia",
+      "text": "日本の島の数は",
+      "image": "nishinoshim_shintou_niijima.png",
+      "answer": "約1万4000島",
+      "answerSpeech": "約一万四千島",
+      "note": "※2023年に数え直して倍以上に",
+      "no": 1
+    },
+    {
+      "type": "trivia",
+      "text": "日本の国鳥は",
+      "image": "bird_kiji.png",
+      "answer": "キジ",
+      "note": "※桃太郎のお供でもおなじみ",
+      "no": 2
+    },
+    {
+      "type": "trivia",
+      "text": "日本の国花は",
+      "image": "ohanami_sakura_zensen.png",
+      "answer": "法律では\n決まっていない",
+      "note": "※桜や菊が国花とされることが多い",
+      "no": 3
+    },
+    {
+      "type": "trivia",
+      "text": "世界最古の会社と\nいわれるのは",
+      "image": "building_tera.png",
+      "answer": "日本の金剛組",
+      "note": "※578年創業のお寺などを建てる会社",
+      "no": 4,
+      "speech": "世界最古の会社と、いわれるのは"
+    },
+    {
+      "type": "trivia",
+      "text": "日本の自動販売機は",
+      "image": "machine_jidouhanbaiki.png",
+      "answer": "約400万台もある",
+      "answerSpeech": "約四百万台もある",
+      "note": "※世界でもトップクラスの多さ",
+      "no": 5
+    },
+    {
+      "type": "trivia",
+      "text": "富士山の山頂は",
+      "image": "fujisan_shikaku.png",
+      "answer": "神社の土地",
+      "note": "※8合目より上は富士山本宮浅間大社の境内",
+      "no": 6
+    },
+    {
+      "type": "trivia",
+      "text": "日本の電気は",
+      "image": "denryoku_soudensen.png",
+      "answer": "東と西で\n周波数が違う",
+      "note": "※東日本は50Hz　西日本は60Hz",
+      "no": 7
+    }
+  ],
+  "description": "知らないと損する、日本に関する雑学",
+  "hashtags": [
+    "雑学",
+    "豆知識",
+    "トリビア",
+    "日本",
+    "Shorts"
+  ]
+}

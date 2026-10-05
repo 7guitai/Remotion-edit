@@ -27,6 +27,8 @@ export type ResolvedSlide = {
   answerStart: number | null;
   explainVoice: string | null;
   explainStart: number | null;
+  // 派手な編集（エピソードの style が "flashy"）
+  flashy: boolean;
   // 2ch風のレス（表示と読み上げを始めるフレーム）
   replies: { voice: string | null; start: number }[];
   // 読み上げが終わってからカウントダウンが始まるまで（クイズ出題のみ）
@@ -90,6 +92,7 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
         no: numbers[i],
         total,
         replies: [] as { voice: string | null; start: number }[],
+        flashy: episode.style === "flashy",
       };
       if (slide.type === "thread") {
         let cursor = LEAD_IN + voiceFrames;
@@ -151,6 +154,7 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
         voice: hasVoice ? voicePath : null,
         voiceStart: LEAD_IN,
         replies: [],
+        flashy: episode.style === "flashy",
         answerVoice: null,
         answerStart: null,
         explainVoice: null,

@@ -17,12 +17,13 @@ import { TitleBand } from "./components/TitleBand";
 export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
   const episode = getEpisode(episodeId);
   const { durationInFrames } = useVideoConfig();
+  const bgmLevel = episode.bgmVolume ?? BGM_VOLUME;
   // BGM は最初と最後だけフェード
   const bgmVolume = (f: number) =>
     interpolate(
       f,
       [0, 15, durationInFrames - 45, durationInFrames],
-      [0, BGM_VOLUME, BGM_VOLUME, 0],
+      [0, bgmLevel, bgmLevel, 0],
       { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
     );
 
@@ -61,6 +62,22 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
                   {r.voice ? <Audio src={staticFile(r.voice)} /> : null}
                 </Sequence>
               ))}
+              {s.flashy ? (
+                <>
+                  <Audio src={staticFile("sfx/whoosh.wav")} volume={0.55} />
+                  {s.answerStart !== null ? (
+                    <Sequence from={s.answerStart}>
+                      <Audio src={staticFile("sfx/impact.wav")} volume={0.7} />
+                      <Sequence from={4}>
+                        <Audio
+                          src={staticFile("sfx/sparkle.wav")}
+                          volume={0.35}
+                        />
+                      </Sequence>
+                    </Sequence>
+                  ) : null}
+                </>
+              ) : null}
               <QuizSfx resolved={s} />
             </Series.Sequence>
           ))}

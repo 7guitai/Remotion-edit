@@ -11,6 +11,8 @@
 | `love-trivia-short` | 恋愛の雑学（縦型ショート・クイズ1問入り） | 約50秒 |
 | `animal-trivia-long` | 寝る前に聞きたい 動物の雑学63選（横長・1ページ1雑学＋解説、全6章） | 約8分44秒 |
 | `savings-2ch-short` | 【2ch風】貯金1000万貯めて分かったこと（縦型ショート・スレ風の見出し＋レス） | 約52秒 |
+| `japan-trivia-short` | 日本の雑学7選（縦型ショート・派手な編集） | 約36秒 |
+| `body-trivia-short` | 体の雑学7選（縦型ショート・派手な編集） | 約36秒 |
 | `coffee-trivia-short` | コーヒーの雑学7選（10月1日のコーヒーの日。縦型ショート・1ページ1雑学） | 約45秒 |
 | `money-trivia-short` | お金の雑学7選（縦型ショート・1ページ1雑学、声は青山龍星） | 約44秒 |
 | `charger-power-split` | PCとスマホを同時充電する充電器の選び方（[OCHA NOTE の記事](https://ochanote.com/articles/laptop-phone-charger-power-split/)を動画化） | 約4分12秒 |
@@ -37,6 +39,8 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 | --- | --- |
 | `id` / `title` | コンポジションID / 動画タイトル |
 | `format` | `"short"` で縦型（1080×1920）の YouTube ショート。画面上部にタイトルの帯が出て、テロップは3行まで |
+| `style` | `"flashy"` で1ページ1雑学を派手な編集にする（ページごとに色が変わる集中線、文字の叩きつけ、答えでフラッシュ＋画面の揺れ＋集中線＋きらきら、「シュッ」「ドンッ」「キラッ」の効果音） |
+| `bgmVolume` | BGM の音量（省略時は 0.12） |
 | `titleBand` | `false` でショート上部のタイトル帯を消す |
 | `background` | 背景色（省略時は白） |
 | `replyVoices` | 2ch風のレスを読む声の配列（レスの順番で交互に使う） |
