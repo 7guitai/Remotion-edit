@@ -6,6 +6,9 @@ import moneyTriviaShort from "./money-trivia-short.json";
 import savings2chShort from "./savings-2ch-short.json";
 import sleepTrivia1h from "./sleep-trivia-1h.json";
 import thingsRankingShort from "./things-ranking-short.json";
+import foodRankingShort from "./food-ranking-short.json";
+import bodyRankingShort from "./body-ranking-short.json";
+import konbiniRankingShort from "./konbini-ranking-short.json";
 import chargerPowerSplit from "./charger-power-split.json";
 import coffeeTriviaShort from "./coffee-trivia-short.json";
 import japanTriviaShort from "./japan-trivia-short.json";
@@ -171,6 +174,9 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  foodRankingShort as Episode,
+  bodyRankingShort as Episode,
+  konbiniRankingShort as Episode,
   thingsRankingShort as Episode,
   sleepTrivia1h as Episode,
   moneyTriviaLong as Episode,

@@ -1,0 +1,136 @@
+{
+  "id": "food-ranking-short",
+  "title": "9割が知らない 食べ物のヒミツ ランキング",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "flashy",
+  "bgmVolume": 0.14,
+  "answerPause": 15,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.25,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "summer_triangle.mp3",
+    "title": "SUMMER TRIANGLE",
+    "credit": "しゃろう",
+    "page": "https://opentracks.com/bgm/detail/12983",
+    "opentracks": 12983
+  },
+  "illustrations": {
+    "fe_bread.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Bread」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Bread/Color/bread_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_calendar.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Calendar」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Calendar/Color/calendar_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_face_with_hand_over_mouth.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Face with hand over mouth」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Face%20with%20hand%20over%20mouth/Color/face_with_hand_over_mouth_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_thinking_face.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Thinking face」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Thinking%20face/Color/thinking_face_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "food_cup_ramen_miso.png": {
+      "emoji": "✨",
+      "irasutoya": "カップラーメンのイラスト（味噌ラーメン）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdZ3z1_ZnotG_dOIcDwhiNp0pF7GYMSYnSs5Kh0qA4XUsLKyGL4OCaK2E_-hwd-OFddiM2K49JbzuPHb9GECxdi8BhBCGw268j4-Rpr2Gxq6jGlbK4gWeLOwlQpLq9Bpvu9LNAdgpgimE/s800/food_cup_ramen_miso.png"
+    },
+    "potatochips.png": {
+      "emoji": "✨",
+      "irasutoya": "ポテトチップスのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKyKbkjIzowkjStG4s5FYPq9R8d4ZZJ_s8O21ZSJIuur8-nmkHeKSKyIYdXWKpeEVCbh27NwKRQKlPWkSuQKh9giJ4HnX2pxB1FgQQE9b7q3rh63diM3uukqp86JGoFcByJvsJidCSlTo/s800/potatochips.png"
+    },
+    "sweets_chocolate_milk.png": {
+      "emoji": "✨",
+      "irasutoya": "板チョコのイラスト（ミルク）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbl_RLG51GdDBdt-Nkqjs7ssEuGtSM51gsOp49nwSEQzLU24j5zH4MbdiaNZ_jTuN6UEBQRr4s9JYIejUmCr9y1bY3TTa5IRSLGPrE7cD1dFXPU12HiQ3geMIDM3gYy8_nXxUMOuMdunIQ/s800/sweets_chocolate_milk.png"
+    }
+  },
+  "slides": [
+    {
+      "type": "trivia",
+      "text": "9割が知らない\n食べ物の\nヒミツ",
+      "speech": "九割が知らない、食べ物のヒミツ。一位は、今日から役に立つ",
+      "image": "fe_face_with_hand_over_mouth.svg"
+    },
+    {
+      "type": "trivia",
+      "text": "カップ麺の麺が\n下だけスカスカなのは",
+      "speech": "第五位。カップ麺の麺が、下だけスカスカなのは",
+      "image": "food_cup_ramen_miso.png",
+      "answer": "お湯を全体に\n行きわたらせるため",
+      "note": "※運ぶときに麺が割れにくくもなる",
+      "rank": 5,
+      "no": 1
+    },
+    {
+      "type": "trivia",
+      "text": "ポテチの袋が\nパンパンなのは",
+      "speech": "第四位。ポテチの袋が、パンパンなのは",
+      "image": "potatochips.png",
+      "answer": "中身を\n守るため",
+      "note": "※割れを防ぎ湿気や酸化からも守る",
+      "rank": 4,
+      "no": 2
+    },
+    {
+      "type": "trivia",
+      "text": "板チョコに\n溝があるのは",
+      "speech": "第三位。板チョコに、溝があるのは",
+      "image": "sweets_chocolate_milk.png",
+      "answer": "早く冷やして\n固めるため",
+      "note": "※割りやすくする役目もある",
+      "rank": 3,
+      "no": 3
+    },
+    {
+      "type": "trivia",
+      "text": "食パンの袋を留める\nプラスチックの名前は",
+      "speech": "第二位。食パンの袋を留める、プラスチックの名前は",
+      "image": "fe_bread.svg",
+      "answer": "バッグ・\nクロージャー",
+      "note": "※アメリカで生まれた道具",
+      "rank": 2,
+      "no": 4
+    },
+    {
+      "type": "trivia",
+      "text": "賞味期限が\n過ぎた食べ物は",
+      "speech": "第一位。賞味期限が、過ぎた食べ物は",
+      "image": "fe_calendar.svg",
+      "answer": "すぐに食べられなく\nなるわけではない",
+      "note": "※賞味期限はおいしく食べられる目安",
+      "rank": 1,
+      "no": 5
+    },
+    {
+      "type": "trivia",
+      "text": "知ってたのは\nいくつ？\nコメントで教えて",
+      "speech": "知ってたのは、いくつ？コメントで教えて！",
+      "image": "fe_thinking_face.svg",
+      "chapter": "エンディング"
+    }
+  ],
+  "description": "9割が知らない、食べ物に隠された意外なヒミツをランキングで紹介！\n知ってたのはいくつ？コメントで教えてください。",
+  "hashtags": [
+    "雑学",
+    "豆知識",
+    "トリビア",
+    "食べ物",
+    "Shorts"
+  ]
+}

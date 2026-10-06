@@ -1,0 +1,137 @@
+{
+  "id": "body-ranking-short",
+  "title": "9割が知らない 体のヒミツ ランキング",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "flashy",
+  "bgmVolume": 0.14,
+  "answerPause": 15,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.25,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "summer_triangle.mp3",
+    "title": "SUMMER TRIANGLE",
+    "credit": "しゃろう",
+    "page": "https://opentracks.com/bgm/detail/12983",
+    "opentracks": 12983
+  },
+  "illustrations": {
+    "fe_face_screaming_in_fear.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Face screaming in fear」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Face%20screaming%20in%20fear/Color/face_screaming_in_fear_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_nose.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Nose」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Nose/Default/Color/nose_color_default.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_studio_microphone.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Studio microphone」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Studio%20microphone/Color/studio_microphone_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_thinking_face.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Thinking face」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Thinking%20face/Color/thinking_face_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "kansetsu_narasu.png": {
+      "emoji": "✨",
+      "irasutoya": "指の関節を鳴らす人のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgAKGdS4UEzDVjMuuXUjqv-5JM1LEx83uKCCMFbVrWLHrs0ZRJCmNTEseB3SASqeGa2amPaJgYtAvpmO_pNQaLWpy_jBBhdIkR88S_xO78vG_wIWVioMaUt1WMEPkhxq82nGnqWK__Lhq6D/s800/kansetsu_narasu.png"
+    },
+    "kenkoushindan_shinchou.png": {
+      "emoji": "✨",
+      "irasutoya": "身長測定のイラスト（健康診断）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXTYXIzjRvhgnYX0Y8EKh-S9Yz7lCFppzE-aGt0gtF0R0oCmZnX452ZtS-SvY4YmBUppcuHK_sLbAU5VY3gSjOI8RpArf19N55Y8ZZzq3mzY4kp2baRSr9kRg8A-Xq53nch60PLig1Y5Y/s800/kenkoushindan_shinchou.png"
+    },
+    "kusuguru_baby.png": {
+      "emoji": "✨",
+      "irasutoya": "赤ちゃんをくすぐる親のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2qlVeqBemyFXp3N78v9Ao4pfNALS87F2NgKGn_2yuKQcG1AMbHoWScmx6_z9Nq1uovuf3tVPy66nTCSryKbWukk38G8UllJKERxDgLyw2PRF44JIVHqOuZnBhyRupBL2NVsqPVhYt8A7u/s800/kusuguru_baby.png"
+    }
+  },
+  "slides": [
+    {
+      "type": "trivia",
+      "text": "9割が知らない\n体の\nヒミツ",
+      "speech": "九割が知らない、体のヒミツ。一位は、明日の朝に試したくなる",
+      "image": "fe_face_screaming_in_fear.svg"
+    },
+    {
+      "type": "trivia",
+      "text": "鼻の穴は",
+      "speech": "第五位。鼻の穴は",
+      "image": "fe_nose.svg",
+      "answer": "片方ずつ交代で\n休んでいる",
+      "note": "※数時間ごとに入れ替わっている",
+      "rank": 5,
+      "no": 1
+    },
+    {
+      "type": "trivia",
+      "text": "録音した自分の声が\n変に聞こえるのは",
+      "speech": "第四位。録音した自分の声が、変に聞こえるのは",
+      "image": "fe_studio_microphone.svg",
+      "answer": "骨を伝わる音が\n入っていないから",
+      "note": "※いつもは骨からも声を聞いている",
+      "rank": 4,
+      "no": 2
+    },
+    {
+      "type": "trivia",
+      "text": "自分でくすぐっても\nくすぐったくないのは",
+      "speech": "第三位。自分でくすぐっても、くすぐったくないのは",
+      "image": "kusuguru_baby.png",
+      "answer": "脳が先に\n予想しているから",
+      "note": "※分かっている刺激には反応しにくい",
+      "rank": 3,
+      "no": 3
+    },
+    {
+      "type": "trivia",
+      "text": "指の関節が\nポキッと鳴るのは",
+      "speech": "第二位。指の関節が、ポキッと鳴るのは",
+      "image": "kansetsu_narasu.png",
+      "answer": "関節の中に\n泡ができる音",
+      "note": "※骨がこすれているわけではない",
+      "rank": 2,
+      "no": 4
+    },
+    {
+      "type": "trivia",
+      "text": "朝起きたときの身長は",
+      "speech": "第一位。朝起きたときの身長は",
+      "image": "kenkoushindan_shinchou.png",
+      "answer": "夜より\n1〜2cm高い",
+      "note": "※寝ている間に背骨の間が広がるため",
+      "rank": 1,
+      "no": 5,
+      "answerSpeech": "夜より一センチから二センチ高い"
+    },
+    {
+      "type": "trivia",
+      "text": "知ってたのは\nいくつ？\nコメントで教えて",
+      "speech": "知ってたのは、いくつ？コメントで教えて！",
+      "image": "fe_thinking_face.svg",
+      "chapter": "エンディング"
+    }
+  ],
+  "description": "9割が知らない、体に隠された意外なヒミツをランキングで紹介！\n知ってたのはいくつ？コメントで教えてください。",
+  "hashtags": [
+    "雑学",
+    "豆知識",
+    "トリビア",
+    "人体",
+    "Shorts"
+  ]
+}

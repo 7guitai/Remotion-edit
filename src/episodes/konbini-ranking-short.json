@@ -1,0 +1,131 @@
+{
+  "id": "konbini-ranking-short",
+  "title": "9割が知らない コンビニのヒミツ ランキング",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "flashy",
+  "bgmVolume": 0.14,
+  "answerPause": 15,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.25,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "summer_triangle.mp3",
+    "title": "SUMMER TRIANGLE",
+    "credit": "しゃろう",
+    "page": "https://opentracks.com/bgm/detail/12983",
+    "opentracks": 12983
+  },
+  "illustrations": {
+    "fe_convenience_store.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Convenience store」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Convenience%20store/Color/convenience_store_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_thinking_face.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Thinking face」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Thinking%20face/Color/thinking_face_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "food_oden_daikon.png": {
+      "emoji": "✨",
+      "irasutoya": "大根のイラスト（おでん）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEic9ea1Ze_s7tRJIGx0oTvuH5dMeDx1SYZyWRRRlXplbQEC05sNIGvPAEofP4I1tjbPm9SLjbcxNlLFTy8m4wYSuRp6tfF4UusV6qjnNVjMMegSvRrP_wQ-BBcTBQfKr6lc7qUKCXjZ2PM/s800/food_oden_daikon.png"
+    },
+    "haisya.png": {
+      "emoji": "✨",
+      "irasutoya": "歯医者さんのイラスト（職業）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6fjhsHNg4egAE9YunNQ7XSLZ429Rjz41LIfEFqQVOzehhL_O3yypN1JEMRoTJpYdFwBpdeqx91Eg8Ch6yvT3RC10ZoO3X67NOYdQHSd9Qk1BbKs2Gcrlh9PdtswfFVV9xMIyKIc6WcSU/s800/haisya.png"
+    },
+    "job_gyunyu_haitatsu.png": {
+      "emoji": "✨",
+      "irasutoya": "牛乳配達のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQ4v6Oup1yyRAOeNYdlG22j93KOJy0nd9bTwwI7MbrL0FmwDQf9hfZ5d6Nt_tdwK9dRUNed-8Z1YwOrSe8llllKFxt9K4zR55Gfg9fhcPJb-8LXHpxeQTMJRt_6_kBQ5akTp_Tz7Anoo_0/s800/job_gyunyu_haitatsu.png"
+    },
+    "reizouko_gyoumuyou.png": {
+      "emoji": "✨",
+      "irasutoya": "業務用冷蔵庫のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEglttv3e1u9zmjkK-y10bklcVp-g6wWZ9MNdevPJZt9EFORKN3wmXIG5npyP071vRH6guiR2EuTt2iNIjaepziLkd4BhOlwudbgtgByWdUZOTKBa7nllKbh0f3TXEs2d_1gbp5GkJM62lk/s800/reizouko_gyoumuyou.png"
+    }
+  },
+  "slides": [
+    {
+      "type": "trivia",
+      "text": "9割が知らない\nコンビニの\nヒミツ",
+      "speech": "九割が知らない、コンビニのヒミツ。一位は、意外すぎる",
+      "image": "fe_convenience_store.svg"
+    },
+    {
+      "type": "trivia",
+      "text": "「セブンイレブン」の\n名前の由来は",
+      "speech": "第五位。セブンイレブンの、名前の由来は",
+      "image": "fe_convenience_store.svg",
+      "answer": "朝7時から夜11時まで\n営業していたから",
+      "note": "※アメリカで生まれた名前",
+      "rank": 5,
+      "no": 1,
+      "answerSpeech": "朝七時から、夜十一時まで営業していたから"
+    },
+    {
+      "type": "trivia",
+      "text": "「ローソン」の\n名前の由来は",
+      "speech": "第四位。ローソンの、名前の由来は",
+      "image": "job_gyunyu_haitatsu.png",
+      "answer": "アメリカの\n牛乳屋さんの名前",
+      "note": "※だから看板に牛乳缶のマーク",
+      "rank": 4,
+      "no": 2
+    },
+    {
+      "type": "trivia",
+      "text": "飲み物の棚の\n裏側は",
+      "speech": "第三位。飲み物の棚の、裏側は",
+      "image": "reizouko_gyoumuyou.png",
+      "answer": "人が入れる\n大きな冷蔵庫",
+      "note": "※裏から飲み物を補充している",
+      "rank": 3,
+      "no": 3
+    },
+    {
+      "type": "trivia",
+      "text": "コンビニのおでんが\n始まったのは",
+      "speech": "第二位。コンビニのおでんが、始まったのは",
+      "image": "food_oden_daikon.png",
+      "answer": "1979年",
+      "note": "※セブンイレブンが始めた",
+      "rank": 2,
+      "no": 4,
+      "answerSpeech": "千九百七十九年"
+    },
+    {
+      "type": "trivia",
+      "text": "日本で\nコンビニより多いのは",
+      "speech": "第一位。日本で、コンビニより多いのは",
+      "image": "haisya.png",
+      "answer": "歯医者さん",
+      "note": "※コンビニ約5.6万店　歯科医院約6.6万か所",
+      "rank": 1,
+      "no": 5
+    },
+    {
+      "type": "trivia",
+      "text": "知ってたのは\nいくつ？\nコメントで教えて",
+      "speech": "知ってたのは、いくつ？コメントで教えて！",
+      "image": "fe_thinking_face.svg",
+      "chapter": "エンディング"
+    }
+  ],
+  "description": "9割が知らない、コンビニに隠された意外なヒミツをランキングで紹介！\n知ってたのはいくつ？コメントで教えてください。",
+  "hashtags": [
+    "雑学",
+    "豆知識",
+    "トリビア",
+    "コンビニ",
+    "Shorts"
+  ]
+}
