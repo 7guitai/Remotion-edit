@@ -1,0 +1,212 @@
+{
+  "note": "フリー素材カタログ。python3 scripts/download_footage.py で public/footage/ に取得する",
+  "items": [
+    {
+      "file": "moon_phases_2026_vertical.mp4",
+      "type": "video",
+      "ja": "2026年の月の満ち欠けと秤動（縦型1080×1920・日付入り）",
+      "title": "Moon Phase and Libration, 2026",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a005500/a005587/phases_2026_fancy_v1_1920p30.mp4",
+      "page": "https://svs.gsfc.nasa.gov/5587/",
+      "credit": "NASA's Scientific Visualization Studio",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "月",
+        "縦型"
+      ]
+    },
+    {
+      "file": "moon_phases_2026_1080p.mp4",
+      "type": "video",
+      "ja": "2026年の月の満ち欠けと秤動（横型1920×1080）",
+      "title": "Moon Phase and Libration, 2026",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a005500/a005587/phases_2026_fancy_1080p30.mp4",
+      "page": "https://svs.gsfc.nasa.gov/5587/",
+      "credit": "NASA's Scientific Visualization Studio",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "月"
+      ]
+    },
+    {
+      "file": "solar_eclipse_2026-08-12_vertical.mp4",
+      "type": "video",
+      "ja": "2026年8月12日の皆既日食・地球に落ちる月の影（縦型）",
+      "title": "Animations of the August 12, 2026, Total Solar Eclipse",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a005600/a005656/eclipse_202608_global_v_1920p30.mp4",
+      "page": "https://svs.gsfc.nasa.gov/5656/",
+      "credit": "NASA's Scientific Visualization Studio",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "日食",
+        "地球",
+        "縦型"
+      ]
+    },
+    {
+      "file": "ocean_tides_1080p.mp4",
+      "type": "video",
+      "ja": "地球全体の潮の満ち引きのシミュレーション",
+      "title": "Barotropic Global Ocean Tides",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004821/tides01_final_HD.mp4",
+      "page": "https://svs.gsfc.nasa.gov/4821/",
+      "credit": "NASA's Scientific Visualization Studio",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "海",
+        "潮"
+      ]
+    },
+    {
+      "file": "sun_sdo_171_1024.mp4",
+      "type": "video",
+      "ja": "太陽の4日間の活動（SDO衛星・正方形）",
+      "title": "Four Days of Solar Dynamics in 16 Minutes",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a005600/a005649/NOVA20260201_AIA.0171A_PSF_stamped_1024p30.mp4",
+      "page": "https://svs.gsfc.nasa.gov/5649/",
+      "credit": "NASA/SDO",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "太陽"
+      ]
+    },
+    {
+      "file": "earth_views_iss.mp4",
+      "type": "video",
+      "ja": "国際宇宙ステーションから見た地球（音楽なし）",
+      "title": "Earth Views from the ISS - No Music",
+      "url": "http://images-assets.nasa.gov/video/NHQ_2020_1221_Earth%20Views/NHQ_2020_1221_Earth%20Views~medium.mp4",
+      "page": "https://images.nasa.gov/details/NHQ_2020_1221_Earth%20Views",
+      "credit": "NASA",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "地球",
+        "宇宙ステーション"
+      ]
+    },
+    {
+      "file": "blue_marble_east.jpg",
+      "type": "image",
+      "ja": "青い地球（ブルーマーブル2012・東半球）",
+      "title": "Eastern Hemisphere - Blue Marble 2012",
+      "url": "http://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001788/GSFC_20171208_Archive_e001788~orig.jpg",
+      "page": "https://images.nasa.gov/details/GSFC_20171208_Archive_e001788",
+      "credit": "NASA",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "地球"
+      ]
+    },
+    {
+      "file": "earthrise_artemis2.jpg",
+      "type": "image",
+      "ja": "月の向こうから昇る地球（アルテミス2号・2026年）",
+      "title": "Artemis Era Earthrise",
+      "url": "http://images-assets.nasa.gov/image/art002e009280b/art002e009280b~large.jpg",
+      "page": "https://images.nasa.gov/details/art002e009280b",
+      "credit": "NASA",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "地球",
+        "月"
+      ]
+    },
+    {
+      "file": "hurricane_helene_iss.jpg",
+      "type": "image",
+      "ja": "宇宙ステーションから見たハリケーン",
+      "title": "Hurricane Helene pictured from the space station",
+      "url": "http://images-assets.nasa.gov/image/iss072e001649/iss072e001649~large.jpg",
+      "page": "https://images.nasa.gov/details/iss072e001649",
+      "credit": "NASA",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "天気",
+        "台風"
+      ]
+    },
+    {
+      "file": "earth_night_iss.jpg",
+      "type": "image",
+      "ja": "宇宙から見た夜の地球",
+      "title": "Night view of Earth taken by the Expedition 25 crew",
+      "url": "http://images-assets.nasa.gov/image/iss025e015176/iss025e015176~large.jpg",
+      "page": "https://images.nasa.gov/details/iss025e015176",
+      "credit": "NASA",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "地球",
+        "夜"
+      ]
+    },
+    {
+      "file": "aurora_from_space.jpg",
+      "type": "image",
+      "ja": "宇宙から見たオーロラ",
+      "title": "Auroras over North America as Seen from Space",
+      "url": "http://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001646/GSFC_20171208_Archive_e001646~large.jpg",
+      "page": "https://images.nasa.gov/details/GSFC_20171208_Archive_e001646",
+      "credit": "NASA",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "オーロラ"
+      ]
+    },
+    {
+      "file": "full_moon.jpg",
+      "type": "image",
+      "ja": "満月（ケネディ宇宙センターで撮影）",
+      "title": "Creative Photography - Full Blue Moon",
+      "url": "http://images-assets.nasa.gov/image/KSC-20240819-PH-JBS01_0009/KSC-20240819-PH-JBS01_0009~large.jpg",
+      "page": "https://images.nasa.gov/details/KSC-20240819-PH-JBS01_0009",
+      "credit": "NASA/Ben Smegelsky",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "月"
+      ]
+    },
+    {
+      "file": "moon_texture_2k.jpg",
+      "type": "texture",
+      "ja": "月の表面の全体図（回る月を作る用・2048×1024）",
+      "title": "CGI Moon Kit",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg",
+      "page": "https://svs.gsfc.nasa.gov/4720/",
+      "credit": "NASA's Scientific Visualization Studio",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "月",
+        "テクスチャ"
+      ]
+    },
+    {
+      "file": "earth_texture_5400.jpg",
+      "type": "texture",
+      "ja": "地球の全体図（回る地球を作る用・ブルーマーブル 5400×2700）",
+      "title": "Blue Marble Next Generation (December 2004)",
+      "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x5400x2700.jpg",
+      "page": "https://visibleearth.nasa.gov/images/74218",
+      "credit": "NASA Earth Observatory",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "地球",
+        "テクスチャ"
+      ]
+    },
+    {
+      "file": "earth_night_texture.jpg",
+      "type": "texture",
+      "ja": "夜の地球の全体図（街の明かり・ブラックマーブル）",
+      "title": "Earth at Night (Black Marble 2012)",
+      "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/79000/79765/dnb_land_ocean_ice.2012.3600x1800.jpg",
+      "page": "https://visibleearth.nasa.gov/images/79765",
+      "credit": "NASA Earth Observatory/NOAA NGDC",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "地球",
+        "夜",
+        "テクスチャ"
+      ]
+    }
+  ]
+}
