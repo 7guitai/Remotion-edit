@@ -5,6 +5,7 @@ import loveTriviaShort from "./love-trivia-short.json";
 import moneyTriviaShort from "./money-trivia-short.json";
 import savings2chShort from "./savings-2ch-short.json";
 import sleepTrivia1h from "./sleep-trivia-1h.json";
+import thingsRankingShort from "./things-ranking-short.json";
 import chargerPowerSplit from "./charger-power-split.json";
 import coffeeTriviaShort from "./coffee-trivia-short.json";
 import japanTriviaShort from "./japan-trivia-short.json";
@@ -75,6 +76,8 @@ export type TriviaSlide = {
   answer?: string;
   answerSpeech?: string;
   note?: string;
+  // ランキングの順位（派手版で「第○位」のステッカーを出す）
+  rank?: number;
   // 答えのあとに読み上げる解説（画面には答えの下に小さく出す）
   explain?: string;
   explainSpeech?: string;
@@ -133,6 +136,8 @@ export type Episode = {
   slideGap?: number;
   // ずっと流す環境音（雨の音など）
   ambient?: { file: string; volume: number; name: string };
+  // 1ページ1雑学で、振りを読み終えてから答えを出すまでの間（フレーム。省略時は 30）
+  answerPause?: number;
   // BGM の音量（省略時は theme.ts の BGM_VOLUME）
   bgmVolume?: number;
   // 背景色（省略時は白）
@@ -166,6 +171,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  thingsRankingShort as Episode,
   sleepTrivia1h as Episode,
   moneyTriviaLong as Episode,
   japanTriviaShort as Episode,

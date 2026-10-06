@@ -125,7 +125,8 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
         const answerSeconds = hasAnswer
           ? await getAudioDurationInSeconds(staticFile(answerPath))
           : 1 + (slide.answerSpeech ?? slide.answer).length * 0.13;
-        const answerStart = LEAD_IN + voiceFrames + ANSWER_PAUSE;
+        const answerStart =
+          LEAD_IN + voiceFrames + (episode.answerPause ?? ANSWER_PAUSE);
         const answerEnd = answerStart + Math.ceil(answerSeconds * FPS);
         const explainPath = voicePath.replace(".wav", "-explain.wav");
         const hasExplain = slide.explain ? await exists(explainPath) : false;

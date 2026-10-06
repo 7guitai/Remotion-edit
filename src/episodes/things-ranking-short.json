@@ -1,0 +1,134 @@
+{
+  "id": "things-ranking-short",
+  "title": "9割が知らない 身近なモノのヒミツ ランキング",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "flashy",
+  "bgmVolume": 0.14,
+  "answerPause": 15,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.25,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "summer_triangle.mp3",
+    "title": "SUMMER TRIANGLE",
+    "credit": "しゃろう",
+    "page": "https://opentracks.com/bgm/detail/12983",
+    "opentracks": 12983
+  },
+  "illustrations": {
+    "bunbougu_enpitsu.png": {
+      "emoji": "✨",
+      "irasutoya": "鉛筆のイラスト（文房具）",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwsZOXdGwxCsXDak85njrvADLfsq2yorYX7wjJ7V2S3O-SG_UkuJ7E68fs43R1Bl0VaSSCBPfdGG9qsvZudjzeYwthEAoOW-tfTTlE_n2OHVvjB821BVfuME__j7jgK1nDYiMzkbBxmAh5/s800/bunbougu_enpitsu.png"
+    },
+    "can_juice.png": {
+      "emoji": "✨",
+      "irasutoya": "缶ジュースのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiS0UW381yMfEH1dGG0IrKwnkElf3AeI1sEzDnii_HEbXkBvcC70Y1jodKl9KTvDXwMO77Tr0FGsNZVNmkKl2PNwnsgAabXtjzKYyWc-YzIe10CmBT2kn-Xk6bgNQJLOH3u_UNBP0z6wQhR/s800/can_juice.png"
+    },
+    "cooking_microwave.png": {
+      "emoji": "✨",
+      "irasutoya": "調理器具のイラスト「電子レンジ」",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4C9ol5y1_N47oUeNzOjTjwMnuFvaaHN6DVKh_q_yc11ToRxFIDTkXAo8gLm1Ttx7asN9_duSw8uBW_xgKsvmcITmh5ivmiEo4ABZ92XswUs3ifMuVXQGgO_FquH3rmap6QgP0hobv4Erl/s800/cooking_microwave.png"
+    },
+    "shopping_hair_shampoo_rinse_machigae.png": {
+      "emoji": "✨",
+      "irasutoya": "シャンプーとリンスを買い間違えた人のイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVQQ9SFnjxycBG-Tm0X9RzDpaFiAwWcUgNe0LgYuDR-hAEIEOJFuamRws-gQBLmlBiKgVM3K9aRjFU6LvsSlluUckZQQ2_AQxlsiIFmXw_F0xBfGs1scvprLEG0FyRvGQ3CBmSOeFWhEnx/s800/shopping_hair_shampoo_rinse_machigae.png"
+    },
+    "drink_milk_pack.png": {
+      "emoji": "✨",
+      "irasutoya": "牛乳パックのイラスト",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6Kw9nxhMhbvZv9Qdmtu-QLqCBtUUfgrf1FuBkR22805MEQove4mzB_UfFrH4JCfCRzFzUNRF6EShMSaoqlnbXXfsR2Ss7WWYIRxRroYcIorl9-ac5Z2qhtzMlL7lXjg026chNiAIcDJh-/s800/drink_milk_pack.png"
+    },
+    "fe_exploding_head.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Exploding head」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Exploding%20head/Color/exploding_head_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_thinking_face.svg": {
+      "emoji": "✨",
+      "irasutoya": "Fluent Emoji「Thinking face」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Thinking%20face/Color/thinking_face_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    }
+  },
+  "slides": [
+    {
+      "type": "trivia",
+      "text": "9割が知らない\n身近なモノの\nヒミツ",
+      "speech": "九割が知らない、身近なモノのヒミツ。一位は、知ると優しくなれる",
+      "image": "fe_exploding_head.svg"
+    },
+    {
+      "type": "trivia",
+      "text": "鉛筆が六角形なのは",
+      "image": "bunbougu_enpitsu.png",
+      "answer": "転がりにくく\n持ちやすいから",
+      "note": "※3本の指で持つのにぴったり",
+      "rank": 5,
+      "no": 1,
+      "speech": "第五位。鉛筆が六角形なのは"
+    },
+    {
+      "type": "trivia",
+      "text": "缶ジュースの底が\nへこんでいるのは",
+      "speech": "第四位。缶ジュースの底が、へこんでいるのは",
+      "image": "can_juice.png",
+      "answer": "中からの圧力に\n強くするため",
+      "note": "※平らだとふくらんでしまう",
+      "rank": 4,
+      "no": 2
+    },
+    {
+      "type": "trivia",
+      "text": "電子レンジが\n「チン」と鳴るのは",
+      "speech": "第三位。電子レンジが、チンと鳴るのは",
+      "image": "cooking_microwave.png",
+      "answer": "昔はベルが\n付いていたから",
+      "note": "※その名残で今も「チン」",
+      "rank": 3,
+      "no": 3
+    },
+    {
+      "type": "trivia",
+      "text": "シャンプーの\nギザギザは",
+      "speech": "第二位。シャンプーの、ギザギザは",
+      "image": "shopping_hair_shampoo_rinse_machigae.png",
+      "answer": "目が不自由な人が\nリンスと区別するため",
+      "note": "※日本で生まれて世界に広がった工夫",
+      "rank": 2,
+      "no": 4
+    },
+    {
+      "type": "trivia",
+      "text": "牛乳パックの上の\n小さな切り込みは",
+      "speech": "第一位。牛乳パックの上の、小さな切り込みは",
+      "image": "drink_milk_pack.png",
+      "answer": "目が不自由な人が\n牛乳だと分かるため",
+      "note": "※開け口の反対側に付いている",
+      "rank": 1,
+      "no": 5
+    },
+    {
+      "type": "trivia",
+      "text": "知ってたのは\nいくつ？\nコメントで教えて",
+      "speech": "知ってたのは、いくつ？コメントで教えて！",
+      "image": "fe_thinking_face.svg",
+      "chapter": "エンディング"
+    }
+  ],
+  "description": "9割が知らない、身近なモノに隠された意外な理由をランキングで紹介！\n知ってたのはいくつ？コメントで教えてください。",
+  "hashtags": [
+    "雑学",
+    "豆知識",
+    "トリビア",
+    "ランキング",
+    "Shorts"
+  ]
+}

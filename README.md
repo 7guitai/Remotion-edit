@@ -13,6 +13,7 @@
 | `money-trivia-long` | 知っておきたい お金の雑学62選（横長・1ページ1雑学＋解説、全6章） | 約9分58秒 |
 | `animal-trivia-long` | 寝る前に聞きたい 動物の雑学63選（横長・1ページ1雑学＋解説、全6章） | 約8分44秒 |
 | `savings-2ch-short` | 【2ch風】貯金1000万貯めて分かったこと（縦型ショート・スレ風の見出し＋レス） | 約52秒 |
+| `things-ranking-short` | 9割が知らない 身近なモノのヒミツ ランキング（縦型ショート・派手な編集・第5位〜第1位） | 約38秒 |
 | `japan-trivia-short` | 日本の雑学7選（縦型ショート・派手な編集） | 約36秒 |
 | `body-trivia-short` | 体の雑学7選（縦型ショート・派手な編集） | 約36秒 |
 | `coffee-trivia-short` | コーヒーの雑学7選（10月1日のコーヒーの日。縦型ショート・1ページ1雑学） | 約45秒 |
@@ -45,6 +46,7 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 | `fps` | フレームレート（省略時は 30）。動きの少ない長時間動画は 10 などに下げると書き出しが速い |
 | `slideGap` | 読み上げのあとに入れる間（フレーム）。睡眠用は全体の長さに合わせて調整する |
 | `ambient` | ずっと流す環境音 `{file, volume, name}`（`public/sfx/`。雨の音は `python3 scripts/make_ambient.py` で合成） |
+| `answerPause` | 1ページ1雑学で、振りから答えまでの間（フレーム。省略時は 30）。テンポを上げたいショートは 15 前後 |
 | `bgmVolume` | BGM の音量（省略時は 0.12） |
 | `titleBand` | `false` でショート上部のタイトル帯を消す |
 | `background` | 背景色（省略時は白） |

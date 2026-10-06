@@ -252,8 +252,20 @@ export const FlashyTriviaPage: React.FC<{
               transform: `rotate(-12deg) scale(${interpolate(setupPop, [0, 1], [0, 1])})`,
             }}
           >
-            <div style={{ fontSize: 34, lineHeight: 1 }}>雑学</div>
-            <div style={{ fontSize: 72, lineHeight: 1 }}>{resolved.no}</div>
+            {slide.rank !== undefined ? (
+              <div style={{ display: "flex", alignItems: "baseline" }}>
+                <span style={{ fontSize: 36 }}>第</span>
+                <span style={{ fontSize: 88, lineHeight: 1 }}>
+                  {slide.rank}
+                </span>
+                <span style={{ fontSize: 36 }}>位</span>
+              </div>
+            ) : (
+              <>
+                <div style={{ fontSize: 34, lineHeight: 1 }}>雑学</div>
+                <div style={{ fontSize: 72, lineHeight: 1 }}>{resolved.no}</div>
+              </>
+            )}
           </div>
         ) : null}
 

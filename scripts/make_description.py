@@ -28,7 +28,9 @@ def seconds(voice: Path) -> float:
 REPLY_GAP = 10  # 2ch風：見出しとレス、レスとレスの間
 
 
-def slide_frames(voice: Path, slide: dict, gap: int = TAIL, fps: int = FPS) -> int:
+def slide_frames(
+    voice: Path, slide: dict, gap: int = TAIL, fps: int = FPS, pause: int = ANSWER_PAUSE
+) -> int:
     if slide.get("type") == "thread":
         cursor = LEAD_IN + math.ceil(seconds(voice) * FPS)
         for k in range(len(slide.get("replies", []))):
@@ -37,7 +39,7 @@ def slide_frames(voice: Path, slide: dict, gap: int = TAIL, fps: int = FPS) -> i
         return cursor + ANSWER_TAIL
     if slide.get("type") == "trivia" and slide.get("answer"):
         answer = voice.with_name(voice.stem + "-answer.wav")
-        start = LEAD_IN + math.ceil(seconds(voice) * FPS) + ANSWER_PAUSE
+        start = LEAD_IN + math.ceil(seconds(voice) * FPS) + pause
         end = start + math.ceil(seconds(answer) * FPS)
         if slide.get("explain"):
             explain = voice.with_name(voice.stem + "-explain.wav")
@@ -69,7 +71,7 @@ def main() -> None:
     for i, slide in enumerate(ep["slides"]):
         if slide.get("chapter"):
             chapters.append(f"{timestamp(frame, fps)} {slide['chapter']}")
-        frame += slide_frames(voice_dir / f"{i:03d}.wav", slide, gap, fps)
+        frame += slide_frames(voice_dir / f"{i:03d}.wav", slide, gap, fps, ep.get("answerPause", ANSWER_PAUSE))
 
     lines = []
     if ep.get("pr"):
