@@ -1,0 +1,179 @@
+{
+  "id": "whatif-moon-short",
+  "title": "もし月がなくなったら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "headline": [
+    "もし月が",
+    "なくなったら？"
+  ],
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.12,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "uchuuhikoushi.mp3",
+    "title": "宇宙飛行士が最後に見たもの",
+    "credit": "しゃろう",
+    "page": "https://opentracks.com/bgm/detail/9706",
+    "opentracks": 9706
+  },
+  "illustrations": {
+    "fe_full_moon.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Full moon」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Full%20moon/Color/full_moon_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_night_with_stars.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Night with stars」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Night%20with%20stars/Color/night_with_stars_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_water_wave.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Water wave」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Water%20wave/Color/water_wave_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_sun.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Sun」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Sun/Color/sun_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_coral.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Coral」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Coral/Color/coral_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_globe_showing_asia_australia.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Globe showing asia-australia」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Globe%20showing%20asia-australia/Color/globe_showing_asia-australia_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_thermometer.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Thermometer」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Thermometer/Color/thermometer_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_new_moon.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「New moon」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/New%20moon/Color/new_moon_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_full_moon_face.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Full moon face」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Full%20moon%20face/Color/full_moon_face_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_thinking_face.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Thinking face」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Thinking%20face/Color/thinking_face_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    }
+  },
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、ある日突然、月がなくなったら、どうなるのか？",
+      "effect": "zoom",
+      "bg": "space",
+      "image": "fe_full_moon.svg"
+    },
+    {
+      "type": "whatif",
+      "text": "まず、夜がとても暗くなる。",
+      "effect": "dark",
+      "bg": "night",
+      "image": "fe_full_moon.svg"
+    },
+    {
+      "type": "whatif",
+      "text": "月明かりがなくなって、星の光だけの、真っ暗な夜になるんだ。",
+      "effect": "dark",
+      "bg": "night",
+      "image": "fe_night_with_stars.svg"
+    },
+    {
+      "type": "whatif",
+      "text": "次に、海の満ち引きが、小さくなる。",
+      "effect": "flood",
+      "bg": "sea",
+      "image": "fe_water_wave.svg"
+    },
+    {
+      "type": "whatif",
+      "text": "太陽の力の分だけは残るから、満ち引きは、およそ3分の1に。",
+      "effect": "zoom",
+      "bg": "space",
+      "image": "fe_sun.svg",
+      "big": "約3分の1",
+      "speech": "太陽の力の分だけは残るから、みちひきは、およそ三分の一に。"
+    },
+    {
+      "type": "whatif",
+      "text": "満月に合わせて卵を産む、サンゴのような生き物も、困ってしまう。",
+      "effect": "zoom",
+      "bg": "sea",
+      "image": "fe_coral.svg"
+    },
+    {
+      "type": "whatif",
+      "text": "さらに、地球の傾きが安定しなくなり、気候が大きく変わるかもしれない。",
+      "effect": "flip",
+      "bg": "space",
+      "image": "fe_globe_showing_asia_australia.svg"
+    },
+    {
+      "type": "whatif",
+      "text": "暑すぎる時代や、寒すぎる時代が、くり返し来るとも考えられているんだ。",
+      "effect": "shake",
+      "bg": "sky",
+      "image": "fe_thermometer.svg"
+    },
+    {
+      "type": "whatif",
+      "text": "それから、日食も月食も、もう二度と見られなくなる。",
+      "effect": "dark",
+      "bg": "space",
+      "image": "fe_new_moon.svg"
+    },
+    {
+      "type": "whatif",
+      "text": "月はいつもそばで、地球を支えてくれているんだね。",
+      "effect": "zoom",
+      "bg": "space",
+      "image": "fe_full_moon_face.svg"
+    },
+    {
+      "type": "whatif",
+      "text": "ほかに知りたい「もしも」は、コメントで教えて！",
+      "effect": "zoom",
+      "bg": "space",
+      "image": "fe_thinking_face.svg",
+      "speech": "ほかに知りたい、もしもは、コメントで教えて！"
+    }
+  ],
+  "description": "もしある日突然、月がなくなったら、地球はどうなるのか？科学的に考えてみました。\nほかに知りたい「もしも」は、コメントで教えてください！",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "宇宙",
+    "月",
+    "Shorts"
+  ]
+}

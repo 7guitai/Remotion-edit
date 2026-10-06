@@ -6,6 +6,8 @@ import moneyTriviaShort from "./money-trivia-short.json";
 import savings2chShort from "./savings-2ch-short.json";
 import sleepTrivia1h from "./sleep-trivia-1h.json";
 import thingsRankingShort from "./things-ranking-short.json";
+import whatifRotationShort from "./whatif-rotation-short.json";
+import whatifMoonShort from "./whatif-moon-short.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -105,6 +107,21 @@ export type SleepSlide = {
   speech: string;
 };
 
+// 「もしも」動画の1場面：text を読み上げ（speech があればそちら）、字幕は句読点ごとに切り替える
+export type WhatIfSlide = {
+  type: "whatif";
+  text: string;
+  speech?: string;
+  image?: string;
+  imageSize?: number;
+  // 背景（space=宇宙 / night=夜 / sky=空 / sea=海）
+  bg?: "space" | "night" | "sky" | "sea";
+  // 演出（zoom=寄る / spin=回る / stop=急に止まる / shake=揺れる / wind=暴風 / flood=水が上がる / dark=暗くなる / arrows=矢印 / half=昼と夜 / flip=傾く）
+  effect?: "zoom" | "spin" | "stop" | "shake" | "wind" | "flood" | "dark" | "arrows" | "half" | "flip";
+  // 映像の上に出す黄色いラベル（数字など）
+  big?: string;
+};
+
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
 // no を付けたスライドから次の chapter まで、画面左上に「雑学 No.○」を表示する。
 // テロップの **〜** は強調表示（読み上げでは記号を除く）
@@ -117,6 +134,7 @@ export type ScriptSlide = (
   | TriviaSlide
   | ThreadSlide
   | SleepSlide
+  | WhatIfSlide
 ) & {
   chapter?: string;
   no?: number;
@@ -132,7 +150,9 @@ export type Episode = {
   // ショートの上部のタイトル帯（省略時は表示）
   titleBand?: boolean;
   // "flashy" で1ページ1雑学を派手な編集にする（集中線・叩きつけ文字・フラッシュ・揺れ・効果音）
-  style?: "flashy" | "sleep";
+  style?: "flashy" | "sleep" | "whatif";
+  // 「もしも」動画の上の黒帯に出し続けるタイトル（2行）
+  headline?: string[];
   // フレームレート（省略時は 30）。動きの少ない長時間動画は下げると書き出しが速い
   fps?: number;
   // 各スライドの読み上げのあとに入れる間（フレーム。省略時は 12）
@@ -174,6 +194,8 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  whatifRotationShort as Episode,
+  whatifMoonShort as Episode,
   foodRankingShort as Episode,
   bodyRankingShort as Episode,
   konbiniRankingShort as Episode,

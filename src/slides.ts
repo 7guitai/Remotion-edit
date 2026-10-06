@@ -22,6 +22,8 @@ export type ResolvedSlide = {
   hasImage: boolean;
   voice: string | null;
   voiceStart: number;
+  // 読み上げの長さ（フレーム）。字幕の切り替えに使う
+  voiceFrames: number;
   // 1ページ1雑学の答え（表示と読み上げを始めるフレーム）
   answerVoice: string | null;
   answerStart: number | null;
@@ -92,6 +94,7 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
         voiceStart: LEAD_IN,
         no: numbers[i],
         total,
+        voiceFrames,
         replies: [] as { voice: string | null; start: number }[],
         flashy: episode.style === "flashy",
       };
@@ -155,6 +158,7 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
         hasImage: image ? await exists(`illustrations/${image}`) : false,
         voice: hasVoice ? voicePath : null,
         voiceStart: LEAD_IN,
+        voiceFrames,
         replies: [],
         flashy: episode.style === "flashy",
         answerVoice: null,

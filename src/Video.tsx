@@ -14,6 +14,7 @@ import { COUNTDOWN, ResolvedSlide, VideoProps } from "./slides";
 import { AccentContext, BGM_VOLUME, COLORS, fontFamily } from "./theme";
 import { TitleBand } from "./components/TitleBand";
 import { SleepBackground } from "./components/SleepPage";
+import { WhatIfHeadline } from "./components/WhatIfPage";
 
 export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
   const episode = getEpisode(episodeId);
@@ -40,6 +41,9 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
         style={{ backgroundColor: episode.background ?? COLORS.background }}
       >
         {episode.style === "sleep" ? <SleepBackground /> : null}
+        {episode.style === "whatif" ? (
+          <WhatIfHeadline lines={episode.headline ?? [episode.title]} />
+        ) : null}
         <Series>
           {slides.map((s, i) => (
             <Series.Sequence key={i} durationInFrames={s.durationInFrames}>
