@@ -117,9 +117,15 @@ export type WhatIfSlide = {
   // 背景（space=宇宙 / night=夜 / sky=空 / sea=海）
   bg?: "space" | "night" | "sky" | "sea";
   // 演出（zoom=寄る / spin=回る / stop=急に止まる / shake=揺れる / wind=暴風 / flood=水が上がる / dark=暗くなる / arrows=矢印 / half=昼と夜 / flip=傾く）
-  effect?: "zoom" | "spin" | "stop" | "shake" | "wind" | "flood" | "dark" | "arrows" | "half" | "flip";
+  effect?: "none" | "zoom" | "spin" | "stop" | "shake" | "wind" | "flood" | "dark" | "arrows" | "half" | "flip";
   // 映像の上に出す黄色いラベル（数字など）
   big?: string;
+  // 本物の写真の回る地球・月（NASA の地図画像を3Dの球に貼る）
+  globe?: import("../components/Globe").GlobeProps;
+  // NASA などの動画（public/footage/）。start は使い始める秒、zoom と focus で切り抜く
+  footage?: { file: string; start?: number; zoom?: number; focus?: [number, number] };
+  // NASA などの写真（public/footage/）。ゆっくり寄りながら見せる
+  photo?: { file: string; zoom?: number; focus?: [number, number] };
 };
 
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。

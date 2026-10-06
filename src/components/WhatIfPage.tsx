@@ -2,6 +2,7 @@ import React from "react";
 import {
   AbsoluteFill,
   Img,
+  OffthreadVideo,
   interpolate,
   random,
   spring,
@@ -12,6 +13,7 @@ import {
 import { WhatIfSlide } from "../episodes";
 import { fontFamily } from "../theme";
 import { charWidth } from "./ThreadPage";
+import { Globe } from "./Globe";
 
 // 画面の配置（1080×1920）：上の黒帯にタイトル、真ん中が映像、下は黒
 export const VIEW = { top: 520, height: 1000 };
@@ -201,8 +203,17 @@ const splitCaption = (text: string): string[] => {
   const mid = text.length / 2;
   let best = Math.round(mid);
   let bestDist = Infinity;
+  // 「」の中では区切らない
+  let depth = 0;
   [...text].forEach((ch, i) => {
-    if (i > 2 && i < text.length - 2 && "はがをにでともへやのて".includes(ch)) {
+    if (ch === "「") depth++;
+    if (ch === "」") depth--;
+    if (
+      depth === 0 &&
+      i > 2 &&
+      i < text.length - 2 &&
+      "はがをにでともへやのて」".includes(ch)
+    ) {
       const d = Math.abs(i + 1 - mid);
       if (d < bestDist) {
         bestDist = d;
@@ -332,6 +343,41 @@ export const WhatIfPage: React.FC<{
                 "linear-gradient(90deg, rgba(255,230,140,0.35) 0%, rgba(255,230,140,0.35) 50%, rgba(0,0,30,0.75) 50%)",
             }}
           />
+        ) : null}
+        {slide.footage ? (
+          <AbsoluteFill
+            style={{
+              transform: `scale(${(slide.footage.zoom ?? 1) * interpolate(frame, [0, durationInFrames], [1, 1.06])})`,
+              transformOrigin: `${(slide.footage.focus ?? [0.5, 0.5])[0] * 100}% ${(slide.footage.focus ?? [0.5, 0.5])[1] * 100}%`,
+            }}
+          >
+            <OffthreadVideo
+              src={staticFile(`footage/${slide.footage.file}`)}
+              startFrom={Math.round((slide.footage.start ?? 0) * fps)}
+              muted
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </AbsoluteFill>
+        ) : null}
+        {slide.photo ? (
+          <AbsoluteFill
+            style={{
+              transform: `scale(${(slide.photo.zoom ?? 1) * interpolate(frame, [0, durationInFrames], [1, 1.15])})`,
+              transformOrigin: `${(slide.photo.focus ?? [0.5, 0.5])[0] * 100}% ${(slide.photo.focus ?? [0.5, 0.5])[1] * 100}%`,
+            }}
+          >
+            <Img
+              src={staticFile(`footage/${slide.photo.file}`)}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </AbsoluteFill>
+        ) : null}
+        {slide.globe ? (
+          <AbsoluteFill
+            style={{ transform: `translate(0, -60px) scale(${scale})` }}
+          >
+            <Globe {...slide.globe} width={1080} height={VIEW.height} />
+          </AbsoluteFill>
         ) : null}
         <AbsoluteFill
           style={{ justifyContent: "center", alignItems: "center" }}

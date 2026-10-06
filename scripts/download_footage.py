@@ -5,6 +5,8 @@
   python3 scripts/download_footage.py 月 地球     # タグで絞り込み
 
 素材はファイルが大きいので Git には含めない（.gitignore で除外）。
+長い動画は clips に書いた部分だけを短いクリップ（音なし）に切り出す。長い動画の後ろの方を
+Remotion で直接読むと時間切れになることがあるため。
 """
 
 import json
@@ -33,6 +35,25 @@ def fetch(url: str, out: Path) -> None:
             time.sleep(2 * (attempt + 1))
 
 
+def cut(src: Path, clip: dict) -> None:
+    """imageio-ffmpeg の ffmpeg で、start 秒から duration 秒を切り出す（キーフレームを細かく入れ直す）"""
+    import subprocess
+
+    import imageio_ffmpeg
+
+    out = OUT / clip["file"]
+    if out.exists():
+        print(f"  skip  {clip['file']}")
+        return
+    subprocess.run(
+        [imageio_ffmpeg.get_ffmpeg_exe(), "-v", "error", "-y", "-ss", str(clip["start"]), "-i", str(src),
+         "-t", str(clip["duration"]), "-an", "-c:v", "libx264", "-crf", "18", "-g", "15",
+         "-pix_fmt", "yuv420p", str(out)],
+        check=True,
+    )
+    print(f"  cut   {clip['file']}  {clip['ja']}")
+
+
 def main() -> None:
     tags = set(sys.argv[1:])
     OUT.mkdir(parents=True, exist_ok=True)
@@ -42,9 +63,11 @@ def main() -> None:
         out = OUT / item["file"]
         if out.exists():
             print(f"  skip  {item['file']}")
-            continue
-        fetch(item["url"], out)
-        print(f"  saved {item['file']}  {out.stat().st_size / 1e6:.1f}MB  {item['ja']}")
+        else:
+            fetch(item["url"], out)
+            print(f"  saved {item['file']}  {out.stat().st_size / 1e6:.1f}MB  {item['ja']}")
+        for clip in item.get("clips", []):
+            cut(out, clip)
 
 
 if __name__ == "__main__":

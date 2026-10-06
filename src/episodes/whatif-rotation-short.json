@@ -24,137 +24,139 @@
     "page": "https://opentracks.com/bgm/detail/9706",
     "opentracks": 9706
   },
-  "illustrations": {
-    "fe_globe_showing_asia_australia.svg": {
-      "emoji": "🌍",
-      "irasutoya": "Fluent Emoji「Globe showing asia-australia」",
-      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Globe%20showing%20asia-australia/Color/globe_showing_asia-australia_color.svg",
-      "credit": "Microsoft Fluent Emoji（MIT License）"
-    },
-    "fe_cityscape.svg": {
-      "emoji": "🌍",
-      "irasutoya": "Fluent Emoji「Cityscape」",
-      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Cityscape/Color/cityscape_color.svg",
-      "credit": "Microsoft Fluent Emoji（MIT License）"
-    },
-    "fe_tornado.svg": {
-      "emoji": "🌍",
-      "irasutoya": "Fluent Emoji「Tornado」",
-      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Tornado/Color/tornado_color.svg",
-      "credit": "Microsoft Fluent Emoji（MIT License）"
-    },
-    "fe_water_wave.svg": {
-      "emoji": "🌍",
-      "irasutoya": "Fluent Emoji「Water wave」",
-      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Water%20wave/Color/water_wave_color.svg",
-      "credit": "Microsoft Fluent Emoji（MIT License）"
-    },
-    "fe_sun.svg": {
-      "emoji": "🌍",
-      "irasutoya": "Fluent Emoji「Sun」",
-      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Sun/Color/sun_color.svg",
-      "credit": "Microsoft Fluent Emoji（MIT License）"
-    },
-    "fe_thinking_face.svg": {
-      "emoji": "🌍",
-      "irasutoya": "Fluent Emoji「Thinking face」",
-      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Thinking%20face/Color/thinking_face_color.svg",
-      "credit": "Microsoft Fluent Emoji（MIT License）"
-    }
-  },
+  "illustrations": {},
   "slides": [
     {
       "type": "whatif",
       "text": "もし、地球の自転が急に止まったら、どうなるのか？",
-      "effect": "spin",
+      "effect": "zoom",
       "bg": "space",
-      "image": "fe_globe_showing_asia_australia.svg"
+      "globe": {
+        "texture": "earth",
+        "speed": 1.2
+      }
     },
     {
       "type": "whatif",
       "text": "地球は今も、ものすごい速さで回っている。",
-      "effect": "spin",
+      "effect": "none",
       "bg": "space",
-      "image": "fe_globe_showing_asia_australia.svg"
+      "globe": {
+        "texture": "earth",
+        "speed": 4
+      }
     },
     {
       "type": "whatif",
       "text": "赤道のあたりでは、時速およそ1700キロ。音より速いんだ。",
-      "effect": "zoom",
+      "effect": "none",
       "bg": "space",
-      "image": "fe_globe_showing_asia_australia.svg",
       "big": "時速約1700km",
-      "speech": "赤道のあたりでは、時速およそ千七百キロ。音より速いんだ。"
+      "speech": "赤道のあたりでは、時速およそ千七百キロ。音より速いんだ。",
+      "globe": {
+        "texture": "earth",
+        "speed": 1.2,
+        "size": 1.25
+      }
     },
     {
       "type": "whatif",
       "text": "その回転が、急ブレーキで止まると、",
       "effect": "stop",
       "bg": "space",
-      "image": "fe_globe_showing_asia_australia.svg"
+      "globe": {
+        "texture": "earth",
+        "speed": 5,
+        "stopAt": 24
+      }
     },
     {
       "type": "whatif",
       "text": "地面の上のものは、勢いのまま、東へ吹き飛ばされる。",
       "effect": "wind",
-      "bg": "sky",
-      "image": "fe_cityscape.svg"
+      "bg": "space",
+      "footage": {
+        "file": "iss_land.mp4",
+        "start": 1
+      }
     },
     {
       "type": "whatif",
       "text": "空気も同じ速さで動いているから、とてつもない暴風が地球を襲う。",
       "effect": "wind",
-      "bg": "sky",
-      "image": "fe_tornado.svg"
+      "bg": "space",
+      "footage": {
+        "file": "iss_storm.mp4",
+        "start": 1
+      }
     },
     {
       "type": "whatif",
       "text": "海の水も止まれずに、巨大な津波になって、陸へ押し寄せる。",
       "effect": "flood",
-      "bg": "sea",
-      "image": "fe_water_wave.svg",
-      "speech": "海の水もとまれずに、巨大な津波になって、陸へ押し寄せる。"
+      "bg": "space",
+      "speech": "海の水もとまれずに、巨大な津波になって、陸へ押し寄せる。",
+      "footage": {
+        "file": "iss_ocean.mp4",
+        "start": 1
+      }
     },
     {
       "type": "whatif",
       "text": "もし生き残れても、1日の長さが、1年になってしまう。",
-      "effect": "half",
+      "effect": "none",
       "bg": "space",
-      "image": "fe_sun.svg",
       "big": "1日＝1年",
-      "speech": "もし生き残れても、一日の長さが、一年になってしまう。"
+      "speech": "もし生き残れても、一日の長さが、一年になってしまう。",
+      "globe": {
+        "texture": "earth",
+        "speed": 0.15
+      }
     },
     {
       "type": "whatif",
       "text": "昼が約半年、夜も約半年、続くんだ。",
-      "effect": "half",
+      "effect": "none",
       "bg": "space",
-      "image": "fe_globe_showing_asia_australia.svg"
+      "globe": {
+        "texture": "earth_night",
+        "speed": 0.3
+      }
     },
     {
       "type": "whatif",
       "text": "さらに、海の水は北と南へ動いて、赤道には、巨大な大陸が現れる。",
       "effect": "arrows",
       "bg": "space",
-      "image": "fe_globe_showing_asia_australia.svg"
+      "globe": {
+        "texture": "earth",
+        "speed": 0.6,
+        "tilt": 0
+      }
     },
     {
       "type": "whatif",
       "text": "でも安心して。地球の自転が急に止まることは、ないと考えられている。",
-      "effect": "spin",
+      "effect": "none",
       "bg": "space",
-      "image": "fe_globe_showing_asia_australia.svg"
+      "photo": {
+        "file": "blue_marble_east.jpg",
+        "zoom": 1.05
+      }
     },
     {
       "type": "whatif",
       "text": "ほかに知りたい「もしも」は、コメントで教えて！",
       "effect": "zoom",
       "bg": "space",
-      "image": "fe_thinking_face.svg",
-      "speech": "ほかに知りたい、もしもは、コメントで教えて！"
+      "speech": "ほかに知りたい、もしもは、コメントで教えて！",
+      "globe": {
+        "texture": "earth",
+        "speed": 1.5
+      }
     }
   ],
-  "description": "もし地球の自転が急に止まったら、いったい何が起きるのか？科学的に考えてみました。\nほかに知りたい「もしも」は、コメントで教えてください！",
+  "description": "もし地球の自転が急に止まったら、いったい何が起きるのか？科学的に考えてみました。\nほかに知りたい「もしも」は、コメントで教えてください！\n映像・画像：NASA",
   "hashtags": [
     "もしも",
     "雑学",

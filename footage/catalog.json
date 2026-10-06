@@ -82,6 +82,26 @@
       "tags": [
         "地球",
         "宇宙ステーション"
+      ],
+      "clips": [
+        {
+          "file": "iss_land.mp4",
+          "start": 240,
+          "duration": 20,
+          "ja": "陸地の上を飛ぶ"
+        },
+        {
+          "file": "iss_storm.mp4",
+          "start": 2200,
+          "duration": 20,
+          "ja": "大きな雲の渦"
+        },
+        {
+          "file": "iss_ocean.mp4",
+          "start": 1800,
+          "duration": 20,
+          "ja": "青い海の上を飛ぶ"
+        }
       ]
     },
     {
