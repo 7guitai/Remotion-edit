@@ -322,6 +322,27 @@ export const WhatIfPage: React.FC<{
           extrapolateRight: "clamp",
         })
       : 0;
+  // vanish：場面の途中で強く光ってから、まっ暗に消える
+  const vanishAt = durationInFrames * 0.55;
+  const vanishFlash =
+    effect === "vanish"
+      ? interpolate(
+          frame,
+          [vanishAt - 4, vanishAt, vanishAt + 6],
+          [0, 0.95, 0],
+          {
+            extrapolateLeft: "clamp",
+            extrapolateRight: "clamp",
+          },
+        )
+      : 0;
+  const vanishDark =
+    effect === "vanish"
+      ? interpolate(frame, [vanishAt, vanishAt + 8], [0, 1], {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        })
+      : 0;
   const flash = interpolate(frame, [0, 5], [0.6, 0], {
     extrapolateRight: "clamp",
   });
@@ -404,7 +425,10 @@ export const WhatIfPage: React.FC<{
         {effect === "wind" ? <Wind /> : null}
         {effect === "flood" ? <Flood /> : null}
         {effect === "arrows" ? <Arrows /> : null}
-        <AbsoluteFill style={{ background: "#000", opacity: dark }} />
+        <AbsoluteFill
+          style={{ background: "#000", opacity: Math.max(dark, vanishDark) }}
+        />
+        <AbsoluteFill style={{ background: "#fff", opacity: vanishFlash }} />
         {slide.big ? (
           <div
             style={{

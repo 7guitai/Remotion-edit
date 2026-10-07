@@ -14,6 +14,7 @@
 | `animal-trivia-long` | 寝る前に聞きたい 動物の雑学63選（横長・1ページ1雑学＋解説、全6章） | 約8分44秒 |
 | `savings-2ch-short` | 【2ch風】貯金1000万貯めて分かったこと（縦型ショート・スレ風の見出し＋レス） | 約52秒 |
 | `whatif-rotation-short` | もし地球の自転が止まったら？（縦型ショート・「もしも」形式） | 約48秒 |
+| `whatif-sun-short` | もし太陽が消えたら？（同上・NASA の映像9種類） | 約51秒 |
 | `whatif-moon-short` | もし月がなくなったら？（同上） | 約44秒 |
 | `food-ranking-short` | 9割が知らない 食べ物のヒミツ ランキング（縦型ショート・派手な編集） | 約38秒 |
 | `body-ranking-short` | 9割が知らない 体のヒミツ ランキング（同上） | 約38秒 |
@@ -80,7 +81,7 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 | `quiz` | クイズの選択肢（A/B/C…） | `choices`, `answer`（正解の番号。0 始まり） |
 | `thread` | 2ch風。集中線の背景に赤グラデ＋白黒フチの大きな見出し、イラストの上にレスの吹き出しが順番に出る（「ポンッ」の効果音つき）。レスは `replyVoices` の声で交互に読む | `image`, `replies: [{text, speech, color}]` |
 | `sleep` | 睡眠用。夜空（星・月・雨のすじ・眠る犬）の背景に雑学の文字をふわっと出して消す。`speech` をひと続きで読み上げ、`answer`/`explain` は表示だけ | `speech`, `answer`, `explain` |
-| `whatif` | 「もしも」形式。上の黒帯に2行のタイトル（エピソードの `headline`）、真ん中の映像に背景・イラスト・演出、読み上げに合わせて句読点ごとに切り替わる大きな字幕 | `image`, `bg`（space/night/sky/sea）, `effect`（none/zoom/spin/stop/shake/wind/flood/dark/arrows/half/flip）, `big`（黄色いラベル）, `globe`（本物の写真の回る地球・月）, `footage`（NASA の動画）, `photo`（NASA の写真） |
+| `whatif` | 「もしも」形式。上の黒帯に2行のタイトル（エピソードの `headline`）、真ん中の映像に背景・イラスト・演出、読み上げに合わせて句読点ごとに切り替わる大きな字幕 | `image`, `bg`（space/night/sky/sea）, `effect`（none/vanish/zoom/spin/stop/shake/wind/flood/dark/arrows/half/flip）, `big`（黄色いラベル）, `globe`（本物の写真の回る地球・月）, `footage`（NASA の動画）, `photo`（NASA の写真） |
 | `trivia` | 1ページ1雑学（ショート向け）。上に `text`（振り）、中央にイラスト、読み上げのあと下に `answer`（答え）を出す。文字は黒＋白フチの極太 | `image`, `answer`, `answerSpeech`, `note`（読み上げない補足）, `explain` / `explainSpeech`（答えのあとに読み上げる解説） |
 
 - **クイズ**：`answer` のない `quiz` は出題スライドで、読み上げのあとに3秒のカウントダウン（「考えてみて！」＋効果音）が入ります。

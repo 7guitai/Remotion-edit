@@ -68,6 +68,20 @@
       "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
       "tags": [
         "太陽"
+      ],
+      "clips": [
+        {
+          "file": "sun_a.mp4",
+          "start": 60,
+          "duration": 20,
+          "ja": "太陽（SDO）その1"
+        },
+        {
+          "file": "sun_b.mp4",
+          "start": 200,
+          "duration": 20,
+          "ja": "太陽（SDO）その2"
+        }
       ]
     },
     {
@@ -226,6 +240,98 @@
         "地球",
         "夜",
         "テクスチャ"
+      ]
+    },
+    {
+      "file": "earth_spin_nightlights.mp4",
+      "type": "video",
+      "ja": "雲・大気・夜の街の明かりつきで回る地球（CG）",
+      "title": "Spinning Earth with clouds, atmosphere, and night lights",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a005500/a005570/Earth_wAtmos_spin_02_1080p60.mp4",
+      "page": "https://svs.gsfc.nasa.gov/5570/",
+      "credit": "NASA's Scientific Visualization Studio",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "地球",
+        "夜"
+      ]
+    },
+    {
+      "file": "solar_flare_m84.mp4",
+      "type": "video",
+      "ja": "太陽フレア（2025年6月15日・M8.4・SDO衛星）",
+      "title": "M8.4 flare from Active Region 14114 - June 15, 2025",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a005500/a005560/20250615_AR14114M84_AIA.0171A_PSF_stamped_1024p30.mp4",
+      "page": "https://svs.gsfc.nasa.gov/5560/",
+      "credit": "NASA/SDO",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "太陽"
+      ]
+    },
+    {
+      "file": "arctic_sea_ice_2026.mp4",
+      "type": "video",
+      "ja": "北極の海氷（2026年の最小面積まで）",
+      "title": "Arctic Sea Ice Minimum 2026",
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a005600/a005677/arctic_sea_ice_min_2026_1080p60.mp4",
+      "page": "https://svs.gsfc.nasa.gov/5677/",
+      "credit": "NASA's Scientific Visualization Studio",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "氷",
+        "地球"
+      ]
+    },
+    {
+      "file": "iss_aurora_2025.mp4",
+      "type": "video",
+      "ja": "宇宙ステーションから見たオーロラ（2025年11月の磁気嵐）",
+      "title": "ISS views Aurora from the November 11-13, 2025 Geomagnetic Storm",
+      "url": "https://svs.gsfc.nasa.gov/vis/a030000/a031300/a031375/ISS_20251112_071350-20251112_073549_1080p30.mp4",
+      "page": "https://svs.gsfc.nasa.gov/31375/",
+      "credit": "NASA",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "オーロラ",
+        "宇宙ステーション"
+      ]
+    },
+    {
+      "file": "plants_glow.mp4",
+      "type": "video",
+      "ja": "植物の光合成を宇宙から観測するイメージ映像（OCO-3）（途中から人物インタビューなので、使うのは森の部分だけ）",
+      "title": "NASA's OCO-3: Watching Plants Grow and Glow",
+      "url": "http://images-assets.nasa.gov/video/JPL-20190403-OCOf-0002-OCO3%20Watching%20Plants%20Grow%20and%20Glow%204K/JPL-20190403-OCOf-0002-OCO3%20Watching%20Plants%20Grow%20and%20Glow%204K~medium.mp4",
+      "page": "https://images.nasa.gov/details/JPL-20190403-OCOf-0002-OCO3%20Watching%20Plants%20Grow%20and%20Glow%204K",
+      "credit": "NASA/JPL-Caltech",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "植物",
+        "地球"
+      ],
+      "clips": [
+        {
+          "file": "plants_forest.mp4",
+          "start": 4,
+          "duration": 4,
+          "speed": 0.5,
+          "ja": "森と木もれ日（スロー）"
+        }
+      ]
+    },
+    {
+      "file": "frozen_lake_iss.jpg",
+      "type": "image",
+      "ja": "宇宙から見た凍った湖（モンゴル・フブスグル湖）",
+      "title": "The frozen Khuvsgul Lake in Mongolia",
+      "url": "http://images-assets.nasa.gov/image/iss074e0247458/iss074e0247458~large.jpg",
+      "page": "https://images.nasa.gov/details/iss074e0247458",
+      "credit": "NASA",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "氷",
+        "宇宙ステーション"
       ]
     }
   ]

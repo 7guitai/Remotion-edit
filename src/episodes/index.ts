@@ -8,6 +8,7 @@ import sleepTrivia1h from "./sleep-trivia-1h.json";
 import thingsRankingShort from "./things-ranking-short.json";
 import whatifRotationShort from "./whatif-rotation-short.json";
 import whatifMoonShort from "./whatif-moon-short.json";
+import whatifSunShort from "./whatif-sun-short.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -117,7 +118,7 @@ export type WhatIfSlide = {
   // 背景（space=宇宙 / night=夜 / sky=空 / sea=海）
   bg?: "space" | "night" | "sky" | "sea";
   // 演出（zoom=寄る / spin=回る / stop=急に止まる / shake=揺れる / wind=暴風 / flood=水が上がる / dark=暗くなる / arrows=矢印 / half=昼と夜 / flip=傾く）
-  effect?: "none" | "zoom" | "spin" | "stop" | "shake" | "wind" | "flood" | "dark" | "arrows" | "half" | "flip";
+  effect?: "none" | "vanish" | "zoom" | "spin" | "stop" | "shake" | "wind" | "flood" | "dark" | "arrows" | "half" | "flip";
   // 映像の上に出す黄色いラベル（数字など）
   big?: string;
   // 本物の写真の回る地球・月（NASA の地図画像を3Dの球に貼る）
@@ -200,6 +201,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  whatifSunShort as Episode,
   whatifRotationShort as Episode,
   whatifMoonShort as Episode,
   foodRankingShort as Episode,

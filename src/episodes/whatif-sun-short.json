@@ -1,0 +1,196 @@
+{
+  "id": "whatif-sun-short",
+  "title": "もし太陽が消えたら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.12,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "uchuuhikoushi.mp3",
+    "title": "宇宙飛行士が最後に見たもの",
+    "credit": "しゃろう",
+    "page": "https://opentracks.com/bgm/detail/9706",
+    "opentracks": 9706
+  },
+  "headline": [
+    "もし太陽が",
+    "消えたら？"
+  ],
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、太陽が突然消えたら、どうなるのか？",
+      "effect": "vanish",
+      "bg": "space",
+      "footage": {
+        "file": "sun_a.mp4",
+        "start": 1
+      }
+    },
+    {
+      "type": "whatif",
+      "text": "実は、消えても、すぐには気づかない。",
+      "effect": "none",
+      "bg": "space",
+      "footage": {
+        "file": "earth_spin_nightlights.mp4",
+        "start": 5,
+        "zoom": 1.4
+      }
+    },
+    {
+      "type": "whatif",
+      "text": "太陽の光が地球に届くまで、約8分20秒かかるからだ。",
+      "effect": "none",
+      "bg": "space",
+      "footage": {
+        "file": "solar_flare_m84.mp4",
+        "start": 15
+      },
+      "big": "約8分20秒",
+      "speech": "太陽の光が地球に届くまで、約八分二十秒かかるからだ。"
+    },
+    {
+      "type": "whatif",
+      "text": "8分後、空は突然、まっ暗になる。",
+      "effect": "dark",
+      "bg": "space",
+      "footage": {
+        "file": "iss_land.mp4",
+        "start": 1
+      },
+      "speech": "八分後、空は突然、まっ暗になる。"
+    },
+    {
+      "type": "whatif",
+      "text": "月も惑星も、見えなくなる。自分では光っていないからだ。",
+      "effect": "dark",
+      "bg": "space",
+      "globe": {
+        "texture": "moon",
+        "speed": 0.6
+      }
+    },
+    {
+      "type": "whatif",
+      "text": "さらに地球は、太陽に引っぱられなくなり、",
+      "effect": "none",
+      "bg": "space",
+      "globe": {
+        "texture": "earth",
+        "speed": 1.0
+      }
+    },
+    {
+      "type": "whatif",
+      "text": "まっすぐ宇宙の暗闇へ、飛んでいってしまう。",
+      "effect": "none",
+      "bg": "space",
+      "globe": {
+        "texture": "earth_night",
+        "speed": 1.0,
+        "sizeTo": 0.15
+      }
+    },
+    {
+      "type": "whatif",
+      "text": "植物は光合成ができず、少しずつ枯れていく。",
+      "effect": "dark",
+      "bg": "space",
+      "footage": {
+        "file": "plants_forest.mp4",
+        "start": 0
+      }
+    },
+    {
+      "type": "whatif",
+      "text": "1週間ほどで、地表の気温は、氷点下に。",
+      "effect": "none",
+      "bg": "space",
+      "footage": {
+        "file": "arctic_sea_ice_2026.mp4",
+        "start": 30,
+        "zoom": 1.5,
+        "focus": [
+          0.45,
+          0.65
+        ]
+      },
+      "big": "氷点下",
+      "speech": "一週間ほどで、地表の気温は、氷点下に。"
+    },
+    {
+      "type": "whatif",
+      "text": "1年後には、マイナス70度ほどまで下がるといわれている。",
+      "effect": "none",
+      "bg": "space",
+      "photo": {
+        "file": "frozen_lake_iss.jpg",
+        "zoom": 1.1
+      },
+      "big": "約−70℃",
+      "speech": "一年後には、マイナス七十度ほどまで下がるといわれている。"
+    },
+    {
+      "type": "whatif",
+      "text": "それでも、深い海は、すぐには凍らない。",
+      "effect": "dark",
+      "bg": "space",
+      "footage": {
+        "file": "iss_ocean.mp4",
+        "start": 1
+      }
+    },
+    {
+      "type": "whatif",
+      "text": "海の底の熱で生きる生き物は、生き残れるかもしれない。",
+      "effect": "dark",
+      "bg": "space",
+      "footage": {
+        "file": "ocean_tides_1080p.mp4",
+        "start": 30,
+        "zoom": 1.4
+      }
+    },
+    {
+      "type": "whatif",
+      "text": "でも安心して。太陽は、あと50億年ほど輝き続けるといわれているんだ。",
+      "effect": "none",
+      "bg": "space",
+      "footage": {
+        "file": "sun_b.mp4",
+        "start": 1
+      },
+      "big": "あと約50億年",
+      "speech": "でも安心して。太陽は、あと五十億年ほど輝き続けるといわれているんだ。"
+    },
+    {
+      "type": "whatif",
+      "text": "ほかに知りたい「もしも」は、コメントで教えて！",
+      "effect": "none",
+      "bg": "space",
+      "footage": {
+        "file": "iss_aurora_2025.mp4",
+        "start": 60
+      },
+      "speech": "ほかに知りたい、もしもは、コメントで教えて！"
+    }
+  ],
+  "description": "もしある日突然、太陽が消えたら、地球はどうなるのか？科学的に考えてみました。\nほかに知りたい「もしも」は、コメントで教えてください！\n映像・画像：NASA",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "宇宙",
+    "太陽",
+    "Shorts"
+  ]
+}

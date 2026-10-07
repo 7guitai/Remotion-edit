@@ -47,7 +47,10 @@ def cut(src: Path, clip: dict) -> None:
         return
     subprocess.run(
         [imageio_ffmpeg.get_ffmpeg_exe(), "-v", "error", "-y", "-ss", str(clip["start"]), "-i", str(src),
-         "-t", str(clip["duration"]), "-an", "-c:v", "libx264", "-crf", "18", "-g", "15",
+         "-t", str(clip["duration"]), "-an",
+         # speed を指定するとスローにする（短い使える部分を長く見せる）
+         "-vf", f"setpts=PTS/{clip.get('speed', 1)}",
+         "-c:v", "libx264", "-crf", "18", "-g", "15",
          "-pix_fmt", "yuv420p", str(out)],
         check=True,
     )

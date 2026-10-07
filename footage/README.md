@@ -30,6 +30,12 @@
 | `moon_texture_2k.jpg` | テクスチャ | 月の表面の全体図（回る月を作る用・2048×1024） | NASA's Scientific Visualization Studio | [CGI Moon Kit](https://svs.gsfc.nasa.gov/4720/) |
 | `earth_texture_5400.jpg` | テクスチャ | 地球の全体図（回る地球を作る用・ブルーマーブル 5400×2700） | NASA Earth Observatory | [Blue Marble Next Generation (December 2004)](https://visibleearth.nasa.gov/images/74218) |
 | `earth_night_texture.jpg` | テクスチャ | 夜の地球の全体図（街の明かり・ブラックマーブル） | NASA Earth Observatory/NOAA NGDC | [Earth at Night (Black Marble 2012)](https://visibleearth.nasa.gov/images/79765) |
+| `earth_spin_nightlights.mp4` | 動画 | 雲・大気・夜の街の明かりつきで回る地球（CG） | NASA's Scientific Visualization Studio | [Spinning Earth with clouds, atmosphere, and night lights](https://svs.gsfc.nasa.gov/5570/) |
+| `solar_flare_m84.mp4` | 動画 | 太陽フレア（2025年6月15日・M8.4・SDO衛星） | NASA/SDO | [M8.4 flare from Active Region 14114 - June 15, 2025](https://svs.gsfc.nasa.gov/5560/) |
+| `arctic_sea_ice_2026.mp4` | 動画 | 北極の海氷（2026年の最小面積まで） | NASA's Scientific Visualization Studio | [Arctic Sea Ice Minimum 2026](https://svs.gsfc.nasa.gov/5677/) |
+| `iss_aurora_2025.mp4` | 動画 | 宇宙ステーションから見たオーロラ（2025年11月の磁気嵐） | NASA | [ISS views Aurora from the November 11-13, 2025 Geomagnetic Storm](https://svs.gsfc.nasa.gov/31375/) |
+| `plants_glow.mp4` | 動画 | 植物の光合成を宇宙から観測するイメージ映像（OCO-3）（途中から人物インタビューなので、使うのは森の部分だけ） | NASA/JPL-Caltech | [NASA's OCO-3: Watching Plants Grow and Glow](https://images.nasa.gov/details/JPL-20190403-OCOf-0002-OCO3%20Watching%20Plants%20Grow%20and%20Glow%204K) |
+| `frozen_lake_iss.jpg` | 画像 | 宇宙から見た凍った湖（モンゴル・フブスグル湖） | NASA | [The frozen Khuvsgul Lake in Mongolia](https://images.nasa.gov/details/iss074e0247458) |
 
 ## 使うときの注意
 

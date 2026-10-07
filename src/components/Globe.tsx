@@ -19,8 +19,9 @@ export type GlobeProps = {
   // 地軸の傾き（度）。tiltTo を指定すると場面の間にそこまで傾いていく
   tilt?: number;
   tiltTo?: number;
-  // 球の大きさ（1 で映像エリアにほぼ収まる）
+  // 球の大きさ（1 で映像エリアにほぼ収まる）。sizeTo を指定すると場面の間にその大きさへ（遠ざかる表現）
   size?: number;
+  sizeTo?: number;
   // 描く範囲（映像エリアの大きさ）
   width?: number;
   height?: number;
@@ -65,6 +66,7 @@ export const Globe: React.FC<GlobeProps> = ({
   tilt = texture === "moon" ? 0 : 23.4,
   tiltTo,
   size = 1,
+  sizeTo,
   width: w,
   height: h,
 }) => {
@@ -92,7 +94,13 @@ export const Globe: React.FC<GlobeProps> = ({
       )}
       <group
         rotation={[0.25, 0, tiltNow * deg]}
-        scale={size * 0.88}
+        scale={
+          (sizeTo === undefined
+            ? size
+            : size +
+              (sizeTo - size) * Math.min(1, frame / durationInFrames) ** 1.5) *
+          0.88
+        }
         position={[0, 0.12, 0]}
       >
         <mesh rotation={[0, (angleAt(frame, speed, stopAt) - 90) * deg, 0]}>
