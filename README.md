@@ -16,6 +16,7 @@
 | `whatif-rotation-short` | もし地球の自転が止まったら？（縦型ショート・「もしも」形式） | 約48秒 |
 | `whatif-sun-short` | もし太陽が消えたら？（同上・NASA の映像9種類） | 約51秒 |
 | `whatif-gravity-short` | もし重力が半分になったら？（人・車は物理エンジンでシミュレーション、火星は NASA の素材） | 約59秒 |
+| `whatif-friction-short` | もし摩擦がなくなったら？（同上。右・奥の世界は途中で摩擦がゼロになる） | 約55秒 |
 | `whatif-moon-short` | もし月がなくなったら？（同上） | 約44秒 |
 | `food-ranking-short` | 9割が知らない 食べ物のヒミツ ランキング（縦型ショート・派手な編集） | 約38秒 |
 | `body-ranking-short` | 9割が知らない 体のヒミツ ランキング（同上） | 約38秒 |
@@ -82,7 +83,7 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 | `quiz` | クイズの選択肢（A/B/C…） | `choices`, `answer`（正解の番号。0 始まり） |
 | `thread` | 2ch風。集中線の背景に赤グラデ＋白黒フチの大きな見出し、イラストの上にレスの吹き出しが順番に出る（「ポンッ」の効果音つき）。レスは `replyVoices` の声で交互に読む | `image`, `replies: [{text, speech, color}]` |
 | `sleep` | 睡眠用。夜空（星・月・雨のすじ・眠る犬）の背景に雑学の文字をふわっと出して消す。`speech` をひと続きで読み上げ、`answer`/`explain` は表示だけ | `speech`, `answer`, `explain` |
-| `whatif` | 「もしも」形式。上の黒帯に2行のタイトル（エピソードの `headline`）、真ん中の映像に背景・イラスト・演出、読み上げに合わせて句読点ごとに切り替わる大きな字幕 | `image`, `bg`（space/night/sky/sea）, `effect`（none/vanish/zoom/spin/stop/shake/wind/flood/dark/arrows/half/flip）, `big`（黄色いラベル）, `globe`（本物の写真の回る地球・月）, `footage`（NASA の動画）, `photo`（NASA の写真）, `sim`（物理シミュレーション：scale/jump/slip/throw/brake/party） |
+| `whatif` | 「もしも」形式。上の黒帯に2行のタイトル（エピソードの `headline`）、真ん中の映像に背景・イラスト・演出、読み上げに合わせて句読点ごとに切り替わる大きな字幕 | `image`, `bg`（space/night/sky/sea）, `effect`（none/vanish/zoom/spin/stop/shake/wind/flood/dark/arrows/half/flip）, `big`（黄色いラベル）, `globe`（本物の写真の回る地球・月）, `footage`（NASA の動画）, `photo`（NASA の写真）, `sim`（物理シミュレーション：scale/jump/slip/throw/brake/party、摩擦は fstand/fpush/fbrake/ladder/fchaos） |
 | `trivia` | 1ページ1雑学（ショート向け）。上に `text`（振り）、中央にイラスト、読み上げのあと下に `answer`（答え）を出す。文字は黒＋白フチの極太 | `image`, `answer`, `answerSpeech`, `note`（読み上げない補足）, `explain` / `explainSpeech`（答えのあとに読み上げる解説） |
 
 - **クイズ**：`answer` のない `quiz` は出題スライドで、読み上げのあとに3秒のカウントダウン（「考えてみて！」＋効果音）が入ります。
@@ -118,6 +119,14 @@ npx remotion render whatif-rotation-short out/whatif-rotation-short.mp4 --gl=swa
 | `throw` | ボールを投げる（飛んだ距離） |
 | `brake` | 時速36kmから急ブレーキ（止まるまでの距離・コーンをはね飛ばす） |
 | `party` | 重力半分の世界で、5人でジャンプ |
+| `fstand` | 一歩ふみ出す（摩擦ゼロだと足が前後にすべって開脚） |
+| `fpush` | 40kgの箱を150Nで押す（摩擦ゼロだと箱は前へ、自分は後ろへすべり続ける） |
+| `fbrake` | 時速36kmから急ブレーキ（摩擦ゼロだと止まれない） |
+| `ladder` | 壁に70度で立てかけた3mのはしご（摩擦ゼロだと足もとがすべって倒れる） |
+| `fchaos` | 摩擦ゼロの広場で、5人が歩き出そうとして転ぶ |
+
+摩擦の場面（f〜・ladder）は、右（奥）の世界だけ 0.6 秒で摩擦がゼロになり、地面が氷のように光ります。
+関節の筋肉の強さは実際のトルク（N·m）で、物理エンジンの1ステップあたりの力積に直して与えています。
 
 ## AI音声（ずんだもん）
 

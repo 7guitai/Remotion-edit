@@ -92,81 +92,135 @@ const JOINTS: JointDef[] = [
 ];
 
 // 姿勢：関節ごとの曲げ角（親に対する、x→y→z の順のオイラー角, ラジアン）。書かない関節はまっすぐ
+// 向きの決まり（顔は +z）：
+//  - 下を向いた部位（腕・脚）は x がマイナスで前へ、プラスで後ろへ（ひざ・ひじは、ひざがプラス・ひじがマイナスで曲がる）
+//  - 上を向いた部位（胴体・頭）は x がプラスで前かがみ
+//  - z は左右に開く向き（左はマイナス、右はプラスで外へ）
 export type Pose = Partial<Record<JointName, [number, number, number]>>;
 
 export const POSES: Record<string, Pose> = {
   stand: {
     shoulderL: [0, 0, -0.12],
     shoulderR: [0, 0, 0.12],
-    elbowL: [0.25, 0, 0],
-    elbowR: [0.25, 0, 0],
+    elbowL: [-0.25, 0, 0],
+    elbowR: [-0.25, 0, 0],
   },
   // 跳ぶ前にしゃがんで腕をうしろへ
   crouch: {
     waist: [0.5, 0, 0],
-    hipL: [1.2, 0, 0],
-    hipR: [1.2, 0, 0],
-    kneeL: [-1.6, 0, 0],
-    kneeR: [-1.6, 0, 0],
-    ankleL: [0.5, 0, 0],
-    ankleR: [0.5, 0, 0],
-    shoulderL: [-0.9, 0, -0.2],
-    shoulderR: [-0.9, 0, 0.2],
-    elbowL: [0.3, 0, 0],
-    elbowR: [0.3, 0, 0],
+    hipL: [-1.2, 0, 0],
+    hipR: [-1.2, 0, 0],
+    kneeL: [1.6, 0, 0],
+    kneeR: [1.6, 0, 0],
+    ankleL: [-0.4, 0, 0],
+    ankleR: [-0.4, 0, 0],
+    shoulderL: [0.9, 0, -0.2],
+    shoulderR: [0.9, 0, 0.2],
+    elbowL: [-0.3, 0, 0],
+    elbowR: [-0.3, 0, 0],
   },
   // 空中：バンザイ
   air: {
-    shoulderL: [2.7, 0, -0.35],
-    shoulderR: [2.7, 0, 0.35],
-    elbowL: [0.15, 0, 0],
-    elbowR: [0.15, 0, 0],
-    hipL: [0.15, 0, 0],
-    hipR: [0.15, 0, 0],
-    kneeL: [-0.3, 0, 0],
-    kneeR: [-0.3, 0, 0],
+    shoulderL: [-2.7, 0, -0.35],
+    shoulderR: [-2.7, 0, 0.35],
+    elbowL: [-0.15, 0, 0],
+    elbowR: [-0.15, 0, 0],
+    hipL: [-0.15, 0, 0],
+    hipR: [-0.15, 0, 0],
+    kneeL: [0.3, 0, 0],
+    kneeR: [0.3, 0, 0],
   },
   // 着地：ひざを曲げて受け止める
   land: {
     waist: [0.25, 0, 0],
-    hipL: [0.7, 0, 0],
-    hipR: [0.7, 0, 0],
-    kneeL: [-1.0, 0, 0],
-    kneeR: [-1.0, 0, 0],
-    ankleL: [0.3, 0, 0],
-    ankleR: [0.3, 0, 0],
-    shoulderL: [0.9, 0, -0.5],
-    shoulderR: [0.9, 0, 0.5],
-    elbowL: [0.6, 0, 0],
-    elbowR: [0.6, 0, 0],
+    hipL: [-0.7, 0, 0],
+    hipR: [-0.7, 0, 0],
+    kneeL: [1.0, 0, 0],
+    kneeR: [1.0, 0, 0],
+    ankleL: [-0.3, 0, 0],
+    ankleR: [-0.3, 0, 0],
+    shoulderL: [-0.9, 0, -0.5],
+    shoulderR: [-0.9, 0, 0.5],
+    elbowL: [-0.6, 0, 0],
+    elbowR: [-0.6, 0, 0],
   },
-  // 投げる前：右腕をうしろへ
+  // 投げる前：右腕を後ろ上へ
   windup: {
     waist: [0, 0.5, 0],
-    shoulderR: [-1.6, 0, 0.3],
-    elbowR: [0.9, 0, 0],
-    shoulderL: [1.2, 0, -0.3],
-    hipL: [0.3, 0, 0],
-    kneeL: [-0.2, 0, 0],
+    shoulderR: [2.3, 0, 0.3],
+    elbowR: [-0.9, 0, 0],
+    shoulderL: [-1.2, 0, -0.3],
+    hipL: [-0.3, 0, 0],
+    kneeL: [0.2, 0, 0],
   },
   // 投げたあと：右腕を前へ振り抜く
   throw: {
     waist: [0.25, -0.5, 0],
-    shoulderR: [2.2, 0, 0.1],
-    elbowR: [0.1, 0, 0],
-    shoulderL: [-0.6, 0, -0.3],
-    hipR: [0.3, 0, 0],
-    kneeR: [-0.2, 0, 0],
+    shoulderR: [-1.4, 0, 0.1],
+    elbowR: [-0.1, 0, 0],
+    shoulderL: [0.6, 0, -0.3],
+    hipR: [-0.3, 0, 0],
+    kneeR: [0.2, 0, 0],
   },
   // 足をすべらせて、手をばたつかせる
   slip: {
     waist: [-0.3, 0, 0],
-    shoulderL: [2.2, 0, -1.0],
-    shoulderR: [2.2, 0, 1.0],
-    elbowL: [0.6, 0, 0],
-    elbowR: [0.6, 0, 0],
-    hipL: [1.0, 0, 0],
-    hipR: [0.4, 0, 0],
+    shoulderL: [-2.2, 0, -1.0],
+    shoulderR: [-2.2, 0, 1.0],
+    elbowL: [-0.6, 0, 0],
+    elbowR: [-0.6, 0, 0],
+    hipL: [-1.0, 0, 0],
+    hipR: [-0.4, 0, 0],
+  },
+  // 箱を両手で押す（左足を後ろに引いて踏んばる）
+  push: {
+    waist: [0.25, 0, 0],
+    shoulderL: [-1.45, 0, -0.1],
+    shoulderR: [-1.45, 0, 0.1],
+    elbowL: [-0.2, 0, 0],
+    elbowR: [-0.2, 0, 0],
+    hipL: [0.35, 0, 0],
+    kneeL: [0.15, 0, 0],
+    hipR: [-0.25, 0, 0],
+    kneeR: [0.3, 0, 0],
+    ankleR: [-0.05, 0, 0],
+  },
+  // 一歩ふみ出す途中：右ひざを上げる
+  swing: {
+    waist: [0.08, 0, 0],
+    hipR: [-0.75, 0, 0],
+    kneeR: [1.0, 0, 0],
+    ankleR: [-0.1, 0, 0],
+    hipL: [0.1, 0, 0],
+    shoulderL: [-0.4, 0, -0.12],
+    shoulderR: [0.3, 0, 0.12],
+    elbowL: [-0.4, 0, 0],
+    elbowR: [-0.25, 0, 0],
+  },
+  // 右足を前へ一歩ふみ出す
+  step: {
+    waist: [0.1, 0, 0],
+    hipR: [-0.6, 0, 0],
+    kneeR: [0.15, 0, 0],
+    ankleR: [0.45, 0, 0],
+    hipL: [0.35, 0, 0],
+    kneeL: [0.1, 0, 0],
+    ankleL: [-0.45, 0, 0],
+    shoulderL: [-0.5, 0, -0.12],
+    shoulderR: [0.4, 0, 0.12],
+    elbowL: [-0.4, 0, 0],
+    elbowR: [-0.25, 0, 0],
+  },
+  // 足を少し開いて立つ
+  stance: {
+    hipL: [0, 0, -0.18],
+    hipR: [0, 0, 0.18],
+    ankleL: [0, 0, 0.18],
+    ankleR: [0, 0, -0.18],
+    shoulderL: [0, 0, -0.25],
+    shoulderR: [0, 0, 0.25],
+    elbowL: [-0.25, 0, 0],
+    elbowR: [-0.25, 0, 0],
   },
 };
 
@@ -214,7 +268,9 @@ class ServoJoint extends CANNON.ConeTwistConstraint {
       new CANNON.Vec3(0, 1, 0),
       new CANNON.Vec3(0, 0, 1),
     ];
-    const force = this.baseTorque * this.strength;
+    // ソルバーの上限は「1ステップあたりの力積」なので、トルク × 時間刻み にする
+    const dt = a.world?.dt || 1 / 240;
+    const force = this.baseTorque * this.strength * dt;
     this.motors.forEach((m, i) => {
       m.axisA.copy(axes[i]);
       m.axisB.copy(axes[i]);

@@ -1,0 +1,143 @@
+{
+  "id": "whatif-friction-short",
+  "title": "もし摩擦がなくなったら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.11,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "odoru_uchuu.mp3",
+    "title": "踊る、宇宙の中で(Dancing,at Universe)",
+    "credit": "蒲鉾さちこ",
+    "page": "https://opentracks.com/bgm/detail/15926",
+    "opentracks": 15926,
+    "track": 2
+  },
+  "headline": [
+    "もし摩擦が",
+    "なくなったら？"
+  ],
+  "illustrations": {
+    "fe_nut_and_bolt.svg": {
+      "emoji": "🔩",
+      "irasutoya": "Fluent Emoji「Nut and bolt」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Nut%20and%20bolt/Color/nut_and_bolt_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_knot.svg": {
+      "emoji": "🔩",
+      "irasutoya": "Fluent Emoji「Knot」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Knot/Color/knot_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_pencil.svg": {
+      "emoji": "🔩",
+      "irasutoya": "Fluent Emoji「Pencil」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Pencil/Color/pencil_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    }
+  },
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、世界から摩擦が、突然なくなったら、どうなるのか？",
+      "sim": "fchaos",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "まず、歩くことができない。一歩ふみ出すと、足がすべって、転んでしまうんだ。",
+      "sim": "fstand",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "重い荷物も、軽く押すだけで動き出す。でも、押した自分も、後ろへすべっていくんだ。",
+      "sim": "fpush",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "車は、ブレーキをかけても止まれない。タイヤと地面の摩擦がないと、止まる力が生まれないんだ。",
+      "sim": "fbrake",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "壁に立てかけた、はしごも、足もとがすべって倒れてしまう。",
+      "sim": "ladder",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "ネジや釘も、摩擦の力でとまっている。家具は、バラバラになってしまうかも。",
+      "bg": "night",
+      "effect": "shake",
+      "image": "fe_nut_and_bolt.svg",
+      "imageSize": 560
+    },
+    {
+      "type": "whatif",
+      "text": "ひもの結び目もほどけて、靴ひもも結べない。",
+      "bg": "night",
+      "effect": "zoom",
+      "image": "fe_knot.svg",
+      "imageSize": 560
+    },
+    {
+      "type": "whatif",
+      "text": "鉛筆で、字を書くこともできない。芯が紙にこすれて、けずれた粉が残るのも、摩擦のおかげなんだ。",
+      "bg": "night",
+      "effect": "zoom",
+      "image": "fe_pencil.svg",
+      "imageSize": 560,
+      "big": "摩擦のおかげ"
+    },
+    {
+      "type": "whatif",
+      "text": "実は、摩擦がとても小さい場所は、身近にもある。それが、氷の上。",
+      "bg": "space",
+      "effect": "none",
+      "footage": {
+        "file": "arctic_sea_ice_2026.mp4",
+        "start": 0
+      }
+    },
+    {
+      "type": "whatif",
+      "text": "氷がすべりやすいのは、表面がぬれたようになっているからだと、考えられているんだ。",
+      "bg": "space",
+      "effect": "none",
+      "photo": {
+        "file": "frozen_lake_iss.jpg",
+        "zoom": 1.05
+      }
+    },
+    {
+      "type": "whatif",
+      "text": "摩擦がない世界、生きていけそう？コメントで教えてね！",
+      "bg": "space",
+      "effect": "zoom",
+      "globe": {
+        "texture": "earth",
+        "speed": 0.8
+      }
+    }
+  ],
+  "description": "もし世界から摩擦が突然なくなったら、歩く・押す・止まる・立てかける…はどうなるのか？\n人や車の動きは、物理エンジンでシミュレーションして作りました。\nほかに知りたい「もしも」は、コメントで教えてください！\n映像・画像：NASA",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "摩擦",
+    "物理",
+    "Shorts"
+  ]
+}

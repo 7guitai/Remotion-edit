@@ -12,11 +12,27 @@ import {
 // 物理シミュレーションの場面。1フレームごとに全部の物体の位置と向きを記録しておき、
 // 描画するときはそのフレームの記録を読むだけにする（どのフレームから描いても同じ結果になる）
 
-export type SimKind = "scale" | "jump" | "slip" | "throw" | "brake" | "party";
+export type SimKind =
+  | "scale"
+  | "jump"
+  | "slip"
+  | "throw"
+  | "brake"
+  | "party"
+  // 摩擦の比較（右・奥のレーンは FRICTION_OFF 秒で摩擦がゼロになる）
+  | "fstand"
+  | "fpush"
+  | "fbrake"
+  | "ladder"
+  | "fchaos";
+
+export const FRICTION_KINDS: SimKind[] = ["fstand", "fpush", "fbrake", "ladder", "fchaos"];
+// この時刻（秒）で、右（奥）の世界の摩擦が消える
+export const FRICTION_OFF = 0.6;
 
 export type SimBody = {
   lane: number;
-  shape: "part" | "box" | "sphere" | "cone" | "car" | "platform";
+  shape: "part" | "box" | "sphere" | "cone" | "car" | "platform" | "ladder" | "wall";
   part?: PartName;
   look?: Look;
   doll?: number;
@@ -37,6 +53,8 @@ export type SimResult = {
   values: Record<string, Float32Array>;
   // 各レーンの重力（m/s²）
   gravity: number[];
+  // 各レーンの名前（画面のラベル）
+  labels: string[];
 };
 
 // ぶつかった物の種類で効果音を変える（body=人、ball=ボール、cone=コーン）
@@ -82,6 +100,25 @@ const makeWorld = (g: number) => {
   ground.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
   world.addBody(ground);
   return { world, ground };
+};
+
+// 摩擦の比較用の世界。lane 1 は FRICTION_OFF 秒で、すべての摩擦（地面・物どうし）がゼロになる
+const frictionWorld = (lane: number) => {
+  const { world } = makeWorld(G);
+  let off = false;
+  return {
+    world,
+    isOff: () => off,
+    update: (t: number) => {
+      if (lane === 1 && !off && t >= FRICTION_OFF) {
+        off = true;
+        world.defaultContactMaterial.friction = 0;
+        for (const m of world.contactmaterials) {
+          m.friction = 0;
+        }
+      }
+    },
+  };
 };
 
 // 箱のいちばん低い角の高さ
@@ -135,6 +172,36 @@ const jumper = (rd: Ragdoll, start: number, kick: number) => {
       }
     } else {
       rd.setPose(POSES.land, POSES.stand, smooth((t - start - 0.25) / 0.5));
+    }
+  };
+};
+
+// 一歩ふみ出そうとする。摩擦がないと、足が前後にすべって開き、転んでしまう
+const stepper = (rd: Ragdoll, start: number) => {
+  let fall = -1;
+  return (t: number) => {
+    applyBalance(rd);
+    if (t < start) {
+      rd.setPose(POSES.stand);
+      return;
+    }
+    // ふみ出したあとは股関節と足首の力を抜く（ひざはまっすぐ）。どちらの世界でも同じ
+    rd.setStrength(t < start + 0.6 ? 1 : 0.05, ["hipL", "hipR"]);
+    if (fall < 0 && rd.bodies.pelvis.position.y < 0.72) {
+      // 体が沈み始めたら、あわてて手をばたつかせる
+      fall = t;
+      rd.balance = 0.2;
+      rd.setStrength(0.05, ["hipL", "hipR", "kneeL", "kneeR", "waist"]);
+    }
+    if (fall >= 0) {
+      rd.setPose(POSES.step, POSES.slip, smooth((t - fall) / 0.25));
+    } else {
+      // ひざを上げて足を前へ運び（0.3秒）、前に下ろす（0.3秒）
+      if (t < start + 0.3) {
+        rd.setPose(POSES.stand, POSES.swing, smooth((t - start) / 0.3));
+      } else {
+        rd.setPose(POSES.swing, POSES.step, smooth((t - start - 0.3) / 0.3));
+      }
     }
   };
 };
@@ -342,10 +409,12 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
       };
       lanes.push({ world, g, dolls: [rd], control, record });
     });
-  } else if (kind === "brake") {
+  } else if (kind === "brake" || kind === "fbrake") {
     // 同じ速さ（時速36km）で走る車が、線のところで急ブレーキ
-    [G, G / 2].forEach((g, lane) => {
-      const { world } = makeWorld(g);
+    [0, 1].forEach((lane) => {
+      const g = kind === "brake" && lane === 1 ? G / 2 : G;
+      const fw = frictionWorld(kind === "fbrake" ? lane : 0);
+      const world = kind === "brake" ? makeWorld(g).world : fw.world;
       const z = lane === 0 ? 1.7 : -1.7;
       const carMat = new CANNON.Material("car");
       // タイヤと地面の摩擦は、下の control で力として計算する（線を越えたらタイヤがロックしてこすれる）
@@ -395,15 +464,17 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
       const stopX = val(`stop${lane}`);
       let braking = false;
       let stopped = -1;
-      const control = () => {
+      const control = (t: number) => {
+        fw.update(t);
         // 車の前の端が線（x = 0）を越えたらブレーキ
         if (!braking && car.position.x + 2.0 >= 0) {
           braking = true;
         }
+        // 動摩擦力 = 摩擦係数 × 車が地面を押す力（重さ × 重力）。重力が半分なら半分、摩擦ゼロなら0
+        const mu = fw.isOff() ? 0 : 0.7;
         if (braking && stopped < 0) {
-          // 動摩擦力 = 摩擦係数 × 車が地面を押す力（重さ × 重力）。重力が半分なら、止める力も半分
           if (car.velocity.x > 0.02) {
-            car.force.x -= 0.7 * car.mass * g;
+            car.force.x -= mu * car.mass * g;
           } else {
             car.velocity.set(0, car.velocity.y, 0);
             car.type = CANNON.Body.STATIC;
@@ -415,6 +486,133 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
         stopX[f] = stopped;
       };
       lanes.push({ world, g, dolls: [], control, record });
+    });
+  } else if (kind === "fstand") {
+    // 一歩ふみ出す。横から見るので、人は +x を向く
+    [0, 1].forEach((lane) => {
+      const fw = frictionWorld(lane);
+      const rd = addDoll(fw.world, lane, lane, [lane === 0 ? -1.2 : 1.2, 0, 0], Math.PI / 2);
+      const step = stepper(rd, FRICTION_OFF + 0.15);
+      const control = (t: number) => {
+        fw.update(t);
+        step(t);
+      };
+      lanes.push({ world: fw.world, g: G, dolls: [rd], control, record: () => {} });
+    });
+  } else if (kind === "fpush") {
+    // 重い箱（40kg）を、同じ力（150N）で押す。手前がいまの地球、奥が摩擦ゼロ
+    [0, 1].forEach((lane) => {
+      const fw = frictionWorld(lane);
+      const world = fw.world;
+      const z = lane === 0 ? 0.9 : -0.9;
+      const boxMat = new CANNON.Material("box");
+      world.addContactMaterial(
+        new CANNON.ContactMaterial(groundMaterial, boxMat, { friction: 0.5, restitution: 0 }),
+      );
+      const rd = addDoll(world, lane, lane, [0, 0, z], Math.PI / 2);
+      const box = new CANNON.Body({
+        mass: 40,
+        shape: new CANNON.Box(new CANNON.Vec3(0.4, 0.4, 0.4)),
+        position: new CANNON.Vec3(0.95, 0.4, z),
+        material: boxMat,
+      });
+      world.addBody(box);
+      bodies.push({ lane, shape: "box", size: [0.8, 0.8, 0.8], color: "#c8925a" });
+      tracked.push(box);
+      const boxMoved = val(`box${lane}`);
+      const manMoved = val(`man${lane}`);
+      const hand = () =>
+        rd.bodies.lowerArmR.pointToWorldFrame(new CANNON.Vec3(0, -0.17, 0));
+      const control = (t: number) => {
+        fw.update(t);
+        applyBalance(rd);
+        rd.setPose(POSES.stand, POSES.push, smooth((t - 0.2) / 0.4));
+        // 手が箱にふれている間だけ押す（押した力と同じ力で、自分も押し返される）
+        if (t > 0.7 && t < 1.5 && hand().x > box.position.x - 0.4 - 0.12) {
+          box.force.x += 150;
+          rd.bodies.torso.force.x -= 150;
+        }
+      };
+      const record = (f: number) => {
+        boxMoved[f] = box.position.x - 0.95;
+        manMoved[f] = rd.bodies.pelvis.position.x;
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record });
+    });
+  } else if (kind === "ladder") {
+    // 壁に立てかけた長さ3mのはしご（地面から70度）。床の摩擦がないと、足もとがすべって倒れる
+    [0, 1].forEach((lane) => {
+      const fw = frictionWorld(lane);
+      const world = fw.world;
+      // 手前がいまの地球、奥が摩擦ゼロ。どちらも壁は右側にある
+      const side = 1;
+      const wallX = 0.6;
+      const z = lane === 0 ? 1.3 : -1.3;
+      const wall = new CANNON.Body({
+        mass: 0,
+        shape: new CANNON.Box(new CANNON.Vec3(0.15, 1.75, 0.65)),
+        position: new CANNON.Vec3(wallX + side * 0.15, 1.75, z),
+        material: groundMaterial,
+      });
+      world.addBody(wall);
+      bodies.push({ lane, shape: "wall", size: [0.3, 3.5, 1.3] });
+      tracked.push(wall);
+      const L = 3;
+      const angle = (70 * Math.PI) / 180;
+      const ladder = new CANNON.Body({
+        mass: 12,
+        material: bodyMaterial,
+        position: new CANNON.Vec3(
+          wallX - side * ((L / 2) * Math.cos(angle) + 0.03),
+          (L / 2) * Math.sin(angle) + 0.005,
+          z,
+        ),
+      });
+      // 2本の柱（長さ方向が y）と、7本の横木（z 方向）
+      for (const z of [-0.24, 0.24]) {
+        ladder.addShape(new CANNON.Box(new CANNON.Vec3(0.03, L / 2, 0.03)), new CANNON.Vec3(0, 0, z));
+      }
+      for (let k = 0; k < 7; k++) {
+        ladder.addShape(
+          new CANNON.Box(new CANNON.Vec3(0.018, 0.018, 0.24)),
+          new CANNON.Vec3(0, -L / 2 + 0.35 + k * 0.38, 0),
+        );
+      }
+      // 柱を壁側へ傾ける（z 軸まわりに 90°−70°）
+      ladder.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 0, 1), -side * (Math.PI / 2 - angle));
+      world.addBody(ladder);
+      bodies.push({ lane, shape: "ladder", size: [0.06, L, 0.54] });
+      tracked.push(ladder);
+      soundOf.set(ladder, "cone");
+      lanes.push({ world, g: G, dolls: [], control: (t) => fw.update(t), record: () => {} });
+    });
+  } else if (kind === "fchaos") {
+    // 摩擦ゼロの広場で、5人が歩き出そうとする
+    const fw = frictionWorld(1);
+    const world = fw.world;
+    const dolls: Ragdoll[] = [];
+    const spots: [number, number, number][] = [
+      [-2.4, -1.0, 0.4],
+      [-1.2, 0.4, 0.15],
+      [0, -0.5, 0],
+      [1.2, 0.4, -0.15],
+      [2.4, -1.0, -0.4],
+    ];
+    // 少しずつずれたタイミングで、それぞれ歩き出そうとする
+    const steps = spots.map(([x, z, yaw], i) => {
+      const rd = addDoll(world, 0, i, [x, 0, z], yaw);
+      dolls.push(rd);
+      return stepper(rd, FRICTION_OFF + 0.2 + i * 0.3);
+    });
+    lanes.push({
+      world,
+      g: G,
+      dolls,
+      control: (t) => {
+        fw.update(t);
+        steps.forEach((step) => step(t));
+      },
+      record: () => {},
     });
   } else {
     // 重力半分の世界で、みんなでジャンプ
@@ -535,6 +733,9 @@ export const simulate = (kind: SimKind, frames: number, fps: number): SimResult 
     impacts,
     values,
     gravity: lanes.map((l) => l.g),
+    labels: FRICTION_KINDS.includes(kind)
+      ? ["いまの地球", "摩擦ゼロ"]
+      : ["いまの地球 1G", "重力半分 0.5G"],
   };
   cache.set(key, result);
   return result;

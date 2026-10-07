@@ -11,13 +11,12 @@ import {
 } from "remotion";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
-import { HitSound, SimKind, SimResult, simulate } from "../sim/scenes";
+import { FRICTION_OFF, HitSound, SimKind, SimResult, simulate } from "../sim/scenes";
 import { fontFamily } from "../theme";
 
 // 物理エンジンで計算した場面を、3D で描く（人は関節つきの人形）
 
 const LANE_COLORS = ["#ff4a3d", "#2f8bff"];
-const LANE_NAMES = ["いまの地球 1G", "重力半分 0.5G"];
 const PARTY_SHIRTS = ["#ff4a3d", "#ffb020", "#2fc46b", "#2f8bff", "#b25cff"];
 
 type Cam = { pos: [number, number, number]; look: [number, number, number] };
@@ -67,13 +66,25 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       const d = 6.5 + far * 0.55;
       return { pos: [cx, 1.8 + far * 0.12, d], look: [cx, 1.6 + far * 0.1, 0] };
     }
-    case "brake": {
-      // 2台の車のまん中を見る
+    case "fstand":
+      return { pos: [0, 1.5, lerp(8.6, 8.0, t)], look: [0, 0.85, 0] };
+    case "fpush":
+      return { pos: [0.9, 1.9, lerp(10.2, 9.6, t)], look: [0.9, 0.8, 0] };
+    case "ladder":
+      // 斜め前から見下ろす（手前と奥のはしごが重ならないように）
+      return { pos: [lerp(-6.0, -5.4, t), 4.0, 8.2], look: [-0.4, 1.2, -0.3] };
+    case "fchaos": {
+      const a = lerp(-0.3, 0.3, t);
+      return { pos: [Math.sin(a) * 7.6, 2.1, Math.cos(a) * 7.6], look: [0, 1.1, 0] };
+    }
+    case "brake":
+    case "fbrake": {
+      // 2台の車のまん中を見る（止まれない車は、そのまま画面の外へ走り去る）
       const mid =
         (posAt(sim, f, findIndex(sim, "car", 0))[0] +
           posAt(sim, f, findIndex(sim, "car", 1))[0]) /
         2;
-      const cx = Math.max(-1, mid) + 2;
+      const cx = Math.min(Math.max(-1, mid), 10) + 2;
       return { pos: [cx - 5, 9, 17], look: [cx + 0.5, 0, 0] };
     }
     default: {
@@ -124,7 +135,7 @@ const useGroundTexture = (kind: SimKind) =>
     canvas.width = size;
     canvas.height = size;
     const ctx = canvas.getContext("2d")!;
-    if (kind === "brake") {
+    if (kind === "brake" || kind === "fbrake") {
       ctx.fillStyle = "#4a4d55";
       ctx.fillRect(0, 0, size, size);
       for (let i = 0; i < 1800; i++) {
@@ -144,7 +155,7 @@ const useGroundTexture = (kind: SimKind) =>
     tex.wrapT = THREE.RepeatWrapping;
     tex.colorSpace = THREE.SRGBColorSpace;
     // brake は 4m、それ以外は 2m（タイル1枚が1m）ごとにくり返す
-    const unit = kind === "brake" ? 4 : 2;
+    const unit = kind === "brake" || kind === "fbrake" ? 4 : 2;
     tex.repeat.set(200 / unit, 200 / unit);
     tex.anisotropy = 8;
     return tex;
@@ -287,7 +298,7 @@ const Cone: React.FC = () => (
 );
 
 const shirtColor = (sim: SimResult, doll: number, lane: number) =>
-  sim.kind === "party" ? PARTY_SHIRTS[doll % PARTY_SHIRTS.length] : LANE_COLORS[lane];
+  sim.kind === "party" || sim.kind === "fchaos" ? PARTY_SHIRTS[doll % PARTY_SHIRTS.length] : LANE_COLORS[lane];
 
 const Pill: React.FC<{
   x: number;
@@ -346,26 +357,34 @@ export const PhysicsScene: React.FC<{
 
   const overlays: React.ReactNode[] = [];
   const laneX = [width * 0.25, width * 0.75];
-  const lanesTop = sim.kind === "jump" || sim.kind === "scale" || sim.kind === "slip";
+  const isRoad = sim.kind === "brake" || sim.kind === "fbrake";
+  const lanesTop = ["jump", "scale", "slip", "fstand"].includes(sim.kind);
+  // 摩擦ゼロの世界は、摩擦が消えた瞬間からラベルを点滅させる
+  const offFrame = Math.round(FRICTION_OFF * fps);
+  const isFriction = sim.labels[1] === "摩擦ゼロ";
+  const blink =
+    isFriction && f >= offFrame && f < offFrame + 24
+      ? 1 + 0.18 * Math.sin(((f - offFrame) / 24) * Math.PI * 4)
+      : 1;
   if (lanesTop) {
-    const xs = sim.kind === "slip" ? [-0.8, 2.6] : [-1, 1];
+    const xs = sim.kind === "slip" ? [-0.8, 2.6] : [-1.2, 1.2];
     xs.forEach((x, lane) => {
       const p = project(cam, [x, 0, 0], width, height);
       laneX[lane] = Math.min(width - 190, Math.max(190, p.x));
       overlays.push(
-        <Pill key={`lane${lane}`} x={laneX[lane]} y={70} color={LANE_COLORS[lane]} size={44}>
-          {LANE_NAMES[lane]}
+        <Pill key={`lane${lane}`} x={laneX[lane]} y={70} color={LANE_COLORS[lane]} size={44 * (lane === 1 ? blink : 1)}>
+          {sim.labels[lane]}
         </Pill>,
       );
     });
-  } else if (sim.kind === "throw" || sim.kind === "brake") {
+  } else if (sim.kind === "throw" || isRoad || sim.kind === "fpush" || sim.kind === "ladder") {
     overlays.push(
       <div key="legend" style={{ position: "absolute", left: 30, top: 34, display: "flex", flexDirection: "column", gap: 12 }}>
         {[0, 1].map((lane) => (
           <div key={lane} style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div style={{ width: 34, height: 34, borderRadius: 8, background: LANE_COLORS[lane], border: "4px solid #fff" }} />
             <div style={{ fontFamily, fontWeight: 900, fontSize: 40, color: "#fff", WebkitTextStroke: "8px #111", paintOrder: "stroke fill" }}>
-              {LANE_NAMES[lane]}
+              {sim.labels[lane]}
             </div>
           </div>
         ))}
@@ -453,9 +472,18 @@ export const PhysicsScene: React.FC<{
       }
     });
   }
-  if (sim.kind === "brake") {
+  if (isRoad) {
     [0, 1].forEach((lane) => {
       const stop = v(`stop${lane}`);
+      const carX = posAt(sim, f, findIndex(sim, "car", lane))[0];
+      if (stop < 0 && sim.kind === "fbrake" && carX > 9) {
+        // 摩擦がないので、ブレーキをかけても止まれない
+        overlays.push(
+          <Pill key={`stop${lane}`} x={width * 0.62} y={190} color={LANE_COLORS[lane]} size={46}>
+            止まれない！
+          </Pill>,
+        );
+      }
       if (stop > 0) {
         const p = project(cam, [stop - 2, 1.8, lane === 0 ? 1.7 : -1.7], width, height);
         overlays.push(
@@ -464,6 +492,19 @@ export const PhysicsScene: React.FC<{
           </Pill>,
         );
       }
+    });
+  }
+
+  if (sim.kind === "fpush") {
+    [0, 1].forEach((lane) => {
+      const bi = findIndex(sim, "box", lane);
+      const p = project(cam, [posAt(sim, f, bi)[0], 1.05, lane === 0 ? 0.9 : -0.9], width, height);
+      const moved = Math.max(0, v(`box${lane}`));
+      overlays.push(
+        <Pill key={`box${lane}`} x={Math.min(width - 120, Math.max(120, p.x))} y={Math.max(190, p.y - 20)} color={LANE_COLORS[lane]} size={40}>
+          {moved < 0.05 ? "びくともしない" : `箱 ${moved.toFixed(1)}m →`}
+        </Pill>,
+      );
     });
   }
 
@@ -501,7 +542,18 @@ export const PhysicsScene: React.FC<{
     );
   });
 
-  const fogColor = kind === "brake" ? "#b9c7d6" : "#cfe8ff";
+  const fogColor = isRoad ? "#b9c7d6" : "#cfe8ff";
+  // 摩擦ゼロの地面は、つるつるの氷のように見せる（摩擦が消えた瞬間から）
+  const ice = isFriction
+    ? Math.min(1, Math.max(0, (f - offFrame) / 8))
+    : 0;
+  const iceArea: [number, number, number, number] | null = !isFriction
+    ? null
+    : sim.kind === "fchaos"
+      ? [0, 0, 40, 40]
+      : lanesTop
+        ? [10.0, 0, 20, 40]
+        : [0, -10, 80, 20];
 
   return (
     <AbsoluteFill>
@@ -535,6 +587,13 @@ export const PhysicsScene: React.FC<{
           <planeGeometry args={[200, 200]} />
           <meshStandardMaterial map={ground} roughness={0.95} />
         </mesh>
+
+        {iceArea && ice > 0 ? (
+          <mesh position={[iceArea[0], 0.004, iceArea[1]]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+            <planeGeometry args={[iceArea[2], iceArea[3]]} />
+            <meshStandardMaterial color="#d6f3ff" transparent opacity={0.62 * ice} roughness={0.08} metalness={0.25} />
+          </mesh>
+        ) : null}
 
         {lanesTop ? (
           // レーンの境目
@@ -589,7 +648,7 @@ export const PhysicsScene: React.FC<{
           </mesh>
         ) : null}
 
-        {sim.kind === "brake" ? (
+        {isRoad ? (
           <>
             {/* ブレーキをかける線 */}
             <mesh position={[0, 0.006, 0]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -657,6 +716,49 @@ export const PhysicsScene: React.FC<{
             return (
               <group key={i} position={pos} quaternion={quat}>
                 <Car color={b.color!} />
+              </group>
+            );
+          }
+          if (b.shape === "box") {
+            return (
+              <group key={i} position={pos} quaternion={quat}>
+                <mesh castShadow receiveShadow>
+                  <boxGeometry args={b.size} />
+                  <meshStandardMaterial color={b.color} roughness={0.85} />
+                </mesh>
+                {/* ガムテープ */}
+                <mesh position={[0, b.size[1] / 2 + 0.002, 0]}>
+                  <boxGeometry args={[b.size[0] + 0.004, 0.004, 0.16]} />
+                  <meshStandardMaterial color="#d9b77c" roughness={0.6} />
+                </mesh>
+              </group>
+            );
+          }
+          if (b.shape === "wall") {
+            return (
+              <mesh key={i} position={pos} quaternion={quat} castShadow receiveShadow>
+                <boxGeometry args={b.size} />
+                <meshStandardMaterial color="#d8cbb8" roughness={0.9} />
+              </mesh>
+            );
+          }
+          if (b.shape === "ladder") {
+            const L = b.size[1];
+            return (
+              <group key={i} position={pos} quaternion={quat}>
+                {[-0.24, 0.24].map((z) => (
+                  <mesh key={z} position={[0, 0, z]} castShadow>
+                    <boxGeometry args={[0.06, L, 0.06]} />
+                    {/* 柱は左上の色見本と同じ色（赤＝いまの地球、青＝摩擦ゼロ） */}
+                    <meshStandardMaterial color={LANE_COLORS[b.lane]} roughness={0.35} metalness={0.3} />
+                  </mesh>
+                ))}
+                {Array.from({ length: 7 }, (_, k) => (
+                  <mesh key={k} position={[0, -L / 2 + 0.35 + k * 0.38, 0]} rotation={[Math.PI / 2, 0, 0]} castShadow>
+                    <cylinderGeometry args={[0.02, 0.02, 0.48, 10]} />
+                    <meshStandardMaterial color="#aeb4bd" roughness={0.35} metalness={0.6} />
+                  </mesh>
+                ))}
               </group>
             );
           }

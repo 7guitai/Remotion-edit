@@ -8,6 +8,7 @@ import sleepTrivia1h from "./sleep-trivia-1h.json";
 import thingsRankingShort from "./things-ranking-short.json";
 import whatifRotationShort from "./whatif-rotation-short.json";
 import whatifMoonShort from "./whatif-moon-short.json";
+import whatifFrictionShort from "./whatif-friction-short.json";
 import whatifGravityShort from "./whatif-gravity-short.json";
 import whatifSunShort from "./whatif-sun-short.json";
 import foodRankingShort from "./food-ranking-short.json";
@@ -206,6 +207,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  whatifFrictionShort as Episode,
   whatifGravityShort as Episode,
   whatifSunShort as Episode,
   whatifRotationShort as Episode,
