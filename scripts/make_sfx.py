@@ -6,6 +6,7 @@
 - whoosh.wav … 派手版のページ切り替えの「シュッ」
 - impact.wav … 派手版の答えが出るときの「ドンッ」
 - sparkle.wav … 派手版の答えのきらきら「キラッ」
+- thud.wav   … 物理シミュレーションで人や物が地面にぶつかる「ドサッ」
 
 使い方: python3 scripts/make_sfx.py
 """
@@ -75,6 +76,21 @@ def impact() -> list[float]:
     return out
 
 
+def thud() -> list[float]:
+    # こもった低い音＋短くこすれるノイズ（布や体が地面に当たる感じ）
+    n = int(RATE * 0.35)
+    out, phase, y = [], 0.0, 0.0
+    nz = noise(n, 3)
+    for t in range(n):
+        freq = 55 + 70 * math.exp(-t / RATE / 0.03)
+        phase += 2 * math.pi * freq / RATE
+        body = math.exp(-t / RATE / 0.07) * math.sin(phase)
+        y += 0.12 * (nz[t] - y)  # ノイズをこもらせる
+        rustle = 1.4 * math.exp(-t / RATE / 0.04) * y
+        out.append(0.8 * body + rustle)
+    return out
+
+
 def mix(*parts: tuple[float, list[float]]) -> list[float]:
     length = max(int(start * RATE) + len(s) for start, s in parts)
     out = [0.0] * length
@@ -105,6 +121,7 @@ def main() -> None:
     write("pop.wav", pop())
     write("whoosh.wav", whoosh())
     write("impact.wav", impact())
+    write("thud.wav", thud())
     write("sparkle.wav", mix(*[(i * 0.05, tone(f, 0.4, 0.12, 0.18)) for i, f in enumerate([2093, 2637, 3136, 4186])]))
     write("correct.wav", mix((0, tone(1318.5, 0.35, 0.12, 0.35)), (0.16, tone(1046.5, 0.9, 0.3, 0.35))))
 

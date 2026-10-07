@@ -11,7 +11,7 @@ import * as THREE from "three";
 
 export type GlobeProps = {
   // 貼り付ける地図（public/footage/ の NASA テクスチャ）
-  texture: "earth" | "earth_night" | "moon";
+  texture: "earth" | "earth_night" | "moon" | "mars";
   // 1フレームあたりの回転（度）
   speed?: number;
   // このフレームで急ブレーキをかけて止める
@@ -31,6 +31,7 @@ const TEXTURES = {
   earth: "footage/earth_texture_5400.jpg",
   earth_night: "footage/earth_night_texture.jpg",
   moon: "footage/moon_texture_2k.jpg",
+  mars: "footage/mars_texture.jpg",
 };
 
 const useTexture = (path: string) => {
@@ -63,7 +64,7 @@ export const Globe: React.FC<GlobeProps> = ({
   texture,
   speed = 0.6,
   stopAt,
-  tilt = texture === "moon" ? 0 : 23.4,
+  tilt = texture === "moon" ? 0 : texture === "mars" ? 25.2 : 23.4,
   tiltTo,
   size = 1,
   sizeTo,
@@ -118,13 +119,13 @@ export const Globe: React.FC<GlobeProps> = ({
           ) : null}
         </mesh>
         {texture === "moon" ? null : (
-          // 大気のうっすらした光
-          <mesh scale={1.035}>
+          // 大気のうっすらした光（火星はうすいオレンジ）
+          <mesh scale={texture === "mars" ? 1.02 : 1.035}>
             <sphereGeometry args={[1, 64, 64]} />
             <meshBasicMaterial
-              color="#5fb0ff"
+              color={texture === "mars" ? "#ffb27a" : "#5fb0ff"}
               transparent
-              opacity={0.16}
+              opacity={texture === "mars" ? 0.1 : 0.16}
               side={THREE.BackSide}
             />
           </mesh>

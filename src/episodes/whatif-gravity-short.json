@@ -1,0 +1,129 @@
+{
+  "id": "whatif-gravity-short",
+  "title": "もし重力が半分になったら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.11,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "odoru_uchuu.mp3",
+    "title": "踊る、宇宙の中で(Dancing,at Universe)",
+    "credit": "蒲鉾さちこ",
+    "page": "https://opentracks.com/bgm/detail/15926",
+    "opentracks": 15926,
+    "track": 2
+  },
+  "headline": [
+    "もし重力が",
+    "半分になったら？"
+  ],
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、地球の重力が、突然半分になったら、どうなるのか？",
+      "bg": "space",
+      "effect": "zoom",
+      "globe": {
+        "texture": "earth",
+        "speed": 0.8
+      }
+    },
+    {
+      "type": "whatif",
+      "text": "まず、体重計にのると、体重がなんと半分に！",
+      "sim": "scale",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "でも、筋肉の力はそのまま。ジャンプすると、約2倍の高さまで跳べるといわれているんだ。",
+      "sim": "jump",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "転んだときも、倒れるのがゆっくりになって、地面にぶつかる勢いも弱くなる。",
+      "sim": "slip",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "ボールを投げると、空気の抵抗を考えなければ、約2倍遠くまで飛ぶんだ。",
+      "sim": "throw",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "ただし、困ることもある。タイヤが地面を押す力も半分になるので、止まるまでの距離は約2倍に。",
+      "sim": "brake",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "さらに、地球が空気を引きとめる力も弱くなる。長い時間をかけて、空気が宇宙へ逃げやすくなるといわれているんだ。",
+      "bg": "space",
+      "effect": "none",
+      "footage": {
+        "file": "iss_ocean.mp4",
+        "start": 0
+      }
+    },
+    {
+      "type": "whatif",
+      "text": "実は、重力が小さい星は、本当にある。火星の重力は、地球の約4割。",
+      "bg": "space",
+      "effect": "zoom",
+      "globe": {
+        "texture": "mars",
+        "speed": 0.7
+      },
+      "big": "約4割"
+    },
+    {
+      "type": "whatif",
+      "text": "重力が小さいこともあって、火星には、エベレストの約2.5倍の高さといわれる、オリンポス山があるんだ。",
+      "bg": "space",
+      "effect": "none",
+      "photo": {
+        "file": "olympus_mons_viking.jpg",
+        "zoom": 1.05
+      },
+      "big": "約2.5倍"
+    },
+    {
+      "type": "whatif",
+      "text": "月の重力は、さらに小さい、地球の約6分の1。",
+      "bg": "space",
+      "effect": "zoom",
+      "globe": {
+        "texture": "moon",
+        "speed": 0.6
+      },
+      "big": "約6分の1"
+    },
+    {
+      "type": "whatif",
+      "text": "重力が半分の世界、住んでみたい？コメントで教えてね！",
+      "sim": "party",
+      "effect": "none"
+    }
+  ],
+  "description": "もし地球の重力が突然半分になったら、体重・ジャンプ・ボール・車のブレーキはどうなるのか？\n人や車の動きは、物理エンジンでシミュレーションして作りました。\nほかに知りたい「もしも」は、コメントで教えてください！\n映像・画像：NASA / NASA/JPL（火星・オリンポス山）",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "重力",
+    "物理",
+    "火星",
+    "Shorts"
+  ]
+}

@@ -14,6 +14,7 @@ import { WhatIfSlide } from "../episodes";
 import { fontFamily } from "../theme";
 import { charWidth } from "./ThreadPage";
 import { Globe } from "./Globe";
+import { PhysicsScene } from "./PhysicsScene";
 
 // 画面の配置（1080×1920）：上の黒帯にタイトル、真ん中が映像、下は黒
 export const VIEW = { top: 520, height: 1000 };
@@ -397,6 +398,9 @@ export const WhatIfPage: React.FC<{
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           </AbsoluteFill>
+        ) : null}
+        {slide.sim ? (
+          <PhysicsScene kind={slide.sim} width={1080} height={VIEW.height} />
         ) : null}
         {slide.globe ? (
           <AbsoluteFill

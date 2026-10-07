@@ -333,6 +333,34 @@
         "氷",
         "宇宙ステーション"
       ]
+    },
+    {
+      "file": "mars_texture.jpg",
+      "type": "image",
+      "ja": "火星の全球地図（3D の火星に貼るテクスチャ・正距円筒図法）",
+      "title": "Mars texture (NASA 3D Resources)",
+      "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/Images%20and%20Textures/Mars/Mars.jpg",
+      "page": "https://github.com/nasa/NASA-3D-Resources",
+      "credit": "NASA",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "火星",
+        "テクスチャ"
+      ]
+    },
+    {
+      "file": "olympus_mons_viking.jpg",
+      "type": "image",
+      "ja": "火星のオリンポス山（バイキング1号のカラーモザイク）",
+      "title": "Color Mosaic of Olympus Mons (PIA02982)",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia02/pia02982/PIA02982.jpg",
+      "page": "https://science.nasa.gov/photojournal/color-mosaic-of-olympus-mons/",
+      "credit": "NASA/JPL",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "火星",
+        "山"
+      ]
     }
   ]
 }

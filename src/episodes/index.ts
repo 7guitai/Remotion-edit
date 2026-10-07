@@ -8,6 +8,7 @@ import sleepTrivia1h from "./sleep-trivia-1h.json";
 import thingsRankingShort from "./things-ranking-short.json";
 import whatifRotationShort from "./whatif-rotation-short.json";
 import whatifMoonShort from "./whatif-moon-short.json";
+import whatifGravityShort from "./whatif-gravity-short.json";
 import whatifSunShort from "./whatif-sun-short.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
@@ -127,6 +128,8 @@ export type WhatIfSlide = {
   footage?: { file: string; start?: number; zoom?: number; focus?: [number, number] };
   // NASA などの写真（public/footage/）。ゆっくり寄りながら見せる
   photo?: { file: string; zoom?: number; focus?: [number, number] };
+  // 物理エンジンのシミュレーション（人が出る場面はこれで描く）
+  sim?: import("../sim/scenes").SimKind;
 };
 
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
@@ -194,6 +197,8 @@ export type Episode = {
     credit: string;
     url?: string;
     opentracks?: number;
+    // OpenTracks の別バージョン（Track2 など）
+    track?: number;
   };
   readings?: Record<string, string>;
   illustrations: Record<string, Illustration>;
@@ -201,6 +206,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  whatifGravityShort as Episode,
   whatifSunShort as Episode,
   whatifRotationShort as Episode,
   whatifMoonShort as Episode,

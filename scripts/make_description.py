@@ -99,7 +99,12 @@ def main() -> None:
         ),
         *([f"BGM：{ep['bgm']['credit']}「{ep['bgm']['title']}」"] if ep.get("bgm") else []),
         *([f"環境音：{ep['ambient']['name']}"] if ep.get("ambient") else []),
-        "イラスト：" + "、".join(dict.fromkeys(i.get("credit", "いらすとや") for i in ep["illustrations"].values())),
+        # イラストを使っていない回（「もしも」など）は書かない
+        *(
+            ["イラスト：" + "、".join(dict.fromkeys(i.get("credit", "いらすとや") for i in ep["illustrations"].values()))]
+            if ep["illustrations"]
+            else []
+        ),
         "",
     ]
     if ep.get("hashtags"):
