@@ -32,12 +32,19 @@ export type SimResult = {
   // frames × bodies × 7（x, y, z, qx, qy, qz, qw）
   data: Float32Array;
   // 地面などにぶつかった瞬間（効果音用）
-  impacts: { frame: number; v: number }[];
+  impacts: Impact[];
   // 場面ごとの数値（体重計の目盛り・最高点・ストップウォッチなど）。frames 個ずつ
   values: Record<string, Float32Array>;
   // 各レーンの重力（m/s²）
   gravity: number[];
 };
+
+// ぶつかった物の種類で効果音を変える（body=人、ball=ボール、cone=コーン）
+export type HitSound = "body" | "ball" | "cone";
+export type Impact = { frame: number; v: number; sound: HitSound; lane: number };
+
+// 物体ごとの音の種類（車はコーンに当たったときだけ鳴らすので cone 扱い）
+const soundOf = new WeakMap<CANNON.Body, HitSound | "car">();
 
 export const G = 9.8;
 const SUB = 8;
@@ -168,6 +175,7 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
     const rd = createRagdoll(world, origin, yaw, bodyMaterial);
     bodies.push(...ragdollBodies(rd, lane, doll));
     tracked.push(...ragdollParts.map((p) => rd.bodies[p]));
+    ragdollParts.forEach((p) => soundOf.set(rd.bodies[p], "body"));
     return rd;
   };
 
@@ -298,6 +306,7 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
         color: lane === 0 ? "#ff3b3b" : "#2f8bff",
       });
       tracked.push(ball);
+      soundOf.set(ball, "ball");
       const landX = val(`land${lane}`);
       let released = false;
       let landed = -1;
@@ -369,6 +378,7 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
       world.addBody(car);
       bodies.push({ lane, shape: "car", size: [4.0, 0.9, 1.7], color: lane === 0 ? "#e8333a" : "#2f7bff" });
       tracked.push(car);
+      soundOf.set(car, "car");
       // コーン（ここより先に行ったらアウト）
       for (let i = 0; i < 3; i++) {
         const cone = new CANNON.Body({
@@ -380,6 +390,7 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
         world.addBody(cone);
         bodies.push({ lane, shape: "cone", size: [0.4, 0.6, 0.4] });
         tracked.push(cone);
+        soundOf.set(cone, "cone");
       }
       const stopX = val(`stop${lane}`);
       let braking = false;
@@ -454,32 +465,54 @@ export const simulate = (kind: SimKind, frames: number, fps: number): SimResult 
   }
   const { lanes, bodies, tracked, values } = build(kind, frames, fps);
   const data = new Float32Array(frames * tracked.length * 7);
-  const impacts: { frame: number; v: number }[] = [];
+  const impacts: Impact[] = [];
   const dt = 1 / (fps * SUB);
-  // 地面にぶつかった強さを、フレームごと・レーンごとに集める
-  const hits = lanes.map(() => 0);
-  const lastHit = lanes.map(() => -100);
+  // ぶつかった瞬間の「面に向かう速さ」を、フレームごと・レーンごと・音の種類ごとに集める
+  // （横にすべっているだけの接触では鳴らさない）
+  const sounds: HitSound[] = ["body", "ball", "cone"];
+  const hits = lanes.map(() => ({ body: 0, ball: 0, cone: 0 }));
+  const lastHit = lanes.map(() => ({ body: -100, ball: -100, cone: -100 }));
   lanes.forEach((lane, li) => {
-    lane.world.addEventListener(
-      "beginContact",
-      (e: { bodyA: CANNON.Body; bodyB: CANNON.Body }) => {
-        const v = e.bodyA.velocity.vsub(e.bodyB.velocity).length();
-        hits[li] = Math.max(hits[li], v);
-      },
-    );
+    for (const b of lane.world.bodies) {
+      const self = soundOf.get(b);
+      if (!self) {
+        continue;
+      }
+      b.addEventListener(
+        "collide",
+        (e: { body: CANNON.Body; contact: CANNON.ContactEquation }) => {
+          const other = soundOf.get(e.body);
+          // 人の体どうし（自分の腕と胴体など）は鳴らさない。車と地面も鳴らさない
+          if ((self === "body" && other === "body") || (self === "car" && !other)) {
+            return;
+          }
+          const sound: HitSound =
+            self === "cone" || other === "cone" || self === "car"
+              ? "cone"
+              : self === "ball" || other === "ball"
+                ? "ball"
+                : "body";
+          const v = Math.abs(e.contact.getImpactVelocityAlongNormal());
+          hits[li][sound] = Math.max(hits[li][sound], v);
+        },
+      );
+    }
   });
   for (let f = 0; f < frames; f++) {
     lanes.forEach((lane, li) => {
-      hits[li] = 0;
+      hits[li] = { body: 0, ball: 0, cone: 0 };
       for (let s = 0; s < SUB; s++) {
         const t = f / fps + s * dt;
         lane.control(t, dt);
         lane.world.step(dt);
       }
       lane.record(f);
-      if (hits[li] > 1.6 && f - lastHit[li] > 5) {
-        impacts.push({ frame: f, v: hits[li] });
-        lastHit[li] = f;
+      for (const sound of sounds) {
+        const v = hits[li][sound];
+        if (v > 0.8 && f - lastHit[li][sound] > 4) {
+          impacts.push({ frame: f, v, sound, lane: li });
+          lastHit[li][sound] = f;
+        }
       }
     });
     tracked.forEach((b, i) => {

@@ -6,7 +6,9 @@
 - whoosh.wav … 派手版のページ切り替えの「シュッ」
 - impact.wav … 派手版の答えが出るときの「ドンッ」
 - sparkle.wav … 派手版の答えのきらきら「キラッ」
-- thud.wav   … 物理シミュレーションで人や物が地面にぶつかる「ドサッ」
+- thud1〜3.wav … 物理シミュレーションで人が地面にぶつかる「ドサッ」（毎回同じ音にならないよう高さ違いを3つ）
+- tok.wav    … ボールが地面ではねる「トッ」
+- clack.wav  … コーンが車に当たる・倒れる「カコン」
 
 使い方: python3 scripts/make_sfx.py
 """
@@ -76,19 +78,50 @@ def impact() -> list[float]:
     return out
 
 
-def thud() -> list[float]:
+def thud(pitch: float = 1.0, seed: int = 3) -> list[float]:
     # こもった低い音＋短くこすれるノイズ（布や体が地面に当たる感じ）
-    n = int(RATE * 0.35)
+    n = int(RATE * 0.3)
     out, phase, y = [], 0.0, 0.0
-    nz = noise(n, 3)
+    nz = noise(n, seed)
     for t in range(n):
-        freq = 55 + 70 * math.exp(-t / RATE / 0.03)
+        freq = pitch * (50 + 60 * math.exp(-t / RATE / 0.025))
         phase += 2 * math.pi * freq / RATE
-        body = math.exp(-t / RATE / 0.07) * math.sin(phase)
-        y += 0.12 * (nz[t] - y)  # ノイズをこもらせる
-        rustle = 1.4 * math.exp(-t / RATE / 0.04) * y
-        out.append(0.8 * body + rustle)
-    return out
+        body = math.exp(-t / RATE / 0.06) * math.sin(phase)
+        y += 0.08 * (nz[t] - y)  # ノイズをこもらせる
+        rustle = 1.2 * math.exp(-t / RATE / 0.03) * y
+        out.append(0.7 * body + rustle)
+    return normalize(out, 0.6)
+
+
+def tok() -> list[float]:
+    # ゴムのボールがはねる、短く高めの「トッ」
+    n = int(RATE * 0.12)
+    out, phase = [], 0.0
+    for t in range(n):
+        freq = 260 + 180 * math.exp(-t / RATE / 0.01)
+        phase += 2 * math.pi * freq / RATE
+        out.append(math.exp(-t / RATE / 0.025) * math.sin(phase))
+    return normalize(out, 0.5)
+
+
+def clack() -> list[float]:
+    # 中が空洞のプラスチックが当たる「カコン」（いくつかの共鳴を重ねる）
+    n = int(RATE * 0.25)
+    nz = noise(n, 5)
+    out = []
+    for t in range(n):
+        sec = t / RATE
+        ring = sum(
+            a * math.exp(-sec / d) * math.sin(2 * math.pi * f * sec)
+            for f, a, d in [(620, 1.0, 0.05), (1130, 0.6, 0.035), (1870, 0.35, 0.02)]
+        )
+        out.append(ring + 0.5 * math.exp(-sec / 0.004) * nz[t])
+    return normalize(out, 0.5)
+
+
+def normalize(samples: list[float], peak: float) -> list[float]:
+    m = max(abs(v) for v in samples) or 1.0
+    return [v * peak / m for v in samples]
 
 
 def mix(*parts: tuple[float, list[float]]) -> list[float]:
@@ -121,7 +154,10 @@ def main() -> None:
     write("pop.wav", pop())
     write("whoosh.wav", whoosh())
     write("impact.wav", impact())
-    write("thud.wav", thud())
+    for k, (pitch, seed) in enumerate([(1.0, 3), (0.86, 7), (1.15, 11)], start=1):
+        write(f"thud{k}.wav", thud(pitch, seed))
+    write("tok.wav", tok())
+    write("clack.wav", clack())
     write("sparkle.wav", mix(*[(i * 0.05, tone(f, 0.4, 0.12, 0.18)) for i, f in enumerate([2093, 2637, 3136, 4186])]))
     write("correct.wav", mix((0, tone(1318.5, 0.35, 0.12, 0.35)), (0.16, tone(1046.5, 0.9, 0.3, 0.35))))
 

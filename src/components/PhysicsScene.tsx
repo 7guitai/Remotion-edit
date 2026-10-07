@@ -11,7 +11,7 @@ import {
 } from "remotion";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
-import { SimKind, SimResult, simulate } from "../sim/scenes";
+import { HitSound, SimKind, SimResult, simulate } from "../sim/scenes";
 import { fontFamily } from "../theme";
 
 // 物理エンジンで計算した場面を、3D で描く（人は関節つきの人形）
@@ -182,6 +182,13 @@ const useRulerTexture = (labels: string[], vertical: boolean) =>
     tex.anisotropy = 8;
     return tex;
   }, [labels, vertical]);
+
+// 効果音の種類ごとの最大音量と、最大になるぶつかる速さ（m/s）
+const HIT_SOUNDS: Record<HitSound, { file: string; max: number; ref: number }> = {
+  body: { file: "sfx/thud1.wav", max: 0.3, ref: 5 },
+  ball: { file: "sfx/tok.wav", max: 0.22, ref: 9 },
+  cone: { file: "sfx/clack.wav", max: 0.25, ref: 6 },
+};
 
 const SKIN = "#f1c7a0";
 const PANTS = "#2d3a57";
@@ -480,15 +487,19 @@ export const PhysicsScene: React.FC<{
     });
   }
 
-  // 効果音：ぶつかった強さで音量を変える
-  const sounds = sim.impacts.map((hit, i) => (
-    <Sequence key={i} from={hit.frame} durationInFrames={20}>
-      <Audio
-        src={staticFile("sfx/thud.wav")}
-        volume={Math.min(0.9, 0.2 + hit.v * 0.08)}
-      />
-    </Sequence>
-  ));
+  // 効果音：ぶつかった速さで音量を変える（音の大きさは速さの約1.5乗で増える）。
+  // 人の音は高さ違いの3種類を順番に使い、毎回まったく同じ音にならないようにする
+  const sounds = sim.impacts.map((hit, i) => {
+    const spec = HIT_SOUNDS[hit.sound];
+    const file =
+      hit.sound === "body" ? `sfx/thud${(i % 3) + 1}.wav` : spec.file;
+    const volume = spec.max * Math.min(1, (hit.v / spec.ref) ** 1.5);
+    return (
+      <Sequence key={i} from={hit.frame} durationInFrames={15}>
+        <Audio src={staticFile(file)} volume={volume} />
+      </Sequence>
+    );
+  });
 
   const fogColor = kind === "brake" ? "#b9c7d6" : "#cfe8ff";
 
