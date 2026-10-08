@@ -1,6 +1,7 @@
 import React from "react";
 import { Composition, Still } from "remotion";
 import { SleepThumbnail } from "./components/SleepThumbnail";
+import { WhatIfThumbnail } from "./components/WhatIfThumbnail";
 import { EPISODES } from "./episodes";
 import { calculateMetadata, FPS } from "./slides";
 import { Video } from "./Video";
@@ -34,6 +35,19 @@ export const RemotionRoot: React.FC = () => {
           catchCopy: "聴くだけで\nぐっすり",
           hours: "1",
           tag: "雨の音",
+        }}
+      />
+      {/* 「地球の“もしも”10選」のサムネイル（npx remotion still whatif-earth-long-thumbnail out/thumb.png --gl=swangle） */}
+      <Still
+        id="whatif-earth-long-thumbnail"
+        component={WhatIfThumbnail}
+        width={1280}
+        height={720}
+        defaultProps={{
+          kicker: "物理シミュレーションで検証",
+          title: ["地球の", "“もしも”"],
+          big: "10選",
+          badge: "海が消えた地球",
         }}
       />
     </>

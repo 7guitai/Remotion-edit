@@ -11,7 +11,14 @@ import {
 } from "remotion";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
-import { FRICTION_OFF, HitSound, SimKind, SimResult, simulate } from "../sim/scenes";
+import {
+  FRICTION_KINDS,
+  FRICTION_OFF,
+  HitSound,
+  SimKind,
+  SimResult,
+  simulate,
+} from "../sim/scenes";
 import { fontFamily } from "../theme";
 
 // 物理エンジンで計算した場面を、3D で描く（人は関節つきの人形）
@@ -66,6 +73,8 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       const d = 6.5 + far * 0.55;
       return { pos: [cx, 1.8 + far * 0.12, d], look: [cx, 1.6 + far * 0.1, 0] };
     }
+    case "wind":
+      return { pos: [-0.2, 1.7, lerp(9.6, 9.0, t)], look: [-0.2, 1.15, 0] };
     case "fstand":
       return { pos: [0, 1.5, lerp(8.6, 8.0, t)], look: [0, 0.85, 0] };
     case "fpush":
@@ -335,15 +344,31 @@ export const PhysicsScene: React.FC<{
   kind: SimKind;
   width: number;
   height: number;
-}> = ({ kind, width, height }) => {
+  // 重力くらべの右（奥）の世界の重力（1G に対する倍率）
+  gravity?: number;
+  // 左右の世界の名前（省略するとシミュレーションの種類から決まる）
+  labels?: [string, string];
+  // シミュレーションの途中（フレーム）から見せる
+  offset?: number;
+}> = ({ kind, width, height, gravity = 0.5, labels, offset = 0 }) => {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const sim = useMemo(
-    () => simulate(kind, durationInFrames, fps),
-    [kind, durationInFrames, fps],
+    () => simulate(kind, durationInFrames + offset, fps, gravity),
+    [kind, durationInFrames, fps, gravity, offset],
   );
-  const f = Math.min(frame, sim.frames - 1);
-  const cam = cameraFor(sim, f, sim.frames);
+  const laneNames = labels ?? sim.labels;
+  const f = Math.min(frame + offset, sim.frames - 1);
+  // 横長の画面では、人がもう少し大きく見えるよう、カメラを少し近づける
+  const landscape = width > height;
+  const cam0 = cameraFor(sim, f, sim.frames);
+  const near = landscape && !["throw", "brake", "fbrake"].includes(kind) ? 0.8 : 1;
+  const cam: Cam = {
+    pos: cam0.pos.map((p, i) => cam0.look[i] + (p - cam0.look[i]) * near) as [number, number, number],
+    look: cam0.look,
+  };
+  // 横長では右上に章の名前が出るので、ラベル類を少し下げる
+  const T = landscape ? 70 : 0;
   const ground = useGroundTexture(kind);
   const heightRuler = useRulerTexture(
     ["0m", "", "1m", "", "2m", "", "3m"],
@@ -358,33 +383,40 @@ export const PhysicsScene: React.FC<{
   const overlays: React.ReactNode[] = [];
   const laneX = [width * 0.25, width * 0.75];
   const isRoad = sim.kind === "brake" || sim.kind === "fbrake";
-  const lanesTop = ["jump", "scale", "slip", "fstand"].includes(sim.kind);
+  const lanesTop = ["jump", "scale", "slip", "fstand", "wind"].includes(sim.kind);
   // 摩擦ゼロの世界は、摩擦が消えた瞬間からラベルを点滅させる
   const offFrame = Math.round(FRICTION_OFF * fps);
-  const isFriction = sim.labels[1] === "摩擦ゼロ";
+  const isFriction = FRICTION_KINDS.includes(sim.kind);
   const blink =
     isFriction && f >= offFrame && f < offFrame + 24
       ? 1 + 0.18 * Math.sin(((f - offFrame) / 24) * Math.PI * 4)
       : 1;
   if (lanesTop) {
-    const xs = sim.kind === "slip" ? [-0.8, 2.6] : [-1.2, 1.2];
+    const xs =
+      sim.kind === "slip"
+        ? [-0.8, 2.6]
+        : sim.kind === "wind"
+          ? [-1.5, 1.0]
+          : sim.kind === "scale" || sim.kind === "jump"
+            ? [-1, 1]
+            : [-1.2, 1.2];
     xs.forEach((x, lane) => {
       const p = project(cam, [x, 0, 0], width, height);
       laneX[lane] = Math.min(width - 190, Math.max(190, p.x));
       overlays.push(
-        <Pill key={`lane${lane}`} x={laneX[lane]} y={70} color={LANE_COLORS[lane]} size={44 * (lane === 1 ? blink : 1)}>
-          {sim.labels[lane]}
+        <Pill key={`lane${lane}`} x={laneX[lane]} y={70 + T} color={LANE_COLORS[lane]} size={44 * (lane === 1 ? blink : 1)}>
+          {laneNames[lane]}
         </Pill>,
       );
     });
   } else if (sim.kind === "throw" || isRoad || sim.kind === "fpush" || sim.kind === "ladder") {
     overlays.push(
-      <div key="legend" style={{ position: "absolute", left: 30, top: 34, display: "flex", flexDirection: "column", gap: 12 }}>
+      <div key="legend" style={{ position: "absolute", left: 30, top: 34 + T, display: "flex", flexDirection: "column", gap: 12 }}>
         {[0, 1].map((lane) => (
           <div key={lane} style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div style={{ width: 34, height: 34, borderRadius: 8, background: LANE_COLORS[lane], border: "4px solid #fff" }} />
             <div style={{ fontFamily, fontWeight: 900, fontSize: 40, color: "#fff", WebkitTextStroke: "8px #111", paintOrder: "stroke fill" }}>
-              {sim.labels[lane]}
+              {laneNames[lane]}
             </div>
           </div>
         ))}
@@ -392,6 +424,14 @@ export const PhysicsScene: React.FC<{
     );
   }
 
+  if (sim.kind === "wind") {
+    const w = v("wind0");
+    overlays.push(
+      <Pill key="wind" x={width / 2} y={150 + T} color="#334" size={40}>
+        {`風速 ${Math.round(w)}m/s`}
+      </Pill>,
+    );
+  }
   if (sim.kind === "scale") {
     [0, 1].forEach((lane) => {
       overlays.push(
@@ -400,7 +440,7 @@ export const PhysicsScene: React.FC<{
           style={{
             position: "absolute",
             left: laneX[lane],
-            top: 128,
+            top: 128 + T,
             transform: "translate(-50%, 0)",
             fontFamily: "'Courier New', monospace",
             fontWeight: 900,
@@ -441,7 +481,7 @@ export const PhysicsScene: React.FC<{
           style={{
             position: "absolute",
             left: laneX[lane],
-            top: 128,
+            top: 128 + T,
             transform: "translate(-50%, 0)",
             fontFamily,
             fontWeight: 900,
@@ -465,7 +505,7 @@ export const PhysicsScene: React.FC<{
       if (land > 0) {
         const p = project(cam, [land, 0.9, lane === 0 ? 0.9 : -0.9], width, height);
         overlays.push(
-          <Pill key={`land${lane}`} x={Math.min(width - 120, Math.max(120, p.x))} y={Math.max(190, p.y - 40)} color={LANE_COLORS[lane]} size={42}>
+          <Pill key={`land${lane}`} x={Math.min(width - 120, Math.max(120, p.x))} y={Math.max(190 + T, p.y - 40)} color={LANE_COLORS[lane]} size={42}>
             {`約${Math.round(land)}m`}
           </Pill>,
         );
@@ -479,7 +519,7 @@ export const PhysicsScene: React.FC<{
       if (stop < 0 && sim.kind === "fbrake" && carX > 9) {
         // 摩擦がないので、ブレーキをかけても止まれない
         overlays.push(
-          <Pill key={`stop${lane}`} x={width * 0.62} y={190} color={LANE_COLORS[lane]} size={46}>
+          <Pill key={`stop${lane}`} x={width * 0.62} y={190 + T} color={LANE_COLORS[lane]} size={46}>
             止まれない！
           </Pill>,
         );
@@ -487,7 +527,7 @@ export const PhysicsScene: React.FC<{
       if (stop > 0) {
         const p = project(cam, [stop - 2, 1.8, lane === 0 ? 1.7 : -1.7], width, height);
         overlays.push(
-          <Pill key={`stop${lane}`} x={Math.min(width - 200, Math.max(200, p.x))} y={Math.max(190, p.y - 30)} color={LANE_COLORS[lane]} size={42}>
+          <Pill key={`stop${lane}`} x={Math.min(width - 200, Math.max(200, p.x))} y={Math.max(190 + T, p.y - 30)} color={LANE_COLORS[lane]} size={42}>
             {`${stop.toFixed(1)}mで停止`}
           </Pill>,
         );
@@ -501,7 +541,7 @@ export const PhysicsScene: React.FC<{
       const p = project(cam, [posAt(sim, f, bi)[0], 1.05, lane === 0 ? 0.9 : -0.9], width, height);
       const moved = Math.max(0, v(`box${lane}`));
       overlays.push(
-        <Pill key={`box${lane}`} x={Math.min(width - 120, Math.max(120, p.x))} y={Math.max(190, p.y - 20)} color={LANE_COLORS[lane]} size={40}>
+        <Pill key={`box${lane}`} x={Math.min(width - 120, Math.max(120, p.x))} y={Math.max(190 + T, p.y - 20)} color={LANE_COLORS[lane]} size={40}>
           {moved < 0.05 ? "びくともしない" : `箱 ${moved.toFixed(1)}m →`}
         </Pill>,
       );
@@ -530,13 +570,15 @@ export const PhysicsScene: React.FC<{
 
   // 効果音：ぶつかった速さで音量を変える（音の大きさは速さの約1.5乗で増える）。
   // 人の音は高さ違いの3種類を順番に使い、毎回まったく同じ音にならないようにする
-  const sounds = sim.impacts.map((hit, i) => {
+  const sounds = sim.impacts
+    .filter((hit) => hit.frame >= offset)
+    .map((hit, i) => {
     const spec = HIT_SOUNDS[hit.sound];
     const file =
       hit.sound === "body" ? `sfx/thud${(i % 3) + 1}.wav` : spec.file;
     const volume = spec.max * Math.min(1, (hit.v / spec.ref) ** 1.5);
     return (
-      <Sequence key={i} from={hit.frame} durationInFrames={15}>
+      <Sequence key={i} from={hit.frame - offset} durationInFrames={15}>
         <Audio src={staticFile(file)} volume={volume} />
       </Sequence>
     );
@@ -597,7 +639,7 @@ export const PhysicsScene: React.FC<{
 
         {lanesTop ? (
           // レーンの境目
-          <mesh position={[sim.kind === "slip" ? 0.95 : 0, 0.005, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <mesh position={[sim.kind === "slip" ? 0.95 : sim.kind === "wind" ? -0.25 : 0, 0.005, 0]} rotation={[-Math.PI / 2, 0, 0]}>
             <planeGeometry args={[0.06, 40]} />
             <meshBasicMaterial color="#ffffff" transparent opacity={0.8} />
           </mesh>
@@ -625,7 +667,7 @@ export const PhysicsScene: React.FC<{
         {sim.kind === "scale"
           ? [-1, 1].map((x) => (
               <mesh key={x} position={[x, 0.03, 0]} castShadow receiveShadow>
-                <boxGeometry args={[0.58, 0.06, 0.58]} />
+                <boxGeometry args={[0.78, 0.06, 0.78]} />
                 <meshStandardMaterial color="#9aa3ad" roughness={0.4} metalness={0.2} />
               </mesh>
             ))

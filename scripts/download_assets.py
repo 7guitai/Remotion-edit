@@ -58,8 +58,9 @@ def main() -> None:
         episode = json.loads(path.read_text(encoding="utf-8"))
         print(f"[{episode['id']}]")
 
-        bgm = episode.get("bgm")
-        if bgm:
+        for bgm in [episode.get("bgm"), *episode.get("bgmPlaylist", [])]:
+            if not bgm:
+                continue
             out = ROOT / "public" / "bgm" / bgm["file"]
             url = bgm.get("url") or (None if out.exists() else opentracks_url(bgm["opentracks"], bgm.get("track", 1)))
             download(url, ROOT / "public" / "bgm" / bgm["file"], f"{bgm['title']}（{bgm['credit']}）")

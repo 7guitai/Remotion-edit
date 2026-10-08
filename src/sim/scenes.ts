@@ -24,7 +24,9 @@ export type SimKind =
   | "fpush"
   | "fbrake"
   | "ladder"
-  | "fchaos";
+  | "fchaos"
+  // 空気の濃さくらべ（右の世界は空気が2倍）。強い風の中に立つ
+  | "wind";
 
 export const FRICTION_KINDS: SimKind[] = ["fstand", "fpush", "fbrake", "ladder", "fchaos"];
 // この時刻（秒）で、右（奥）の世界の摩擦が消える
@@ -65,6 +67,9 @@ export type Impact = { frame: number; v: number; sound: HitSound; lane: number }
 const soundOf = new WeakMap<CANNON.Body, HitSound | "car">();
 
 export const G = 9.8;
+
+const gravityLabel = (g2: number) =>
+  g2 === 0.5 ? "重力半分 0.5G" : g2 === 2 ? "重力2倍 2G" : `重力${g2}倍 ${g2}G`;
 const SUB = 8;
 
 type Lane = {
@@ -223,7 +228,7 @@ type Build = {
   values: Record<string, Float32Array>;
 };
 
-const build = (kind: SimKind, frames: number, fps: number): Build => {
+const build = (kind: SimKind, frames: number, fps: number, g2: number): Build => {
   const values: Record<string, Float32Array> = {};
   const bodies: SimBody[] = [];
   const tracked: CANNON.Body[] = [];
@@ -248,7 +253,7 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
 
   if (kind === "jump" || kind === "scale" || kind === "slip") {
     // 左：いまの地球（1G）、右：重力半分（0.5G）
-    [G, G / 2].forEach((g, lane) => {
+    [G, G * g2].forEach((g, lane) => {
       const { world } = makeWorld(g);
       const x = lane === 0 ? -1.0 : 1.0;
       let control: Lane["control"] = () => {};
@@ -270,23 +275,25 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
       } else if (kind === "scale") {
         // ばね式の体重計：台がどれだけ沈んだかで重さを読む（地球の重力で目盛りを合わせてある）
         const k = 40000;
-        const c = 900;
+        const c = 3000;
         const rest = 0.09;
+        // 台は重め（30kg）にする。物理エンジンは軽い物の上だと足がすべりやすいため
+        const pm = 30;
         const plate = new CANNON.Body({
-          mass: 2,
-          shape: new CANNON.Box(new CANNON.Vec3(0.26, 0.03, 0.26)),
+          mass: pm,
+          shape: new CANNON.Box(new CANNON.Vec3(0.36, 0.03, 0.36)),
           position: new CANNON.Vec3(x, rest, 0),
           material: groundMaterial,
         });
         plate.linearFactor.set(0, 1, 0);
         plate.angularFactor.set(0, 0, 0);
         world.addBody(plate);
-        bodies.push({ lane, shape: "platform", size: [0.52, 0.06, 0.52] });
+        bodies.push({ lane, shape: "platform", size: [0.72, 0.06, 0.72] });
         tracked.push(plate);
-        const rd = addDoll(world, lane, lane, [x, rest + 0.03 + 0.2, 0]);
+        const rd = addDoll(world, lane, lane, [x, rest + 0.03 + 0.06, 0]);
         // 体重計にのる直前は、体を少し浮かせて持っておく
         const reading = val(`kg${lane}`);
-        const natural = rest + (2 * g) / k;
+        const natural = rest + (pm * g) / k;
         control = (t) => {
           rd.setPose(POSES.stand);
           applyBalance(rd);
@@ -302,7 +309,7 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
         };
         record = (f) => {
           // ばねの力から台の重さを引いたもの÷地球の重力 ＝ 表示される体重
-          const F = k * (natural - plate.position.y) - 2 * g;
+          const F = k * (natural - plate.position.y) - pm * g;
           reading[f] = Math.max(0, F / G);
         };
         lanes.push({ world, g, dolls: [rd], control, record });
@@ -349,7 +356,7 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
     });
   } else if (kind === "throw") {
     // 手前が 1G、奥が 0.5G。同じ速さ・同じ角度でボールを投げる
-    [G, G / 2].forEach((g, lane) => {
+    [G, G * g2].forEach((g, lane) => {
       const { world } = makeWorld(g);
       const z = lane === 0 ? 0.9 : -0.9;
       const rd = addDoll(world, lane, lane, [0, 0, z], Math.PI / 2);
@@ -412,7 +419,7 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
   } else if (kind === "brake" || kind === "fbrake") {
     // 同じ速さ（時速36km）で走る車が、線のところで急ブレーキ
     [0, 1].forEach((lane) => {
-      const g = kind === "brake" && lane === 1 ? G / 2 : G;
+      const g = kind === "brake" && lane === 1 ? G * g2 : G;
       const fw = frictionWorld(kind === "fbrake" ? lane : 0);
       const world = kind === "brake" ? makeWorld(g).world : fw.world;
       const z = lane === 0 ? 1.7 : -1.7;
@@ -586,6 +593,62 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
       soundOf.set(ladder, "cone");
       lanes.push({ world, g: G, dolls: [], control: (t) => fw.update(t), record: () => {} });
     });
+  } else if (kind === "wind") {
+    // 風速24m/s（台風なみ）の横風。風が押す力 = 1/2 × 空気の密度 × 速さ² × 受ける面積 × 抗力係数
+    [1.2, 2.4].forEach((rho, lane) => {
+      const { world } = makeWorld(G);
+      const x = lane === 0 ? -1.5 : 1.0;
+      const rd = addDoll(world, lane, lane, [x, 0, 0]);
+      rd.balance = 0.15;
+      const things: CANNON.Body[] = [];
+      // 荷物の入った段ボール箱（18kg）を2つ
+      [[-0.9, 0.6], [-0.6, -0.7]].forEach(([dx, z]) => {
+        const box = new CANNON.Body({
+          mass: 18,
+          shape: new CANNON.Box(new CANNON.Vec3(0.25, 0.25, 0.25)),
+          position: new CANNON.Vec3(x + dx, 0.25, z),
+          material: bodyMaterial,
+        });
+        world.addBody(box);
+        bodies.push({ lane, shape: "box", size: [0.5, 0.5, 0.5], color: "#c8925a" });
+        tracked.push(box);
+        soundOf.set(box, "body");
+        things.push(box);
+      });
+      const windAt = (t: number) =>
+        24 * smooth((t - 0.5) / 1.2) * (1 + 0.12 * Math.sin(t * 5.3) + 0.06 * Math.sin(t * 13.1));
+      const speed = val(`wind${lane}`);
+      const all: { b: CANNON.Body; half: CANNON.Vec3 }[] = [
+        ...(Object.keys(rd.bodies) as PartName[]).map((p) => ({
+          b: rd.bodies[p],
+          half: new CANNON.Vec3(rd.sizes[p][0] / 2, rd.sizes[p][1] / 2, rd.sizes[p][2] / 2),
+        })),
+        ...things.map((b) => ({ b, half: new CANNON.Vec3(0.25, 0.25, 0.25) })),
+      ];
+      const control = (t: number) => {
+        rd.setPose(POSES.stand, POSES.stance, smooth((t - 0.2) / 0.3));
+        applyBalance(rd);
+        const w = windAt(t);
+        for (const { b, half } of all) {
+          // 風の向き（+x）から見た、箱の影の面積
+          const q = b.quaternion;
+          const ex = q.vmult(new CANNON.Vec3(1, 0, 0));
+          const ey = q.vmult(new CANNON.Vec3(0, 1, 0));
+          const ez = q.vmult(new CANNON.Vec3(0, 0, 1));
+          const area =
+            4 *
+            (half.y * half.z * Math.abs(ex.x) +
+              half.x * half.z * Math.abs(ey.x) +
+              half.x * half.y * Math.abs(ez.x));
+          const rel = w - b.velocity.x;
+          b.force.x += 0.5 * rho * 1.0 * area * rel * Math.abs(rel);
+        }
+      };
+      const record = (f: number) => {
+        speed[f] = windAt(f / fps);
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record });
+    });
   } else if (kind === "fchaos") {
     // 摩擦ゼロの広場で、5人が歩き出そうとする
     const fw = frictionWorld(1);
@@ -616,7 +679,7 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
     });
   } else {
     // 重力半分の世界で、みんなでジャンプ
-    const g = G / 2;
+    const g = G * g2;
     const { world } = makeWorld(g);
     const dolls: Ragdoll[] = [];
     const steps: ((t: number) => void)[] = [];
@@ -655,13 +718,19 @@ const build = (kind: SimKind, frames: number, fps: number): Build => {
 
 const cache = new Map<string, SimResult>();
 
-export const simulate = (kind: SimKind, frames: number, fps: number): SimResult => {
-  const key = `${kind}:${frames}:${fps}`;
+// g2 は重力くらべの右（奥）の世界の重力（1G に対する倍率）
+export const simulate = (
+  kind: SimKind,
+  frames: number,
+  fps: number,
+  g2 = 0.5,
+): SimResult => {
+  const key = `${kind}:${frames}:${fps}:${g2}`;
   const hit = cache.get(key);
   if (hit) {
     return hit;
   }
-  const { lanes, bodies, tracked, values } = build(kind, frames, fps);
+  const { lanes, bodies, tracked, values } = build(kind, frames, fps, g2);
   const data = new Float32Array(frames * tracked.length * 7);
   const impacts: Impact[] = [];
   const dt = 1 / (fps * SUB);
@@ -735,7 +804,9 @@ export const simulate = (kind: SimKind, frames: number, fps: number): SimResult 
     gravity: lanes.map((l) => l.g),
     labels: FRICTION_KINDS.includes(kind)
       ? ["いまの地球", "摩擦ゼロ"]
-      : ["いまの地球 1G", "重力半分 0.5G"],
+      : kind === "wind"
+        ? ["いまの空気", "空気が2倍"]
+        : ["いまの地球 1G", gravityLabel(g2)],
   };
   cache.set(key, result);
   return result;

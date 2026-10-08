@@ -8,6 +8,7 @@ import sleepTrivia1h from "./sleep-trivia-1h.json";
 import thingsRankingShort from "./things-ranking-short.json";
 import whatifRotationShort from "./whatif-rotation-short.json";
 import whatifMoonShort from "./whatif-moon-short.json";
+import whatifEarthLong from "./whatif-earth-long.json";
 import whatifFrictionShort from "./whatif-friction-short.json";
 import whatifGravityShort from "./whatif-gravity-short.json";
 import whatifSunShort from "./whatif-sun-short.json";
@@ -131,6 +132,18 @@ export type WhatIfSlide = {
   photo?: { file: string; zoom?: number; focus?: [number, number] };
   // 物理エンジンのシミュレーション（人が出る場面はこれで描く）
   sim?: import("../sim/scenes").SimKind;
+  // 重力くらべの右（奥）の世界の重力（1G に対する倍率。ふつうは 0.5）
+  simG?: number;
+  // 左右（手前・奥）の世界の名前を変えるとき
+  simLabels?: [string, string];
+  // シミュレーションの途中（秒）から見せる（オープニングの見どころ集など）
+  simStart?: number;
+  // 章の扉（大きな番号とタイトル）。この場面は字幕を出さない
+  card?: { no?: number; title: string[]; sub?: string; tag?: string };
+  // 読み上げのあとに、そのまま映像を見せる時間（秒）。エンドカード用など
+  hold?: number;
+  // 特別な背景（ringsky＝地上から見上げた輪のある夜空、ringsky_day＝昼の空）
+  scene?: "ringsky" | "ringsky_day";
 };
 
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
@@ -201,12 +214,15 @@ export type Episode = {
     // OpenTracks の別バージョン（Track2 など）
     track?: number;
   };
+  // 場面ごとに BGM を切り替える（fromSlide 番目のスライドから。前の曲とはクロスフェード）
+  bgmPlaylist?: (NonNullable<Episode["bgm"]> & { fromSlide: number; volume?: number })[];
   readings?: Record<string, string>;
   illustrations: Record<string, Illustration>;
   slides: ScriptSlide[];
 };
 
 export const EPISODES: Episode[] = [
+  whatifEarthLong as Episode,
   whatifFrictionShort as Episode,
   whatifGravityShort as Episode,
   whatifSunShort as Episode,

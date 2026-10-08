@@ -15,10 +15,27 @@ import { AccentContext, BGM_VOLUME, COLORS, fontFamily } from "./theme";
 import { TitleBand } from "./components/TitleBand";
 import { SleepBackground } from "./components/SleepPage";
 import { WhatIfHeadline } from "./components/WhatIfPage";
+import { ChapterTag } from "./components/WhatIfCard";
 
 export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
   const episode = getEpisode(episodeId);
-  const { durationInFrames } = useVideoConfig();
+  const { durationInFrames, width, height } = useVideoConfig();
+  const landscape = width > height;
+  // スライドごとの開始フレーム（BGM の切り替えに使う）
+  const starts = slides.reduce<number[]>(
+    (acc, s, i) => [...acc, i === 0 ? 0 : acc[i - 1] + slides[i - 1].durationInFrames],
+    [],
+  );
+  // 横長の「もしも」：章の扉（card.no）から次の扉までの間、右上に章の名前を出す
+  let chapter: { no: number; tag: string } | null = null;
+  const chapters = slides.map((s) => {
+    const card = s.slide.type === "whatif" ? s.slide.card : undefined;
+    if (card) {
+      chapter = card.no !== undefined ? { no: card.no, tag: card.tag ?? card.title.join("") } : null;
+      return null;
+    }
+    return chapter;
+  });
   const bgmLevel = episode.bgmVolume ?? BGM_VOLUME;
   const ambientLevel = episode.ambient?.volume ?? 0;
   // BGM は最初と最後だけフェード
@@ -48,6 +65,9 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
           {slides.map((s, i) => (
             <Series.Sequence key={i} durationInFrames={s.durationInFrames}>
               <Slide resolved={s} />
+              {episode.style === "whatif" && landscape && chapters[i] ? (
+                <ChapterTag no={chapters[i]!.no} tag={chapters[i]!.tag} total={10} />
+              ) : null}
               {s.voice ? (
                 <Sequence from={s.voiceStart}>
                   <Audio src={staticFile(s.voice)} />
@@ -93,7 +113,14 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
           <TitleBand title={episode.title} />
         )}
         {episode.pr ? <PrBadge /> : null}
-        {episode.bgm ? (
+        {episode.bgmPlaylist ? (
+          <BgmPlaylist
+            tracks={episode.bgmPlaylist}
+            starts={starts}
+            total={durationInFrames}
+            level={bgmLevel}
+          />
+        ) : episode.bgm ? (
           <Audio
             src={staticFile(`bgm/${episode.bgm.file}`)}
             volume={bgmVolume}
@@ -120,6 +147,41 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
     </AccentContext.Provider>
   );
 };
+
+// 場面ごとの BGM。曲の切り替わりは XF フレームかけてクロスフェード
+const XF = 45;
+const BgmPlaylist: React.FC<{
+  tracks: NonNullable<ReturnType<typeof getEpisode>["bgmPlaylist"]>;
+  starts: number[];
+  total: number;
+  level: number;
+}> = ({ tracks, starts, total, level }) => (
+  <>
+    {tracks.map((t, k) => {
+      const from = k === 0 ? 0 : (starts[t.fromSlide] ?? total) - XF;
+      const to = k === tracks.length - 1 ? total : (starts[tracks[k + 1].fromSlide] ?? total);
+      const len = Math.max(1, to - from);
+      const vol = level * (t.volume ?? 1);
+      return (
+        <Sequence key={k} from={from} durationInFrames={len}>
+          <Audio
+            src={staticFile(`bgm/${t.file}`)}
+            loop
+            loopVolumeCurveBehavior="extend"
+            volume={(f) =>
+              interpolate(
+                f,
+                [0, k === 0 ? 15 : XF, len - (k === tracks.length - 1 ? 45 : XF), len],
+                [0, vol, vol, 0],
+                { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+              )
+            }
+          />
+        </Sequence>
+      );
+    })}
+  </>
+);
 
 // クイズの効果音（カウントダウンの「コッ」と正解の「ピンポーン」）
 const QuizSfx: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {

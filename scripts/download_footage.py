@@ -66,8 +66,29 @@ def main() -> None:
         out = OUT / item["file"]
         if out.exists():
             print(f"  skip  {item['file']}")
+        elif item["type"] == "derived":
+            # ほかの素材から作る画像（例：海がなくなった地球）
+            import subprocess
+
+            subprocess.run(item["script"].split(), cwd=ROOT, check=True)
+            print(f"  made  {item['file']}  {item['ja']}")
         else:
             fetch(item["url"], out)
+            if item.get("crop"):
+                # 左右に2枚並んだ画像などから一部を切り出し、黒い横長の画面の真ん中に置く
+                from PIL import Image
+
+                part = Image.open(out).convert("RGB").crop(tuple(item["crop"]))
+                w, h = item.get("canvas", part.size)
+                part.thumbnail((w, h - 80), Image.LANCZOS)
+                canvas = Image.new("RGB", (w, h))
+                canvas.paste(part, ((w - part.width) // 2, (h - part.height) // 2))
+                canvas.save(out, quality=92)
+            if item.get("resize"):
+                # 大きすぎる地図画像は、3D で使う大きさに縮小しておく
+                from PIL import Image
+
+                Image.open(out).convert("RGB").resize(tuple(item["resize"]), Image.LANCZOS).save(out, quality=92)
             print(f"  saved {item['file']}  {out.stat().st_size / 1e6:.1f}MB  {item['ja']}")
         for clip in item.get("clips", []):
             cut(out, clip)

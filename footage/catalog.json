@@ -361,6 +361,62 @@
         "火星",
         "山"
       ]
+    },
+    {
+      "file": "earth_topo_bathy_jul.jpg",
+      "type": "image",
+      "ja": "地球の全球地図（7月・陸の地形と海底地形の陰影つき）",
+      "title": "Blue Marble Next Generation w/ Topography and Bathymetry (July 2004)",
+      "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-topography-bathymetry/july/world.topo.bathy.200407.3x5400x2700.jpg",
+      "page": "https://science.nasa.gov/earth/earth-observatory/blue-marble-next-generation/base-topography-bathymetry",
+      "credit": "NASA Earth Observatory",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "地球",
+        "テクスチャ",
+        "海底"
+      ],
+      "resize": [
+        4096,
+        2048
+      ]
+    },
+    {
+      "file": "earth_dry_seabed.jpg",
+      "type": "derived",
+      "ja": "「海がなくなった地球」の地図（上の画像から scripts/make_dry_earth.py で作る）",
+      "from": "earth_topo_bathy_jul.jpg",
+      "script": "python3 scripts/make_dry_earth.py public/footage/earth_topo_bathy_jul.jpg public/footage/earth_dry_seabed.jpg",
+      "credit": "NASA Earth Observatory（加工）",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "地球",
+        "テクスチャ",
+        "海底"
+      ]
+    },
+    {
+      "file": "venus_mariner10.jpg",
+      "type": "image",
+      "ja": "マリナー10号が撮った金星（色を強調した版を切り出し、横長の黒い画面の中央に配置）",
+      "title": "Venus from Mariner 10 (PIA23791)",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23791/PIA23791.jpg",
+      "page": "https://www.jpl.nasa.gov/images/pia23791-venus-from-mariner-10/",
+      "credit": "NASA/JPL-Caltech",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "crop": [
+        1180,
+        0,
+        2245,
+        1096
+      ],
+      "canvas": [
+        1920,
+        1080
+      ],
+      "tags": [
+        "金星"
+      ]
     }
   ]
 }

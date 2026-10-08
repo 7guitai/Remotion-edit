@@ -97,7 +97,11 @@ def main() -> None:
                 + [v["name"] for v in ep.get("replyVoices", [])]
             )
         ),
-        *([f"BGM：{ep['bgm']['credit']}「{ep['bgm']['title']}」"] if ep.get("bgm") else []),
+        *(
+            [f"BGM：{t['credit']}「{t['title']}」" for t in ep["bgmPlaylist"]]
+            if ep.get("bgmPlaylist")
+            else [f"BGM：{ep['bgm']['credit']}「{ep['bgm']['title']}」"] if ep.get("bgm") else []
+        ),
         *([f"環境音：{ep['ambient']['name']}"] if ep.get("ambient") else []),
         # イラストを使っていない回（「もしも」など）は書かない
         *(

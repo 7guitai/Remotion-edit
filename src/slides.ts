@@ -172,7 +172,9 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
           LEAD_IN +
           voiceFrames +
           (episode.slideGap ?? TAIL) +
-          (isQuestion ? COUNTDOWN : 0),
+          (isQuestion ? COUNTDOWN : 0) +
+          // 「もしも」の hold：読み上げのあとも映像を見せる
+          Math.round((slide.type === "whatif" ? (slide.hold ?? 0) : 0) * fps),
       };
     }),
   );

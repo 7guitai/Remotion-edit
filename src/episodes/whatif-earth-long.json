@@ -1,0 +1,1262 @@
+{
+  "id": "whatif-earth-long",
+  "title": "地球の“もしも”10選",
+  "format": "landscape",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 8,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.15,
+    "name": "青山龍星"
+  },
+  "bgmPlaylist": [
+    {
+      "file": "odoru_uchuu.mp3",
+      "title": "踊る、宇宙の中で(Dancing,at Universe)",
+      "credit": "蒲鉾さちこ",
+      "page": "https://opentracks.com/bgm/detail/15926",
+      "opentracks": 15926,
+      "fromSlide": 0,
+      "track": 2
+    },
+    {
+      "file": "spacewalk.mp3",
+      "title": "Spacewalk",
+      "credit": "Make a field Music",
+      "page": "https://opentracks.com/bgm/detail/13616",
+      "opentracks": 13616,
+      "fromSlide": 44,
+      "volume": 1.3
+    },
+    {
+      "file": "giant_step.mp3",
+      "title": "Giant Step",
+      "credit": "風可＆葉羽",
+      "page": "https://opentracks.com/bgm/detail/9134",
+      "opentracks": 9134,
+      "fromSlide": 79,
+      "volume": 0.9
+    }
+  ],
+  "headline": [
+    "地球の",
+    "もしも10選"
+  ],
+  "illustrations": {
+    "fe_nut_and_bolt.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Nut and bolt」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Nut%20and%20bolt/Color/nut_and_bolt_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_knot.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Knot」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Knot/Color/knot_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_pencil.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Pencil」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Pencil/Color/pencil_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_pot_of_food.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Pot of food」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Pot%20of%20food/Color/pot_of_food_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_fire.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Fire」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Fire/Color/fire_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_airplane.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Airplane」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Airplane/Color/airplane_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_ringed_planet.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Ringed planet」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Ringed%20planet/Color/ringed_planet_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_violin.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Violin」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Violin/Color/violin_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_cloud_with_rain.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Cloud with rain」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Cloud%20with%20rain/Color/cloud_with_rain_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_elephant.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Elephant」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Elephant/Color/elephant_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_spiral_calendar.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Spiral calendar」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Spiral%20calendar/Color/spiral_calendar_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_shooting_star.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Shooting star」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Shooting%20star/Color/shooting_star_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    }
+  },
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、重力が半分になったら？",
+      "sim": "jump",
+      "simStart": 0.7,
+      "chapter": "オープニング",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "もし、摩擦が消えたら？",
+      "sim": "fchaos",
+      "simStart": 0.9,
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "もし、太陽が消えたら？",
+      "footage": {
+        "file": "sun_a.mp4",
+        "start": 1
+      },
+      "effect": "vanish",
+      "bg": "space"
+    },
+    {
+      "type": "whatif",
+      "text": "もし、海がなくなったら？",
+      "globe": {
+        "texture": "earth_jul",
+        "textureTo": "earth_dry",
+        "fade": [
+          0.05,
+          0.75
+        ],
+        "speed": 0.5
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "もし、地球に輪があったら？",
+      "globe": {
+        "texture": "earth",
+        "rings": true,
+        "size": 0.6,
+        "speed": 0.6
+      },
+      "bg": "space",
+      "effect": "zoom"
+    },
+    {
+      "type": "whatif",
+      "text": "今回は、地球の「もしも」を10個、物理シミュレーションと、NASAの本物の映像で、本気で考えてみた。",
+      "speech": "今回は、地球のもしもを10個、物理シミュレーションと、ナサの本物の映像で、本気で考えてみた。",
+      "globe": {
+        "texture": "earth",
+        "speed": 0.9
+      },
+      "bg": "space",
+      "effect": "zoom"
+    },
+    {
+      "type": "whatif",
+      "text": "地球のもしも、10選。",
+      "card": {
+        "title": [
+          "地球の“もしも”",
+          "10選"
+        ],
+        "sub": "物理シミュレーション × NASAの本物の映像"
+      },
+      "hold": 0.8,
+      "globe": {
+        "texture": "earth",
+        "speed": 0.5,
+        "size": 0.8
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "1つめ。もし、重力が半分になったら？",
+      "card": {
+        "title": [
+          "もし重力が",
+          "半分になったら？"
+        ],
+        "no": 1,
+        "tag": "重力が半分"
+      },
+      "hold": 0.8,
+      "globe": {
+        "texture": "earth",
+        "speed": 0.8
+      },
+      "bg": "space",
+      "effect": "none",
+      "chapter": "01 もし重力が半分になったら？"
+    },
+    {
+      "type": "whatif",
+      "text": "まず、体重計にのると、体重がなんと半分に。66キロの人なら、33キロだ。",
+      "sim": "scale",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "でも、筋肉の力はそのまま。だから、ジャンプすると、ずっと高く跳べるんだ。",
+      "sim": "jump",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "転んだときも、倒れるのがゆっくりになって、地面にぶつかる勢いも、弱くなる。",
+      "sim": "slip",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "ボールを投げると、空気の抵抗を考えなければ、2倍近く遠くまで飛ぶ。",
+      "sim": "throw",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "ただし、困ることもある。タイヤが地面を押す力も半分になるので、止まるまでの距離は、約2倍に。",
+      "sim": "brake",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "スポーツも、大きく変わる。バスケットボールのダンクも、だれでもできるようになるかも。",
+      "sim": "party",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "さらに、地球が空気を引きとめる力も弱くなる。長い時間をかけて、空気が宇宙へ逃げやすくなるといわれているんだ。",
+      "footage": {
+        "file": "iss_ocean.mp4",
+        "start": 1
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "実際に、重力が地球の約4割しかない火星は、大気の濃さが、地球の100分の1ほどしかない。",
+      "globe": {
+        "texture": "mars",
+        "speed": 0.7
+      },
+      "bg": "space",
+      "big": "重力 約4割",
+      "effect": "zoom"
+    },
+    {
+      "type": "whatif",
+      "text": "重力が小さいことも、その理由の一つと考えられているんだ。",
+      "globe": {
+        "texture": "mars",
+        "speed": 0.7,
+        "size": 1.25
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "2つめ。もし、摩擦がなくなったら？",
+      "card": {
+        "title": [
+          "もし摩擦が",
+          "なくなったら？"
+        ],
+        "no": 2,
+        "tag": "摩擦がゼロ"
+      },
+      "hold": 0.8,
+      "footage": {
+        "file": "arctic_sea_ice_2026.mp4",
+        "start": 10,
+        "zoom": 1.25,
+        "focus": [
+          0.4,
+          0.62
+        ]
+      },
+      "bg": "space",
+      "effect": "none",
+      "chapter": "02 もし摩擦がなくなったら？"
+    },
+    {
+      "type": "whatif",
+      "text": "まず、歩くことができない。一歩ふみ出すと、足がすべって、転んでしまうんだ。",
+      "sim": "fstand",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "重い荷物も、軽く押すだけで動き出す。でも、押した自分も、後ろへすべっていく。",
+      "sim": "fpush",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "車は、ブレーキをかけても止まれない。止まる力も、摩擦が生み出しているからなんだ。",
+      "sim": "fbrake",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "壁に立てかけた、はしごも、足もとがすべって倒れてしまう。",
+      "sim": "ladder",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "ネジや釘も、摩擦の力でとまっている。家具は、バラバラになってしまうかも。",
+      "image": "fe_nut_and_bolt.svg",
+      "imageSize": 560,
+      "bg": "night",
+      "effect": "shake"
+    },
+    {
+      "type": "whatif",
+      "text": "ひもの結び目もほどけて、靴ひもも結べない。",
+      "image": "fe_knot.svg",
+      "imageSize": 560,
+      "bg": "night",
+      "effect": "zoom"
+    },
+    {
+      "type": "whatif",
+      "text": "鉛筆で字が書けるのも、芯が紙にこすれて、粉が残るから。摩擦がないと、字も書けないんだ。",
+      "image": "fe_pencil.svg",
+      "imageSize": 560,
+      "bg": "night",
+      "effect": "zoom",
+      "big": "摩擦のおかげ"
+    },
+    {
+      "type": "whatif",
+      "text": "実は、音を出すのにも摩擦が使われている。バイオリンの音は、弓と弦がこすれて生まれるんだ。",
+      "speech": "実は、音を出すのにも摩擦が使われている。バイオリンの音は、弓とげんがこすれて生まれるんだ。",
+      "image": "fe_violin.svg",
+      "imageSize": 560,
+      "bg": "night",
+      "effect": "zoom"
+    },
+    {
+      "type": "whatif",
+      "text": "ふだんは邪魔に思える摩擦。でも実は、私たちの暮らしを、しっかり支えてくれているんだね。",
+      "footage": {
+        "file": "arctic_sea_ice_2026.mp4",
+        "start": 30,
+        "zoom": 1.25,
+        "focus": [
+          0.4,
+          0.62
+        ]
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "3つめ。もし、空気が2倍の濃さになったら？",
+      "card": {
+        "title": [
+          "もし空気が",
+          "2倍の濃さになったら？"
+        ],
+        "no": 3,
+        "tag": "空気が2倍"
+      },
+      "hold": 0.8,
+      "footage": {
+        "file": "iss_storm.mp4",
+        "start": 1
+      },
+      "bg": "space",
+      "effect": "none",
+      "chapter": "03 もし空気が2倍の濃さになったら？"
+    },
+    {
+      "type": "whatif",
+      "text": "空気の濃さが2倍になると、同じ速さの風でも、物を押す力が、2倍になる。",
+      "footage": {
+        "file": "iss_storm.mp4",
+        "start": 3
+      },
+      "bg": "space",
+      "big": "風の力 2倍",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "台風なみの風の中、いまの空気なら、なんとか立っていられる。でも、空気が2倍だと、人も荷物も、吹き飛ばされてしまうんだ。",
+      "sim": "wind",
+      "effect": "wind"
+    },
+    {
+      "type": "whatif",
+      "text": "気圧も2倍になるので、水がふっとうする温度は、約120度に上がる。料理の時間も、変わりそうだ。",
+      "image": "fe_pot_of_food.svg",
+      "imageSize": 560,
+      "bg": "night",
+      "effect": "zoom",
+      "big": "約120℃でふっとう"
+    },
+    {
+      "type": "whatif",
+      "text": "空気中の酸素も増えるので、ものが燃えやすくなり、火事が広がりやすくなるといわれている。",
+      "image": "fe_fire.svg",
+      "imageSize": 560,
+      "bg": "night",
+      "effect": "shake"
+    },
+    {
+      "type": "whatif",
+      "text": "そのかわり、つばさが受ける力も大きくなるので、鳥や飛行機は、空に浮かびやすくなる。",
+      "image": "fe_airplane.svg",
+      "imageSize": 560,
+      "bg": "sky",
+      "effect": "zoom"
+    },
+    {
+      "type": "whatif",
+      "text": "雨つぶは、空気の抵抗が大きくなって、今より、ゆっくり落ちてくるようになる。",
+      "image": "fe_cloud_with_rain.svg",
+      "imageSize": 560,
+      "bg": "sky",
+      "effect": "zoom"
+    },
+    {
+      "type": "whatif",
+      "text": "ちなみに、お隣の金星の大気は、地球の約90倍。地上は、約460度の、灼熱の世界なんだ。",
+      "speech": "ちなみに、お隣のきんせいの大気は、地球の約90倍。地上は、約460度の、灼熱の世界なんだ。",
+      "photo": {
+        "file": "venus_mariner10.jpg",
+        "zoom": 1.0
+      },
+      "bg": "space",
+      "big": "気圧 約90倍",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "4つめ。もし、地球が2倍の大きさだったら？",
+      "card": {
+        "title": [
+          "もし地球が",
+          "2倍の大きさだったら？"
+        ],
+        "no": 4,
+        "tag": "地球が2倍"
+      },
+      "hold": 0.8,
+      "globe": {
+        "texture": "earth",
+        "speed": 0.7,
+        "size": 0.55,
+        "sizeTo": 1.0
+      },
+      "bg": "space",
+      "effect": "none",
+      "chapter": "04 もし地球が2倍の大きさだったら？"
+    },
+    {
+      "type": "whatif",
+      "text": "同じ材料でできたまま、直径が2倍になると、表面の重力も、約2倍になる。",
+      "globe": {
+        "texture": "earth",
+        "speed": 0.7,
+        "size": 0.5,
+        "sizeTo": 1.05
+      },
+      "bg": "space",
+      "big": "重力 約2倍",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "体重計にのると、66キロの人が、132キロに。",
+      "sim": "scale",
+      "simG": 2,
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "ジャンプしても、ほとんど跳べない。",
+      "sim": "jump",
+      "simG": 2,
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "転ぶときも、ずっと速く、地面にたたきつけられてしまう。",
+      "sim": "slip",
+      "simG": 2,
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "投げたボールも、すぐに落ちてしまう。",
+      "sim": "throw",
+      "simG": 2,
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "高い山も、できにくくなる。重力が強いと、山が自分の重さで、くずれやすくなるからだ。",
+      "footage": {
+        "file": "iss_land.mp4",
+        "start": 1
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "生き物は、重い体を支えるために、背が低く、がっしりした体つきになるかもしれない。",
+      "image": "fe_elephant.svg",
+      "imageSize": 560,
+      "bg": "sky",
+      "effect": "zoom"
+    },
+    {
+      "type": "whatif",
+      "text": "反対に、重力が小さい火星には、エベレストの約2.5倍の高さといわれる、オリンポス山があるんだ。",
+      "photo": {
+        "file": "olympus_mons_viking.jpg",
+        "zoom": 1.05
+      },
+      "bg": "space",
+      "big": "約2.5倍",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "5つめ。もし、地球の自転が、急に止まったら？",
+      "card": {
+        "title": [
+          "もし地球の自転が",
+          "止まったら？"
+        ],
+        "no": 5,
+        "tag": "自転が止まる"
+      },
+      "hold": 0.8,
+      "globe": {
+        "texture": "earth",
+        "speed": 2.5
+      },
+      "bg": "space",
+      "effect": "none",
+      "chapter": "05 もし地球の自転が止まったら？"
+    },
+    {
+      "type": "whatif",
+      "text": "地球は今も、ものすごい速さで回っている。赤道のあたりでは、時速およそ1700キロ。音より速いんだ。",
+      "speech": "地球は今も、ものすごい速さで回っている。赤道のあたりでは、時速およそせんななひゃっキロ。音より速いんだ。",
+      "globe": {
+        "texture": "earth",
+        "speed": 4
+      },
+      "bg": "space",
+      "big": "時速 約1700km",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "その回転が、急ブレーキで止まると、",
+      "globe": {
+        "texture": "earth",
+        "speed": 5,
+        "stopAt": 24
+      },
+      "bg": "space",
+      "effect": "stop"
+    },
+    {
+      "type": "whatif",
+      "text": "地面の上のものは、勢いのまま、東へ吹き飛ばされる。",
+      "footage": {
+        "file": "iss_land.mp4",
+        "start": 1
+      },
+      "effect": "wind"
+    },
+    {
+      "type": "whatif",
+      "text": "空気も同じ速さで動いているから、とてつもない暴風が、地球をおそう。",
+      "footage": {
+        "file": "iss_storm.mp4",
+        "start": 1
+      },
+      "effect": "wind"
+    },
+    {
+      "type": "whatif",
+      "text": "海の水も止まれずに、巨大な津波になって、陸へ押し寄せる。",
+      "speech": "海の水もとまれずに、巨大な津波になって、陸へ押し寄せる。",
+      "footage": {
+        "file": "iss_ocean.mp4",
+        "start": 1
+      },
+      "effect": "flood"
+    },
+    {
+      "type": "whatif",
+      "text": "もし生き残れても、1日の長さが、1年になってしまう。昼が約半年、夜も約半年、続くんだ。",
+      "globe": {
+        "texture": "earth_night",
+        "speed": 0.3
+      },
+      "bg": "space",
+      "big": "1日＝1年",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "さらに、海の水は北と南へ動いて、赤道には、巨大な大陸が現れると考えられている。",
+      "globe": {
+        "texture": "earth",
+        "speed": 0.6,
+        "tilt": 0
+      },
+      "bg": "space",
+      "effect": "arrows"
+    },
+    {
+      "type": "whatif",
+      "text": "でも安心して。地球の自転が急に止まることは、ないと考えられているんだ。",
+      "photo": {
+        "file": "blue_marble_east.jpg",
+        "zoom": 1.05
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "6つめ。もし、1日が12時間だったら？",
+      "card": {
+        "title": [
+          "もし1日が",
+          "12時間だったら？"
+        ],
+        "no": 6,
+        "tag": "1日12時間"
+      },
+      "hold": 0.8,
+      "globe": {
+        "texture": "earth",
+        "speed": 3
+      },
+      "bg": "space",
+      "effect": "none",
+      "chapter": "06 もし1日が12時間だったら？"
+    },
+    {
+      "type": "whatif",
+      "text": "地球の回る速さが2倍になると、1日は12時間。昼と夜は、およそ6時間ずつになる。",
+      "globe": {
+        "texture": "earth",
+        "speed": 2.4
+      },
+      "bg": "space",
+      "big": "1日 12時間",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "1年の長さは変わらないので、1年は、およそ730日に。誕生日が来るのも、ずいぶん先に感じそうだ。",
+      "image": "fe_spiral_calendar.svg",
+      "imageSize": 560,
+      "bg": "night",
+      "effect": "zoom",
+      "big": "1年 約730日"
+    },
+    {
+      "type": "whatif",
+      "text": "赤道では、外へ飛び出そうとする力が強くなって、体重が、少しだけ軽くなる。66キロの人なら、約65.3キロだ。",
+      "speech": "赤道では、外へ飛び出そうとする力が強くなって、体重が、少しだけ軽くなる。66キロの人なら、約65てん3キロだ。",
+      "sim": "scale",
+      "simG": 0.9896,
+      "simLabels": [
+        "いまの1日 24時間",
+        "1日 12時間"
+      ],
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "地球の形も、今より横に広がって、少しつぶれた形になる。",
+      "globe": {
+        "texture": "earth",
+        "speed": 2.4,
+        "tilt": 0,
+        "squash": 1.0,
+        "squashTo": 0.9
+      },
+      "bg": "space",
+      "big": "※大げさに表現しています",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "さらに、風を曲げる力も強くなるので、うずを巻く嵐が、強くなりやすいといわれている。",
+      "footage": {
+        "file": "iss_storm.mp4",
+        "start": 2
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "実は、大昔の地球は、今よりずっと速く回っていた。",
+      "footage": {
+        "file": "earth_spin_nightlights.mp4",
+        "start": 5
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "月が引っぱる力で、少しずつブレーキがかかり、今の24時間になったと考えられているんだ。",
+      "globe": {
+        "texture": "moon",
+        "speed": 0.6
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "7つめ。もし、地球から海がなくなったら？",
+      "card": {
+        "title": [
+          "もし地球から",
+          "海がなくなったら？"
+        ],
+        "no": 7,
+        "tag": "海がなくなる"
+      },
+      "hold": 0.8,
+      "globe": {
+        "texture": "earth_jul",
+        "speed": 0.6
+      },
+      "bg": "space",
+      "effect": "none",
+      "chapter": "07 もし海がなくなったら？"
+    },
+    {
+      "type": "whatif",
+      "text": "地球の表面の、約7割をおおう海。その水が、すべて消えてしまったら…",
+      "globe": {
+        "texture": "earth_jul",
+        "textureTo": "earth_dry",
+        "fade": [
+          0.2,
+          0.9
+        ],
+        "speed": 0.5
+      },
+      "bg": "space",
+      "big": "表面の約7割",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "そこに現れるのは、見たこともない、巨大な谷と山脈だ。",
+      "globe": {
+        "texture": "earth_dry",
+        "speed": 0.5,
+        "size": 1.15
+      },
+      "bg": "space",
+      "effect": "zoom"
+    },
+    {
+      "type": "whatif",
+      "text": "海の底には、地球をぐるっと取り巻く、長さ約6万キロもの山脈が、かくれているんだ。",
+      "globe": {
+        "texture": "earth_dry",
+        "speed": 0.9,
+        "size": 1.3,
+        "tilt": 10
+      },
+      "bg": "space",
+      "big": "全長 約6万km",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "いちばん深いマリアナ海溝は、深さ約1万メートル。エベレストを沈めても、まだ届かない深さだ。",
+      "globe": {
+        "texture": "earth_dry",
+        "speed": 0.4,
+        "size": 1.4
+      },
+      "bg": "space",
+      "big": "深さ 約1万m",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "ハワイのマウナケア山も、海の底から測ると、約1万メートル。実はエベレストよりも高い山なんだ。",
+      "globe": {
+        "texture": "earth_dry",
+        "speed": 0.4,
+        "size": 1.35,
+        "tilt": -15
+      },
+      "bg": "space",
+      "big": "海底から 約1万m",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "雨も、ほとんど降らなくなる。雨のもとになる水蒸気の多くは、海から来ているからだ。",
+      "photo": {
+        "file": "hurricane_helene_iss.jpg",
+        "zoom": 1.05
+      },
+      "bg": "space",
+      "effect": "dark"
+    },
+    {
+      "type": "whatif",
+      "text": "陸は乾いた砂漠のようになり、昼と夜の気温の差も、とても大きくなるといわれている。",
+      "globe": {
+        "texture": "earth_dry",
+        "speed": 0.5
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "さらに、私たちが吸う酸素の、約半分は、海の小さな植物プランクトンが作っているといわれている。",
+      "footage": {
+        "file": "iss_ocean.mp4",
+        "start": 1
+      },
+      "bg": "space",
+      "big": "酸素の約半分",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "海は、地球の命を支える、大切な場所なんだね。",
+      "globe": {
+        "texture": "earth_jul",
+        "speed": 0.6
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "8つめ。もし、地球に、土星のような輪があったら？",
+      "card": {
+        "title": [
+          "もし地球に",
+          "輪があったら？"
+        ],
+        "no": 8,
+        "tag": "地球に輪"
+      },
+      "hold": 0.8,
+      "globe": {
+        "texture": "earth",
+        "rings": true,
+        "size": 0.55,
+        "speed": 0.6
+      },
+      "bg": "space",
+      "effect": "none",
+      "chapter": "08 もし地球に輪があったら？"
+    },
+    {
+      "type": "whatif",
+      "text": "土星の輪は、たくさんの、氷や岩のつぶでできている。",
+      "image": "fe_ringed_planet.svg",
+      "imageSize": 600,
+      "bg": "space",
+      "effect": "zoom"
+    },
+    {
+      "type": "whatif",
+      "text": "もし地球に輪があれば、こんなふうに、宇宙から見てもとても美しい星になるはずだ。",
+      "globe": {
+        "texture": "earth",
+        "rings": true,
+        "size": 0.5,
+        "speed": 0.5,
+        "tilt": 23.4,
+        "tiltTo": 30
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "夜空には、空を横切る、大きな光の帯が見えるだろう。",
+      "scene": "ringsky",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "昼間も、うっすらと白い輪が、空にかかって見えるかもしれない。",
+      "scene": "ringsky_day",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "ただし、輪の影が落ちる場所では、日光がさえぎられて、冬がより寒くなるともいわれている。",
+      "globe": {
+        "texture": "earth",
+        "rings": true,
+        "size": 0.62,
+        "speed": 0.5,
+        "tilt": -8
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "輪のつぶが少しずつ落ちてきて、流れ星も、今よりずっと増えるかもしれない。",
+      "image": "fe_shooting_star.svg",
+      "imageSize": 560,
+      "bg": "night",
+      "effect": "zoom"
+    },
+    {
+      "type": "whatif",
+      "text": "実は、大昔の地球にも、輪があったかもしれない、という研究もあるんだ。",
+      "globe": {
+        "texture": "earth",
+        "rings": true,
+        "size": 0.45,
+        "speed": 0.8
+      },
+      "bg": "space",
+      "effect": "zoom"
+    },
+    {
+      "type": "whatif",
+      "text": "9つめ。もし、ある日突然、月がなくなったら？",
+      "card": {
+        "title": [
+          "もし月が",
+          "なくなったら？"
+        ],
+        "no": 9,
+        "tag": "月がなくなる"
+      },
+      "hold": 0.8,
+      "globe": {
+        "texture": "moon",
+        "speed": 1.0
+      },
+      "bg": "space",
+      "effect": "none",
+      "chapter": "09 もし月がなくなったら？"
+    },
+    {
+      "type": "whatif",
+      "text": "まず、夜がとても暗くなる。月明かりがなくなって、星の光だけの夜になるんだ。",
+      "photo": {
+        "file": "earth_night_iss.jpg",
+        "zoom": 1.15,
+        "focus": [
+          0.5,
+          0.3
+        ]
+      },
+      "effect": "dark"
+    },
+    {
+      "type": "whatif",
+      "text": "次に、海の満ち引きが小さくなる。太陽の力の分だけが残るので、およそ3分の1に。",
+      "speech": "次に、海のみちひきが小さくなる。太陽の力の分だけが残るので、およそ3分の1に。",
+      "footage": {
+        "file": "ocean_tides_1080p.mp4",
+        "start": 15,
+        "zoom": 1.3,
+        "focus": [
+          0.5,
+          0.4
+        ]
+      },
+      "big": "約3分の1",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "満月に合わせて卵を産む、サンゴのような生き物も、困ってしまう。",
+      "footage": {
+        "file": "iss_ocean.mp4",
+        "start": 1
+      },
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "さらに、地球の傾きが安定しなくなって、気候が、大きく変わるかもしれない。",
+      "globe": {
+        "texture": "earth",
+        "speed": 0.8,
+        "tilt": 23.4,
+        "tiltTo": 60
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "暑すぎる時代や、寒すぎる時代が、くり返しやってくるとも考えられている。",
+      "footage": {
+        "file": "iss_storm.mp4",
+        "start": 1
+      },
+      "effect": "shake"
+    },
+    {
+      "type": "whatif",
+      "text": "それから、日食も月食も、もう二度と見られなくなる。",
+      "globe": {
+        "texture": "moon",
+        "speed": 0.4
+      },
+      "bg": "space",
+      "effect": "dark"
+    },
+    {
+      "type": "whatif",
+      "text": "ちなみに月は、1年に約3.8センチずつ、地球から遠ざかっているんだ。",
+      "speech": "ちなみに月は、1年に約3てん8センチずつ、地球から遠ざかっているんだ。",
+      "globe": {
+        "texture": "moon",
+        "speed": 0.5,
+        "size": 1.0,
+        "sizeTo": 0.8
+      },
+      "bg": "space",
+      "big": "毎年 約3.8cm",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "月はいつもそばで、地球を支えてくれているんだね。",
+      "photo": {
+        "file": "earthrise_artemis2.jpg"
+      },
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "そして最後。もし、太陽が、突然消えたら？",
+      "card": {
+        "title": [
+          "もし太陽が",
+          "消えたら？"
+        ],
+        "no": 10,
+        "tag": "太陽が消える"
+      },
+      "hold": 0.8,
+      "footage": {
+        "file": "sun_b.mp4",
+        "start": 1
+      },
+      "bg": "space",
+      "effect": "none",
+      "chapter": "10 もし太陽が消えたら？"
+    },
+    {
+      "type": "whatif",
+      "text": "その瞬間、太陽は消える。でも地球では、まだ誰も気づかない。",
+      "footage": {
+        "file": "sun_a.mp4",
+        "start": 1
+      },
+      "effect": "vanish"
+    },
+    {
+      "type": "whatif",
+      "text": "太陽の光が地球に届くまで、約8分20秒かかるからだ。",
+      "footage": {
+        "file": "solar_flare_m84.mp4",
+        "start": 15
+      },
+      "big": "約8分20秒",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "8分後、空は突然、まっ暗になる。",
+      "footage": {
+        "file": "iss_land.mp4",
+        "start": 1
+      },
+      "effect": "dark"
+    },
+    {
+      "type": "whatif",
+      "text": "月も惑星も、見えなくなる。自分では光っていないからだ。",
+      "globe": {
+        "texture": "moon",
+        "speed": 0.6
+      },
+      "bg": "space",
+      "effect": "dark"
+    },
+    {
+      "type": "whatif",
+      "text": "さらに地球は、太陽に引っぱられなくなり、まっすぐ宇宙の暗闇へ、飛んでいってしまう。",
+      "globe": {
+        "texture": "earth_night",
+        "speed": 1.0,
+        "sizeTo": 0.15
+      },
+      "bg": "space",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "植物は光合成ができず、少しずつ枯れていく。",
+      "footage": {
+        "file": "plants_forest.mp4",
+        "start": 0
+      },
+      "effect": "dark"
+    },
+    {
+      "type": "whatif",
+      "text": "1週間ほどで、地表の気温は、氷点下に。",
+      "footage": {
+        "file": "arctic_sea_ice_2026.mp4",
+        "start": 30,
+        "zoom": 1.3,
+        "focus": [
+          0.45,
+          0.6
+        ]
+      },
+      "big": "氷点下",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "1年後には、マイナス70度ほどまで下がるといわれている。",
+      "photo": {
+        "file": "frozen_lake_iss.jpg",
+        "zoom": 1.1
+      },
+      "big": "約−70℃",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "それでも深い海は、すぐには凍らない。海の底の熱で生きる生き物は、生き残れるかもしれない。",
+      "footage": {
+        "file": "iss_ocean.mp4",
+        "start": 1
+      },
+      "effect": "dark"
+    },
+    {
+      "type": "whatif",
+      "text": "でも安心して。太陽は、あと50億年ほど、輝き続けるといわれているんだ。",
+      "footage": {
+        "file": "sun_b.mp4",
+        "start": 1
+      },
+      "big": "あと約50億年",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "10個のもしも、どれがいちばん怖かった？コメントで教えてね。",
+      "card": {
+        "title": [
+          "どの“もしも”が",
+          "いちばん怖かった？"
+        ],
+        "sub": "コメントで教えてね"
+      },
+      "hold": 0.8,
+      "footage": {
+        "file": "iss_aurora_2025.mp4",
+        "start": 60
+      },
+      "effect": "none",
+      "chapter": "エンディング"
+    },
+    {
+      "type": "whatif",
+      "text": "当たり前の毎日は、重力や摩擦、海や月、そして太陽に、支えられているんだね。",
+      "footage": {
+        "file": "iss_aurora_2025.mp4",
+        "start": 70
+      },
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "ほかに知りたいもしもがあれば、ぜひリクエストしてね。チャンネル登録も、よろしくね。",
+      "globe": {
+        "texture": "earth",
+        "speed": 0.6,
+        "size": 0.7
+      },
+      "bg": "space",
+      "hold": 14,
+      "effect": "none"
+    }
+  ],
+  "description": "重力が半分、摩擦がゼロ、海が消える、地球に輪がある、太陽が消える…。地球の「もしも」を10個、本気で考えてみました。\n人や車の動きは物理エンジンでシミュレーションし、宇宙や地球の映像はNASAの本物の素材を使っています。\nあなたがいちばん怖かった「もしも」は？コメントで教えてください！\n映像・画像：NASA / NASA/JPL / NASA/JPL-Caltech / NASA Earth Observatory\n※「海がなくなった地球」はNASAの地図画像を加工して作ったイメージです。",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "宇宙",
+    "物理",
+    "地球",
+    "科学"
+  ]
+}

@@ -15,6 +15,8 @@ import { fontFamily } from "../theme";
 import { charWidth } from "./ThreadPage";
 import { Globe } from "./Globe";
 import { PhysicsScene } from "./PhysicsScene";
+import { WhatIfCard } from "./WhatIfCard";
+import { RingSky } from "./RingSky";
 
 // 画面の配置（1080×1920）：上の黒帯にタイトル、真ん中が映像、下は黒
 export const VIEW = { top: 520, height: 1000 };
@@ -197,8 +199,8 @@ const Flood: React.FC = () => {
 };
 
 // 長い字幕は、真ん中に近い助詞のあとで2行に分ける（文字を大きく見せるため）
-const splitCaption = (text: string): string[] => {
-  if (text.length <= 10) {
+const splitCaption = (text: string, maxLen = 10): string[] => {
+  if (text.length <= maxLen) {
     return [text];
   }
   const mid = text.length / 2;
@@ -237,6 +239,8 @@ const Caption: React.FC<{
   voiceFrames: number;
 }> = ({ text, voiceStart, voiceFrames }) => {
   const frame = useCurrentFrame();
+  const { width, height } = useVideoConfig();
+  const landscape = width > height;
   const chunks = text
     .split(/(?<=[、。！？])/)
     .map((c) => c.replace(/[、。]$/, ""))
@@ -251,16 +255,19 @@ const Caption: React.FC<{
     }
     acc += c.length;
   }
-  const lines = splitCaption(current);
+  // 横長（ロング動画）は1行に長めに入れて、画面の下に置く
+  const lines = splitCaption(current, landscape ? 18 : 10);
   const size = Math.min(
-    110,
-    Math.floor(1000 / Math.max(1, ...lines.map(charWidth))),
+    landscape ? 92 : 110,
+    Math.floor((landscape ? 1640 : 1000) / Math.max(1, ...lines.map(charWidth))),
   );
   return (
     <div
       style={{
         position: "absolute",
-        top: VIEW.top + VIEW.height - 330,
+        top: landscape
+          ? height - 60 - size * 1.15 * lines.length
+          : VIEW.top + VIEW.height - 330,
         left: 30,
         right: 30,
         textAlign: "center",
@@ -287,7 +294,10 @@ export const WhatIfPage: React.FC<{
   voiceFrames: number;
 }> = ({ slide, voiceStart, voiceFrames }) => {
   const frame = useCurrentFrame();
-  const { fps, durationInFrames } = useVideoConfig();
+  const { fps, durationInFrames, width, height } = useVideoConfig();
+  const landscape = width > height;
+  // 映像エリア：たて動画は上下に黒帯、横長は画面いっぱい
+  const view = landscape ? { top: 0, height } : VIEW;
   const effect = slide.effect ?? "zoom";
   const pop = spring({ frame, fps, config: { damping: 12 } });
   // カメラのゆっくりズーム（場面の最初は少し強めに寄る）
@@ -344,9 +354,13 @@ export const WhatIfPage: React.FC<{
           extrapolateRight: "clamp",
         })
       : 0;
-  const flash = interpolate(frame, [0, 5], [0.6, 0], {
-    extrapolateRight: "clamp",
-  });
+  // 場面の切り替わり：たて動画は白く光らせる。横長（長い動画）は目が疲れないよう、少し暗くするだけ
+  const flash = landscape
+    ? 0
+    : interpolate(frame, [0, 5], [0.6, 0], { extrapolateRight: "clamp" });
+  const dip = landscape
+    ? interpolate(frame, [0, 6], [0.45, 0], { extrapolateRight: "clamp" })
+    : 0;
   const bigPop = spring({ frame: frame - 8, fps, config: { damping: 9 } });
 
   return (
@@ -354,10 +368,10 @@ export const WhatIfPage: React.FC<{
       <div
         style={{
           position: "absolute",
-          top: VIEW.top,
+          top: view.top,
           left: 0,
           right: 0,
-          height: VIEW.height,
+          height: view.height,
           overflow: "hidden",
           transform: `translate(${shakeX}px, ${shakeY}px)`,
         }}
@@ -399,14 +413,26 @@ export const WhatIfPage: React.FC<{
             />
           </AbsoluteFill>
         ) : null}
+        {slide.scene === "ringsky" || slide.scene === "ringsky_day" ? (
+          <RingSky day={slide.scene === "ringsky_day"} />
+        ) : null}
         {slide.sim ? (
-          <PhysicsScene kind={slide.sim} width={1080} height={VIEW.height} />
+          <PhysicsScene
+            kind={slide.sim}
+            width={width}
+            height={view.height}
+            gravity={slide.simG}
+            labels={slide.simLabels}
+            offset={Math.round((slide.simStart ?? 0) * fps)}
+          />
         ) : null}
         {slide.globe ? (
           <AbsoluteFill
-            style={{ transform: `translate(0, -60px) scale(${scale})` }}
+            style={{
+              transform: `translate(0, ${landscape ? -30 : -60}px) scale(${scale})`,
+            }}
           >
-            <Globe {...slide.globe} width={1080} height={VIEW.height} />
+            <Globe {...slide.globe} width={width} height={view.height} />
           </AbsoluteFill>
         ) : null}
         <AbsoluteFill
@@ -421,7 +447,7 @@ export const WhatIfPage: React.FC<{
                 objectFit: "contain",
                 transform: `scale(${scale}) rotate(${rotate}deg)`,
                 filter: "drop-shadow(0 0 40px rgba(120,180,255,0.35))",
-                marginTop: -120,
+                marginTop: landscape ? -90 : -120,
               }}
             />
           ) : null}
@@ -433,11 +459,11 @@ export const WhatIfPage: React.FC<{
           style={{ background: "#000", opacity: Math.max(dark, vanishDark) }}
         />
         <AbsoluteFill style={{ background: "#fff", opacity: vanishFlash }} />
-        {slide.big ? (
+        {slide.big && !slide.card ? (
           <div
             style={{
               position: "absolute",
-              top: 60,
+              top: landscape ? 120 : 60,
               left: 0,
               right: 0,
               display: "flex",
@@ -450,7 +476,7 @@ export const WhatIfPage: React.FC<{
               style={{
                 fontFamily,
                 fontWeight: 900,
-                fontSize: 96,
+                fontSize: landscape ? 104 : 96,
                 color: "#111",
                 background: "#ffe600",
                 padding: "6px 34px",
@@ -464,12 +490,30 @@ export const WhatIfPage: React.FC<{
           </div>
         ) : null}
         <AbsoluteFill style={{ background: "#fff", opacity: flash }} />
+        <AbsoluteFill style={{ background: "#000", opacity: dip }} />
       </div>
-      <Caption
-        text={slide.text}
-        voiceStart={voiceStart}
-        voiceFrames={voiceFrames}
-      />
+      {slide.card ? <WhatIfCard card={slide.card} total={10} /> : null}
+      {landscape && !slide.card ? (
+        // 字幕を読みやすくする、下のうす暗いグラデーション
+        <div
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: 330,
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%)",
+          }}
+        />
+      ) : null}
+      {slide.card ? null : (
+        <Caption
+          text={slide.text}
+          voiceStart={voiceStart}
+          voiceFrames={voiceFrames}
+        />
+      )}
     </AbsoluteFill>
   );
 };
