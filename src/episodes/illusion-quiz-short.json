@@ -1,0 +1,121 @@
+{
+  "id": "illusion-quiz-short",
+  "title": "目の錯覚クイズ",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "illusion",
+  "background": "#07031a",
+  "slideGap": 8,
+  "answerPause": 90,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 3,
+    "speed": 1.2,
+    "name": "ずんだもん"
+  },
+  "bgm": {
+    "file": "nazonazo.mp3",
+    "title": "なぞなぞ",
+    "credit": "Make a field Music",
+    "page": "https://opentracks.com/bgm/detail/16023",
+    "opentracks": 16023,
+    "track": 2
+  },
+  "illustrations": {
+    "fe_eyes.svg": {
+      "emoji": "👁️",
+      "irasutoya": "Fluent Emoji「Eyes」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Eyes/Color/eyes_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_brain.svg": {
+      "emoji": "👁️",
+      "irasutoya": "Fluent Emoji「Brain」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Brain/Color/brain_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    }
+  },
+  "slides": [
+    {
+      "type": "illusion",
+      "kind": "intro",
+      "text": "全部見抜けたら天才！目の錯覚クイズ、5問いくのだ！"
+    },
+    {
+      "type": "illusion",
+      "kind": "muller",
+      "no": 1,
+      "text": "AとB、長い線はどっち？",
+      "answer": "同じ長さ！",
+      "answerSpeech": "正解は…、同じ長さなのだ！",
+      "explain": "矢印の向きにつられて、脳が線の長さを読み違えるのだ。",
+      "labels": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "type": "illusion",
+      "kind": "ebbinghaus",
+      "no": 2,
+      "text": "オレンジの円、大きいのはどっち？",
+      "answer": "同じ大きさ！",
+      "answerSpeech": "正解は…、同じ大きさなのだ！",
+      "explain": "脳はまわりと比べて大きさを決めるので、小さな円に囲まれると大きく見えるのだ。",
+      "labels": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "type": "illusion",
+      "kind": "contrast",
+      "no": 3,
+      "text": "灰色の帯、明るいのは左と右どっち？",
+      "answer": "全部同じ色！",
+      "answerSpeech": "正解は…、全部同じ色なのだ！",
+      "explain": "脳はまわりとの差で明るさを決めるので、暗い背景の前だと明るく見えるのだ。",
+      "labels": [
+        "左",
+        "右"
+      ]
+    },
+    {
+      "type": "illusion",
+      "kind": "cafe",
+      "no": 4,
+      "text": "横の線、かたむいている？",
+      "answer": "全部まっすぐ！",
+      "answerSpeech": "正解は…、全部まっすぐで平行なのだ！",
+      "explain": "白と黒のタイルのずれと、間の灰色の線が組み合わさって、ななめに見えるのだ。"
+    },
+    {
+      "type": "illusion",
+      "kind": "ponzo",
+      "no": 5,
+      "text": "上と下、長い棒はどっち？",
+      "answer": "同じ長さ！",
+      "answerSpeech": "正解は…、同じ長さなのだ！",
+      "explain": "線路の奥行きにつられて、遠くにある上の棒を、脳が大きく見積もってしまうのだ。",
+      "labels": [
+        "上",
+        "下"
+      ]
+    },
+    {
+      "type": "illusion",
+      "kind": "outro",
+      "text": "何問見抜けたのだ？コメントで教えてほしいのだ！"
+    }
+  ],
+  "description": "あなたの脳はだまされる？有名な目の錯覚を5問、答え合わせのアニメーションつきで出題します。\n何問見抜けたか、コメントで教えてください！",
+  "hashtags": [
+    "目の錯覚",
+    "錯視",
+    "クイズ",
+    "脳トレ",
+    "雑学",
+    "Shorts"
+  ]
+}

@@ -8,6 +8,7 @@ import sleepTrivia1h from "./sleep-trivia-1h.json";
 import thingsRankingShort from "./things-ranking-short.json";
 import whatifRotationShort from "./whatif-rotation-short.json";
 import whatifMoonShort from "./whatif-moon-short.json";
+import illusionQuizShort from "./illusion-quiz-short.json";
 import whatifEarthLong from "./whatif-earth-long.json";
 import whatifFrictionShort from "./whatif-friction-short.json";
 import whatifGravityShort from "./whatif-gravity-short.json";
@@ -92,6 +93,21 @@ export type TriviaSlide = {
   explainSpeech?: string;
 };
 
+// 目の錯覚クイズ：図を見せて問題を読み、カウントダウンのあと答え合わせ（図が動いて種明かし）→ 解説
+export type IllusionSlide = {
+  type: "illusion";
+  // 図の種類（intro/outro はタイトルとしめくくり）
+  kind: "muller" | "ebbinghaus" | "contrast" | "cafe" | "ponzo" | "intro" | "outro";
+  text: string;
+  speech?: string;
+  answer?: string;
+  answerSpeech?: string;
+  explain?: string;
+  explainSpeech?: string;
+  // 図の中に出す選択肢（A/B など）
+  labels?: [string, string];
+};
+
 // 2ch風ショート：集中線の背景に大きな見出し（スレタイや要点）、イラストの上にレスが順番に出る。
 // 見出し（NNN.wav）とレス（NNN-rK.wav）を別の声で読み上げる
 export type ThreadSlide = {
@@ -159,6 +175,7 @@ export type ScriptSlide = (
   | ThreadSlide
   | SleepSlide
   | WhatIfSlide
+  | IllusionSlide
 ) & {
   chapter?: string;
   no?: number;
@@ -174,7 +191,7 @@ export type Episode = {
   // ショートの上部のタイトル帯（省略時は表示）
   titleBand?: boolean;
   // "flashy" で1ページ1雑学を派手な編集にする（集中線・叩きつけ文字・フラッシュ・揺れ・効果音）
-  style?: "flashy" | "sleep" | "whatif";
+  style?: "flashy" | "sleep" | "whatif" | "illusion";
   // 「もしも」動画の上の黒帯に出し続けるタイトル（2行）
   headline?: string[];
   // フレームレート（省略時は 30）。動きの少ない長時間動画は下げると書き出しが速い
@@ -222,6 +239,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  illusionQuizShort as Episode,
   whatifEarthLong as Episode,
   whatifFrictionShort as Episode,
   whatifGravityShort as Episode,

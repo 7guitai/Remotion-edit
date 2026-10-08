@@ -122,7 +122,7 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
           durationInFrames: cursor + ANSWER_TAIL,
         };
       }
-      if (slide.type === "trivia" && slide.answer) {
+      if ((slide.type === "trivia" || slide.type === "illusion") && slide.answer) {
         const answerPath = voicePath.replace(".wav", "-answer.wav");
         const hasAnswer = await exists(answerPath);
         const answerSeconds = hasAnswer

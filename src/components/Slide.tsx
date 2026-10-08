@@ -17,6 +17,7 @@ import { Quiz } from "./Quiz";
 import { FlashyTriviaPage } from "./FlashyTriviaPage";
 import { SleepPage } from "./SleepPage";
 import { WhatIfPage } from "./WhatIfPage";
+import { IllusionPage } from "./IllusionPage";
 import { ThreadPage } from "./ThreadPage";
 import { TriviaPage } from "./TriviaPage";
 
@@ -132,6 +133,9 @@ export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
     extrapolateRight: "clamp",
   });
 
+  if (slide.type === "illusion") {
+    return <IllusionPage resolved={resolved} slide={slide} />;
+  }
   if (slide.type === "whatif") {
     return (
       <WhatIfPage
