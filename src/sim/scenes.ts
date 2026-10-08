@@ -26,7 +26,10 @@ export type SimKind =
   | "ladder"
   | "fchaos"
   // 空気の濃さくらべ（右の世界は空気が2倍）。強い風の中に立つ
-  | "wind";
+  | "wind"
+  // 地球を貫く穴の中を落ちていく（tunnelzero は中心付近の無重力）
+  | "tunnel"
+  | "tunnelzero";
 
 export const FRICTION_KINDS: SimKind[] = ["fstand", "fpush", "fbrake", "ladder", "fchaos"];
 // この時刻（秒）で、右（奥）の世界の摩擦が消える
@@ -649,6 +652,22 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
       };
       lanes.push({ world, g: G, dolls: [rd], control, record });
     });
+  } else if (kind === "tunnel" || kind === "tunnelzero") {
+    // 地面のない世界で、力を抜いた人形が回りながら落ちる（中心付近は重力ゼロでただよう）
+    const zero = kind === "tunnelzero";
+    const world = new CANNON.World({ gravity: new CANNON.Vec3(0, zero ? 0 : -3.2, 0) });
+    world.allowSleep = false;
+    (world.solver as CANNON.GSSolver).iterations = 20;
+    const rd = addDoll(world, 0, 0, [0, 0, 0], 0.4);
+    rd.balance = 0;
+    rd.setStrength(0.03);
+    rd.setPose(POSES.slip);
+    // ゆっくり回り出すように、少しだけ回転をつける
+    rd.bodies.torso.angularVelocity.set(0.5, 0.35, 0.6);
+    rd.bodies.pelvis.angularVelocity.set(0.3, -0.2, 0.4);
+    rd.bodies.upperArmL.velocity.set(-0.4, 0.3, 0.2);
+    rd.bodies.upperArmR.velocity.set(0.4, 0.2, -0.2);
+    lanes.push({ world, g: zero ? 0 : 3.2, dolls: [rd], control: () => {}, record: () => {} });
   } else if (kind === "fchaos") {
     // 摩擦ゼロの広場で、5人が歩き出そうとする
     const fw = frictionWorld(1);

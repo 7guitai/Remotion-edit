@@ -73,6 +73,13 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       const d = 6.5 + far * 0.55;
       return { pos: [cx, 1.8 + far * 0.12, d], look: [cx, 1.6 + far * 0.1, 0] };
     }
+    case "tunnel":
+    case "tunnelzero": {
+      // 落ちていく人を、ななめ上から追いかける
+      const pi = sim.bodies.findIndex((b) => b.part === "pelvis");
+      const p = posAt(sim, f, pi);
+      return { pos: [p[0] + 1.6, p[1] + 2.9, p[2] + 2.9], look: [p[0], p[1] - 0.2, p[2]] };
+    }
     case "wind":
       return { pos: [-0.2, 1.7, lerp(9.6, 9.0, t)], look: [-0.2, 1.15, 0] };
     case "fstand":
@@ -230,6 +237,64 @@ const partGeometry = (part: string, size: [number, number, number]) => {
     return new THREE.CapsuleGeometry(r, Math.max(0.01, h - 2 * r), 8, 16);
   }
   return new RoundedBoxGeometry(w, h, d, 4, Math.min(w, h, d) * 0.35);
+};
+
+// 地球を貫く穴の壁：岩の地層の模様と、一定の間隔の明かり。壁は落ちる人のまわりにだけ描き、
+// 模様の位置を高さに合わせてずらして、ずっと続く穴に見せる
+const useRockTexture = () =>
+  useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 256;
+    canvas.height = 512;
+    const ctx = canvas.getContext("2d")!;
+    let y = 0;
+    let k = 0;
+    while (y < 512) {
+      const h = 8 + ((k * 37) % 29);
+      const c = 70 + ((k * 53) % 60);
+      ctx.fillStyle = `rgb(${c + 40},${c},${Math.round(c * 0.6)})`;
+      ctx.fillRect(0, y, 256, h);
+      y += h;
+      k++;
+    }
+    for (let i = 0; i < 1500; i++) {
+      const g = (i * 71) % 90;
+      ctx.fillStyle = `rgba(${g + 20},${g},${g * 0.5},0.5)`;
+      ctx.fillRect((i * 97) % 256, (i * 151) % 512, 3, 2);
+    }
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.wrapT = THREE.RepeatWrapping;
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.repeat.set(4, 6);
+    return tex;
+  }, []);
+
+// y：壁を置く高さ（落ちる人のまわり）、phase：模様を流す量（m）。人がその場にいても、壁が流れて速さが見える
+const Shaft: React.FC<{ y: number; phase?: number }> = ({ y, phase = 0 }) => {
+  const tex = useRockTexture();
+  const H = 60;
+  const yy = y - phase;
+  // 模様の1回分が10m。壁の中心が y にあっても、模様は高さで決まる位置に見える
+  tex.offset.y = (((yy - H / 2) / 10) % 1 + 1) % 1;
+  const lamps = [];
+  for (let h = Math.ceil((yy - 28) / 6) * 6; h < yy + 28; h += 6) {
+    lamps.push(h + phase);
+  }
+  return (
+    <group>
+      <mesh position={[0, y, 0]}>
+        <cylinderGeometry args={[2.8, 2.8, H, 48, 1, true]} />
+        <meshStandardMaterial map={tex} side={THREE.BackSide} roughness={0.95} />
+      </mesh>
+      {lamps.map((h) => (
+        <mesh key={h} position={[0, h, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[2.72, 0.05, 8, 64]} />
+          <meshStandardMaterial color="#ffb347" emissive="#ff9a2e" emissiveIntensity={2.5} />
+        </mesh>
+      ))}
+    </group>
+  );
 };
 
 const PersonPart: React.FC<{
@@ -553,6 +618,27 @@ export const PhysicsScene: React.FC<{
     });
   }
 
+  if (sim.kind === "tunnel" || sim.kind === "tunnelzero") {
+    // 速さは、中身が均一な地球を通る穴の計算（中心で時速 約2万8000km）を場面に合わせて表示
+    const p = f / Math.max(1, sim.frames - 1);
+    const kmh = sim.kind === "tunnelzero" ? 28000 : 28000 * Math.sin((Math.PI / 2) * 0.85 * p);
+    overlays.push(
+      <div key="hud" style={{ position: "absolute", left: 30, top: 30 + T, display: "flex", flexDirection: "column", gap: 10 }}>
+        <div style={{ fontFamily, fontWeight: 900, fontSize: 44, color: "#7dff9a", background: "rgba(0,0,0,0.65)", border: "3px solid rgba(125,255,154,0.6)", borderRadius: 14, padding: "2px 18px", whiteSpace: "nowrap" }}>
+          <span style={{ color: "#fff", fontSize: 32, marginRight: 12 }}>時速</span>
+          {`${Math.round(kmh).toLocaleString()} km`}
+        </div>
+      </div>,
+    );
+    if (sim.kind === "tunnelzero") {
+      overlays.push(
+        <Pill key="zero" x={width - 190} y={70 + T} color="#7a3cff" size={46}>
+          重力ゼロ
+        </Pill>,
+      );
+    }
+  }
+
   // ボールの軌跡（0.5秒前までの位置を点で）
   const trails: React.ReactNode[] = [];
   if (sim.kind === "throw") {
@@ -589,7 +675,10 @@ export const PhysicsScene: React.FC<{
     );
   });
 
-  const fogColor = isRoad ? "#b9c7d6" : "#cfe8ff";
+  const isTunnel = kind === "tunnel" || kind === "tunnelzero";
+  const fogColor = isTunnel ? "#140a05" : isRoad ? "#b9c7d6" : "#cfe8ff";
+  // 中心付近（tunnelzero）は人がその場でただようので、壁のほうを流して速さを見せる
+  const shaftPhase = kind === "tunnelzero" ? frame * 0.9 : 0;
   // 摩擦ゼロの地面は、つるつるの氷のように見せる（摩擦が消えた瞬間から）
   const ice = isFriction
     ? Math.min(1, Math.max(0, (f - offFrame) / 8))
@@ -606,14 +695,21 @@ export const PhysicsScene: React.FC<{
     <AbsoluteFill>
       <AbsoluteFill
         style={{
-          background:
-            "linear-gradient(180deg, #4a9cff 0%, #8cc8ff 55%, #dff0ff 100%)",
+          background: isTunnel
+            ? "#140a05"
+            : "linear-gradient(180deg, #4a9cff 0%, #8cc8ff 55%, #dff0ff 100%)",
         }}
       />
       <ThreeCanvas width={width} height={height} shadows camera={{ fov: 40, near: 0.1, far: 400 }}>
         <CameraRig cam={cam} width={width} height={height} />
-        <fog attach="fog" args={[fogColor, 30, 120]} />
-        <hemisphereLight args={["#dff1ff", "#6a7a4a", 1.1]} />
+        <fog attach="fog" args={isTunnel ? [fogColor, 6, 34] : [fogColor, 30, 120]} />
+        <hemisphereLight args={isTunnel ? ["#ffd2a0", "#3a1a08", 0.9] : ["#dff1ff", "#6a7a4a", 1.1]} />
+        {isTunnel ? (
+          <>
+            <pointLight position={[cam.look[0] + 0.5, cam.look[1] + 2.5, cam.look[2] + 1]} intensity={30} distance={14} color="#ffe2b8" />
+            <Shaft y={cam.look[1]} phase={shaftPhase} />
+          </>
+        ) : null}
         <directionalLight
           position={[cam.look[0] + 6, 12, 8]}
           intensity={2.4}
@@ -630,10 +726,12 @@ export const PhysicsScene: React.FC<{
         >
           <object3D attach="target" position={[cam.look[0], 0, 0]} />
         </directionalLight>
-        <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-          <planeGeometry args={[200, 200]} />
-          <meshStandardMaterial map={ground} roughness={0.95} />
-        </mesh>
+        {isTunnel ? null : (
+          <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+            <planeGeometry args={[200, 200]} />
+            <meshStandardMaterial map={ground} roughness={0.95} />
+          </mesh>
+        )}
 
         {iceArea && ice > 0 ? (
           <mesh position={[iceArea[0], 0.004, iceArea[1]]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>

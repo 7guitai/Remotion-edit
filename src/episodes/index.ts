@@ -15,6 +15,7 @@ import whatifFrictionShort from "./whatif-friction-short.json";
 import whatifGravity2Short from "./whatif-gravity2-short.json";
 import whatifGravityShort from "./whatif-gravity-short.json";
 import whatifSunShort from "./whatif-sun-short.json";
+import whatifTunnelShort from "./whatif-tunnel-short.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -174,6 +175,8 @@ export type WhatIfSlide = {
   hold?: number;
   // 特別な背景（ringsky＝地上から見上げた輪のある夜空、ringsky_day＝昼の空）
   scene?: "ringsky" | "ringsky_day";
+  // 地球の断面と、中心を通る穴（地球を貫く穴に飛び込んだら）
+  cut?: import("../components/EarthCut").CutMode;
 };
 
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
@@ -256,6 +259,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  whatifTunnelShort as Episode,
   illusionQuiz2Short as Episode,
   whatifGravity2Short as Episode,
   illusionQuizShort as Episode,

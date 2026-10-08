@@ -1,0 +1,115 @@
+{
+  "id": "whatif-tunnel-short",
+  "title": "もし地球を貫く穴に飛び込んだら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.11,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "odoru_uchuu.mp3",
+    "title": "踊る、宇宙の中で(Dancing,at Universe)",
+    "credit": "蒲鉾さちこ",
+    "page": "https://opentracks.com/bgm/detail/15926",
+    "opentracks": 15926,
+    "track": 2
+  },
+  "headline": [
+    "もし地球を貫く",
+    "穴に飛び込んだら？"
+  ],
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、地球の反対側まで、まっすぐ穴をあけて、飛び込んだら、どうなるのか？",
+      "effect": "none",
+      "cut": "intro"
+    },
+    {
+      "type": "whatif",
+      "text": "日本の反対側は、ブラジル沖の大西洋。穴の長さは、地球の直径、約1万2700キロだ。",
+      "effect": "none",
+      "globe": {
+        "texture": "earth",
+        "speed": 0.6
+      },
+      "bg": "space",
+      "big": "約1万2700km"
+    },
+    {
+      "type": "whatif",
+      "text": "飛び込むと、どんどん加速していく。",
+      "effect": "none",
+      "sim": "tunnel"
+    },
+    {
+      "type": "whatif",
+      "text": "地球の中心では、時速およそ2万8000キロ！音の、20倍以上の速さだ。",
+      "effect": "none",
+      "cut": "fall"
+    },
+    {
+      "type": "whatif",
+      "text": "しかも中心では、まわりから引っぱる力がつり合って、重力がゼロになる。",
+      "effect": "none",
+      "sim": "tunnelzero"
+    },
+    {
+      "type": "whatif",
+      "text": "そのあとは、だんだん減速して、反対側の出口で、ぴたりと止まる。地球の中身が均一だとすると、かかる時間は約42分。",
+      "effect": "none",
+      "cut": "cross",
+      "big": "約42分"
+    },
+    {
+      "type": "whatif",
+      "text": "でも、出口でつかまらないと、また落ちて、日本に戻ってくる。永遠に、行ったり来たりするんだ。",
+      "effect": "none",
+      "cut": "oscillate"
+    },
+    {
+      "type": "whatif",
+      "text": "さらにおどろきなのは、まっすぐな穴なら、東京から大阪でも、同じ約42分で着くこと！",
+      "effect": "none",
+      "cut": "chord",
+      "big": "どこでも約42分"
+    },
+    {
+      "type": "whatif",
+      "text": "ただし、現実はきびしい。地球の中心は、5000度をこえる灼熱で、圧力は、約360万気圧。",
+      "effect": "none",
+      "cut": "core",
+      "big": "5000℃以上"
+    },
+    {
+      "type": "whatif",
+      "text": "人類がこれまでに掘った、いちばん深い穴でも、約12キロ。中心までの、わずか0.2%ほどなんだ。",
+      "effect": "none",
+      "cut": "intro",
+      "big": "約12km"
+    },
+    {
+      "type": "whatif",
+      "text": "地球を貫く穴、飛び込んでみたい？コメントで教えてね！",
+      "effect": "none",
+      "sim": "tunnel"
+    }
+  ],
+  "description": "もし地球の反対側までまっすぐ穴をあけて飛び込んだら？中心では時速約2万8000km、反対側まで約42分、そして東京→大阪の穴でも約42分…！\n※地球の中身が均一で、空気の抵抗がないとした場合の計算です。\n落ちていく人の動きは、物理エンジンでシミュレーションして作りました。\nほかに知りたい「もしも」は、コメントで教えてください！",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "科学",
+    "物理",
+    "地球",
+    "Shorts"
+  ]
+}
