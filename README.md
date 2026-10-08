@@ -17,6 +17,7 @@
 | `whatif-sun-short` | もし太陽が消えたら？（同上・NASA の映像9種類） | 約51秒 |
 | `whatif-gravity-short` | もし重力が半分になったら？（人・車は物理エンジンでシミュレーション、火星は NASA の素材） | 約59秒 |
 | `whatif-friction-short` | もし摩擦がなくなったら？（同上。右・奥の世界は途中で摩擦がゼロになる） | 約55秒 |
+| `whatif-earth-long` | 地球の“もしも”10選（横長。章の扉・BGM 3曲の切り替え・物理シミュレーション・NASA の素材） | 約9分21秒 |
 | `whatif-moon-short` | もし月がなくなったら？（同上） | 約44秒 |
 | `food-ranking-short` | 9割が知らない 食べ物のヒミツ ランキング（縦型ショート・派手な編集） | 約38秒 |
 | `body-ranking-short` | 9割が知らない 体のヒミツ ランキング（同上） | 約38秒 |
@@ -127,6 +128,22 @@ npx remotion render whatif-rotation-short out/whatif-rotation-short.mp4 --gl=swa
 
 摩擦の場面（f〜・ladder）は、右（奥）の世界だけ 0.6 秒で摩擦がゼロになり、地面が氷のように光ります。
 関節の筋肉の強さは実際のトルク（N·m）で、物理エンジンの1ステップあたりの力積に直して与えています。
+
+## 横長の「もしも」（ロング動画）
+
+`format: "landscape"` で `style: "whatif"` にすると、横長のレイアウトになります（例：`whatif-earth-long`）。
+
+- 映像は画面いっぱい、字幕は下（読みやすいように下をうす暗く）
+- `card`：章の扉（大きな番号・タイトル・全体の何番目か）。読み上げはするが字幕は出さない。`tag` は章の間、右上に出す短い名前
+- `bgmPlaylist`：`fromSlide` 番目のスライドから曲を切り替える（1.5秒のクロスフェード）。曲ごとに `volume` で音量をそろえる
+- `hold`：読み上げのあとも映像を見せる秒数（最後のエンドカード用など）
+- `sim` と一緒に `simG`（右の世界の重力の倍率）・`simLabels`（左右の名前）・`simStart`（途中の秒から見せる）
+- `globe` に `textureTo`／`fade`（別の地図へゆっくり切り替え）・`rings`（輪）・`squash`／`squashTo`（上下につぶれた形）
+- `scene: "ringsky"`／`"ringsky_day"`：地上から見上げた、輪のある空
+
+台本は `scripts/build_whatif_earth_long.py` で書いて JSON を作ります。仕上がりの確認には、場面ごとの静止画をまとめて書き出す `scripts/render_stills.mjs` が便利です。
+長いので、書き出しはフレームの範囲ごとに分けて（`--frames` と `--muted`）、音声は `--codec=wav` で別に書き出してからつなぎます。
+サムネイルは `npx remotion still whatif-earth-long-thumbnail out/thumb.png --gl=swangle`。
 
 ## AI音声（ずんだもん）
 
