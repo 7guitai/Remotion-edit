@@ -226,7 +226,7 @@ const splitCaption = (text: string, maxLen = 10): string[] => {
     }
   });
   // 数字や英字のかたまりの途中では区切らない（「1700」などが割れないように）
-  const ascii = /[0-9A-Za-z.,]/;
+  const ascii = /[0-9A-Za-z.,%％]/;
   while (best > 1 && ascii.test(text[best - 1]) && ascii.test(text[best])) {
     best--;
   }
