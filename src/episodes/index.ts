@@ -11,6 +11,7 @@ import whatifMoonShort from "./whatif-moon-short.json";
 import illusionQuizShort from "./illusion-quiz-short.json";
 import whatifEarthLong from "./whatif-earth-long.json";
 import whatifFrictionShort from "./whatif-friction-short.json";
+import whatifGravity2Short from "./whatif-gravity2-short.json";
 import whatifGravityShort from "./whatif-gravity-short.json";
 import whatifSunShort from "./whatif-sun-short.json";
 import foodRankingShort from "./food-ranking-short.json";
@@ -239,6 +240,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  whatifGravity2Short as Episode,
   illusionQuizShort as Episode,
   whatifEarthLong as Episode,
   whatifFrictionShort as Episode,

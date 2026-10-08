@@ -417,6 +417,19 @@
       "tags": [
         "金星"
       ]
+    },
+    {
+      "file": "jupiter_cassini.jpg",
+      "type": "image",
+      "ja": "カッシーニ探査機が撮った木星（たて長）",
+      "title": "Cassini's Portrait of Jupiter (PIA04866)",
+      "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia04/pia04866/PIA04866.jpg",
+      "page": "https://science.nasa.gov/photojournal/cassinis-portrait-of-jupiter/",
+      "credit": "NASA/JPL/University of Arizona",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "木星"
+      ]
     }
   ]
 }

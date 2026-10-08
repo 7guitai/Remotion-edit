@@ -1,0 +1,142 @@
+{
+  "id": "whatif-gravity2-short",
+  "title": "もし重力が2倍になったら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.11,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "odoru_uchuu.mp3",
+    "title": "踊る、宇宙の中で(Dancing,at Universe)",
+    "credit": "蒲鉾さちこ",
+    "page": "https://opentracks.com/bgm/detail/15926",
+    "opentracks": 15926,
+    "track": 2
+  },
+  "headline": [
+    "もし重力が",
+    "2倍になったら？"
+  ],
+  "illustrations": {
+    "fe_anatomical_heart.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Anatomical heart」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Anatomical%20heart/Color/anatomical_heart_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_office_building.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Office building」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Office%20building/Color/office_building_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_roller_coaster.svg": {
+      "emoji": "🌍",
+      "irasutoya": "Fluent Emoji「Roller coaster」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Roller%20coaster/Color/roller_coaster_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    }
+  },
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、地球の重力が、突然2倍になったら、どうなるのか？",
+      "effect": "none",
+      "sim": "scale",
+      "simG": 2
+    },
+    {
+      "type": "whatif",
+      "text": "体重は2倍。体が重すぎて、ジャンプしても、ほとんど跳べないんだ。",
+      "effect": "none",
+      "sim": "jump",
+      "simG": 2
+    },
+    {
+      "type": "whatif",
+      "text": "転んだときは、ずっと速く、地面にたたきつけられる。",
+      "effect": "none",
+      "sim": "slip",
+      "simG": 2
+    },
+    {
+      "type": "whatif",
+      "text": "ボールを投げても、すぐに落ちてしまう。",
+      "effect": "none",
+      "sim": "throw",
+      "simG": 2
+    },
+    {
+      "type": "whatif",
+      "text": "でも、いいこともある。タイヤが地面を押す力も2倍になるので、車は、半分の距離で止まれるんだ。",
+      "effect": "none",
+      "sim": "brake",
+      "simG": 2,
+      "speech": "でも、いいこともある。タイヤが地面を押す力も2倍になるので、車は、半分の距離でとまれるんだ。"
+    },
+    {
+      "type": "whatif",
+      "text": "体の中も大変だ。心臓は、血を頭まで送るのに、もっと力が必要になる。立ちくらみしやすくなるといわれているんだ。",
+      "effect": "shake",
+      "image": "fe_anatomical_heart.svg",
+      "imageSize": 560,
+      "bg": "night"
+    },
+    {
+      "type": "whatif",
+      "text": "背の高い木やビルも、自分の重さを、支えにくくなる。",
+      "effect": "zoom",
+      "image": "fe_office_building.svg",
+      "imageSize": 560,
+      "bg": "sky"
+    },
+    {
+      "type": "whatif",
+      "text": "実は、ジェットコースターの急カーブでは、一瞬だけ、重力の2倍以上の力を感じることがあるんだ。",
+      "effect": "zoom",
+      "image": "fe_roller_coaster.svg",
+      "imageSize": 600,
+      "bg": "sky",
+      "big": "2倍以上"
+    },
+    {
+      "type": "whatif",
+      "text": "ちなみに、木星の重力は、地球の約2.5倍。体重66キロの人なら、約165キロにもなるんだ。",
+      "effect": "none",
+      "photo": {
+        "file": "jupiter_cassini.jpg",
+        "zoom": 1.0,
+        "focus": [
+          0.4,
+          0.5
+        ]
+      },
+      "bg": "space",
+      "big": "約2.5倍"
+    },
+    {
+      "type": "whatif",
+      "text": "重力2倍の世界、住んでみたい？コメントで教えてね！",
+      "effect": "none",
+      "sim": "party",
+      "simG": 2
+    }
+  ],
+  "description": "もし地球の重力が突然2倍になったら、体重・ジャンプ・転倒・ボール・車のブレーキはどうなるのか？\n人や車の動きは、物理エンジンでシミュレーションして作りました。\nほかに知りたい「もしも」は、コメントで教えてください！\n画像：NASA/JPL/University of Arizona（木星）",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "重力",
+    "物理",
+    "木星",
+    "Shorts"
+  ]
+}

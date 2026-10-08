@@ -93,7 +93,12 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
         (posAt(sim, f, findIndex(sim, "car", 0))[0] +
           posAt(sim, f, findIndex(sim, "car", 1))[0]) /
         2;
-      const cx = Math.min(Math.max(-1, mid), 10) + 2;
+      // 重力が強い世界の車は手前で止まるので、そのときは少し左を見る
+      const near = Math.min(
+        posAt(sim, f, findIndex(sim, "car", 0))[0],
+        posAt(sim, f, findIndex(sim, "car", 1))[0],
+      );
+      const cx = Math.min(Math.max(-1, mid), 10) + (near > 2.5 ? 2 : 0.8);
       return { pos: [cx - 5, 9, 17], look: [cx + 0.5, 0, 0] };
     }
     default: {
@@ -527,7 +532,7 @@ export const PhysicsScene: React.FC<{
       if (stop > 0) {
         const p = project(cam, [stop - 2, 1.8, lane === 0 ? 1.7 : -1.7], width, height);
         overlays.push(
-          <Pill key={`stop${lane}`} x={Math.min(width - 200, Math.max(200, p.x))} y={Math.max(190 + T, p.y - 30)} color={LANE_COLORS[lane]} size={42}>
+          <Pill key={`stop${lane}`} x={Math.min(width - 200, Math.max(200, p.x))} y={Math.max(240 + T, p.y - 30)} color={LANE_COLORS[lane]} size={42}>
             {`${stop.toFixed(1)}mで停止`}
           </Pill>,
         );
