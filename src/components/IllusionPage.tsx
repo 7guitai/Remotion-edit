@@ -209,6 +209,166 @@ const Ponzo: React.FC<{ r: number; labels?: [string, string] }> = ({ r, labels }
   );
 };
 
+
+// ---- 上級編 ----
+
+// ポッゲンドルフ錯視：棒の後ろを通る斜めの線。本当につながっているのは B（下の線）
+const Poggendorff: React.FC<{ r: number; labels?: [string, string] }> = ({ r, labels }) => {
+  const y = (x: number) => 250 + 0.6 * (x - 100);
+  const bar = 1 - 0.75 * clamp(r * 2);
+  const draw = clamp(r * 1.4 - 0.2);
+  return (
+    <>
+      <g stroke="#111" strokeWidth={12} strokeLinecap="round">
+        <line x1={100} y1={y(100)} x2={420} y2={y(420)} />
+        {/* A：本当の線より少し上にずらした線 */}
+        <line x1={580} y1={y(580) - 75} x2={900} y2={y(900) - 75} />
+        {/* B：本当の続き */}
+        <line x1={580} y1={y(580)} x2={900} y2={y(900)} />
+      </g>
+      <rect x={400} y={60} width={200} height={880} fill="#8f9bb0" opacity={bar} />
+      <line
+        x1={100}
+        y1={y(100)}
+        x2={100 + 800 * draw}
+        y2={y(100 + 800 * draw)}
+        stroke="#ff2d2d"
+        strokeWidth={8}
+        strokeDasharray="20 12"
+      />
+      <Labels labels={labels} at={[[915, y(900) - 60], [915, y(900) + 22]]} />
+    </>
+  );
+};
+
+// ジャストロー錯視：同じ形の扇形を上下に並べる。下の図形が上へ動いて重なる
+const sector = (cy: number) => {
+  const r1 = 420;
+  const r2 = 620;
+  const a1 = (-120 * Math.PI) / 180;
+  const a2 = (-60 * Math.PI) / 180;
+  const p = (r: number, a: number) => `${500 + r * Math.cos(a)} ${cy + r * Math.sin(a)}`;
+  return `M ${p(r2, a1)} A ${r2} ${r2} 0 0 1 ${p(r2, a2)} L ${p(r1, a2)} A ${r1} ${r1} 0 0 0 ${p(r1, a1)} Z`;
+};
+const Jastrow: React.FC<{ r: number; labels?: [string, string] }> = ({ r, labels }) => {
+  const move = clamp((r - 0.15) / 0.85);
+  const ease = move * move * (3 - 2 * move);
+  return (
+    <>
+      <rect x={0} y={0} width={1000} height={1000} fill="#fbf7ee" />
+      <path d={sector(840)} fill="#3a8dff" />
+      <path d={sector(1150)} fill="#ff4a4a" />
+      {move > 0 ? (
+        <path
+          d={sector(1150 - 310 * ease)}
+          fill="none"
+          stroke="#111"
+          strokeWidth={8}
+          strokeDasharray="18 10"
+        />
+      ) : null}
+      <Labels labels={labels} at={[[60, 330], [60, 640]]} />
+    </>
+  );
+};
+
+// ムンカー錯視：同じ色の玉に、左は赤、右は青のしまを重ねる
+const Munker: React.FC<{ r: number }> = ({ r }) => {
+  const stripes = 1 - clamp(r * 1.5);
+  const balls = [230, 500, 770];
+  return (
+    <>
+      <rect x={0} y={0} width={1000} height={1000} fill="#fff" />
+      {balls.map((y) => (
+        <g key={y}>
+          <circle cx={260} cy={y} r={110} fill="#c9a66b" />
+          <circle cx={740} cy={y} r={110} fill="#c9a66b" />
+        </g>
+      ))}
+      <g opacity={stripes}>
+        {Array.from({ length: 42 }, (_, i) => (
+          <g key={i}>
+            <rect x={0} y={i * 24} width={498} height={12} fill="#ff1e3c" />
+            <rect x={502} y={i * 24} width={498} height={12} fill="#1e5bff" />
+          </g>
+        ))}
+      </g>
+    </>
+  );
+};
+
+// コーンスウィート錯視：境目のすぐ近くだけ明るさが変わっている。境目をかくすと左右は同じ
+const Cornsweet: React.FC<{ r: number; labels?: [string, string] }> = ({ r, labels }) => {
+  const cover = clamp(r * 1.6);
+  return (
+    <>
+      <defs>
+        <linearGradient id="cw" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stopColor="#808080" />
+          <stop offset="0.3" stopColor="#808080" />
+          <stop offset="0.4999" stopColor="#5c5c5c" />
+          <stop offset="0.5001" stopColor="#a4a4a4" />
+          <stop offset="0.7" stopColor="#808080" />
+          <stop offset="1" stopColor="#808080" />
+        </linearGradient>
+      </defs>
+      <rect x={0} y={0} width={1000} height={1000} fill="url(#cw)" />
+      {/* 種明かし：上から黒い板がおりてきて、境目をかくす */}
+      <rect x={290} y={0} width={420} height={1000 * cover} fill="#111" />
+      <Labels labels={labels} at={[[150, 930], [850, 930]]} center />
+    </>
+  );
+};
+
+// シェパードのテーブル：左の天板を90度回すと、右の天板にぴったり重なる
+const Shepard: React.FC<{ r: number; labels?: [string, string] }> = ({ r, labels }) => {
+  const u: [number, number] = [70, -340];
+  const v: [number, number] = [140, 46];
+  const rot = (p: [number, number], deg: number): [number, number] => {
+    const a = (deg * Math.PI) / 180;
+    return [p[0] * Math.cos(a) - p[1] * Math.sin(a), p[0] * Math.sin(a) + p[1] * Math.cos(a)];
+  };
+  const quad = (c: [number, number], deg: number) => {
+    const uu = rot(u, deg);
+    const vv = rot(v, deg);
+    const o: [number, number] = [c[0] - (uu[0] + vv[0]) / 2, c[1] - (uu[1] + vv[1]) / 2];
+    return [o, [o[0] + uu[0], o[1] + uu[1]], [o[0] + uu[0] + vv[0], o[1] + uu[1] + vv[1]], [o[0] + vv[0], o[1] + vv[1]]] as [number, number][];
+  };
+  const pts = (q: [number, number][], dy = 0) => q.map(([x, y]) => `${x},${y + dy}`).join(" ");
+  const table = (c: [number, number], deg: number) => {
+    const q = quad(c, deg);
+    // 下側の3つの角から脚をのばす（いちばん上の角以外）
+    const top = q.reduce((m, p, i) => (p[1] < q[m][1] ? i : m), 0);
+    return (
+      <g>
+        {q.map((p, i) =>
+          i === top ? null : (
+            <line key={i} x1={p[0]} y1={p[1] + 20} x2={p[0]} y2={p[1] + 190} stroke="#6b4423" strokeWidth={16} strokeLinecap="round" />
+          ),
+        )}
+        <polygon points={pts(q, 22)} fill="#7a4b22" />
+        <polygon points={pts(q)} fill="#d39a5c" stroke="#6b4423" strokeWidth={4} />
+      </g>
+    );
+  };
+  const A: [number, number] = [290, 470];
+  const B: [number, number] = [700, 470];
+  const move = clamp((r - 0.1) / 0.9);
+  const ease = move * move * (3 - 2 * move);
+  const c: [number, number] = [A[0] + (B[0] - A[0]) * ease, A[1] + (B[1] - A[1]) * ease];
+  return (
+    <>
+      <rect x={0} y={0} width={1000} height={1000} fill="#f4efe6" />
+      {table(A, 0)}
+      {table(B, 90)}
+      {move > 0 ? (
+        <polygon points={pts(quad(c, 90 * ease))} fill="none" stroke="#ff2d2d" strokeWidth={8} strokeDasharray="18 10" />
+      ) : null}
+      <Labels labels={labels} at={[[290, 900], [700, 900]]} center />
+    </>
+  );
+};
+
 const Labels: React.FC<{
   labels?: [string, string];
   at: [[number, number], [number, number]];
@@ -262,7 +422,12 @@ const Background: React.FC = () => {
   );
 };
 
-const Header: React.FC<{ no: number | null; total: number }> = ({ no, total }) => (
+// 見出しの上の小さな文字と、タイトル横の札（エピソードの kicker / badge）
+export const IllusionHeaderContext = React.createContext<{ kicker?: string; badge?: string }>({});
+
+const Header: React.FC<{ no: number | null; total: number }> = ({ no, total }) => {
+  const { kicker, badge } = React.useContext(IllusionHeaderContext);
+  return (
   <div style={{ position: "absolute", top: 70, left: 0, right: 0, textAlign: "center" }}>
     <div
       style={{
@@ -276,7 +441,7 @@ const Header: React.FC<{ no: number | null; total: number }> = ({ no, total }) =
         borderRadius: 999,
       }}
     >
-      あなたの脳はだまされる？
+      {kicker ?? "あなたの脳はだまされる？"}
     </div>
     <div
       style={{
@@ -292,6 +457,26 @@ const Header: React.FC<{ no: number | null; total: number }> = ({ no, total }) =
       }}
     >
       目の錯覚クイズ
+      {badge ? (
+        <span
+          style={{
+            display: "inline-block",
+            marginLeft: 14,
+            verticalAlign: "middle",
+            fontSize: 56,
+            color: "#fff",
+            background: "#111",
+            WebkitTextStroke: "0px",
+            padding: "6px 18px",
+            borderRadius: 14,
+            border: "5px solid #ffe600",
+            transform: "rotate(-6deg) translateY(-14px)",
+            letterSpacing: 0,
+          }}
+        >
+          {badge}
+        </span>
+      ) : null}
     </div>
     {no !== null ? (
       <div
@@ -314,7 +499,8 @@ const Header: React.FC<{ no: number | null; total: number }> = ({ no, total }) =
       </div>
     ) : null}
   </div>
-);
+  );
+};
 
 export const IllusionPage: React.FC<{ resolved: ResolvedSlide; slide: IllusionSlide }> = ({
   resolved,
@@ -383,7 +569,18 @@ export const IllusionPage: React.FC<{ resolved: ResolvedSlide; slide: IllusionSl
     );
   }
 
-  const Fig = { muller: Muller, ebbinghaus: Ebbinghaus, contrast: Contrast, cafe: Cafe, ponzo: Ponzo }[
+  const Fig = {
+    muller: Muller,
+    ebbinghaus: Ebbinghaus,
+    contrast: Contrast,
+    cafe: Cafe,
+    ponzo: Ponzo,
+    poggendorff: Poggendorff,
+    jastrow: Jastrow,
+    munker: Munker,
+    cornsweet: Cornsweet,
+    shepard: Shepard,
+  }[
     slide.kind
   ];
   const sec = countStart !== null && frame >= countStart && !answered ? 3 - Math.floor((frame - countStart) / fps) : null;

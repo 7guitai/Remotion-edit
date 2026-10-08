@@ -9,6 +9,7 @@ import thingsRankingShort from "./things-ranking-short.json";
 import whatifRotationShort from "./whatif-rotation-short.json";
 import whatifMoonShort from "./whatif-moon-short.json";
 import illusionQuizShort from "./illusion-quiz-short.json";
+import illusionQuiz2Short from "./illusion-quiz2-short.json";
 import whatifEarthLong from "./whatif-earth-long.json";
 import whatifFrictionShort from "./whatif-friction-short.json";
 import whatifGravity2Short from "./whatif-gravity2-short.json";
@@ -98,7 +99,19 @@ export type TriviaSlide = {
 export type IllusionSlide = {
   type: "illusion";
   // 図の種類（intro/outro はタイトルとしめくくり）
-  kind: "muller" | "ebbinghaus" | "contrast" | "cafe" | "ponzo" | "intro" | "outro";
+  kind:
+    | "muller"
+    | "ebbinghaus"
+    | "contrast"
+    | "cafe"
+    | "ponzo"
+    | "poggendorff"
+    | "jastrow"
+    | "munker"
+    | "cornsweet"
+    | "shepard"
+    | "intro"
+    | "outro";
   text: string;
   speech?: string;
   answer?: string;
@@ -193,6 +206,9 @@ export type Episode = {
   titleBand?: boolean;
   // "flashy" で1ページ1雑学を派手な編集にする（集中線・叩きつけ文字・フラッシュ・揺れ・効果音）
   style?: "flashy" | "sleep" | "whatif" | "illusion";
+  // 目の錯覚クイズの見出し：上の小さな文字と、タイトル横の札（例：上級編）
+  kicker?: string;
+  badge?: string;
   // 「もしも」動画の上の黒帯に出し続けるタイトル（2行）
   headline?: string[];
   // フレームレート（省略時は 30）。動きの少ない長時間動画は下げると書き出しが速い
@@ -240,6 +256,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  illusionQuiz2Short as Episode,
   whatifGravity2Short as Episode,
   illusionQuizShort as Episode,
   whatifEarthLong as Episode,

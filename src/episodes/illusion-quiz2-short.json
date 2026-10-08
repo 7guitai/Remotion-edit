@@ -1,0 +1,124 @@
+{
+  "id": "illusion-quiz2-short",
+  "title": "目の錯覚クイズ 上級編",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "illusion",
+  "background": "#07031a",
+  "slideGap": 8,
+  "answerPause": 90,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 3,
+    "speed": 1.2,
+    "name": "ずんだもん"
+  },
+  "bgm": {
+    "file": "nazonazo.mp3",
+    "title": "なぞなぞ",
+    "credit": "Make a field Music",
+    "page": "https://opentracks.com/bgm/detail/16023",
+    "opentracks": 16023,
+    "track": 2
+  },
+  "illustrations": {
+    "fe_eyes.svg": {
+      "emoji": "👁️",
+      "irasutoya": "Fluent Emoji「Eyes」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Eyes/Color/eyes_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_brain.svg": {
+      "emoji": "👁️",
+      "irasutoya": "Fluent Emoji「Brain」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Brain/Color/brain_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    }
+  },
+  "slides": [
+    {
+      "type": "illusion",
+      "kind": "intro",
+      "text": "全部見抜けたら錯覚マスター！上級編、5問いくのだ！"
+    },
+    {
+      "type": "illusion",
+      "kind": "poggendorff",
+      "no": 1,
+      "text": "左の線とつながっているのは、AとBどっち？",
+      "answer": "Bにつながる！",
+      "answerSpeech": "正解は…、Bなのだ！",
+      "explain": "線が棒にかくれると、脳が線の角度を読み違えて、つながる場所をずらして感じてしまうといわれているのだ。",
+      "labels": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "type": "illusion",
+      "kind": "jastrow",
+      "no": 2,
+      "text": "上と下、大きいのはどっち？",
+      "answer": "同じ大きさ！",
+      "answerSpeech": "正解は…、同じ大きさなのだ！",
+      "explain": "上の図形の短い辺と、下の図形の長い辺が並ぶので、下のほうが大きく見えてしまうのだ。",
+      "labels": [
+        "上",
+        "下"
+      ],
+      "explainSpeech": "上の図形の短いへんと、下の図形の長いへんが並ぶので、下のほうが大きく見えてしまうのだ。"
+    },
+    {
+      "type": "illusion",
+      "kind": "munker",
+      "no": 3,
+      "text": "左と右の玉、同じ色？ちがう色？",
+      "answer": "全部同じ色！",
+      "answerSpeech": "正解は…、全部同じ色なのだ！",
+      "explain": "玉に重なるしまの色に、脳が引っぱられて、ちがう色に見えてしまうのだ。"
+    },
+    {
+      "type": "illusion",
+      "kind": "cornsweet",
+      "no": 4,
+      "text": "左と右、明るいのはどっち？",
+      "answer": "同じ明るさ！",
+      "answerSpeech": "正解は…、同じ明るさなのだ！",
+      "explain": "明るさが変わっているのは、境目のすぐそばだけ。脳はその差を、全体の差だと思いこんでしまうのだ。",
+      "labels": [
+        "左",
+        "右"
+      ]
+    },
+    {
+      "type": "illusion",
+      "kind": "shepard",
+      "no": 5,
+      "text": "最終問題！テーブルAとB、天板の形は同じ？",
+      "answer": "まったく同じ形！",
+      "answerSpeech": "正解は…、まったく同じ形なのだ！",
+      "explain": "脳が立体として見てしまうので、奥にのびている天板を、長く感じてしまうのだ。",
+      "labels": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "type": "illusion",
+      "kind": "outro",
+      "text": "何問見抜けたのだ？コメントで教えてほしいのだ！"
+    }
+  ],
+  "description": "有名な錯覚は知っていても、これは見抜ける？知っている人が少ない目の錯覚を5問、答え合わせのアニメーションつきで出題します。\nポッゲンドルフ錯視／ジャストロー錯視／ムンカー錯視／コーンスウィート錯視／シェパードのテーブル\n何問見抜けたか、コメントで教えてください！",
+  "hashtags": [
+    "目の錯覚",
+    "錯視",
+    "クイズ",
+    "脳トレ",
+    "上級編",
+    "Shorts"
+  ],
+  "kicker": "知っている人は少ない？",
+  "badge": "上級編"
+}

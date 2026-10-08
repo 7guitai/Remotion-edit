@@ -16,6 +16,7 @@ import { TitleBand } from "./components/TitleBand";
 import { SleepBackground } from "./components/SleepPage";
 import { WhatIfHeadline } from "./components/WhatIfPage";
 import { ChapterTag } from "./components/WhatIfCard";
+import { IllusionHeaderContext } from "./components/IllusionPage";
 
 export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
   const episode = getEpisode(episodeId);
@@ -54,6 +55,7 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
 
   return (
     <AccentContext.Provider value={accent}>
+      <IllusionHeaderContext.Provider value={{ kicker: episode.kicker, badge: episode.badge }}>
       <AbsoluteFill
         style={{ backgroundColor: episode.background ?? COLORS.background }}
       >
@@ -144,6 +146,7 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
           />
         ) : null}
       </AbsoluteFill>
+      </IllusionHeaderContext.Provider>
     </AccentContext.Provider>
   );
 };
