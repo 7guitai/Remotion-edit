@@ -13,6 +13,8 @@ import {
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import {
+  TINY,
+  TINY_KINDS,
   AIR_KINDS,
   FRICTION_KINDS,
   FRICTION_OFF,
@@ -63,6 +65,23 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       return { pos: [0, 2.2, lerp(9.4, 8.8, t)], look: [0, 2.0, 0] };
     case "slip":
       return { pos: [0.9, 1.5, lerp(8.8, 8.2, t)], look: [0.9, 0.85, 0] };
+    case "tworld": {
+      // 大きな物のまわりを、ゆっくり一周する（40秒で一周。simStart で向きを選べる）
+      const a = (f / sim.fps) * ((Math.PI * 2) / 40);
+      return { pos: [Math.sin(a) * 5.6, 1.8, Math.cos(a) * 5.6], look: [0, 1.15, 0] };
+    }
+    case "tlift":
+      return { pos: [0, 1.75, lerp(7.6, 7.2, t)], look: [0, 1.45, 0] };
+    case "tjump":
+      return { pos: [0, 5.4, lerp(18.5, 17.5, t)], look: [0, 4.9, 0] };
+    case "tfall": {
+      const a = lerp(-0.2, 0.2, t);
+      return { pos: [Math.sin(a) * 5.8, 6.4, Math.cos(a) * 5.8], look: [0, 2.35, 0] };
+    }
+    case "twind":
+      return { pos: [0.6, 1.8, lerp(10.4, 9.8, t)], look: [0.6, 1.25, 0] };
+    case "train":
+      return { pos: [0, 1.65, lerp(7.8, 7.4, t)], look: [0, 1.3, 0] };
     case "afeather":
       return { pos: [0, 1.6, lerp(8.2, 7.8, t)], look: [0, 1.6, 0] };
     case "arain":
@@ -177,7 +196,20 @@ const useGroundTexture = (kind: SimKind) =>
     canvas.width = size;
     canvas.height = size;
     const ctx = canvas.getContext("2d")!;
-    if (kind === "brake" || kind === "fbrake") {
+    if (TINY_KINDS.includes(kind)) {
+      // 木の床（板の幅は 10cmの人の世界で 10cm → 拡大して 1.75m）
+      const plank = ["#b98a5a", "#c49464", "#ae8052", "#bf8f5d"];
+      plank.forEach((c, i) => {
+        ctx.fillStyle = c;
+        ctx.fillRect(0, (i * size) / 4, size, size / 4);
+        ctx.fillStyle = "rgba(60,35,15,0.55)";
+        ctx.fillRect(0, (i * size) / 4, size, 2);
+      });
+      for (let i = 0; i < 260; i++) {
+        ctx.fillStyle = `rgba(90,55,25,${0.08 + ((i * 37) % 10) / 100})`;
+        ctx.fillRect((i * 53) % size, (i * 131) % size, 30 + ((i * 17) % 40), 1);
+      }
+    } else if (kind === "brake" || kind === "fbrake") {
       ctx.fillStyle = "#4a4d55";
       ctx.fillRect(0, 0, size, size);
       for (let i = 0; i < 1800; i++) {
@@ -197,7 +229,7 @@ const useGroundTexture = (kind: SimKind) =>
     tex.wrapT = THREE.RepeatWrapping;
     tex.colorSpace = THREE.SRGBColorSpace;
     // brake は 4m、それ以外は 2m（タイル1枚が1m）ごとにくり返す
-    const unit = kind === "brake" || kind === "fbrake" ? 4 : 2;
+    const unit = TINY_KINDS.includes(kind) ? 7 : kind === "brake" || kind === "fbrake" ? 4 : 2;
     tex.repeat.set(200 / unit, 200 / unit);
     tex.anisotropy = 8;
     return tex;
@@ -379,6 +411,79 @@ const useBeachTexture = () =>
     return tex;
   }, []);
 
+// 500円玉（10cmの人の世界を17.5倍に拡大：直径46cm・厚さ3.2cm）
+const Coin: React.FC<{ y?: number; rot?: number }> = ({ y = 0, rot = 0 }) => (
+  <group position={[0, y, 0]} rotation={[0, rot, 0]}>
+    <mesh castShadow receiveShadow>
+      <cylinderGeometry args={[0.23, 0.23, 0.032, 48]} />
+      <meshStandardMaterial color="#d8b25a" roughness={0.3} metalness={0.85} />
+    </mesh>
+    {/* ふちの模様と、表面の円 */}
+    <mesh position={[0, 0.0165, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+      <ringGeometry args={[0.19, 0.205, 48]} />
+      <meshStandardMaterial color="#b8923f" roughness={0.4} metalness={0.8} />
+    </mesh>
+  </group>
+);
+
+// 10cmの人のまわりの物（17.5倍に拡大して置く）。label はラベルを出す位置
+const TINY_PROPS: { name: string; label: [number, number, number] }[] = [
+  { name: "500円玉（直径46cm）", label: [1.7, 0.75, -0.3] },
+  { name: "鉛筆（長さ3m）", label: [-0.2, 0.45, -1.7] },
+  { name: "スマホ（高さ2.6m）", label: [-2.0, 2.9, -0.4] },
+  { name: "米つぶ（9cm）", label: [0.9, 0.35, 1.2] },
+];
+
+const TinyProps: React.FC = () => (
+  <group>
+    {/* 立てた500円玉 */}
+    <group position={[1.7, 0.23, -0.3]} rotation={[Math.PI / 2, 0, 0.4]}>
+      <Coin />
+    </group>
+    {/* 寝かせた鉛筆（六角形・長さ3m・太さ12cm） */}
+    <group position={[-0.2, 0.06, -1.7]} rotation={[0, 0.15, Math.PI / 2]}>
+      <mesh castShadow receiveShadow>
+        <cylinderGeometry args={[0.06, 0.06, 2.6, 6]} />
+        <meshStandardMaterial color="#f2c230" roughness={0.5} />
+      </mesh>
+      <mesh position={[0, -1.5, 0]} rotation={[Math.PI, 0, 0]} castShadow>
+        <cylinderGeometry args={[0.06, 0.012, 0.4, 6]} />
+        <meshStandardMaterial color="#e7cfa6" roughness={0.8} />
+      </mesh>
+      <mesh position={[0, -1.72, 0]} rotation={[Math.PI, 0, 0]}>
+        <coneGeometry args={[0.012, 0.05, 6]} />
+        <meshStandardMaterial color="#333" roughness={0.6} />
+      </mesh>
+      <mesh position={[0, 1.36, 0]} castShadow>
+        <cylinderGeometry args={[0.062, 0.062, 0.12, 16]} />
+        <meshStandardMaterial color="#c9ccd2" roughness={0.3} metalness={0.7} />
+      </mesh>
+      <mesh position={[0, 1.5, 0]} castShadow>
+        <cylinderGeometry args={[0.058, 0.058, 0.16, 16]} />
+        <meshStandardMaterial color="#f08aa0" roughness={0.8} />
+      </mesh>
+    </group>
+    {/* 立てたスマホ（高さ2.6m・幅1.25m・厚さ14cm） */}
+    <group position={[-2.0, 1.31, -0.4]} rotation={[0, 0.5, 0]}>
+      <mesh castShadow receiveShadow>
+        <boxGeometry args={[1.25, 2.62, 0.14]} />
+        <meshStandardMaterial color="#15171c" roughness={0.25} metalness={0.4} />
+      </mesh>
+      <mesh position={[0, 0, 0.071]}>
+        <planeGeometry args={[1.12, 2.45]} />
+        <meshStandardMaterial color="#1f3a66" emissive="#2a5aa8" emissiveIntensity={0.35} roughness={0.1} />
+      </mesh>
+    </group>
+    {/* 米つぶ（長さ5mm → 9cm） */}
+    {[[0.9, 1.2, 0.3], [1.05, 1.35, 1.2], [0.75, 1.4, 2.1]].map(([x, z, r], k) => (
+      <mesh key={k} position={[x, 0.025, z]} rotation={[0, r, Math.PI / 2]} scale={[1, 1, 0.75]} castShadow>
+        <capsuleGeometry args={[0.025, 0.045, 6, 12]} />
+        <meshStandardMaterial color="#fbf8ef" roughness={0.6} />
+      </mesh>
+    ))}
+  </group>
+);
+
 const PersonPart: React.FC<{
   part: string;
   size: [number, number, number];
@@ -514,7 +619,7 @@ export const PhysicsScene: React.FC<{
   // 横長の画面では、人がもう少し大きく見えるよう、カメラを少し近づける
   const landscape = width > height;
   const cam0 = cameraFor(sim, f, sim.frames);
-  const near = landscape && !["throw", "brake", "fbrake"].includes(kind) ? 0.8 : 1;
+  const near = landscape && !["throw", "brake", "fbrake", "athrow", "aplane", "tjump", "tfall", "asky", "tworld"].includes(kind) ? 0.8 : 1;
   const cam: Cam = {
     pos: cam0.pos.map((p, i) => cam0.look[i] + (p - cam0.look[i]) * near) as [number, number, number],
     look: cam0.look,
@@ -535,7 +640,7 @@ export const PhysicsScene: React.FC<{
   const overlays: React.ReactNode[] = [];
   const laneX = [width * 0.25, width * 0.75];
   const isRoad = sim.kind === "brake" || sim.kind === "fbrake";
-  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky"].includes(sim.kind);
+  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train"].includes(sim.kind);
   const isAir = AIR_KINDS.includes(sim.kind);
   // 摩擦ゼロの世界は、摩擦が消えた瞬間からラベルを点滅させる
   const offFrame = Math.round(FRICTION_OFF * fps);
@@ -550,8 +655,16 @@ export const PhysicsScene: React.FC<{
         ? [-0.8, 2.6]
         : sim.kind === "wind"
           ? [-1.5, 1.0]
-          : sim.kind === "asky"
+          : sim.kind === "asky" || sim.kind === "tfall"
             ? [-1.35, 1.35]
+            : sim.kind === "tlift"
+              ? [-1.4, 1.4]
+              : sim.kind === "tjump"
+                ? [-3.0, 3.0]
+                : sim.kind === "twind"
+                  ? [-1.5, 1.0]
+                  : sim.kind === "train"
+                    ? [-1.3, 1.3]
           : sim.kind === "scale" || sim.kind === "jump"
             ? [-1, 1]
             : [-1.2, 1.2];
@@ -817,6 +930,107 @@ export const PhysicsScene: React.FC<{
     }
   }
 
+  if (sim.kind === "tworld") {
+    overlays.push(
+      <Pill key="title" x={width / 2} y={70 + T} color="#7a3cff" size={40}>
+        身長10cmの世界（17.5倍に拡大）
+      </Pill>,
+    );
+    // まわりの物の名前（カメラの前にあるときだけ）
+    for (const prop of TINY_PROPS) {
+      const p = project(cam, prop.label, width, height);
+      const d = Math.hypot(cam.pos[0] - prop.label[0], cam.pos[2] - prop.label[2]);
+      const toLook = [cam.look[0] - cam.pos[0], cam.look[2] - cam.pos[2]];
+      const toProp = [prop.label[0] - cam.pos[0], prop.label[2] - cam.pos[2]];
+      const front = toLook[0] * toProp[0] + toLook[1] * toProp[1] > 0;
+      if (front && d > 2.5 && p.x > 120 && p.x < width - 120 && p.y > 130 + T) {
+        overlays.push(
+          <Pill key={prop.name} x={p.x} y={p.y} color="#222" size={34}>
+            {prop.name}
+          </Pill>,
+        );
+      }
+    }
+  }
+  if (sim.kind === "tlift") {
+    const late = f > 2.6 * fps;
+    overlays.push(
+      <Pill key="w0" x={laneX[0]} y={145 + T} color="#334" size={32}>バーベル132kg（体重の2倍）</Pill>,
+      <Pill key="w1" x={laneX[1]} y={145 + T} color="#334" size={32}>500円玉4枚 28g（体重の2倍）</Pill>,
+    );
+    if (late) {
+      overlays.push(
+        <Pill key="r0" x={laneX[0]} y={215 + T} color={LANE_COLORS[0]} size={40}>持ち上がらない…</Pill>,
+        <Pill key="r1" x={laneX[1]} y={215 + T} color={LANE_COLORS[1]} size={40}>軽々！</Pill>,
+      );
+    }
+  }
+  if (sim.kind === "tjump") {
+    [-3.0, 3.0].forEach((x, lane) => {
+      const top = v(`top${lane}`);
+      if (top > 0.1) {
+        const p = project(cam, [x + 0.5, top, 0], width, height);
+        const real = lane === 0 ? top : top / TINY;
+        overlays.push(
+          <Pill key={`top${lane}`} x={Math.min(width - 260, p.x + 150)} y={Math.max(150 + T, p.y)} color={LANE_COLORS[lane]} size={36}>
+            {lane === 0 ? `${Math.round(real * 100)}cm` : `${Math.round(real * 100)}cm（身長の${(real / 0.1).toFixed(1)}倍）`}
+          </Pill>,
+        );
+      }
+    });
+  }
+  if (sim.kind === "tfall") {
+    [0, 1].forEach((lane) => {
+      const kmh = v(`v${lane}`);
+      const h = v(`h${lane}`);
+      overlays.push(
+        <div
+          key={`hud${lane}`}
+          style={{ position: "absolute", left: laneX[lane], top: 124 + T, transform: "translate(-50%, 0)", display: "flex", flexDirection: "column", gap: 8 }}
+        >
+          {[
+            ["時速", `${Math.round(kmh)} km`],
+            ["高さ", `${h.toFixed(1)} m`],
+          ].map(([k, val]) => (
+            <div key={k} style={{ fontFamily, fontWeight: 900, fontSize: 42, color: "#7dff9a", background: "rgba(0,0,0,0.7)", border: `4px solid ${LANE_COLORS[lane]}`, borderRadius: 14, padding: "0 16px", whiteSpace: "nowrap", textAlign: "right" }}>
+              <span style={{ color: "#fff", fontSize: 28, marginRight: 12 }}>{k}</span>
+              {val}
+            </div>
+          ))}
+        </div>,
+      );
+      if (h <= 0) {
+        overlays.push(
+          <Pill key={`land${lane}`} x={laneX[lane]} y={300 + T} color={LANE_COLORS[lane]} size={38}>
+            {`地面に着く速さ 時速${Math.round(kmh)}km`}
+          </Pill>,
+        );
+      }
+    });
+  }
+  if (sim.kind === "twind") {
+    overlays.push(
+      <Pill key="wind" x={width / 2} y={150 + T} color="#334" size={38}>
+        {`どちらも 風速${v("wind0").toFixed(0)}m/s`}
+      </Pill>,
+    );
+    if (v("wind0") > 5) {
+      overlays.push(
+        <Pill key="ty" x={laneX[1]} y={225 + T} color="#e01b2f" size={40}>
+          台風なみ！
+        </Pill>,
+      );
+    }
+  }
+  if (sim.kind === "train") {
+    if (v("hit1") > 0) {
+      overlays.push(
+        <Pill key="h0" x={laneX[0]} y={150 + T} color="#334" size={36}>何も感じない</Pill>,
+        <Pill key="h1" x={laneX[1]} y={150 + T} color="#e01b2f" size={36}>雨粒1つで よろける！</Pill>,
+      );
+    }
+  }
+
   // ボールの軌跡（0.5秒前までの位置を点で）
   const trails: React.ReactNode[] = [];
   if (sim.kind === "throw" || sim.kind === "athrow" || sim.kind === "aplane") {
@@ -854,7 +1068,7 @@ export const PhysicsScene: React.FC<{
   });
 
   const isTunnel = kind === "tunnel" || kind === "tunnelzero";
-  const isSky = kind === "asky";
+  const isSky = kind === "asky" || kind === "tfall";
   const beach = useBeachTexture();
 
   // 空から落ちていく場面：下から上へ流れる風のすじ（流れる速さと長さは落ちる速さに比例）
@@ -862,12 +1076,14 @@ export const PhysicsScene: React.FC<{
   if (isSky) {
     [0, 1].forEach((lane) => {
       const sp = sim.values[`v${lane}`];
+      const hh = sim.values[`h${lane}`];
       // ここまでに流れた量（m）。見やすいよう、実際の速さの 1/4 で流す
       let travel = 0;
       for (let k = 0; k <= f; k++) {
         travel += (sp[k] / 3.6 / fps) * 0.25;
       }
-      const vNow = sp[f] / 3.6;
+      // tfall は地面に着いたら止める
+      const vNow = kind === "tfall" && hh && hh[f] <= 0 ? 0 : sp[f] / 3.6;
       const len = Math.min(6, 0.15 + vNow * 0.02);
       for (let i = 0; i < 36; i++) {
         const H = 14;
@@ -884,8 +1100,68 @@ export const PhysicsScene: React.FC<{
     });
   }
 
-  // 雨：左はゆっくり（秒速8m・短いすじ）、右は空気抵抗ゼロで超高速（見やすいよう秒速40mで表示・長いすじ）
   const rain: React.ReactNode[] = [];
+  // 10cmの人の雨：左はふつうの雨粒（細いすじ）、右はソフトボールくらいの水のかたまり（※動きはスロー）
+  if (kind === "train") {
+    const t = f / fps;
+    [0, 1].forEach((lane) => {
+      const cx = lane === 0 ? -1.3 : 1.3;
+      const n = lane === 0 ? 120 : 14;
+      const speedV = lane === 0 ? 9 : 22;
+      const H = 7;
+      for (let i = 0; i < n; i++) {
+        const x = cx + (random(`tr${lane}x${i}`) - 0.5) * 2.4;
+        const z = (random(`tr${lane}z${i}`) - 0.5) * 3;
+        // 体の真上は、当たる1粒だけにする
+        if (Math.abs(x - cx) < 0.35 && Math.abs(z) < 0.35) {
+          continue;
+        }
+        const y = H - ((random(`tr${lane}y${i}`) * H + t * speedV) % H);
+        rain.push(
+          lane === 0 ? (
+            <mesh key={`tr${lane}-${i}`} position={[x, y + 0.1, z]}>
+              <boxGeometry args={[0.008, 0.2, 0.008]} />
+              <meshBasicMaterial color="#d6ecff" transparent opacity={0.6} />
+            </mesh>
+          ) : (
+            <mesh key={`tr${lane}-${i}`} position={[x, y, z]} scale={[1, 1.25, 1]}>
+              <sphereGeometry args={[0.045, 16, 12]} />
+              <meshStandardMaterial color="#9fd3ff" transparent opacity={0.55} roughness={0.05} metalness={0.1} />
+            </mesh>
+          ),
+        );
+      }
+      // 頭に当たる1粒（当たる時刻にちょうど頭の上に来るように落とす）と、はじける水しぶき
+      const head = posAt(sim, f, sim.bodies.findIndex((b) => b.part === "head" && b.lane === lane));
+      [1.5, 4.2].forEach((hitT, k) => {
+        const dtHit = hitT - t;
+        const r = lane === 0 ? 0.012 : 0.045;
+        if (dtHit > 0 && dtHit < 0.4) {
+          rain.push(
+            <mesh key={`hd${lane}-${k}`} position={[head[0], head[1] + 0.15 + dtHit * speedV, head[2]]} scale={[1, 1.25, 1]}>
+              <sphereGeometry args={[r, 16, 12]} />
+              <meshStandardMaterial color="#9fd3ff" transparent opacity={0.7} roughness={0.05} />
+            </mesh>,
+          );
+        }
+        if (dtHit <= 0 && dtHit > -0.35) {
+          const s = -dtHit / 0.35;
+          for (let j = 0; j < 10; j++) {
+            const a = (j / 10) * Math.PI * 2;
+            const sp = lane === 0 ? 0.08 : 0.5;
+            rain.push(
+              <mesh key={`sp${lane}-${k}-${j}`} position={[head[0] + Math.cos(a) * sp * s, head[1] + 0.12 + Math.sin(s * Math.PI) * sp * 0.6, head[2] + Math.sin(a) * sp * s]}>
+                <sphereGeometry args={[r * 0.35, 8, 8]} />
+                <meshBasicMaterial color="#e8f6ff" transparent opacity={0.85 * (1 - s)} />
+              </mesh>,
+            );
+          }
+        }
+      });
+    });
+  }
+
+  // 雨：左はゆっくり（秒速8m・短いすじ）、右は空気抵抗ゼロで超高速（見やすいよう秒速40mで表示・長いすじ）
   if (kind === "arain") {
     [0, 1].forEach((lane) => {
       const cx = lane === 0 ? -1.2 : 1.2;
@@ -919,7 +1195,15 @@ export const PhysicsScene: React.FC<{
       }
     });
   }
-  const fogColor = isTunnel ? "#140a05" : isRoad ? "#b9c7d6" : kind === "arain" ? "#8f9aa8" : "#cfe8ff";
+  const fogColor = isTunnel
+    ? "#140a05"
+    : isRoad
+      ? "#b9c7d6"
+      : kind === "arain" || kind === "train"
+        ? "#8f9aa8"
+        : TINY_KINDS.includes(kind)
+          ? "#ead9bc"
+          : "#cfe8ff";
   // 中心付近（tunnelzero）は人がその場でただようので、壁のほうを流して速さを見せる
   const shaftPhase = kind === "tunnelzero" ? frame * 0.9 : 0;
   // 摩擦ゼロの地面は、つるつるの氷のように見せる（摩擦が消えた瞬間から）
@@ -942,8 +1226,10 @@ export const PhysicsScene: React.FC<{
             ? "#140a05"
             : isSky
               ? "linear-gradient(180deg, #1f5fbf 0%, #5ea3e8 45%, #cfe6ff 100%)"
-              : kind === "arain"
+              : kind === "arain" || kind === "train"
                 ? "linear-gradient(180deg, #4d5866 0%, #7d8896 55%, #a3adb9 100%)"
+                : TINY_KINDS.includes(kind)
+                  ? "linear-gradient(180deg, #f3e6d0 0%, #e9d6b8 60%, #d9c09a 100%)"
                 : "linear-gradient(180deg, #4a9cff 0%, #8cc8ff 55%, #dff0ff 100%)",
         }}
       />
@@ -1087,6 +1373,31 @@ export const PhysicsScene: React.FC<{
                     : PANTS;
             return <PersonPart key={i} part={b.part!} size={b.size} color={color} pos={pos} quat={quat} />;
           }
+          if (b.shape === "barbell") {
+            return (
+              <group key={i} position={pos} quaternion={quat}>
+                <mesh rotation={[0, 0, Math.PI / 2]} castShadow>
+                  <cylinderGeometry args={[0.018, 0.018, 1.8, 12]} />
+                  <meshStandardMaterial color="#c9ccd2" roughness={0.3} metalness={0.8} />
+                </mesh>
+                {[-0.72, 0.72].map((x) => (
+                  <mesh key={x} position={[x, 0, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
+                    <cylinderGeometry args={[0.24, 0.24, 0.12, 32]} />
+                    <meshStandardMaterial color="#1d1f24" roughness={0.6} />
+                  </mesh>
+                ))}
+              </group>
+            );
+          }
+          if (b.shape === "coins") {
+            return (
+              <group key={i} position={pos} quaternion={quat}>
+                {[0, 1, 2, 3].map((k) => (
+                  <Coin key={k} y={-0.0485 + k * 0.0325} rot={k * 0.7} />
+                ))}
+              </group>
+            );
+          }
           if (b.shape === "feather") {
             return (
               <group key={i} position={pos} quaternion={quat}>
@@ -1140,11 +1451,13 @@ export const PhysicsScene: React.FC<{
                   <boxGeometry args={b.size} />
                   <meshStandardMaterial color={b.color} roughness={0.85} />
                 </mesh>
-                {/* ガムテープ */}
-                <mesh position={[0, b.size[1] / 2 + 0.002, 0]}>
-                  <boxGeometry args={[b.size[0] + 0.004, 0.004, 0.16]} />
-                  <meshStandardMaterial color="#d9b77c" roughness={0.6} />
-                </mesh>
+                {/* ガムテープ（段ボール箱だけ） */}
+                {b.color === "#c8925a" ? (
+                  <mesh position={[0, b.size[1] / 2 + 0.002, 0]}>
+                    <boxGeometry args={[b.size[0] + 0.004, 0.004, 0.16]} />
+                    <meshStandardMaterial color="#d9b77c" roughness={0.6} />
+                  </mesh>
+                ) : null}
               </group>
             );
           }
@@ -1185,13 +1498,24 @@ export const PhysicsScene: React.FC<{
           }
           return null;
         })}
+        {kind === "tworld" ? <TinyProps /> : null}
         {trails}
         {streaks}
         {rain}
       </ThreeCanvas>
       {overlays}
       {sounds}
-      {kind === "arain" ? <Audio src={staticFile("sfx/rain.wav")} volume={0.35} loop /> : null}
+      {kind === "arain" || kind === "train" ? <Audio src={staticFile("sfx/rain.wav")} volume={0.3} loop /> : null}
+      {kind === "train"
+        ? [1.5, 4.2].map((h) => {
+            const from = Math.round(h * fps) - offset;
+            return from >= 0 ? (
+              <Sequence key={h} from={from} durationInFrames={20}>
+                <Audio src={staticFile("sfx/thud2.wav")} volume={0.22} />
+              </Sequence>
+            ) : null;
+          })
+        : null}
       {isSky ? <Audio src={staticFile("sfx/whoosh.wav")} volume={0.12} /> : null}
     </AbsoluteFill>
   );

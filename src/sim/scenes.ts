@@ -35,9 +35,26 @@ export type SimKind =
   | "athrow"
   | "arain"
   | "asky"
-  | "aplane";
+  | "aplane"
+  // 身長10cmの人（体の大きさをそろえて比べる。右・奥が10cmの人）
+  | "tworld"
+  | "tlift"
+  | "tjump"
+  | "tfall"
+  | "twind"
+  | "train";
 
 export const AIR_KINDS: SimKind[] = ["afeather", "athrow", "arain", "asky", "aplane"];
+export const TINY_KINDS: SimKind[] = ["tworld", "tlift", "tjump", "tfall", "twind", "train"];
+
+// 身長10cmの人：大きさは 175cm の 1/17.5。
+// 10cmの人の世界を17.5倍に拡大して（ふつうの人と同じ大きさにそろえて）計算すると、
+//  - 重さは 17.5³ 分の1 なのに、筋肉の力（断面積）は 17.5² 分の1 → 体重のわりに 17.5倍強い
+//  - 拡大した世界では、時間が √17.5 ≒ 4.18倍 ゆっくり進むのと同じ（重さで動く物の動きのルール）
+//    → 計算は地球の重力のまま行い、4.18倍の速さで再生する
+//  - 空気抵抗の式は、拡大した世界でもそのまま使える（そよ風 6m/s → 拡大した世界では約25m/s）
+export const TINY = 17.5;
+export const TINY_SPEED = Math.sqrt(TINY);
 
 export const FRICTION_KINDS: SimKind[] = ["fstand", "fpush", "fbrake", "ladder", "fchaos"];
 // この時刻（秒）で、右（奥）の世界の摩擦が消える
@@ -45,7 +62,7 @@ export const FRICTION_OFF = 0.6;
 
 export type SimBody = {
   lane: number;
-  shape: "part" | "box" | "sphere" | "cone" | "car" | "platform" | "ladder" | "wall" | "feather" | "plane";
+  shape: "part" | "box" | "sphere" | "cone" | "car" | "platform" | "ladder" | "wall" | "feather" | "plane" | "barbell" | "coins";
   part?: PartName;
   look?: Look;
   doll?: number;
@@ -87,6 +104,8 @@ const SUB = 8;
 type Lane = {
   world: CANNON.World;
   g: number;
+  // 再生の速さ（10cmの人の世界は 4.18倍速）
+  speed?: number;
   dolls: Ragdoll[];
   control: (t: number, dt: number) => void;
   record: (frame: number) => void;
@@ -939,6 +958,285 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
       };
       lanes.push({ world, g: 0, dolls: [rd], control, record });
     });
+  } else if (kind === "tworld") {
+    // 10cmの人（を17.5倍に拡大）が、大きな物にかこまれて立つ。まわりの物は描くだけ
+    const { world } = makeWorld(G);
+    const rd = addDoll(world, 0, 0, [0, 0, 0], 0.5);
+    rd.setStrength(TINY);
+    lanes.push({
+      world,
+      g: G,
+      speed: TINY_SPEED,
+      dolls: [rd],
+      control: (t) => {
+        rd.setPose(POSES.stand, POSES.stance, smooth((t - 0.5) / 2));
+        applyBalance(rd);
+      },
+      record: () => {},
+    });
+  } else if (kind === "tlift") {
+    // 体重の2倍の重さを、胸の前から頭の上へ持ち上げる。左はふつうの人（バーベル132kg）、
+    // 右は10cmの人（500円玉4枚 28g。拡大した世界では 150kg）
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const x = lane === 0 ? -1.4 : 1.4;
+      const rd = addDoll(world, lane, lane, [x, 0, 0]);
+      rd.balance = 1.2;
+      if (lane === 1) {
+        rd.setStrength(TINY);
+      }
+      rd.setPose(POSES.carry);
+      // 持つ物：胸の前、手の高さに置く（はじめは台の上）
+      const y0 = 1.02;
+      const z0 = 0.36;
+      const thing = new CANNON.Body({
+        mass: lane === 0 ? 132 : 150,
+        position: new CANNON.Vec3(x, y0, z0),
+        material: bodyMaterial,
+      });
+      if (lane === 0) {
+        thing.addShape(new CANNON.Box(new CANNON.Vec3(0.9, 0.025, 0.025)));
+        bodies.push({ lane, shape: "barbell", size: [1.8, 0.05, 0.05] });
+      } else {
+        thing.addShape(new CANNON.Cylinder(0.23, 0.23, 0.13, 24));
+        bodies.push({ lane, shape: "coins", size: [0.46, 0.13, 0.46] });
+      }
+      thing.collisionFilterGroup = 2;
+      thing.collisionFilterMask = 1 | 8;
+      world.addBody(thing);
+      tracked.push(thing);
+      // 台（持ち上げる前に置いてある）
+      const stand = new CANNON.Body({
+        mass: 0,
+        shape: new CANNON.Box(new CANNON.Vec3(0.3, (y0 - 0.06) / 2, 0.12)),
+        position: new CANNON.Vec3(x, (y0 - 0.06) / 2, z0 + 0.05),
+        material: groundMaterial,
+      });
+      stand.collisionFilterGroup = 8;
+      stand.collisionFilterMask = 2;
+      world.addBody(stand);
+      bodies.push({ lane, shape: "box", size: [0.6, y0 - 0.06, 0.24], color: "#8a6a4a" });
+      tracked.push(stand);
+      // 両手でつかむ（手のひらの位置と、持つ物の左右の端をつなぐ）
+      const grip = lane === 0 ? 0.24 : 0.2;
+      for (const [arm, sx] of [["lowerArmL", -1], ["lowerArmR", 1]] as const) {
+        world.addConstraint(
+          new CANNON.PointToPointConstraint(
+            rd.bodies[arm],
+            new CANNON.Vec3(0, -0.17, 0),
+            thing,
+            new CANNON.Vec3(sx * grip, 0, 0),
+            4000,
+          ),
+        );
+      }
+      const lifted = val(`lift${lane}`);
+      const control = (t: number) => {
+        applyBalance(rd);
+        // 1秒たったら、頭の上へ持ち上げようとする
+        // （どちらも実際の時間で同じタイミング・同じ速さで持ち上げようとする）
+        rd.setPose(POSES.carry, POSES.press, smooth((t / (lane === 1 ? TINY_SPEED : 1) - 1.0) / 1.2));
+      };
+      const record = (f: number) => {
+        lifted[f] = thing.position.y - y0;
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record, speed: lane === 1 ? TINY_SPEED : 1 });
+    });
+  } else if (kind === "tjump") {
+    // どちらも高さ50cmまで跳ぶ。10cmの人には身長の5倍（拡大した世界では 8.75m）
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const x = lane === 0 ? -3.0 : 3.0;
+      const rd = addDoll(world, lane, lane, [x, 0, 0]);
+      // 足の高さが 50cm（10cmの人は拡大した世界で 8.75m）になるよう、けり出す速さを合わせてある
+      const kick = Math.sqrt(2 * G * (lane === 0 ? 0.5 : 0.5 * TINY)) * (lane === 0 ? 1.42 : 1.06);
+      if (lane === 1) {
+        rd.setStrength(TINY);
+      }
+      const k = lane === 0 ? 1 : TINY_SPEED;
+      // 足が地面をはなれる瞬間（実際の時間で0.85秒）が、どちらの世界でも同じになるように
+      let next = 0.85 * k - 0.45;
+      let step = jumper(rd, next, kick);
+      const top = val(`top${lane}`);
+      let best = 0;
+      const control = (t: number) => {
+        // 着地して落ち着いたら、もう一度跳ぶ（どちらの世界も同じ時刻に）
+        if (t > next + 2.2 * k) {
+          next += 2.2 * k;
+          step = jumper(rd, next, kick);
+          best = 0;
+        }
+        step(t);
+        applyBalance(rd);
+        // 真上に跳ぶ（空中で前後左右に流れていかないようにする）
+        if (rd.bodies.pelvis.position.y > 1.25) {
+          for (const b of Object.values(rd.bodies)) {
+            b.velocity.x *= 0.995;
+            b.velocity.z *= 0.995;
+          }
+        }
+      };
+      const record = (f: number) => {
+        best = Math.max(best, rd.bodies.footL.position.y - 0.04);
+        top[f] = best;
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record, speed: k });
+    });
+  } else if (kind === "tfall") {
+    // 高さ30mのビルから落ちる（目線は人と一緒に落ちていく）。左はふつうの人、右は10cmの人。
+    // 速さは「重力 − 空気抵抗」で計算する（最高速度：ふつうの人は秒速55m、10cmの人は秒速9.3m）
+    const H0 = 30;
+    const R = new CANNON.Quaternion();
+    R.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), Math.PI / 2);
+    [0, 1].forEach((lane) => {
+      const world = new CANNON.World({ gravity: new CANNON.Vec3(0, 0, 0) });
+      world.allowSleep = false;
+      (world.solver as CANNON.GSSolver).iterations = 20;
+      const x = lane === 0 ? -1.35 : 1.35;
+      const rd = addDoll(world, lane, lane, [0, 0, 0]);
+      rd.balance = 0;
+      const c = new CANNON.Vec3(0, 1.0, 0);
+      for (const b of Object.values(rd.bodies)) {
+        const r = R.vmult(b.position.vsub(c));
+        b.position.set(x + r.x, 1.6 + r.y, r.z);
+        b.quaternion.copy(R.mult(b.quaternion));
+      }
+      const VT = lane === 0 ? 55 : 9.3;
+      // 落ちる速さと高さを、先に細かい刻みで計算しておく（実際の時間）
+      const speed = val(`v${lane}`);
+      const alt = val(`h${lane}`);
+      const time = val(`t${lane}`);
+      let v = 0;
+      let h = H0;
+      let landedAt = -1;
+      for (let f = 0; f < frames; f++) {
+        for (let k = 0; k < 20; k++) {
+          if (h > 0) {
+            v += G * (1 - (v / VT) ** 2) * (1 / (fps * 20));
+            h -= v * (1 / (fps * 20));
+            if (h <= 0) {
+              h = 0;
+              landedAt = (f + k / 20) / fps;
+            }
+          }
+        }
+        speed[f] = v * 3.6;
+        alt[f] = h;
+        time[f] = landedAt < 0 ? f / fps : landedAt;
+      }
+      const k = lane === 0 ? 1 : TINY_SPEED;
+      if (lane === 1) {
+        rd.setStrength(TINY);
+      }
+      const control = (t: number) => {
+        rd.setPose(POSES.arch);
+        const pel = rd.bodies.pelvis;
+        for (const b of Object.values(rd.bodies)) {
+          b.force.x += (x - pel.position.x) * 1.2 * b.mass - b.velocity.x * b.mass * 2;
+          b.force.y += (1.6 - pel.position.y) * 1.2 * b.mass - b.velocity.y * b.mass * 2;
+          b.force.z += (0 - pel.position.z) * 1.2 * b.mass - b.velocity.z * b.mass * 2;
+        }
+        // 空気で手足がばたつく（強さは「速さ ÷ 最高速度」の2乗。10cmの人はすぐ最高速度に近づく）
+        const fNow = Math.min(frames - 1, Math.floor((t / k) * fps));
+        if (alt[fNow] > 0) {
+          const q = (speed[fNow] / 3.6 / VT) ** 2;
+          (["upperArmL", "upperArmR", "lowerArmL", "lowerArmR", "shinL", "shinR", "head"] as PartName[]).forEach((p, i) => {
+            const b = rd.bodies[p];
+            const n = Math.sin(t * (17 + i * 3.1) + i) + 0.6 * Math.sin(t * (29 + i * 1.7) + 2 * i);
+            b.force.y += q * b.mass * 9 * n;
+            b.force.x += q * b.mass * 4 * Math.sin(t * (13 + i) + i * 0.7);
+          });
+        }
+      };
+      lanes.push({ world, g: 0, dolls: [rd], control, record: () => {}, speed: k });
+    });
+  } else if (kind === "twind") {
+    // どちらも風速6m/s。10cmの人は、拡大した世界では風速25m/s（台風なみ）を受けるのと同じ
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const x = lane === 0 ? -1.5 : 1.0;
+      const rd = addDoll(world, lane, lane, [x, 0, 0]);
+      rd.balance = 0.15;
+      const k = lane === 0 ? 1 : TINY_SPEED;
+      if (lane === 1) {
+        rd.setStrength(TINY);
+      }
+      const W = 6 * k;
+      // その世界の時刻 t での風速（実際の時間で0.6秒から吹き始める。突風のゆらぎつき）
+      const windAt = (t: number) => {
+        const tt = t / k;
+        return W * smooth((tt - 0.6) / 1.0) * (1 + 0.12 * Math.sin(tt * 5.3) + 0.06 * Math.sin(tt * 13.1));
+      };
+      const speed = val(`wind${lane}`);
+      const all = (Object.keys(rd.bodies) as PartName[]).map((p) => ({
+        b: rd.bodies[p],
+        half: new CANNON.Vec3(rd.sizes[p][0] / 2, rd.sizes[p][1] / 2, rd.sizes[p][2] / 2),
+      }));
+      const control = (t: number) => {
+        rd.setPose(POSES.stand, POSES.stance, smooth((t / k - 0.2) / 0.3));
+        applyBalance(rd);
+        const w = windAt(t);
+        for (const { b, half } of all) {
+          const q = b.quaternion;
+          const ex = q.vmult(new CANNON.Vec3(1, 0, 0));
+          const ey = q.vmult(new CANNON.Vec3(0, 1, 0));
+          const ez = q.vmult(new CANNON.Vec3(0, 0, 1));
+          const area =
+            4 *
+            (half.y * half.z * Math.abs(ex.x) +
+              half.x * half.z * Math.abs(ey.x) +
+              half.x * half.y * Math.abs(ez.x));
+          const rel = w - b.velocity.x;
+          b.force.x += 0.5 * 1.2 * 1.0 * area * rel * Math.abs(rel);
+        }
+      };
+      const record = (f: number) => {
+        // 画面に出す風速は、どちらも実際の風速
+        speed[f] = windAt((f / fps) * k) / k;
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record, speed: k });
+    });
+  } else if (kind === "train") {
+    // 大粒の雨（直径5mm・秒速9m）が頭に当たる。左はふつうの人、右は10cmの人。
+    // 10cmの人には、雨粒はソフトボールくらい（拡大した世界で直径8.75cm・350g）。
+    // 当たると体が 秒速0.85m（拡大した世界）ほど押される。ふつうの人は、ほとんど何も感じない
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const x = lane === 0 ? -1.3 : 1.3;
+      const rd = addDoll(world, lane, lane, [x, 0, 0]);
+      rd.balance = lane === 0 ? 1 : 0.25;
+      const k = lane === 0 ? 1 : TINY_SPEED;
+      if (lane === 1) {
+        rd.setStrength(TINY);
+      }
+      const hitN = val(`hit${lane}`);
+      // 当たる時刻（実際の時間）
+      const hits = [1.5, 4.2];
+      const done = hits.map(() => false);
+      const control = (t: number) => {
+        applyBalance(rd);
+        hits.forEach((h, i) => {
+          if (!done[i] && t >= h * k) {
+            done[i] = true;
+            // 雨粒の勢い（質量 × 速さ）を、頭と肩に分けて与える
+            const dv = lane === 0 ? 0.0001 : 0.85;
+            for (const p of ["head", "torso", "upperArmL", "upperArmR"] as PartName[]) {
+              rd.bodies[p].velocity.y -= dv * 1.6;
+              rd.bodies[p].velocity.x += dv * (i === 0 ? 0.7 : -0.6);
+            }
+          }
+        });
+        if (lane === 1 && t > hits[0] * k) {
+          rd.setPose(POSES.stand, POSES.cover, smooth((t / k - hits[0] - 0.15) / 0.3));
+        } else {
+          rd.setPose(POSES.stand);
+        }
+      };
+      const record = (f: number) => {
+        hitN[f] = hits.filter((h) => f / fps >= h).length;
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record, speed: k });
+    });
   } else if (kind === "fchaos") {
     // 摩擦ゼロの広場で、5人が歩き出そうとする
     const fw = frictionWorld(1);
@@ -1058,8 +1356,10 @@ export const simulate = (
   for (let f = 0; f < frames; f++) {
     lanes.forEach((lane, li) => {
       hits[li] = { body: 0, ball: 0, cone: 0 };
-      for (let s = 0; s < SUB; s++) {
-        const t = f / fps + s * dt;
+      const sp = lane.speed ?? 1;
+      const steps = Math.round(SUB * sp);
+      for (let s = 0; s < steps; s++) {
+        const t = (f / fps) * sp + s * dt;
         lane.control(t, dt);
         lane.world.step(dt);
       }
@@ -1098,6 +1398,8 @@ export const simulate = (
         ? ["いまの空気", "空気が2倍"]
         : AIR_KINDS.includes(kind)
           ? ["いまの地球", "空気抵抗ゼロ"]
+          : TINY_KINDS.includes(kind)
+            ? ["身長175cm", "身長10cm（拡大）"]
         : ["いまの地球 1G", gravityLabel(g2)],
   };
   cache.set(key, result);

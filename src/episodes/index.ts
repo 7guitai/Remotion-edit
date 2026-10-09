@@ -18,6 +18,7 @@ import thermoPrShort from "./thermo-pr-short.json";
 import whatifSunShort from "./whatif-sun-short.json";
 import whatifTunnelShort from "./whatif-tunnel-short.json";
 import whatifAirShort from "./whatif-air-short.json";
+import whatifTinyLong from "./whatif-tiny-long.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -184,6 +185,8 @@ export type WhatIfSlide = {
   product?: { name: string; points: string[] };
   // 流れ星の断面図（burn＝空気で燃えつきる、hit＝空気抵抗がなく地面にぶつかる）
   meteor?: import("../components/MeteorScene").MeteorMode;
+  // 読み上げのあとに流す音（public/ からのパス）。hold と組み合わせて、流す時間をとる
+  sfx?: { file: string; volume?: number };
 };
 
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
@@ -266,6 +269,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  whatifTinyLong as Episode,
   whatifAirShort as Episode,
   thermoPrShort as Episode,
   whatifTunnelShort as Episode,

@@ -1,6 +1,8 @@
 import React from "react";
 import {
   AbsoluteFill,
+  Audio,
+  Sequence,
   Img,
   OffthreadVideo,
   interpolate,
@@ -514,6 +516,12 @@ export const WhatIfPage: React.FC<{
               "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%)",
           }}
         />
+      ) : null}
+      {slide.sfx ? (
+        // 読み上げが終わったあとに流す音（例：10cmの人の声のイメージ）
+        <Sequence from={voiceStart + voiceFrames + 4}>
+          <Audio src={staticFile(slide.sfx.file)} volume={slide.sfx.volume ?? 1} />
+        </Sequence>
       ) : null}
       {slide.card ? null : (
         <Caption

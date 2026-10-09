@@ -246,6 +246,28 @@ export const POSES: Record<string, Pose> = {
     kneeL: [1.0, 0, 0],
     kneeR: [1.0, 0, 0],
   },
+  // 両手で持った物を、頭の上へ持ち上げる
+  press: {
+    shoulderL: [-2.95, 0, -0.12],
+    shoulderR: [-2.95, 0, 0.12],
+    elbowL: [-0.1, 0, 0],
+    elbowR: [-0.1, 0, 0],
+    hipL: [0, 0, -0.15],
+    hipR: [0, 0, 0.15],
+    ankleL: [0, 0, 0.15],
+    ankleR: [0, 0, -0.15],
+  },
+  // 両手で物を胸の前に持つ（ひじを曲げて）
+  carry: {
+    shoulderL: [-0.9, 0, -0.05],
+    shoulderR: [-0.9, 0, 0.05],
+    elbowL: [-1.3, 0, 0],
+    elbowR: [-1.3, 0, 0],
+    hipL: [0, 0, -0.15],
+    hipR: [0, 0, 0.15],
+    ankleL: [0, 0, 0.15],
+    ankleR: [0, 0, -0.15],
+  },
   // 足を少し開いて立つ
   stance: {
     hipL: [0, 0, -0.18],
