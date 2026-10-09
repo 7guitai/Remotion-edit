@@ -1,0 +1,149 @@
+{
+  "id": "subscription-2ch-2026-10-09",
+  "title": "【2ch風】サブスク整理したら、使ってない課金が出てきた",
+  "pr": false,
+  "format": "short",
+  "titleBand": false,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.3,
+    "name": "青山龍星"
+  },
+  "replyVoices": [
+    {
+      "speaker": 3,
+      "speed": 1.3,
+      "name": "ずんだもん"
+    },
+    {
+      "speaker": 8,
+      "speed": 1.3,
+      "name": "春日部つむぎ"
+    }
+  ],
+  "bgmVolume": 0.08,
+  "bgm": {
+    "file": "subscription-2ch-2026-10-09.wav",
+    "title": "明細チェック・ビート",
+    "credit": "本動画用の自作音源"
+  },
+  "illustrations": {
+    "subscription-2ch-2026-10-09-phone.svg": {
+      "emoji": "",
+      "irasutoya": "phone",
+      "credit": "自作SVG"
+    },
+    "subscription-2ch-2026-10-09-receipt.svg": {
+      "emoji": "",
+      "irasutoya": "receipt",
+      "credit": "自作SVG"
+    },
+    "subscription-2ch-2026-10-09-coins.svg": {
+      "emoji": "",
+      "irasutoya": "coins",
+      "credit": "自作SVG"
+    },
+    "subscription-2ch-2026-10-09-check.svg": {
+      "emoji": "",
+      "irasutoya": "check",
+      "credit": "自作SVG"
+    }
+  },
+  "slides": [
+    {
+      "type": "thread",
+      "text": "サブスク整理で\n衝撃の事実",
+      "speech": "サブスク整理したら、衝撃の事実が出てきた。",
+      "image": "subscription-2ch-2026-10-09-phone.svg",
+      "replies": []
+    },
+    {
+      "type": "thread",
+      "text": "使ってないのに\n毎月引かれてた",
+      "speech": "使ってないのに、毎月引かれてた。",
+      "image": "subscription-2ch-2026-10-09-receipt.svg",
+      "replies": [
+        {
+          "text": "無料体験のあと\n忘れてたわ",
+          "speech": "無料体験のあと、忘れてたわ。"
+        },
+        {
+          "text": "それ課金だけ\n皆勤賞やん",
+          "speech": "それ課金だけ、皆勤賞やん。"
+        }
+      ]
+    },
+    {
+      "type": "thread",
+      "text": "月980円が\n3つあった",
+      "speech": "ひと月九百八十円が、三つあった。",
+      "image": "subscription-2ch-2026-10-09-coins.svg",
+      "replies": [
+        {
+          "text": "月2940円\n消えてた",
+          "speech": "ひと月二千九百四十円、消えてた。"
+        },
+        {
+          "text": "年35280円\n地味にデカい",
+          "speech": "年間三万五千二百八十円。地味にでかい。"
+        }
+      ]
+    },
+    {
+      "type": "thread",
+      "text": "アプリ消して\n安心してた",
+      "speech": "アプリ消して、安心してた。",
+      "image": "subscription-2ch-2026-10-09-phone.svg",
+      "replies": [
+        {
+          "text": "削除だけじゃ\n解約にならんぞ",
+          "speech": "削除だけじゃ、解約にならんぞ。"
+        },
+        {
+          "text": "契約した場所で\n手続き確認や",
+          "speech": "契約した場所で、手続き確認や。"
+        }
+      ]
+    },
+    {
+      "type": "thread",
+      "text": "全部やめる？\nそれは違う",
+      "speech": "全部やめる？それは違う。",
+      "image": "subscription-2ch-2026-10-09-check.svg",
+      "replies": [
+        {
+          "text": "使うやつは残す\n放置だけ切る",
+          "speech": "使うやつは残す。放置だけ切る。"
+        },
+        {
+          "text": "節約って\n仕分けなんやな",
+          "speech": "節約って、仕分けなんやな。"
+        }
+      ]
+    },
+    {
+      "type": "thread",
+      "text": "まずは明細\n見てみよう",
+      "speech": "まずは明細、見てみよう。",
+      "image": "subscription-2ch-2026-10-09-receipt.svg",
+      "replies": [
+        {
+          "text": "最後に使ったの\nいつやった？",
+          "speech": "最後に使ったの、いつやった？"
+        },
+        {
+          "text": "忘れてた課金\nコメントで教えて",
+          "speech": "忘れてた課金、コメントで教えて。"
+        }
+      ]
+    }
+  ],
+  "description": "2026年10月9日制作。サブスクの放置課金あるあるを、スレ主とレスの掛け合いで描きました。\n本作は2ch風のオリジナル創作です。実在の投稿・体験談の転載ではありません。\n月980円×3件＝月2940円、12か月で35280円という架空の例です。解約方法・更新日・利用終了日は契約先で確認してください。",
+  "hashtags": [
+    "2ch風",
+    "サブスク",
+    "節約",
+    "あるある",
+    "Shorts"
+  ]
+}

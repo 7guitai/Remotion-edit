@@ -10,3 +10,6 @@ __pycache__/
 
 # NASA などのフリー素材（大きいので python3 scripts/download_footage.py で取得）
 public/footage/
+
+# 本動画の自作SVGは再配布可能
+!public/illustrations/subscription-2ch-2026-10-09-*.svg

@@ -1,3 +1,4 @@
+import subscription2chToday from "./subscription-2ch-2026-10-09.json";
 import animalTriviaLong from "./animal-trivia-long.json";
 import autumnTrivia from "./autumn-trivia.json";
 import bodyTriviaShort from "./body-trivia-short.json";
@@ -263,6 +264,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  subscription2chToday as Episode,
   thermoPrShort as Episode,
   whatifTunnelShort as Episode,
   illusionQuiz2Short as Episode,

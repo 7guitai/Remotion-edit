@@ -6,7 +6,7 @@ import fs from "node:fs";
 const [, , id, framesFile, outDir, scale = "0.3"] = process.argv;
 const frames = JSON.parse(fs.readFileSync(framesFile, "utf8"));
 const serveUrl = await bundle({ entryPoint: new URL("../src/index.ts", import.meta.url).pathname });
-const browser = await openBrowser("chrome", { chromiumOptions: { gl: "swangle" } });
+const browser = await openBrowser("chrome", { browserExecutable: process.env.REMOTION_BROWSER_EXECUTABLE, chromiumOptions: { gl: "swangle" } });
 const composition = await selectComposition({ serveUrl, id, puppeteerInstance: browser, chromiumOptions: { gl: "swangle" } });
 fs.mkdirSync(outDir, { recursive: true });
 for (const f of frames) {

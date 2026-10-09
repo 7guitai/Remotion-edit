@@ -124,10 +124,13 @@ const Headline: React.FC<{ text: string; maxSize: number; top: number }> = ({
         return (
           <div key={i} style={{ position: "relative", height: size * 1.16 }}>
             {layer(line, size, {
+              color: "#111",
+              WebkitTextStroke: `${size * 0.38}px #111`,
+            })}
+            {layer(line, size, {
               color: "#fff",
               WebkitTextStroke: `${size * 0.26}px #fff`,
-              // 白フチの外側だけに黒フチ（8方向にずらした影＋ぼかし）
-              filter: blackRim(size * 0.06),
+              // 黒→白→赤の3層で縁取り。重い多段フィルターを避ける。
             })}
             {layer(line, size, {
               background:
@@ -201,10 +204,10 @@ export const ThreadPage: React.FC<{
         <div
           style={{
             position: "absolute",
-            top: opener ? 1060 : 880,
+            top: opener ? 1060 : 1540,
             left: 0,
             right: 0,
-            height: opener ? 520 : 660,
+            height: opener ? 520 : 210,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -214,12 +217,13 @@ export const ThreadPage: React.FC<{
             src={staticFile(`illustrations/${slide.image}`)}
             style={{
               width: 900,
-              height: opener ? 500 : 640,
+              height: opener ? 500 : 200,
               objectFit: "contain",
             }}
           />
         </div>
       ) : null}
+      <div style={{ position: "absolute", bottom: 105, left: 0, right: 0, textAlign: "center", fontFamily, fontSize: 30, fontWeight: 800, color: "#653900" }}>2ch風・オリジナル創作</div>
       <Headline text={slide.text} maxSize={maxSize} top={headTop} />
       <div
         style={{
