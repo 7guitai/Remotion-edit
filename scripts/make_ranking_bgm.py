@@ -5,10 +5,10 @@ import wave
 
 ROOT = Path(__file__).resolve().parent.parent
 sr = 44100
-length = 16
+length = 12.8
 t = np.arange(sr * length) / sr
 x = np.zeros_like(t)
-# 120 BPM, eight bars. Warm bass and short bell notes, no samples.
+# 150 BPM, eight bars. Warm bass and short bell notes, no samples.
 roots = [146.8324, 196.0, 220.0, 164.8138]
 for beat in range(32):
     start = beat * 0.4

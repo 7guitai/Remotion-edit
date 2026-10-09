@@ -1,0 +1,20 @@
+{
+  "id": "everyday-ranking-2026-10-09",
+  "resolution": "1080x1920",
+  "fps": 30,
+  "duration_seconds": 40.57,
+  "checks": [
+    "TypeScript passed",
+    "All seven representative frames reviewed",
+    "VOICEVOX pronunciations reviewed",
+    "Manufacturer and industry association sources checked",
+    "Original music and restrained sound effects included",
+    "Requested label omitted",
+    "Final MP4 full decode passed",
+    "H.264 1080x1920 at 30fps + AAC stereo audio verified",
+    "Final mix normalized to -16 LUFS target and -1.5 dBTP ceiling"
+  ],
+  "music": "ひみつカウントダウン（自作・150BPM）",
+  "mp4_duration_seconds": 40.7,
+  "mp4_size_bytes": 2412347
+}
