@@ -716,7 +716,9 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
       let step = jumper(rd, next, 3.4 + (i % 2) * 0.4);
       steps.push((t) => {
         // 着地して落ち着いたら、もう一度跳ぶ
-        if (t > next + 2.9) {
+        if (t > next + 2.9 &&
+            Math.max(rd.bodies.footL.position.y, rd.bodies.footR.position.y) < 0.15 &&
+            Math.abs(rd.bodies.pelvis.velocity.y) < 0.8) {
           next = t + 0.1;
           step = jumper(rd, next, 3.4 + (i % 2) * 0.4);
         }

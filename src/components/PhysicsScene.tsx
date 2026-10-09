@@ -56,10 +56,17 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
   const t = f / Math.max(1, total - 1);
   switch (sim.kind) {
     case "scale":
+      if (sim.gravity[1] < 3) return { pos: [0, 2.3, 10], look: [0, 1.65, 0] };
       return { pos: [0, 1.7, lerp(9.0, 8.5, t)], look: [0, 1.15, 0] };
     case "jump":
+      if (sim.gravity[1] < 3) return { pos: [0, 3.3, 14.5], look: [0, 3.3, 0] };
       return { pos: [0, 2.2, lerp(9.4, 8.8, t)], look: [0, 2.0, 0] };
     case "slip":
+      if (sim.gravity[1] < 3) {
+        const xs = sim.bodies.map((b,i) => b.part === "head" ? posAt(sim,f,i)[0] : null).filter((x): x is number => x !== null);
+        const cx = (Math.min(...xs) + Math.max(...xs)) / 2;
+        return { pos: [cx, 1.8, Math.max(12.5, (Math.max(...xs)-Math.min(...xs))*2.1)], look: [cx,1.05,0] };
+      }
       return { pos: [0.9, 1.5, lerp(8.8, 8.2, t)], look: [0.9, 0.85, 0] };
     case "throw": {
       // いちばん遠くまで飛んでいるボールを追いかけて、だんだん引く
@@ -70,6 +77,11 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
         }
       }
       const cx = 0.8 + far * 0.5;
+      if (sim.gravity[1] < 3) {
+        const ballTop = Math.max(2, ...[0, 1].map(lane => posAt(sim, f, findIndex(sim, "sphere", lane))[1]));
+        const d = Math.max(12, 12 + far * 1.8, 6 + ballTop * 2.2);
+        return { pos: [cx, 1 + ballTop * 0.55, d], look: [cx, 1 + ballTop * 0.55, 0] };
+      }
       const d = 6.5 + far * 0.55;
       return { pos: [cx, 1.8 + far * 0.12, d], look: [cx, 1.6 + far * 0.1, 0] };
     }
@@ -107,6 +119,13 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       );
       const cx = Math.min(Math.max(-1, mid), 10) + (near > 2.5 ? 2 : 0.8);
       return { pos: [cx - 5, 9, 17], look: [cx + 0.5, 0, 0] };
+    }
+    case "party": {
+      // 低重力でも頭が画面外へ出ないよう、実際の位置から引く。
+      const highest = Math.max(3.6, ...sim.bodies.map((b, i) => b.part === "head" ? posAt(sim, f, i)[1] : 0));
+      const d = Math.max(14, (highest + 1.8) * 2.4);
+      const a = lerp(-0.35, 0.35, t);
+      return { pos: [Math.sin(a) * d, highest * 0.6, Math.cos(a) * d], look: [0, highest * 0.6, 0] };
     }
     default: {
       const a = lerp(-0.35, 0.35, t);
@@ -570,6 +589,11 @@ export const PhysicsScene: React.FC<{
     });
   }
   if (sim.kind === "throw") {
+    if (sim.gravity[1] < 3) overlays.push(
+      <div key="flight-comparison" style={{position:"absolute",top:230,left:35,right:35,display:"flex",justifyContent:"center",gap:30,fontFamily,fontSize:46,fontWeight:900}}>
+        {[0,1].map(lane => <div key={lane} style={{background:LANE_COLORS[lane],color:"white",border:"4px solid white",borderRadius:20,padding:"12px 22px"}}>{lane===0?"地球":"月"}：{v(`land${lane}`)>0?`約${Math.round(v(`land${lane}`))}m`:"飛行中"}</div>)}
+      </div>
+    );
     [0, 1].forEach((lane) => {
       const land = v(`land${lane}`);
       if (land > 0) {
@@ -642,6 +666,11 @@ export const PhysicsScene: React.FC<{
   // ボールの軌跡（0.5秒前までの位置を点で）
   const trails: React.ReactNode[] = [];
   if (sim.kind === "throw") {
+    if (sim.gravity[1] < 3) overlays.push(
+      <div key="flight-comparison" style={{position:"absolute",top:230,left:35,right:35,display:"flex",justifyContent:"center",gap:30,fontFamily,fontSize:46,fontWeight:900}}>
+        {[0,1].map(lane => <div key={lane} style={{background:LANE_COLORS[lane],color:"white",border:"4px solid white",borderRadius:20,padding:"12px 22px"}}>{lane===0?"地球":"月"}：{v(`land${lane}`)>0?`約${Math.round(v(`land${lane}`))}m`:"飛行中"}</div>)}
+      </div>
+    );
     [0, 1].forEach((lane) => {
       const bi = findIndex(sim, "sphere", lane);
       for (let k = 2; k <= f; k += 2) {

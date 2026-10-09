@@ -1,3 +1,4 @@
+import moonGravityToday from "./whatif-moon-gravity-2026-10-09.json";
 import everydayRanking from "./everyday-ranking-2026-10-09.json";
 import subscription2chToday from "./subscription-2ch-2026-10-09.json";
 import animalTriviaLong from "./animal-trivia-long.json";
@@ -266,6 +267,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  moonGravityToday as Episode,
   everydayRanking as Episode,
   subscription2chToday as Episode,
   thermoPrShort as Episode,
