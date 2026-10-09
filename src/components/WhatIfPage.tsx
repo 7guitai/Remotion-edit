@@ -18,6 +18,7 @@ import { PhysicsScene } from "./PhysicsScene";
 import { WhatIfCard } from "./WhatIfCard";
 import { RingSky } from "./RingSky";
 import { EarthCut } from "./EarthCut";
+import { ThermoScene } from "./ThermoScene";
 
 // 画面の配置（1080×1920）：上の黒帯にタイトル、真ん中が映像、下は黒
 export const VIEW = { top: 520, height: 1000 };
@@ -418,6 +419,9 @@ export const WhatIfPage: React.FC<{
           <RingSky day={slide.scene === "ringsky_day"} />
         ) : null}
         {slide.cut ? <EarthCut mode={slide.cut} width={width} height={view.height} /> : null}
+        {slide.thermo ? (
+          <ThermoScene mode={slide.thermo} width={width} height={view.height} product={slide.product} />
+        ) : null}
         {slide.sim ? (
           <PhysicsScene
             kind={slide.sim}

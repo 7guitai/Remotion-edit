@@ -14,6 +14,7 @@ import whatifEarthLong from "./whatif-earth-long.json";
 import whatifFrictionShort from "./whatif-friction-short.json";
 import whatifGravity2Short from "./whatif-gravity2-short.json";
 import whatifGravityShort from "./whatif-gravity-short.json";
+import thermoPrShort from "./thermo-pr-short.json";
 import whatifSunShort from "./whatif-sun-short.json";
 import whatifTunnelShort from "./whatif-tunnel-short.json";
 import foodRankingShort from "./food-ranking-short.json";
@@ -177,6 +178,9 @@ export type WhatIfSlide = {
   scene?: "ringsky" | "ringsky_day";
   // 地球の断面と、中心を通る穴（地球を貫く穴に飛び込んだら）
   cut?: import("../components/EarthCut").CutMode;
+  // 真空断熱のしくみの図解（商品紹介の科学解説）と、商品カードの中身
+  thermo?: import("../components/ThermoScene").ThermoMode;
+  product?: { name: string; points: string[] };
 };
 
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
@@ -259,6 +263,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  thermoPrShort as Episode,
   whatifTunnelShort as Episode,
   illusionQuiz2Short as Episode,
   whatifGravity2Short as Episode,

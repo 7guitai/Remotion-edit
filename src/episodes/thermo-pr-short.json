@@ -1,0 +1,101 @@
+{
+  "id": "thermo-pr-short",
+  "title": "氷が溶けないタンブラーの秘密",
+  "format": "short",
+  "titleBand": false,
+  "pr": true,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "spacewalk.mp3",
+    "title": "Spacewalk",
+    "credit": "Make a field Music",
+    "page": "https://opentracks.com/bgm/detail/13616",
+    "opentracks": 13616
+  },
+  "headline": [
+    "氷が溶けない",
+    "タンブラーの秘密"
+  ],
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "同じ氷を入れたのに、片方だけ、なかなか溶けない。その秘密は、目に見えない「真空」なんだ。",
+      "effect": "none",
+      "thermo": "compare"
+    },
+    {
+      "type": "whatif",
+      "text": "熱の伝わり方は、3つある。1つめは「伝導」。分子どうしがぶつかって、熱がとなりへ伝わっていく。",
+      "effect": "none",
+      "thermo": "conduction"
+    },
+    {
+      "type": "whatif",
+      "text": "2つめは「対流」。温められた空気や水が動いて、熱を運ぶ。",
+      "effect": "none",
+      "thermo": "convection"
+    },
+    {
+      "type": "whatif",
+      "text": "3つめは「放射」。太陽の光のように、何もない空間でも、熱は光として届くんだ。",
+      "effect": "none",
+      "thermo": "radiation"
+    },
+    {
+      "type": "whatif",
+      "text": "真空断熱のタンブラーは、二重のかべの間が真空。ぶつかる分子がないから、伝導も対流も、ほとんど起きない。",
+      "effect": "none",
+      "thermo": "vacuum"
+    },
+    {
+      "type": "whatif",
+      "text": "さらに、内側を鏡のような面にして、放射の熱もはね返すものが多いんだ。",
+      "effect": "none",
+      "thermo": "mirror"
+    },
+    {
+      "type": "whatif",
+      "text": "外側のかべは、ほとんど冷えないので、水滴がつきにくいのも、うれしいポイント。",
+      "effect": "none",
+      "thermo": "compare"
+    },
+    {
+      "type": "whatif",
+      "text": "このしくみは、1892年に、イギリスの科学者デュワーが考えた、魔法びんと同じなんだ。",
+      "effect": "none",
+      "thermo": "dewar"
+    },
+    {
+      "type": "whatif",
+      "text": "冷たい飲み物も、温かい飲み物も、長い時間そのまま。気になる人は、概要欄のリンクから見てみてね。",
+      "effect": "none",
+      "thermo": "product",
+      "product": {
+        "name": "真空断熱タンブラー",
+        "points": [
+          "冷たいまま・温かいまま",
+          "水滴がつきにくい",
+          "氷が長もち"
+        ]
+      }
+    }
+  ],
+  "description": "氷が何時間も溶けにくい「真空断熱タンブラー」。その秘密を、熱の伝わり方（伝導・対流・放射）から科学で解説しました。\n\n▼ 紹介した商品\n（ここに商品名とアフィリエイトリンクを入れてください）\n\n※動画の氷の溶け方の比較はイメージです。保冷・保温の時間は商品によって異なります。",
+  "hashtags": [
+    "PR",
+    "雑学",
+    "科学",
+    "真空断熱",
+    "タンブラー",
+    "Shorts"
+  ]
+}
