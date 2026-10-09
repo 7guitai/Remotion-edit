@@ -93,14 +93,14 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
               ))}
               {s.flashy ? (
                 <>
-                  <Audio src={staticFile("sfx/whoosh.wav")} volume={0.55} />
+                  <Audio src={staticFile("sfx/whoosh.wav")} volume={s.slide.type === "trivia" && s.slide.presentation === "ranking" ? 0.18 : 0.55} />
                   {s.answerStart !== null ? (
                     <Sequence from={s.answerStart}>
-                      <Audio src={staticFile("sfx/impact.wav")} volume={0.7} />
+                      <Audio src={staticFile("sfx/impact.wav")} volume={s.slide.type === "trivia" && s.slide.presentation === "ranking" ? 0.22 : 0.7} />
                       <Sequence from={4}>
                         <Audio
                           src={staticFile("sfx/sparkle.wav")}
-                          volume={0.35}
+                          volume={s.slide.type === "trivia" && s.slide.presentation === "ranking" ? 0.12 : 0.35}
                         />
                       </Sequence>
                     </Sequence>

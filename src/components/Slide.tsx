@@ -14,6 +14,7 @@ import { Layout, useLayout } from "../layout";
 import { COLORS, fontFamily, useAccent } from "../theme";
 import { Bars, Points, Table } from "./Charts";
 import { Quiz } from "./Quiz";
+import { RankingPage } from "./RankingPage";
 import { FlashyTriviaPage } from "./FlashyTriviaPage";
 import { SleepPage } from "./SleepPage";
 import { WhatIfPage } from "./WhatIfPage";
@@ -150,6 +151,9 @@ export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
   }
   if (slide.type === "thread") {
     return <ThreadPage resolved={resolved} slide={slide} />;
+  }
+  if (slide.type === "trivia" && slide.presentation === "ranking") {
+    return <RankingPage resolved={resolved} slide={slide} />;
   }
   if (slide.type === "trivia" && resolved.flashy) {
     return <FlashyTriviaPage resolved={resolved} slide={slide} />;

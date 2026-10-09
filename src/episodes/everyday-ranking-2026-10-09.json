@@ -1,0 +1,136 @@
+{
+  "id": "everyday-ranking-2026-10-09",
+  "title": "身近なモノの意外なヒミツ TOP5",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "flashy",
+  "answerPause": 10,
+  "voice": {
+    "speaker": 3,
+    "speed": 1.2,
+    "name": "ずんだもん"
+  },
+  "bgmVolume": 0.15,
+  "bgm": {
+    "file": "everyday-ranking-2026-10-09.wav",
+    "title": "ひみつカウントダウン",
+    "credit": "本動画用の自作音源"
+  },
+  "illustrations": {
+    "everyday-ranking-2026-10-09-pencil.svg": {
+      "emoji": "",
+      "irasutoya": "pencil",
+      "credit": "自作SVG"
+    },
+    "everyday-ranking-2026-10-09-jeans.svg": {
+      "emoji": "",
+      "irasutoya": "jeans",
+      "credit": "自作SVG"
+    },
+    "everyday-ranking-2026-10-09-keyboard.svg": {
+      "emoji": "",
+      "irasutoya": "keyboard",
+      "credit": "自作SVG"
+    },
+    "everyday-ranking-2026-10-09-milk.svg": {
+      "emoji": "",
+      "irasutoya": "milk",
+      "credit": "自作SVG"
+    },
+    "everyday-ranking-2026-10-09-barcode.svg": {
+      "emoji": "",
+      "irasutoya": "barcode",
+      "credit": "自作SVG"
+    },
+    "everyday-ranking-2026-10-09-intro.svg": {
+      "emoji": "",
+      "irasutoya": "intro",
+      "credit": "自作SVG"
+    }
+  },
+  "slides": [
+    {
+      "type": "trivia",
+      "presentation": "ranking",
+      "text": "身近なモノの\n意外なヒミツ\nTOP 5",
+      "speech": "身近なモノの意外なヒミツ、トップ五！",
+      "image": "everyday-ranking-2026-10-09-intro.svg"
+    },
+    {
+      "type": "trivia",
+      "presentation": "ranking",
+      "rank": 5,
+      "no": 1,
+      "text": "鉛筆の芯って\n何でできてる？",
+      "speech": "第五位。鉛筆の芯って、何でできてる？",
+      "answer": "黒鉛と粘土",
+      "answerSpeech": "こくえんと、ねんど。",
+      "note": "鉛は使っていない",
+      "image": "everyday-ranking-2026-10-09-pencil.svg"
+    },
+    {
+      "type": "trivia",
+      "presentation": "ranking",
+      "rank": 4,
+      "no": 2,
+      "text": "ジーンズの\n金属の粒は？",
+      "speech": "第四位。ジーンズの、金属の粒は？",
+      "answer": "ポケットの\n補強のため",
+      "answerSpeech": "ポケットを、補強するため。",
+      "note": "名前は「リベット」",
+      "image": "everyday-ranking-2026-10-09-jeans.svg"
+    },
+    {
+      "type": "trivia",
+      "presentation": "ranking",
+      "rank": 3,
+      "no": 3,
+      "text": "FとJの\n小さな突起は？",
+      "speech": "第三位。エフとジェイの、小さな突起は？",
+      "answer": "指の位置を\n教える目印",
+      "answerSpeech": "指の位置を教える、目印。",
+      "note": "見ずにホームポジションへ",
+      "image": "everyday-ranking-2026-10-09-keyboard.svg"
+    },
+    {
+      "type": "trivia",
+      "presentation": "ranking",
+      "rank": 2,
+      "no": 4,
+      "text": "牛乳パックの\n切り欠きは？",
+      "speech": "第二位。牛乳パックの、切り欠きは？",
+      "answer": "触って牛乳を\n見分ける工夫",
+      "answerSpeech": "触って、牛乳を見分ける工夫。",
+      "note": "切り欠きの反対側が開け口",
+      "image": "everyday-ranking-2026-10-09-milk.svg"
+    },
+    {
+      "type": "trivia",
+      "presentation": "ranking",
+      "rank": 1,
+      "no": 5,
+      "text": "バーコードは\n黒だけ読む？",
+      "speech": "第一位。バーコードは、黒だけ読む？",
+      "answer": "白い部分も\n情報の一部！",
+      "answerSpeech": "白い部分も、情報の一部！",
+      "note": "黒と白の幅・反射の差で読取",
+      "image": "everyday-ranking-2026-10-09-barcode.svg"
+    },
+    {
+      "type": "trivia",
+      "presentation": "ranking",
+      "text": "何個知ってた？\nコメントで\n教えて！",
+      "speech": "何個知ってた？コメントで教えて！",
+      "image": "everyday-ranking-2026-10-09-intro.svg",
+      "chapter": "エンディング"
+    }
+  ],
+  "description": "毎日使うモノに、こんな理由が！\n鉛筆・ジーンズ・キーボード・牛乳パック・バーコードの意外な秘密を5位から紹介。\n何個知っていましたか？コメントで教えてください！\n※順位は意外さを基準にした独自の構成です。\n\n▼ 参考情報\n三菱鉛筆：鉛筆の芯\nhttps://www.mpuni.co.jp/customer/pdf/Pencil.pdf\nLevi’s：リベット\nhttps://www.levi.com/CY/en/features/denim-dictionary\n富士通：タッチタイピング\nhttps://mcmgr01.fmworld.net/usage/lesson/keyboard/typing/touch_typing/\nJミルク：牛乳パックの切欠き\nhttps://www.j-milk.jp/knowledge/products/8d863s000007z1wa.html\nGS1 Japan：JANシンボル\nhttps://www.gs1jp.org/standard/barcode/jan_symbol.html",
+  "hashtags": [
+    "雑学",
+    "豆知識",
+    "ランキング",
+    "Shorts"
+  ]
+}

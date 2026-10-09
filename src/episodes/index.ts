@@ -1,3 +1,4 @@
+import everydayRanking from "./everyday-ranking-2026-10-09.json";
 import subscription2chToday from "./subscription-2ch-2026-10-09.json";
 import animalTriviaLong from "./animal-trivia-long.json";
 import autumnTrivia from "./autumn-trivia.json";
@@ -84,6 +85,7 @@ export type QuizSlide = {
 // 1ページ1雑学（ショート向け）。text（上の振り）を読んだあと、
 // 少し間をあけて answer（下の答え）を表示して読み上げる。note は読み上げない補足
 export type TriviaSlide = {
+  presentation?: "ranking";
   type: "trivia";
   text: string;
   speech?: string;
@@ -264,6 +266,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  everydayRanking as Episode,
   subscription2chToday as Episode,
   thermoPrShort as Episode,
   whatifTunnelShort as Episode,
