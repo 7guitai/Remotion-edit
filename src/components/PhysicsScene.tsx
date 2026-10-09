@@ -416,12 +416,13 @@ const Coin: React.FC<{ y?: number; rot?: number }> = ({ y = 0, rot = 0 }) => (
   <group position={[0, y, 0]} rotation={[0, rot, 0]}>
     <mesh castShadow receiveShadow>
       <cylinderGeometry args={[0.23, 0.23, 0.032, 48]} />
-      <meshStandardMaterial color="#d8b25a" roughness={0.3} metalness={0.85} />
+      {/* 金属らしさを強くすると、映りこむ景色がないので黒っぽくなる。少しおさえて明るい金色に */}
+      <meshStandardMaterial color="#e3bf63" roughness={0.38} metalness={0.35} />
     </mesh>
     {/* ふちの模様と、表面の円 */}
     <mesh position={[0, 0.0165, 0]} rotation={[-Math.PI / 2, 0, 0]}>
       <ringGeometry args={[0.19, 0.205, 48]} />
-      <meshStandardMaterial color="#b8923f" roughness={0.4} metalness={0.8} />
+      <meshStandardMaterial color="#b8923f" roughness={0.45} metalness={0.35} />
     </mesh>
   </group>
 );
@@ -437,7 +438,7 @@ const TINY_PROPS: { name: string; label: [number, number, number] }[] = [
 const TinyProps: React.FC = () => (
   <group>
     {/* 立てた500円玉 */}
-    <group position={[1.7, 0.23, -0.3]} rotation={[Math.PI / 2, 0, 0.4]}>
+    <group position={[1.7, 0.23, -0.3]} rotation={[Math.PI / 2, 0, -0.35]}>
       <Coin />
     </group>
     {/* 寝かせた鉛筆（六角形・長さ3m・太さ12cm） */}
@@ -607,7 +608,11 @@ export const PhysicsScene: React.FC<{
   labels?: [string, string];
   // シミュレーションの途中（フレーム）から見せる
   offset?: number;
-}> = ({ kind, width, height, gravity = 0.5, labels, offset = 0 }) => {
+  // ラベルや効果音を出さない（サムネイル用）
+  bare?: boolean;
+  // カメラの位置を指定する（サムネイル用）
+  camera?: Cam;
+}> = ({ kind, width, height, gravity = 0.5, labels, offset = 0, bare = false, camera }) => {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const sim = useMemo(
@@ -618,7 +623,7 @@ export const PhysicsScene: React.FC<{
   const f = Math.min(frame + offset, sim.frames - 1);
   // 横長の画面では、人がもう少し大きく見えるよう、カメラを少し近づける
   const landscape = width > height;
-  const cam0 = cameraFor(sim, f, sim.frames);
+  const cam0 = camera ?? cameraFor(sim, f, sim.frames);
   const near = landscape && !["throw", "brake", "fbrake", "athrow", "aplane", "tjump", "tfall", "asky", "tworld"].includes(kind) ? 0.8 : 1;
   const cam: Cam = {
     pos: cam0.pos.map((p, i) => cam0.look[i] + (p - cam0.look[i]) * near) as [number, number, number],
@@ -1503,8 +1508,8 @@ export const PhysicsScene: React.FC<{
         {streaks}
         {rain}
       </ThreeCanvas>
-      {overlays}
-      {sounds}
+      {bare ? null : overlays}
+      {bare ? null : sounds}
       {kind === "arain" || kind === "train" ? <Audio src={staticFile("sfx/rain.wav")} volume={0.3} loop /> : null}
       {kind === "train"
         ? [1.5, 4.2].map((h) => {

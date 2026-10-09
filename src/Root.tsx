@@ -2,6 +2,7 @@ import React from "react";
 import { Composition, Still } from "remotion";
 import { SleepThumbnail } from "./components/SleepThumbnail";
 import { WhatIfThumbnail } from "./components/WhatIfThumbnail";
+import { TinyThumbnail } from "./components/TinyThumbnail";
 import { EPISODES } from "./episodes";
 import { calculateMetadata, FPS } from "./slides";
 import { Video } from "./Video";
@@ -49,6 +50,16 @@ export const RemotionRoot: React.FC = () => {
           big: "10選",
           badge: "海が消えた地球",
         }}
+      />
+      {/* 「もし人間が10cmになったら？」のサムネイル（npx remotion still whatif-tiny-long-thumbnail out/thumb.png --gl=swangle） */}
+      <Composition
+        id="whatif-tiny-long-thumbnail"
+        component={TinyThumbnail}
+        width={1280}
+        height={720}
+        fps={30}
+        durationInFrames={30}
+        defaultProps={{ offset: 300 }}
       />
     </>
   );
