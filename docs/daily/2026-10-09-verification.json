@@ -1,0 +1,48 @@
+{
+  "episode": "subscription-2ch-2026-10-09",
+  "resolution": "1080x1920",
+  "fps": 30,
+  "duration_frames": 1327,
+  "duration_seconds": 44.233333333333334,
+  "slides": [
+    {
+      "slide": 1,
+      "start_seconds": 0.0,
+      "headline": "サブスク整理で衝撃の事実"
+    },
+    {
+      "slide": 2,
+      "start_seconds": 3.567,
+      "headline": "使ってないのに毎月引かれてた"
+    },
+    {
+      "slide": 3,
+      "start_seconds": 11.367,
+      "headline": "月980円が3つあった"
+    },
+    {
+      "slide": 4,
+      "start_seconds": 21.467,
+      "headline": "アプリ消して安心してた"
+    },
+    {
+      "slide": 5,
+      "start_seconds": 29.233,
+      "headline": "全部やめる？それは違う"
+    },
+    {
+      "slide": 6,
+      "start_seconds": 36.633,
+      "headline": "まずは明細見てみよう"
+    }
+  ],
+  "checks": [
+    "TypeScript passed",
+    "All six pages visually reviewed",
+    "VOICEVOX kana reviewed; annual amount reading corrected",
+    "980 * 3 * 12 == 35280",
+    "MP4 full decode passed",
+    "H.264 video + AAC stereo audio verified",
+    "Audio normalized to -16 LUFS target / -1.5 dBTP ceiling"
+  ]
+}
