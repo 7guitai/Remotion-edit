@@ -268,6 +268,18 @@ export const POSES: Record<string, Pose> = {
     ankleL: [0, 0, 0.15],
     ankleR: [0, 0, -0.15],
   },
+  // 足を前にのばして座る（すべり台）
+  sit: {
+    waist: [0.1, 0, 0],
+    hipL: [-1.45, 0, -0.12],
+    hipR: [-1.45, 0, 0.12],
+    kneeL: [0.15, 0, 0],
+    kneeR: [0.15, 0, 0],
+    shoulderL: [-0.45, 0, -0.35],
+    shoulderR: [-0.45, 0, 0.35],
+    elbowL: [-0.4, 0, 0],
+    elbowR: [-0.4, 0, 0],
+  },
   // 足を少し開いて立つ
   stance: {
     hipL: [0, 0, -0.18],

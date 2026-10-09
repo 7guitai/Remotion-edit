@@ -20,6 +20,7 @@ import whatifTunnelShort from "./whatif-tunnel-short.json";
 import whatifAirShort from "./whatif-air-short.json";
 import whatifTinyLong from "./whatif-tiny-long.json";
 import whatifTrampShort from "./whatif-tramp-short.json";
+import whatifFriction10Short from "./whatif-friction10-short.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -270,6 +271,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  whatifFriction10Short as Episode,
   whatifTrampShort as Episode,
   whatifTinyLong as Episode,
   whatifAirShort as Episode,

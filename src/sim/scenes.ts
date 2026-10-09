@@ -47,9 +47,14 @@ export type SimKind =
   | "bjump"
   | "bdrop"
   | "bwall"
-  | "bparty";
+  | "bparty"
+  // 摩擦が10倍（右・奥の世界）
+  | "xpush"
+  | "xbrake"
+  | "xslide";
 
 export const AIR_KINDS: SimKind[] = ["afeather", "athrow", "arain", "asky", "aplane"];
+export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
 export const BOUNCE_KINDS: SimKind[] = ["bjump", "bdrop", "bwall", "bparty"];
 export const TINY_KINDS: SimKind[] = ["tworld", "tlift", "tjump", "tfall", "twind", "train"];
 
@@ -453,7 +458,7 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
       };
       lanes.push({ world, g, dolls: [rd], control, record });
     });
-  } else if (kind === "brake" || kind === "fbrake") {
+  } else if (kind === "brake" || kind === "fbrake" || kind === "xbrake") {
     // 同じ速さ（時速36km）で走る車が、線のところで急ブレーキ
     [0, 1].forEach((lane) => {
       const g = kind === "brake" && lane === 1 ? G * g2 : G;
@@ -515,7 +520,8 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
           braking = true;
         }
         // 動摩擦力 = 摩擦係数 × 車が地面を押す力（重さ × 重力）。重力が半分なら半分、摩擦ゼロなら0
-        const mu = fw.isOff() ? 0 : 0.7;
+        // 摩擦10倍の世界（xbrake の奥）は 0.7 × 10 = 7
+        const mu = kind === "xbrake" && lane === 1 ? 7 : fw.isOff() ? 0 : 0.7;
         if (braking && stopped < 0) {
           if (car.velocity.x > 0.02) {
             car.force.x -= mu * car.mass * g;
@@ -543,16 +549,28 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
       };
       lanes.push({ world: fw.world, g: G, dolls: [rd], control, record: () => {} });
     });
-  } else if (kind === "fpush") {
-    // 重い箱（40kg）を、同じ力（150N）で押す。手前がいまの地球、奥が摩擦ゼロ
+  } else if (kind === "fpush" || kind === "xpush") {
+    // 重い箱（40kg）を、同じ力で押す（fpush：150N、奥は摩擦ゼロ。xpush：300N、奥は摩擦10倍）
+    const xp = kind === "xpush";
     [0, 1].forEach((lane) => {
-      const fw = frictionWorld(lane);
+      const fw = frictionWorld(xp ? 0 : lane);
       const world = fw.world;
       const z = lane === 0 ? 0.9 : -0.9;
       const boxMat = new CANNON.Material("box");
       world.addContactMaterial(
-        new CANNON.ContactMaterial(groundMaterial, boxMat, { friction: 0.5, restitution: 0 }),
+        // xpush は、箱と床の摩擦を下の control で計算する（物理エンジンの摩擦は、
+        // 箱の角ごとに上限がかかって実際より強くなるため）
+        new CANNON.ContactMaterial(groundMaterial, boxMat, { friction: xp ? 0 : 0.5, restitution: 0 }),
       );
+      const boxMu = lane === 1 ? 5 : 0.5;
+      if (xp && lane === 1) {
+        // すべての摩擦を10倍に（箱と床 0.5 → 5、靴と床も10倍）
+        world.defaultContactMaterial.friction *= 10;
+        for (const m of world.contactmaterials) {
+          m.friction *= 10;
+        }
+      }
+      const F = xp ? 300 : 150;
       const rd = addDoll(world, lane, lane, [0, 0, z], Math.PI / 2);
       const box = new CANNON.Body({
         mass: 40,
@@ -572,9 +590,30 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
         applyBalance(rd);
         rd.setPose(POSES.stand, POSES.push, smooth((t - 0.2) / 0.4));
         // 手が箱にふれている間だけ押す（押した力と同じ力で、自分も押し返される）
-        if (t > 0.7 && t < 1.5 && hand().x > box.position.x - 0.4 - 0.12) {
-          box.force.x += 150;
-          rd.bodies.torso.force.x -= 150;
+        let pushF = 0;
+        if (t > 0.7 && t < (xp ? 2.6 : 1.5) && hand().x > box.position.x - 0.4 - (xp ? 0.5 : 0.12)) {
+          pushF = F;
+          box.force.x += F;
+          // 押し返される力（xpush は足をふんばって受け止めるので、体全体に分けてかける）
+          if (xp) {
+            for (const b of Object.values(rd.bodies)) {
+              b.force.x -= (F * b.mass) / 66;
+            }
+          } else {
+            rd.bodies.torso.force.x -= F;
+          }
+        }
+        if (xp) {
+          // 床の摩擦：止まっていれば押す力を μmg まで打ち消し、すべっていれば μmg で止めようとする
+          const maxF = boxMu * box.mass * G;
+          if (Math.abs(box.velocity.x) > 0.02) {
+            box.force.x -= Math.sign(box.velocity.x) * maxF;
+          } else {
+            box.force.x -= Math.sign(pushF) * Math.min(Math.abs(pushF), maxF);
+            if (Math.abs(pushF) <= maxF) {
+              box.velocity.x = 0;
+            }
+          }
         }
       };
       const record = (f: number) => {
@@ -1466,6 +1505,98 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
       };
       lanes.push({ world, g: G, dolls, control, record });
     });
+  } else if (kind === "xslide") {
+    // すべり台（角度35度・長さ3.2m）。手前はいまの地球（おしりとすべり台の摩擦 0.25）、奥は10倍の 2.5。
+    // tan35° ≒ 0.7 なので、0.25 ならすべり出し、2.5 ならすべらない（すべるには約68度以上が必要）
+    const A = (35 * Math.PI) / 180;
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const z = lane === 0 ? 1.1 : -1.1;
+      const slideMat = new CANNON.Material("slide");
+      const mu = lane === 0 ? 0.25 : 2.5;
+      // すべり台との摩擦は、下の control で「摩擦係数 × 面を押す力」として計算する
+      // （物理エンジンの摩擦は、関節でつながった人形だと実際より強く引っかかるため）
+      world.addContactMaterial(new CANNON.ContactMaterial(bodyMaterial, slideMat, { friction: 0, restitution: 0 }));
+      const addStatic = (half: [number, number, number], pos: [number, number, number], rot: number, color: string) => {
+        const b = new CANNON.Body({
+          mass: 0,
+          shape: new CANNON.Box(new CANNON.Vec3(...half)),
+          position: new CANNON.Vec3(...pos),
+          material: slideMat,
+        });
+        b.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 0, 1), rot);
+        world.addBody(b);
+        bodies.push({ lane, shape: "box", size: [half[0] * 2, half[1] * 2, half[2] * 2], color });
+        tracked.push(b);
+      };
+      // 上の台（高さ2m）と、すべる面、両側の手すり
+      const top = 2.0;
+      addStatic([0.5, 0.05, 0.42], [-1.1, top - 0.05, z], 0, "#3a86ff");
+      const L = 3.2;
+      const sx = -0.6 + (L / 2) * Math.cos(A);
+      const sy = top - (L / 2) * Math.sin(A) - 0.05;
+      addStatic([L / 2, 0.05, 0.42], [sx, sy, z], -A, "#ff6b3d");
+      for (const dz of [-0.45, 0.45]) {
+        addStatic([L / 2, 0.14, 0.03], [sx + 0.08 * Math.sin(A), sy + 0.14 * Math.cos(A), z + dz], -A, "#ffd21a");
+      }
+      // 台の脚
+      addStatic([0.05, top / 2, 0.05], [-1.5, top / 2 - 0.1, z - 0.35], 0, "#888");
+      addStatic([0.05, top / 2, 0.05], [-1.5, top / 2 - 0.1, z + 0.35], 0, "#888");
+      // 座るとおしりが後ろへ下がるので、台の前のほうに立たせておく
+      const rd = addDoll(world, lane, lane, [-0.72, top, z], Math.PI / 2);
+      rd.balance = 0.5;
+      const moved = val(`slide${lane}`);
+      let x0 = 0;
+      let shifted = false;
+      const control = (t: number) => {
+        applyBalance(rd);
+        rd.setPose(POSES.stand, POSES.sit, smooth(t / 0.5));
+        // 座り終わったら、すべり台の入り口まで体ごと移す（この場面は1秒目から見せる）
+        if (!shifted && t > 0.9) {
+          shifted = true;
+          // すべり台の少し下（入り口から0.5m）に、体を傾けずに座らせる
+          const dx = -0.1 - rd.bodies.pelvis.position.x;
+          const dy = -0.5 * Math.tan(A) + 0.04;
+          for (const b of Object.values(rd.bodies)) {
+            b.position.x += dx;
+            b.position.y += dy;
+            b.velocity.set(0, 0, 0);
+          }
+        }
+        // おしりがすべる面にふれていたら、体全体に摩擦をかける
+        const n = new CANNON.Vec3(Math.sin(A), Math.cos(A), 0);
+        const tan = new CANNON.Vec3(Math.cos(A), -Math.sin(A), 0);
+        const pel = rd.bodies.pelvis.position;
+        const d = (pel.x - -0.6) * n.x + (pel.y - top) * n.y;
+        if (shifted && pel.x > -0.6 && pel.x < 2.0 && d < 0.16) {
+          for (const b of Object.values(rd.bodies)) {
+            const vt = b.velocity.dot(tan);
+            const maxF = mu * b.mass * G * Math.cos(A);
+            const gravityT = b.mass * G * Math.sin(A);
+            if (Math.abs(vt) > 0.03) {
+              // すべっている：動きと逆向きに μN
+              b.force.vadd(tan.scale(-Math.sign(vt) * maxF), b.force);
+            } else {
+              // 止まっている：重力の坂方向の力を、μN まで打ち消す
+              b.force.vadd(tan.scale(-Math.min(gravityT, maxF)), b.force);
+            }
+          }
+        }
+        if (t > 1.0 && t < 1.25) {
+          // すべり台の上で、前へ少しおしりをずらす
+          for (const b of Object.values(rd.bodies)) {
+            b.velocity.x = Math.max(b.velocity.x, 0.9);
+          }
+        }
+        if (t < 1.0) {
+          x0 = rd.bodies.pelvis.position.x;
+        }
+      };
+      const record = (f: number) => {
+        moved[f] = rd.bodies.pelvis.position.x - x0;
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record });
+    });
   } else if (kind === "fchaos") {
     // 摩擦ゼロの広場で、5人が歩き出そうとする
     const fw = frictionWorld(1);
@@ -1631,6 +1762,8 @@ export const simulate = (
             ? ["身長175cm", "身長10cm（拡大）"]
             : BOUNCE_KINDS.includes(kind)
               ? ["ふつうの地面", "トランポリンの地面"]
+              : X_KINDS.includes(kind)
+                ? ["いまの地球", "摩擦10倍"]
         : ["いまの地球 1G", gravityLabel(g2)],
   };
   cache.set(key, result);

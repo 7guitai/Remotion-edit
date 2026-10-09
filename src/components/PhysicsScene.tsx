@@ -133,6 +133,7 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
     case "fstand":
       return { pos: [0, 1.5, lerp(8.6, 8.0, t)], look: [0, 0.85, 0] };
     case "fpush":
+    case "xpush":
       return { pos: [0.9, 1.9, lerp(10.2, 9.6, t)], look: [0.9, 0.8, 0] };
     case "ladder":
       // 斜め前から見下ろす（手前と奥のはしごが重ならないように）
@@ -141,8 +142,11 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       const a = lerp(-0.3, 0.3, t);
       return { pos: [Math.sin(a) * 7.6, 2.1, Math.cos(a) * 7.6], look: [0, 1.1, 0] };
     }
+    case "xslide":
+      return { pos: [0.4, 2.3, lerp(9.6, 9.1, t)], look: [0.4, 1.35, 0] };
     case "brake":
-    case "fbrake": {
+    case "fbrake":
+    case "xbrake": {
       // 2台の車のまん中を見る（止まれない車は、そのまま画面の外へ走り去る）
       const mid =
         (posAt(sim, f, findIndex(sim, "car", 0))[0] +
@@ -217,7 +221,7 @@ const useGroundTexture = (kind: SimKind) =>
         ctx.fillStyle = `rgba(90,55,25,${0.08 + ((i * 37) % 10) / 100})`;
         ctx.fillRect((i * 53) % size, (i * 131) % size, 30 + ((i * 17) % 40), 1);
       }
-    } else if (kind === "brake" || kind === "fbrake") {
+    } else if (kind === "brake" || kind === "fbrake" || kind === "xbrake") {
       ctx.fillStyle = "#4a4d55";
       ctx.fillRect(0, 0, size, size);
       for (let i = 0; i < 1800; i++) {
@@ -237,7 +241,7 @@ const useGroundTexture = (kind: SimKind) =>
     tex.wrapT = THREE.RepeatWrapping;
     tex.colorSpace = THREE.SRGBColorSpace;
     // brake は 4m、それ以外は 2m（タイル1枚が1m）ごとにくり返す
-    const unit = TINY_KINDS.includes(kind) ? 7 : kind === "brake" || kind === "fbrake" ? 4 : 2;
+    const unit = TINY_KINDS.includes(kind) ? 7 : kind === "brake" || kind === "fbrake" || kind === "xbrake" ? 4 : 2;
     tex.repeat.set(200 / unit, 200 / unit);
     tex.anisotropy = 8;
     return tex;
@@ -793,7 +797,7 @@ export const PhysicsScene: React.FC<{
 
   const overlays: React.ReactNode[] = [];
   const laneX = [width * 0.25, width * 0.75];
-  const isRoad = sim.kind === "brake" || sim.kind === "fbrake";
+  const isRoad = sim.kind === "brake" || sim.kind === "fbrake" || sim.kind === "xbrake";
   const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall"].includes(sim.kind);
   const isAir = AIR_KINDS.includes(sim.kind);
   // 摩擦ゼロの世界は、摩擦が消えた瞬間からラベルを点滅させる
@@ -835,7 +839,7 @@ export const PhysicsScene: React.FC<{
         </Pill>,
       );
     });
-  } else if (sim.kind === "throw" || sim.kind === "athrow" || sim.kind === "aplane" || isRoad || sim.kind === "fpush" || sim.kind === "ladder") {
+  } else if (sim.kind === "throw" || sim.kind === "athrow" || sim.kind === "aplane" || isRoad || sim.kind === "fpush" || sim.kind === "xpush" || sim.kind === "xslide" || sim.kind === "ladder") {
     overlays.push(
       <div key="legend" style={{ position: "absolute", left: 30, top: 34 + T, display: "flex", flexDirection: "column", gap: 12 }}>
         {[0, 1].map((lane) => (
@@ -1054,7 +1058,26 @@ export const PhysicsScene: React.FC<{
     });
   }
 
-  if (sim.kind === "fpush") {
+  if (sim.kind === "xslide") {
+    [0, 1].forEach((lane) => {
+      const moved = v(`slide${lane}`);
+      if (f > 1.9 * fps) {
+        const pi = sim.bodies.findIndex((b) => b.part === "head" && b.lane === lane);
+        const hp = posAt(sim, f, pi);
+        const p = project(cam, [hp[0], hp[1] + 0.45, hp[2]], width, height);
+        overlays.push(
+          <Pill key={`sl${lane}`} x={Math.min(width - 150, Math.max(150, p.x))} y={Math.max(200 + T, p.y)} color={LANE_COLORS[lane]} size={40}>
+            {moved > 0.8 ? "すべる！" : "すべらない…"}
+          </Pill>,
+        );
+      }
+    });
+    const p = project(cam, [1.6, 0.5, 1.6], width, height);
+    overlays.push(
+      <Pill key="ang" x={p.x} y={p.y} color="#334" size={32}>角度35°</Pill>,
+    );
+  }
+  if (sim.kind === "fpush" || sim.kind === "xpush") {
     [0, 1].forEach((lane) => {
       const bi = findIndex(sim, "box", lane);
       const p = project(cam, [posAt(sim, f, bi)[0], 1.05, lane === 0 ? 0.9 : -0.9], width, height);

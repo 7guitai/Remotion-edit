@@ -1,0 +1,125 @@
+{
+  "id": "whatif-friction10-short",
+  "title": "もし摩擦が10倍になったら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "morning_sharou.mp3",
+    "title": "Morning",
+    "credit": "しゃろう",
+    "page": "https://opentracks.com/bgm/detail/2445",
+    "opentracks": 2445,
+    "track": 1
+  },
+  "headline": [
+    "もし摩擦が",
+    "10倍になったら？"
+  ],
+  "illustrations": {
+    "fe_ice_skate.svg": {
+      "emoji": "🛝",
+      "irasutoya": "Fluent Emoji「Ice skate」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Ice%20skate/Color/ice_skate_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_fire.svg": {
+      "emoji": "🛝",
+      "irasutoya": "Fluent Emoji「Fire」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Fire/Color/fire_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    }
+  },
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、摩擦が10倍になったら？前回は摩擦ゼロの世界だったけど、今回はその逆！",
+      "effect": "none",
+      "sim": "xslide",
+      "simStart": 1.0
+    },
+    {
+      "type": "whatif",
+      "text": "まず、すべり台が、すべらない！",
+      "effect": "none",
+      "sim": "xslide",
+      "simStart": 1.0
+    },
+    {
+      "type": "whatif",
+      "text": "角度35度のすべり台。摩擦が10倍だと、70度くらいの、ほぼ壁のような坂にしないと、すべり出さないんだ。",
+      "effect": "none",
+      "sim": "xslide",
+      "simStart": 2.4
+    },
+    {
+      "type": "whatif",
+      "text": "重い荷物を押すと、ふつうは動き出すのに…",
+      "effect": "none",
+      "sim": "xpush"
+    },
+    {
+      "type": "whatif",
+      "text": "摩擦10倍では、びくともしない。40kgの箱を動かすのに、200kg分もの力が必要になる。",
+      "effect": "none",
+      "speech": "摩擦10倍では、びくともしない。40キロの箱を動かすのに、200キロ分もの力が必要になる。",
+      "sim": "xpush",
+      "simStart": 1.5
+    },
+    {
+      "type": "whatif",
+      "text": "車は、あっという間に止まる。止まるまでの距離は、なんと10分の1！",
+      "effect": "none",
+      "sim": "xbrake"
+    },
+    {
+      "type": "whatif",
+      "text": "でも、乗っている人には、体重の7倍もの力がかかる。とても危ないんだ。",
+      "effect": "none",
+      "sim": "xbrake",
+      "simStart": 1.5,
+      "big": "体重の7倍"
+    },
+    {
+      "type": "whatif",
+      "text": "スケートも、スキーも、そりも、ぜんぜんすべらない。",
+      "effect": "zoom",
+      "image": "fe_ice_skate.svg",
+      "imageSize": 560,
+      "bg": "night"
+    },
+    {
+      "type": "whatif",
+      "text": "手をこすり合わせると、すぐに熱くなる。こすって生まれる熱も、10倍になるからだ。",
+      "effect": "shake",
+      "image": "fe_fire.svg",
+      "imageSize": 560,
+      "bg": "night"
+    },
+    {
+      "type": "whatif",
+      "text": "摩擦ゼロと、摩擦10倍。住むならどっち？コメントで教えてね！",
+      "effect": "none",
+      "sim": "xslide",
+      "simStart": 1.0,
+      "hold": 1
+    }
+  ],
+  "description": "もし摩擦が10倍になったら、すべり台・荷物・車のブレーキ・スケートはどうなるのか？\n「もし摩擦がなくなったら？」の逆バージョンです。人や物の動きは、物理エンジンでシミュレーションして作りました（すべり台と箱の摩擦は「摩擦係数 × 面を押す力」で計算しています）。\nほかに知りたい「もしも」は、コメントで教えてください！",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "摩擦",
+    "物理",
+    "Shorts"
+  ]
+}
