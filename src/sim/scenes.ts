@@ -51,9 +51,13 @@ export type SimKind =
   // 摩擦が10倍（右・奥の世界）
   | "xpush"
   | "xbrake"
-  | "xslide";
+  | "xslide"
+  // 氷が水に浮く・沈む（右・奥は「氷が水より重い」世界）
+  | "ice";
 
 export const AIR_KINDS: SimKind[] = ["afeather", "athrow", "arain", "asky", "aplane"];
+// 水そうの大きさ（中心のz、幅、奥行き、高さ、水面の高さ）
+export const TANK = { z: 0.45, w: 0.9, d: 0.5, h: 0.9, level: 0.75 };
 export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
 export const BOUNCE_KINDS: SimKind[] = ["bjump", "bdrop", "bwall", "bparty"];
 export const TINY_KINDS: SimKind[] = ["tworld", "tlift", "tjump", "tfall", "twind", "train"];
@@ -73,7 +77,7 @@ export const FRICTION_OFF = 0.6;
 
 export type SimBody = {
   lane: number;
-  shape: "part" | "box" | "sphere" | "cone" | "car" | "platform" | "ladder" | "wall" | "feather" | "plane" | "barbell" | "coins" | "egg";
+  shape: "part" | "box" | "sphere" | "cone" | "car" | "platform" | "ladder" | "wall" | "feather" | "plane" | "barbell" | "coins" | "egg" | "ice";
   part?: PartName;
   look?: Look;
   doll?: number;
@@ -1597,6 +1601,88 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
       };
       lanes.push({ world, g: G, dolls: [rd], control, record });
     });
+  } else if (kind === "ice") {
+    // 水そう（深さ90cm）に、人が氷を3つ落とす。左はいまの氷（水の0.92倍の重さ）、右は「もしも」の氷（水の1.08倍）。
+    // 浮力 = 水の密度 × 重力 × 水に入っている体積。水の中では動きにブレーキがかかる
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const x0 = lane === 0 ? -1.0 : 1.0;
+      const rd = addDoll(world, lane, lane, [x0, 0, -0.25]);
+      rd.balance = 1;
+      const level = TANK.level;
+      // 水そうのかべ（ガラス）
+      const walls: [number, number, number, number, number, number][] = [
+        [x0 - TANK.w / 2, TANK.h / 2, TANK.z, 0.02, TANK.h / 2, TANK.d / 2],
+        [x0 + TANK.w / 2, TANK.h / 2, TANK.z, 0.02, TANK.h / 2, TANK.d / 2],
+        [x0, TANK.h / 2, TANK.z - TANK.d / 2, TANK.w / 2, TANK.h / 2, 0.02],
+        [x0, TANK.h / 2, TANK.z + TANK.d / 2, TANK.w / 2, TANK.h / 2, 0.02],
+      ];
+      for (const [x, y, z, hx, hy, hz] of walls) {
+        const wb = new CANNON.Body({ mass: 0, shape: new CANNON.Box(new CANNON.Vec3(hx, hy, hz)), position: new CANNON.Vec3(x, y, z) });
+        wb.collisionFilterGroup = 8;
+        wb.collisionFilterMask = 2;
+        world.addBody(wb);
+      }
+      const rho = lane === 0 ? 917 : 1080;
+      const s = 0.16;
+      const cubes = [-0.22, 0, 0.22].map((dx, k) => {
+        const c = new CANNON.Body({
+          mass: rho * s * s * s,
+          shape: new CANNON.Box(new CANNON.Vec3(s / 2, s / 2, s / 2)),
+          position: new CANNON.Vec3(x0 + dx, 1.35, TANK.z),
+          material: bodyMaterial,
+          type: CANNON.Body.KINEMATIC,
+        });
+        c.quaternion.setFromEuler(0.3 * k, 0.5 * k, 0.2);
+        c.collisionFilterGroup = 2;
+        c.collisionFilterMask = 1 | 2 | 8;
+        world.addBody(c);
+        bodies.push({ lane, shape: "ice", size: [s, s, s] });
+        tracked.push(c);
+        soundOf.set(c, "ball");
+        return c;
+      });
+      const depth = val(`ice${lane}`);
+      const splash = val(`splash${lane}`);
+      const releaseAt = [1.2, 1.45, 1.7];
+      const entered = cubes.map(() => false);
+      let lastSplash = -1;
+      const control = (t: number) => {
+        applyBalance(rd);
+        rd.setPose(POSES.stand, POSES.hold, smooth((t - 0.1) / 0.5));
+        cubes.forEach((c, k) => {
+          if (t < releaseAt[k]) {
+            // 手の前（水そうの真上）に持っている
+            c.position.set(x0 + [-0.22, 0, 0.22][k], 1.35, TANK.z);
+            c.velocity.set(0, 0, 0);
+            return;
+          }
+          if (c.type !== CANNON.Body.DYNAMIC) {
+            c.type = CANNON.Body.DYNAMIC;
+            c.updateMassProperties();
+            c.velocity.set(0, 0, 0);
+          }
+          const bottom = c.position.y - s / 2;
+          const sub = Math.min(1, Math.max(0, (level - bottom) / s));
+          if (sub > 0) {
+            if (!entered[k]) {
+              entered[k] = true;
+              lastSplash = t;
+            }
+            // 浮力と、水の中のブレーキ（上下・左右・回転）
+            c.force.y += 1000 * G * s * s * s * sub;
+            c.force.vadd(c.velocity.scale(-c.mass * 6 * sub), c.force);
+            c.torque.vadd(c.angularVelocity.scale(-c.mass * 0.05 * sub), c.torque);
+          }
+        });
+      };
+      const record = (f: number) => {
+        // 氷のいちばん下の高さ（水面からの深さ）
+        depth[f] = Math.min(...cubes.map((c) => c.position.y));
+        splash[f] = lastSplash;
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record });
+    });
   } else if (kind === "fchaos") {
     // 摩擦ゼロの広場で、5人が歩き出そうとする
     const fw = frictionWorld(1);
@@ -1764,6 +1850,8 @@ export const simulate = (
               ? ["ふつうの地面", "トランポリンの地面"]
               : X_KINDS.includes(kind)
                 ? ["いまの地球", "摩擦10倍"]
+                : kind === "ice"
+                  ? ["いまの氷", "もしも 沈む氷"]
         : ["いまの地球 1G", gravityLabel(g2)],
   };
   cache.set(key, result);

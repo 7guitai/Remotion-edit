@@ -13,6 +13,7 @@ import {
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import {
+  TANK,
   BOUNCE_KINDS,
   TINY,
   TINY_KINDS,
@@ -66,6 +67,9 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       return { pos: [0, 2.2, lerp(9.4, 8.8, t)], look: [0, 2.0, 0] };
     case "slip":
       return { pos: [0.9, 1.5, lerp(8.8, 8.2, t)], look: [0.9, 0.85, 0] };
+    case "ice":
+      // 水そうの中が見えるよう、少し上から見下ろす
+      return { pos: [0, 2.4, lerp(6.4, 6.0, t)], look: [0, 0.7, 0.2] };
     case "bjump":
       return { pos: [0, 2.6, lerp(11.2, 10.6, t)], look: [0, 2.5, 0] };
     case "bdrop":
@@ -798,7 +802,7 @@ export const PhysicsScene: React.FC<{
   const overlays: React.ReactNode[] = [];
   const laneX = [width * 0.25, width * 0.75];
   const isRoad = sim.kind === "brake" || sim.kind === "fbrake" || sim.kind === "xbrake";
-  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall"].includes(sim.kind);
+  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall", "ice"].includes(sim.kind);
   const isAir = AIR_KINDS.includes(sim.kind);
   // 摩擦ゼロの世界は、摩擦が消えた瞬間からラベルを点滅させる
   const offFrame = Math.round(FRICTION_OFF * fps);
@@ -815,6 +819,8 @@ export const PhysicsScene: React.FC<{
           ? [-1.5, 1.0]
           : sim.kind === "bdrop"
             ? [-0.9, 0.9]
+            : sim.kind === "ice"
+              ? [-1.0, 1.0]
             : sim.kind === "bjump" || sim.kind === "bwall"
               ? [-1.4, 1.4]
             : sim.kind === "asky" || sim.kind === "tfall"
@@ -1058,6 +1064,18 @@ export const PhysicsScene: React.FC<{
     });
   }
 
+  if (sim.kind === "ice") {
+    overlays.push(
+      <Pill key="d0" x={laneX[0]} y={140 + T} color="#334" size={30}>氷の重さ：水の0.92倍</Pill>,
+      <Pill key="d1" x={laneX[1]} y={140 + T} color="#334" size={30}>水の1.08倍（もしも）</Pill>,
+    );
+    if (f > 3.6 * fps) {
+      overlays.push(
+        <Pill key="r0" x={laneX[0]} y={205 + T} color={LANE_COLORS[0]} size={42}>浮く！</Pill>,
+        <Pill key="r1" x={laneX[1]} y={205 + T} color={LANE_COLORS[1]} size={42}>沈む…</Pill>,
+      );
+    }
+  }
   if (sim.kind === "xslide") {
     [0, 1].forEach((lane) => {
       const moved = v(`slide${lane}`);
@@ -1295,6 +1313,7 @@ export const PhysicsScene: React.FC<{
   // トランポリンのマットの場所（中心x, 中心z, 幅, 奥行き）
   const matArea: [number, number, number, number] = kind === "bparty" ? [0, -0.6, 9, 6] : [2.4, 0, 4.2, 6];
   const beach = useBeachTexture();
+  const iceGeom = useMemo(() => new RoundedBoxGeometry(0.16, 0.16, 0.16, 3, 0.025), []);
 
   // 空から落ちていく場面：下から上へ流れる風のすじ（流れる速さと長さは落ちる速さに比例）
   const streaks: React.ReactNode[] = [];
@@ -1627,6 +1646,13 @@ export const PhysicsScene: React.FC<{
                     : PANTS;
             return <PersonPart key={i} part={b.part!} size={b.size} color={color} pos={pos} quat={quat} />;
           }
+          if (b.shape === "ice") {
+            return (
+              <mesh key={i} position={pos} quaternion={quat} geometry={iceGeom} castShadow>
+                <meshStandardMaterial color="#e8f7ff" roughness={0.08} metalness={0.05} transparent opacity={0.82} />
+              </mesh>
+            );
+          }
           if (b.shape === "egg") {
             return (
               <group key={i} position={pos} quaternion={b.lane === 0 && v("broken0") > 0 ? [0, 0, 0, 1] : quat}>
@@ -1760,6 +1786,61 @@ export const PhysicsScene: React.FC<{
           return null;
         })}
         {kind === "tworld" ? <TinyProps /> : null}
+        {kind === "ice"
+          ? [-1.0, 1.0].map((x0, lane) => {
+              const sp = sim.values[`splash${lane}`]?.[f] ?? -1;
+              const since = sp < 0 ? 99 : f / fps - sp;
+              return (
+                <group key={lane}>
+                  {/* 水 */}
+                  <mesh position={[x0, TANK.level / 2, TANK.z]}>
+                    <boxGeometry args={[TANK.w - 0.04, TANK.level, TANK.d - 0.04]} />
+                    <meshStandardMaterial color="#3d9bff" transparent opacity={0.32} roughness={0.1} depthWrite={false} />
+                  </mesh>
+                  {/* 水面 */}
+                  <mesh position={[x0, TANK.level, TANK.z]} rotation={[-Math.PI / 2, 0, 0]}>
+                    <planeGeometry args={[TANK.w - 0.04, TANK.d - 0.04]} />
+                    <meshStandardMaterial color="#9fd3ff" transparent opacity={0.45} roughness={0.05} depthWrite={false} side={THREE.DoubleSide} />
+                  </mesh>
+                  {/* ガラスのふち */}
+                  {[
+                    [x0 - TANK.w / 2, TANK.z - TANK.d / 2],
+                    [x0 + TANK.w / 2, TANK.z - TANK.d / 2],
+                    [x0 - TANK.w / 2, TANK.z + TANK.d / 2],
+                    [x0 + TANK.w / 2, TANK.z + TANK.d / 2],
+                  ].map(([x, z], k) => (
+                    <mesh key={k} position={[x, TANK.h / 2, z]}>
+                      <boxGeometry args={[0.025, TANK.h, 0.025]} />
+                      <meshStandardMaterial color="#dfe9f2" roughness={0.2} />
+                    </mesh>
+                  ))}
+                  {[TANK.z - TANK.d / 2, TANK.z + TANK.d / 2].map((z, k) => (
+                    <mesh key={`t${k}`} position={[x0, TANK.h, z]}>
+                      <boxGeometry args={[TANK.w, 0.025, 0.025]} />
+                      <meshStandardMaterial color="#dfe9f2" roughness={0.2} />
+                    </mesh>
+                  ))}
+                  <mesh position={[x0, TANK.h / 2, TANK.z]}>
+                    <boxGeometry args={[TANK.w, TANK.h, TANK.d]} />
+                    <meshStandardMaterial color="#ffffff" transparent opacity={0.08} roughness={0.05} depthWrite={false} />
+                  </mesh>
+                  {/* 水しぶき */}
+                  {since < 0.45
+                    ? Array.from({ length: 14 }, (_, k) => {
+                        const a = (k / 14) * Math.PI * 2;
+                        const s2 = since / 0.45;
+                        return (
+                          <mesh key={`sp${k}`} position={[x0 + Math.cos(a) * 0.25 * s2, TANK.level + Math.sin(s2 * Math.PI) * 0.25 * (0.6 + (k % 3) * 0.2), TANK.z + Math.sin(a) * 0.15 * s2]}>
+                            <sphereGeometry args={[0.018, 8, 8]} />
+                            <meshBasicMaterial color="#e8f6ff" transparent opacity={0.9 * (1 - s2)} />
+                          </mesh>
+                        );
+                      })
+                    : null}
+                </group>
+              );
+            })
+          : null}
         {BOUNCE_KINDS.includes(kind) ? (
           <TrampMat sim={sim} f={f} lane={1} area={matArea} />
         ) : null}
@@ -1770,6 +1851,23 @@ export const PhysicsScene: React.FC<{
       {bare ? null : overlays}
       {bare ? null : sounds}
       {BOUNCE_KINDS.includes(kind) && !bare ? <BounceSounds sim={sim} offset={offset} /> : null}
+      {kind === "ice"
+        ? [0, 1].flatMap((lane) => {
+            // 氷が水に入るたびに「チャポン」（記録された時刻が変わったフレーム）
+            const sp = sim.values[`splash${lane}`];
+            const out: React.ReactNode[] = [];
+            for (let k = Math.max(1, offset); k < sim.frames; k++) {
+              if (sp[k] !== sp[k - 1] && sp[k] > 0) {
+                out.push(
+                  <Sequence key={`pl${lane}-${k}`} from={k - offset} durationInFrames={15}>
+                    <Audio src={staticFile("sfx/plop.wav")} volume={0.22} />
+                  </Sequence>,
+                );
+              }
+            }
+            return out;
+          })
+        : null}
       {kind === "arain" || kind === "train" ? <Audio src={staticFile("sfx/rain.wav")} volume={0.3} loop /> : null}
       {kind === "train"
         ? [1.5, 4.2].map((h) => {

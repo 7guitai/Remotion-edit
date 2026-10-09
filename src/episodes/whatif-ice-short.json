@@ -1,0 +1,115 @@
+{
+  "id": "whatif-ice-short",
+  "title": "もし氷が水に沈んだら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "itsumono_fukei.mp3",
+    "title": "いつもの風景",
+    "credit": "KK",
+    "page": "https://opentracks.com/bgm/detail/4638",
+    "opentracks": 4638,
+    "track": 1
+  },
+  "headline": [
+    "もし氷が",
+    "水に沈んだら？"
+  ],
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、氷が水に沈んだら？",
+      "effect": "none",
+      "sim": "ice"
+    },
+    {
+      "type": "whatif",
+      "text": "いつもは、氷は水に浮く。でもこれ、じつは、とてもめずらしいことなんだ。",
+      "effect": "none",
+      "sim": "ice",
+      "simStart": 2.6
+    },
+    {
+      "type": "whatif",
+      "text": "ほとんどの物質は、固まると、分子がぎっしり詰まって重くなり、自分の液体に沈む。",
+      "effect": "none",
+      "ice": "others"
+    },
+    {
+      "type": "whatif",
+      "text": "でも水は、凍るとき、分子どうしが手をつなぐように、すき間の多い六角形に並ぶ。",
+      "effect": "none",
+      "ice": "molecules"
+    },
+    {
+      "type": "whatif",
+      "text": "だから氷は、水より1割くらい軽くて、浮かぶんだ。",
+      "effect": "none",
+      "ice": "molecules",
+      "big": "水より約1割軽い"
+    },
+    {
+      "type": "whatif",
+      "text": "もし氷が、ほかの物質のように、水より重かったら…",
+      "effect": "none",
+      "sim": "ice",
+      "simStart": 1.0
+    },
+    {
+      "type": "whatif",
+      "text": "冬の湖を見てみよう。いまは、水面に氷のふたができて、その下の水は凍らない。魚は、4℃の水の中で冬を越せるんだ。",
+      "effect": "none",
+      "speech": "冬の湖を見てみよう。いまは、水面に氷のふたができて、その下の水は凍らない。魚は、4度の水の中で冬を越せるんだ。",
+      "ice": "lake_now"
+    },
+    {
+      "type": "whatif",
+      "text": "でも氷が沈むと、できた氷が次々と底にたまり、湖は底から凍りついていく。魚のすむ場所が、どんどんなくなってしまう。",
+      "effect": "none",
+      "ice": "lake_sink"
+    },
+    {
+      "type": "whatif",
+      "text": "夏になっても、温まるのは表面だけ。底の氷は、とけ残ってしまうんだ。",
+      "effect": "none",
+      "ice": "summer_sink"
+    },
+    {
+      "type": "whatif",
+      "text": "海でも同じことが起きたら、地球は、今よりずっと冷たい星になっていたかもしれない。",
+      "effect": "zoom",
+      "globe": {
+        "texture": "earth",
+        "speed": 0.7
+      },
+      "bg": "space"
+    },
+    {
+      "type": "whatif",
+      "text": "氷が沈む世界、どうなると思う？コメントで教えてね！",
+      "effect": "none",
+      "sim": "ice",
+      "simStart": 3.5,
+      "hold": 1
+    }
+  ],
+  "description": "もし氷が水に沈んだら、湖や海、そして地球はどうなるのか？\n水が凍るとすき間の多い六角形に並ぶ「水のふしぎな性質」を、分子のアニメーションと物理シミュレーションで解説しました（水そうの氷は、浮力を計算して動かしています）。\nほかに知りたい「もしも」は、コメントで教えてください！\n画像：NASA",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "化学",
+    "科学",
+    "Shorts"
+  ]
+}

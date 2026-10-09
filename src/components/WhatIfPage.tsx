@@ -21,6 +21,7 @@ import { WhatIfCard } from "./WhatIfCard";
 import { RingSky } from "./RingSky";
 import { EarthCut } from "./EarthCut";
 import { MeteorScene } from "./MeteorScene";
+import { IceScene } from "./IceScene";
 import { ThermoScene } from "./ThermoScene";
 
 // 画面の配置（1080×1920）：上の黒帯にタイトル、真ん中が映像、下は黒
@@ -425,6 +426,7 @@ export const WhatIfPage: React.FC<{
         {slide.thermo ? (
           <ThermoScene mode={slide.thermo} width={width} height={view.height} product={slide.product} />
         ) : null}
+        {slide.ice ? <IceScene mode={slide.ice} width={width} height={view.height} /> : null}
         {slide.meteor ? <MeteorScene mode={slide.meteor} width={width} height={view.height} /> : null}
         {slide.sim ? (
           <PhysicsScene

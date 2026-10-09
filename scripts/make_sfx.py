@@ -11,6 +11,7 @@
 - clack.wav  … コーンが車に当たる・倒れる「カコン」
 - boing.wav  … トランポリンではねる「ボヨン」（低い音が上がりながら、ゆれる）
 - crack.wav  … 卵が割れる「グシャ」
+- plop.wav   … 水に物が落ちる「チャポン」
 
 使い方: python3 scripts/make_sfx.py
 """
@@ -146,6 +147,19 @@ def crack() -> list[float]:
     return normalize([a + 2.5 * b for a, b in zip(sharp, smooth)], 0.55)
 
 
+def plop() -> list[float]:
+    # 高さが急に上がる短い音（水の「ポチャン」）＋ 小さな水しぶきの雑音
+    n = int(RATE * 0.25)
+    out, phase = [], 0.0
+    nz = noise(n, 33)
+    for t in range(n):
+        x = t / RATE
+        f = 380 + 900 * (1 - math.exp(-x * 30))
+        phase += 2 * math.pi * f / RATE
+        out.append(math.exp(-x * 22) * math.sin(phase) + 0.25 * nz[t] * math.exp(-x * 40))
+    return normalize(out, 0.55)
+
+
 def normalize(samples: list[float], peak: float) -> list[float]:
     m = max(abs(v) for v in samples) or 1.0
     return [v * peak / m for v in samples]
@@ -187,6 +201,7 @@ def main() -> None:
     write("clack.wav", clack())
     write("boing.wav", boing())
     write("crack.wav", crack())
+    write("plop.wav", plop())
     write("sparkle.wav", mix(*[(i * 0.05, tone(f, 0.4, 0.12, 0.18)) for i, f in enumerate([2093, 2637, 3136, 4186])]))
     write("correct.wav", mix((0, tone(1318.5, 0.35, 0.12, 0.35)), (0.16, tone(1046.5, 0.9, 0.3, 0.35))))
 

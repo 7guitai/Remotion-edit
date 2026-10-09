@@ -21,6 +21,7 @@ import whatifAirShort from "./whatif-air-short.json";
 import whatifTinyLong from "./whatif-tiny-long.json";
 import whatifTrampShort from "./whatif-tramp-short.json";
 import whatifFriction10Short from "./whatif-friction10-short.json";
+import whatifIceShort from "./whatif-ice-short.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -189,6 +190,8 @@ export type WhatIfSlide = {
   meteor?: import("../components/MeteorScene").MeteorMode;
   // 読み上げのあとに流す音（public/ からのパス）。hold と組み合わせて、流す時間をとる
   sfx?: { file: string; volume?: number };
+  // 「もし氷が水に沈んだら？」の図解（分子・湖の断面）
+  ice?: import("../components/IceScene").IceMode;
 };
 
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
@@ -271,6 +274,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  whatifIceShort as Episode,
   whatifFriction10Short as Episode,
   whatifTrampShort as Episode,
   whatifTinyLong as Episode,
