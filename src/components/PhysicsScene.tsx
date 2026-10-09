@@ -589,11 +589,6 @@ export const PhysicsScene: React.FC<{
     });
   }
   if (sim.kind === "throw") {
-    if (sim.gravity[1] < 3) overlays.push(
-      <div key="flight-comparison" style={{position:"absolute",top:230,left:35,right:35,display:"flex",justifyContent:"center",gap:30,fontFamily,fontSize:46,fontWeight:900}}>
-        {[0,1].map(lane => <div key={lane} style={{background:LANE_COLORS[lane],color:"white",border:"4px solid white",borderRadius:20,padding:"12px 22px"}}>{lane===0?"地球":"月"}：{v(`land${lane}`)>0?`約${Math.round(v(`land${lane}`))}m`:"飛行中"}</div>)}
-      </div>
-    );
     [0, 1].forEach((lane) => {
       const land = v(`land${lane}`);
       if (land > 0) {

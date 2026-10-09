@@ -1,0 +1,26 @@
+{
+  "episode": "whatif-moon-gravity-2026-10-09",
+  "video": "videos/2026-10-09-moon-gravity.mp4",
+  "duration_seconds": 37.6,
+  "size_bytes": 5250756,
+  "resolution": "1080x1920",
+  "fps": 30,
+  "video_codec": "h264",
+  "audio_codec": "aac",
+  "checks": [
+    "TypeScript passed",
+    "Representative frames reviewed after camera adjustments",
+    "Physics coordinates checked for finite values",
+    "Repeated jumps require landing before another takeoff",
+    "Pronunciation verified; fraction reading corrected",
+    "Completed MP4 full decode passed",
+    "Audio mix normalized to -16 LUFS target and -1.5 dBTP ceiling"
+  ],
+  "reference_style": [
+    "black background",
+    "yellow and red headline",
+    "3D physics comparison",
+    "large white captions"
+  ],
+  "source": "https://science.nasa.gov/moon/facts/"
+}
