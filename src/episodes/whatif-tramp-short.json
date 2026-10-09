@@ -1,0 +1,109 @@
+{
+  "id": "whatif-tramp-short",
+  "title": "もし地面がぜんぶトランポリンになったら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "honwaka_puppu.mp3",
+    "title": "ほんわかぷっぷー",
+    "credit": "もっぴーさうんど",
+    "page": "https://opentracks.com/bgm/detail/1854",
+    "opentracks": 1854,
+    "track": 1
+  },
+  "headline": [
+    "もし地面がぜんぶ",
+    "トランポリンだったら？"
+  ],
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、地面がぜんぶ、トランポリンになったら？",
+      "sim": "bparty",
+      "simStart": 2.5,
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "その場でジャンプ！ふつうの地面なら、高さは50cmくらい。",
+      "speech": "その場でジャンプ！ふつうの地面なら、高さは50センチくらい。",
+      "sim": "bjump",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "でもトランポリンの地面では、はねるたびに、どんどん高くなる！",
+      "sim": "bjump",
+      "simStart": 4.2,
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "地面がばねのように沈んで、落ちてきた勢いをためて、はね返す。そこに足の力を足していくからなんだ。",
+      "sim": "bjump",
+      "simStart": 7.6,
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "生卵を、落としてみると…",
+      "sim": "bdrop",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "ふつうの地面では割れるのに、トランポリンなら、はね返って割れない！",
+      "sim": "bdrop",
+      "simStart": 1.6,
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "高さ3mの塀から、飛び降りても…",
+      "speech": "高さ3メートルの塀から、飛び降りても…",
+      "sim": "bwall",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "ふわっと受け止めて、また空中へ。ぶつかる時間が長くなるので、体にかかる力が小さくなるんだ。",
+      "sim": "bwall",
+      "simStart": 2.2,
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "でも、困ることもある。一度はね始めると、なかなか止まれない。",
+      "sim": "bparty",
+      "simStart": 6,
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "トランポリンの世界、住んでみたい？コメントで教えてね！",
+      "sim": "bparty",
+      "simStart": 10,
+      "effect": "none",
+      "hold": 1
+    }
+  ],
+  "description": "もし地面がぜんぶトランポリンになったら、ジャンプ・生卵・飛び降り…はどうなるのか？\n人や物の動きは、物理エンジンでシミュレーションして作りました（トランポリンの地面は「沈んだ深さに比例して押し返す、ばね」として計算しています）。\nほかに知りたい「もしも」は、コメントで教えてください！",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "トランポリン",
+    "物理",
+    "Shorts"
+  ]
+}

@@ -9,6 +9,8 @@
 - thud1〜3.wav … 物理シミュレーションで人が地面にぶつかる「ドサッ」（毎回同じ音にならないよう高さ違いを3つ）
 - tok.wav    … ボールが地面ではねる「トッ」
 - clack.wav  … コーンが車に当たる・倒れる「カコン」
+- boing.wav  … トランポリンではねる「ボヨン」（低い音が上がりながら、ゆれる）
+- crack.wav  … 卵が割れる「グシャ」
 
 使い方: python3 scripts/make_sfx.py
 """
@@ -119,6 +121,31 @@ def clack() -> list[float]:
     return normalize(out, 0.5)
 
 
+def boing() -> list[float]:
+    # 低い音から高い音へ上がりながら、ビブラートでゆれる「ボヨン」
+    n = int(RATE * 0.45)
+    out, phase = [], 0.0
+    for t in range(n):
+        x = t / n
+        f = 110 + 170 * (1 - math.exp(-x * 5)) + 18 * math.sin(2 * math.pi * 11 * t / RATE)
+        phase += 2 * math.pi * f / RATE
+        env = math.exp(-x * 4.5) * min(1.0, t / (RATE * 0.008))
+        out.append(env * (math.sin(phase) + 0.25 * math.sin(2 * phase)))
+    return normalize(out, 0.6)
+
+
+def crack() -> list[float]:
+    # 短い雑音の「カシャ」と、低い「ペシャ」を重ねる
+    n = int(RATE * 0.18)
+    nz = noise(n, 21)
+    sharp = [v * math.exp(-t / (RATE * 0.02)) for t, v in enumerate(nz)]
+    soft = [0.6 * v * math.exp(-t / (RATE * 0.06)) for t, v in enumerate(noise(n, 5))]
+    smooth = [0.0] * n
+    for t in range(1, n):
+        smooth[t] = 0.8 * smooth[t - 1] + 0.2 * soft[t]
+    return normalize([a + 2.5 * b for a, b in zip(sharp, smooth)], 0.55)
+
+
 def normalize(samples: list[float], peak: float) -> list[float]:
     m = max(abs(v) for v in samples) or 1.0
     return [v * peak / m for v in samples]
@@ -158,6 +185,8 @@ def main() -> None:
         write(f"thud{k}.wav", thud(pitch, seed))
     write("tok.wav", tok())
     write("clack.wav", clack())
+    write("boing.wav", boing())
+    write("crack.wav", crack())
     write("sparkle.wav", mix(*[(i * 0.05, tone(f, 0.4, 0.12, 0.18)) for i, f in enumerate([2093, 2637, 3136, 4186])]))
     write("correct.wav", mix((0, tone(1318.5, 0.35, 0.12, 0.35)), (0.16, tone(1046.5, 0.9, 0.3, 0.35))))
 

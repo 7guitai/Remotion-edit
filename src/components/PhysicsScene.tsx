@@ -13,6 +13,7 @@ import {
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import {
+  BOUNCE_KINDS,
   TINY,
   TINY_KINDS,
   AIR_KINDS,
@@ -65,6 +66,13 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       return { pos: [0, 2.2, lerp(9.4, 8.8, t)], look: [0, 2.0, 0] };
     case "slip":
       return { pos: [0.9, 1.5, lerp(8.8, 8.2, t)], look: [0.9, 0.85, 0] };
+    case "bjump":
+      return { pos: [0, 2.6, lerp(11.2, 10.6, t)], look: [0, 2.5, 0] };
+    case "bdrop":
+      // 卵が落ちる地面が、下の字幕にかからないよう、上から見下ろす
+      return { pos: [0.15, 2.3, lerp(5.4, 5.1, t)], look: [0.15, 0.6, 0.3] };
+    case "bwall":
+      return { pos: [-0.1, 2.9, lerp(11.5, 10.9, t)], look: [-0.1, 2.5, 0] };
     case "tworld": {
       // 大きな物のまわりを、ゆっくり一周する（40秒で一周。simStart で向きを選べる）
       const a = (f / sim.fps) * ((Math.PI * 2) / 40);
@@ -485,6 +493,147 @@ const TinyProps: React.FC = () => (
   </group>
 );
 
+// トランポリンの地面：人や物が沈んだ所が、まわりごとへこむマット
+const TrampMat: React.FC<{
+  sim: SimResult;
+  f: number;
+  lane: number;
+  area: [number, number, number, number];
+}> = ({ sim, f, lane, area }) => {
+  const [cx, cz, w, d] = area;
+  const tex = useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 256;
+    canvas.height = 256;
+    const ctx = canvas.getContext("2d")!;
+    ctx.fillStyle = "#1b2433";
+    ctx.fillRect(0, 0, 256, 256);
+    ctx.strokeStyle = "rgba(120,150,200,0.25)";
+    ctx.lineWidth = 2;
+    for (let i = 0; i <= 256; i += 32) {
+      ctx.beginPath();
+      ctx.moveTo(i, 0);
+      ctx.lineTo(i, 256);
+      ctx.moveTo(0, i);
+      ctx.lineTo(256, i);
+      ctx.stroke();
+    }
+    const t = new THREE.CanvasTexture(canvas);
+    t.wrapS = THREE.RepeatWrapping;
+    t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(w, d);
+    t.colorSpace = THREE.SRGBColorSpace;
+    return t;
+  }, [w, d]);
+  // その瞬間に沈んでいる所（人の部位・卵）
+  const dents: [number, number, number][] = [];
+  sim.bodies.forEach((b, i) => {
+    if (b.lane !== lane || !(b.shape === "part" || b.shape === "egg")) {
+      return;
+    }
+    const p = posAt(sim, f, i);
+    const low = p[1] - b.size[1] / 2;
+    if (low < 0) {
+      dents.push([p[0], p[2], -low]);
+    }
+  });
+  const geom = useMemo(() => new THREE.PlaneGeometry(w, d, Math.round(w * 10), Math.round(d * 10)), [w, d]);
+  const pos = geom.attributes.position as THREE.BufferAttribute;
+  for (let k = 0; k < pos.count; k++) {
+    // 平面の (x, y) は、地面では (x, -z)
+    const x = pos.getX(k) + cx;
+    const z = -pos.getY(k) + cz;
+    let dip = 0;
+    for (const [dx, dz, dd] of dents) {
+      const r2 = (x - dx) ** 2 + (z - dz) ** 2;
+      dip = Math.max(dip, dd * Math.exp(-r2 / (2 * 0.5 * 0.5)));
+    }
+    pos.setZ(k, 0.004 - dip);
+  }
+  pos.needsUpdate = true;
+  geom.computeVertexNormals();
+  return (
+    <group>
+      <mesh geometry={geom} position={[cx, 0, cz]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <meshStandardMaterial map={tex} roughness={0.85} side={THREE.DoubleSide} />
+      </mesh>
+      {/* まわりのふち（青いクッション） */}
+      {[
+        [cx, cz - d / 2, w + 0.3, 0.3],
+        [cx, cz + d / 2, w + 0.3, 0.3],
+        [cx - w / 2, cz, 0.3, d],
+        [cx + w / 2, cz, 0.3, d],
+      ].map(([x, z, ww, dd], k) => (
+        <mesh key={k} position={[x, 0.06, z]} castShadow receiveShadow>
+          <boxGeometry args={[ww, 0.12, dd]} />
+          <meshStandardMaterial color="#2f7bff" roughness={0.6} />
+        </mesh>
+      ))}
+    </group>
+  );
+};
+
+// トランポリンではねた瞬間（マットに沈み始めた瞬間）の「ボヨン」と、卵が割れた「グシャ」。
+// 音量は、そのあといちばん深く沈んだ深さで決める
+const BounceSounds: React.FC<{ sim: SimResult; offset: number }> = ({ sim, offset }) => {
+  const deep = sim.values.deep1;
+  const out: React.ReactNode[] = [];
+  if (deep) {
+    for (let k = 1; k < sim.frames; k++) {
+      if (deep[k - 1] < 0.03 && deep[k] >= 0.03 && k >= offset) {
+        let mx = 0;
+        for (let j = k; j < Math.min(sim.frames, k + 12); j++) {
+          mx = Math.max(mx, deep[j]);
+        }
+        out.push(
+          <Sequence key={`bo${k}`} from={k - offset} durationInFrames={20}>
+            <Audio src={staticFile("sfx/boing.wav")} volume={Math.min(0.3, 0.08 + mx * 0.5)} />
+          </Sequence>,
+        );
+      }
+    }
+  }
+  const br = sim.values.broken0;
+  if (br) {
+    const k = br.findIndex((x) => x > 0);
+    if (k >= offset) {
+      out.push(
+        <Sequence key="crack" from={k - offset} durationInFrames={20}>
+          <Audio src={staticFile("sfx/crack.wav")} volume={0.28} />
+        </Sequence>,
+      );
+    }
+  }
+  return <>{out}</>;
+};
+
+// 生卵（割れたら、黄身と白身と殻のかけら）
+const Egg: React.FC<{ broken: boolean }> = ({ broken }) =>
+  broken ? (
+    <group position={[0, -0.008, 0]} scale={1.6}>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} scale={[1.4, 1, 1]}>
+        <circleGeometry args={[0.09, 32]} />
+        <meshStandardMaterial color="#f4f1e6" roughness={0.2} transparent opacity={0.9} />
+      </mesh>
+      <mesh position={[0.01, 0.006, 0]} scale={[1, 0.35, 1]}>
+        <sphereGeometry args={[0.032, 24, 16]} />
+        <meshStandardMaterial color="#ffb21f" roughness={0.25} />
+      </mesh>
+      {[0, 1, 2, 3, 4].map((k) => (
+        <mesh key={k} position={[Math.cos(k * 1.3) * 0.1, 0.006, Math.sin(k * 1.3) * 0.07]} rotation={[k, k * 2, 0]}>
+          <boxGeometry args={[0.025, 0.004, 0.018]} />
+          <meshStandardMaterial color="#f3e6cf" roughness={0.6} />
+        </mesh>
+      ))}
+    </group>
+  ) : (
+    // 小さくて見えにくいので、見た目は1.8倍にする
+    <mesh scale={[1.8, 2.3, 1.8]} castShadow>
+      <sphereGeometry args={[0.035, 24, 18]} />
+      <meshStandardMaterial color="#f3e6cf" roughness={0.45} />
+    </mesh>
+  );
+
 const PersonPart: React.FC<{
   part: string;
   size: [number, number, number];
@@ -645,7 +794,7 @@ export const PhysicsScene: React.FC<{
   const overlays: React.ReactNode[] = [];
   const laneX = [width * 0.25, width * 0.75];
   const isRoad = sim.kind === "brake" || sim.kind === "fbrake";
-  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train"].includes(sim.kind);
+  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall"].includes(sim.kind);
   const isAir = AIR_KINDS.includes(sim.kind);
   // 摩擦ゼロの世界は、摩擦が消えた瞬間からラベルを点滅させる
   const offFrame = Math.round(FRICTION_OFF * fps);
@@ -660,7 +809,11 @@ export const PhysicsScene: React.FC<{
         ? [-0.8, 2.6]
         : sim.kind === "wind"
           ? [-1.5, 1.0]
-          : sim.kind === "asky" || sim.kind === "tfall"
+          : sim.kind === "bdrop"
+            ? [-0.9, 0.9]
+            : sim.kind === "bjump" || sim.kind === "bwall"
+              ? [-1.4, 1.4]
+            : sim.kind === "asky" || sim.kind === "tfall"
             ? [-1.35, 1.35]
             : sim.kind === "tlift"
               ? [-1.4, 1.4]
@@ -935,6 +1088,48 @@ export const PhysicsScene: React.FC<{
     }
   }
 
+  if (sim.kind === "bjump") {
+    [-1.4, 1.4].forEach((x, lane) => {
+      const top = v(`top${lane}`);
+      if (top > 0.15) {
+        const p = project(cam, [x + 0.5, top, 0], width, height);
+        overlays.push(
+          <Pill key={`top${lane}`} x={Math.min(width - 120, p.x + 90)} y={Math.max(150 + T, p.y)} color={LANE_COLORS[lane]} size={40}>
+            {`${top.toFixed(1)}m`}
+          </Pill>,
+        );
+      }
+    });
+  }
+  if (sim.kind === "bdrop") {
+    if (v("broken0") > 0) {
+      overlays.push(
+        <Pill key="b0" x={laneX[0]} y={150 + T} color="#c0182b" size={42}>割れた！</Pill>,
+      );
+    }
+    // トランポリンの卵：一度はね返ったら「割れない！」
+    const ei = sim.bodies.findIndex((b) => b.shape === "egg" && b.lane === 1);
+    let bounced = false;
+    for (let k = 1; k <= f; k++) {
+      if (posAt(sim, k, ei)[1] > posAt(sim, k - 1, ei)[1] + 0.005 && posAt(sim, k, ei)[1] < 0.6) {
+        bounced = true;
+        break;
+      }
+    }
+    if (bounced) {
+      overlays.push(
+        <Pill key="b1" x={laneX[1]} y={150 + T} color="#1f8f4e" size={42}>割れない！</Pill>,
+      );
+    }
+  }
+  if (sim.kind === "bwall") {
+    [-2.3, 0.5].forEach((x, lane) => {
+      const p = project(cam, [x, 3.05, 0], width, height);
+      overlays.push(
+        <Pill key={`h${lane}`} x={p.x} y={p.y - 30} color="#334" size={30}>高さ3m</Pill>,
+      );
+    });
+  }
   if (sim.kind === "tworld") {
     overlays.push(
       <Pill key="title" x={width / 2} y={70 + T} color="#7a3cff" size={40}>
@@ -1074,6 +1269,8 @@ export const PhysicsScene: React.FC<{
 
   const isTunnel = kind === "tunnel" || kind === "tunnelzero";
   const isSky = kind === "asky" || kind === "tfall";
+  // トランポリンのマットの場所（中心x, 中心z, 幅, 奥行き）
+  const matArea: [number, number, number, number] = kind === "bparty" ? [0, -0.6, 9, 6] : [2.4, 0, 4.2, 6];
   const beach = useBeachTexture();
 
   // 空から落ちていく場面：下から上へ流れる風のすじ（流れる速さと長さは落ちる速さに比例）
@@ -1264,7 +1461,36 @@ export const PhysicsScene: React.FC<{
         >
           <object3D attach="target" position={[cam.look[0], 0, 0]} />
         </directionalLight>
-        {isTunnel || isSky ? null : (
+        {isTunnel || isSky ? null : BOUNCE_KINDS.includes(kind) ? (
+          // トランポリンのマットの所だけ、地面に穴をあける（へこんだマットが見えるように）
+          (() => {
+            const [cx, cz, w, d] = matArea;
+            const x0 = cx - w / 2;
+            const x1 = cx + w / 2;
+            const z0 = cz - d / 2;
+            const z1 = cz + d / 2;
+            const R = 100;
+            const pieces: [number, number, number, number][] = [
+              [-R, x0, -R, R],
+              [x1, R, -R, R],
+              [x0, x1, -R, z0],
+              [x0, x1, z1, R],
+            ];
+            return pieces.map(([a0, a1, b0, b1], k) => {
+              // 地面の模様（1m のタイル）が、どの切れ端でも同じ大きさ・同じ位置になるように
+              const t = ground.clone();
+              t.repeat.set((a1 - a0) / 2, (b1 - b0) / 2);
+              t.offset.set((((a0 / 2) % 1) + 1) % 1, (((-b1 / 2) % 1) + 1) % 1);
+              t.needsUpdate = true;
+              return (
+                <mesh key={k} position={[(a0 + a1) / 2, 0, (b0 + b1) / 2]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+                  <planeGeometry args={[a1 - a0, b1 - b0]} />
+                  <meshStandardMaterial map={t} roughness={0.95} />
+                </mesh>
+              );
+            });
+          })()
+        ) : (
           <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
             <planeGeometry args={[200, 200]} />
             <meshStandardMaterial map={ground} roughness={0.95} />
@@ -1377,6 +1603,13 @@ export const PhysicsScene: React.FC<{
                     ? SHOE
                     : PANTS;
             return <PersonPart key={i} part={b.part!} size={b.size} color={color} pos={pos} quat={quat} />;
+          }
+          if (b.shape === "egg") {
+            return (
+              <group key={i} position={pos} quaternion={b.lane === 0 && v("broken0") > 0 ? [0, 0, 0, 1] : quat}>
+                <Egg broken={b.lane === 0 && v("broken0") > 0} />
+              </group>
+            );
           }
           if (b.shape === "barbell") {
             return (
@@ -1504,12 +1737,16 @@ export const PhysicsScene: React.FC<{
           return null;
         })}
         {kind === "tworld" ? <TinyProps /> : null}
+        {BOUNCE_KINDS.includes(kind) ? (
+          <TrampMat sim={sim} f={f} lane={1} area={matArea} />
+        ) : null}
         {trails}
         {streaks}
         {rain}
       </ThreeCanvas>
       {bare ? null : overlays}
       {bare ? null : sounds}
+      {BOUNCE_KINDS.includes(kind) && !bare ? <BounceSounds sim={sim} offset={offset} /> : null}
       {kind === "arain" || kind === "train" ? <Audio src={staticFile("sfx/rain.wav")} volume={0.3} loop /> : null}
       {kind === "train"
         ? [1.5, 4.2].map((h) => {

@@ -42,9 +42,15 @@ export type SimKind =
   | "tjump"
   | "tfall"
   | "twind"
-  | "train";
+  | "train"
+  // 地面がトランポリン（右・奥の世界）
+  | "bjump"
+  | "bdrop"
+  | "bwall"
+  | "bparty";
 
 export const AIR_KINDS: SimKind[] = ["afeather", "athrow", "arain", "asky", "aplane"];
+export const BOUNCE_KINDS: SimKind[] = ["bjump", "bdrop", "bwall", "bparty"];
 export const TINY_KINDS: SimKind[] = ["tworld", "tlift", "tjump", "tfall", "twind", "train"];
 
 // 身長10cmの人：大きさは 175cm の 1/17.5。
@@ -62,7 +68,7 @@ export const FRICTION_OFF = 0.6;
 
 export type SimBody = {
   lane: number;
-  shape: "part" | "box" | "sphere" | "cone" | "car" | "platform" | "ladder" | "wall" | "feather" | "plane" | "barbell" | "coins";
+  shape: "part" | "box" | "sphere" | "cone" | "car" | "platform" | "ladder" | "wall" | "feather" | "plane" | "barbell" | "coins" | "egg";
   part?: PartName;
   look?: Look;
   doll?: number;
@@ -1237,6 +1243,229 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
       };
       lanes.push({ world, g: G, dolls: [rd], control, record, speed: k });
     });
+  } else if (BOUNCE_KINDS.includes(kind)) {
+    // 地面がトランポリン：右（奥）の世界は、地面が「ばね」になっている。
+    // 沈んだ深さに比例して押し返す力（人は体重で約15cm沈む）と、少しだけのブレーキ（はね返りは約8割）
+    const party = kind === "bparty";
+    const laneIds = party ? [1] : [0, 1];
+    laneIds.forEach((lane) => {
+      const { world, ground } = makeWorld(G);
+      const tramp = lane === 1;
+      if (tramp) {
+        world.removeBody(ground);
+      }
+      // k：沈んだ1mあたりの押し返す力（N）、c：ブレーキ。体の部位ごとに、地面にふれている所だけが押される
+      const members: { b: CANNON.Body; size?: [number, number, number]; r?: number; k: number; c: number }[] = [];
+      const x0 = party ? 0 : (lane === 0 ? -1 : 1) * (kind === "bdrop" ? 0.9 : 1.4);
+      const dolls: Ragdoll[] = [];
+      const addMember = (rd: Ragdoll) => {
+        for (const p of Object.keys(rd.bodies) as PartName[]) {
+          // 両足で立つと約10cm沈む（66kg × 9.8 ÷ 2 ÷ 0.1 ≒ 3200）。ブレーキはごく弱く（よくはずむ）
+          members.push({ b: rd.bodies[p], size: rd.sizes[p], k: 3200, c: 8 });
+        }
+      };
+      // 地面のばね（トランポリンの世界だけ）
+      const springs = () => {
+        if (!tramp) {
+          return;
+        }
+        for (const m of members) {
+          const low = m.r !== undefined ? m.b.position.y - m.r : lowestY(m.b, m.size!);
+          const depth = -low;
+          if (depth > 0) {
+            m.b.force.y += m.k * depth - m.c * m.b.velocity.y;
+            // 横には、ほとんどすべらない（マットが足をつかむ）
+            m.b.velocity.x *= 0.985;
+            m.b.velocity.z *= 0.985;
+          }
+        }
+      };
+      const deep = val(`deep${lane}`);
+      const top = val(`top${lane}`);
+      let best = 0;
+      let control: Lane["control"] = () => {};
+      let record: Lane["record"] = () => {};
+
+      if (kind === "bjump" || party) {
+        // その場で何度もジャンプする。トランポリンでは、いちばん沈んだときに足でけって、勢いを足していく
+        const spots: [number, number, number][] = party
+          ? [
+              [-2.4, -1.0, 0.4],
+              [-1.2, 0.5, 0.15],
+              [0, -0.5, 0],
+              [1.2, 0.5, -0.15],
+              [2.4, -1.0, -0.4],
+            ]
+          : [[x0, 0, 0]];
+        const steps = spots.map(([x, z, yaw], i) => {
+          const rd = addDoll(world, lane, party ? i : lane, [x, tramp ? -0.12 : 0, z], yaw);
+          dolls.push(rd);
+          addMember(rd);
+          if (!tramp) {
+            let next = 0.85 - 0.45;
+            let step = jumper(rd, next, Math.sqrt(2 * G * 0.5) * 1.42);
+            return (t: number) => {
+              if (t > next + 2.2) {
+                next += 2.2;
+                step = jumper(rd, next, Math.sqrt(2 * G * 0.5) * 1.42);
+              }
+              step(t);
+              applyBalance(rd);
+              if (rd.bodies.pelvis.position.y > 1.25) {
+                for (const b of Object.values(rd.bodies)) {
+                  b.velocity.x *= 0.995;
+                  b.velocity.z *= 0.995;
+                }
+              }
+            };
+          }
+          // トランポリンの上では、ひざをのばして体を固めて跳ぶ（足がクッションになって勢いを吸わないように）
+          rd.setStrength(5, ["hipL", "hipR", "kneeL", "kneeR", "ankleL", "ankleR", "waist"]);
+          let lastVy = 0;
+          let pushes = 0;
+          let airborne = false;
+          let started = false;
+          const start = 0.6 + i * 0.35;
+          return (t: number) => {
+            applyBalance(rd);
+            const feet = Math.min(lowestY(rd.bodies.footL, rd.sizes.footL), lowestY(rd.bodies.footR, rd.sizes.footR));
+            // 足（マットに沈んでいる所）の上下の速さで、いちばん沈んだ瞬間を見つける
+            const vy = (rd.bodies.footL.velocity.y + rd.bodies.footR.velocity.y) / 2;
+            rd.setPose(feet > 0.05 ? POSES.air : POSES.stand);
+            // 最初はふつうにジャンプ。そのあとは、いちばん沈んだ瞬間（下向き → 上向きに変わる）に
+            // 足でけって勢いを足していく（回数に上限）
+            if (!started && t > start) {
+              started = true;
+              rd.addVelocity([0, 3.2, 0]);
+            }
+            if (feet > 0.05) {
+              airborne = true;
+            }
+            if (started && airborne && feet < -0.03 && lastVy < 0 && vy >= 0 && pushes < (party ? 10 : 8)) {
+              rd.addVelocity([0, party ? 2.8 : 3.6, 0]);
+              pushes++;
+              airborne = false;
+            }
+            lastVy = vy;
+            // 真上に跳ぶ（空中で前後左右に流れていかないようにする）
+            if (feet > 0.3) {
+              for (const b of Object.values(rd.bodies)) {
+                b.velocity.x *= 0.997;
+                b.velocity.z *= 0.997;
+              }
+            }
+          };
+        });
+        control = (t) => {
+          springs();
+          steps.forEach((s) => s(t));
+        };
+      } else if (kind === "bdrop") {
+        // 生卵を手から落とす（高さ約1.4m）。かたい地面なら割れる（ぶつかる速さが秒速2mをこえたら）
+        const rd = addDoll(world, lane, lane, [x0, tramp ? -0.12 : 0, 0]);
+        dolls.push(rd);
+        addMember(rd);
+        const egg = new CANNON.Body({
+          mass: 0.06,
+          shape: new CANNON.Sphere(0.035),
+          position: new CANNON.Vec3(x0 + 0.25, 1.4, 0.5),
+          material: bodyMaterial,
+          type: CANNON.Body.KINEMATIC,
+        });
+        egg.collisionFilterGroup = 2;
+        egg.collisionFilterMask = 1;
+        world.addBody(egg);
+        bodies.push({ lane, shape: "egg", size: [0.07, 0.09, 0.07] });
+        tracked.push(egg);
+        members.push({ b: egg, r: 0.035, k: 29, c: 0.22 });
+        const broken = val(`broken${lane}`);
+        let isBroken = false;
+        const release = 1.4;
+        const handR = () => rd.bodies.lowerArmR.pointToWorldFrame(new CANNON.Vec3(0, -0.2, 0));
+        control = (t) => {
+          springs();
+          applyBalance(rd);
+          rd.setPose(POSES.stand, POSES.hold, smooth((t - 0.05) / 0.45));
+          if (t < release) {
+            egg.position.copy(handR());
+            egg.velocity.set(0, 0, 0);
+            return;
+          }
+          if (egg.type !== CANNON.Body.DYNAMIC && !isBroken) {
+            egg.type = CANNON.Body.DYNAMIC;
+            egg.updateMassProperties();
+            egg.velocity.set(0, 0, 0);
+          }
+          if (!tramp && !isBroken && egg.position.y < 0.045) {
+            isBroken = true;
+            egg.type = CANNON.Body.STATIC;
+            egg.velocity.set(0, 0, 0);
+            egg.position.y = 0.012;
+          }
+        };
+        record = (f) => {
+          broken[f] = isBroken ? 1 : 0;
+        };
+      } else if (kind === "bwall") {
+        // 高さ3mの塀の上から、前へ飛び降りる
+        const H = 3;
+        const wx = x0 - 0.9;
+        const wall = new CANNON.Body({
+          mass: 0,
+          shape: new CANNON.Box(new CANNON.Vec3(0.45, H / 2, 0.6)),
+          position: new CANNON.Vec3(wx, H / 2, 0),
+          material: groundMaterial,
+        });
+        world.addBody(wall);
+        bodies.push({ lane, shape: "wall", size: [0.9, H, 1.2] });
+        tracked.push(wall);
+        const rd = addDoll(world, lane, lane, [wx + 0.22, H, 0], Math.PI / 2);
+        dolls.push(rd);
+        addMember(rd);
+        const jumpAt = 0.9;
+        let jumped = false;
+        let landedAt = -1;
+        control = (t) => {
+          springs();
+          applyBalance(rd);
+          const feet = Math.min(lowestY(rd.bodies.footL, rd.sizes.footL), lowestY(rd.bodies.footR, rd.sizes.footR));
+          if (t < jumpAt - 0.35) {
+            rd.setPose(POSES.stand);
+          } else if (t < jumpAt) {
+            rd.setPose(POSES.stand, POSES.crouch, smooth((t - jumpAt + 0.35) / 0.3));
+          } else {
+            if (!jumped) {
+              jumped = true;
+              rd.addVelocity([2.3, 1.8, 0]);
+            }
+            if (feet > 0.08) {
+              rd.setPose(POSES.air);
+            } else {
+              if (landedAt < 0 && t > jumpAt + 0.3) {
+                landedAt = t;
+              }
+              rd.setPose(POSES.land, POSES.stand, tramp ? 0.3 : smooth((t - landedAt - 0.3) / 0.5));
+            }
+          }
+        };
+      }
+      const prevRecord = record;
+      record = (f) => {
+        prevRecord(f);
+        // いちばん沈んだ深さ（画面のマットのへこみ用）と、足のいちばん高い位置
+        let d = 0;
+        for (const m of members) {
+          const low = m.r !== undefined ? m.b.position.y - m.r : lowestY(m.b, m.size!);
+          d = Math.max(d, -low);
+        }
+        deep[f] = tramp ? d : 0;
+        if (dolls[0]) {
+          best = Math.max(best, Math.min(dolls[0].bodies.footL.position.y, dolls[0].bodies.footR.position.y) - 0.04);
+        }
+        top[f] = best;
+      };
+      lanes.push({ world, g: G, dolls, control, record });
+    });
   } else if (kind === "fchaos") {
     // 摩擦ゼロの広場で、5人が歩き出そうとする
     const fw = frictionWorld(1);
@@ -1400,6 +1629,8 @@ export const simulate = (
           ? ["いまの地球", "空気抵抗ゼロ"]
           : TINY_KINDS.includes(kind)
             ? ["身長175cm", "身長10cm（拡大）"]
+            : BOUNCE_KINDS.includes(kind)
+              ? ["ふつうの地面", "トランポリンの地面"]
         : ["いまの地球 1G", gravityLabel(g2)],
   };
   cache.set(key, result);
