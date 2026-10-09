@@ -1,0 +1,117 @@
+{
+  "id": "whatif-air-short",
+  "title": "もし空気抵抗がなくなったら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "noraneko_uchuu.mp3",
+    "title": "野良猫は宇宙を目指した",
+    "credit": "しゃろう",
+    "page": "https://opentracks.com/bgm/detail/2862",
+    "opentracks": 2862,
+    "track": 1
+  },
+  "headline": [
+    "もし空気抵抗が",
+    "なくなったら？"
+  ],
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、空気抵抗がなくなったら？鉄球と羽根を、同時に落としてみると…",
+      "sim": "afeather",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "なんと同時に着地！空気抵抗がなければ、重さに関係なく、すべての物が同じ速さで落ちるんだ。",
+      "sim": "afeather",
+      "simStart": 5.17,
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "1971年、アポロ15号の宇宙飛行士は、空気のない月で、ハンマーと羽根を落として、これを確かめたんだ。",
+      "bg": "space",
+      "effect": "none",
+      "footage": {
+        "file": "hammer_feather.mp4",
+        "start": 0
+      },
+      "big": "1971年 月面"
+    },
+    {
+      "type": "whatif",
+      "text": "ビーチボールは、ふつうなら、すぐに勢いがなくなる。でも空気抵抗がないと、ぐんぐん遠くまで飛んでいく。",
+      "sim": "athrow",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "困るのは、雨。雨粒は、空気抵抗のおかげで、時速30kmくらいで、ゆっくり落ちてくる。",
+      "sim": "arain",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "でも空気抵抗がないと、高さ1000mの雲から、時速500km！大きな雨粒は、おもちゃのエアガンの弾に近い強さになる。",
+      "sim": "arain",
+      "simStart": 1.5,
+      "effect": "none",
+      "speech": "でも空気抵抗がないと、高さ1000メートルの雲から、時速500km！大きな雨粒は、おもちゃのエアガンの弾に近い強さになる。"
+    },
+    {
+      "type": "whatif",
+      "text": "スカイダイビングも危険だ。ふだんは時速200kmくらいで、それ以上速くならない。でも空気抵抗がないと、どんどん加速して、地面に着くころには時速1000km！パラシュートも開かないんだ。",
+      "sim": "asky",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "空気が物を押す力もなくなるので、紙ひこうきも、飛行機も飛べない。放物線をえがいて、落ちるだけ。",
+      "sim": "aplane",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "実は、空気抵抗は、ぼくらを守っている。宇宙から飛んでくる小さな石は、空気にぶつかって燃えつきる。これが流れ星だ。",
+      "meteor": "burn",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "空気抵抗がないと、流れ星は見えなくなり、石は燃えつきずに、秒速20kmのまま地面に降ってくるんだ。",
+      "meteor": "hit",
+      "effect": "none"
+    },
+    {
+      "type": "whatif",
+      "text": "空気抵抗は、見えないブレーキ。空気抵抗のない世界、住んでみたい？コメントで教えてね！",
+      "bg": "space",
+      "effect": "zoom",
+      "globe": {
+        "texture": "earth",
+        "speed": 0.8
+      }
+    }
+  ],
+  "description": "もし世界から空気抵抗がなくなったら、落ちる・投げる・雨・スカイダイビング・紙ひこうき・流れ星はどうなるのか？\n人や物の動きは、物理エンジンでシミュレーションして作りました（雨粒の速さは、見やすいように実際よりゆっくり表示しています）。\nほかに知りたい「もしも」は、コメントで教えてください！\n映像・画像：NASA",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "空気抵抗",
+    "物理",
+    "Shorts"
+  ]
+}

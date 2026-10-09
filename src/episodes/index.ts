@@ -17,6 +17,7 @@ import whatifGravityShort from "./whatif-gravity-short.json";
 import thermoPrShort from "./thermo-pr-short.json";
 import whatifSunShort from "./whatif-sun-short.json";
 import whatifTunnelShort from "./whatif-tunnel-short.json";
+import whatifAirShort from "./whatif-air-short.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -181,6 +182,8 @@ export type WhatIfSlide = {
   // 真空断熱のしくみの図解（商品紹介の科学解説）と、商品カードの中身
   thermo?: import("../components/ThermoScene").ThermoMode;
   product?: { name: string; points: string[] };
+  // 流れ星の断面図（burn＝空気で燃えつきる、hit＝空気抵抗がなく地面にぶつかる）
+  meteor?: import("../components/MeteorScene").MeteorMode;
 };
 
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
@@ -263,6 +266,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  whatifAirShort as Episode,
   thermoPrShort as Episode,
   whatifTunnelShort as Episode,
   illusionQuiz2Short as Episode,

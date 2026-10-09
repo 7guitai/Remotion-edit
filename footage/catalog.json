@@ -430,6 +430,28 @@
       "tags": [
         "木星"
       ]
+    },
+    {
+      "file": "apollo15_hammer_feather_full.mp4",
+      "type": "video",
+      "ja": "アポロ15号 月面でのハンマーと羽根の落下実験（1971年）",
+      "title": "The Apollo 15 Hammer-Feather Drop",
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/image/AS15_Ham_feath_drop3.mp4",
+      "page": "https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo_15_feather_drop.html",
+      "credit": "NASA",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "月",
+        "アポロ"
+      ],
+      "clips": [
+        {
+          "file": "hammer_feather.mp4",
+          "start": 41.5,
+          "duration": 7,
+          "ja": "ハンマーと羽根を持つ宇宙飛行士"
+        }
+      ]
     }
   ]
 }

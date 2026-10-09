@@ -29,7 +29,15 @@ export type SimKind =
   | "wind"
   // 地球を貫く穴の中を落ちていく（tunnelzero は中心付近の無重力）
   | "tunnel"
-  | "tunnelzero";
+  | "tunnelzero"
+  // 空気抵抗くらべ（右・奥の世界は空気抵抗ゼロ）
+  | "afeather"
+  | "athrow"
+  | "arain"
+  | "asky"
+  | "aplane";
+
+export const AIR_KINDS: SimKind[] = ["afeather", "athrow", "arain", "asky", "aplane"];
 
 export const FRICTION_KINDS: SimKind[] = ["fstand", "fpush", "fbrake", "ladder", "fchaos"];
 // この時刻（秒）で、右（奥）の世界の摩擦が消える
@@ -37,7 +45,7 @@ export const FRICTION_OFF = 0.6;
 
 export type SimBody = {
   lane: number;
-  shape: "part" | "box" | "sphere" | "cone" | "car" | "platform" | "ladder" | "wall";
+  shape: "part" | "box" | "sphere" | "cone" | "car" | "platform" | "ladder" | "wall" | "feather" | "plane";
   part?: PartName;
   look?: Look;
   doll?: number;
@@ -64,6 +72,7 @@ export type SimResult = {
 
 // ぶつかった物の種類で効果音を変える（body=人、ball=ボール、cone=コーン）
 export type HitSound = "body" | "ball" | "cone";
+
 export type Impact = { frame: number; v: number; sound: HitSound; lane: number };
 
 // 物体ごとの音の種類（車はコーンに当たったときだけ鳴らすので cone 扱い）
@@ -668,6 +677,268 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
     rd.bodies.upperArmL.velocity.set(-0.4, 0.3, 0.2);
     rd.bodies.upperArmR.velocity.set(0.4, 0.2, -0.2);
     lanes.push({ world, g: zero ? 0 : 3.2, dolls: [rd], control: () => {}, record: () => {} });
+  } else if (kind === "afeather") {
+    // 両手に鉄球と羽根を持って、同じ高さから同時に落とす。左はいまの地球、右は空気抵抗ゼロ
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const x = lane === 0 ? -1.2 : 1.2;
+      const rd = addDoll(world, lane, lane, [x, 0, 0]);
+      const ball = new CANNON.Body({
+        mass: 2,
+        shape: new CANNON.Sphere(0.07),
+        position: new CANNON.Vec3(x + 0.25, 1.4, 0.5),
+        material: bodyMaterial,
+        type: CANNON.Body.KINEMATIC,
+      });
+      // 羽根は軽くて平たい（長さ22cm）
+      const feather = new CANNON.Body({
+        mass: 0.01,
+        shape: new CANNON.Box(new CANNON.Vec3(0.03, 0.004, 0.11)),
+        position: new CANNON.Vec3(x - 0.25, 1.4, 0.5),
+        material: bodyMaterial,
+        type: CANNON.Body.KINEMATIC,
+        angularDamping: 0.6,
+      });
+      for (const b of [ball, feather]) {
+        b.collisionFilterGroup = 2;
+        b.collisionFilterMask = 1;
+        world.addBody(b);
+      }
+      bodies.push({ lane, shape: "sphere", size: [0.14, 0.14, 0.14], color: "#5b6270" });
+      bodies.push({ lane, shape: "feather", size: [0.06, 0.008, 0.22] });
+      tracked.push(ball, feather);
+      soundOf.set(ball, "ball");
+      const ballT = val(`ball${lane}`);
+      const featherT = val(`feather${lane}`);
+      const release = 3.3;
+      let ballAt = -1;
+      let featherAt = -1;
+      const handL = () => rd.bodies.lowerArmL.pointToWorldFrame(new CANNON.Vec3(0, -0.2, 0));
+      const handR = () => rd.bodies.lowerArmR.pointToWorldFrame(new CANNON.Vec3(0, -0.2, 0));
+      const control = (t: number) => {
+        applyBalance(rd);
+        rd.setPose(POSES.stand, POSES.hold, smooth((t - 0.05) / 0.45));
+        if (t < release) {
+          // 手に持っている間は、手の位置についていく（落とす瞬間は止めておく）
+          ball.position.copy(handR());
+          feather.position.copy(handL());
+          ball.velocity.set(0, 0, 0);
+          feather.velocity.set(0, 0, 0);
+          return;
+        }
+        if (ball.type !== CANNON.Body.DYNAMIC) {
+          for (const b of [ball, feather]) {
+            b.type = CANNON.Body.DYNAMIC;
+            b.updateMassProperties();
+            b.velocity.set(0, 0, 0);
+          }
+        }
+        if (lane === 0 && featherAt < 0) {
+          // 空気抵抗：速さの2乗に比例して、動きと逆向きに（落ちる速さは秒速0.5mくらいで頭打ち）
+          const v = feather.velocity;
+          const sp = v.length();
+          const c = (feather.mass * G) / (0.5 * 0.5);
+          feather.force.x -= c * sp * v.x;
+          feather.force.y -= c * sp * v.y;
+          feather.force.z -= c * sp * v.z;
+          // 空気の流れで、左右にゆれながら落ちる
+          const s = t - release;
+          feather.force.x += feather.mass * G * 1.1 * Math.sin(s * 4.2);
+          feather.force.z += feather.mass * G * 0.4 * Math.sin(s * 2.9 + 1);
+          feather.angularVelocity.set(1.6 * Math.cos(s * 4.2), 0.8, 1.2 * Math.sin(s * 3.1));
+        }
+        if (ballAt < 0 && ball.position.y < 0.08) {
+          ballAt = t - release;
+        }
+        if (featherAt < 0 && feather.position.y < 0.03) {
+          featherAt = t - release;
+          feather.angularVelocity.set(0, 0, 0);
+        }
+      };
+      const record = (f: number) => {
+        const s = f / fps - release;
+        ballT[f] = s < 0 ? 0 : ballAt < 0 ? s : ballAt;
+        featherT[f] = s < 0 ? 0 : featherAt < 0 ? -s : featherAt;
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record });
+    });
+  } else if (kind === "athrow" || kind === "aplane") {
+    // 手前がいまの地球、奥が空気抵抗ゼロ。同じ速さで、ビーチボール（athrow）か紙ひこうき（aplane）を投げる
+    const plane = kind === "aplane";
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const z = lane === 0 ? 0.9 : -0.9;
+      const rd = addDoll(world, lane, lane, [0, 0, z], Math.PI / 2);
+      const thing = new CANNON.Body({
+        mass: plane ? 0.02 : 0.15,
+        shape: plane
+          ? new CANNON.Box(new CANNON.Vec3(0.13, 0.02, 0.09))
+          : new CANNON.Sphere(0.25),
+        position: new CANNON.Vec3(0, 1.3, z),
+        material: bodyMaterial,
+        type: CANNON.Body.KINEMATIC,
+        angularDamping: 0.4,
+      });
+      thing.collisionFilterGroup = 2;
+      thing.collisionFilterMask = 1;
+      world.addBody(thing);
+      if (plane) {
+        bodies.push({ lane, shape: "plane", size: [0.26, 0.04, 0.18], color: lane === 0 ? "#ffffff" : "#fff3c4" });
+      } else {
+        bodies.push({ lane, shape: "sphere", size: [0.5, 0.5, 0.5], color: "beach" });
+      }
+      tracked.push(thing);
+      if (!plane) {
+        soundOf.set(thing, "ball");
+      }
+      const landX = val(`land${lane}`);
+      let released = false;
+      let landed = -1;
+      const hand = () => rd.bodies.lowerArmR.pointToWorldFrame(new CANNON.Vec3(0, plane ? -0.2 : -0.32, 0));
+      const releaseAt = plane ? 0.8 : 0.86;
+      const control = (t: number) => {
+        applyBalance(rd);
+        if (t < 0.3) {
+          rd.setPose(POSES.stand);
+        } else if (t < 0.75) {
+          rd.setPose(POSES.stand, POSES.windup, smooth((t - 0.3) / 0.3));
+        } else {
+          rd.setPose(POSES.throw);
+          rd.joints.shoulderR.gain = plane ? 22 : 30;
+        }
+        if (!released) {
+          thing.position.copy(hand());
+          if (t >= releaseAt) {
+            released = true;
+            thing.type = CANNON.Body.DYNAMIC;
+            thing.updateMassProperties();
+            if (plane) {
+              thing.velocity.set(6.2, 0.9, 0);
+              thing.angularFactor.set(0, 0, 0);
+            } else {
+              thing.velocity.set(5.0, 5.0, 0);
+            }
+          }
+          return;
+        }
+        const v = thing.velocity;
+        const sp = v.length();
+        if (landed < 0 && lane === 0) {
+          if (plane) {
+            // 翼が空気を押し下げた反動（揚力）は動きと直角に上向き、抗力は動きと逆向き（滑空比 約5）
+            const kL = (thing.mass * G) / 36;
+            const kD = kL / 5;
+            thing.force.x += kL * sp * -v.y - kD * sp * v.x;
+            thing.force.y += kL * sp * v.x - kD * sp * v.y;
+          } else {
+            // ビーチボールの空気抵抗 = 1/2 × 空気の密度 × 速さ² × 断面積 × 抗力係数（0.47）
+            const c = 0.5 * 1.2 * Math.PI * 0.25 * 0.25 * 0.47;
+            thing.force.x -= c * sp * v.x;
+            thing.force.y -= c * sp * v.y;
+            thing.force.z -= c * sp * v.z;
+          }
+        }
+        if (plane && landed < 0) {
+          // 紙ひこうきは、進む向きに機首を向ける
+          thing.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 0, 1), Math.atan2(v.y, Math.max(0.01, v.x)));
+        }
+        // 紙ひこうきは機首から地面に着くので、中心の高さで判定する
+        const bottom = plane ? 0.16 : 0.27;
+        if (landed < 0 && thing.position.y < bottom && v.y <= 0.01) {
+          landed = thing.position.x;
+          thing.linearDamping = 0.95;
+          thing.angularDamping = 0.9;
+          if (plane) {
+            thing.angularFactor.set(1, 1, 1);
+          }
+        }
+      };
+      const record = (f: number) => {
+        landX[f] = landed;
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record });
+    });
+  } else if (kind === "arain") {
+    // 雨の中に立つ。左はいまの雨（時速30km）、右は空気抵抗ゼロの雨（時速500km）で、頭をかばってかがむ
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const x = lane === 0 ? -1.2 : 1.2;
+      const rd = addDoll(world, lane, lane, [x, 0, 0]);
+      rd.balance = 0.6;
+      const control = (t: number) => {
+        applyBalance(rd);
+        if (lane === 0) {
+          rd.setPose(POSES.stand);
+        } else {
+          rd.setPose(POSES.stand, POSES.cover, smooth((t - 0.35) / 0.35));
+        }
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record: () => {} });
+    });
+  } else if (kind === "asky") {
+    // 高度4000mから飛び降りる。人と一緒に落ちていく目線で見るので、世界の重力はゼロにして、
+    // 速さと高度は計算式で出す。左は空気抵抗あり（時速200kmで頭打ち）、右は空気抵抗ゼロ
+    const H0 = 4000;
+    const VT = 55;
+    // 場面の長さで、落ち始めから地面に着く直前（28.5秒）までを見せる
+    const span = 28.5;
+    const R = new CANNON.Quaternion();
+    R.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), Math.PI / 2);
+    [0, 1].forEach((lane) => {
+      const world = new CANNON.World({ gravity: new CANNON.Vec3(0, 0, 0) });
+      world.allowSleep = false;
+      (world.solver as CANNON.GSSolver).iterations = 20;
+      const x = lane === 0 ? -1.35 : 1.35;
+      const rd = addDoll(world, lane, lane, [0, 0, 0]);
+      rd.balance = 0;
+      // おなかを下に向けて寝かせる（頭がカメラのほう）
+      const c = new CANNON.Vec3(0, 1.0, 0);
+      for (const b of Object.values(rd.bodies)) {
+        const rel = b.position.vsub(c);
+        const r = R.vmult(rel);
+        b.position.set(x + r.x, 1.6 + r.y, r.z);
+        b.quaternion.copy(R.mult(b.quaternion));
+      }
+      rd.setPose(POSES.arch);
+      const speed = val(`v${lane}`);
+      const alt = val(`h${lane}`);
+      const time = val(`t${lane}`);
+      const control = (t: number) => {
+        rd.setPose(POSES.arch);
+        // 体の向きは、空気抵抗のあるほうは風で少しずつゆれる。全体の位置はその場にとどめる
+        const pel = rd.bodies.pelvis;
+        const pull = new CANNON.Vec3(x - pel.position.x, 1.6 - pel.position.y, 0 - pel.position.z);
+        for (const b of Object.values(rd.bodies)) {
+          b.force.x += pull.x * 60 * b.mass * 0.02 - b.velocity.x * b.mass * 2;
+          b.force.y += pull.y * 60 * b.mass * 0.02 - b.velocity.y * b.mass * 2;
+          b.force.z += pull.z * 60 * b.mass * 0.02 - b.velocity.z * b.mass * 2;
+        }
+        if (lane === 0) {
+          const T = (t / (frames / fps)) * span;
+          const v = VT * Math.tanh((G * T) / VT);
+          const q = (v / VT) ** 2;
+          // 風で手足と服がばたつく（強さは速さの2乗）
+          (["upperArmL", "upperArmR", "lowerArmL", "lowerArmR", "shinL", "shinR", "head"] as PartName[]).forEach((p, i) => {
+            const b = rd.bodies[p];
+            const n = Math.sin(t * (17 + i * 3.1) + i) + 0.6 * Math.sin(t * (29 + i * 1.7) + 2 * i);
+            b.force.y += q * b.mass * 9 * n;
+            b.force.x += q * b.mass * 4 * Math.sin(t * (13 + i) + i * 0.7);
+          });
+        }
+      };
+      const record = (f: number) => {
+        const T = (f / frames) * span;
+        time[f] = T;
+        if (lane === 0) {
+          speed[f] = VT * Math.tanh((G * T) / VT) * 3.6;
+          alt[f] = H0 - ((VT * VT) / G) * Math.log(Math.cosh((G * T) / VT));
+        } else {
+          speed[f] = G * T * 3.6;
+          alt[f] = Math.max(0, H0 - 0.5 * G * T * T);
+        }
+      };
+      lanes.push({ world, g: 0, dolls: [rd], control, record });
+    });
   } else if (kind === "fchaos") {
     // 摩擦ゼロの広場で、5人が歩き出そうとする
     const fw = frictionWorld(1);
@@ -825,6 +1096,8 @@ export const simulate = (
       ? ["いまの地球", "摩擦ゼロ"]
       : kind === "wind"
         ? ["いまの空気", "空気が2倍"]
+        : AIR_KINDS.includes(kind)
+          ? ["いまの地球", "空気抵抗ゼロ"]
         : ["いまの地球 1G", gravityLabel(g2)],
   };
   cache.set(key, result);

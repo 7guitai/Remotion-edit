@@ -4,6 +4,7 @@ import { useThree } from "@react-three/fiber";
 import {
   AbsoluteFill,
   Audio,
+  random,
   Sequence,
   staticFile,
   useCurrentFrame,
@@ -12,6 +13,7 @@ import {
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import {
+  AIR_KINDS,
   FRICTION_KINDS,
   FRICTION_OFF,
   HitSound,
@@ -61,16 +63,35 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       return { pos: [0, 2.2, lerp(9.4, 8.8, t)], look: [0, 2.0, 0] };
     case "slip":
       return { pos: [0.9, 1.5, lerp(8.8, 8.2, t)], look: [0.9, 0.85, 0] };
-    case "throw": {
+    case "afeather":
+      return { pos: [0, 1.6, lerp(8.2, 7.8, t)], look: [0, 1.6, 0] };
+    case "arain":
+      return { pos: [0, 1.6, lerp(8.4, 7.9, t)], look: [0, 1.25, 0] };
+    case "asky": {
+      // 落ちていく2人を、ななめ上からゆっくり回りこんで見る
+      const a = lerp(-0.2, 0.2, t);
+      return { pos: [Math.sin(a) * 5.8, 6.4, Math.cos(a) * 5.8], look: [0, 2.35, 0] };
+    }
+    case "throw":
+    case "athrow":
+    case "aplane": {
       // いちばん遠くまで飛んでいるボールを追いかけて、だんだん引く
       let far = 0;
+      const shape = sim.kind === "aplane" ? "plane" : "sphere";
       for (let k = 0; k <= f; k++) {
         for (const lane of [0, 1]) {
-          far = Math.max(far, posAt(sim, k, findIndex(sim, "sphere", lane))[0]);
+          far = Math.max(far, posAt(sim, k, findIndex(sim, shape, lane))[0]);
         }
       }
-      const cx = 0.8 + far * 0.5;
-      const d = 6.5 + far * 0.55;
+      const air = sim.kind !== "throw";
+      if (air) {
+        far = Math.min(far, 9);
+      }
+      const cx = air ? 0.3 + far * 0.4 : 0.8 + far * 0.5;
+      const d = air ? 8 + far * 0.8 : 6.5 + far * 0.55;
+      if (air) {
+        return { pos: [cx, 1.8 + far * 0.12, d], look: [cx, 0.9 + far * 0.12, 0] };
+      }
       return { pos: [cx, 1.8 + far * 0.12, d], look: [cx, 1.6 + far * 0.1, 0] };
     }
     case "tunnel":
@@ -297,6 +318,67 @@ const Shaft: React.FC<{ y: number; phase?: number }> = ({ y, phase = 0 }) => {
   );
 };
 
+// 羽根（白い羽根と、まん中の軸）
+const Feather: React.FC = () => (
+  // 小さくて見えにくいので、見た目は2倍にする
+  <group scale={2}>
+    <mesh rotation={[-Math.PI / 2, 0, 0]} scale={[0.032, 0.105, 1]} castShadow>
+      <circleGeometry args={[1, 32]} />
+      <meshStandardMaterial color="#fbfbf6" roughness={0.9} side={THREE.DoubleSide} />
+    </mesh>
+    <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0.003, 0.01]}>
+      <cylinderGeometry args={[0.003, 0.002, 0.24, 6]} />
+      <meshStandardMaterial color="#c9b9a0" roughness={0.6} />
+    </mesh>
+  </group>
+);
+
+// 紙ひこうき（機首が +x）
+const usePlaneGeometry = () =>
+  useMemo(() => {
+    const g = new THREE.BufferGeometry();
+    const v = [
+      // 左の翼
+      0.14, 0.0, 0.0, -0.13, 0.01, -0.1, -0.13, 0.0, 0.0,
+      // 右の翼
+      0.14, 0.0, 0.0, -0.13, 0.0, 0.0, -0.13, 0.01, 0.1,
+      // 胴（下に折った部分）
+      0.14, 0.0, 0.0, -0.13, 0.0, 0.0, -0.13, -0.045, 0.0,
+    ];
+    g.setAttribute("position", new THREE.Float32BufferAttribute(v, 3));
+    g.computeVertexNormals();
+    return g;
+  }, []);
+
+const PaperPlane: React.FC<{ color: string }> = ({ color }) => {
+  const geom = usePlaneGeometry();
+  return (
+    <mesh geometry={geom} castShadow scale={2.2}>
+      <meshStandardMaterial color={color} roughness={0.8} side={THREE.DoubleSide} />
+    </mesh>
+  );
+};
+
+// ビーチボールのしま模様
+const useBeachTexture = () =>
+  useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 512;
+    canvas.height = 256;
+    const ctx = canvas.getContext("2d")!;
+    const colors = ["#ff3b3b", "#ffffff", "#ffd21a", "#ffffff", "#2f8bff", "#ffffff"];
+    colors.forEach((c, i) => {
+      ctx.fillStyle = c;
+      ctx.fillRect((i * 512) / colors.length, 0, 512 / colors.length + 1, 256);
+    });
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, 512, 18);
+    ctx.fillRect(0, 238, 512, 18);
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }, []);
+
 const PersonPart: React.FC<{
   part: string;
   size: [number, number, number];
@@ -453,7 +535,8 @@ export const PhysicsScene: React.FC<{
   const overlays: React.ReactNode[] = [];
   const laneX = [width * 0.25, width * 0.75];
   const isRoad = sim.kind === "brake" || sim.kind === "fbrake";
-  const lanesTop = ["jump", "scale", "slip", "fstand", "wind"].includes(sim.kind);
+  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky"].includes(sim.kind);
+  const isAir = AIR_KINDS.includes(sim.kind);
   // 摩擦ゼロの世界は、摩擦が消えた瞬間からラベルを点滅させる
   const offFrame = Math.round(FRICTION_OFF * fps);
   const isFriction = FRICTION_KINDS.includes(sim.kind);
@@ -467,6 +550,8 @@ export const PhysicsScene: React.FC<{
         ? [-0.8, 2.6]
         : sim.kind === "wind"
           ? [-1.5, 1.0]
+          : sim.kind === "asky"
+            ? [-1.35, 1.35]
           : sim.kind === "scale" || sim.kind === "jump"
             ? [-1, 1]
             : [-1.2, 1.2];
@@ -479,7 +564,7 @@ export const PhysicsScene: React.FC<{
         </Pill>,
       );
     });
-  } else if (sim.kind === "throw" || isRoad || sim.kind === "fpush" || sim.kind === "ladder") {
+  } else if (sim.kind === "throw" || sim.kind === "athrow" || sim.kind === "aplane" || isRoad || sim.kind === "fpush" || sim.kind === "ladder") {
     overlays.push(
       <div key="legend" style={{ position: "absolute", left: 30, top: 34 + T, display: "flex", flexDirection: "column", gap: 12 }}>
         {[0, 1].map((lane) => (
@@ -569,18 +654,111 @@ export const PhysicsScene: React.FC<{
       );
     });
   }
-  if (sim.kind === "throw") {
+  if (sim.kind === "throw" || sim.kind === "athrow" || sim.kind === "aplane") {
     [0, 1].forEach((lane) => {
       const land = v(`land${lane}`);
       if (land > 0) {
         const p = project(cam, [land, 0.9, lane === 0 ? 0.9 : -0.9], width, height);
         overlays.push(
           <Pill key={`land${lane}`} x={Math.min(width - 120, Math.max(120, p.x))} y={Math.max(190 + T, p.y - 40)} color={LANE_COLORS[lane]} size={42}>
-            {`約${Math.round(land)}m`}
+            {sim.kind === "throw" ? `約${Math.round(land)}m` : `${land.toFixed(1)}m`}
           </Pill>,
         );
       }
     });
+  }
+  if (sim.kind === "afeather") {
+    // ストップウォッチ：手をはなしてから地面に着くまで
+    [0, 1].forEach((lane) => {
+      const ball = v(`ball${lane}`);
+      const feather = v(`feather${lane}`);
+      const row = (name: string, t: number, done: boolean) => (
+        <div style={{ display: "flex", justifyContent: "space-between", gap: 18 }}>
+          <span style={{ fontSize: 28 }}>{name}</span>
+          <span style={{ color: done ? "#111" : "#888" }}>{`${Math.abs(t).toFixed(2)}秒`}</span>
+        </div>
+      );
+      overlays.push(
+        <div
+          key={`sw${lane}`}
+          style={{
+            position: "absolute",
+            left: laneX[lane],
+            top: 118 + T,
+            transform: "translate(-50%, 0)",
+            fontFamily,
+            fontWeight: 900,
+            fontSize: 36,
+            color: "#111",
+            background: "#fff",
+            padding: "4px 22px",
+            borderRadius: 16,
+            border: `6px solid ${LANE_COLORS[lane]}`,
+            whiteSpace: "nowrap",
+            minWidth: 250,
+          }}
+        >
+          {row("鉄球", ball, ball > 0 && f > 0 && v(`ball${lane}`) === sim.values[`ball${lane}`][Math.max(0, f - 1)])}
+          {row("羽根", feather, feather > 0)}
+        </div>,
+      );
+      if (lane === 1 && feather > 0 && ball > 0) {
+        overlays.push(
+          <Pill key="same" x={width / 2} y={150 + T} color="#ff8a00" size={44}>
+            同時に着地！
+          </Pill>,
+        );
+      }
+    });
+  }
+  if (sim.kind === "arain") {
+    overlays.push(
+      <Pill key="r0" x={laneX[0]} y={150 + T} color="#334" size={38}>雨粒 時速30km</Pill>,
+      <Pill key="r1" x={laneX[1]} y={150 + T} color="#c0182b" size={38}>雨粒 時速500km</Pill>,
+    );
+  }
+  if (sim.kind === "asky") {
+    [0, 1].forEach((lane) => {
+      const kmh = v(`v${lane}`);
+      const h = v(`h${lane}`);
+      overlays.push(
+        <div
+          key={`hud${lane}`}
+          style={{
+            position: "absolute",
+            left: laneX[lane],
+            top: 124 + T,
+            transform: "translate(-50%, 0)",
+            display: "flex",
+            flexDirection: "column",
+            gap: 8,
+            alignItems: "stretch",
+          }}
+        >
+          {[
+            ["時速", `${Math.round(kmh).toLocaleString()} km`, lane === 1 && kmh > 600 ? "#ff5a5a" : "#7dff9a"],
+            ["高度", `${Math.round(h).toLocaleString()} m`, h < 500 ? "#ff5a5a" : "#7dff9a"],
+          ].map(([k, val, c]) => (
+            <div key={k} style={{ fontFamily, fontWeight: 900, fontSize: 44, color: c, background: "rgba(0,0,0,0.7)", border: `4px solid ${LANE_COLORS[lane]}`, borderRadius: 14, padding: "0 16px", whiteSpace: "nowrap", textAlign: "right" }}>
+              <span style={{ color: "#fff", fontSize: 30, marginRight: 12 }}>{k}</span>
+              {val}
+            </div>
+          ))}
+        </div>,
+      );
+    });
+    overlays.push(
+      <Pill key="t" x={width / 2} y={330 + T} color="#222" size={36}>
+        {`飛び降りて ${Math.floor(v("t0"))}秒`}
+      </Pill>,
+    );
+    if (v("h1") < 400) {
+      overlays.push(
+        <Pill key="warn" x={laneX[1]} y={420 + T} color="#e01b2f" size={44 * (1 + 0.06 * Math.sin(f * 0.8))}>
+          地面が目の前！
+        </Pill>,
+      );
+    }
   }
   if (isRoad) {
     [0, 1].forEach((lane) => {
@@ -641,9 +819,9 @@ export const PhysicsScene: React.FC<{
 
   // ボールの軌跡（0.5秒前までの位置を点で）
   const trails: React.ReactNode[] = [];
-  if (sim.kind === "throw") {
+  if (sim.kind === "throw" || sim.kind === "athrow" || sim.kind === "aplane") {
     [0, 1].forEach((lane) => {
-      const bi = findIndex(sim, "sphere", lane);
+      const bi = findIndex(sim, sim.kind === "aplane" ? "plane" : "sphere", lane);
       for (let k = 2; k <= f; k += 2) {
         const p = posAt(sim, k, bi);
         if (p[0] < 0.5) {
@@ -676,7 +854,72 @@ export const PhysicsScene: React.FC<{
   });
 
   const isTunnel = kind === "tunnel" || kind === "tunnelzero";
-  const fogColor = isTunnel ? "#140a05" : isRoad ? "#b9c7d6" : "#cfe8ff";
+  const isSky = kind === "asky";
+  const beach = useBeachTexture();
+
+  // 空から落ちていく場面：下から上へ流れる風のすじ（流れる速さと長さは落ちる速さに比例）
+  const streaks: React.ReactNode[] = [];
+  if (isSky) {
+    [0, 1].forEach((lane) => {
+      const sp = sim.values[`v${lane}`];
+      // ここまでに流れた量（m）。見やすいよう、実際の速さの 1/4 で流す
+      let travel = 0;
+      for (let k = 0; k <= f; k++) {
+        travel += (sp[k] / 3.6 / fps) * 0.25;
+      }
+      const vNow = sp[f] / 3.6;
+      const len = Math.min(6, 0.15 + vNow * 0.02);
+      for (let i = 0; i < 36; i++) {
+        const H = 14;
+        const y = ((random(`sy${lane}-${i}`) * H + travel) % H) - 5;
+        const x = (lane === 0 ? -1.35 : 1.35) + (random(`sx${lane}-${i}`) - 0.5) * 2.6;
+        const z = (random(`sz${lane}-${i}`) - 0.5) * 4 - 0.5;
+        streaks.push(
+          <mesh key={`st${lane}-${i}`} position={[x, y, z]}>
+            <boxGeometry args={[0.012, len, 0.012]} />
+            <meshBasicMaterial color="#ffffff" transparent opacity={vNow < 1 ? 0 : 0.55} />
+          </mesh>,
+        );
+      }
+    });
+  }
+
+  // 雨：左はゆっくり（秒速8m・短いすじ）、右は空気抵抗ゼロで超高速（見やすいよう秒速40mで表示・長いすじ）
+  const rain: React.ReactNode[] = [];
+  if (kind === "arain") {
+    [0, 1].forEach((lane) => {
+      const cx = lane === 0 ? -1.2 : 1.2;
+      const speedV = lane === 0 ? 8 : 40;
+      const len = lane === 0 ? 0.18 : 1.6;
+      const H = 6;
+      for (let i = 0; i < 110; i++) {
+        const x = cx + (random(`rx${lane}-${i}`) - 0.5) * 2.3;
+        const z = (random(`rz${lane}-${i}`) - 0.5) * 3.2;
+        const y = H - ((random(`ry${lane}-${i}`) * H + (f / fps) * speedV) % H);
+        rain.push(
+          <mesh key={`rn${lane}-${i}`} position={[x, y + len / 2, z]}>
+            <boxGeometry args={[0.012, len, 0.012]} />
+            <meshBasicMaterial color={lane === 0 ? "#cfe6ff" : "#e8f4ff"} transparent opacity={0.7} />
+          </mesh>,
+        );
+      }
+      // 地面と体ではじける水しぶき
+      for (let i = 0; i < (lane === 0 ? 10 : 26); i++) {
+        const seed = `sp${lane}-${i}-${Math.floor(f / 2)}`;
+        const onBody = lane === 1 && i % 3 === 0;
+        const x = onBody ? cx + (random(`${seed}x`) - 0.5) * 0.5 : cx + (random(`${seed}x`) - 0.5) * 2.3;
+        const z = onBody ? (random(`${seed}z`) - 0.5) * 0.4 : (random(`${seed}z`) - 0.5) * 3.2;
+        const y = onBody ? 1.15 + random(`${seed}y`) * 0.25 : 0.02;
+        rain.push(
+          <mesh key={`spl${lane}-${i}`} position={[x, y, z]}>
+            <sphereGeometry args={[lane === 0 ? 0.025 : 0.05, 8, 8]} />
+            <meshBasicMaterial color="#ffffff" transparent opacity={0.8} />
+          </mesh>,
+        );
+      }
+    });
+  }
+  const fogColor = isTunnel ? "#140a05" : isRoad ? "#b9c7d6" : kind === "arain" ? "#8f9aa8" : "#cfe8ff";
   // 中心付近（tunnelzero）は人がその場でただようので、壁のほうを流して速さを見せる
   const shaftPhase = kind === "tunnelzero" ? frame * 0.9 : 0;
   // 摩擦ゼロの地面は、つるつるの氷のように見せる（摩擦が消えた瞬間から）
@@ -697,12 +940,16 @@ export const PhysicsScene: React.FC<{
         style={{
           background: isTunnel
             ? "#140a05"
-            : "linear-gradient(180deg, #4a9cff 0%, #8cc8ff 55%, #dff0ff 100%)",
+            : isSky
+              ? "linear-gradient(180deg, #1f5fbf 0%, #5ea3e8 45%, #cfe6ff 100%)"
+              : kind === "arain"
+                ? "linear-gradient(180deg, #4d5866 0%, #7d8896 55%, #a3adb9 100%)"
+                : "linear-gradient(180deg, #4a9cff 0%, #8cc8ff 55%, #dff0ff 100%)",
         }}
       />
       <ThreeCanvas width={width} height={height} shadows camera={{ fov: 40, near: 0.1, far: 400 }}>
         <CameraRig cam={cam} width={width} height={height} />
-        <fog attach="fog" args={isTunnel ? [fogColor, 6, 34] : [fogColor, 30, 120]} />
+        <fog attach="fog" args={isTunnel ? [fogColor, 6, 34] : kind === "arain" ? [fogColor, 12, 60] : [fogColor, 30, 120]} />
         <hemisphereLight args={isTunnel ? ["#ffd2a0", "#3a1a08", 0.9] : ["#dff1ff", "#6a7a4a", 1.1]} />
         {isTunnel ? (
           <>
@@ -726,7 +973,7 @@ export const PhysicsScene: React.FC<{
         >
           <object3D attach="target" position={[cam.look[0], 0, 0]} />
         </directionalLight>
-        {isTunnel ? null : (
+        {isTunnel || isSky ? null : (
           <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
             <planeGeometry args={[200, 200]} />
             <meshStandardMaterial map={ground} roughness={0.95} />
@@ -786,7 +1033,7 @@ export const PhysicsScene: React.FC<{
             ))
           : null}
 
-        {sim.kind === "throw" ? (
+        {sim.kind === "throw" || sim.kind === "athrow" || sim.kind === "aplane" ? (
           <mesh position={[10, 0.006, 1.9]} rotation={[-Math.PI / 2, 0, 0]}>
             <planeGeometry args={[20, 1.0]} />
             <meshBasicMaterial map={distRuler} transparent />
@@ -839,6 +1086,28 @@ export const PhysicsScene: React.FC<{
                     ? SHOE
                     : PANTS;
             return <PersonPart key={i} part={b.part!} size={b.size} color={color} pos={pos} quat={quat} />;
+          }
+          if (b.shape === "feather") {
+            return (
+              <group key={i} position={pos} quaternion={quat}>
+                <Feather />
+              </group>
+            );
+          }
+          if (b.shape === "plane") {
+            return (
+              <group key={i} position={pos} quaternion={quat}>
+                <PaperPlane color={b.color!} />
+              </group>
+            );
+          }
+          if (b.shape === "sphere" && b.color === "beach") {
+            return (
+              <mesh key={i} position={pos} quaternion={quat} castShadow>
+                <sphereGeometry args={[b.size[0] / 2, 32, 24]} />
+                <meshStandardMaterial map={beach} roughness={0.3} />
+              </mesh>
+            );
           }
           if (b.shape === "sphere") {
             return (
@@ -917,9 +1186,13 @@ export const PhysicsScene: React.FC<{
           return null;
         })}
         {trails}
+        {streaks}
+        {rain}
       </ThreeCanvas>
       {overlays}
       {sounds}
+      {kind === "arain" ? <Audio src={staticFile("sfx/rain.wav")} volume={0.35} loop /> : null}
+      {isSky ? <Audio src={staticFile("sfx/whoosh.wav")} volume={0.12} /> : null}
     </AbsoluteFill>
   );
 };
