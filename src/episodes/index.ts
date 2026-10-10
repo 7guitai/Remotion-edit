@@ -255,6 +255,10 @@ export type Episode = {
     title: string;
     credit: string;
     url?: string;
+    attributionUrl?: string;
+    license?: string;
+    licenseUrl?: string;
+    modifications?: string;
     opentracks?: number;
     // OpenTracks の別バージョン（Track2 など）
     track?: number;

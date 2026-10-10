@@ -16,11 +16,16 @@
     "もし地球の重力が",
     "月と同じになったら？"
   ],
-  "bgmVolume": 0.12,
+  "bgmVolume": 0.1,
   "bgm": {
-    "file": "whatif-moon-gravity-2026-10-09.wav",
-    "title": "ムーン・ステップ",
-    "credit": "本動画用の自作音源"
+    "file": "tanner-helland-clowns.mp3",
+    "title": "Clowns",
+    "credit": "Tanner Helland",
+    "url": "https://raw.githubusercontent.com/tannerhelland/free-music/f6bfe16f49feab2181075ab86b13b24740592aa6/mp3/Clowns.mp3",
+    "attributionUrl": "https://tannerhelland.com/music.html",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "modifications": "使用にあたり抜粋・音量調整・フェードを適用。"
   },
   "illustrations": {},
   "slides": [

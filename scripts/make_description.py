@@ -111,6 +111,15 @@ def main() -> None:
         ),
         "",
     ]
+    for track in ep.get("bgmPlaylist", []) or ([ep["bgm"]] if ep.get("bgm") else []):
+        if track.get("attributionUrl"):
+            lines += [track["attributionUrl"]]
+        if track.get("license"):
+            lines += [f"ライセンス：{track['license']}", track["licenseUrl"]]
+        if track.get("modifications"):
+            lines += [track["modifications"]]
+        if track.get("attributionUrl") or track.get("license"):
+            lines += [""]
     if ep.get("hashtags"):
         lines += [" ".join(f"#{t}" for t in ep["hashtags"])]
 

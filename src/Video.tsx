@@ -18,7 +18,7 @@ import { WhatIfHeadline } from "./components/WhatIfPage";
 import { ChapterTag } from "./components/WhatIfCard";
 import { IllusionHeaderContext } from "./components/IllusionPage";
 
-export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
+export const Video: React.FC<VideoProps> = ({ episodeId, slides, bgmMuted = false }) => {
   const episode = getEpisode(episodeId);
   const { durationInFrames, width, height } = useVideoConfig();
   const landscape = width > height;
@@ -115,7 +115,7 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
           <TitleBand title={episode.title} />
         )}
         {episode.pr ? <PrBadge /> : null}
-        {episode.bgmPlaylist ? (
+        {bgmMuted ? null : episode.bgmPlaylist ? (
           <BgmPlaylist
             tracks={episode.bgmPlaylist}
             starts={starts}

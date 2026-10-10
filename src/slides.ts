@@ -44,6 +44,7 @@ export type ResolvedSlide = {
 export type VideoProps = {
   episodeId: string;
   slides: ResolvedSlide[];
+  bgmMuted?: boolean;
 };
 
 const exists = async (path: string) => {
