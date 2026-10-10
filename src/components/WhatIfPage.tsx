@@ -460,7 +460,7 @@ export const WhatIfPage: React.FC<{
                 height: slide.imageSize ?? 640,
                 objectFit: "contain",
                 transform: `scale(${scale}) rotate(${rotate}deg)`,
-                filter: "drop-shadow(0 0 40px rgba(120,180,255,0.35))",
+                filter: `${slide.imageFilter ?? ""} drop-shadow(0 0 40px rgba(120,180,255,0.35))`,
                 marginTop: landscape ? -90 : -120,
               }}
             />

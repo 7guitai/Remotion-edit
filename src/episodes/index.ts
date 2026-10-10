@@ -23,6 +23,7 @@ import whatifTrampShort from "./whatif-tramp-short.json";
 import whatifFriction10Short from "./whatif-friction10-short.json";
 import whatifIceShort from "./whatif-ice-short.json";
 import whatifGoldShort from "./whatif-gold-short.json";
+import verifyTrainJumpShort from "./verify-train-jump-short.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -156,6 +157,8 @@ export type WhatIfSlide = {
   speech?: string;
   image?: string;
   imageSize?: number;
+  // イラストの色を変える（CSS の filter。例：銀色にする grayscale(1)）
+  imageFilter?: string;
   // 背景（space=宇宙 / night=夜 / sky=空 / sea=海）
   bg?: "space" | "night" | "sky" | "sea";
   // 演出（zoom=寄る / spin=回る / stop=急に止まる / shake=揺れる / wind=暴風 / flood=水が上がる / dark=暗くなる / arrows=矢印 / half=昼と夜 / flip=傾く）
@@ -277,6 +280,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  verifyTrainJumpShort as Episode,
   whatifGoldShort as Episode,
   whatifIceShort as Episode,
   whatifFriction10Short as Episode,

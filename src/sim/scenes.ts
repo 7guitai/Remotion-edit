@@ -56,7 +56,11 @@ export type SimKind =
   | "ice"
   // 金の立方体（約21万トン・一辺約22m）と人。goldgone は金が消える
   | "gold"
-  | "goldgone";
+  | "goldgone"
+  // 走る電車の中でジャンプ（一定の速さ・加速中・急ブレーキ中）
+  | "trconst"
+  | "tracc"
+  | "trbrake";
 
 export const AIR_KINDS: SimKind[] = ["afeather", "athrow", "arain", "asky", "aplane"];
 // 水そうの大きさ（中心のz、幅、奥行き、高さ、水面の高さ）
@@ -64,6 +68,7 @@ export const TANK = { z: 0.45, w: 0.9, d: 0.5, h: 0.9, level: 0.75 };
 // 金が消える時刻（秒）と、金の立方体の一辺（m）
 export const GOLD_GONE = 2.0;
 export const GOLD_SIDE = 22.3;
+export const TRAIN_KINDS: SimKind[] = ["trconst", "tracc", "trbrake"];
 export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
 export const BOUNCE_KINDS: SimKind[] = ["bjump", "bdrop", "bwall", "bparty"];
 export const TINY_KINDS: SimKind[] = ["tworld", "tlift", "tjump", "tfall", "twind", "train"];
@@ -1727,6 +1732,75 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
         gone[f] = kind === "goldgone" ? Math.min(1, Math.max(0, (f / fps - GOLD_GONE) / 0.6)) : 0;
       },
     });
+  } else if (TRAIN_KINDS.includes(kind)) {
+    // 電車の中でジャンプする。計算は「電車といっしょに動く目線」で行い、電車が速くなる・遅くなるときは、
+    // 体に「電車の加速と逆向きの力（慣性力）」をかける。電車の外の景色は、電車の進んだ距離だけ流す
+    const setups: Record<string, { v: number; a: number }[]> = {
+      trconst: [
+        { v: 0, a: 0 },
+        { v: 80, a: 0 },
+      ],
+      tracc: [
+        { v: 80, a: 0 },
+        // 発車して加速中（毎秒 時速3kmずつ速くなる ＝ 0.83m/s²）
+        { v: 20, a: 3 / 3.6 },
+      ],
+      trbrake: [
+        { v: 80, a: 0 },
+        // 急ブレーキ中（毎秒 時速4.5kmずつ遅くなる ＝ 1.25m/s²）
+        { v: 80, a: -4.5 / 3.6 },
+      ],
+    };
+    setups[kind].forEach(({ v, a }, lane) => {
+      const { world } = makeWorld(G);
+      const x0 = lane === 0 ? -1.4 : 1.4;
+      const rd = addDoll(world, lane, lane, [x0, 0, 0]);
+      rd.balance = 1;
+      // ジャンプの高さは約50cm（空中にいる時間 約0.6秒）。真上に跳ぶ
+      let step = jumper(rd, 0.8, 3.4);
+      let next = 0.8;
+      const shift = val(`shift${lane}`);
+      const pos = val(`pos${lane}`);
+      const speed = val(`v${lane}`);
+      const take = val(`take${lane}`);
+      const land = val(`land${lane}`);
+      let airborne = false;
+      let takeX = NaN;
+      let landX = NaN;
+      const foot = () => (rd.bodies.footL.position.x + rd.bodies.footR.position.x) / 2;
+      const control = (t: number) => {
+        if (t > next + 3.0) {
+          next += 3.0;
+          step = jumper(rd, next, 3.4);
+        }
+        step(t);
+        applyBalance(rd);
+        // 慣性力（電車の加速と逆向き）
+        if (a !== 0) {
+          for (const b of Object.values(rd.bodies)) {
+            b.force.x -= b.mass * a;
+          }
+        }
+        const feet = Math.min(lowestY(rd.bodies.footL, rd.sizes.footL), lowestY(rd.bodies.footR, rd.sizes.footR));
+        if (!airborne && feet > 0.03) {
+          airborne = true;
+          takeX = foot();
+          landX = NaN;
+        } else if (airborne && feet < 0.01) {
+          airborne = false;
+          landX = foot();
+        }
+      };
+      const record = (f: number) => {
+        const t = f / fps;
+        pos[f] = (v / 3.6) * t + 0.5 * a * t * t;
+        speed[f] = v + a * 3.6 * t;
+        take[f] = takeX;
+        land[f] = landX;
+        shift[f] = Number.isNaN(landX) ? NaN : landX - takeX;
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record });
+    });
   } else if (kind === "fchaos") {
     // 摩擦ゼロの広場で、5人が歩き出そうとする
     const fw = frictionWorld(1);
@@ -1896,6 +1970,12 @@ export const simulate = (
                 ? ["いまの地球", "摩擦10倍"]
                 : kind === "ice"
                   ? ["いまの氷", "もしも 沈む氷"]
+                  : kind === "trconst"
+                    ? ["止まっている電車", "時速80kmの電車"]
+                    : kind === "tracc"
+                      ? ["一定の速さ", "加速中"]
+                      : kind === "trbrake"
+                        ? ["一定の速さ", "急ブレーキ中"]
         : ["いまの地球 1G", gravityLabel(g2)],
   };
   cache.set(key, result);

@@ -1,0 +1,118 @@
+{
+  "id": "verify-train-jump-short",
+  "title": "【検証】走っている電車の中でジャンプしたら、どこに着地する？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "shuwashuwa_lemon.mp3",
+    "title": "しゅわしゅわハニーレモン350ml",
+    "credit": "しゃろう",
+    "page": "https://opentracks.com/bgm/detail/14621",
+    "opentracks": 14621,
+    "track": 1
+  },
+  "headline": [
+    "【検証】走る電車で",
+    "ジャンプしたら？"
+  ],
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "走っている電車の中でジャンプしたら、どこに着地する？同じ場所？それとも後ろ？物理エンジンで検証してみた！",
+      "effect": "none",
+      "sim": "trconst"
+    },
+    {
+      "type": "whatif",
+      "text": "検証1。止まっている電車と、時速80kmで、まっすぐ走る電車。",
+      "effect": "none",
+      "speech": "検証1。止まっている電車と、時速80キロで、まっすぐ走る電車。",
+      "sim": "trconst",
+      "big": "検証1"
+    },
+    {
+      "type": "whatif",
+      "text": "結果は…どちらも、ほぼ同じ場所に着地！",
+      "effect": "none",
+      "sim": "trconst",
+      "simStart": 0.4
+    },
+    {
+      "type": "whatif",
+      "text": "ジャンプする前から、体も、電車と同じ時速80kmで動いている。空中でも、その勢いのまま進むからなんだ。これを、慣性という。",
+      "effect": "none",
+      "speech": "ジャンプする前から、体も電車と同じ時速80キロで動いている。空中でも、その勢いのまま進むからなんだ。これを、慣性という。",
+      "sim": "trconst",
+      "simStart": 2.6
+    },
+    {
+      "type": "whatif",
+      "text": "検証2。発車して、どんどん速くなっている電車では？",
+      "effect": "none",
+      "sim": "tracc",
+      "big": "検証2"
+    },
+    {
+      "type": "whatif",
+      "text": "後ろに14cmずれた！空中にいる間に、電車だけが先に速くなったからだ。",
+      "effect": "none",
+      "speech": "後ろに14センチずれた！空中にいる間に、電車だけが先に速くなったからだ。",
+      "sim": "tracc",
+      "simStart": 0.5
+    },
+    {
+      "type": "whatif",
+      "text": "検証3。急ブレーキ中の電車では…",
+      "effect": "none",
+      "sim": "trbrake",
+      "big": "検証3"
+    },
+    {
+      "type": "whatif",
+      "text": "前に26cmもずれた！バスが急ブレーキをかけると、体が前につんのめるのと、同じ理由だね。",
+      "effect": "none",
+      "speech": "前に26センチもずれた！バスが急ブレーキをかけると、体が前につんのめるのと、同じ理由だね。",
+      "sim": "trbrake",
+      "simStart": 0.5
+    },
+    {
+      "type": "whatif",
+      "text": "ちなみに地球も、日本のあたりでは、時速約1400kmで回っている。それでもジャンプして、同じ場所に着地できるのは、ぼくらも地球といっしょに、動いているからなんだ。",
+      "effect": "zoom",
+      "speech": "ちなみに地球も、日本のあたりでは時速約1400キロで回っている。それでもジャンプして同じ場所に着地できるのは、ぼくらも地球といっしょに動いているからなんだ。",
+      "globe": {
+        "texture": "earth",
+        "speed": 0.9
+      },
+      "bg": "space",
+      "big": "時速 約1400km"
+    },
+    {
+      "type": "whatif",
+      "text": "ただし、電車の中でジャンプするのは、危ないし迷惑なので、まねしないでね。次に検証してほしいこと、コメントで教えてね！",
+      "effect": "none",
+      "sim": "trconst",
+      "simStart": 2.6,
+      "hold": 1
+    }
+  ],
+  "description": "走っている電車の中でジャンプしたら、どこに着地するのか？一定の速さ・加速中・急ブレーキ中の3つを、物理エンジンで検証しました。\nズレの長さはシミュレーションで測った値です（加速は毎秒時速3km、急ブレーキは毎秒時速4.5kmずつ速さが変わる電車として計算）。\n電車の中でジャンプするのは危ないので、まねしないでください。\n次に検証してほしいことは、コメントで教えてください！",
+  "hashtags": [
+    "検証",
+    "物理",
+    "慣性の法則",
+    "雑学",
+    "Shorts"
+  ]
+}

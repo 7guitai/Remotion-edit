@@ -13,6 +13,7 @@ import {
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import {
+  TRAIN_KINDS,
   GOLD_GONE,
   GOLD_SIDE,
   TANK,
@@ -69,6 +70,11 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       return { pos: [0, 2.2, lerp(9.4, 8.8, t)], look: [0, 2.0, 0] };
     case "slip":
       return { pos: [0.9, 1.5, lerp(8.8, 8.2, t)], look: [0.9, 0.85, 0] };
+    case "trconst":
+    case "tracc":
+    case "trbrake":
+      // 床の印（跳んだ位置・着地した位置）が見えるよう、上から見下ろす
+      return { pos: [0, 4.4, lerp(8.4, 8.0, t)], look: [0, 0.3, -0.3] };
     case "gold":
     case "goldgone":
       // 人の後ろから、金の立方体を見上げる
@@ -218,7 +224,16 @@ const useGroundTexture = (kind: SimKind) =>
     canvas.width = size;
     canvas.height = size;
     const ctx = canvas.getContext("2d")!;
-    if (TINY_KINDS.includes(kind)) {
+    if (TRAIN_KINDS.includes(kind)) {
+      // 電車の床（灰色のゴムの床に、細かい粒）
+      ctx.fillStyle = "#8e959e";
+      ctx.fillRect(0, 0, size, size);
+      for (let i = 0; i < 1400; i++) {
+        const g = 120 + ((i * 97) % 40);
+        ctx.fillStyle = `rgb(${g},${g + 4},${g + 10})`;
+        ctx.fillRect((i * 53) % size, (i * 131) % size, 2, 2);
+      }
+    } else if (TINY_KINDS.includes(kind)) {
       // 木の床（板の幅は 10cmの人の世界で 10cm → 拡大して 1.75m）
       const plank = ["#b98a5a", "#c49464", "#ae8052", "#bf8f5d"];
       plank.forEach((c, i) => {
@@ -710,6 +725,94 @@ const GoldCube: React.FC<{ gone: number; t: number }> = ({ gone, t }) => {
   );
 };
 
+// 電車の外の景色（電柱と建物）。電車が進んだ距離だけ、横に流す
+const useSceneryTexture = () =>
+  useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1024;
+    canvas.height = 256;
+    const ctx = canvas.getContext("2d")!;
+    const sky = ctx.createLinearGradient(0, 0, 0, 256);
+    sky.addColorStop(0, "#6fb3ff");
+    sky.addColorStop(1, "#d8ecff");
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, 1024, 256);
+    for (let i = 0; i < 14; i++) {
+      const w = 50 + ((i * 37) % 60);
+      const h = 60 + ((i * 53) % 110);
+      ctx.fillStyle = ["#9aa8b8", "#b9c3cf", "#8a97a8", "#c7b9a8"][i % 4];
+      ctx.fillRect(i * 75, 200 - h, w, h);
+    }
+    ctx.fillStyle = "#6c9a4e";
+    ctx.fillRect(0, 196, 1024, 60);
+    for (let i = 0; i < 4; i++) {
+      ctx.fillStyle = "#4a4f57";
+      ctx.fillRect(i * 256 + 120, 20, 10, 200);
+      ctx.fillRect(i * 256 + 100, 40, 50, 6);
+    }
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }, []);
+
+// 電車の車内（後ろのかべと窓、つり革）。窓の外の景色は、電車の進んだ距離 pos だけ流れる
+const TrainCar: React.FC<{ x0: number; pos: number }> = ({ x0, pos }) => {
+  const base = useSceneryTexture();
+  const tex = useMemo(() => base.clone(), [base]);
+  // 景色の1枚は横 40m 分（電柱 10m おき）
+  tex.repeat.set(2.7 / 40, 1);
+  tex.offset.x = (((pos / 40) % 1) + 1) % 1;
+  tex.needsUpdate = true;
+  const W = 2.7;
+  return (
+    <group>
+      {/* 窓の外の景色 */}
+      <mesh position={[x0, 1.45, -1.25]}>
+        <planeGeometry args={[W, 0.9]} />
+        <meshBasicMaterial map={tex} />
+      </mesh>
+      {/* かべ（窓の下・上・窓わく） */}
+      <mesh position={[x0, 0.5, -1.15]} receiveShadow>
+        <boxGeometry args={[W, 1.0, 0.1]} />
+        <meshStandardMaterial color="#d9dee6" roughness={0.7} />
+      </mesh>
+      <mesh position={[x0, 2.2, -1.15]}>
+        <boxGeometry args={[W, 0.6, 0.1]} />
+        <meshStandardMaterial color="#d9dee6" roughness={0.7} />
+      </mesh>
+      {[-W / 2, 0, W / 2].map((dx) => (
+        <mesh key={dx} position={[x0 + dx, 1.45, -1.13]}>
+          <boxGeometry args={[0.08, 0.9, 0.12]} />
+          <meshStandardMaterial color="#b8c0cc" roughness={0.5} />
+        </mesh>
+      ))}
+      {/* 座席 */}
+      <mesh position={[x0, 0.25, -0.85]} castShadow receiveShadow>
+        <boxGeometry args={[W - 0.2, 0.45, 0.5]} />
+        <meshStandardMaterial color="#3f6fb5" roughness={0.9} />
+      </mesh>
+      {/* つり革 */}
+      <mesh position={[x0, 2.3, 0]} rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.02, 0.02, W, 8]} />
+        <meshStandardMaterial color="#c9ccd2" metalness={0.6} roughness={0.3} />
+      </mesh>
+      {[-0.9, 0.9].map((dx) => (
+        <group key={dx} position={[x0 + dx, 2.3, 0]}>
+          <mesh position={[0, -0.15, 0]}>
+            <boxGeometry args={[0.03, 0.3, 0.02]} />
+            <meshStandardMaterial color="#e8e8e8" />
+          </mesh>
+          <mesh position={[0, -0.36, 0]}>
+            <torusGeometry args={[0.07, 0.015, 8, 20]} />
+            <meshStandardMaterial color="#f2f2f2" />
+          </mesh>
+        </group>
+      ))}
+    </group>
+  );
+};
+
 const PersonPart: React.FC<{
   part: string;
   size: [number, number, number];
@@ -870,7 +973,7 @@ export const PhysicsScene: React.FC<{
   const overlays: React.ReactNode[] = [];
   const laneX = [width * 0.25, width * 0.75];
   const isRoad = sim.kind === "brake" || sim.kind === "fbrake" || sim.kind === "xbrake";
-  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall", "ice"].includes(sim.kind);
+  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall", "ice", "trconst", "tracc", "trbrake"].includes(sim.kind);
   const isAir = AIR_KINDS.includes(sim.kind);
   // 摩擦ゼロの世界は、摩擦が消えた瞬間からラベルを点滅させる
   const offFrame = Math.round(FRICTION_OFF * fps);
@@ -889,6 +992,8 @@ export const PhysicsScene: React.FC<{
             ? [-0.9, 0.9]
             : sim.kind === "ice"
               ? [-1.0, 1.0]
+              : TRAIN_KINDS.includes(sim.kind)
+                ? [-1.4, 1.4]
             : sim.kind === "bjump" || sim.kind === "bwall"
               ? [-1.4, 1.4]
             : sim.kind === "asky" || sim.kind === "tfall"
@@ -1132,6 +1237,25 @@ export const PhysicsScene: React.FC<{
     });
   }
 
+  if (TRAIN_KINDS.includes(sim.kind)) {
+    [0, 1].forEach((lane) => {
+      const kmh = v(`v${lane}`);
+      overlays.push(
+        <Pill key={`sp${lane}`} x={laneX[lane]} y={140 + T} color="#334" size={32}>
+          {kmh < 0.5 ? "止まっている" : `時速${Math.round(kmh)}km →`}
+        </Pill>,
+      );
+      const sh = sim.values[`shift${lane}`][f];
+      if (!Number.isNaN(sh)) {
+        const cm = Math.round(sh * 100);
+        overlays.push(
+          <Pill key={`sh${lane}`} x={laneX[lane]} y={height * 0.48} color={Math.abs(cm) < 4 ? "#1f8f4e" : "#e01b2f"} size={44}>
+            {Math.abs(cm) < 4 ? "ズレ ほぼ0cm" : cm < 0 ? `後ろへ ${-cm}cm` : `前へ ${cm}cm`}
+          </Pill>,
+        );
+      }
+    });
+  }
   if (sim.kind === "gold" || sim.kind === "goldgone") {
     const gone = v("gone");
     overlays.push(
@@ -1533,6 +1657,8 @@ export const PhysicsScene: React.FC<{
         ? "#8f9aa8"
         : TINY_KINDS.includes(kind)
           ? "#ead9bc"
+          : TRAIN_KINDS.includes(kind)
+            ? "#e6eaf0"
           : "#cfe8ff";
   // 中心付近（tunnelzero）は人がその場でただようので、壁のほうを流して速さを見せる
   const shaftPhase = kind === "tunnelzero" ? frame * 0.9 : 0;
@@ -1560,6 +1686,8 @@ export const PhysicsScene: React.FC<{
                 ? "linear-gradient(180deg, #4d5866 0%, #7d8896 55%, #a3adb9 100%)"
                 : TINY_KINDS.includes(kind)
                   ? "linear-gradient(180deg, #f3e6d0 0%, #e9d6b8 60%, #d9c09a 100%)"
+                  : TRAIN_KINDS.includes(kind)
+                    ? "linear-gradient(180deg, #eef1f5 0%, #dfe4ea 100%)"
                 : "linear-gradient(180deg, #4a9cff 0%, #8cc8ff 55%, #dff0ff 100%)",
         }}
       />
@@ -1872,6 +2000,30 @@ export const PhysicsScene: React.FC<{
           return null;
         })}
         {kind === "tworld" ? <TinyProps /> : null}
+        {TRAIN_KINDS.includes(kind)
+          ? [-1.4, 1.4].map((x0, lane) => {
+              const take = sim.values[`take${lane}`][f];
+              const land = sim.values[`land${lane}`][f];
+              return (
+                <group key={lane}>
+                  <TrainCar x0={x0} pos={v(`pos${lane}`)} />
+                  {/* 跳んだ位置（赤い線）と、着地した位置（青い線） */}
+                  {!Number.isNaN(take) ? (
+                    <mesh position={[take, 0.006, 0.45]} rotation={[-Math.PI / 2, 0, 0]}>
+                      <planeGeometry args={[0.06, 0.7]} />
+                      <meshBasicMaterial color="#ff2d2d" />
+                    </mesh>
+                  ) : null}
+                  {!Number.isNaN(land) ? (
+                    <mesh position={[land, 0.007, 0.45]} rotation={[-Math.PI / 2, 0, 0]}>
+                      <planeGeometry args={[0.06, 0.7]} />
+                      <meshBasicMaterial color="#2f8bff" />
+                    </mesh>
+                  ) : null}
+                </group>
+              );
+            })
+          : null}
         {kind === "gold" || kind === "goldgone" ? <GoldCube gone={v("gone")} t={f / fps} /> : null}
         {kind === "ice"
           ? [-1.0, 1.0].map((x0, lane) => {
