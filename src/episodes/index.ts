@@ -22,6 +22,7 @@ import whatifTinyLong from "./whatif-tiny-long.json";
 import whatifTrampShort from "./whatif-tramp-short.json";
 import whatifFriction10Short from "./whatif-friction10-short.json";
 import whatifIceShort from "./whatif-ice-short.json";
+import whatifGoldShort from "./whatif-gold-short.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -192,6 +193,8 @@ export type WhatIfSlide = {
   sfx?: { file: string; volume?: number };
   // 「もし氷が水に沈んだら？」の図解（分子・湖の断面）
   ice?: import("../components/IceScene").IceMode;
+  // 「もし地球から金がなくなったら？」の図解（スマホの端子・さび・検査キット）
+  gold?: import("../components/GoldScene").GoldMode;
 };
 
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
@@ -274,6 +277,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  whatifGoldShort as Episode,
   whatifIceShort as Episode,
   whatifFriction10Short as Episode,
   whatifTrampShort as Episode,

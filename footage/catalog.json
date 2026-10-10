@@ -452,6 +452,49 @@
           "ja": "ハンマーと羽根を持つ宇宙飛行士"
         }
       ]
+    },
+    {
+      "file": "webb_golden_mirror.jpg",
+      "type": "image",
+      "ja": "ジェイムズ・ウェッブ宇宙望遠鏡の金の鏡",
+      "title": "JWST's Golden Mirror Revealed",
+      "url": "http://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000368/GSFC_20171208_Archive_e000368~orig.jpg",
+      "page": "https://images.nasa.gov/details/GSFC_20171208_Archive_e000368",
+      "credit": "NASA",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "金"
+      ],
+      "resize": [
+        2400,
+        1600
+      ]
+    },
+    {
+      "file": "eva_gold_visor.jpg",
+      "type": "image",
+      "ja": "船外活動中の宇宙飛行士のヘルメット（金のバイザー）",
+      "title": "iss065e376212",
+      "url": "http://images-assets.nasa.gov/image/iss065e376212/iss065e376212~large.jpg",
+      "page": "https://images.nasa.gov/details/iss065e376212",
+      "credit": "NASA",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "金"
+      ]
+    },
+    {
+      "file": "neutron_star_merger.jpg",
+      "type": "image",
+      "ja": "ぶつかり合う2つの中性子星（シミュレーション）",
+      "title": "Neutron Stars Rip Each Other Apart to Form Black Hole",
+      "url": "http://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001098/GSFC_20171208_Archive_e001098~large.jpg",
+      "page": "https://images.nasa.gov/details/GSFC_20171208_Archive_e001098",
+      "credit": "NASA",
+      "license": "パブリックドメイン（NASA。クレジット「NASA」推奨、NASAのロゴは使用不可）",
+      "tags": [
+        "金"
+      ]
     }
   ]
 }

@@ -13,6 +13,8 @@ import {
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import {
+  GOLD_GONE,
+  GOLD_SIDE,
   TANK,
   BOUNCE_KINDS,
   TINY,
@@ -67,6 +69,10 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       return { pos: [0, 2.2, lerp(9.4, 8.8, t)], look: [0, 2.0, 0] };
     case "slip":
       return { pos: [0.9, 1.5, lerp(8.8, 8.2, t)], look: [0.9, 0.85, 0] };
+    case "gold":
+    case "goldgone":
+      // 人の後ろから、金の立方体を見上げる
+      return { pos: [lerp(-6, 6, t), 6, 95], look: [0, 8, -6] };
     case "ice":
       // 水そうの中が見えるよう、少し上から見下ろす
       return { pos: [0, 2.4, lerp(6.4, 6.0, t)], look: [0, 0.7, 0.2] };
@@ -642,6 +648,68 @@ const Egg: React.FC<{ broken: boolean }> = ({ broken }) =>
     </mesh>
   );
 
+// 金の延べ棒を積み上げた模様（1本 約25cm × 8cm）
+const useGoldTexture = () =>
+  useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 512;
+    canvas.height = 512;
+    const ctx = canvas.getContext("2d")!;
+    ctx.fillStyle = "#e7b53c";
+    ctx.fillRect(0, 0, 512, 512);
+    const bw = 64;
+    const bh = 22;
+    for (let r = 0; r < 512 / bh; r++) {
+      for (let c = -1; c < 512 / bw + 1; c++) {
+        const x = c * bw + (r % 2) * (bw / 2);
+        const y = r * bh;
+        const g = ctx.createLinearGradient(x, y, x, y + bh);
+        g.addColorStop(0, "#ffe9a3");
+        g.addColorStop(0.45, "#f2c14e");
+        g.addColorStop(1, "#b9852a");
+        ctx.fillStyle = g;
+        ctx.fillRect(x + 2, y + 2, bw - 4, bh - 4);
+      }
+    }
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(GOLD_SIDE / 2, GOLD_SIDE / 2);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = 8;
+    return tex;
+  }, []);
+
+const GoldCube: React.FC<{ gone: number; t: number }> = ({ gone, t }) => {
+  const tex = useGoldTexture();
+  const s = 1 - gone;
+  const c: [number, number, number] = [0, GOLD_SIDE / 2, -GOLD_SIDE / 2 - 1];
+  return (
+    <group>
+      {s > 0.01 ? (
+        <mesh position={[c[0], (GOLD_SIDE / 2) * s, c[2]]} scale={[s, s, s]} castShadow receiveShadow>
+          <boxGeometry args={[GOLD_SIDE, GOLD_SIDE, GOLD_SIDE]} />
+          <meshStandardMaterial map={tex} roughness={0.32} metalness={0.45} emissive="#7a5200" emissiveIntensity={0.55} />
+        </mesh>
+      ) : null}
+      {/* 消えるときのきらきら */}
+      {gone > 0 && gone < 1
+        ? Array.from({ length: 70 }, (_, i) => {
+            const a = random(`ga${i}`) * Math.PI * 2;
+            const r = random(`gr${i}`) * GOLD_SIDE * 0.6;
+            const up = gone * (6 + random(`gu${i}`) * 14);
+            return (
+              <mesh key={i} position={[c[0] + Math.cos(a) * r, 2 + random(`gy${i}`) * GOLD_SIDE * 0.8 + up, c[2] + Math.sin(a) * r]}>
+                <octahedronGeometry args={[0.35 + 0.3 * Math.sin(t * 9 + i), 0]} />
+                <meshBasicMaterial color="#fff2a8" transparent opacity={1 - gone} />
+              </mesh>
+            );
+          })
+        : null}
+    </group>
+  );
+};
+
 const PersonPart: React.FC<{
   part: string;
   size: [number, number, number];
@@ -722,7 +790,7 @@ const Cone: React.FC = () => (
 );
 
 const shirtColor = (sim: SimResult, doll: number, lane: number) =>
-  sim.kind === "party" || sim.kind === "fchaos" ? PARTY_SHIRTS[doll % PARTY_SHIRTS.length] : LANE_COLORS[lane];
+  sim.kind === "party" || sim.kind === "fchaos" || sim.kind === "gold" || sim.kind === "goldgone" ? PARTY_SHIRTS[doll % PARTY_SHIRTS.length] : LANE_COLORS[lane];
 
 const Pill: React.FC<{
   x: number;
@@ -1064,6 +1132,24 @@ export const PhysicsScene: React.FC<{
     });
   }
 
+  if (sim.kind === "gold" || sim.kind === "goldgone") {
+    const gone = v("gone");
+    overlays.push(
+      <Pill key="g1" x={width / 2} y={80 + T} color="#b8860b" size={40} opacity={1 - gone}>
+        人類が掘り出した金 ぜんぶ
+      </Pill>,
+      <Pill key="g2" x={width / 2} y={150 + T} color="#222" size={36} opacity={1 - gone}>
+        約21万トン・一辺 約22m
+      </Pill>,
+    );
+    if (gone >= 1) {
+      overlays.push(
+        <Pill key="g3" x={width / 2} y={110 + T} color="#e01b2f" size={56}>
+          消えた！
+        </Pill>,
+      );
+    }
+  }
   if (sim.kind === "ice") {
     overlays.push(
       <Pill key="d0" x={laneX[0]} y={140 + T} color="#334" size={30}>氷の重さ：水の0.92倍</Pill>,
@@ -1479,7 +1565,7 @@ export const PhysicsScene: React.FC<{
       />
       <ThreeCanvas width={width} height={height} shadows camera={{ fov: 40, near: 0.1, far: 400 }}>
         <CameraRig cam={cam} width={width} height={height} />
-        <fog attach="fog" args={isTunnel ? [fogColor, 6, 34] : kind === "arain" ? [fogColor, 12, 60] : [fogColor, 30, 120]} />
+        <fog attach="fog" args={isTunnel ? [fogColor, 6, 34] : kind === "arain" ? [fogColor, 12, 60] : kind === "gold" || kind === "goldgone" ? [fogColor, 160, 600] : [fogColor, 30, 120]} />
         <hemisphereLight args={isTunnel ? ["#ffd2a0", "#3a1a08", 0.9] : ["#dff1ff", "#6a7a4a", 1.1]} />
         {isTunnel ? (
           <>
@@ -1786,6 +1872,7 @@ export const PhysicsScene: React.FC<{
           return null;
         })}
         {kind === "tworld" ? <TinyProps /> : null}
+        {kind === "gold" || kind === "goldgone" ? <GoldCube gone={v("gone")} t={f / fps} /> : null}
         {kind === "ice"
           ? [-1.0, 1.0].map((x0, lane) => {
               const sp = sim.values[`splash${lane}`]?.[f] ?? -1;
@@ -1851,6 +1938,11 @@ export const PhysicsScene: React.FC<{
       {bare ? null : overlays}
       {bare ? null : sounds}
       {BOUNCE_KINDS.includes(kind) && !bare ? <BounceSounds sim={sim} offset={offset} /> : null}
+      {kind === "goldgone" && Math.round(GOLD_GONE * fps) - offset >= 0 ? (
+        <Sequence from={Math.round(GOLD_GONE * fps) - offset} durationInFrames={40}>
+          <Audio src={staticFile("sfx/sparkle.wav")} volume={0.35} />
+        </Sequence>
+      ) : null}
       {kind === "ice"
         ? [0, 1].flatMap((lane) => {
             // 氷が水に入るたびに「チャポン」（記録された時刻が変わったフレーム）

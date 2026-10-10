@@ -1,0 +1,138 @@
+{
+  "id": "whatif-gold-short",
+  "title": "もし地球から金がなくなったら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "nichiyou_gogo.mp3",
+    "title": "日曜の午後",
+    "credit": "KK",
+    "page": "https://opentracks.com/bgm/detail/4658",
+    "opentracks": 4658,
+    "track": 1
+  },
+  "headline": [
+    "もし地球から",
+    "金がなくなったら？"
+  ],
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、地球から金が、一瞬で消えたら？",
+      "effect": "none",
+      "sim": "goldgone",
+      "simStart": 0.4
+    },
+    {
+      "type": "whatif",
+      "text": "人類がこれまでに掘り出した金は、約21万トン。ぜんぶ集めても、一辺22mの立方体におさまってしまう。",
+      "effect": "none",
+      "speech": "人類がこれまでに掘り出した金は、約21万トン。ぜんぶ集めても、一辺22メートルの立方体におさまってしまう。",
+      "sim": "gold"
+    },
+    {
+      "type": "whatif",
+      "text": "アクセサリーや金貨が消えるだけ、と思うかもしれない。でも…",
+      "effect": "none",
+      "sim": "gold",
+      "simStart": 4
+    },
+    {
+      "type": "whatif",
+      "text": "スマホにも、1台に約0.03gの金が使われている。さびにくく、電気を通しやすいので、部品のつなぎ目にぴったりなんだ。",
+      "effect": "none",
+      "speech": "スマホにも、1台に約0.03グラムの金が使われている。さびにくく、電気を通しやすいので、部品のつなぎ目にぴったりなんだ。",
+      "gold": "phone"
+    },
+    {
+      "type": "whatif",
+      "text": "金が消えると、つなぎ目がさびて、電子機器が少しずつ故障していくかもしれない。",
+      "effect": "none",
+      "gold": "rust"
+    },
+    {
+      "type": "whatif",
+      "text": "宇宙飛行士のヘルメットのバイザーにも、金のうすい膜。強い太陽の光や熱を、はね返している。",
+      "effect": "none",
+      "photo": {
+        "file": "eva_gold_visor.jpg",
+        "zoom": 1.15,
+        "focus": [
+          0.55,
+          0.5
+        ]
+      },
+      "bg": "space"
+    },
+    {
+      "type": "whatif",
+      "text": "ジェイムズ・ウェッブ宇宙望遠鏡の鏡も、金でおおわれている。使われた金は、ぜんぶでゴルフボール1個分ほどなんだ。",
+      "effect": "none",
+      "photo": {
+        "file": "webb_golden_mirror.jpg",
+        "zoom": 1.05,
+        "focus": [
+          0.45,
+          0.45
+        ]
+      },
+      "bg": "space",
+      "big": "金 約48g"
+    },
+    {
+      "type": "whatif",
+      "text": "多くの検査キットの赤い線も、じつは金の小さな粒の色。金は、とても小さな粒になると、赤く見えるんだ。",
+      "effect": "none",
+      "gold": "test"
+    },
+    {
+      "type": "whatif",
+      "text": "じつは、地球の金のほとんどは、中心の核に沈んでいる。その量は、地球の表面を、厚さ約50cmでおおえるほどといわれている。",
+      "effect": "none",
+      "speech": "じつは、地球の金のほとんどは、中心の核に沈んでいる。その量は、地球の表面を、厚さ約50センチでおおえるほどといわれている。",
+      "cut": "core",
+      "big": "地表を厚さ約50cm"
+    },
+    {
+      "type": "whatif",
+      "text": "そして金は、中性子星という星どうしがぶつかる大爆発で、生まれたと考えられているんだ。",
+      "effect": "none",
+      "photo": {
+        "file": "neutron_star_merger.jpg",
+        "zoom": 1.1,
+        "focus": [
+          0.5,
+          0.5
+        ]
+      },
+      "bg": "space"
+    },
+    {
+      "type": "whatif",
+      "text": "金のない世界、どうなると思う？コメントで教えてね！",
+      "effect": "none",
+      "sim": "goldgone",
+      "simStart": 0.4,
+      "hold": 1
+    }
+  ],
+  "description": "もし地球から金が一瞬で消えたら、スマホや宇宙、医療の検査はどうなるのか？\n人類がこれまでに掘り出した金（約21万トン）を集めた立方体は、物理エンジンの人と並べて大きさを比べています。\n金の量・使われ方の数字は、おおよその値です。\nほかに知りたい「もしも」は、コメントで教えてください！\n画像：NASA",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "金",
+    "化学",
+    "Shorts"
+  ]
+}

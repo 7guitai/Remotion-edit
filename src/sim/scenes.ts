@@ -53,11 +53,17 @@ export type SimKind =
   | "xbrake"
   | "xslide"
   // 氷が水に浮く・沈む（右・奥は「氷が水より重い」世界）
-  | "ice";
+  | "ice"
+  // 金の立方体（約21万トン・一辺約22m）と人。goldgone は金が消える
+  | "gold"
+  | "goldgone";
 
 export const AIR_KINDS: SimKind[] = ["afeather", "athrow", "arain", "asky", "aplane"];
 // 水そうの大きさ（中心のz、幅、奥行き、高さ、水面の高さ）
 export const TANK = { z: 0.45, w: 0.9, d: 0.5, h: 0.9, level: 0.75 };
+// 金が消える時刻（秒）と、金の立方体の一辺（m）
+export const GOLD_GONE = 2.0;
+export const GOLD_SIDE = 22.3;
 export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
 export const BOUNCE_KINDS: SimKind[] = ["bjump", "bdrop", "bwall", "bparty"];
 export const TINY_KINDS: SimKind[] = ["tworld", "tlift", "tjump", "tfall", "twind", "train"];
@@ -1682,6 +1688,44 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
         splash[f] = lastSplash;
       };
       lanes.push({ world, g: G, dolls: [rd], control, record });
+    });
+  } else if (kind === "gold" || kind === "goldgone") {
+    // 人類がこれまでに掘り出した金（約21万トン）を集めた立方体（一辺約22m）の前に、6人が立つ。
+    // goldgone は、2秒で金が消えて、みんながおどろいて手を上げる
+    const { world } = makeWorld(G);
+    const dolls: Ragdoll[] = [];
+    const spots: [number, number, number][] = [
+      [-5, 6, 0.2],
+      [-3, 8.5, -0.1],
+      [-1, 6.5, 0.15],
+      [1.2, 9, 0],
+      [3.2, 6.8, -0.2],
+      [5.2, 8.2, 0.1],
+    ];
+    spots.forEach(([x, z, yaw], i) => {
+      // 立方体のほうを向く（-z 向き）
+      const rd = addDoll(world, 0, i, [x, 0, z], Math.PI + yaw);
+      rd.balance = 1;
+      dolls.push(rd);
+    });
+    const gone = val("gone");
+    lanes.push({
+      world,
+      g: G,
+      dolls,
+      control: (t) => {
+        dolls.forEach((rd, i) => {
+          applyBalance(rd);
+          if (kind === "goldgone" && t > GOLD_GONE + 0.25 + i * 0.08) {
+            rd.setPose(POSES.stand, POSES.air, smooth((t - GOLD_GONE - 0.25 - i * 0.08) / 0.3));
+          } else {
+            rd.setPose(POSES.stand);
+          }
+        });
+      },
+      record: (f) => {
+        gone[f] = kind === "goldgone" ? Math.min(1, Math.max(0, (f / fps - GOLD_GONE) / 0.6)) : 0;
+      },
     });
   } else if (kind === "fchaos") {
     // 摩擦ゼロの広場で、5人が歩き出そうとする
