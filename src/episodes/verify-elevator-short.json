@@ -1,0 +1,128 @@
+{
+  "id": "verify-elevator-short",
+  "title": "【検証】落ちるエレベーター、着地の瞬間にジャンプすれば助かる？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "fuon_kokke.mp3",
+    "title": "不穏",
+    "credit": "こっけ",
+    "page": "https://opentracks.com/bgm/detail/8333",
+    "opentracks": 8333,
+    "track": 1
+  },
+  "headline": [
+    "【検証】落ちるエレベーター",
+    "ジャンプで助かる？"
+  ],
+  "illustrations": {},
+  "description": "よく聞く都市伝説「落ちるエレベーターの中で、地面にぶつかる瞬間にジャンプすれば助かる」を、物理エンジンで検証しました。\n\n※条件：20階（高さ60m）から、空気抵抗なしで自由落下。ジャンプは秒速3m（垂直とび約45cm）として計算。\n※実際のエレベーターはロープが何本もあり、全部切れても「非常止め」がレールをつかんで止まるしくみになっています。\nほかに検証してほしい都市伝説は、コメントで教えてください！\n\n#Shorts #検証 #物理 #雑学",
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "エレベーターが落ちたら、着地の瞬間にジャンプすれば助かる？",
+      "effect": "none",
+      "sim": "elevfall",
+      "simLabels": [
+        "20階からロープが切れた！",
+        ""
+      ]
+    },
+    {
+      "type": "whatif",
+      "text": "スローで見てみよう。落ちている間、かごの中は無重力。体がふわっと浮いてしまう。",
+      "effect": "none",
+      "sim": "elevfloat",
+      "simLabels": [
+        "スローで検証",
+        ""
+      ]
+    },
+    {
+      "type": "whatif",
+      "text": "足が床から離れているから、そもそもジャンプできない！",
+      "effect": "none",
+      "sim": "elevfloat",
+      "simStart": 7.5,
+      "simLabels": [
+        "スローで検証",
+        ""
+      ]
+    },
+    {
+      "type": "whatif",
+      "text": "仮にジャンプできても、床にぶつかる速さは時速約120km。ジャンプで減らせるのは、たったの時速11kmほど。高速道路の車より速い！",
+      "effect": "none",
+      "speech": "仮にジャンプできても、床にぶつかる速さは時速約120キロ。ジャンプで減らせるのは、たったの時速11キロほど。高速道路の車より速い！",
+      "compare": {
+        "title": "床にぶつかる速さ",
+        "rows": [
+          {
+            "label": "そのまま",
+            "value": 123,
+            "unit": "km/h",
+            "color": "#ff4a3d"
+          },
+          {
+            "label": "ジャンプ",
+            "value": 112,
+            "unit": "km/h",
+            "color": "#ffb02e"
+          },
+          {
+            "label": "高速道路の車",
+            "value": 100,
+            "unit": "km/h",
+            "color": "#2f8bff"
+          }
+        ],
+        "note": "ジャンプしても、ほぼ変わらない"
+      }
+    },
+    {
+      "type": "whatif",
+      "text": "答えは…助からない！",
+      "effect": "none",
+      "sim": "elevfall",
+      "simStart": 3.0,
+      "simLabels": [
+        "20階からロープが切れた！",
+        ""
+      ],
+      "hold": 0.8
+    },
+    {
+      "type": "whatif",
+      "text": "でも安心して。本物のエレベーターはロープが何本もあって、全部切れても「非常止め」がレールをつかんで止まるんだ。",
+      "effect": "none",
+      "speech": "でも安心して。本物のエレベーターはロープが何本もあって、全部切れても、ひじょうどめがレールをつかんで止まるんだ。",
+      "sim": "elevsafe",
+      "simLabels": [
+        "本物は「非常止め」で止まる",
+        ""
+      ]
+    },
+    {
+      "type": "whatif",
+      "text": "ほかに検証してほしい都市伝説、コメントで教えてね！",
+      "effect": "none",
+      "sim": "elevsafe",
+      "simStart": 1.0,
+      "simLabels": [
+        "本物は「非常止め」で止まる",
+        ""
+      ],
+      "hold": 1
+    }
+  ]
+}

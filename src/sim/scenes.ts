@@ -63,7 +63,11 @@ export type SimKind =
   | "trbrake"
   // 雨の中を歩く・走る
   | "rwalk"
-  | "rrun";
+  | "rrun"
+  // 落ちるエレベーター（elevsafe は非常止めで止まる）
+  | "elevfall"
+  | "elevfloat"
+  | "elevsafe";
 
 export const AIR_KINDS: SimKind[] = ["afeather", "athrow", "arain", "asky", "aplane"];
 // 水そうの大きさ（中心のz、幅、奥行き、高さ、水面の高さ）
@@ -74,6 +78,9 @@ export const GOLD_SIDE = 22.3;
 // 雨の検証：コンビニまで10m、歩く 秒速1.5m・走る 秒速5m。強い雨（1m³に600粒・落ちる速さ 秒速7m）。
 // 人の大きさ：上から見た面積 0.11m²（肩幅45cm × 厚さ25cm）、前から見た面積 0.79m²（45cm × 175cm）
 export const RAIN = { dist: 10, walk: 1.5, run: 5, n: 600, fall: 7, top: 0.11, front: 0.79 };
+// エレベーター：ロープが切れる時刻（秒）と、落ちる高さ（10階 ≒ 30m）
+// elevfloat は同じ落下を 1/4 のスローで見せる（中の人が浮く様子）
+export const ELEV = { snap: 0.4, height: 60, floor: 3, slow: 0.25 };
 export const TRAIN_KINDS: SimKind[] = ["trconst", "tracc", "trbrake"];
 export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
 export const BOUNCE_KINDS: SimKind[] = ["bjump", "bdrop", "bwall", "bparty"];
@@ -1865,6 +1872,96 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
         front[f] = tFront;
         hits[f] = tTop + tFront;
         dist[f] = d;
+      },
+    });
+  } else if (kind === "elevfall" || kind === "elevsafe" || kind === "elevfloat") {
+    // エレベーターの中の人を「かごといっしょに動く目線」で計算する。
+    // ロープが切れて自由落下している間は、かごの中は無重力（重力 0）。
+    // elevfall：20階（60m）落ちて、時速約120km で地面にぶつかる（elevfloat は同じものを 1/4 のスローで）
+    // elevsafe：0.4秒落ちたところで非常止めがレールをつかみ、1G で減速して止まる
+    const safe = kind === "elevsafe";
+    const { world } = makeWorld(G);
+    const rd = addDoll(world, 0, 0, [0, 0, -0.1]);
+    rd.balance = 0.6;
+    const T0 = ELEV.snap;
+    const Tf = safe ? 0.4 : Math.sqrt((2 * ELEV.height) / G);
+    const vImpact = G * Tf;
+    const brakeT = safe ? vImpact / G : 0;
+    const fallY = val("fall");
+    const speed = val("speed");
+    const hit = val("hit");
+    let impacted = false;
+    let kicked = false;
+    world.addBody(
+      Object.assign(
+        new CANNON.Body({ mass: 0, shape: new CANNON.Box(new CANNON.Vec3(1.0, 0.05, 0.8)), position: new CANNON.Vec3(0, 2.45, 0) }),
+        {},
+      ),
+    );
+    for (const [x, z, hx, hz] of [
+      [-1.05, 0, 0.05, 0.8],
+      [1.05, 0, 0.05, 0.8],
+      [0, -0.85, 1.0, 0.05],
+    ] as const) {
+      world.addBody(new CANNON.Body({ mass: 0, shape: new CANNON.Box(new CANNON.Vec3(hx, 1.2, hz)), position: new CANNON.Vec3(x, 1.2, z) }));
+    }
+    const slow = kind === "elevfloat" ? ELEV.slow : 1;
+    lanes.push({
+      world,
+      g: G,
+      speed: slow,
+      dolls: [rd],
+      control: (t) => {
+        const free = t >= T0 && t < T0 + Tf;
+        if (t < T0) {
+          world.gravity.set(0, -G, 0);
+        } else if (free) {
+          // 自由落下：かごの中は無重力
+          world.gravity.set(0, 0, 0);
+          rd.balance = 0;
+          if (!kicked) {
+            // 床を押していた足の力が残って、少しだけ浮き上がる
+            kicked = true;
+            rd.addVelocity([0.05, 0.35, 0.02]);
+            rd.bodies.torso.angularVelocity.set(0.25, 0.1, 0.15);
+          }
+          // 床をけってジャンプしようとする（足が床にふれていないので、手足が動くだけ）
+          const s = t - T0;
+          rd.setPose(s % 0.9 < 0.45 ? POSES.crouch : POSES.air);
+        } else if (safe && t < T0 + Tf + brakeT) {
+          // 非常止め：1G で減速 → かごの中は重力2倍
+          world.gravity.set(0, -2 * G, 0);
+          rd.setPose(POSES.land);
+        } else {
+          world.gravity.set(0, -G, 0);
+          if (!safe && !impacted) {
+            impacted = true;
+            // 地面にぶつかった瞬間、かごは止まり、中の人は落ちていた速さのまま床へ
+            rd.addVelocity([0, -vImpact * 0.35, 0]);
+          }
+          rd.setPose(safe ? POSES.stand : POSES.slip);
+          if (safe) {
+            rd.balance = Math.min(0.6, rd.balance + 0.002);
+          }
+        }
+        applyBalance(rd);
+      },
+      record: (f) => {
+        const t = (f / fps) * slow;
+        const s = Math.min(Math.max(0, t - T0), Tf);
+        let v = G * s;
+        let y = 0.5 * G * s * s;
+        if (safe && t > T0 + Tf) {
+          const b = Math.min(t - T0 - Tf, brakeT);
+          v = vImpact - G * b;
+          y += vImpact * b - 0.5 * G * b * b;
+        }
+        if (!safe && t >= T0 + Tf) {
+          v = 0;
+        }
+        fallY[f] = y;
+        speed[f] = v * 3.6;
+        hit[f] = !safe && t >= T0 + Tf ? t - T0 - Tf : -1;
       },
     });
   } else if (kind === "fchaos") {

@@ -13,6 +13,7 @@ import {
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import {
+  ELEV,
   RAIN,
   TRAIN_KINDS,
   GOLD_GONE,
@@ -71,6 +72,11 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       return { pos: [0, 2.2, lerp(9.4, 8.8, t)], look: [0, 2.0, 0] };
     case "slip":
       return { pos: [0.9, 1.5, lerp(8.8, 8.2, t)], look: [0.9, 0.85, 0] };
+    case "elevfall":
+    case "elevfloat":
+    case "elevsafe":
+      // かごの正面（ドアの位置）から、中を見る。かごといっしょに動く
+      return { pos: [0, 1.5, 4.9], look: [0, 1.25, 0] };
     case "rwalk":
     case "rrun": {
       // 歩く・走る人を、横から追いかける
@@ -742,6 +748,98 @@ const GoldCube: React.FC<{ gone: number; t: number }> = ({ gone, t }) => {
   );
 };
 
+// エレベーターのかご（前は開いている）と、まわりの昇降路。昇降路のかべは、かごが落ちた距離だけ上へ流れる
+const ElevatorCar: React.FC<{ fall: number; snapped: boolean; t: number }> = ({ fall, snapped, t }) => {
+  const shaft = useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 256;
+    canvas.height = 512;
+    const ctx = canvas.getContext("2d")!;
+    ctx.fillStyle = "#6b6f76";
+    ctx.fillRect(0, 0, 256, 512);
+    for (let i = 0; i < 900; i++) {
+      const g = 90 + ((i * 97) % 40);
+      ctx.fillStyle = `rgb(${g},${g + 2},${g + 6})`;
+      ctx.fillRect((i * 53) % 256, (i * 131) % 512, 3, 3);
+    }
+    // 各階の床（3.3m ごと）
+    ctx.fillStyle = "#2b2e33";
+    ctx.fillRect(0, 0, 256, 40);
+    ctx.fillStyle = "#ffcf33";
+    ctx.fillRect(0, 40, 256, 8);
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.wrapT = THREE.RepeatWrapping;
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }, []);
+  const H = 12;
+  const tex = useMemo(() => {
+    const c = shaft.clone();
+    c.repeat.set(1, H / 3.3);
+    return c;
+  }, [shaft]);
+  tex.offset.y = (((-fall / 3.3) % 1) + 1) % 1;
+  tex.needsUpdate = true;
+  const wall = "#cfd5dc";
+  return (
+    <group>
+      {/* 昇降路のかべ（左右と奥） */}
+      {[-1.9, 1.9].map((x) => (
+        <mesh key={x} position={[x, 1.5, -0.4]} rotation={[0, x < 0 ? Math.PI / 2 : -Math.PI / 2, 0]}>
+          <planeGeometry args={[3.2, H]} />
+          <meshStandardMaterial map={tex} roughness={0.9} />
+        </mesh>
+      ))}
+      <mesh position={[0, 1.5, -1.6]}>
+        <planeGeometry args={[3.8, H]} />
+        <meshStandardMaterial map={tex} roughness={0.9} />
+      </mesh>
+      {/* かご：床・天井・かべ */}
+      <mesh position={[0, -0.05, 0]} receiveShadow>
+        <boxGeometry args={[2.2, 0.1, 1.8]} />
+        <meshStandardMaterial color="#8a7a66" roughness={0.8} />
+      </mesh>
+      <mesh position={[0, 2.5, 0]}>
+        <boxGeometry args={[2.2, 0.1, 1.8]} />
+        <meshStandardMaterial color="#e8ebef" emissive="#fff6dd" emissiveIntensity={0.35} />
+      </mesh>
+      {[-1.1, 1.1].map((x) => (
+        <mesh key={x} position={[x, 1.25, 0]} receiveShadow>
+          <boxGeometry args={[0.06, 2.5, 1.8]} />
+          <meshStandardMaterial color={wall} roughness={0.35} metalness={0.3} />
+        </mesh>
+      ))}
+      <mesh position={[0, 1.25, -0.9]} receiveShadow>
+        <boxGeometry args={[2.2, 2.5, 0.06]} />
+        <meshStandardMaterial color={wall} roughness={0.35} metalness={0.3} />
+      </mesh>
+      {/* 手すりと、ボタン */}
+      <mesh position={[0, 0.9, -0.82]} rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[0.025, 0.025, 1.8, 10]} />
+        <meshStandardMaterial color="#d8dde4" metalness={0.7} roughness={0.25} />
+      </mesh>
+      <mesh position={[1.06, 1.2, 0.5]}>
+        <boxGeometry args={[0.04, 0.5, 0.18]} />
+        <meshStandardMaterial color="#333" />
+      </mesh>
+      {/* ロープ（切れると、短くなってゆれる） */}
+      {snapped ? (
+        <mesh position={[0.05 * Math.sin(t * 7), 3.0, 0]}>
+          <cylinderGeometry args={[0.03, 0.03, 0.9, 8]} />
+          <meshStandardMaterial color="#555" />
+        </mesh>
+      ) : (
+        <mesh position={[0, 6.6, 0]}>
+          <cylinderGeometry args={[0.03, 0.03, 8, 8]} />
+          <meshStandardMaterial color="#555" />
+        </mesh>
+      )}
+      <pointLight position={[0, 2.2, 0.3]} intensity={6} distance={6} color="#fff3d6" />
+    </group>
+  );
+};
+
 // 雨の道：スタートの線、10m先のコンビニ、降る雨と、人に当たってはじける雨
 const RainStreet: React.FC<{ sim: SimResult; f: number }> = ({ sim, f }) => {
   const t = f / sim.fps;
@@ -1337,6 +1435,68 @@ export const PhysicsScene: React.FC<{
     });
   }
 
+  if (sim.kind === "elevfall" || sim.kind === "elevsafe" || sim.kind === "elevfloat") {
+    const fall = v("fall");
+    const floor = Math.max(1, Math.round(ELEV.height / ELEV.floor - fall / ELEV.floor));
+    if (sim.kind === "elevfloat") {
+      overlays.push(
+        <Pill key="slow" x={width / 2} y={height * 0.5} color="#7a3cff" size={34}>
+          スロー（1/4）
+        </Pill>,
+      );
+    }
+    overlays.push(
+      <div
+        key="ind"
+        style={{
+          position: "absolute",
+          left: 40,
+          top: 40 + T,
+          fontFamily: "'Courier New', monospace",
+          fontWeight: 900,
+          fontSize: 70,
+          color: "#ffb020",
+          background: "#111",
+          border: "5px solid #444",
+          borderRadius: 14,
+          padding: "0 22px",
+          textShadow: "0 0 14px rgba(255,176,32,0.8)",
+        }}
+      >
+        {`${floor}F`}
+      </div>,
+      <div
+        key="spd"
+        style={{
+          position: "absolute",
+          right: 40,
+          top: 50 + T,
+          fontFamily,
+          fontWeight: 900,
+          fontSize: 50,
+          color: v("speed") > 60 ? "#ff5a5a" : "#7dff9a",
+          background: "rgba(0,0,0,0.7)",
+          borderRadius: 14,
+          padding: "0 18px",
+        }}
+      >
+        <span style={{ fontSize: 30, color: "#fff", marginRight: 10 }}>時速</span>
+        {`${Math.round(v("speed"))} km`}
+      </div>,
+    );
+    const snapF = Math.round((ELEV.snap / (sim.kind === "elevfloat" ? ELEV.slow : 1)) * fps);
+    if (f >= snapF && f < snapF + 30) {
+      overlays.push(
+        <Pill key="snap" x={width / 2} y={190 + T} color="#e01b2f" size={48 * (1 + 0.08 * Math.sin(f))}>
+          ロープが切れた！
+        </Pill>,
+      );
+    }
+    const hitT = v("hit");
+    if (hitT >= 0) {
+      overlays.push(<AbsoluteFill key="flash" style={{ background: "#fff", opacity: Math.max(0, 1 - hitT / 0.5) }} />);
+    }
+  }
   if (sim.kind === "rwalk" || sim.kind === "rrun") {
     const hits = v("hits");
     const d = v("dist");
@@ -1817,7 +1977,9 @@ export const PhysicsScene: React.FC<{
             ? "#140a05"
             : isSky
               ? "linear-gradient(180deg, #1f5fbf 0%, #5ea3e8 45%, #cfe6ff 100%)"
-              : kind === "arain" || kind === "train" || kind === "rwalk" || kind === "rrun"
+              : kind === "elevfall" || kind === "elevsafe" || kind === "elevfloat"
+                ? "#2b2e33"
+                : kind === "arain" || kind === "train" || kind === "rwalk" || kind === "rrun"
                 ? "linear-gradient(180deg, #4d5866 0%, #7d8896 55%, #a3adb9 100%)"
                 : TINY_KINDS.includes(kind)
                   ? "linear-gradient(180deg, #f3e6d0 0%, #e9d6b8 60%, #d9c09a 100%)"
@@ -1852,7 +2014,7 @@ export const PhysicsScene: React.FC<{
         >
           <object3D attach="target" position={[cam.look[0], 0, 0]} />
         </directionalLight>
-        {isTunnel || isSky ? null : BOUNCE_KINDS.includes(kind) ? (
+        {isTunnel || isSky || kind === "elevfall" || kind === "elevsafe" || kind === "elevfloat" ? null : BOUNCE_KINDS.includes(kind) ? (
           // トランポリンのマットの所だけ、地面に穴をあける（へこんだマットが見えるように）
           (() => {
             const [cx, cz, w, d] = matArea;
@@ -2136,6 +2298,9 @@ export const PhysicsScene: React.FC<{
         })}
         {kind === "tworld" ? <TinyProps /> : null}
         {kind === "rwalk" || kind === "rrun" ? <RainStreet sim={sim} f={f} /> : null}
+        {kind === "elevfall" || kind === "elevsafe" || kind === "elevfloat" ? (
+          <ElevatorCar fall={v("fall")} snapped={f >= Math.round((ELEV.snap / (kind === "elevfloat" ? ELEV.slow : 1)) * fps)} t={f / fps} />
+        ) : null}
         {TRAIN_KINDS.includes(kind)
           ? [-1.4, 1.4].map((x0, lane) => {
               const take = sim.values[`take${lane}`][f];
@@ -2226,6 +2391,23 @@ export const PhysicsScene: React.FC<{
       {bare ? null : overlays}
       {bare ? null : sounds}
       {BOUNCE_KINDS.includes(kind) && !bare ? <BounceSounds sim={sim} offset={offset} /> : null}
+      {(kind === "elevfall" || kind === "elevsafe" || kind === "elevfloat") && !bare
+        ? [
+            { at: ELEV.snap / (kind === "elevfloat" ? ELEV.slow : 1), file: "sfx/clack.wav", vol: 0.45 },
+            ...(kind === "elevfall"
+              ? [{ at: ELEV.snap + Math.sqrt((2 * ELEV.height) / 9.8), file: "sfx/impact.wav", vol: 0.5 }]
+              : kind === "elevsafe"
+                ? [{ at: ELEV.snap + 0.4, file: "sfx/thud2.wav", vol: 0.3 }]
+                : []),
+          ].map(({ at, file, vol }) => {
+            const from = Math.round(at * fps) - offset;
+            return from >= 0 ? (
+              <Sequence key={file} from={from} durationInFrames={30}>
+                <Audio src={staticFile(file)} volume={vol} />
+              </Sequence>
+            ) : null;
+          })
+        : null}
       {kind === "goldgone" && Math.round(GOLD_GONE * fps) - offset >= 0 ? (
         <Sequence from={Math.round(GOLD_GONE * fps) - offset} durationInFrames={40}>
           <Audio src={staticFile("sfx/sparkle.wav")} volume={0.35} />

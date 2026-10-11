@@ -25,6 +25,7 @@ import whatifIceShort from "./whatif-ice-short.json";
 import whatifGoldShort from "./whatif-gold-short.json";
 import verifyTrainJumpShort from "./verify-train-jump-short.json";
 import verifyRainRunShort from "./verify-rain-run-short.json";
+import verifyElevator from "./verify-elevator-short.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -201,6 +202,8 @@ export type WhatIfSlide = {
   gold?: import("../components/GoldScene").GoldMode;
   // 雨の検証の図解（内訳の棒グラフ・ぬれ方の2種類）
   rainChart?: import("../components/RainChart").RainChartMode;
+  // 検証動画の結果くらべ（横棒グラフ）
+  compare?: import("../components/CompareBars").CompareSpec;
 };
 
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる。
@@ -283,6 +286,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  verifyElevator as Episode,
   verifyRainRunShort as Episode,
   verifyTrainJumpShort as Episode,
   whatifGoldShort as Episode,
