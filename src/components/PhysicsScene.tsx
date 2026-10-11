@@ -2248,7 +2248,7 @@ export const PhysicsScene: React.FC<{
             return out;
           })
         : null}
-      {kind === "arain" || kind === "train" || kind === "rwalk" || kind === "rrun" ? <Audio src={staticFile("sfx/rain.wav")} volume={0.3} loop /> : null}
+      {kind === "arain" || kind === "train" ? <Audio src={staticFile("sfx/rain.wav")} volume={0.3} loop /> : null}
       {kind === "train"
         ? [1.5, 4.2].map((h) => {
             const from = Math.round(h * fps) - offset;
