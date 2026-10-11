@@ -60,7 +60,10 @@ export type SimKind =
   // 走る電車の中でジャンプ（一定の速さ・加速中・急ブレーキ中）
   | "trconst"
   | "tracc"
-  | "trbrake";
+  | "trbrake"
+  // 雨の中を歩く・走る
+  | "rwalk"
+  | "rrun";
 
 export const AIR_KINDS: SimKind[] = ["afeather", "athrow", "arain", "asky", "aplane"];
 // 水そうの大きさ（中心のz、幅、奥行き、高さ、水面の高さ）
@@ -68,6 +71,9 @@ export const TANK = { z: 0.45, w: 0.9, d: 0.5, h: 0.9, level: 0.75 };
 // 金が消える時刻（秒）と、金の立方体の一辺（m）
 export const GOLD_GONE = 2.0;
 export const GOLD_SIDE = 22.3;
+// 雨の検証：コンビニまで10m、歩く 秒速1.5m・走る 秒速5m。強い雨（1m³に600粒・落ちる速さ 秒速7m）。
+// 人の大きさ：上から見た面積 0.11m²（肩幅45cm × 厚さ25cm）、前から見た面積 0.79m²（45cm × 175cm）
+export const RAIN = { dist: 10, walk: 1.5, run: 5, n: 600, fall: 7, top: 0.11, front: 0.79 };
 export const TRAIN_KINDS: SimKind[] = ["trconst", "tracc", "trbrake"];
 export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
 export const BOUNCE_KINDS: SimKind[] = ["bjump", "bdrop", "bwall", "bparty"];
@@ -1800,6 +1806,66 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
         shift[f] = Number.isNaN(landX) ? NaN : landX - takeX;
       };
       lanes.push({ world, g: G, dolls: [rd], control, record });
+    });
+  } else if (kind === "rwalk" || kind === "rrun") {
+    // 雨の中、10m先のコンビニまで歩く（秒速1.5m）／走る（秒速5m）。
+    // 足を前後に交互に出しながら、体全体を一定の速さで進ませる（地面の摩擦はゼロにして、足をすべらせて進む）
+    const run = kind === "rrun";
+    const V = run ? RAIN.run : RAIN.walk;
+    const { world } = makeWorld(G);
+    world.defaultContactMaterial.friction = 0;
+    for (const m of world.contactmaterials) {
+      m.friction = 0;
+    }
+    const rd = addDoll(world, 0, 0, [0, 0, 0], Math.PI / 2);
+    rd.balance = 1.2;
+    const start = 0.6;
+    const hits = val("hits");
+    const dist = val("dist");
+    const top = val("top");
+    const front = val("front");
+    const period = run ? 0.36 : 0.62;
+    lanes.push({
+      world,
+      g: G,
+      dolls: [rd],
+      control: (t) => {
+        applyBalance(rd);
+        const moving = t > start && rd.bodies.pelvis.position.x < RAIN.dist;
+        if (moving) {
+          // 足を交互に前へ（走るときは前かがみで、ひざを高く）
+          const ph = ((t - start) / period) % 2;
+          const a = ph < 1 ? POSES.step : POSES.stepL;
+          const b = ph < 1 ? POSES.stepL : POSES.step;
+          rd.setPose(run ? POSES.runA : a, run ? POSES.runB : b, 0);
+          if (run) {
+            rd.setPose(ph < 1 ? POSES.runA : POSES.runB, ph < 1 ? POSES.runB : POSES.runA, smooth(ph % 1));
+          } else {
+            rd.setPose(a, b, smooth(ph % 1));
+          }
+          for (const body of Object.values(rd.bodies)) {
+            body.velocity.x += (V - body.velocity.x) * 0.08;
+          }
+        } else {
+          rd.setPose(POSES.stand);
+          for (const body of Object.values(rd.bodies)) {
+            body.velocity.x *= 0.9;
+          }
+        }
+      },
+      record: (f) => {
+        // ぬれた雨粒の数（目安）：上から当たる分 ＝ 雨の量 × 上から見た面積 × 外にいた時間、
+        // 前から当たる分 ＝ 空気中の雨粒の数 × 前から見た面積 × 進んだ距離
+        const t = f / fps;
+        const d = Math.min(RAIN.dist, Math.max(0, rd.bodies.pelvis.position.x));
+        const tin = Math.max(0, Math.min(t, start + RAIN.dist / V));
+        const tTop = RAIN.n * RAIN.fall * RAIN.top * tin;
+        const tFront = RAIN.n * RAIN.front * d;
+        top[f] = tTop;
+        front[f] = tFront;
+        hits[f] = tTop + tFront;
+        dist[f] = d;
+      },
     });
   } else if (kind === "fchaos") {
     // 摩擦ゼロの広場で、5人が歩き出そうとする

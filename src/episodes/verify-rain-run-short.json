@@ -1,0 +1,122 @@
+{
+  "id": "verify-rain-run-short",
+  "title": "【検証】雨の日、走るのと歩くの、どっちがぬれない？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "shounen_natsuyasumi.mp3",
+    "title": "少年達の夏休み的なBGM",
+    "credit": "鷹尾まさき(タカオマサキ)",
+    "page": "https://opentracks.com/bgm/detail/2190",
+    "opentracks": 2190,
+    "track": 1
+  },
+  "headline": [
+    "【検証】雨の日",
+    "走る？歩く？"
+  ],
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "雨の日、傘がない！コンビニまで10m。走るのと歩くの、どっちがぬれない？物理で検証してみた！",
+      "effect": "none",
+      "speech": "雨の日、傘がない！コンビニまで10メートル。走るのと歩くの、どっちがぬれない？物理で検証してみた！",
+      "sim": "rrun"
+    },
+    {
+      "type": "whatif",
+      "text": "検証1。歩いて、コンビニへ。",
+      "effect": "none",
+      "sim": "rwalk",
+      "simLabels": [
+        "検証1 歩く（秒速1.5m）",
+        ""
+      ]
+    },
+    {
+      "type": "whatif",
+      "text": "かかった時間は、約7秒。ぬれた雨粒は…約8100粒！",
+      "effect": "none",
+      "speech": "かかった時間は、約7秒。ぬれた雨粒は…約8100粒！",
+      "sim": "rwalk",
+      "simStart": 3.0,
+      "simLabels": [
+        "検証1 歩く（秒速1.5m）",
+        ""
+      ]
+    },
+    {
+      "type": "whatif",
+      "text": "検証2。走って、コンビニへ。",
+      "effect": "none",
+      "sim": "rrun",
+      "simLabels": [
+        "検証2 走る（秒速5m）",
+        ""
+      ]
+    },
+    {
+      "type": "whatif",
+      "text": "かかった時間は、たったの2秒。ぬれた雨粒は…約5900粒！走ったほうが、約3割ぬれにくい！",
+      "effect": "none",
+      "sim": "rrun",
+      "simStart": 0.8,
+      "simLabels": [
+        "検証2 走る（秒速5m）",
+        ""
+      ]
+    },
+    {
+      "type": "whatif",
+      "text": "でも、思ったより差は小さい。その理由は、ぬれ方が2種類あるから。",
+      "effect": "none",
+      "rainChart": "why"
+    },
+    {
+      "type": "whatif",
+      "text": "頭や肩に、上から落ちてくる雨は、外にいる時間が短いほど減る。でも、体の前にぶつかる雨は、同じ距離を進むかぎり、走っても歩いても、同じだけぶつかるんだ。",
+      "effect": "none",
+      "rainChart": "why"
+    },
+    {
+      "type": "whatif",
+      "text": "だから、減ったのは上からの分だけ。走っても、ずぶぬれは、さけられないんだね。",
+      "effect": "none",
+      "rainChart": "bars"
+    },
+    {
+      "type": "whatif",
+      "text": "ちなみに、走ってすべって転ぶと、もっとぬれるので注意！折りたたみ傘を、持ち歩こう。",
+      "effect": "none",
+      "sim": "rwalk",
+      "simStart": 6.5
+    },
+    {
+      "type": "whatif",
+      "text": "次に検証してほしいこと、コメントで教えてね！",
+      "effect": "none",
+      "sim": "rrun",
+      "simStart": 1.5,
+      "hold": 1
+    }
+  ],
+  "description": "雨の日に傘がないとき、走るのと歩くの、どっちがぬれないのか？コンビニまで10mを、物理エンジンの人で検証しました。\nぬれた雨粒の数は、強い雨（1立方メートルに約600粒、落ちる速さ秒速7m）、歩く速さ秒速1.5m、走る速さ秒速5m、体の大きさ（上から見て0.11㎡、前から見て0.79㎡）として計算した目安です。風はないものとしています。\n次に検証してほしいことは、コメントで教えてください！",
+  "hashtags": [
+    "検証",
+    "雨",
+    "物理",
+    "雑学",
+    "Shorts"
+  ]
+}

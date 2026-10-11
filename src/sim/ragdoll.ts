@@ -280,6 +280,43 @@ export const POSES: Record<string, Pose> = {
     elbowL: [-0.4, 0, 0],
     elbowR: [-0.4, 0, 0],
   },
+  // 左足を前へ一歩（step の左右反対）
+  stepL: {
+    waist: [0.1, 0, 0],
+    hipL: [-0.6, 0, 0],
+    kneeL: [0.15, 0, 0],
+    ankleL: [0.45, 0, 0],
+    hipR: [0.35, 0, 0],
+    kneeR: [0.1, 0, 0],
+    ankleR: [-0.45, 0, 0],
+    shoulderR: [-0.5, 0, 0.12],
+    shoulderL: [0.4, 0, -0.12],
+    elbowL: [-0.4, 0, 0],
+    elbowR: [-0.25, 0, 0],
+  },
+  // 走る（前かがみ・ひざを高く・うでを大きく振る）。runA は右足が前、runB は左足が前
+  runA: {
+    waist: [0.3, 0, 0],
+    hipR: [-1.0, 0, 0],
+    kneeR: [1.1, 0, 0],
+    hipL: [0.5, 0, 0],
+    kneeL: [0.9, 0, 0],
+    shoulderL: [-0.9, 0, -0.12],
+    shoulderR: [0.7, 0, 0.12],
+    elbowL: [-1.4, 0, 0],
+    elbowR: [-1.4, 0, 0],
+  },
+  runB: {
+    waist: [0.3, 0, 0],
+    hipL: [-1.0, 0, 0],
+    kneeL: [1.1, 0, 0],
+    hipR: [0.5, 0, 0],
+    kneeR: [0.9, 0, 0],
+    shoulderR: [-0.9, 0, 0.12],
+    shoulderL: [0.7, 0, -0.12],
+    elbowL: [-1.4, 0, 0],
+    elbowR: [-1.4, 0, 0],
+  },
   // 足を少し開いて立つ
   stance: {
     hipL: [0, 0, -0.18],

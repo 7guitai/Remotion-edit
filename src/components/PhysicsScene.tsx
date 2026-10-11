@@ -13,6 +13,7 @@ import {
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import {
+  RAIN,
   TRAIN_KINDS,
   GOLD_GONE,
   GOLD_SIDE,
@@ -70,6 +71,13 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       return { pos: [0, 2.2, lerp(9.4, 8.8, t)], look: [0, 2.0, 0] };
     case "slip":
       return { pos: [0.9, 1.5, lerp(8.8, 8.2, t)], look: [0.9, 0.85, 0] };
+    case "rwalk":
+    case "rrun": {
+      // 歩く・走る人を、横から追いかける
+      const pi = sim.bodies.findIndex((b) => b.part === "pelvis");
+      const px = Math.min(RAIN.dist - 1.2, posAt(sim, f, pi)[0]);
+      return { pos: [px + 0.6, 2.3, 8.6], look: [px + 0.9, 1.45, -0.6] };
+    }
     case "trconst":
     case "tracc":
     case "trbrake":
@@ -224,7 +232,16 @@ const useGroundTexture = (kind: SimKind) =>
     canvas.width = size;
     canvas.height = size;
     const ctx = canvas.getContext("2d")!;
-    if (TRAIN_KINDS.includes(kind)) {
+    if (kind === "rwalk" || kind === "rrun") {
+      // ぬれたアスファルト
+      ctx.fillStyle = "#3d4249";
+      ctx.fillRect(0, 0, size, size);
+      for (let i = 0; i < 2200; i++) {
+        const g = 55 + ((i * 97) % 35);
+        ctx.fillStyle = `rgb(${g},${g + 3},${g + 8})`;
+        ctx.fillRect((i * 53) % size, (i * 131) % size, 2, 2);
+      }
+    } else if (TRAIN_KINDS.includes(kind)) {
       // 電車の床（灰色のゴムの床に、細かい粒）
       ctx.fillStyle = "#8e959e";
       ctx.fillRect(0, 0, size, size);
@@ -721,6 +738,89 @@ const GoldCube: React.FC<{ gone: number; t: number }> = ({ gone, t }) => {
             );
           })
         : null}
+    </group>
+  );
+};
+
+// 雨の道：スタートの線、10m先のコンビニ、降る雨と、人に当たってはじける雨
+const RainStreet: React.FC<{ sim: SimResult; f: number }> = ({ sim, f }) => {
+  const t = f / sim.fps;
+  const pi = sim.bodies.findIndex((b) => b.part === "pelvis");
+  const hi = sim.bodies.findIndex((b) => b.part === "head");
+  const p = posAt(sim, f, pi);
+  const head = posAt(sim, f, hi);
+  const sign = useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 512;
+    canvas.height = 128;
+    const ctx = canvas.getContext("2d")!;
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, 512, 128);
+    ["#1f8f4e", "#ff8a00", "#2f8bff"].forEach((c, i) => {
+      ctx.fillStyle = c;
+      ctx.fillRect(0, 96 + i * 10, 512, 10);
+    });
+    ctx.fillStyle = "#1f8f4e";
+    ctx.font = "bold 72px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("コンビニ", 256, 76);
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    return tex;
+  }, []);
+  const drops: React.ReactNode[] = [];
+  // カメラのまわりだけに雨を描く（ななめのすじ）
+  for (let i = 0; i < 220; i++) {
+    const x = p[0] - 4 + random(`rx${i}`) * 9;
+    const z = -2.5 + random(`rz${i}`) * 5;
+    const H = 6;
+    const y = H - ((random(`ry${i}`) * H + t * RAIN.fall) % H);
+    drops.push(
+      <mesh key={`d${i}`} position={[x, y + 0.15, z]}>
+        <boxGeometry args={[0.008, 0.3, 0.008]} />
+        <meshBasicMaterial color="#cfe6ff" transparent opacity={0.6} />
+      </mesh>,
+    );
+  }
+  // 頭・肩・体の前ではじける雨（当たる量に合わせて数を変える）
+  const rate = sim.values.hits[Math.min(sim.frames - 1, f + 1)] - sim.values.hits[f];
+  const nSplash = Math.min(16, Math.round(rate / 12));
+  for (let i = 0; i < nSplash; i++) {
+    const seed = `sp${f}-${i}`;
+    const onTop = random(`${seed}t`) < 0.5;
+    const x = onTop ? head[0] + (random(`${seed}x`) - 0.5) * 0.4 : p[0] + 0.15;
+    const y = onTop ? head[1] + 0.1 - random(`${seed}y`) * 0.3 : 0.3 + random(`${seed}y`) * 1.3;
+    drops.push(
+      <mesh key={`s${i}`} position={[x, y, (random(`${seed}z`) - 0.5) * 0.4]}>
+        <sphereGeometry args={[0.025, 6, 6]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.85} />
+      </mesh>,
+    );
+  }
+  return (
+    <group>
+      {/* スタートの線 */}
+      <mesh position={[0.3, 0.006, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[0.1, 3]} />
+        <meshBasicMaterial color="#ffffff" />
+      </mesh>
+      {/* コンビニ（10m先） */}
+      {/* 道の奥に建つ。入り口は人が着く場所（10m）の正面 */}
+      <group position={[RAIN.dist + 0.4, 0, -2.9]}>
+        <mesh position={[0, 1.6, 0]} castShadow receiveShadow>
+          <boxGeometry args={[5, 3.2, 3]} />
+          <meshStandardMaterial color="#e8e6e0" roughness={0.8} />
+        </mesh>
+        <mesh position={[0, 2.75, 1.51]}>
+          <planeGeometry args={[3.2, 0.8]} />
+          <meshBasicMaterial map={sign} />
+        </mesh>
+        <mesh position={[-0.4, 1.1, 1.51]}>
+          <planeGeometry args={[1.6, 2.0]} />
+          <meshStandardMaterial color="#fff6d8" emissive="#fff1c0" emissiveIntensity={0.8} />
+        </mesh>
+      </group>
+      {drops}
     </group>
   );
 };
@@ -1237,6 +1337,41 @@ export const PhysicsScene: React.FC<{
     });
   }
 
+  if (sim.kind === "rwalk" || sim.kind === "rrun") {
+    const hits = v("hits");
+    const d = v("dist");
+    const arrived = d >= RAIN.dist - 0.01;
+    overlays.push(
+      <Pill key="mode" x={width / 2} y={70 + T} color={sim.kind === "rrun" ? "#2f8bff" : "#ff4a3d"} size={40}>
+        {labels?.[0] || (sim.kind === "rrun" ? "走る（秒速5m）" : "歩く（秒速1.5m）")}
+      </Pill>,
+      <div
+        key="cnt"
+        style={{
+          position: "absolute",
+          left: width / 2,
+          top: 120 + T,
+          transform: "translate(-50%, 0)",
+          fontFamily,
+          fontWeight: 900,
+          fontSize: 60,
+          color: "#9fd3ff",
+          background: "rgba(0,0,0,0.7)",
+          border: "5px solid #9fd3ff",
+          borderRadius: 18,
+          padding: "2px 26px",
+          whiteSpace: "nowrap",
+        }}
+      >
+        <span style={{ fontSize: 34, color: "#fff", marginRight: 14 }}>ぬれた雨粒</span>
+        {Math.round(hits).toLocaleString()}
+        <span style={{ fontSize: 34 }}> 粒</span>
+      </div>,
+      <Pill key="dist" x={width / 2} y={250 + T} color={arrived ? "#1f8f4e" : "#334"} size={34}>
+        {arrived ? "コンビニに到着！" : `コンビニまで ${(RAIN.dist - d).toFixed(1)}m`}
+      </Pill>,
+    );
+  }
   if (TRAIN_KINDS.includes(sim.kind)) {
     [0, 1].forEach((lane) => {
       const kmh = v(`v${lane}`);
@@ -1653,7 +1788,7 @@ export const PhysicsScene: React.FC<{
     ? "#140a05"
     : isRoad
       ? "#b9c7d6"
-      : kind === "arain" || kind === "train"
+      : kind === "arain" || kind === "train" || kind === "rwalk" || kind === "rrun"
         ? "#8f9aa8"
         : TINY_KINDS.includes(kind)
           ? "#ead9bc"
@@ -1682,7 +1817,7 @@ export const PhysicsScene: React.FC<{
             ? "#140a05"
             : isSky
               ? "linear-gradient(180deg, #1f5fbf 0%, #5ea3e8 45%, #cfe6ff 100%)"
-              : kind === "arain" || kind === "train"
+              : kind === "arain" || kind === "train" || kind === "rwalk" || kind === "rrun"
                 ? "linear-gradient(180deg, #4d5866 0%, #7d8896 55%, #a3adb9 100%)"
                 : TINY_KINDS.includes(kind)
                   ? "linear-gradient(180deg, #f3e6d0 0%, #e9d6b8 60%, #d9c09a 100%)"
@@ -2000,6 +2135,7 @@ export const PhysicsScene: React.FC<{
           return null;
         })}
         {kind === "tworld" ? <TinyProps /> : null}
+        {kind === "rwalk" || kind === "rrun" ? <RainStreet sim={sim} f={f} /> : null}
         {TRAIN_KINDS.includes(kind)
           ? [-1.4, 1.4].map((x0, lane) => {
               const take = sim.values[`take${lane}`][f];
@@ -2112,7 +2248,7 @@ export const PhysicsScene: React.FC<{
             return out;
           })
         : null}
-      {kind === "arain" || kind === "train" ? <Audio src={staticFile("sfx/rain.wav")} volume={0.3} loop /> : null}
+      {kind === "arain" || kind === "train" || kind === "rwalk" || kind === "rrun" ? <Audio src={staticFile("sfx/rain.wav")} volume={0.3} loop /> : null}
       {kind === "train"
         ? [1.5, 4.2].map((h) => {
             const from = Math.round(h * fps) - offset;
