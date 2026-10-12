@@ -26,6 +26,7 @@ import whatifGoldShort from "./whatif-gold-short.json";
 import verifyTrainJumpShort from "./verify-train-jump-short.json";
 import verifyRainRunShort from "./verify-rain-run-short.json";
 import verifyElevator from "./verify-elevator-short.json";
+import relaxSleep45m from "./relax-sleep-45m.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -152,6 +153,19 @@ export type SleepSlide = {
   speech: string;
 };
 
+// 寝落ち用「聞くだけ雑学」の1場面：上に字幕、真ん中に写真（public/photos/）かイラスト。card は章の扉
+export type RelaxSlide = {
+  type: "relax";
+  text: string;
+  speech?: string;
+  photo?: string;
+  // 写真の見せる位置（CSS の object-position）と、横長に広げるか
+  focus?: string;
+  wide?: boolean;
+  image?: string;
+  card?: string;
+};
+
 // 「もしも」動画の1場面：text を読み上げ（speech があればそちら）、字幕は句読点ごとに切り替える
 export type WhatIfSlide = {
   type: "whatif";
@@ -220,6 +234,7 @@ export type ScriptSlide = (
   | SleepSlide
   | WhatIfSlide
   | IllusionSlide
+  | RelaxSlide
 ) & {
   chapter?: string;
   no?: number;
@@ -235,7 +250,7 @@ export type Episode = {
   // ショートの上部のタイトル帯（省略時は表示）
   titleBand?: boolean;
   // "flashy" で1ページ1雑学を派手な編集にする（集中線・叩きつけ文字・フラッシュ・揺れ・効果音）
-  style?: "flashy" | "sleep" | "whatif" | "illusion";
+  style?: "flashy" | "sleep" | "whatif" | "illusion" | "relax";
   // 目の錯覚クイズの見出し：上の小さな文字と、タイトル横の札（例：上級編）
   kicker?: string;
   badge?: string;
@@ -245,6 +260,8 @@ export type Episode = {
   fps?: number;
   // 各スライドの読み上げのあとに入れる間（フレーム。省略時は 12）
   slideGap?: number;
+  // 写真の出典（概要欄に書く）
+  photoCredits?: string;
   // ずっと流す環境音（雨の音など）
   ambient?: { file: string; volume: number; name: string };
   // 1ページ1雑学で、振りを読み終えてから答えを出すまでの間（フレーム。省略時は 30）
@@ -286,6 +303,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  relaxSleep45m as Episode,
   verifyElevator as Episode,
   verifyRainRunShort as Episode,
   verifyTrainJumpShort as Episode,

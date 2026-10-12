@@ -1,0 +1,93 @@
+[
+ {
+  "id": "297d4ebc-e069-476b-bd68-0dc748434000",
+  "title": "Cat Relaxed",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/OHOPNFDBJM.jpg",
+  "thumb": "https://api.openverse.org/v1/images/297d4ebc-e069-476b-bd68-0dc748434000/thumb/",
+  "w": 4608,
+  "h": 3072,
+  "license": "cc0",
+  "creator": "MichaelGaida",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/cat-relaxed-OHOPNFDBJM",
+  "query": "cat relaxing"
+ },
+ {
+  "id": "2ead67af-06ec-4e3a-ab62-1a30117688e4",
+  "title": "Cat Grooming",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/7BXCZNT5JF.jpg",
+  "thumb": "https://api.openverse.org/v1/images/2ead67af-06ec-4e3a-ab62-1a30117688e4/thumb/",
+  "w": 6662,
+  "h": 3747,
+  "license": "cc0",
+  "creator": "Ian Livesey",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/cat-grooming-7BXCZNT5JF",
+  "query": "cat relaxing"
+ },
+ {
+  "id": "4f432a82-dbad-4939-8647-f42a5a3ba80a",
+  "title": "Animal Face",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/GZW89D8X6K.jpg",
+  "thumb": "https://api.openverse.org/v1/images/4f432a82-dbad-4939-8647-f42a5a3ba80a/thumb/",
+  "w": 4588,
+  "h": 3518,
+  "license": "cc0",
+  "creator": "Travel Photographer",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/animal-face-GZW89D8X6K",
+  "query": "cat relaxing"
+ },
+ {
+  "id": "8948ef3e-4cc1-4416-aec7-c338456e5bef",
+  "title": "Black cat lying comfortably on a bed",
+  "url": "https://pd.w.org/2022/09/59763177de1c69ea0.01090517-2048x1182.jpg",
+  "thumb": "https://api.openverse.org/v1/images/8948ef3e-4cc1-4416-aec7-c338456e5bef/thumb/",
+  "w": 2048,
+  "h": 1182,
+  "license": "cc0",
+  "creator": "Theo Gkitsos",
+  "source": "wordpress",
+  "landing": "https://wordpress.org/photos/photo/59763177de/",
+  "query": "cat relaxing"
+ },
+ {
+  "id": "8f442ce5-ba0b-4edc-a334-def7f494ad1d",
+  "title": "Cute cat lying wood plank",
+  "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdXB3azYyMTc2ODY1LXdpa2ltZWRpYS1pbWFnZS1rb3dpcnQ3Zy5qcGc.jpg",
+  "thumb": "https://api.openverse.org/v1/images/8f442ce5-ba0b-4edc-a334-def7f494ad1d/thumb/",
+  "w": 5892,
+  "h": 3934,
+  "license": "cc0",
+  "creator": "",
+  "source": "rawpixel",
+  "landing": "https://www.rawpixel.com/image/3288620/free-photo-image-sleeping-cat-person-laying-down-abyssinian",
+  "query": "cat relaxing"
+ },
+ {
+  "id": "862170d2-ade5-46bd-b9a3-2bd1298044b4",
+  "title": "Close cat sleeping floor",
+  "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L3Vwd2s2MjE3NjkwMC13aWtpbWVkaWEtaW1hZ2Uta293bmY3NnguanBn.jpg",
+  "thumb": "https://api.openverse.org/v1/images/862170d2-ade5-46bd-b9a3-2bd1298044b4/thumb/",
+  "w": 6000,
+  "h": 4000,
+  "license": "cc0",
+  "creator": "",
+  "source": "rawpixel",
+  "landing": "https://www.rawpixel.com/image/3297061/free-photo-image-cute-sleep-vsco-abyssinian",
+  "query": "cat relaxing"
+ },
+ {
+  "id": "c70bba30-079e-4fc5-9c30-ccd0fc582fa9",
+  "title": "",
+  "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvZnJjYXRfY2F0X21pYV9wZXRzLWltYWdlLWt5Y2hwcmJ0LmpwZw.jpg",
+  "thumb": "https://api.openverse.org/v1/images/c70bba30-079e-4fc5-9c30-ccd0fc582fa9/thumb/",
+  "w": 5472,
+  "h": 3080,
+  "license": "cc0",
+  "creator": "",
+  "source": "rawpixel",
+  "landing": "https://www.rawpixel.com/image/6067433/free-public-domain-cc0-photo",
+  "query": "cat relaxing"
+ }
+]

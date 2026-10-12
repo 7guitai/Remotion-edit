@@ -16,6 +16,7 @@ import { Bars, Points, Table } from "./Charts";
 import { Quiz } from "./Quiz";
 import { FlashyTriviaPage } from "./FlashyTriviaPage";
 import { SleepPage } from "./SleepPage";
+import { RelaxPage } from "./RelaxPage";
 import { WhatIfPage } from "./WhatIfPage";
 import { IllusionPage } from "./IllusionPage";
 import { ThreadPage } from "./ThreadPage";
@@ -147,6 +148,9 @@ export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
   }
   if (slide.type === "sleep") {
     return <SleepPage slide={slide} />;
+  }
+  if (slide.type === "relax") {
+    return <RelaxPage slide={slide} />;
   }
   if (slide.type === "thread") {
     return <ThreadPage resolved={resolved} slide={slide} />;

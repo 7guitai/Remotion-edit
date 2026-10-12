@@ -10,3 +10,6 @@ __pycache__/
 
 # NASA などのフリー素材（大きいので python3 scripts/download_footage.py で取得）
 public/footage/
+
+# Openverse のフリー写真（python3 scripts/finalize_photos.py scripts/photo_picks_raw.json で取得）
+public/photos/

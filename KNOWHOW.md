@@ -107,6 +107,18 @@ python3 scripts/generate_voice.py <id>
 - いらすとや：概要欄にクレジット（使わない動画では行ごと省略される）
 - フォント：M PLUS Rounded 1c（OFL）
 
+## 6.5 寝落ち用ロング（relax）の作り方
+
+- 台本は `scripts/relax_sleep_script.txt`（1行＝1場面。`= 章`、`@ 英語の検索語`、行末 `[c]` は落ち着いた写真の共通セット、`{よみ}` は読みだけ変える）
+- 1つの話題は「事実 → 理由 → 身近な例 → やさしい一言（眠りにつなげる）」の4行前後。断定しすぎず「〜といわれています」
+- 声は **青山龍星「しっとり」（speaker 84）・1.0倍・抑揚0.9**（約5.7文字/秒）。BGM は 0.07（声が主役）。間（slideGap）は 22フレーム（15fps）
+- 写真：Openverse API（CC0・パブリックドメインだけ、横長・大きめ）→ `fetch_openverse.py` で候補 → `photo_sheet.py` で一覧シート → 番号を選ぶ → `finalize_photos.py`
+  - **匿名は1分20回・1日200回まで**（403/429 が出たら待つ）。結果は `scripts/openverse_cache/` に保存して再利用
+  - **rawpixel は `image_1300` など大きいサイズにすかしが入る**。Openverse の URL（`editor_1024`）をそのまま使う
+  - 博物館の古い版画・白黒写真・ロゴ入り（コーラ缶など）・関係ない写真が混ざるので、必ず目で選ぶ
+- YouTube の参考動画はクラウド環境から音声を取れない（ボット確認）。`yt-dlp --extractor-args youtube:player_client=mweb -f sb0` でストーリーボード（サムネ一覧）だけは取れる
+- fps 15 で 45分 ≒ 4万フレーム、4コアで約35分で書き出せる
+
 ## 7. 品質チェックの手順（毎回やる）
 
 1. `node scripts/render_stills.mjs <id> frames.json <出力フォルダ> 0.5` で各スライドの代表フレームを書き出す

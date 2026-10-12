@@ -1,0 +1,67 @@
+[
+ {
+  "id": "8d9663dd-24eb-4004-8bfe-118f1f4159ac",
+  "title": "Apple Hand",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/OXWTHY7CJ2.jpg",
+  "thumb": "https://api.openverse.org/v1/images/8d9663dd-24eb-4004-8bfe-118f1f4159ac/thumb/",
+  "w": 5120,
+  "h": 3413,
+  "license": "cc0",
+  "creator": "Jonas Svidras",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/apple-hand-OXWTHY7CJ2",
+  "query": "smartphone night"
+ },
+ {
+  "id": "6bef3467-e043-4952-a65f-9f4ed1635bb2",
+  "title": "House Home",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/W9NA327MNL.jpg",
+  "thumb": "https://api.openverse.org/v1/images/6bef3467-e043-4952-a65f-9f4ed1635bb2/thumb/",
+  "w": 6000,
+  "h": 4000,
+  "license": "cc0",
+  "creator": "Joseph Albanese",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/house-home-W9NA327MNL",
+  "query": "phone in bed"
+ },
+ {
+  "id": "5aeb55cf-cc69-4b25-9d18-aac2c5dc5a58",
+  "title": "Bedroom White",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/8RWPJ5Q6OZ.jpg",
+  "thumb": "https://api.openverse.org/v1/images/5aeb55cf-cc69-4b25-9d18-aac2c5dc5a58/thumb/",
+  "w": 3921,
+  "h": 2971,
+  "license": "cc0",
+  "creator": "Jeff Sheldon",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/bedroom-white-8RWPJ5Q6OZ",
+  "query": "phone in bed"
+ },
+ {
+  "id": "a7a183e6-214e-4c8f-bdf2-028243f5c9c9",
+  "title": "Carefree Smile",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/ERHPHAFHV2.jpg",
+  "thumb": "https://api.openverse.org/v1/images/a7a183e6-214e-4c8f-bdf2-028243f5c9c9/thumb/",
+  "w": 4128,
+  "h": 2752,
+  "license": "cc0",
+  "creator": "Matt Moloney",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/carefree-smile-ERHPHAFHV2",
+  "query": "phone in bed"
+ },
+ {
+  "id": "de5168ae-0e40-4ff5-822b-24d6b94dd2c5",
+  "title": "Volodymyr Zelenskyy paid visit wounded",
+  "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2xyL2ZsNTE5Mzg2MjI1OTMtaW1hZ2UuanBn.jpg",
+  "thumb": "https://api.openverse.org/v1/images/de5168ae-0e40-4ff5-822b-24d6b94dd2c5/thumb/",
+  "w": 3000,
+  "h": 2001,
+  "license": "cc0",
+  "creator": "",
+  "source": "rawpixel",
+  "landing": "https://www.rawpixel.com/image/6924927/photo-image-phone-public-domain-person",
+  "query": "phone in bed"
+ }
+]

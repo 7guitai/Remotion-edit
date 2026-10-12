@@ -103,6 +103,7 @@ def main() -> None:
             else [f"BGM：{ep['bgm']['credit']}「{ep['bgm']['title']}」"] if ep.get("bgm") else []
         ),
         *([f"環境音：{ep['ambient']['name']}"] if ep.get("ambient") else []),
+        *([f"写真：{ep['photoCredits']}"] if ep.get("photoCredits") else []),
         # イラストを使っていない回（「もしも」など）は書かない
         *(
             ["イラスト：" + "、".join(dict.fromkeys(i.get("credit", "いらすとや") for i in ep["illustrations"].values()))]

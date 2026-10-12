@@ -1,0 +1,28 @@
+[
+ {
+  "id": "ec36e194-3b62-43da-996e-d06206dd2160",
+  "title": "Bedroom Clean",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/OE0F9BHXJQ.jpg",
+  "thumb": "https://api.openverse.org/v1/images/ec36e194-3b62-43da-996e-d06206dd2160/thumb/",
+  "w": 4460,
+  "h": 2973,
+  "license": "cc0",
+  "creator": "Burst",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/bedroom-clean-OE0F9BHXJQ",
+  "query": "bed pillow morning light"
+ },
+ {
+  "id": "1aab5a3b-cc9e-4c88-8979-f79dea4c9e49",
+  "title": "Bed Breakfast",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/9E448HXUQL.jpg",
+  "thumb": "https://api.openverse.org/v1/images/1aab5a3b-cc9e-4c88-8979-f79dea4c9e49/thumb/",
+  "w": 4608,
+  "h": 3072,
+  "license": "cc0",
+  "creator": "WDnet Studio",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/bed-breakfast-9E448HXUQL",
+  "query": "bed pillow morning light"
+ }
+]

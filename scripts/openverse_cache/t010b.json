@@ -1,0 +1,54 @@
+[
+ {
+  "id": "b83b1ef6-2117-4283-bade-758658c2d206",
+  "title": "People Woman",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/BJ880XYE9T.jpg",
+  "thumb": "https://api.openverse.org/v1/images/b83b1ef6-2117-4283-bade-758658c2d206/thumb/",
+  "w": 2768,
+  "h": 1848,
+  "license": "cc0",
+  "creator": "Xavier Sotomayor",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/people-woman-BJ880XYE9T",
+  "query": "sad woman window"
+ },
+ {
+  "id": "33a6401a-1ad5-4c32-b88b-216142106f39",
+  "title": "People Woman",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/NBIKGCFO08.jpg",
+  "thumb": "https://api.openverse.org/v1/images/33a6401a-1ad5-4c32-b88b-216142106f39/thumb/",
+  "w": 5616,
+  "h": 3744,
+  "license": "cc0",
+  "creator": "Aidan Meyer",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/people-woman-NBIKGCFO08",
+  "query": "sad woman window"
+ },
+ {
+  "id": "670a00ed-a5db-4f23-8a5b-0bc64efce4d3",
+  "title": "People Woman",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/OALZFG9HPE.jpg",
+  "thumb": "https://api.openverse.org/v1/images/670a00ed-a5db-4f23-8a5b-0bc64efce4d3/thumb/",
+  "w": 7311,
+  "h": 5304,
+  "license": "cc0",
+  "creator": "Joshua Newton",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/people-woman-OALZFG9HPE",
+  "query": "sad woman window"
+ },
+ {
+  "id": "cfdb8d92-2699-4062-97bd-06ffd108ed38",
+  "title": "Wooden tissue box",
+  "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL2ZyaGFuZGtlcmNoaWVmc19ib3hfYmxlc3NfeW91LWltYWdlLWt5YmRqdnV3LmpwZw.jpg",
+  "thumb": "https://api.openverse.org/v1/images/cfdb8d92-2699-4062-97bd-06ffd108ed38/thumb/",
+  "w": 4918,
+  "h": 3312,
+  "license": "cc0",
+  "creator": "",
+  "source": "rawpixel",
+  "landing": "https://www.rawpixel.com/image/6036817/wooden-tissue-box-free-public-domain-cc0-photo",
+  "query": "tissue box"
+ }
+]

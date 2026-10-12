@@ -1,0 +1,67 @@
+[
+ {
+  "id": "6346cde5-dc32-4593-b96d-094ec6ec4b7a",
+  "title": "Flowers Nature",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/MQF0HG7ZIT.jpg",
+  "thumb": "https://api.openverse.org/v1/images/6346cde5-dc32-4593-b96d-094ec6ec4b7a/thumb/",
+  "w": 5199,
+  "h": 3466,
+  "license": "cc0",
+  "creator": "Miki Czetti",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/flowers-nature-MQF0HG7ZIT",
+  "query": "bedding sun"
+ },
+ {
+  "id": "1aab5a3b-cc9e-4c88-8979-f79dea4c9e49",
+  "title": "Bed Breakfast",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/9E448HXUQL.jpg",
+  "thumb": "https://api.openverse.org/v1/images/1aab5a3b-cc9e-4c88-8979-f79dea4c9e49/thumb/",
+  "w": 4608,
+  "h": 3072,
+  "license": "cc0",
+  "creator": "WDnet Studio",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/bed-breakfast-9E448HXUQL",
+  "query": "bedding sun"
+ },
+ {
+  "id": "c846b723-6859-4bb0-b046-247fc092a5f3",
+  "title": "People Man",
+  "url": "https://cdn.stocksnap.io/img-thumbs/960w/CQ09BJ7ECQ.jpg",
+  "thumb": "https://api.openverse.org/v1/images/c846b723-6859-4bb0-b046-247fc092a5f3/thumb/",
+  "w": 5472,
+  "h": 3648,
+  "license": "cc0",
+  "creator": "Martin Jernberg",
+  "source": "stocksnap",
+  "landing": "https://stocksnap.io/photo/people-man-CQ09BJ7ECQ",
+  "query": "bedding sun"
+ },
+ {
+  "id": "108ab91f-ba1f-44bf-a7dd-0d1e2bbd344c",
+  "title": "Locust plagues Palestine. Methods fighting",
+  "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2xvYzIwMTk2OTM2NTMtaW1hZ2UuanBn.jpg",
+  "thumb": "https://api.openverse.org/v1/images/108ab91f-ba1f-44bf-a7dd-0d1e2bbd344c/thumb/",
+  "w": 5792,
+  "h": 4285,
+  "license": "cc0",
+  "creator": "libraryofcongress",
+  "source": "rawpixel",
+  "landing": "https://www.rawpixel.com/image/6823346/photo-image-art-sun-vintage",
+  "query": "bedding sun"
+ },
+ {
+  "id": "41b6d450-50ab-4162-9dc1-62b6013773ac",
+  "title": "winter sun blares top tree",
+  "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvYnM2NDEwLWltYWdlLWt3eXQ1a3lrLmpwZw.jpg",
+  "thumb": "https://api.openverse.org/v1/images/41b6d450-50ab-4162-9dc1-62b6013773ac/thumb/",
+  "w": 2000,
+  "h": 1333,
+  "license": "cc0",
+  "creator": "",
+  "source": "rawpixel",
+  "landing": "https://www.rawpixel.com/image/5974999/photo-image-light-public-domain-tree",
+  "query": "bedding sun"
+ }
+]
