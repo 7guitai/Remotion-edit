@@ -118,6 +118,8 @@ python3 scripts/generate_voice.py <id>
   - 博物館の古い版画・白黒写真・ロゴ入り（コーラ缶など）・関係ない写真が混ざるので、必ず目で選ぶ
 - YouTube の参考動画はクラウド環境から音声を取れない（ボット確認）。`yt-dlp --extractor-args youtube:player_client=mweb -f sb0` でストーリーボード（サムネ一覧）だけは取れる
 - fps 15 で 45分 ≒ 4万フレーム、4コアで約35分で書き出せる
+- **長い動画は音声で容量切れになる**（Remotion は音声ごとに一時 wav を作り、BGM のループで数GB使う）。
+  映像は `--muted` で書き出し → すぐ 720p に圧縮して元を消す → 音声は `python3 scripts/mix_audio.py <id> out/a.m4a`（同じタイミングで自前で重ねる）→ `ffmpeg -c copy` でつなぐ
 
 ## 7. 品質チェックの手順（毎回やる）
 
