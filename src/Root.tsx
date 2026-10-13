@@ -4,6 +4,7 @@ import { SleepThumbnail } from "./components/SleepThumbnail";
 import { WhatIfThumbnail } from "./components/WhatIfThumbnail";
 import { TinyThumbnail } from "./components/TinyThumbnail";
 import { RelaxThumbnail } from "./components/RelaxThumbnail";
+import { PaperThumbnail } from "./components/PaperThumbnail";
 import { EPISODES } from "./episodes";
 import { calculateMetadata, FPS } from "./slides";
 import { Video } from "./Video";
@@ -57,6 +58,20 @@ export const RemotionRoot: React.FC = () => {
             "relax/bef6d67d-baac-49db-9e7b-a94fd50af4f8.jpg",
             "relax/7a52926a-6ca3-4498-86d7-98cf9e7b48e2.jpg",
           ],
+        }}
+      />
+      {/* 「論文で読み解く心理学」スポットライト効果の回のサムネイル（npx remotion still paper-spotlight-long-thumbnail out/thumb.png） */}
+      <Still
+        id="paper-spotlight-long-thumbnail"
+        component={PaperThumbnail}
+        width={1280}
+        height={720}
+        defaultProps={{
+          kicker: "論文で読み解く心理学",
+          lines: ["人は、あなたを", "見ていない"],
+          badge: "スポットライト効果",
+          person: "ira_man_shock.png",
+          thought: "みんなに\n見られてる…！？",
         }}
       />
       {/* 「地球の“もしも”10選」のサムネイル（npx remotion still whatif-earth-long-thumbnail out/thumb.png --gl=swangle） */}

@@ -28,6 +28,7 @@ import verifyRainRunShort from "./verify-rain-run-short.json";
 import verifyElevator from "./verify-elevator-short.json";
 import verifyStrap from "./verify-strap-short.json";
 import paperLoveLong from "./paper-love-long.json";
+import paperSpotlightLong from "./paper-spotlight-long.json";
 import relaxSleep45m from "./relax-sleep-45m.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
@@ -307,6 +308,7 @@ export type Episode = {
 
 export const EPISODES: Episode[] = [
   paperLoveLong as Episode,
+  paperSpotlightLong as Episode,
   verifyStrap as Episode,
   relaxSleep45m as Episode,
   verifyElevator as Episode,

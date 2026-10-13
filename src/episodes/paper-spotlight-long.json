@@ -1,0 +1,2181 @@
+{
+ "id": "paper-spotlight-long",
+ "title": "人は、あなたが思うほどあなたを見ていない｜スポットライト効果【論文で読み解く心理学】",
+ "format": "landscape",
+ "titleBand": false,
+ "pr": false,
+ "style": "paper",
+ "background": "#0b1222",
+ "slideGap": 10,
+ "bgmVolume": 0.07,
+ "voice": {
+  "speaker": 13,
+  "speed": 1.2,
+  "name": "青山龍星"
+ },
+ "bgm": {
+  "file": "jitaku_nite.mp3",
+  "title": "自宅にて",
+  "credit": "KK",
+  "page": "https://opentracks.com/bgm/detail/4041",
+  "opentracks": 4041,
+  "track": 1
+ },
+ "illustrations": {
+  "ira_man_cry.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMwrKPOp3kuJfDea-QwL6S8fu7rCCziqC6OzaS8QbRjwJBlajVoZYrghnt531VLj9G0XmIdNdKAXu3FV_T_Y0haoD6b8Rbtg_q_5hDOOdcDH5g4UUQTu3HEX2FWa-jo-PHGAZqtdwxhyphenhyphen_B/s800/business_man1_3_cry.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_idea.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhT1nHSRTNumaQWjilS1yilCY863lpnSaaVWo9oTSuIIB_vJ1I4N7eAlMhKqf_0SalEaBBuVSuF0e6kLIeU571h9ozcf4R2mBHC-7i_r8m35PDZruoSyC3GtvMObVSHpz5x4iGKdwQJSnqB/s800/business_man2_1_idea.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_laugh.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOHa1uoODoJQKY4lJibxtbHwA7J0MZd_T7NI6Ccay2-Z-73eo10bkIenD9uMbk2n1If4e7m-W58iL_QSMaz1ekU7i0sBSq2ecLUpGrpwWs_farEoAtFI7TfxMIGwqvgmVF1qUJ2nUWsc1o/s800/business_man1_4_laugh.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_question.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgl0KzEZadyAPONwycA4NlT0GpZ3hlafw-DbpxSwzRp2BRgo4iIjacANvbXZW4CPwd7jqhdJI3FWPqhYrboe9bA7rCl7SqLVogwgZaru5rGSIe6iePd3Om-q-tk7O3pJxXwnnZHhAMA6_7b/s800/business_man3_1_question.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_shock.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_6HziRfnEDt4hyphenhyphenAYghphhjJh930C5aFyyh31XDYKkS_FIrNOY4liMDdMhU1e6w9wN3hgGgH-mjLmSteUs3jy_t_H2JltQ2VoSx0lH5Yz2BE_iXyysblzC1LkUMb3XNen3Pe0Vj7HXuYdU/s800/business_man2_2_shock.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_smile.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinCa3_I-Cu_oduFEXJgdqLfVVLTpVDzeeKvJU1P7Tmvy0-LJIQn6eLnUde-sOqyUxlU6Kmf_3nN832P3E5_MuqE_VM3ZUP598T9aA9RBjhVVPZm3OC_fuKOQA5qHw61GXMAvDTEmgmtV9n/s800/business_man1_1_smile.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_tehe.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpWUJ8C23MH3tU9WO26wRMXCdu2di6A5q1Cm4YtF41FzfMT7LzIj1KuG3VCcQ_p6pNzR2WwGEHQFcDMMSPi3jjl_9eKZ-RigCKTnIvNvIl2QDQ3cq_5myY5DEmaZJEXYCs7GF-M0I2wZ7_/s800/business_man3_4_tehe.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_laugh.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieAeI8ijO5STgO5_khv-yLs6YEmCim2YRL0pf2AmPs8n5BrLbNRlAPl2Xr-L0GPMrY2bHy03KwyS0AD5MEDr_cyvOIziLeJ1wE7j1zJOo3vuA2Rxcbhbzlu3OsLUo3CBrW1wCEEtWKWVgv/s800/business_woman1_4_laugh.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_question.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgLFi0jmvOC0MaCsAPvncR4IIVJcfHYTqte1gB1JrzuEEM4TK_2LlnEhT8JUu2ey4NMlMsAtwiY6s2-XC-VwvuB7Hu6FLRD0iiJGKFV-9yxYSZtLCsd3TOKrjQguZAyUU6dkhYVBp2YqHGF/s800/business_woman3_1_question.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_shock.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDCbvH3MnhSwXvCRkMh6oKkuWOl7VavEfSKEmUupkYbjo3rhyGZjmrt6Bn_Qet24e-5WkweqKetj_M2gPTkPVhA5-ACi3soeFXaYO8AJ-M_Tbd7Cgx6dLT_RfikBqaIsgCEfhYY_UJi_g2/s800/business_woman2_2_shock.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_smile.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKIGkR0NAsKhA679VI-_AHno_N3kOZwDEDErKUvypLVOHeDP4mSJAL1BjcGdpQUT3entVehgWv5XUgqmaCT0Bk6JAxMC0KLDQ8ro14IqpaQVGADgeXzmKsvaKYorWY3JtENTkKNC1xaoD4/s800/business_woman1_1_smile.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_tehe.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhWNyPdOCBYo-ri3xd13eMoGkRrSQiYNCTUEMgV771ZnVdhJLEBQJKA2_tzmvNNzrB4kiyRA-eJhhyfM2jpY-kiJ-SX9gahezwy5ftFW6p2Yeu9_Mnhaa0XHbGngI7ivuLa3FWQFF4EKSSA/s800/business_woman3_4_tehe.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_think.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5WZVuN0Tjy3STawu94uzuxEFV3OG_ykTcqeWKgWLQez13ISsOub8G0u_WQfTnjvQes_RXVnJuaiUjjW8NZv9jwGFvfaoXtA7hlapl932SYQsrBO6jZhP-8ZXuAp4IGj1ElpfL1vZXfiqA/s800/business_woman2_4_think.png",
+   "credit": "いらすとや"
+  }
+ },
+ "description": "寝ぐせ、言いまちがい、人前での緊張。「みんなに見られていた」と感じるあの感覚は、どこまで本当なのか。スポットライト効果・透明性の錯覚など、5つの心理学の研究から読み解きます。\n台本・例え話はオリジナルです。研究の内容は、論文の要旨や本文で確認できた範囲で紹介しています（Tシャツ実験の割合は、研究を紹介した解説で広く引用されている値です）。\n\n▼ 紹介した研究\n・Gilovich, Medvec & Savitsky (2000) The Spotlight Effect in Social Judgment. Journal of Personality and Social Psychology, 78(2), 211-222.\n・Gilovich, Kruger & Medvec (2002) The Spotlight Effect Revisited. Journal of Experimental Social Psychology.\n・Gilovich, Savitsky & Medvec (1998) The Illusion of Transparency. Journal of Personality and Social Psychology, 75(2), 332-346.\n・Savitsky, Epley & Gilovich (2001) Do Others Judge Us as Harshly as We Think? Journal of Personality and Social Psychology, 81(1), 44-56.\n・Savitsky & Gilovich (2003) The Illusion of Transparency and the Alleviation of Speech Anxiety. Journal of Experimental Social Psychology, 39, 618-625.",
+ "hashtags": [
+  "心理学",
+  "スポットライト効果",
+  "論文",
+  "雑学"
+ ],
+ "slides": [
+  {
+   "type": "paper",
+   "text": "あの失敗、みんなに見られていた気がする。",
+   "visual": {
+    "kind": "title",
+    "kicker": "論文で読み解く 心理学",
+    "title": [
+     "人は、あなたが思うほど",
+     "あなたを見ていない"
+    ],
+    "sub": "5つの研究で読み解く「気にしすぎ」の正体"
+   },
+   "enter": true,
+   "chapter": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "その「見られている感じ」には、ちゃんと名前のついた心のクセがあります。",
+   "visual": {
+    "kind": "title",
+    "kicker": "論文で読み解く 心理学",
+    "title": [
+     "人は、あなたが思うほど",
+     "あなたを見ていない"
+    ],
+    "sub": "5つの研究で読み解く「気にしすぎ」の正体"
+   },
+   "enter": false
+  },
+  {
+   "type": "paper",
+   "text": "入社2年目のソウタと、同じチームのアカリ。",
+   "visual": {
+    "kind": "scene",
+    "place": "朝の会議室",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "ソウタ",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "アカリ",
+     "thought": null,
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "speech": "入社にねんめのソウタと、同じチームのアカリ。",
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "月曜の朝、ソウタは寝坊して、寝ぐせのまま会議に飛びこみました。",
+   "visual": {
+    "kind": "scene",
+    "place": "朝の会議室",
+    "left": {
+     "emoji": "ira_man_shock.png",
+     "name": "ソウタ",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "アカリ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": true,
+   "speech": "月曜の朝、ソウタは寝坊して、ねぐせのまま会議に飛びこみました。",
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "しかも、売上の報告で数字を言いまちがえ、口ごもってしまいます。",
+   "visual": {
+    "kind": "scene",
+    "place": "朝の会議室",
+    "left": {
+     "emoji": "ira_man_shock.png",
+     "name": "ソウタ",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "アカリ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "ソウタは思います。「最悪だ。みんな絶対、変に思った」",
+   "visual": {
+    "kind": "scene",
+    "place": "朝の会議室",
+    "left": {
+     "emoji": "ira_man_cry.png",
+     "name": "ソウタ",
+     "thought": "寝ぐせも見られた…\n数字もまちがえた…",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "アカリ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "席にもどってからも、あの数秒が、何度も頭の中で再生されます。",
+   "visual": {
+    "kind": "scene",
+    "place": "朝の会議室",
+    "left": {
+     "emoji": "ira_man_cry.png",
+     "name": "ソウタ",
+     "thought": "寝ぐせも見られた…\n数字もまちがえた…",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "アカリ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "同じ会議で、アカリも考えごとをしていました。",
+   "visual": {
+    "kind": "scene",
+    "place": "朝の会議室",
+    "left": {
+     "emoji": "ira_man_cry.png",
+     "name": "ソウタ",
+     "thought": "寝ぐせも見られた…\n数字もまちがえた…",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_think.png",
+     "name": "アカリ",
+     "thought": "資料の誤字、\nバレてないかな…",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "「私の資料、1か所まちがえてた。気づかれたかな」",
+   "visual": {
+    "kind": "scene",
+    "place": "朝の会議室",
+    "left": {
+     "emoji": "ira_man_cry.png",
+     "name": "ソウタ",
+     "thought": "寝ぐせも見られた…\n数字もまちがえた…",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_think.png",
+     "name": "アカリ",
+     "thought": "資料の誤字、\nバレてないかな…",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "speech": "私の資料、いっかしょまちがえてた。気づかれたかな",
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "2人とも、自分の小さな失敗に、強いライトが当たっているように感じています。",
+   "visual": {
+    "kind": "scene",
+    "place": "朝の会議室",
+    "left": {
+     "emoji": "ira_man_cry.png",
+     "name": "ソウタ",
+     "thought": "寝ぐせも見られた…\n数字もまちがえた…",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_think.png",
+     "name": "アカリ",
+     "thought": "資料の誤字、\nバレてないかな…",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "でも実は、2人とも、相手の失敗にはほとんど気づいていません。",
+   "visual": {
+    "kind": "scene",
+    "place": "朝の会議室",
+    "left": {
+     "emoji": "ira_man_cry.png",
+     "name": "ソウタ",
+     "thought": "寝ぐせも見られた…\n数字もまちがえた…",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_think.png",
+     "name": "アカリ",
+     "thought": "資料の誤字、\nバレてないかな…",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "この動画では、なぜ私たちが「見られすぎ」と感じるのかを、5つの研究から解き明かします。",
+   "visual": {
+    "kind": "list",
+    "title": "この動画で紹介する研究",
+    "items": [
+     "目立つTシャツは、どれくらい覚えられていた？",
+     "会議の発言も、毎日の見た目も、思うほど目立たない",
+     "緊張やウソは、顔に出ているほどバレていない",
+     "失敗しても、思うほど厳しく見られない",
+     "「見えていない」と知るだけで、話がうまくなる"
+    ]
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "最後に、気にしすぎをほどく3つのルールもお話しします。",
+   "visual": {
+    "kind": "list",
+    "title": "この動画で紹介する研究",
+    "items": [
+     "目立つTシャツは、どれくらい覚えられていた？",
+     "会議の発言も、毎日の見た目も、思うほど目立たない",
+     "緊張やウソは、顔に出ているほどバレていない",
+     "失敗しても、思うほど厳しく見られない",
+     "「見えていない」と知るだけで、話がうまくなる"
+    ]
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "第1章。目立つTシャツは、覚えられていたか。",
+   "visual": {
+    "kind": "chapter",
+    "no": 1,
+    "title": "目立つTシャツは\n覚えられていたか"
+   },
+   "enter": true,
+   "speech": "第一章。目立つTシャツは、覚えられていたか。",
+   "chapter": "第1章 目立つTシャツの実験"
+  },
+  {
+   "type": "paper",
+   "text": "アメリカのコーネル大学で、ちょっと変わった実験が行われました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Medvec & Savitsky",
+    "year": "2000",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "The Spotlight Effect in Social Judgment",
+    "points": [
+     "学生に、ちょっと恥ずかしい絵柄のTシャツを着てもらう",
+     "そのまま、ほかの学生がいる部屋に少しだけ入る"
+    ]
+   },
+   "enter": true,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "学生に、当時の大学生から見て「ちょっとダサい」歌手の顔が大きくプリントされたTシャツを着てもらいます。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Medvec & Savitsky",
+    "year": "2000",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "The Spotlight Effect in Social Judgment",
+    "points": [
+     "学生に、ちょっと恥ずかしい絵柄のTシャツを着てもらう",
+     "そのまま、ほかの学生がいる部屋に少しだけ入る"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "そして、ほかの学生たちがアンケートを書いている部屋に、少しだけ入ってもらいました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Medvec & Savitsky",
+    "year": "2000",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "The Spotlight Effect in Social Judgment",
+    "points": [
+     "学生に、ちょっと恥ずかしい絵柄のTシャツを着てもらう",
+     "そのまま、ほかの学生がいる部屋に少しだけ入る"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "部屋を出たあと、Tシャツを着た本人に聞きます。「何人くらいが、このTシャツの絵柄に気づいたと思う？」",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Medvec & Savitsky",
+    "year": "2000",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "The Spotlight Effect in Social Judgment",
+    "points": [
+     "学生に、ちょっと恥ずかしい絵柄のTシャツを着てもらう",
+     "そのまま、ほかの学生がいる部屋に少しだけ入る"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "本人たちの予想は、部屋にいた人の、およそ半分でした。",
+   "visual": {
+    "kind": "bars",
+    "title": "Tシャツの絵柄に 気づいた人の割合",
+    "rows": [
+     {
+      "label": "本人の予想",
+      "value": 46,
+      "color": "#d0607a"
+     },
+     {
+      "label": "実際に気づいた人",
+      "value": 23,
+      "color": "#2f5d8a"
+     }
+    ],
+    "max": 60,
+    "note": "出典：Gilovich ほか（2000）研究1の結果を紹介した解説より（約）"
+   },
+   "enter": true,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "ところが、実際に絵柄を言い当てられたのは、4人に1人ほど。",
+   "visual": {
+    "kind": "bars",
+    "title": "Tシャツの絵柄に 気づいた人の割合",
+    "rows": [
+     {
+      "label": "本人の予想",
+      "value": 46,
+      "color": "#d0607a"
+     },
+     {
+      "label": "実際に気づいた人",
+      "value": 23,
+      "color": "#2f5d8a"
+     }
+    ],
+    "max": 60,
+    "note": "出典：Gilovich ほか（2000）研究1の結果を紹介した解説より（約）"
+   },
+   "enter": false,
+   "speech": "ところが、実際に絵柄を言い当てられたのは、よにんにひとりほど。",
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "本人は、見られている割合を、およそ2倍に見積もっていたんです。",
+   "visual": {
+    "kind": "bars",
+    "title": "Tシャツの絵柄に 気づいた人の割合",
+    "rows": [
+     {
+      "label": "本人の予想",
+      "value": 46,
+      "color": "#d0607a"
+     },
+     {
+      "label": "実際に気づいた人",
+      "value": 23,
+      "color": "#2f5d8a"
+     }
+    ],
+    "max": 60,
+    "note": "出典：Gilovich ほか（2000）研究1の結果を紹介した解説より（約）"
+   },
+   "enter": false,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "この思い込みは、スポットライト効果と名づけられました。",
+   "visual": {
+    "kind": "concept",
+    "term": "スポットライト効果",
+    "en": "The Spotlight Effect",
+    "desc": "自分の見た目や行動が、\n実際よりも他人に注目されていると思い込むこと"
+   },
+   "enter": true,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "まるで舞台の上で、自分だけにライトが当たっているように感じる、という意味です。",
+   "visual": {
+    "kind": "concept",
+    "term": "スポットライト効果",
+    "en": "The Spotlight Effect",
+    "desc": "自分の見た目や行動が、\n実際よりも他人に注目されていると思い込むこと"
+   },
+   "enter": false,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "面白いのは、恥ずかしいTシャツだけではなかったことです。",
+   "visual": {
+    "kind": "concept",
+    "term": "スポットライト効果",
+    "en": "The Spotlight Effect",
+    "desc": "自分の見た目や行動が、\n実際よりも他人に注目されていると思い込むこと"
+   },
+   "enter": false,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "本人が「着ていて誇らしい」と思う人物のTシャツでも、やはり気づかれ方を多く見積もっていました。",
+   "visual": {
+    "kind": "concept",
+    "term": "スポットライト効果",
+    "en": "The Spotlight Effect",
+    "desc": "自分の見た目や行動が、\n実際よりも他人に注目されていると思い込むこと"
+   },
+   "enter": false,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "つまり、恥ずかしいときも、ほめられたいときも、私たちは「見られている」と感じすぎるんです。",
+   "visual": {
+    "kind": "concept",
+    "term": "スポットライト効果",
+    "en": "The Spotlight Effect",
+    "desc": "自分の見た目や行動が、\n実際よりも他人に注目されていると思い込むこと"
+   },
+   "enter": false,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "なぜ、こんなに見積もりがずれるのでしょうか。",
+   "visual": {
+    "kind": "concept",
+    "term": "スポットライト効果",
+    "en": "The Spotlight Effect",
+    "desc": "自分の見た目や行動が、\n実際よりも他人に注目されていると思い込むこと"
+   },
+   "enter": false,
+   "speech": "なぜ、こんなにみつもりがずれるのでしょうか。",
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "研究チームは、私たちが「自分の感じ方」を基準にしてしまうからだと考えました。",
+   "visual": {
+    "kind": "concept",
+    "term": "自分の感覚がものさし",
+    "desc": "自分にとって大きなことを出発点にして、\n相手の目線へ調整しきれない"
+   },
+   "enter": true,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "自分にとって、あのTシャツはとても目立つ。その強い感覚を出発点にして、「相手から見たら」と考え直します。",
+   "visual": {
+    "kind": "concept",
+    "term": "自分の感覚がものさし",
+    "desc": "自分にとって大きなことを出発点にして、\n相手の目線へ調整しきれない"
+   },
+   "enter": false,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "でも、その考え直しが、どうしても足りない。だから、見積もりが大きいまま残ってしまうんです。",
+   "visual": {
+    "kind": "concept",
+    "term": "自分の感覚がものさし",
+    "desc": "自分にとって大きなことを出発点にして、\n相手の目線へ調整しきれない"
+   },
+   "enter": false,
+   "speech": "でも、その考え直しが、どうしても足りない。だから、みつもりが大きいまま残ってしまうんです。",
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "前髪を切りすぎた日。シャツに小さなシミがある日。マスクのあとが顔に残っている日。",
+   "visual": {
+    "kind": "list",
+    "title": "「見られてる」と感じやすい場面",
+    "items": [
+     "前髪を切りすぎた日",
+     "シャツに小さなシミがある日",
+     "電車で、お腹が鳴ったとき",
+     "新しい服をおろした日"
+    ]
+   },
+   "enter": true,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "そんな日は、すれちがう人みんなに見られている気がしますよね。",
+   "visual": {
+    "kind": "list",
+    "title": "「見られてる」と感じやすい場面",
+    "items": [
+     "前髪を切りすぎた日",
+     "シャツに小さなシミがある日",
+     "電車で、お腹が鳴ったとき",
+     "新しい服をおろした日"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "でも、実験の結果から考えると、気づいている人は、思っているよりずっと少ないんです。",
+   "visual": {
+    "kind": "list",
+    "title": "「見られてる」と感じやすい場面",
+    "items": [
+     "前髪を切りすぎた日",
+     "シャツに小さなシミがある日",
+     "電車で、お腹が鳴ったとき",
+     "新しい服をおろした日"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "ソウタの寝ぐせも、会議の参加者の多くは、たぶん覚えていません。",
+   "visual": {
+    "kind": "scene",
+    "place": "朝の会議室",
+    "left": {
+     "emoji": "ira_man_cry.png",
+     "name": "ソウタ",
+     "thought": "（みんな寝ぐせ見てた…）",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_think.png",
+     "name": "アカリ",
+     "thought": "（今日のお昼、何にしよう）",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "speech": "ソウタのねぐせも、会議の参加者の多くは、たぶん覚えていません。",
+   "tag": "第1章 スポットライト効果"
+  },
+  {
+   "type": "paper",
+   "text": "第2章。会議の発言も、毎日の見た目も、思うほど目立たない。",
+   "visual": {
+    "kind": "chapter",
+    "no": 2,
+    "title": "発言も見た目も\n思うほど目立たない"
+   },
+   "enter": true,
+   "speech": "第二章。会議の発言も、毎日の見た目も、思うほど目立たない。",
+   "chapter": "第2章 発言も見た目も目立たない"
+  },
+  {
+   "type": "paper",
+   "text": "同じ論文には、話し合いの実験ものっています。",
+   "visual": {
+    "kind": "chapter",
+    "no": 2,
+    "title": "発言も見た目も\n思うほど目立たない"
+   },
+   "enter": false
+  },
+  {
+   "type": "paper",
+   "text": "数人のグループで話し合ったあと、自分の発言がどれくらい印象に残ったかを予想してもらいました。",
+   "visual": {
+    "kind": "chapter",
+    "no": 2,
+    "title": "発言も見た目も\n思うほど目立たない"
+   },
+   "enter": false
+  },
+  {
+   "type": "paper",
+   "text": "すると、うまく言えた発言も、言いまちがえた発言も、本人が思うほどは目立っていませんでした。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "本人の感覚",
+     "body": "あの一言、変だった…\nみんな覚えてるはず"
+    },
+    "right": {
+     "title": "ほかの参加者",
+     "body": "そんなこと言ってた？\n（よく覚えていない）"
+    }
+   },
+   "enter": true,
+   "tag": "第2章 他人は自分で忙しい"
+  },
+  {
+   "type": "paper",
+   "text": "会議で口ごもった一言を、帰り道まで気にしてしまうこと、ありますよね。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "本人の感覚",
+     "body": "あの一言、変だった…\nみんな覚えてるはず"
+    },
+    "right": {
+     "title": "ほかの参加者",
+     "body": "そんなこと言ってた？\n（よく覚えていない）"
+    }
+   },
+   "enter": false,
+   "speech": "会議でくちごもったひとことを、帰り道まで気にしてしまうこと、ありますよね。",
+   "tag": "第2章 他人は自分で忙しい"
+  },
+  {
+   "type": "paper",
+   "text": "でも、ほかの人にとっては、たくさんの発言のうちの、ひとつにすぎません。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "本人の感覚",
+     "body": "あの一言、変だった…\nみんな覚えてるはず"
+    },
+    "right": {
+     "title": "ほかの参加者",
+     "body": "そんなこと言ってた？\n（よく覚えていない）"
+    }
+   },
+   "enter": false,
+   "tag": "第2章 他人は自分で忙しい"
+  },
+  {
+   "type": "paper",
+   "text": "さらに2002年、同じ研究者たちは、毎日の「調子の波」についても調べました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Kruger & Medvec",
+    "year": "2002",
+    "journal": "Journal of Experimental Social Psychology",
+    "title": "The Spotlight Effect Revisited",
+    "points": [
+     "見た目の「いい日・悪い日」は、周りに気づかれているか",
+     "スポーツやゲームの出来の波でも調べた"
+    ]
+   },
+   "enter": true,
+   "tag": "第2章 他人は自分で忙しい"
+  },
+  {
+   "type": "paper",
+   "text": "今日は髪型が決まらない。昨日より顔がむくんでいる。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Kruger & Medvec",
+    "year": "2002",
+    "journal": "Journal of Experimental Social Psychology",
+    "title": "The Spotlight Effect Revisited",
+    "points": [
+     "見た目の「いい日・悪い日」は、周りに気づかれているか",
+     "スポーツやゲームの出来の波でも調べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第2章 他人は自分で忙しい"
+  },
+  {
+   "type": "paper",
+   "text": "自分では、日によって見た目が大きくちがうように感じます。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Kruger & Medvec",
+    "year": "2002",
+    "journal": "Journal of Experimental Social Psychology",
+    "title": "The Spotlight Effect Revisited",
+    "points": [
+     "見た目の「いい日・悪い日」は、周りに気づかれているか",
+     "スポーツやゲームの出来の波でも調べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第2章 他人は自分で忙しい"
+  },
+  {
+   "type": "paper",
+   "text": "でも研究では、その「日による差」を、周りの人は本人が思うほど見分けていませんでした。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Kruger & Medvec",
+    "year": "2002",
+    "journal": "Journal of Experimental Social Psychology",
+    "title": "The Spotlight Effect Revisited",
+    "points": [
+     "見た目の「いい日・悪い日」は、周りに気づかれているか",
+     "スポーツやゲームの出来の波でも調べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第2章 他人は自分で忙しい"
+  },
+  {
+   "type": "paper",
+   "text": "スポーツやテレビゲームの出来の波でも、同じ傾向が見られました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Kruger & Medvec",
+    "year": "2002",
+    "journal": "Journal of Experimental Social Psychology",
+    "title": "The Spotlight Effect Revisited",
+    "points": [
+     "見た目の「いい日・悪い日」は、周りに気づかれているか",
+     "スポーツやゲームの出来の波でも調べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第2章 他人は自分で忙しい"
+  },
+  {
+   "type": "paper",
+   "text": "では、なぜ周りの人は、そんなに気づかないのでしょう。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Kruger & Medvec",
+    "year": "2002",
+    "journal": "Journal of Experimental Social Psychology",
+    "title": "The Spotlight Effect Revisited",
+    "points": [
+     "見た目の「いい日・悪い日」は、周りに気づかれているか",
+     "スポーツやゲームの出来の波でも調べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第2章 他人は自分で忙しい"
+  },
+  {
+   "type": "paper",
+   "text": "答えのひとつは、周りの人も、自分のことで手いっぱいだからです。",
+   "visual": {
+    "kind": "concept",
+    "term": "みんな自分で手いっぱい",
+    "desc": "ほかの人も、自分の発言・見た目・次にすることで\n頭がいっぱい。あなたを見ている余裕は少ない"
+   },
+   "enter": true,
+   "tag": "第2章 他人は自分で忙しい"
+  },
+  {
+   "type": "paper",
+   "text": "ゲームの研究でも、見ている側が自分のプレイに集中していると、相手の出来には気づきにくいことが示されました。",
+   "visual": {
+    "kind": "concept",
+    "term": "みんな自分で手いっぱい",
+    "desc": "ほかの人も、自分の発言・見た目・次にすることで\n頭がいっぱい。あなたを見ている余裕は少ない"
+   },
+   "enter": false,
+   "tag": "第2章 他人は自分で忙しい"
+  },
+  {
+   "type": "paper",
+   "text": "会議中のアカリも、自分の資料の誤字のことで、頭がいっぱいでした。",
+   "visual": {
+    "kind": "scene",
+    "place": "朝の会議室",
+    "left": {
+     "emoji": "ira_man_cry.png",
+     "name": "ソウタ",
+     "thought": "（言いまちがえた…）",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_shock.png",
+     "name": "アカリ",
+     "thought": "（誤字、バレたかな…）",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "第2章 他人は自分で忙しい"
+  },
+  {
+   "type": "paper",
+   "text": "みんながそれぞれ、自分にライトを当てている。だから、他人のライトまでは見ていないんです。",
+   "visual": {
+    "kind": "scene",
+    "place": "朝の会議室",
+    "left": {
+     "emoji": "ira_man_cry.png",
+     "name": "ソウタ",
+     "thought": "（言いまちがえた…）",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_shock.png",
+     "name": "アカリ",
+     "thought": "（誤字、バレたかな…）",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "第2章 他人は自分で忙しい"
+  },
+  {
+   "type": "paper",
+   "text": "第3章。緊張もウソも、顔に出ているほどバレていない。",
+   "visual": {
+    "kind": "chapter",
+    "no": 3,
+    "title": "緊張もウソも\n思うほどバレていない"
+   },
+   "enter": true,
+   "speech": "第三章。緊張もウソも、顔に出ているほどバレていない。",
+   "chapter": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "見た目だけでなく、心の中についても、同じようなクセがあります。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Savitsky & Medvec",
+    "year": "1998",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "The Illusion of Transparency",
+    "points": [
+     "5人でウソ当てゲーム。毎回1人だけがウソをつく",
+     "ウソをついた人に「何人に見抜かれたと思う？」と聞いた"
+    ]
+   },
+   "enter": true,
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "5人のグループで、順番に、自分についての短い話をします。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Savitsky & Medvec",
+    "year": "1998",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "The Illusion of Transparency",
+    "points": [
+     "5人でウソ当てゲーム。毎回1人だけがウソをつく",
+     "ウソをついた人に「何人に見抜かれたと思う？」と聞いた"
+    ]
+   },
+   "enter": false,
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "ただし、毎回1人だけが、こっそりウソをつきます。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Savitsky & Medvec",
+    "year": "1998",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "The Illusion of Transparency",
+    "points": [
+     "5人でウソ当てゲーム。毎回1人だけがウソをつく",
+     "ウソをついた人に「何人に見抜かれたと思う？」と聞いた"
+    ]
+   },
+   "enter": false,
+   "speech": "ただし、毎回ひとりだけが、こっそりウソをつきます。",
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "ウソをついた人は、ほかの4人のうち、何人に見抜かれたと思ったでしょうか。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Gilovich, Savitsky & Medvec",
+    "year": "1998",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "The Illusion of Transparency",
+    "points": [
+     "5人でウソ当てゲーム。毎回1人だけがウソをつく",
+     "ウソをついた人に「何人に見抜かれたと思う？」と聞いた"
+    ]
+   },
+   "enter": false,
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "本人たちの予想は、平均で48.8%。およそ半分の人に見抜かれた、と感じていました。",
+   "visual": {
+    "kind": "bars",
+    "title": "ウソを 見抜かれた割合",
+    "rows": [
+     {
+      "label": "ウソをついた本人の予想",
+      "value": 48.8,
+      "color": "#d0607a"
+     },
+     {
+      "label": "実際に見抜いた人",
+      "value": 25.6,
+      "color": "#2f5d8a"
+     }
+    ],
+    "max": 60,
+    "note": "出典：Gilovich, Savitsky & Medvec（1998）研究1"
+   },
+   "enter": true,
+   "speech": "本人たちの予想は、平均で、よんじゅうはってんはちパーセント。およそ半分の人に見抜かれた、と感じていました。",
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "でも、実際に見抜いた人は25.6%。",
+   "visual": {
+    "kind": "bars",
+    "title": "ウソを 見抜かれた割合",
+    "rows": [
+     {
+      "label": "ウソをついた本人の予想",
+      "value": 48.8,
+      "color": "#d0607a"
+     },
+     {
+      "label": "実際に見抜いた人",
+      "value": 25.6,
+      "color": "#2f5d8a"
+     }
+    ],
+    "max": 60,
+    "note": "出典：Gilovich, Savitsky & Medvec（1998）研究1"
+   },
+   "enter": false,
+   "speech": "でも、実際に見抜いた人は、にじゅうごてんろくパーセント。",
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "4人から適当に1人を選んでも当たるのは25%なので、ほとんど当てずっぽうと同じでした。",
+   "visual": {
+    "kind": "bars",
+    "title": "ウソを 見抜かれた割合",
+    "rows": [
+     {
+      "label": "ウソをついた本人の予想",
+      "value": 48.8,
+      "color": "#d0607a"
+     },
+     {
+      "label": "実際に見抜いた人",
+      "value": 25.6,
+      "color": "#2f5d8a"
+     }
+    ],
+    "max": 60,
+    "note": "出典：Gilovich, Savitsky & Medvec（1998）研究1"
+   },
+   "enter": false,
+   "speech": "4人から適当に1人を選んでも当たるのは25パーセントなので、ほとんど当てずっぽうと同じでした。",
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "自分の気持ちが、ガラスのように外から透けて見えている、と思い込むクセ。",
+   "visual": {
+    "kind": "bars",
+    "title": "ウソを 見抜かれた割合",
+    "rows": [
+     {
+      "label": "ウソをついた本人の予想",
+      "value": 48.8,
+      "color": "#d0607a"
+     },
+     {
+      "label": "実際に見抜いた人",
+      "value": 25.6,
+      "color": "#2f5d8a"
+     }
+    ],
+    "max": 60,
+    "note": "出典：Gilovich, Savitsky & Medvec（1998）研究1"
+   },
+   "enter": false,
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "これを、透明性の錯覚といいます。",
+   "visual": {
+    "kind": "concept",
+    "term": "透明性の錯覚",
+    "en": "The Illusion of Transparency",
+    "desc": "自分の緊張や気持ちが、\n実際よりも相手に伝わっていると思い込むこと"
+   },
+   "enter": true,
+   "speech": "これを、とうめいせいのさっかくといいます。",
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "同じ論文では、まずい飲み物を、顔に出さずに飲んでもらう実験もありました。",
+   "visual": {
+    "kind": "concept",
+    "term": "透明性の錯覚",
+    "en": "The Illusion of Transparency",
+    "desc": "自分の緊張や気持ちが、\n実際よりも相手に伝わっていると思い込むこと"
+   },
+   "enter": false,
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "飲んだ本人は「顔に出ていた」と思っていましたが、見ていた人は、本人が思うほどは気づいていませんでした。",
+   "visual": {
+    "kind": "concept",
+    "term": "透明性の錯覚",
+    "en": "The Illusion of Transparency",
+    "desc": "自分の緊張や気持ちが、\n実際よりも相手に伝わっていると思い込むこと"
+   },
+   "enter": false,
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "友だちの手料理が口に合わなかったとき、「バレたかも」とドキッとしたこと、ありませんか。",
+   "visual": {
+    "kind": "concept",
+    "term": "透明性の錯覚",
+    "en": "The Illusion of Transparency",
+    "desc": "自分の緊張や気持ちが、\n実際よりも相手に伝わっていると思い込むこと"
+   },
+   "enter": false,
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "面接で手がふるえたとき、プレゼンで声がうわずったとき。",
+   "visual": {
+    "kind": "concept",
+    "term": "透明性の錯覚",
+    "en": "The Illusion of Transparency",
+    "desc": "自分の緊張や気持ちが、\n実際よりも相手に伝わっていると思い込むこと"
+   },
+   "enter": false,
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "自分の中では、ドキドキが大きく鳴りひびいています。",
+   "visual": {
+    "kind": "concept",
+    "term": "透明性の錯覚",
+    "en": "The Illusion of Transparency",
+    "desc": "自分の緊張や気持ちが、\n実際よりも相手に伝わっていると思い込むこと"
+   },
+   "enter": false,
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "でも、そのドキドキの音は、外にはほとんど聞こえていないんです。",
+   "visual": {
+    "kind": "concept",
+    "term": "透明性の錯覚",
+    "en": "The Illusion of Transparency",
+    "desc": "自分の緊張や気持ちが、\n実際よりも相手に伝わっていると思い込むこと"
+   },
+   "enter": false,
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "自分の気持ちは内側からよく分かるので、相手にも分かっているはずだと考えてしまう。それが、このクセの正体です。",
+   "visual": {
+    "kind": "concept",
+    "term": "透明性の錯覚",
+    "en": "The Illusion of Transparency",
+    "desc": "自分の緊張や気持ちが、\n実際よりも相手に伝わっていると思い込むこと"
+   },
+   "enter": false,
+   "tag": "第3章 透明性の錯覚"
+  },
+  {
+   "type": "paper",
+   "text": "第4章。失敗しても、思うほど厳しく見られない。",
+   "visual": {
+    "kind": "chapter",
+    "no": 4,
+    "title": "失敗しても\n思うほど厳しく見られない"
+   },
+   "enter": true,
+   "speech": "第四章。失敗しても、思うほど厳しく見られない。",
+   "chapter": "第4章 失敗の見られ方"
+  },
+  {
+   "type": "paper",
+   "text": "では、気づかれてしまった失敗は、どう見られているのでしょう。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Savitsky, Epley & Gilovich",
+    "year": "2001",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "Do Others Judge Us as Harshly as We Think?",
+    "points": [
+     "気まずい失敗や、人前での失敗のあと",
+     "「どれくらい悪く思われたか」の予想と実際を比べた"
+    ]
+   },
+   "enter": true,
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "この研究では、4つの実験で、恥ずかしい失敗をしたあとの「見られ方」を調べました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Savitsky, Epley & Gilovich",
+    "year": "2001",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "Do Others Judge Us as Harshly as We Think?",
+    "points": [
+     "気まずい失敗や、人前での失敗のあと",
+     "「どれくらい悪く思われたか」の予想と実際を比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "気まずい失敗を想像してもらったり、人前で問題が解けない経験をしてもらったりしたんです。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Savitsky, Epley & Gilovich",
+    "year": "2001",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "Do Others Judge Us as Harshly as We Think?",
+    "points": [
+     "気まずい失敗や、人前での失敗のあと",
+     "「どれくらい悪く思われたか」の予想と実際を比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "すると、失敗した本人は、実際よりも厳しく評価されると予想していました。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "失敗した本人",
+     "body": "頭が悪いと思われた…\nもう信用されない"
+    },
+    "right": {
+     "title": "見ていた人",
+     "body": "まあ、そういうこともある\n（評価はほとんど変わらない）"
+    }
+   },
+   "enter": true,
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "見ていた人の評価は、本人が心配するほど、下がっていなかったんです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "失敗した本人",
+     "body": "頭が悪いと思われた…\nもう信用されない"
+    },
+    "right": {
+     "title": "見ていた人",
+     "body": "まあ、そういうこともある\n（評価はほとんど変わらない）"
+    }
+   },
+   "enter": false,
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "なぜ、こんなズレが生まれるのでしょうか。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "失敗した本人",
+     "body": "頭が悪いと思われた…\nもう信用されない"
+    },
+    "right": {
+     "title": "見ていた人",
+     "body": "まあ、そういうこともある\n（評価はほとんど変わらない）"
+    }
+   },
+   "enter": false,
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "失敗した本人は、その失敗の一瞬に、ずっと注目しています。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "失敗した本人",
+     "body": "頭が悪いと思われた…\nもう信用されない"
+    },
+    "right": {
+     "title": "見ていた人",
+     "body": "まあ、そういうこともある\n（評価はほとんど変わらない）"
+    }
+   },
+   "enter": false,
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "でも見ている側は、「今日は難しい問題だった」「緊張する場面だった」と、まわりの事情もいっしょに見ています。",
+   "visual": {
+    "kind": "list",
+    "title": "見ている人が考えていること",
+    "items": [
+     "その場の状況（難しさ・時間のなさ）",
+     "その人の、ふだんの姿",
+     "「自分も同じ失敗をするかも」という気持ち"
+    ]
+   },
+   "enter": true,
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "それに、その人のふだんの姿も知っています。1回の失敗だけで、全部を決めつけたりはしません。",
+   "visual": {
+    "kind": "list",
+    "title": "見ている人が考えていること",
+    "items": [
+     "その場の状況（難しさ・時間のなさ）",
+     "その人の、ふだんの姿",
+     "「自分も同じ失敗をするかも」という気持ち"
+    ]
+   },
+   "enter": false,
+   "speech": "それに、その人のふだんの姿も知っています。いっかいの失敗だけで、全部を決めつけたりはしません。",
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "あなたも、友だちがカフェで飲み物をこぼしたとき、その人を嫌いになったりはしませんよね。",
+   "visual": {
+    "kind": "list",
+    "title": "見ている人が考えていること",
+    "items": [
+     "その場の状況（難しさ・時間のなさ）",
+     "その人の、ふだんの姿",
+     "「自分も同じ失敗をするかも」という気持ち"
+    ]
+   },
+   "enter": false,
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "たぶん「大丈夫？」と思って、次の日には忘れているはずです。",
+   "visual": {
+    "kind": "list",
+    "title": "見ている人が考えていること",
+    "items": [
+     "その場の状況（難しさ・時間のなさ）",
+     "その人の、ふだんの姿",
+     "「自分も同じ失敗をするかも」という気持ち"
+    ]
+   },
+   "enter": false,
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "LINEの送り先をまちがえたときも、送った本人ほど、相手は気にしていないことが多いものです。",
+   "visual": {
+    "kind": "list",
+    "title": "見ている人が考えていること",
+    "items": [
+     "その場の状況（難しさ・時間のなさ）",
+     "その人の、ふだんの姿",
+     "「自分も同じ失敗をするかも」という気持ち"
+    ]
+   },
+   "enter": false,
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "自分の失敗だけ、急に厳しい目で見てしまう。それが、私たちのクセなんです。",
+   "visual": {
+    "kind": "list",
+    "title": "見ている人が考えていること",
+    "items": [
+     "その場の状況（難しさ・時間のなさ）",
+     "その人の、ふだんの姿",
+     "「自分も同じ失敗をするかも」という気持ち"
+    ]
+   },
+   "enter": false,
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "ソウタの数字の言いまちがいも、きっと「月曜の朝だし、そういうこともある」くらいに受け取られています。",
+   "visual": {
+    "kind": "scene",
+    "place": "朝の会議室",
+    "left": {
+     "emoji": "ira_man_cry.png",
+     "name": "ソウタ",
+     "thought": "（信用なくしたかも…）",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "アカリ",
+     "thought": "（月曜の朝だもんね）",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "第4章 失敗への評価"
+  },
+  {
+   "type": "paper",
+   "text": "第5章。「見えていない」と知るだけで、話がうまくなる。",
+   "visual": {
+    "kind": "chapter",
+    "no": 5,
+    "title": "「見えていない」と\n知るだけで変わる"
+   },
+   "enter": true,
+   "speech": "第五章。見えていない、と知るだけで、話がうまくなる。",
+   "chapter": "第5章 知るだけで変わる"
+  },
+  {
+   "type": "paper",
+   "text": "このクセを知ると、何か変わるのでしょうか。それを確かめた研究があります。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Savitsky & Gilovich",
+    "year": "2003",
+    "journal": "Journal of Experimental Social Psychology",
+    "title": "The Illusion of Transparency and the Alleviation of Speech Anxiety",
+    "points": [
+     "人前で短いスピーチをしてもらう",
+     "話す前に伝える内容を、3つのグループで変えた"
+    ]
+   },
+   "enter": true,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "学生に、短い準備時間で、人前でスピーチをしてもらいます。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Savitsky & Gilovich",
+    "year": "2003",
+    "journal": "Journal of Experimental Social Psychology",
+    "title": "The Illusion of Transparency and the Alleviation of Speech Anxiety",
+    "points": [
+     "人前で短いスピーチをしてもらう",
+     "話す前に伝える内容を、3つのグループで変えた"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "話す前に伝える内容を、3つのグループで変えました。",
+   "visual": {
+    "kind": "list",
+    "title": "話す前に伝えたこと",
+    "items": [
+     "何も伝えない",
+     "「緊張するのはふつうだから、気にしないで」",
+     "「緊張は、思っているほど外から見えない」と、透明性の錯覚を説明する"
+    ]
+   },
+   "enter": true,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "1つめは、何も伝えないグループ。",
+   "visual": {
+    "kind": "list",
+    "title": "話す前に伝えたこと",
+    "items": [
+     "何も伝えない",
+     "「緊張するのはふつうだから、気にしないで」",
+     "「緊張は、思っているほど外から見えない」と、透明性の錯覚を説明する"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "2つめは、「緊張してもふつうだよ」と、はげますだけのグループ。",
+   "visual": {
+    "kind": "list",
+    "title": "話す前に伝えたこと",
+    "items": [
+     "何も伝えない",
+     "「緊張するのはふつうだから、気にしないで」",
+     "「緊張は、思っているほど外から見えない」と、透明性の錯覚を説明する"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "3つめは、「緊張は、自分が思うほど外からは見えない」と、透明性の錯覚を説明したグループです。",
+   "visual": {
+    "kind": "list",
+    "title": "話す前に伝えたこと",
+    "items": [
+     "何も伝えない",
+     "「緊張するのはふつうだから、気にしないで」",
+     "「緊張は、思っているほど外から見えない」と、透明性の錯覚を説明する"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "すると、3つめのグループは、自分のスピーチをより高く評価し、落ち着いていたと答えました。",
+   "visual": {
+    "kind": "list",
+    "title": "話す前に伝えたこと",
+    "items": [
+     "何も伝えない",
+     "「緊張するのはふつうだから、気にしないで」",
+     "「緊張は、思っているほど外から見えない」と、透明性の錯覚を説明する"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "さらに、聞いていた人からも、話の出来や落ち着きを、高く評価されたそうです。",
+   "visual": {
+    "kind": "list",
+    "title": "話す前に伝えたこと",
+    "items": [
+     "何も伝えない",
+     "「緊張するのはふつうだから、気にしないで」",
+     "「緊張は、思っているほど外から見えない」と、透明性の錯覚を説明する"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "ただ「大丈夫」と言われるより、「緊張は見えていない」という事実を知るほうが、効いたのかもしれません。",
+   "visual": {
+    "kind": "list",
+    "title": "話す前に伝えたこと",
+    "items": [
+     "何も伝えない",
+     "「緊張するのはふつうだから、気にしないで」",
+     "「緊張は、思っているほど外から見えない」と、透明性の錯覚を説明する"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "「緊張がバレたらどうしよう」と思うと、その不安で、さらに緊張してしまいます。",
+   "visual": {
+    "kind": "list",
+    "title": "話す前に伝えたこと",
+    "items": [
+     "何も伝えない",
+     "「緊張するのはふつうだから、気にしないで」",
+     "「緊張は、思っているほど外から見えない」と、透明性の錯覚を説明する"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "でも、「どうせ外からはあまり見えない」と分かれば、その悪循環を止められます。",
+   "visual": {
+    "kind": "list",
+    "title": "話す前に伝えたこと",
+    "items": [
+     "何も伝えない",
+     "「緊張するのはふつうだから、気にしないで」",
+     "「緊張は、思っているほど外から見えない」と、透明性の錯覚を説明する"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "ソウタは明日、取引先の前でプレゼンがあります。",
+   "visual": {
+    "kind": "scene",
+    "place": "夜・ソウタの部屋",
+    "left": {
+     "emoji": "ira_man_shock.png",
+     "name": "ソウタ",
+     "thought": "明日のプレゼン、\n緊張がバレたら…",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "アカリ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": true,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "この研究を知っていれば、少しだけ、肩の力を抜けるかもしれません。",
+   "visual": {
+    "kind": "scene",
+    "place": "夜・ソウタの部屋",
+    "left": {
+     "emoji": "ira_man_idea.png",
+     "name": "ソウタ",
+     "thought": "緊張しても、\n思うほど見えてない",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "アカリ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": true,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "ここまでの研究を、まとめてみましょう。",
+   "visual": {
+    "kind": "list",
+    "title": "「見られすぎ」と感じる5つのクセ",
+    "items": [
+     "見た目は、実際の2倍ほど見られている気がする",
+     "発言や調子の波も、思うほど目立たない",
+     "緊張やウソは、思うほど透けて見えない",
+     "失敗しても、思うほど厳しく見られない",
+     "それを知るだけで、落ち着いて話せる"
+    ]
+   },
+   "enter": true,
+   "tag": "第5章 スピーチの実験"
+  },
+  {
+   "type": "paper",
+   "text": "第6章。気にしすぎをほどく、3つのルール。",
+   "visual": {
+    "kind": "chapter",
+    "no": 6,
+    "title": "気にしすぎをほどく\n3つのルール"
+   },
+   "enter": true,
+   "speech": "第六章。気にしすぎをほどく、3つのルール。",
+   "chapter": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ルール1。「昨日の、隣の人の服」を思い出してみる。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "「昨日の、隣の人の服」を\n思い出してみる",
+    "body": "思い出せないなら、相手もあなたを覚えていない"
+   },
+   "enter": true,
+   "speech": "ルールいち。昨日の、隣の人の服を、思い出してみる。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "昨日、隣の席の人が何を着ていたか、思い出せますか。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "「昨日の、隣の人の服」を\n思い出してみる",
+    "body": "思い出せないなら、相手もあなたを覚えていない"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ほとんどの人は、はっきりとは思い出せません。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "「昨日の、隣の人の服」を\n思い出してみる",
+    "body": "思い出せないなら、相手もあなたを覚えていない"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "きのうの会議で、誰が何回かんだかも、きっと覚えていないはずです。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "「昨日の、隣の人の服」を\n思い出してみる",
+    "body": "思い出せないなら、相手もあなたを覚えていない"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "あなたが覚えていないように、相手も、あなたの寝ぐせやシミを覚えていないんです。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "「昨日の、隣の人の服」を\n思い出してみる",
+    "body": "思い出せないなら、相手もあなたを覚えていない"
+   },
+   "enter": false,
+   "speech": "あなたが覚えていないように、相手も、あなたのねぐせやシミを覚えていないんです。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ルール2。失敗したら、「見ていた人の目」で、1回だけ見直す。",
+   "visual": {
+    "kind": "rule",
+    "no": 2,
+    "title": "「見ていた人の目」で\n1回だけ見直す",
+    "body": "友だちが同じ失敗をしたら、自分はどう思う？"
+   },
+   "enter": true,
+   "speech": "ルールに。失敗したら、見ていた人の目で、いっかいだけ見直す。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "頭の中で反省会が止まらないときは、立場を入れかえてみてください。",
+   "visual": {
+    "kind": "rule",
+    "no": 2,
+    "title": "「見ていた人の目」で\n1回だけ見直す",
+    "body": "友だちが同じ失敗をしたら、自分はどう思う？"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "友だちが同じ失敗をしたら、あなたはその人を、そんなに悪く思うでしょうか。",
+   "visual": {
+    "kind": "rule",
+    "no": 2,
+    "title": "「見ていた人の目」で\n1回だけ見直す",
+    "body": "友だちが同じ失敗をしたら、自分はどう思う？"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "たぶん「よくあることだよ」と言ってあげるはずです。その言葉を、自分にもかけてあげましょう。",
+   "visual": {
+    "kind": "rule",
+    "no": 2,
+    "title": "「見ていた人の目」で\n1回だけ見直す",
+    "body": "友だちが同じ失敗をしたら、自分はどう思う？"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ルール3。緊張したら、「これは外からは見えていない」と心の中で言う。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "「これは外から\n見えていない」と唱える",
+    "body": "ドキドキは、内側で鳴っているだけ"
+   },
+   "enter": true,
+   "speech": "ルールさん。緊張したら、これは外からは見えていない、と心の中で言う。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "スピーチの実験のように、事実を知っているだけで、気持ちは落ち着きやすくなります。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "「これは外から\n見えていない」と唱える",
+    "body": "ドキドキは、内側で鳴っているだけ"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "手がふるえても、声がうわずっても、聞いている人は、思うほど気づいていません。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "「これは外から\n見えていない」と唱える",
+    "body": "ドキドキは、内側で鳴っているだけ"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "聞いている人の多くは、話の中身や、自分が次に何を言うかで、頭がいっぱいです。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "「これは外から\n見えていない」と唱える",
+    "body": "ドキドキは、内側で鳴っているだけ"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ひとつだけ注意です。見られていないからといって、何をしてもいい、という意味ではありません。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "「これは外から\n見えていない」と唱える",
+    "body": "ドキドキは、内側で鳴っているだけ"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "大切なのは、小さな失敗を、必要以上に大きく抱えこまないことです。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "「これは外から\n見えていない」と唱える",
+    "body": "ドキドキは、内側で鳴っているだけ"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "まとめ。",
+   "visual": {
+    "kind": "chapter",
+    "no": 7,
+    "title": "まとめ",
+    "sub": "ライトを当てているのは、自分だけ"
+   },
+   "enter": true,
+   "chapter": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "お昼休み。ソウタは思いきって、アカリに言いました。",
+   "visual": {
+    "kind": "scene",
+    "place": "昼休みの休憩スペース",
+    "left": {
+     "emoji": "ira_man_tehe.png",
+     "name": "ソウタ",
+     "thought": "さっきの会議、\n恥ずかしかったです",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "アカリ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": true,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "「さっきの会議、数字まちがえて、恥ずかしかったです」",
+   "visual": {
+    "kind": "scene",
+    "place": "昼休みの休憩スペース",
+    "left": {
+     "emoji": "ira_man_tehe.png",
+     "name": "ソウタ",
+     "thought": "さっきの会議、\n恥ずかしかったです",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "アカリ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "アカリは、きょとんとして答えます。「え、そうだった？　全然気づかなかった」",
+   "visual": {
+    "kind": "scene",
+    "place": "昼休みの休憩スペース",
+    "left": {
+     "emoji": "ira_man_tehe.png",
+     "name": "ソウタ",
+     "thought": "さっきの会議、\n恥ずかしかったです",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_question.png",
+     "name": "アカリ",
+     "thought": "え、そうだった？\n全然気づかなかった",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "「それより私、資料に誤字があって、ずっと気になってたんだよね」",
+   "visual": {
+    "kind": "scene",
+    "place": "昼休みの休憩スペース",
+    "left": {
+     "emoji": "ira_man_tehe.png",
+     "name": "ソウタ",
+     "thought": "さっきの会議、\n恥ずかしかったです",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_question.png",
+     "name": "アカリ",
+     "thought": "え、そうだった？\n全然気づかなかった",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "今度は、ソウタがきょとんとする番です。「え、どこですか？」",
+   "visual": {
+    "kind": "scene",
+    "place": "昼休みの休憩スペース",
+    "left": {
+     "emoji": "ira_man_question.png",
+     "name": "ソウタ",
+     "thought": "え、どこですか？",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_tehe.png",
+     "name": "アカリ",
+     "thought": "資料の誤字、\nずっと気になってて",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "2人は顔を見合わせて、笑い出しました。",
+   "visual": {
+    "kind": "scene",
+    "place": "昼休みの休憩スペース",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "ソウタ",
+     "thought": "なんだ、お互いさまか",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "アカリ",
+     "thought": "みんな自分のことで\n精一杯なんだね",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "私たちはみんな、自分にだけ強いライトを当てて、舞台に立っているような気持ちでいます。",
+   "visual": {
+    "kind": "scene",
+    "place": "昼休みの休憩スペース",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "ソウタ",
+     "thought": "なんだ、お互いさまか",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "アカリ",
+     "thought": "みんな自分のことで\n精一杯なんだね",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "でも客席にいる人たちも、実は、それぞれの舞台で、自分のことで精一杯なんです。",
+   "visual": {
+    "kind": "scene",
+    "place": "昼休みの休憩スペース",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "ソウタ",
+     "thought": "なんだ、お互いさまか",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "アカリ",
+     "thought": "みんな自分のことで\n精一杯なんだね",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "次に「見られている」と感じたら、そのライトを、少しだけ弱めてみてください。",
+   "visual": {
+    "kind": "scene",
+    "place": "昼休みの休憩スペース",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "ソウタ",
+     "thought": "なんだ、お互いさまか",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "アカリ",
+     "thought": "みんな自分のことで\n精一杯なんだね",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "この動画が参考になったら、高評価とチャンネル登録をお願いします。",
+   "visual": {
+    "kind": "title",
+    "kicker": "論文で読み解く 心理学",
+    "title": [
+     "最後まで見てくれて",
+     "ありがとう"
+    ],
+    "sub": "あなたの「気にしすぎだった体験」、コメントで教えてください"
+   },
+   "enter": true
+  },
+  {
+   "type": "paper",
+   "text": "あなたの「気にしすぎだった体験」も、ぜひコメントで教えてください。",
+   "visual": {
+    "kind": "title",
+    "kicker": "論文で読み解く 心理学",
+    "title": [
+     "最後まで見てくれて",
+     "ありがとう"
+    ],
+    "sub": "あなたの「気にしすぎだった体験」、コメントで教えてください"
+   },
+   "enter": false
+  }
+ ]
+}

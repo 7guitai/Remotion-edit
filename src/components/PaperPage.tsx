@@ -238,7 +238,7 @@ const Visual: React.FC<{ v: PaperVisual; enter: boolean }> = ({ v, enter }) => {
         );
       };
       return (
-        <div style={{ width: 1720, opacity: a, transform: `translateY(${(1 - a) * 36 - 80}px)` }}>
+        <div style={{ width: 1720, opacity: a, transform: `translateY(${(1 - a) * 36}px)` }}>
           <div style={{ textAlign: "center", ...mincho(32, WA.kin, 700), letterSpacing: 6 }}>{`― ${v.place} ―`}</div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {person(v.left, "left", 8)}
@@ -301,7 +301,7 @@ const Visual: React.FC<{ v: PaperVisual; enter: boolean }> = ({ v, enter }) => {
                   <div style={{ width: `${(r.value / max) * 100 * e}%`, height: "100%", background: c, borderRadius: 4 }} />
                 </div>
                 <div style={{ width: 180, textAlign: "right", ...mincho(52, c) }}>
-                  {Math.round(r.value * e)}
+                  {Number.isInteger(r.value) ? Math.round(r.value * e) : (r.value * e).toFixed(1)}
                   <span style={{ fontSize: 28 }}>{v.unit ?? "%"}</span>
                 </div>
               </div>
@@ -382,7 +382,7 @@ export const PaperPage: React.FC<{ slide: PaperSlide; voiceFrames: number }> = (
           {slide.tag}
         </div>
       ) : null}
-      <AbsoluteFill style={{ top: big ? 0 : 70, bottom: big ? 60 : 230, alignItems: "center", justifyContent: "center" }}>
+      <AbsoluteFill style={{ top: big ? 0 : 70, height: big ? 1020 : 720, alignItems: "center", justifyContent: "center" }}>
         <Visual v={slide.visual} enter={enter} />
       </AbsoluteFill>
       {big ? null : (
