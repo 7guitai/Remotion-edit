@@ -13,7 +13,7 @@ export type PaperVisual =
   | { kind: "paper"; authors: string; year: string; journal: string; title: string; points: string[] }
   | { kind: "stat"; value: number; unit?: string; label: string; sub?: string; color?: string }
   | { kind: "bars"; title: string; rows: { label: string; value: number; color?: string }[]; unit?: string; max?: number; note?: string }
-  | { kind: "concept"; term: string; en?: string; desc: string }
+  | { kind: "concept"; term: string; en?: string; desc: string; label?: string }
   | { kind: "versus"; left: { title: string; body: string }; right: { title: string; body: string } }
   | { kind: "rule"; no: number; title: string; body: string }
   | { kind: "list"; title: string; items: string[] }
@@ -319,7 +319,7 @@ const Visual: React.FC<{ v: PaperVisual; enter: boolean }> = ({ v, enter }) => {
     case "concept":
       return (
         <Card style={{ width: 1420, padding: "40px 80px 44px", textAlign: "center", ...lift(a) }} line={WA.shu}>
-          <Seal size={30}>心理用語</Seal>
+          <Seal size={30}>{v.label ?? "心理用語"}</Seal>
           <div style={{ ...mincho(92, WA.ai), marginTop: 14, letterSpacing: 6 }}>{v.term}</div>
           {v.en ? <div style={{ fontFamily: minchoFamily, fontWeight: 700, fontSize: 32, color: WA.kin, fontStyle: "italic" }}>{v.en}</div> : null}
           <div style={{ width: 300, height: 2, background: WA.kin, margin: "18px auto" }} />

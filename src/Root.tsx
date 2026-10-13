@@ -84,7 +84,7 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={{
           kicker: "身近な科学を 図解で読み解く",
           lines: ["半導体の", "しくみ"],
-          badge: "砂から生まれる200億個のスイッチ",
+          badge: "砂から生まれる 200億個",
           left: { image: "ira_man_question.png", thought: "半導体って\nそもそも何？", color: "#2f5d8a" },
           right: { image: "ira_woman_smile.png", thought: "スマホの中に\n200億個！", color: "#d0607a" },
           heart: false,
