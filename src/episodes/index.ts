@@ -26,6 +26,7 @@ import whatifGoldShort from "./whatif-gold-short.json";
 import verifyTrainJumpShort from "./verify-train-jump-short.json";
 import verifyRainRunShort from "./verify-rain-run-short.json";
 import verifyElevator from "./verify-elevator-short.json";
+import verifyStrap from "./verify-strap-short.json";
 import relaxSleep45m from "./relax-sleep-45m.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
@@ -303,6 +304,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  verifyStrap as Episode,
   relaxSleep45m as Episode,
   verifyElevator as Episode,
   verifyRainRunShort as Episode,

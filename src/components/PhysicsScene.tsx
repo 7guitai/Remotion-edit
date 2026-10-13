@@ -16,6 +16,8 @@ import {
   ELEV,
   RAIN,
   TRAIN_KINDS,
+  STRAP_KINDS,
+  STRAP,
   GOLD_GONE,
   GOLD_SIDE,
   TANK,
@@ -84,6 +86,10 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       const px = Math.min(RAIN.dist - 1.2, posAt(sim, f, pi)[0]);
       return { pos: [px + 0.6, 2.3, 8.6], look: [px + 0.9, 1.45, -0.6] };
     }
+    case "strfeet":
+    case "strhold":
+      // 2人の全身とつり革が入るよう、正面から少し見下ろす
+      return { pos: [0, 2.0, lerp(8.0, 7.7, t)], look: [0, 1.05, -0.2] };
     case "trconst":
     case "tracc":
     case "trbrake":
@@ -247,7 +253,7 @@ const useGroundTexture = (kind: SimKind) =>
         ctx.fillStyle = `rgb(${g},${g + 3},${g + 8})`;
         ctx.fillRect((i * 53) % size, (i * 131) % size, 2, 2);
       }
-    } else if (TRAIN_KINDS.includes(kind)) {
+    } else if (TRAIN_KINDS.includes(kind) || STRAP_KINDS.includes(kind)) {
       // 電車の床（灰色のゴムの床に、細かい粒）
       ctx.fillStyle = "#8e959e";
       ctx.fillRect(0, 0, size, size);
@@ -955,7 +961,7 @@ const useSceneryTexture = () =>
   }, []);
 
 // 電車の車内（後ろのかべと窓、つり革）。窓の外の景色は、電車の進んだ距離 pos だけ流れる
-const TrainCar: React.FC<{ x0: number; pos: number }> = ({ x0, pos }) => {
+const TrainCar: React.FC<{ x0: number; pos: number; grip?: [number, number, number] | null }> = ({ x0, pos, grip }) => {
   const base = useSceneryTexture();
   const tex = useMemo(() => base.clone(), [base]);
   // 景色の1枚は横 40m 分（電柱 10m おき）
@@ -1007,6 +1013,20 @@ const TrainCar: React.FC<{ x0: number; pos: number }> = ({ x0, pos }) => {
           </mesh>
         </group>
       ))}
+      {/* 人がつかんでいるつり革（手の位置まで下がっている） */}
+      {grip ? (
+        <group position={[grip[0], 0, grip[2]]}>
+          {/* 手が輪の下側をにぎる */}
+          <mesh position={[0, (2.3 + grip[1] + 0.1) / 2, 0]}>
+            <boxGeometry args={[0.035, Math.max(0.02, 2.3 - grip[1] - 0.1), 0.025]} />
+            <meshStandardMaterial color="#e8e8e8" />
+          </mesh>
+          <mesh position={[0, grip[1] + 0.03, 0]}>
+            <torusGeometry args={[0.075, 0.018, 8, 24]} />
+            <meshStandardMaterial color="#ffd23a" />
+          </mesh>
+        </group>
+      ) : null}
     </group>
   );
 };
@@ -1171,7 +1191,7 @@ export const PhysicsScene: React.FC<{
   const overlays: React.ReactNode[] = [];
   const laneX = [width * 0.25, width * 0.75];
   const isRoad = sim.kind === "brake" || sim.kind === "fbrake" || sim.kind === "xbrake";
-  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall", "ice", "trconst", "tracc", "trbrake"].includes(sim.kind);
+  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall", "ice", "trconst", "tracc", "trbrake", "strfeet", "strhold"].includes(sim.kind);
   const isAir = AIR_KINDS.includes(sim.kind);
   // 摩擦ゼロの世界は、摩擦が消えた瞬間からラベルを点滅させる
   const offFrame = Math.round(FRICTION_OFF * fps);
@@ -1190,7 +1210,7 @@ export const PhysicsScene: React.FC<{
             ? [-0.9, 0.9]
             : sim.kind === "ice"
               ? [-1.0, 1.0]
-              : TRAIN_KINDS.includes(sim.kind)
+              : TRAIN_KINDS.includes(sim.kind) || STRAP_KINDS.includes(sim.kind)
                 ? [-1.4, 1.4]
             : sim.kind === "bjump" || sim.kind === "bwall"
               ? [-1.4, 1.4]
@@ -1531,6 +1551,28 @@ export const PhysicsScene: React.FC<{
         {arrived ? "コンビニに到着！" : `コンビニまで ${(RAIN.dist - d).toFixed(1)}m`}
       </Pill>,
     );
+  }
+  if (STRAP_KINDS.includes(sim.kind)) {
+    const braking = f / fps > STRAP.t0;
+    const kmh = v("v0");
+    overlays.push(
+      <Pill key="sp" x={width / 2} y={height * 0.36} color={braking ? "#e01b2f" : "#334"} size={36}>
+        {braking ? (kmh < 0.5 ? "停車" : `急ブレーキ！ 時速${Math.round(kmh)}km`) : `時速${Math.round(kmh)}km →`}
+      </Pill>,
+    );
+    [0, 1].forEach((lane) => {
+      const fell = v(`fell${lane}`) > 0;
+      const cm = Math.round(Math.abs(v(`moved${lane}`)) * 100);
+      if (fell) {
+        overlays.push(
+          <Pill key={`r${lane}`} x={laneX[lane]} y={height * 0.5} color="#e01b2f" size={48}>倒れた！</Pill>,
+        );
+      } else if (f / fps > STRAP.t0 + 2.4) {
+        overlays.push(
+          <Pill key={`r${lane}`} x={laneX[lane]} y={height * 0.5} color="#1f8f4e" size={44}>{`ゆれ ${cm}cm`}</Pill>,
+        );
+      }
+    });
   }
   if (TRAIN_KINDS.includes(sim.kind)) {
     [0, 1].forEach((lane) => {
@@ -1952,7 +1994,7 @@ export const PhysicsScene: React.FC<{
         ? "#8f9aa8"
         : TINY_KINDS.includes(kind)
           ? "#ead9bc"
-          : TRAIN_KINDS.includes(kind)
+          : TRAIN_KINDS.includes(kind) || STRAP_KINDS.includes(kind)
             ? "#e6eaf0"
           : "#cfe8ff";
   // 中心付近（tunnelzero）は人がその場でただようので、壁のほうを流して速さを見せる
@@ -1983,7 +2025,7 @@ export const PhysicsScene: React.FC<{
                 ? "linear-gradient(180deg, #4d5866 0%, #7d8896 55%, #a3adb9 100%)"
                 : TINY_KINDS.includes(kind)
                   ? "linear-gradient(180deg, #f3e6d0 0%, #e9d6b8 60%, #d9c09a 100%)"
-                  : TRAIN_KINDS.includes(kind)
+                  : TRAIN_KINDS.includes(kind) || STRAP_KINDS.includes(kind)
                     ? "linear-gradient(180deg, #eef1f5 0%, #dfe4ea 100%)"
                 : "linear-gradient(180deg, #4a9cff 0%, #8cc8ff 55%, #dff0ff 100%)",
         }}
@@ -2301,6 +2343,14 @@ export const PhysicsScene: React.FC<{
         {kind === "elevfall" || kind === "elevsafe" || kind === "elevfloat" ? (
           <ElevatorCar fall={v("fall")} snapped={f >= Math.round((ELEV.snap / (kind === "elevfloat" ? ELEV.slow : 1)) * fps)} t={f / fps} />
         ) : null}
+        {STRAP_KINDS.includes(kind)
+          ? [-1.4, 1.4].map((x0, lane) => {
+              const gx = sim.values[`ax${lane}`][f];
+              const gy = sim.values[`ay${lane}`][f];
+              const gz = sim.values[`az${lane}`][f];
+              return <TrainCar key={lane} x0={x0} pos={v(`pos${lane}`)} grip={Number.isNaN(gx) ? null : [gx, gy, gz]} />;
+            })
+          : null}
         {TRAIN_KINDS.includes(kind)
           ? [-1.4, 1.4].map((x0, lane) => {
               const take = sim.values[`take${lane}`][f];

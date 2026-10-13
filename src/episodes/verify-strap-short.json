@@ -1,0 +1,84 @@
+{
+  "id": "verify-strap-short",
+  "title": "【検証】電車の急ブレーキ、つり革なしで倒れない方法はある？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": { "speaker": 13, "speed": 1.2, "name": "青山龍星" },
+  "bgm": {
+    "file": "dreamy_land.mp3",
+    "title": "Dreamy Land",
+    "credit": "えだまめ88",
+    "page": "https://opentracks.com/bgm/detail/22207",
+    "opentracks": 22207,
+    "track": 1
+  },
+  "headline": ["【検証】電車の急ブレーキ", "倒れない立ち方は？"],
+  "illustrations": {},
+  "description": "電車の急ブレーキで、つり革につかまらずに倒れない方法はあるのか？足をそろえる・足を開く・つり革をつかむ、の3つを物理エンジンで検証しました。\n\n※条件：時速60kmから、毎秒 時速4.5kmずつ遅くなる急ブレーキ（約1.25m/s²）。人は窓の方を向いて立っているとして計算。ゆれ・倒れたかどうかはシミュレーションの結果です。\n※実際の電車では、急ブレーキのときに倒れて けがをすることがあります。立っているときは、つり革や手すりにつかまりましょう。\nほかに検証してほしいことは、コメントで教えてください！\n\n#Shorts #検証 #物理 #雑学",
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "電車の急ブレーキ。つり革につかまらずに、倒れない方法はある？",
+      "effect": "none",
+      "sim": "strhold"
+    },
+    {
+      "type": "whatif",
+      "text": "検証1。つり革なしで、足をそろえる人と、足を開く人。時速60kmから、急ブレーキ！",
+      "speech": "検証1。つり革なしで、足をそろえる人と、足を開く人。時速60キロから、急ブレーキ！",
+      "effect": "none",
+      "sim": "strfeet",
+      "big": "検証1"
+    },
+    {
+      "type": "whatif",
+      "text": "足をそろえた人は…倒れた！足を開いた人は、ゆれたのは、たったの2cm。",
+      "speech": "足をそろえた人は…倒れた！足を開いた人は、ゆれたのは、たったの2センチ。",
+      "effect": "none",
+      "sim": "strfeet",
+      "simStart": 2.0
+    },
+    {
+      "type": "whatif",
+      "text": "足を開くと、体を支える幅が広がって、倒れにくくなるんだ。",
+      "effect": "none",
+      "sim": "strfeet",
+      "simStart": 4.2
+    },
+    {
+      "type": "whatif",
+      "text": "検証2。足をそろえたまま、つり革をつかむと？",
+      "effect": "none",
+      "sim": "strhold",
+      "big": "検証2"
+    },
+    {
+      "type": "whatif",
+      "text": "つかまない人は倒れたけど、つり革の人は、ほとんどゆれない！",
+      "effect": "none",
+      "sim": "strhold",
+      "simStart": 2.2
+    },
+    {
+      "type": "whatif",
+      "text": "急ブレーキのとき、体には、体重の約13%の力が横からかかる。体重50kgの人なら、6kgの荷物で押されるのと同じだ。",
+      "speech": "急ブレーキのとき、体には、体重の約13パーセントの力が横からかかる。体重50キロの人なら、6キロの荷物で押されるのと同じだ。",
+      "effect": "none",
+      "sim": "strhold",
+      "simStart": 4.2
+    },
+    {
+      "type": "whatif",
+      "text": "答えは、足を開いて、つり革につかまる！ほかに検証してほしいこと、コメントで教えてね！",
+      "effect": "none",
+      "sim": "strhold",
+      "simStart": 4.5,
+      "hold": 1
+    }
+  ]
+}

@@ -61,6 +61,8 @@ export type SimKind =
   | "trconst"
   | "tracc"
   | "trbrake"
+  | "strfeet"
+  | "strhold"
   // 雨の中を歩く・走る
   | "rwalk"
   | "rrun"
@@ -82,6 +84,9 @@ export const RAIN = { dist: 10, walk: 1.5, run: 5, n: 600, fall: 7, top: 0.11, f
 // elevfloat は同じ落下を 1/4 のスローで見せる（中の人が浮く様子）
 export const ELEV = { snap: 0.4, height: 60, floor: 3, slow: 0.25 };
 export const TRAIN_KINDS: SimKind[] = ["trconst", "tracc", "trbrake"];
+// 満員電車の急ブレーキ（つり革の検証）。t0 秒にブレーキ、a は減速（m/s²）、v は最初の時速
+export const STRAP_KINDS: SimKind[] = ["strfeet", "strhold"];
+export const STRAP = { t0: 1.2, a: 4.5 / 3.6, v: 60 };
 export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
 export const BOUNCE_KINDS: SimKind[] = ["bjump", "bdrop", "bwall", "bparty"];
 export const TINY_KINDS: SimKind[] = ["tworld", "tlift", "tjump", "tfall", "twind", "train"];
@@ -1745,6 +1750,77 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
         gone[f] = kind === "goldgone" ? Math.min(1, Math.max(0, (f / fps - GOLD_GONE) / 0.6)) : 0;
       },
     });
+  } else if (STRAP_KINDS.includes(kind)) {
+    // 急ブレーキの電車で立っている人。計算は「電車といっしょに動く目線」で、ブレーキ中は体に前向きの慣性力をかける。
+    // 人は窓の方（カメラ）を向いて立つので、ブレーキの力は体の横向きにかかる。
+    // 体をまっすぐに保つ力（balance）は弱くして、足の幅・つり革で倒れるかどうかが決まるようにする
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const x0 = lane === 0 ? -1.4 : 1.4;
+      const rd = addDoll(world, lane, lane, [x0, 0, 0]);
+      const wide = kind === "strfeet" && lane === 1;
+      const hold = kind === "strhold" && lane === 1;
+      const stance = wide ? POSES.wide : POSES.narrow;
+      let grip: CANNON.PointToPointConstraint | null = null;
+      let anchor: CANNON.Body | null = null;
+      const moved = val(`moved${lane}`);
+      const fell = val(`fell${lane}`);
+      const speed = val(`v${lane}`);
+      const pos = val(`pos${lane}`);
+      const ax = val(`ax${lane}`);
+      const ay = val(`ay${lane}`);
+      const az = val(`az${lane}`);
+      let x00 = NaN;
+      let down = 0;
+      let peak = 0;
+      const control = (t: number) => {
+        rd.balance = 0.12;
+        rd.setPose(hold ? { ...stance, ...POSES.strap } : stance);
+        applyBalance(rd);
+        if (hold && !grip && t > 0.7) {
+          // 上げた右手の先を、天井から下がったつり革（動かない点）につなぐ
+          const arm = rd.bodies.lowerArmR;
+          const local = new CANNON.Vec3(0, -rd.sizes.lowerArmR[1] / 2, 0);
+          const p = arm.pointToWorldFrame(local);
+          anchor = new CANNON.Body({ mass: 0, position: p.clone() });
+          anchor.collisionResponse = false;
+          world.addBody(anchor);
+          grip = new CANNON.PointToPointConstraint(arm, local, anchor, new CANNON.Vec3(0, 0, 0), 900);
+          world.addConstraint(grip);
+        }
+        // ブレーキ中（電車が止まるまで）は、体に前向きの慣性力
+        if (t > STRAP.t0 && t < STRAP.t0 + STRAP.v / 3.6 / STRAP.a) {
+          for (const b of Object.values(rd.bodies)) {
+            b.force.x += b.mass * STRAP.a;
+          }
+        }
+        if (Number.isNaN(x00) && t > STRAP.t0 - 0.05) {
+          x00 = rd.bodies.pelvis.position.x;
+        }
+        if (rd.bodies.head.position.y < 1.0) {
+          down = 1;
+        }
+      };
+      const record = (f: number) => {
+        const t = f / fps;
+        const tb = Math.max(0, t - STRAP.t0);
+        const v0 = STRAP.v / 3.6;
+        const vb = Math.max(0, v0 - STRAP.a * tb);
+        speed[f] = vb * 3.6;
+        pos[f] = v0 * Math.min(t, STRAP.t0) + (v0 * v0 - vb * vb) / (2 * STRAP.a);
+        // ブレーキのあと、腰がいちばん大きく動いた幅（ゆれの大きさ）
+        // （となりの人が倒れきるブレーキ 2.5秒後までの値で止める）
+        if (t <= STRAP.t0 + 2.5) {
+          peak = Math.max(peak, Number.isNaN(x00) ? 0 : Math.abs(rd.bodies.pelvis.position.x - x00));
+        }
+        moved[f] = peak;
+        fell[f] = down;
+        ax[f] = anchor ? anchor.position.x : NaN;
+        ay[f] = anchor ? anchor.position.y : NaN;
+        az[f] = anchor ? anchor.position.z : NaN;
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record });
+    });
   } else if (TRAIN_KINDS.includes(kind)) {
     // 電車の中でジャンプする。計算は「電車といっしょに動く目線」で行い、電車が速くなる・遅くなるときは、
     // 体に「電車の加速と逆向きの力（慣性力）」をかける。電車の外の景色は、電車の進んだ距離だけ流す
@@ -2139,6 +2215,10 @@ export const simulate = (
                       ? ["一定の速さ", "加速中"]
                       : kind === "trbrake"
                         ? ["一定の速さ", "急ブレーキ中"]
+                        : kind === "strfeet"
+                          ? ["足をそろえる", "足を開く"]
+                          : kind === "strhold"
+                            ? ["何もつかまない", "つり革をつかむ"]
         : ["いまの地球 1G", gravityLabel(g2)],
   };
   cache.set(key, result);
