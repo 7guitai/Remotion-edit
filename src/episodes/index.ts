@@ -27,6 +27,7 @@ import verifyTrainJumpShort from "./verify-train-jump-short.json";
 import verifyRainRunShort from "./verify-rain-run-short.json";
 import verifyElevator from "./verify-elevator-short.json";
 import verifyStrap from "./verify-strap-short.json";
+import paperLoveLong from "./paper-love-long.json";
 import relaxSleep45m from "./relax-sleep-45m.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
@@ -236,6 +237,7 @@ export type ScriptSlide = (
   | WhatIfSlide
   | IllusionSlide
   | RelaxSlide
+  | import("../components/PaperPage").PaperSlide
 ) & {
   chapter?: string;
   no?: number;
@@ -251,7 +253,7 @@ export type Episode = {
   // ショートの上部のタイトル帯（省略時は表示）
   titleBand?: boolean;
   // "flashy" で1ページ1雑学を派手な編集にする（集中線・叩きつけ文字・フラッシュ・揺れ・効果音）
-  style?: "flashy" | "sleep" | "whatif" | "illusion" | "relax";
+  style?: "flashy" | "sleep" | "whatif" | "illusion" | "relax" | "paper";
   // 目の錯覚クイズの見出し：上の小さな文字と、タイトル横の札（例：上級編）
   kicker?: string;
   badge?: string;
@@ -304,6 +306,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  paperLoveLong as Episode,
   verifyStrap as Episode,
   relaxSleep45m as Episode,
   verifyElevator as Episode,

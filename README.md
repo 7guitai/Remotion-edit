@@ -20,6 +20,7 @@
 | `whatif-friction-short` | もし摩擦がなくなったら？（同上。右・奥の世界は途中で摩擦がゼロになる） | 約55秒 |
 | `whatif-earth-long` | 地球の“もしも”10選（横長。章の扉・BGM 3曲の切り替え・物理シミュレーション・NASA の素材） | 約9分21秒 |
 | `illusion-quiz-short` | 目の錯覚クイズ（新ジャンル。図形はコードで描き、答え合わせで図が動いて種明かし） | 約82秒 |
+| `paper-love-long` | 好意はあるのに近づいてこない人の心理【論文で読み解く恋愛心理学】（オリジナル台本・研究6本・約10分） | 約10分 |
 | `verify-strap-short` | 【検証】電車の急ブレーキ、つり革なしで倒れない方法はある？（足をそろえる・開く・つり革） | 約46秒 |
 | `verify-elevator-short` | 【検証】落ちるエレベーター、着地の瞬間にジャンプすれば助かる？（無重力・スロー・ぶつかる速さの比較・非常止め） | 約36秒 |
 | `verify-rain-run-short` | 【検証】雨の日、走るのと歩くの、どっちがぬれない？（コンビニまで10m・ぬれた雨粒を計算） | 約58秒 |
@@ -95,6 +96,7 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 | `points` | ラベル付きの箇条書き（結論・チェックポイント） | `items: [{label, body}]` |
 | `quiz` | クイズの選択肢（A/B/C…） | `choices`, `answer`（正解の番号。0 始まり） |
 | `thread` | 2ch風。集中線の背景に赤グラデ＋白黒フチの大きな見出し、イラストの上にレスの吹き出しが順番に出る（「ポンッ」の効果音つき）。レスは `replyVoices` の声で交互に読む | `image`, `replies: [{text, speech, color}]` |
+| `paper` | 論文で読み解く解説（横長）。紺の背景に、論文カード・数字・棒グラフ・キーワード・2人の心の声・ルールカード。下に字幕 | `visual`（kind: title / chapter / scene / paper / stat / bars / concept / versus / rule / list） |
 | `relax` | 寝落ち用の「聞くだけ雑学」。白い背景・上に黒い太字の字幕・真ん中にフリー写真（public/photos/）。`card` で章の扉 | `photo`, `focus`, `card` |
 | `sleep` | 睡眠用。夜空（星・月・雨のすじ・眠る犬）の背景に雑学の文字をふわっと出して消す。`speech` をひと続きで読み上げ、`answer`/`explain` は表示だけ | `speech`, `answer`, `explain` |
 | `whatif` | 「もしも」形式。上の黒帯に2行のタイトル（エピソードの `headline`）、真ん中の映像に背景・イラスト・演出、読み上げに合わせて句読点ごとに切り替わる大きな字幕 | `image`, `bg`（space/night/sky/sea）, `effect`（none/vanish/zoom/spin/stop/shake/wind/flood/dark/arrows/half/flip）, `big`（黄色いラベル）, `globe`（本物の写真の回る地球・月）, `footage`（NASA の動画）, `photo`（NASA の写真）, `sim`（物理シミュレーション：scale/jump/slip/throw/brake/party、摩擦は fstand/fpush/fbrake/ladder/fchaos） |
