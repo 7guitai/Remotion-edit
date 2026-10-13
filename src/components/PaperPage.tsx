@@ -6,7 +6,7 @@ import { fontFamily, minchoFamily } from "../theme";
 // 和紙の地に、青海波（せいがいは）の模様、金の二重の枠。色は 藍・朱・金・桜。見出しと字幕は明朝体。
 // visual が前のスライドと同じとき（enter=false）は登場アニメをしない（同じ図のまま話が続く）
 export type PaperVisual =
-  | { kind: "title"; title: string[]; sub?: string }
+  | { kind: "title"; title: string[]; sub?: string; kicker?: string }
   | { kind: "chapter"; no: number; title: string; sub?: string }
   | { kind: "scene"; place: string; left: Person; right: Person; show?: ("left" | "right")[] }
   | { kind: "paper"; authors: string; year: string; journal: string; title: string; points: string[] }
@@ -172,7 +172,7 @@ const Visual: React.FC<{ v: PaperVisual; enter: boolean }> = ({ v, enter }) => {
         <div style={{ textAlign: "center", ...lift(a) }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 24, marginBottom: 34 }}>
             <div style={{ width: 120, height: 2, background: WA.kin }} />
-            <div style={{ ...mincho(40, WA.kin, 700), letterSpacing: 8 }}>論文で読み解く 恋愛心理学</div>
+            <div style={{ ...mincho(40, WA.kin, 700), letterSpacing: 8 }}>{v.kicker ?? "論文で読み解く 恋愛心理学"}</div>
             <div style={{ width: 120, height: 2, background: WA.kin }} />
           </div>
           {v.title.map((t, i) => (
