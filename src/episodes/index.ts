@@ -27,6 +27,7 @@ import verifyTrainJumpShort from "./verify-train-jump-short.json";
 import verifyRainRunShort from "./verify-rain-run-short.json";
 import verifyElevator from "./verify-elevator-short.json";
 import verifyStrap from "./verify-strap-short.json";
+import scienceSemi from "./science-semiconductor-short.json";
 import paperLoveLong from "./paper-love-long.json";
 import paperSpotlightLong from "./paper-spotlight-long.json";
 import relaxSleep45m from "./relax-sleep-45m.json";
@@ -219,6 +220,8 @@ export type WhatIfSlide = {
   gold?: import("../components/GoldScene").GoldMode;
   // 雨の検証の図解（内訳の棒グラフ・ぬれ方の2種類）
   rainChart?: import("../components/RainChart").RainChartMode;
+  // 半導体のしくみの図解（原子・電子・トランジスタ）
+  semi?: import("../components/SemiScene").SemiMode;
   // 検証動画の結果くらべ（横棒グラフ）
   compare?: import("../components/CompareBars").CompareSpec;
 };
@@ -307,6 +310,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  scienceSemi as Episode,
   paperLoveLong as Episode,
   paperSpotlightLong as Episode,
   verifyStrap as Episode,

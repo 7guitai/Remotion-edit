@@ -24,6 +24,7 @@ import { MeteorScene } from "./MeteorScene";
 import { IceScene } from "./IceScene";
 import { GoldScene } from "./GoldScene";
 import { RainChart } from "./RainChart";
+import { SemiScene } from "./SemiScene";
 import { CompareBars } from "./CompareBars";
 import { ThermoScene } from "./ThermoScene";
 
@@ -431,6 +432,7 @@ export const WhatIfPage: React.FC<{
         ) : null}
         {slide.compare ? <CompareBars spec={slide.compare} width={width} height={view.height} /> : null}
         {slide.rainChart ? <RainChart mode={slide.rainChart} width={width} height={view.height} /> : null}
+        {slide.semi ? <SemiScene mode={slide.semi} width={width} height={view.height} /> : null}
         {slide.gold ? <GoldScene mode={slide.gold} width={width} height={view.height} /> : null}
         {slide.ice ? <IceScene mode={slide.ice} width={width} height={view.height} /> : null}
         {slide.meteor ? <MeteorScene mode={slide.meteor} width={width} height={view.height} /> : null}
