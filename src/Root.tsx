@@ -3,6 +3,7 @@ import { Composition, Still } from "remotion";
 import { SleepThumbnail } from "./components/SleepThumbnail";
 import { WhatIfThumbnail } from "./components/WhatIfThumbnail";
 import { TinyThumbnail } from "./components/TinyThumbnail";
+import { RelaxThumbnail } from "./components/RelaxThumbnail";
 import { EPISODES } from "./episodes";
 import { calculateMetadata, FPS } from "./slides";
 import { Video } from "./Video";
@@ -36,6 +37,26 @@ export const RemotionRoot: React.FC = () => {
           catchCopy: "聴くだけで\nぐっすり",
           hours: "1",
           tag: "雨の音",
+        }}
+      />
+      {/* 寝落ち雑学45分のサムネイル（npx remotion still relax-sleep-45m-thumbnail out/thumb.png） */}
+      <Still
+        id="relax-sleep-45m-thumbnail"
+        component={RelaxThumbnail}
+        width={1280}
+        height={720}
+        defaultProps={{
+          kicker: "聞くだけで",
+          title: "眠くなる\n雑学",
+          minutes: "45分",
+          sub: "やさしい\n暮らしの雑学100",
+          main: "relax/cee3458a-3794-4f12-b61f-a7296aa9fa78.jpg",
+          strip: [
+            "relax/70280d10-ca80-4887-b9db-ddd14fbdcca2.jpg",
+            "relax/366921d5-e66e-4201-9e53-99c5e8792bd7.jpg",
+            "relax/bef6d67d-baac-49db-9e7b-a94fd50af4f8.jpg",
+            "relax/7a52926a-6ca3-4498-86d7-98cf9e7b48e2.jpg",
+          ],
         }}
       />
       {/* 「地球の“もしも”10選」のサムネイル（npx remotion still whatif-earth-long-thumbnail out/thumb.png --gl=swangle） */}
