@@ -104,6 +104,20 @@ export const RemotionRoot: React.FC = () => {
           thought: "みんなに\n見られてる…！？",
         }}
       />
+      {/* 「質問上手が好かれる」の回のサムネイル（npx remotion still paper-question-long-thumbnail out/thumb.png） */}
+      <Still
+        id="paper-question-long-thumbnail"
+        component={PaperThumbnail}
+        width={1280}
+        height={720}
+        defaultProps={{
+          kicker: "論文で読み解く心理学",
+          lines: ["話がうまい人より", "質問上手"],
+          badge: "なぜか好かれる理由",
+          person: "ira_woman_smile.png",
+          thought: "それで、\nどうなったんですか？",
+        }}
+      />
       {/* 「地球の“もしも”10選」のサムネイル（npx remotion still whatif-earth-long-thumbnail out/thumb.png --gl=swangle） */}
       <Still
         id="whatif-earth-long-thumbnail"

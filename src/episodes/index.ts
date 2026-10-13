@@ -31,6 +31,7 @@ import scienceSemi from "./science-semiconductor-short.json";
 import paperSemiLong from "./paper-semiconductor-long.json";
 import paperLoveLong from "./paper-love-long.json";
 import paperSpotlightLong from "./paper-spotlight-long.json";
+import paperQuestionLong from "./paper-question-long.json";
 import relaxSleep45m from "./relax-sleep-45m.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
@@ -315,6 +316,7 @@ export const EPISODES: Episode[] = [
   scienceSemi as Episode,
   paperLoveLong as Episode,
   paperSpotlightLong as Episode,
+  paperQuestionLong as Episode,
   verifyStrap as Episode,
   relaxSleep45m as Episode,
   verifyElevator as Episode,

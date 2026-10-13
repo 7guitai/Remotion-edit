@@ -1,0 +1,2111 @@
+{
+ "id": "paper-question-long",
+ "title": "話がうまい人より、質問上手が好かれる理由｜会話の心理学【論文で読み解く心理学】",
+ "format": "landscape",
+ "titleBand": false,
+ "pr": false,
+ "style": "paper",
+ "background": "#0b1222",
+ "slideGap": 10,
+ "bgmVolume": 0.07,
+ "voice": {
+  "speaker": 13,
+  "speed": 1.2,
+  "name": "青山龍星"
+ },
+ "bgm": {
+  "file": "ten_degrees.mp3",
+  "title": "10℃",
+  "credit": "しゃろう",
+  "page": "https://opentracks.com/bgm/detail/12420",
+  "opentracks": 12420,
+  "track": 1
+ },
+ "illustrations": {
+  "ira_man_idea.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhT1nHSRTNumaQWjilS1yilCY863lpnSaaVWo9oTSuIIB_vJ1I4N7eAlMhKqf_0SalEaBBuVSuF0e6kLIeU571h9ozcf4R2mBHC-7i_r8m35PDZruoSyC3GtvMObVSHpz5x4iGKdwQJSnqB/s800/business_man2_1_idea.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_laugh.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOHa1uoODoJQKY4lJibxtbHwA7J0MZd_T7NI6Ccay2-Z-73eo10bkIenD9uMbk2n1If4e7m-W58iL_QSMaz1ekU7i0sBSq2ecLUpGrpwWs_farEoAtFI7TfxMIGwqvgmVF1qUJ2nUWsc1o/s800/business_man1_4_laugh.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_question.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgl0KzEZadyAPONwycA4NlT0GpZ3hlafw-DbpxSwzRp2BRgo4iIjacANvbXZW4CPwd7jqhdJI3FWPqhYrboe9bA7rCl7SqLVogwgZaru5rGSIe6iePd3Om-q-tk7O3pJxXwnnZHhAMA6_7b/s800/business_man3_1_question.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_smile.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinCa3_I-Cu_oduFEXJgdqLfVVLTpVDzeeKvJU1P7Tmvy0-LJIQn6eLnUde-sOqyUxlU6Kmf_3nN832P3E5_MuqE_VM3ZUP598T9aA9RBjhVVPZm3OC_fuKOQA5qHw61GXMAvDTEmgmtV9n/s800/business_man1_1_smile.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_think.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4f8UNlNx6rgIq-4BDpGQszhhYthGnl10m47e0hgtvKX3ikrea74r0uu9wm7yI7U9kwe9FT01JCbBLYA0aHOjQaaqYq2hsL2Q_eNgmOG5fzH6V2x_XUxF8mx_mEuzmbhXwQbuSuYx4QrYG/s800/business_man2_4_think.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_laugh.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieAeI8ijO5STgO5_khv-yLs6YEmCim2YRL0pf2AmPs8n5BrLbNRlAPl2Xr-L0GPMrY2bHy03KwyS0AD5MEDr_cyvOIziLeJ1wE7j1zJOo3vuA2Rxcbhbzlu3OsLUo3CBrW1wCEEtWKWVgv/s800/business_woman1_4_laugh.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_smile.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKIGkR0NAsKhA679VI-_AHno_N3kOZwDEDErKUvypLVOHeDP4mSJAL1BjcGdpQUT3entVehgWv5XUgqmaCT0Bk6JAxMC0KLDQ8ro14IqpaQVGADgeXzmKsvaKYorWY3JtENTkKNC1xaoD4/s800/business_woman1_1_smile.png",
+   "credit": "いらすとや"
+  }
+ },
+ "description": "面白い話を用意したのに、なぜか「話しやすい」と言われるのは、質問していた人のほう。会話と好意の関係を、5つの心理学の研究から読み解きます。\n台本・例え話はオリジナルです。研究の内容は、論文の要旨や大学・メディアの紹介で確認できた範囲で紹介しています（自分の話のためにあきらめたお金の割合は、研究の報道で紹介された値です）。\n\n▼ 紹介した研究\n・Huang, Yeomans, Brooks, Minson & Gino (2017) It Doesn't Hurt to Ask: Question-Asking Increases Liking. Journal of Personality and Social Psychology, 113(3), 430-452.\n・Tamir & Mitchell (2012) Disclosing Information about the Self Is Intrinsically Rewarding. PNAS, 109(21), 8038-8043.\n・Aron, Melinat, Aron, Vallone & Bator (1997) The Experimental Generation of Interpersonal Closeness. Personality and Social Psychology Bulletin, 23(4), 363-377.\n・Kardas, Kumar & Epley (2022) Overly Shallow?: Miscalibrated Expectations Create a Barrier to Deeper Conversation. Journal of Personality and Social Psychology, 122(3), 367-398.\n・Hart, VanEpps & Schweitzer (2021) The (Better Than Expected) Consequences of Asking Sensitive Questions. Organizational Behavior and Human Decision Processes, 162, 136-154.",
+ "hashtags": [
+  "心理学",
+  "会話",
+  "論文",
+  "雑学"
+ ],
+ "slides": [
+  {
+   "type": "paper",
+   "text": "話がうまい人より、なぜか好かれる人がいる。",
+   "visual": {
+    "kind": "title",
+    "kicker": "論文で読み解く 心理学",
+    "title": [
+     "話がうまい人より",
+     "質問上手が好かれる"
+    ],
+    "sub": "5つの研究で読み解く「また話したい人」の正体"
+   },
+   "enter": true,
+   "chapter": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "その秘密は、話す力ではなく、聞く力のほうにありました。",
+   "visual": {
+    "kind": "title",
+    "kicker": "論文で読み解く 心理学",
+    "title": [
+     "話がうまい人より",
+     "質問上手が好かれる"
+    ],
+    "sub": "5つの研究で読み解く「また話したい人」の正体"
+   },
+   "enter": false
+  },
+  {
+   "type": "paper",
+   "text": "春から同じ部署に配属された、リクとナナミ。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "リク",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": null,
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "今日は、先輩たちとの歓迎ランチです。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "リク",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": null,
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "リクは前の晩から、面白い話を3つも準備してきました。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_idea.png",
+     "name": "リク",
+     "thought": "盛り上げなきゃ！\nネタは3つ用意した",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "学生時代の失敗談、旅行の話、最近ハマっているゲームの話。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_idea.png",
+     "name": "リク",
+     "thought": "盛り上げなきゃ！\nネタは3つ用意した",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "「沈黙になったら負けだ」。そう思って、リクは話のすき間を必死に埋めていきます。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_idea.png",
+     "name": "リク",
+     "thought": "盛り上げなきゃ！\nネタは3つ用意した",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "リクは一生懸命しゃべり続け、ランチの時間はあっという間に終わりました。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_idea.png",
+     "name": "リク",
+     "thought": "盛り上げなきゃ！\nネタは3つ用意した",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "一方のナナミは、あまり自分の話をしませんでした。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "リク",
+     "thought": "盛り上げなきゃ！\nネタは3つ用意した",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": "先輩たちの話、\nもっと聞きたいな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "先輩が「週末は山に行った」と言えば、「どの山ですか？」と聞く。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "リク",
+     "thought": "盛り上げなきゃ！\nネタは3つ用意した",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": "先輩たちの話、\nもっと聞きたいな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "speech": "先輩が「週末は山に行った」と言えば、「どのやまですか？」と聞く。",
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "「それで、頂上はどうでした？」と、また聞く。それだけです。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "リク",
+     "thought": "盛り上げなきゃ！\nネタは3つ用意した",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": "先輩たちの話、\nもっと聞きたいな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "ところが帰り道、先輩たちはこう話していました。「ナナミさんって、なんだか話しやすいね」",
+   "visual": {
+    "kind": "scene",
+    "place": "帰り道",
+    "left": {
+     "emoji": "ira_man_question.png",
+     "name": "リク",
+     "thought": "あんなに話したのに…\nなんでだろう",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "ナナミ",
+     "thought": "楽しかったな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "リクは首をかしげます。「僕のほうが、ずっとたくさん話したのに」",
+   "visual": {
+    "kind": "scene",
+    "place": "帰り道",
+    "left": {
+     "emoji": "ira_man_question.png",
+     "name": "リク",
+     "thought": "あんなに話したのに…\nなんでだろう",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "ナナミ",
+     "thought": "楽しかったな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "話題も、笑いも、リクのほうが多かったはず。それなのに、なぜでしょう。",
+   "visual": {
+    "kind": "scene",
+    "place": "帰り道",
+    "left": {
+     "emoji": "ira_man_question.png",
+     "name": "リク",
+     "thought": "あんなに話したのに…\nなんでだろう",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "ナナミ",
+     "thought": "楽しかったな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "この動画では、なぜ質問する人が好かれるのかを、5つの研究から解き明かします。",
+   "visual": {
+    "kind": "list",
+    "title": "この動画で紹介する研究",
+    "items": [
+     "質問の多い人は、好かれる",
+     "自分の話をするのは、気持ちいい",
+     "少しずつ深い質問で、距離が縮まる",
+     "深い話は、思ったより気まずくない",
+     "聞きにくい質問も、思ったほど嫌がられない"
+    ]
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "最後に、今日から使える3つのルールもお話しします。",
+   "visual": {
+    "kind": "list",
+    "title": "この動画で紹介する研究",
+    "items": [
+     "質問の多い人は、好かれる",
+     "自分の話をするのは、気持ちいい",
+     "少しずつ深い質問で、距離が縮まる",
+     "深い話は、思ったより気まずくない",
+     "聞きにくい質問も、思ったほど嫌がられない"
+    ]
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "第1章。質問の多い人は、好かれる。",
+   "visual": {
+    "kind": "chapter",
+    "no": 1,
+    "title": "質問の多い人は\n好かれる"
+   },
+   "enter": true,
+   "speech": "第一章。質問の多い人は、好かれる。",
+   "chapter": "第1章 質問の多い人は好かれる"
+  },
+  {
+   "type": "paper",
+   "text": "ハーバード大学の研究チームが、会話と好意の関係を調べました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Huang, Yeomans, Brooks ほか",
+    "year": "2017",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "It Doesn't Hurt to Ask: Question-Asking Increases Liking",
+    "points": [
+     "初対面の2人に、オンラインで会話してもらう",
+     "片方に「たくさん質問して」「あまり質問しないで」と頼んで比べた"
+    ]
+   },
+   "enter": true,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "初対面の2人に、チャットで自己紹介の会話をしてもらいます。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Huang, Yeomans, Brooks ほか",
+    "year": "2017",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "It Doesn't Hurt to Ask: Question-Asking Increases Liking",
+    "points": [
+     "初対面の2人に、オンラインで会話してもらう",
+     "片方に「たくさん質問して」「あまり質問しないで」と頼んで比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "このとき、片方の人にだけ、こっそり指示を出しました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Huang, Yeomans, Brooks ほか",
+    "year": "2017",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "It Doesn't Hurt to Ask: Question-Asking Increases Liking",
+    "points": [
+     "初対面の2人に、オンラインで会話してもらう",
+     "片方に「たくさん質問して」「あまり質問しないで」と頼んで比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "「できるだけたくさん質問してください」、または「質問はあまりしないでください」。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Huang, Yeomans, Brooks ほか",
+    "year": "2017",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "It Doesn't Hurt to Ask: Question-Asking Increases Liking",
+    "points": [
+     "初対面の2人に、オンラインで会話してもらう",
+     "片方に「たくさん質問して」「あまり質問しないで」と頼んで比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "会話のあと、相手の人に「この人をどれくらい好きになったか」を聞きます。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Huang, Yeomans, Brooks ほか",
+    "year": "2017",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "It Doesn't Hurt to Ask: Question-Asking Increases Liking",
+    "points": [
+     "初対面の2人に、オンラインで会話してもらう",
+     "片方に「たくさん質問して」「あまり質問しないで」と頼んで比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "結果は、はっきりしていました。たくさん質問した人のほうが、相手から好かれていたんです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "質問が多い人",
+     "body": "相手からの好感度が\n高かった"
+    },
+    "right": {
+     "title": "質問が少ない人",
+     "body": "相手からの好感度は\nそれほど上がらなかった"
+    }
+   },
+   "enter": true,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "しかも、効果が大きかったのは、ある種類の質問でした。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "質問が多い人",
+     "body": "相手からの好感度が\n高かった"
+    },
+    "right": {
+     "title": "質問が少ない人",
+     "body": "相手からの好感度は\nそれほど上がらなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "それが、相手の話を受けて、もう一歩聞く質問。フォローアップ質問です。",
+   "visual": {
+    "kind": "concept",
+    "term": "フォローアップ質問",
+    "en": "Follow-up Question",
+    "desc": "相手が話したことを受けて、\n「それで？」「どうして？」と一歩深く聞く質問"
+   },
+   "enter": true,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "「週末、山に行ったんです」に「どの山ですか？」と返す。これがフォローアップ質問です。",
+   "visual": {
+    "kind": "concept",
+    "term": "フォローアップ質問",
+    "en": "Follow-up Question",
+    "desc": "相手が話したことを受けて、\n「それで？」「どうして？」と一歩深く聞く質問"
+   },
+   "enter": false,
+   "speech": "「週末、山に行ったんです」に「どのやまですか？」と返す。これがフォローアップ質問です。",
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "急に「趣味は何ですか？」と話題を変える質問とは、ちがいます。",
+   "visual": {
+    "kind": "concept",
+    "term": "フォローアップ質問",
+    "en": "Follow-up Question",
+    "desc": "相手が話したことを受けて、\n「それで？」「どうして？」と一歩深く聞く質問"
+   },
+   "enter": false,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "LINEで「今日カレー食べた」と来たら、「どこのお店？」と返す。これも立派なフォローアップ質問です。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "フォローアップ質問",
+     "body": "「今日カレー食べた」\n→「どこのお店？」"
+    },
+    "right": {
+     "title": "話題を変える質問",
+     "body": "「今日カレー食べた」\n→「ところで趣味は？」"
+    }
+   },
+   "enter": true,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "フォローアップ質問をされると、人は「ちゃんと聞いてもらえている」と感じます。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "フォローアップ質問",
+     "body": "「今日カレー食べた」\n→「どこのお店？」"
+    },
+    "right": {
+     "title": "話題を変える質問",
+     "body": "「今日カレー食べた」\n→「ところで趣味は？」"
+    }
+   },
+   "enter": false,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "研究チームは、これを「応答性」と呼びました。聞いて、分かって、大切にしてくれている感じのことです。",
+   "visual": {
+    "kind": "concept",
+    "term": "応答性",
+    "en": "Responsiveness",
+    "desc": "話を聞いて、分かって、\n大切にしてくれていると感じられること"
+   },
+   "enter": true,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "質問の数が増えるほど好かれたのは、この「ちゃんと聞いてくれている感じ」が伝わるからだと考えられています。",
+   "visual": {
+    "kind": "concept",
+    "term": "応答性",
+    "en": "Responsiveness",
+    "desc": "話を聞いて、分かって、\n大切にしてくれていると感じられること"
+   },
+   "enter": false,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "逆に、相手の話を聞き流して、自分の話にすりかえると、この感じは伝わりません。",
+   "visual": {
+    "kind": "concept",
+    "term": "応答性",
+    "en": "Responsiveness",
+    "desc": "話を聞いて、分かって、\n大切にしてくれていると感じられること"
+   },
+   "enter": false,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "この研究では、スピードデートの会話も分析しています。",
+   "visual": {
+    "kind": "concept",
+    "term": "応答性",
+    "en": "Responsiveness",
+    "desc": "話を聞いて、分かって、\n大切にしてくれていると感じられること"
+   },
+   "enter": false,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "すると、フォローアップ質問の多い人ほど、相手から「また会いたい」と言われやすかったんです。",
+   "visual": {
+    "kind": "concept",
+    "term": "応答性",
+    "en": "Responsiveness",
+    "desc": "話を聞いて、分かって、\n大切にしてくれていると感じられること"
+   },
+   "enter": false,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "ところが、面白い点がもうひとつあります。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "実際の結果",
+     "body": "質問が多いほど\n好かれていた"
+    },
+    "right": {
+     "title": "多くの人の予想",
+     "body": "質問の数は\n好かれるかと関係ない"
+    }
+   },
+   "enter": true,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "多くの人は、「質問をすると好かれる」とは、予想していなかったんです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "実際の結果",
+     "body": "質問が多いほど\n好かれていた"
+    },
+    "right": {
+     "title": "多くの人の予想",
+     "body": "質問の数は\n好かれるかと関係ない"
+    }
+   },
+   "enter": false,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "だからリクのように、「面白い話をしなきゃ」と、自分が話すことばかり考えてしまうんですね。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_think.png",
+     "name": "リク",
+     "thought": "面白い話を\nしなきゃ…",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": true,
+   "tag": "第1章 質問と好意"
+  },
+  {
+   "type": "paper",
+   "text": "第2章。自分の話をするのは、気持ちいい。",
+   "visual": {
+    "kind": "chapter",
+    "no": 2,
+    "title": "自分の話をするのは\n気持ちいい"
+   },
+   "enter": true,
+   "speech": "第二章。自分の話をするのは、気持ちいい。",
+   "chapter": "第2章 自分の話は気持ちいい"
+  },
+  {
+   "type": "paper",
+   "text": "では、なぜ質問されると、うれしいのでしょうか。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Tamir & Mitchell",
+    "year": "2012",
+    "journal": "PNAS",
+    "title": "Disclosing Information about the Self Is Intrinsically Rewarding",
+    "points": [
+     "自分のことを話しているときの脳の働きを調べた",
+     "お金と「自分の話」の、どちらを選ぶかも調べた"
+    ]
+   },
+   "enter": true,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "ハーバード大学のタミールたちは、まず、人の会話の中身に注目しました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Tamir & Mitchell",
+    "year": "2012",
+    "journal": "PNAS",
+    "title": "Disclosing Information about the Self Is Intrinsically Rewarding",
+    "points": [
+     "自分のことを話しているときの脳の働きを調べた",
+     "お金と「自分の話」の、どちらを選ぶかも調べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "私たちの会話の30〜40%は、自分の経験や気持ちを伝える話だといわれています。",
+   "visual": {
+    "kind": "stat",
+    "value": 40,
+    "unit": "%",
+    "label": "会話のうち「自分のこと」の話",
+    "sub": "人の会話の 30〜40% といわれる"
+   },
+   "enter": true,
+   "speech": "私たちの会話の、さんじゅうからよんじゅうパーセントは、自分の経験や気持ちを伝える話だといわれています。",
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "研究チームは、自分のことを話しているときの脳を、MRIで調べました。",
+   "visual": {
+    "kind": "stat",
+    "value": 40,
+    "unit": "%",
+    "label": "会話のうち「自分のこと」の話",
+    "sub": "人の会話の 30〜40% といわれる"
+   },
+   "enter": false,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "すると、おいしい物を食べたときなどに働く、「ごほうび」に関わる脳の部分が活発になっていました。",
+   "visual": {
+    "kind": "concept",
+    "term": "自分の話は「ごほうび」",
+    "en": "Self-disclosure is rewarding",
+    "desc": "自分のことを話すと、\n脳の「ごほうび」に関わる部分が働く"
+   },
+   "enter": true,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "さらに、こんな実験もしました。",
+   "visual": {
+    "kind": "concept",
+    "term": "自分の話は「ごほうび」",
+    "en": "Self-disclosure is rewarding",
+    "desc": "自分のことを話すと、\n脳の「ごほうび」に関わる部分が働く"
+   },
+   "enter": false,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "「自分についての質問に答える」か「ほかの人についての質問に答える」かを選ぶと、もらえるお金が少し変わる。",
+   "visual": {
+    "kind": "concept",
+    "term": "自分の話は「ごほうび」",
+    "en": "Self-disclosure is rewarding",
+    "desc": "自分のことを話すと、\n脳の「ごほうび」に関わる部分が働く"
+   },
+   "enter": false,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "すると参加者たちは、もらえるお金が減っても、自分の話をするほうを選びがちでした。",
+   "visual": {
+    "kind": "concept",
+    "term": "自分の話は「ごほうび」",
+    "en": "Self-disclosure is rewarding",
+    "desc": "自分のことを話すと、\n脳の「ごほうび」に関わる部分が働く"
+   },
+   "enter": false,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "報道によると、自分の話をするために、もらえるはずのお金の17%ほどをあきらめていたそうです。",
+   "visual": {
+    "kind": "stat",
+    "value": 17,
+    "unit": "%",
+    "label": "自分の話のために あきらめたお金",
+    "sub": "出典：Tamir & Mitchell（2012）の研究の報道より"
+   },
+   "enter": true,
+   "speech": "報道によると、自分の話をするために、もらえるはずのお金の、じゅうななパーセントほどをあきらめていたそうです。",
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "人は、お金を払ってでも、自分の話をしたい生き物なんですね。",
+   "visual": {
+    "kind": "stat",
+    "value": 17,
+    "unit": "%",
+    "label": "自分の話のために あきらめたお金",
+    "sub": "出典：Tamir & Mitchell（2012）の研究の報道より"
+   },
+   "enter": false,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "しかも、その話を誰かが聞いてくれると分かっているときのほうが、うれしさは大きかったそうです。",
+   "visual": {
+    "kind": "stat",
+    "value": 17,
+    "unit": "%",
+    "label": "自分の話のために あきらめたお金",
+    "sub": "出典：Tamir & Mitchell（2012）の研究の報道より"
+   },
+   "enter": false,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "そう考えると、質問するというのは、相手に「ごほうび」を渡すことでもあります。",
+   "visual": {
+    "kind": "stat",
+    "value": 17,
+    "unit": "%",
+    "label": "自分の話のために あきらめたお金",
+    "sub": "出典：Tamir & Mitchell（2012）の研究の報道より"
+   },
+   "enter": false,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "リクが自分の話をしている間、気持ちよくなっていたのは、実はリク自身でした。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "リク",
+     "thought": "（話してて楽しい！）",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": "（うんうん）",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "ナナミの質問は、先輩たちに、その気持ちよさを渡していたんです。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "リク",
+     "thought": "（話してて楽しい！）",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": "（うんうん）",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "もちろん、リクが悪いわけではありません。話したくなるのは、人として自然なことです。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "リク",
+     "thought": "（話してて楽しい！）",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": "（うんうん）",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "ただ、相手も同じように話したいと思っている。そのことを覚えておくだけで、会話は変わります。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "リク",
+     "thought": "（話してて楽しい！）",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": "（うんうん）",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "SNSで、自分の近況をつい書きたくなるのも、同じしくみだと考えられています。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "リク",
+     "thought": "（話してて楽しい！）",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": "（うんうん）",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "第2章 自己開示とごほうび"
+  },
+  {
+   "type": "paper",
+   "text": "第3章。少しずつ深い質問で、距離が縮まる。",
+   "visual": {
+    "kind": "chapter",
+    "no": 3,
+    "title": "少しずつ深い質問で\n距離が縮まる"
+   },
+   "enter": true,
+   "speech": "第三章。少しずつ深い質問で、距離が縮まる。",
+   "chapter": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "質問の「深さ」に注目した、有名な研究があります。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Aron, Melinat, Aron, Vallone & Bator",
+    "year": "1997",
+    "journal": "Personality and Social Psychology Bulletin",
+    "title": "The Experimental Generation of Interpersonal Closeness",
+    "points": [
+     "初対面の2人が、決められた質問を交互に聞き合う",
+     "質問は3つのセットで、だんだん深くなっていく"
+    ]
+   },
+   "enter": true,
+   "tag": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "ニューヨーク州立大学のアーロンたちは、初対面の2人に、質問を聞き合ってもらいました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Aron, Melinat, Aron, Vallone & Bator",
+    "year": "1997",
+    "journal": "Personality and Social Psychology Bulletin",
+    "title": "The Experimental Generation of Interpersonal Closeness",
+    "points": [
+     "初対面の2人が、決められた質問を交互に聞き合う",
+     "質問は3つのセットで、だんだん深くなっていく"
+    ]
+   },
+   "enter": false,
+   "tag": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "用意された質問は全部で36個。12個ずつ、3つのセットに分かれています。",
+   "visual": {
+    "kind": "list",
+    "title": "質問のイメージ（だんだん深くなる）",
+    "items": [
+     "最初：「理想の1日って、どんな日？」",
+     "途中：「人生で一番感謝していることは？」",
+     "最後：「人前で最後に泣いたのはいつ？」"
+    ]
+   },
+   "enter": true,
+   "speech": "用意された質問は、全部で、さんじゅうろっこ。じゅうにこずつ、3つのセットに分かれています。",
+   "tag": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "最初は軽い質問から始まり、セットが進むほど、少しずつ深い質問になっていきます。",
+   "visual": {
+    "kind": "list",
+    "title": "質問のイメージ（だんだん深くなる）",
+    "items": [
+     "最初：「理想の1日って、どんな日？」",
+     "途中：「人生で一番感謝していることは？」",
+     "最後：「人前で最後に泣いたのはいつ？」"
+    ]
+   },
+   "enter": false,
+   "tag": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "比べるグループには、ずっと浅い世間話をしてもらいました。",
+   "visual": {
+    "kind": "list",
+    "title": "質問のイメージ（だんだん深くなる）",
+    "items": [
+     "最初：「理想の1日って、どんな日？」",
+     "途中：「人生で一番感謝していることは？」",
+     "最後：「人前で最後に泣いたのはいつ？」"
+    ]
+   },
+   "enter": false,
+   "tag": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "すると、だんだん深くなる質問をしたペアのほうが、相手との距離が近くなったと感じていました。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "だんだん深い質問",
+     "body": "相手を近くに感じる\n気持ちが強まった"
+    },
+    "right": {
+     "title": "ずっと浅い世間話",
+     "body": "距離は\nあまり縮まらなかった"
+    }
+   },
+   "enter": true,
+   "tag": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "この36の質問は、「恋に落ちる36の質問」として、世界中で話題になりました。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "だんだん深い質問",
+     "body": "相手を近くに感じる\n気持ちが強まった"
+    },
+    "right": {
+     "title": "ずっと浅い世間話",
+     "body": "距離は\nあまり縮まらなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "ただし研究者自身は、これで信頼や深い絆まで生まれるわけではない、と注意しています。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "だんだん深い質問",
+     "body": "相手を近くに感じる\n気持ちが強まった"
+    },
+    "right": {
+     "title": "ずっと浅い世間話",
+     "body": "距離は\nあまり縮まらなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "ポイントは、いきなり深い質問をしないこと。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "だんだん深い質問",
+     "body": "相手を近くに感じる\n気持ちが強まった"
+    },
+    "right": {
+     "title": "ずっと浅い世間話",
+     "body": "距離は\nあまり縮まらなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "軽い質問で安心してもらってから、少しずつ深くしていく。その順番が大切なんです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "だんだん深い質問",
+     "body": "相手を近くに感じる\n気持ちが強まった"
+    },
+    "right": {
+     "title": "ずっと浅い世間話",
+     "body": "距離は\nあまり縮まらなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "新しいクラスや、部活の飲み会でも同じです。まずは出身地や好きな食べ物から。",
+   "visual": {
+    "kind": "list",
+    "title": "飲み会での質問の順番（例）",
+    "items": [
+     "「出身はどこ？」「好きな食べ物は？」",
+     "「休みの日は何してるの？」",
+     "「どうしてその仕事を選んだの？」"
+    ]
+   },
+   "enter": true,
+   "tag": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "打ちとけてきたら、「どうしてその仕事を選んだの？」と、少しだけ深く聞いてみる。",
+   "visual": {
+    "kind": "list",
+    "title": "飲み会での質問の順番（例）",
+    "items": [
+     "「出身はどこ？」「好きな食べ物は？」",
+     "「休みの日は何してるの？」",
+     "「どうしてその仕事を選んだの？」"
+    ]
+   },
+   "enter": false,
+   "tag": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "ナナミも、「どの山ですか？」から始めて、「頂上はどうでした？」と、少しずつ聞いていました。",
+   "visual": {
+    "kind": "scene",
+    "place": "歓迎ランチのお店",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "リク",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": "どの山ですか？\n頂上はどうでした？",
+     "color": "#d0607a"
+    },
+    "show": [
+     "right"
+    ]
+   },
+   "enter": true,
+   "speech": "ナナミも、「どのやまですか？」から始めて、「頂上はどうでした？」と、少しずつ聞いていました。",
+   "tag": "第3章 36の質問"
+  },
+  {
+   "type": "paper",
+   "text": "第4章。深い話は、思ったより気まずくない。",
+   "visual": {
+    "kind": "chapter",
+    "no": 4,
+    "title": "深い話は\n思ったより気まずくない"
+   },
+   "enter": true,
+   "speech": "第四章。深い話は、思ったより気まずくない。",
+   "chapter": "第4章 深い話の気まずさ"
+  },
+  {
+   "type": "paper",
+   "text": "でも、「深い質問なんて、気まずくなりそう」と思いますよね。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Kardas, Kumar & Epley",
+    "year": "2022",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "Overly Shallow?: Miscalibrated Expectations Create a Barrier to Deeper Conversation",
+    "points": [
+     "初対面どうしで、深い話・浅い話をしてもらう",
+     "話す前の予想と、話したあとの感想を比べた"
+    ]
+   },
+   "enter": true,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "シカゴ大学のエプリーたちは、初対面の人どうしで、深い話をしてもらう実験をくり返しました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Kardas, Kumar & Epley",
+    "year": "2022",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "Overly Shallow?: Miscalibrated Expectations Create a Barrier to Deeper Conversation",
+    "points": [
+     "初対面どうしで、深い話・浅い話をしてもらう",
+     "話す前の予想と、話したあとの感想を比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "話す前、参加者たちは「きっと気まずくなる」と予想していました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Kardas, Kumar & Epley",
+    "year": "2022",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "Overly Shallow?: Miscalibrated Expectations Create a Barrier to Deeper Conversation",
+    "points": [
+     "初対面どうしで、深い話・浅い話をしてもらう",
+     "話す前の予想と、話したあとの感想を比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "ところが実際に話してみると、気まずさは予想よりずっと小さく、つながりや楽しさは予想より大きかったんです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "話す前の予想",
+     "body": "気まずくなりそう…\n相手は興味ないかも"
+    },
+    "right": {
+     "title": "話したあと",
+     "body": "思ったより楽しかった\n相手もちゃんと聞いてくれた"
+    }
+   },
+   "enter": true,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "特に、深い話のほうが、予想とのズレが大きくなっていました。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "話す前の予想",
+     "body": "気まずくなりそう…\n相手は興味ないかも"
+    },
+    "right": {
+     "title": "話したあと",
+     "body": "思ったより楽しかった\n相手もちゃんと聞いてくれた"
+    }
+   },
+   "enter": false,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "なぜ、こんなに予想が外れるのでしょう。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "話す前の予想",
+     "body": "気まずくなりそう…\n相手は興味ないかも"
+    },
+    "right": {
+     "title": "話したあと",
+     "body": "思ったより楽しかった\n相手もちゃんと聞いてくれた"
+    }
+   },
+   "enter": false,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "研究チームによると、私たちは「相手は自分の話に、あまり興味がないだろう」と思いこんでいるからです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "話す前の予想",
+     "body": "気まずくなりそう…\n相手は興味ないかも"
+    },
+    "right": {
+     "title": "話したあと",
+     "body": "思ったより楽しかった\n相手もちゃんと聞いてくれた"
+    }
+   },
+   "enter": false,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "でも実際は、相手は思っているより、あなたの話を大切に聞いてくれていました。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "話す前の予想",
+     "body": "気まずくなりそう…\n相手は興味ないかも"
+    },
+    "right": {
+     "title": "話したあと",
+     "body": "思ったより楽しかった\n相手もちゃんと聞いてくれた"
+    }
+   },
+   "enter": false,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "ちなみに、仲のいい友だちや家族が相手のときは、予想はもっと正確だったそうです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "初対面の相手",
+     "body": "「興味ないかも」と思い\n予想がずれやすい"
+    },
+    "right": {
+     "title": "友だち・家族",
+     "body": "興味を持ってくれていると\n分かるので予想が正確"
+    }
+   },
+   "enter": true,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "相手が自分に興味を持ってくれていると、はっきり分かっているからですね。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "初対面の相手",
+     "body": "「興味ないかも」と思い\n予想がずれやすい"
+    },
+    "right": {
+     "title": "友だち・家族",
+     "body": "興味を持ってくれていると\n分かるので予想が正確"
+    }
+   },
+   "enter": false,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "だから、つい天気や仕事の話ばかりの、浅い会話になってしまう。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "初対面の相手",
+     "body": "「興味ないかも」と思い\n予想がずれやすい"
+    },
+    "right": {
+     "title": "友だち・家族",
+     "body": "興味を持ってくれていると\n分かるので予想が正確"
+    }
+   },
+   "enter": false,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "研究チームは、これを「浅すぎる会話」のわなだと指摘しています。",
+   "visual": {
+    "kind": "concept",
+    "term": "浅すぎる会話のわな",
+    "en": "Overly Shallow",
+    "desc": "「相手は興味がないだろう」と思いこみ、\n深い話を避けてしまうこと"
+   },
+   "enter": true,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "同じ人と、深い話と浅い話の両方をしてもらった実験では、深い話をした相手のほうに、より強いつながりを感じていました。",
+   "visual": {
+    "kind": "concept",
+    "term": "浅すぎる会話のわな",
+    "en": "Overly Shallow",
+    "desc": "「相手は興味がないだろう」と思いこみ、\n深い話を避けてしまうこと"
+   },
+   "enter": false,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "そして、「深い話は思ったより気まずくない」と知った人は、実際に深い話題を選びやすくなったそうです。",
+   "visual": {
+    "kind": "concept",
+    "term": "浅すぎる会話のわな",
+    "en": "Overly Shallow",
+    "desc": "「相手は興味がないだろう」と思いこみ、\n深い話を避けてしまうこと"
+   },
+   "enter": false,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "職場のランチで、毎回「最近忙しいですか？」で終わってしまうのも、このわなかもしれません。",
+   "visual": {
+    "kind": "concept",
+    "term": "浅すぎる会話のわな",
+    "en": "Overly Shallow",
+    "desc": "「相手は興味がないだろう」と思いこみ、\n深い話を避けてしまうこと"
+   },
+   "enter": false,
+   "tag": "第4章 深い会話"
+  },
+  {
+   "type": "paper",
+   "text": "第5章。聞きにくい質問も、思ったほど嫌がられない。",
+   "visual": {
+    "kind": "chapter",
+    "no": 5,
+    "title": "聞きにくい質問も\n思ったほど嫌がられない"
+   },
+   "enter": true,
+   "speech": "第五章。聞きにくい質問も、思ったほど嫌がられない。",
+   "chapter": "第5章 聞きにくい質問"
+  },
+  {
+   "type": "paper",
+   "text": "もう一歩、踏みこんだ研究もあります。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Hart, VanEpps & Schweitzer",
+    "year": "2021",
+    "journal": "Organizational Behavior and Human Decision Processes",
+    "title": "The (Better Than Expected) Consequences of Asking Sensitive Questions",
+    "points": [
+     "お給料など「聞きにくいこと」を質問してもらう",
+     "質問した人の予想と、相手の実際の印象を比べた"
+    ]
+   },
+   "enter": true,
+   "tag": "第5章 聞きにくい質問"
+  },
+  {
+   "type": "paper",
+   "text": "ペンシルベニア大学などの研究チームは、5つの実験で、1400人以上を調べました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Hart, VanEpps & Schweitzer",
+    "year": "2021",
+    "journal": "Organizational Behavior and Human Decision Processes",
+    "title": "The (Better Than Expected) Consequences of Asking Sensitive Questions",
+    "points": [
+     "お給料など「聞きにくいこと」を質問してもらう",
+     "質問した人の予想と、相手の実際の印象を比べた"
+    ]
+   },
+   "enter": false,
+   "speech": "ペンシルベニア大学などの研究チームは、5つの実験で、せんよんひゃくにん以上を調べました。",
+   "tag": "第5章 聞きにくい質問"
+  },
+  {
+   "type": "paper",
+   "text": "参加者に、お給料のような「聞きにくい質問」をしてもらいます。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Hart, VanEpps & Schweitzer",
+    "year": "2021",
+    "journal": "Organizational Behavior and Human Decision Processes",
+    "title": "The (Better Than Expected) Consequences of Asking Sensitive Questions",
+    "points": [
+     "お給料など「聞きにくいこと」を質問してもらう",
+     "質問した人の予想と、相手の実際の印象を比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 聞きにくい質問"
+  },
+  {
+   "type": "paper",
+   "text": "質問する側は、「失礼だと思われる」「相手が気を悪くする」と心配していました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Hart, VanEpps & Schweitzer",
+    "year": "2021",
+    "journal": "Organizational Behavior and Human Decision Processes",
+    "title": "The (Better Than Expected) Consequences of Asking Sensitive Questions",
+    "points": [
+     "お給料など「聞きにくいこと」を質問してもらう",
+     "質問した人の予想と、相手の実際の印象を比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 聞きにくい質問"
+  },
+  {
+   "type": "paper",
+   "text": "ところが相手の印象は、通勤のような、ふつうの質問をされたときと、ほとんど変わらなかったんです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "質問した人の心配",
+     "body": "失礼だと思われそう…\n嫌われるかも"
+    },
+    "right": {
+     "title": "相手の実際の印象",
+     "body": "ふつうの質問のときと\nほとんど変わらなかった"
+    }
+   },
+   "enter": true,
+   "tag": "第5章 聞きにくい質問"
+  },
+  {
+   "type": "paper",
+   "text": "この結果は、友だちどうしでも、初対面でも、対面でもオンラインでも、同じでした。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "質問した人の心配",
+     "body": "失礼だと思われそう…\n嫌われるかも"
+    },
+    "right": {
+     "title": "相手の実際の印象",
+     "body": "ふつうの質問のときと\nほとんど変わらなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第5章 聞きにくい質問"
+  },
+  {
+   "type": "paper",
+   "text": "私たちは、聞きにくいことを聞くとき、相手の気持ちを大きく見積もりすぎているのかもしれません。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "質問した人の心配",
+     "body": "失礼だと思われそう…\n嫌われるかも"
+    },
+    "right": {
+     "title": "相手の実際の印象",
+     "body": "ふつうの質問のときと\nほとんど変わらなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第5章 聞きにくい質問"
+  },
+  {
+   "type": "paper",
+   "text": "聞きにくいことを、思いきって聞く。そのほうが、深い話につながることもあります。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "質問した人の心配",
+     "body": "失礼だと思われそう…\n嫌われるかも"
+    },
+    "right": {
+     "title": "相手の実際の印象",
+     "body": "ふつうの質問のときと\nほとんど変わらなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第5章 聞きにくい質問"
+  },
+  {
+   "type": "paper",
+   "text": "ただし、どんな質問でもいい、ということではありません。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "質問した人の心配",
+     "body": "失礼だと思われそう…\n嫌われるかも"
+    },
+    "right": {
+     "title": "相手の実際の印象",
+     "body": "ふつうの質問のときと\nほとんど変わらなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第5章 聞きにくい質問"
+  },
+  {
+   "type": "paper",
+   "text": "相手が答えたくなさそうなら、すぐに引く。その気づかいは、いつでも大切です。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "質問した人の心配",
+     "body": "失礼だと思われそう…\n嫌われるかも"
+    },
+    "right": {
+     "title": "相手の実際の印象",
+     "body": "ふつうの質問のときと\nほとんど変わらなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第5章 聞きにくい質問"
+  },
+  {
+   "type": "paper",
+   "text": "ここまでの研究を、まとめてみましょう。",
+   "visual": {
+    "kind": "list",
+    "title": "質問上手が好かれる5つの理由",
+    "items": [
+     "質問、特にフォローアップ質問が好かれる",
+     "自分の話は、脳にとって「ごほうび」",
+     "少しずつ深い質問で、距離が縮まる",
+     "深い話は、思ったより気まずくない",
+     "聞きにくい質問も、思ったほど嫌がられない"
+    ]
+   },
+   "enter": true,
+   "tag": "第5章 聞きにくい質問"
+  },
+  {
+   "type": "paper",
+   "text": "第6章。今日から使える、3つのルール。",
+   "visual": {
+    "kind": "chapter",
+    "no": 6,
+    "title": "今日から使える\n3つのルール"
+   },
+   "enter": true,
+   "speech": "第六章。今日から使える、3つのルール。",
+   "chapter": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ルール1。相手の言葉を拾って、もう一歩だけ聞く。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "相手の言葉を拾って\nもう一歩だけ聞く",
+    "body": "「山に行った」→「どの山ですか？」"
+   },
+   "enter": true,
+   "speech": "ルールいち。相手の言葉を拾って、もう一歩だけ聞く。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "新しい話題を考える必要はありません。相手が言った言葉を、そのまま拾えばいいんです。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "相手の言葉を拾って\nもう一歩だけ聞く",
+    "body": "「山に行った」→「どの山ですか？」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "「どうして？」「それで、どうなったんですか？」。これだけで、立派なフォローアップ質問になります。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "相手の言葉を拾って\nもう一歩だけ聞く",
+    "body": "「山に行った」→「どの山ですか？」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "会議のあとの雑談で、同期が「昨日、徹夜で資料作ってて」と言ったら、「何の資料？」と聞くだけでいいんです。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "相手の言葉を拾って\nもう一歩だけ聞く",
+    "body": "「山に行った」→「どの山ですか？」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ルール2。話す時間の半分は、相手にゆずる。",
+   "visual": {
+    "kind": "rule",
+    "no": 2,
+    "title": "話す時間の半分は\n相手にゆずる",
+    "body": "自分の話をしたら、「〇〇さんはどうですか？」と返す"
+   },
+   "enter": true,
+   "speech": "ルールに。話す時間の半分は、相手にゆずる。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "自分の話をするのは、悪いことではありません。自分のことを話すと、相手も話しやすくなります。",
+   "visual": {
+    "kind": "rule",
+    "no": 2,
+    "title": "話す時間の半分は\n相手にゆずる",
+    "body": "自分の話をしたら、「〇〇さんはどうですか？」と返す"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ただ、話し終えたら、「〇〇さんはどうですか？」と、ボールを相手に返しましょう。",
+   "visual": {
+    "kind": "rule",
+    "no": 2,
+    "title": "話す時間の半分は\n相手にゆずる",
+    "body": "自分の話をしたら、「〇〇さんはどうですか？」と返す"
+   },
+   "enter": false,
+   "speech": "ただ、話し終えたら、なになにさんはどうですか？と、ボールを相手に返しましょう。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ルール3。浅い話のあとに、少しだけ深い質問をひとつ。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "浅い話のあとに\n少し深い質問をひとつ",
+    "body": "「最近、一番うれしかったことは？」"
+   },
+   "enter": true,
+   "speech": "ルールさん。浅い話のあとに、少しだけ深い質問をひとつ。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "「最近、一番うれしかったことは何ですか？」。それくらいの深さで、十分です。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "浅い話のあとに\n少し深い質問をひとつ",
+    "body": "「最近、一番うれしかったことは？」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "「この仕事、どこが一番好きですか？」「子どものころ、何になりたかったですか？」も、使いやすい質問です。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "浅い話のあとに\n少し深い質問をひとつ",
+    "body": "「最近、一番うれしかったことは？」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "相手は、あなたが思うよりずっと、その質問を歓迎してくれるはずです。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "浅い話のあとに\n少し深い質問をひとつ",
+    "body": "「最近、一番うれしかったことは？」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ひとつだけ注意です。質問を、つぎつぎと浴びせると、取り調べのようになってしまいます。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "浅い話のあとに\n少し深い質問をひとつ",
+    "body": "「最近、一番うれしかったことは？」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "大切なのは、質問の数より、相手の答えに本当に興味を持つことです。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "浅い話のあとに\n少し深い質問をひとつ",
+    "body": "「最近、一番うれしかったことは？」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "答えを聞きながら、うなずいたり、「へえ！」と反応したりするだけでも、聞いている気持ちは伝わります。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "浅い話のあとに\n少し深い質問をひとつ",
+    "body": "「最近、一番うれしかったことは？」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "まとめ。",
+   "visual": {
+    "kind": "chapter",
+    "no": 7,
+    "title": "まとめ",
+    "sub": "好かれる人は、聞き上手"
+   },
+   "enter": true,
+   "chapter": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "次の週のランチ。リクは、ネタを準備するのをやめました。",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のランチ",
+    "left": {
+     "emoji": "ira_man_idea.png",
+     "name": "リク",
+     "thought": "今日は、\n聞いてみよう",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": true,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "先輩が「最近、料理を始めたんだ」と言うと、リクは聞きました。「何を作ったんですか？」",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のランチ",
+    "left": {
+     "emoji": "ira_man_idea.png",
+     "name": "リク",
+     "thought": "今日は、\n聞いてみよう",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "「それで、うまくできました？」。先輩はうれしそうに、失敗談まで話してくれました。",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のランチ",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "リク",
+     "thought": "それで、\nうまくできました？",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "ナナミ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": true,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "帰り道、ナナミが笑って言います。「リクくん、今日すごく楽しそうだったね」",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のランチ",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "リク",
+     "thought": "話さなくても\n楽しいんだな",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "ナナミ",
+     "thought": "今日は聞き上手\nだったね",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "私たちは、好かれるには、面白い話をしなければ、と思いがちです。",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のランチ",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "リク",
+     "thought": "話さなくても\n楽しいんだな",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "ナナミ",
+     "thought": "今日は聞き上手\nだったね",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "でも研究が教えてくれるのは、その反対でした。",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のランチ",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "リク",
+     "thought": "話さなくても\n楽しいんだな",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "ナナミ",
+     "thought": "今日は聞き上手\nだったね",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "話のうまさより、相手への興味。たくさん話すより、もう一歩聞くこと。",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のランチ",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "リク",
+     "thought": "話さなくても\n楽しいんだな",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "ナナミ",
+     "thought": "今日は聞き上手\nだったね",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "「また話したい」と思われる人は、相手の話を、もう一歩聞いてくれる人なんです。",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のランチ",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "リク",
+     "thought": "話さなくても\n楽しいんだな",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "ナナミ",
+     "thought": "今日は聞き上手\nだったね",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "この動画が参考になったら、高評価とチャンネル登録をお願いします。",
+   "visual": {
+    "kind": "title",
+    "kicker": "論文で読み解く 心理学",
+    "title": [
+     "最後まで見てくれて",
+     "ありがとう"
+    ],
+    "sub": "あなたが「話しやすい」と感じる人の質問、コメントで教えてください"
+   },
+   "enter": true
+  },
+  {
+   "type": "paper",
+   "text": "あなたが「話しやすい」と感じる人は、どんな質問をしてくれますか？　ぜひコメントで教えてください。",
+   "visual": {
+    "kind": "title",
+    "kicker": "論文で読み解く 心理学",
+    "title": [
+     "最後まで見てくれて",
+     "ありがとう"
+    ],
+    "sub": "あなたが「話しやすい」と感じる人の質問、コメントで教えてください"
+   },
+   "enter": false
+  }
+ ]
+}
