@@ -11,6 +11,8 @@ export type PaperPairThumbnailProps = {
   badge: string;
   left: { image: string; thought: string; color: string };
   right: { image: string; thought: string; color: string };
+  // 2人の間の「割れたハート」（恋愛の回だけ）
+  heart?: boolean;
 };
 
 const Bubble: React.FC<{ text: string; color: string; style: React.CSSProperties }> = ({ text, color, style }) => (
@@ -36,7 +38,7 @@ const Bubble: React.FC<{ text: string; color: string; style: React.CSSProperties
   </div>
 );
 
-export const PaperPairThumbnail: React.FC<PaperPairThumbnailProps> = ({ kicker, lines, badge, left, right }) => {
+export const PaperPairThumbnail: React.FC<PaperPairThumbnailProps> = ({ kicker, lines, badge, left, right, heart = true }) => {
   const stroke = "0 0 8px #fffaf0, 0 0 8px #fffaf0, 0 0 3px #fffaf0";
   return (
     <AbsoluteFill style={{ overflow: "hidden" }}>
@@ -47,7 +49,7 @@ export const PaperPairThumbnail: React.FC<PaperPairThumbnailProps> = ({ kicker, 
       <div style={{ position: "absolute", left: 660, top: 250, width: 300, height: 300, borderRadius: "50%", background: "rgba(47,93,138,0.13)" }} />
       <div style={{ position: "absolute", left: 930, top: 250, width: 300, height: 300, borderRadius: "50%", background: "rgba(208,96,122,0.15)" }} />
       {/* 届かない気持ち：点線のハートが2つに割れている */}
-      <svg width={1280} height={720} style={{ position: "absolute", inset: 0 }}>
+      <svg width={1280} height={720} style={{ position: "absolute", inset: 0, display: heart ? "block" : "none" }}>
         <g transform="translate(945,300)">
           <path d="M0 18 C -8 -6, -44 -6, -44 20 C -44 44, -12 60, 0 76 Z" fill="none" stroke={WA.shu} strokeWidth={5} strokeDasharray="9 7" transform="translate(-8,0) rotate(-8)" />
           <path d="M0 18 C 8 -6, 44 -6, 44 20 C 44 44, 12 60, 0 76 Z" fill="none" stroke={WA.shu} strokeWidth={5} strokeDasharray="9 7" transform="translate(8,0) rotate(8)" />

@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { fontFamily, minchoFamily } from "../theme";
+import { SemiScene } from "./SemiScene";
 
 // 論文で読み解く心理学（横長 1920×1080）。和モダンのデザイン：
 // 和紙の地に、青海波（せいがいは）の模様、金の二重の枠。色は 藍・朱・金・桜。見出しと字幕は明朝体。
@@ -15,7 +16,11 @@ export type PaperVisual =
   | { kind: "concept"; term: string; en?: string; desc: string }
   | { kind: "versus"; left: { title: string; body: string }; right: { title: string; body: string } }
   | { kind: "rule"; no: number; title: string; body: string }
-  | { kind: "list"; title: string; items: string[] };
+  | { kind: "list"; title: string; items: string[] }
+  // 図解パネル（半導体のアニメーション SemiScene を、金の枠の中に）
+  | { kind: "semi"; mode: import("./SemiScene").SemiMode; title?: string }
+  // 年表（左から順に出てくる）
+  | { kind: "timeline"; items: { year: string; title: string; sub?: string; color?: string }[] };
 
 // emoji は public/illustrations/ の画像（いらすとやの表情など）
 type Person = { emoji: string; name: string; thought?: string; color: string };
@@ -330,7 +335,7 @@ const Visual: React.FC<{ v: PaperVisual; enter: boolean }> = ({ v, enter }) => {
           ].map(({ s, c, p }, i) => (
             <Card key={i} style={{ width: 720, padding: 0, overflow: "hidden", ...lift(p) }} line={c}>
               <div style={{ background: c, ...mincho(46, "#fff"), padding: "22px 40px", letterSpacing: 4 }}>{s.title}</div>
-              <div style={{ ...mincho(42, WA.sumi, 700), padding: "34px 44px 40px", lineHeight: 1.6, whiteSpace: "pre-line" }}>{s.body}</div>
+              <div style={{ ...mincho(s.body.length > 30 ? 36 : 42, WA.sumi, 700), padding: "34px 44px 40px", lineHeight: 1.6, whiteSpace: "pre-line" }}>{s.body}</div>
             </Card>
           ))}
         </div>
@@ -346,14 +351,59 @@ const Visual: React.FC<{ v: PaperVisual; enter: boolean }> = ({ v, enter }) => {
           </div>
         </Card>
       );
+    case "semi":
+      return (
+        <div style={{ ...lift(a), display: "flex", flexDirection: "column", alignItems: "center" }}>
+          {v.title ? <div style={{ ...mincho(40, WA.ai), marginBottom: 12, letterSpacing: 4 }}>{v.title}</div> : null}
+          <div
+            style={{
+              width: 1080 * 0.92,
+              height: 640 * 0.92,
+              border: `4px solid ${WA.kin}`,
+              outline: `2px solid ${WA.ai}`,
+              outlineOffset: 6,
+              borderRadius: 8,
+              overflow: "hidden",
+              position: "relative",
+              boxShadow: "0 18px 40px rgba(60,40,10,0.25)",
+            }}
+          >
+            <div style={{ position: "absolute", left: 0, top: 0, width: 1080, height: 640, transform: "scale(0.92)", transformOrigin: "0 0" }}>
+              <SemiScene mode={v.mode} width={1080} height={640} />
+            </div>
+          </div>
+        </div>
+      );
+    case "timeline": {
+      const n = v.items.length;
+      const w = 1560;
+      return (
+        <div style={{ width: w, position: "relative", height: 470, ...lift(a) }}>
+          <div style={{ position: "absolute", left: 40, right: 40, top: 190, height: 6, background: WA.kin, borderRadius: 3 }} />
+          {v.items.map((it, i) => {
+            const t = sp(8 + i * 14);
+            const x = 40 + ((w - 80) * (i + 0.5)) / n;
+            const c = it.color ?? WA.ai;
+            return (
+              <div key={i} style={{ position: "absolute", left: x - 180, width: 360, top: 0, textAlign: "center", opacity: t, transform: `translateY(${(1 - t) * 30}px)` }}>
+                <div style={{ ...mincho(64, c), lineHeight: 1.1 }}>{it.year}</div>
+                <div style={{ width: 34, height: 34, borderRadius: "50%", background: c, border: `5px solid ${WA.card}`, margin: "96px auto 0", boxShadow: `0 0 0 3px ${c}` }} />
+                <div style={{ ...mincho(38, WA.sumi), marginTop: 26, lineHeight: 1.35, whiteSpace: "pre-line" }}>{it.title}</div>
+                {it.sub ? <div style={{ ...mincho(32, c, 700), marginTop: 10, whiteSpace: "pre-line" }}>{it.sub}</div> : null}
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
     case "list":
       return (
-        <Card style={{ width: 1460, padding: "50px 76px", ...lift(a) }}>
-          <div style={{ ...mincho(50, WA.shu), marginBottom: 28, letterSpacing: 4 }}>{v.title}</div>
+        <Card style={{ width: 1460, padding: v.items.length > 4 ? "36px 76px" : "50px 76px", ...lift(a) }}>
+          <div style={{ ...mincho(v.items.length > 4 ? 44 : 50, WA.shu), marginBottom: v.items.length > 4 ? 18 : 28, letterSpacing: 4 }}>{v.title}</div>
           {v.items.map((it, i) => {
             const t = sp(10 + i * 10);
             return (
-              <div key={i} style={{ ...mincho(44, WA.sumi), marginTop: i ? 18 : 0, opacity: t, display: "flex", gap: 22, alignItems: "center" }}>
+              <div key={i} style={{ ...mincho(v.items.length > 4 ? 38 : 44, WA.sumi), marginTop: i ? (v.items.length > 4 ? 12 : 18) : 0, opacity: t, display: "flex", gap: 22, alignItems: "center" }}>
                 <span
                   style={{ width: 54, height: 54, borderRadius: "50%", background: WA.ai, color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: 32, flex: "none" }}
                 >

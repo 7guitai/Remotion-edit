@@ -1,0 +1,1632 @@
+{
+ "id": "paper-semiconductor-long",
+ "title": "半導体のしくみ｜何が「半分」？砂から生まれる200億個のスイッチ【図解で読み解く】",
+ "format": "landscape",
+ "titleBand": false,
+ "pr": false,
+ "style": "paper",
+ "background": "#0b1222",
+ "slideGap": 10,
+ "bgmVolume": 0.07,
+ "voice": {
+  "speaker": 13,
+  "speed": 1.2,
+  "name": "青山龍星"
+ },
+ "bgm": {
+  "file": "kamikakushi_shinso.mp3",
+  "title": "神隠しの真相",
+  "credit": "しゃろう",
+  "page": "https://opentracks.com/bgm/detail/7674",
+  "opentracks": 7674,
+  "track": 1
+ },
+ "illustrations": {
+  "ira_man_smile.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinCa3_I-Cu_oduFEXJgdqLfVVLTpVDzeeKvJU1P7Tmvy0-LJIQn6eLnUde-sOqyUxlU6Kmf_3nN832P3E5_MuqE_VM3ZUP598T9aA9RBjhVVPZm3OC_fuKOQA5qHw61GXMAvDTEmgmtV9n/s800/business_man1_1_smile.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_laugh.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOHa1uoODoJQKY4lJibxtbHwA7J0MZd_T7NI6Ccay2-Z-73eo10bkIenD9uMbk2n1If4e7m-W58iL_QSMaz1ekU7i0sBSq2ecLUpGrpwWs_farEoAtFI7TfxMIGwqvgmVF1qUJ2nUWsc1o/s800/business_man1_4_laugh.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_question.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgl0KzEZadyAPONwycA4NlT0GpZ3hlafw-DbpxSwzRp2BRgo4iIjacANvbXZW4CPwd7jqhdJI3FWPqhYrboe9bA7rCl7SqLVogwgZaru5rGSIe6iePd3Om-q-tk7O3pJxXwnnZHhAMA6_7b/s800/business_man3_1_question.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_smile.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKIGkR0NAsKhA679VI-_AHno_N3kOZwDEDErKUvypLVOHeDP4mSJAL1BjcGdpQUT3entVehgWv5XUgqmaCT0Bk6JAxMC0KLDQ8ro14IqpaQVGADgeXzmKsvaKYorWY3JtENTkKNC1xaoD4/s800/business_woman1_1_smile.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_idea.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhT1nHSRTNumaQWjilS1yilCY863lpnSaaVWo9oTSuIIB_vJ1I4N7eAlMhKqf_0SalEaBBuVSuF0e6kLIeU571h9ozcf4R2mBHC-7i_r8m35PDZruoSyC3GtvMObVSHpz5x4iGKdwQJSnqB/s800/business_man2_1_idea.png",
+   "credit": "いらすとや"
+  }
+ },
+ "description": "ニュースでよく聞く「半導体」。何が「半分」なのか、どうして電気で動くスイッチになるのか、真空管から200億個のスイッチまでの歴史、砂から作られるまでの工程、そして世界と日本の今を、図解アニメーションで読み解きます。\n台本・例え話はオリジナルです。数字は公開資料で確認できた範囲で紹介しています（一部は推定値・概数）。\n\n▼ 数字の出典（目安）\n・最新スマホのチップのトランジスタ数 約200億個：Apple A18 Pro の報道値（メーカー非公表の推定）\n・シリコンは地殻の重さの約28%：日本金属学会などの解説\n・ENIAC（1945年）真空管17,468本・約27トン：コンピューター史の資料\n・トランジスタの発明（1947年・ベル研究所）、1956年ノーベル物理学賞\n・Intel 4004（1971年）トランジスタ2,300個、日本のビジコン向け\n・半導体用シリコンの純度 イレブンナイン：早稲田大学の解説\n・ファウンドリ世界シェア TSMC 約70%（2025年）：TrendForce\n・ラピダス 2nm 2027年量産目標：報道\n・フォトレジストは日本の主要メーカーが世界の大部分：報道（「約9割」とする記事もあり）\n・2021年の半導体不足による自動車の減産：報道",
+ "hashtags": [
+  "半導体",
+  "科学",
+  "図解",
+  "雑学",
+  "テクノロジー"
+ ],
+ "slides": [
+  {
+   "type": "paper",
+   "text": "ニュースでよく聞く「半導体」。",
+   "visual": {
+    "kind": "title",
+    "kicker": "身近な科学を 図解で読み解く",
+    "title": [
+     "半導体の",
+     "しくみ"
+    ],
+    "sub": "砂から生まれる 200億個のスイッチ"
+   },
+   "enter": true,
+   "chapter": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "名前は知っていても、何がどうすごいのか、説明できる人は少ないかもしれません。",
+   "visual": {
+    "kind": "title",
+    "kicker": "身近な科学を 図解で読み解く",
+    "title": [
+     "半導体の",
+     "しくみ"
+    ],
+    "sub": "砂から生まれる 200億個のスイッチ"
+   },
+   "enter": false
+  },
+  {
+   "type": "paper",
+   "text": "入社1年目のユウトは、昼休みにスマホでニュースを見ていました。",
+   "visual": {
+    "kind": "scene",
+    "place": "会社の休憩室",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "ユウト",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "サキ先輩",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "「半導体が足りなくて、車が作れない…？半導体って、そもそも何なんだろう」",
+   "visual": {
+    "kind": "scene",
+    "place": "会社の休憩室",
+    "left": {
+     "emoji": "ira_man_question.png",
+     "name": "ユウト",
+     "thought": "半導体って\nそもそも何？",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "サキ先輩",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "2021年ごろ、世界中で半導体が足りなくなり、自動車の生産が大きく減りました。",
+   "visual": {
+    "kind": "scene",
+    "place": "会社の休憩室",
+    "left": {
+     "emoji": "ira_man_question.png",
+     "name": "ユウト",
+     "thought": "半導体って\nそもそも何？",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "サキ先輩",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": false,
+   "speech": "二千二十一年ごろ、世界中で半導体が足りなくなり、自動車の生産が大きく減りました。",
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "車が作れなくなるほど大事な部品。それなのに、目にすることはほとんどありません。",
+   "visual": {
+    "kind": "scene",
+    "place": "会社の休憩室",
+    "left": {
+     "emoji": "ira_man_question.png",
+     "name": "ユウト",
+     "thought": "半導体って\nそもそも何？",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "サキ先輩",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "となりの席のサキ先輩が、ユウトのスマホを指さして言いました。",
+   "visual": {
+    "kind": "scene",
+    "place": "会社の休憩室",
+    "left": {
+     "emoji": "ira_man_question.png",
+     "name": "ユウト",
+     "thought": "半導体って\nそもそも何？",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "サキ先輩",
+     "thought": "そのスマホの中に\nぎっしり入ってるよ",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "「そのスマホの中にも、ぎっしり入ってるよ」",
+   "visual": {
+    "kind": "scene",
+    "place": "会社の休憩室",
+    "left": {
+     "emoji": "ira_man_question.png",
+     "name": "ユウト",
+     "thought": "半導体って\nそもそも何？",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "サキ先輩",
+     "thought": "そのスマホの中に\nぎっしり入ってるよ",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "実は、最新のスマホの頭脳には、小さなスイッチが約200億個も詰まっているといわれています。",
+   "visual": {
+    "kind": "semi",
+    "mode": "phone"
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "この動画では、半導体のしくみから、歴史、作り方、そして世界と日本の今までを、順番に読み解きます。",
+   "visual": {
+    "kind": "list",
+    "title": "この動画の流れ",
+    "items": [
+     "半導体って、何が「半分」？",
+     "電気を通すしくみ",
+     "電気で動くスイッチ",
+     "真空管から200億個へ",
+     "砂から作られるまで",
+     "世界と日本の半導体"
+    ]
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "第1章。半導体って、何が「半分」？",
+   "visual": {
+    "kind": "chapter",
+    "no": 1,
+    "title": "何が「半分」なの？"
+   },
+   "enter": true,
+   "speech": "第一章。半導体って、何が、半分、なの？",
+   "chapter": "第1章 何が「半分」なの？"
+  },
+  {
+   "type": "paper",
+   "text": "世の中の物は、電気の通しやすさで、大きく3つに分けられます。",
+   "visual": {
+    "kind": "semi",
+    "mode": "between",
+    "title": "電気の通しやすさ"
+   },
+   "enter": true,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "paper",
+   "text": "金属は、電気をよく通します。電線に銅が使われるのは、そのためです。",
+   "visual": {
+    "kind": "semi",
+    "mode": "between",
+    "title": "電気の通しやすさ"
+   },
+   "enter": false,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "paper",
+   "text": "ゴムやプラスチックは、電気をほとんど通しません。電線のまわりを包んでいるのが、これです。",
+   "visual": {
+    "kind": "semi",
+    "mode": "between",
+    "title": "電気の通しやすさ"
+   },
+   "enter": false,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "paper",
+   "text": "半導体は、その間。条件しだいで、通したり、通さなかったりする物質です。",
+   "visual": {
+    "kind": "semi",
+    "mode": "between",
+    "title": "電気の通しやすさ"
+   },
+   "enter": false,
+   "speech": "半導体は、そのあいだ。条件しだいで、通したり、通さなかったりする物質です。",
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "paper",
+   "text": "「半分だけ通す」というより、「通すかどうかを、人が決められる」のがポイントなんです。",
+   "visual": {
+    "kind": "concept",
+    "term": "半導体",
+    "en": "Semiconductor",
+    "desc": "電気を通す金属と、通さないゴムの中間。\n条件しだいで、通したり止めたりできる物質"
+   },
+   "enter": true,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "paper",
+   "text": "その代表が、シリコン。日本語では、ケイ素といいます。",
+   "visual": {
+    "kind": "concept",
+    "term": "半導体",
+    "en": "Semiconductor",
+    "desc": "電気を通す金属と、通さないゴムの中間。\n条件しだいで、通したり止めたりできる物質"
+   },
+   "enter": false,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "paper",
+   "text": "シリコンは、砂や石の中にたくさん含まれていて、地球の表面の重さの約28%をしめています。",
+   "visual": {
+    "kind": "stat",
+    "value": 28,
+    "unit": "%",
+    "label": "地殻にしめるシリコンの重さ",
+    "sub": "酸素の次に多い元素",
+    "color": "#4f8a6b"
+   },
+   "enter": true,
+   "speech": "シリコンは、砂や石の中にたくさん含まれていて、地球の表面の重さの約28パーセントをしめています。",
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "paper",
+   "text": "酸素の次に多い元素です。半導体の材料は、足元にいくらでもあるんですね。",
+   "visual": {
+    "kind": "stat",
+    "value": 28,
+    "unit": "%",
+    "label": "地殻にしめるシリコンの重さ",
+    "sub": "酸素の次に多い元素",
+    "color": "#4f8a6b"
+   },
+   "enter": false,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "paper",
+   "text": "第2章。電気を通すしくみ。",
+   "visual": {
+    "kind": "chapter",
+    "no": 2,
+    "title": "電気を通すしくみ"
+   },
+   "enter": true,
+   "speech": "第二章。電気を通すしくみ。",
+   "chapter": "第2章 電気を通すしくみ"
+  },
+  {
+   "type": "paper",
+   "text": "電気が流れるというのは、電子という、小さな粒が動くことです。",
+   "visual": {
+    "kind": "chapter",
+    "no": 2,
+    "title": "電気を通すしくみ"
+   },
+   "enter": false
+  },
+  {
+   "type": "paper",
+   "text": "シリコンの原子は、となりの原子と、4本の手でしっかりつながっています。",
+   "visual": {
+    "kind": "semi",
+    "mode": "lattice"
+   },
+   "enter": true,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "paper",
+   "text": "手をつないでいる電子は、その場から動けません。",
+   "visual": {
+    "kind": "semi",
+    "mode": "lattice"
+   },
+   "enter": false,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "paper",
+   "text": "だから、きれいなシリコンは、そのままだと電気をほとんど通さないんです。",
+   "visual": {
+    "kind": "semi",
+    "mode": "lattice"
+   },
+   "enter": false,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "paper",
+   "text": "ここで、ちょっとした工夫をします。ほかの原子を、ほんの少しだけ混ぜるんです。",
+   "visual": {
+    "kind": "semi",
+    "mode": "lattice"
+   },
+   "enter": false,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "paper",
+   "text": "たとえば、手が5本ある「リン」を混ぜると。",
+   "visual": {
+    "kind": "semi",
+    "mode": "ntype"
+   },
+   "enter": true,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "paper",
+   "text": "つなぐ相手のいない電子が、1個余ります。",
+   "visual": {
+    "kind": "semi",
+    "mode": "ntype"
+   },
+   "enter": false,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "paper",
+   "text": "この余った電子が、自由に動き回って、電気を運んでくれるんです。",
+   "visual": {
+    "kind": "semi",
+    "mode": "ntype"
+   },
+   "enter": false,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "paper",
+   "text": "逆に、手が3本しかない「ホウ素」を混ぜると。",
+   "visual": {
+    "kind": "semi",
+    "mode": "ptype"
+   },
+   "enter": true,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "paper",
+   "text": "電子が1個足りない「空席」ができます。",
+   "visual": {
+    "kind": "semi",
+    "mode": "ptype"
+   },
+   "enter": false,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "paper",
+   "text": "となりの電子が空席に移ると、また別の場所に空席ができる。",
+   "visual": {
+    "kind": "semi",
+    "mode": "ptype"
+   },
+   "enter": false,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "paper",
+   "text": "映画館で、みんなが1席ずつ詰めていくように、電気が流れていくんです。",
+   "visual": {
+    "kind": "semi",
+    "mode": "ptype"
+   },
+   "enter": false,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "paper",
+   "text": "混ぜる量は、ほんのわずか。それだけで、電気の通しやすさが、がらりと変わります。",
+   "visual": {
+    "kind": "semi",
+    "mode": "ptype"
+   },
+   "enter": false,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "paper",
+   "text": "どこに、何を、どれだけ混ぜるか。これが、半導体づくりの腕の見せどころです。",
+   "visual": {
+    "kind": "semi",
+    "mode": "ptype"
+   },
+   "enter": false,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "paper",
+   "text": "第3章。電気で動くスイッチ。",
+   "visual": {
+    "kind": "chapter",
+    "no": 3,
+    "title": "電気で動くスイッチ"
+   },
+   "enter": true,
+   "speech": "第三章。電気で動くスイッチ。",
+   "chapter": "第3章 電気で動くスイッチ"
+  },
+  {
+   "type": "paper",
+   "text": "リンを混ぜたシリコンと、ホウ素を混ぜたシリコン。この2つを組み合わせると、スイッチが作れます。",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchoff"
+   },
+   "enter": true,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "これが、トランジスタ。",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchoff"
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "上の端子に電圧をかけていないときは、入口から出口へ、電気は流れません。",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchoff"
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "ところが、電圧をかけると。",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchon"
+   },
+   "enter": true,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "電子が引き寄せられて、通り道ができ、電気が流れはじめます。",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchon"
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "指で押すかわりに、電気で押せるスイッチ。これが、とても大事なんです。",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchon"
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "電気で動くから、ものすごく速く、何億回でも、オンとオフを切りかえられます。",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchon"
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "そして、流れるを1、止まるを0と決めると。",
+   "visual": {
+    "kind": "semi",
+    "mode": "bits"
+   },
+   "enter": true,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "スイッチの並びで、数字を表せるようになります。",
+   "visual": {
+    "kind": "semi",
+    "mode": "bits"
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "写真も、音楽も、LINEのメッセージも、スマホの中では、ぜんぶ0と1の並びです。",
+   "visual": {
+    "kind": "semi",
+    "mode": "bits"
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "たくさんのスイッチを組み合わせれば、計算をしたり、覚えたりできる。これが、コンピューターの正体です。",
+   "visual": {
+    "kind": "semi",
+    "mode": "bits"
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "実は、半導体の仕事は、スイッチだけではありません。",
+   "visual": {
+    "kind": "semi",
+    "mode": "bits"
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "リンを混ぜた側と、ホウ素を混ぜた側をくっつけて、電気を流すと。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "LED（光る）",
+     "body": "余った電子が空席に入るとき、\nエネルギーが光になって出てくる"
+    },
+    "right": {
+     "title": "太陽電池（発電する）",
+     "body": "光が当たると、電子と空席が生まれ、\n電子が動いて電気になる"
+    }
+   },
+   "enter": true,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "余った電子が空席に飛びこむとき、そのエネルギーが光になります。これが、LEDです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "LED（光る）",
+     "body": "余った電子が空席に入るとき、\nエネルギーが光になって出てくる"
+    },
+    "right": {
+     "title": "太陽電池（発電する）",
+     "body": "光が当たると、電子と空席が生まれ、\n電子が動いて電気になる"
+    }
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "反対に、光を当てると電子が動き出して、電気が生まれる。これが、太陽電池です。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "LED（光る）",
+     "body": "余った電子が空席に入るとき、\nエネルギーが光になって出てくる"
+    },
+    "right": {
+     "title": "太陽電池（発電する）",
+     "body": "光が当たると、電子と空席が生まれ、\n電子が動いて電気になる"
+    }
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "同じしくみを、行きと帰りで使っているんですね。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "LED（光る）",
+     "body": "余った電子が空席に入るとき、\nエネルギーが光になって出てくる"
+    },
+    "right": {
+     "title": "太陽電池（発電する）",
+     "body": "光が当たると、電子と空席が生まれ、\n電子が動いて電気になる"
+    }
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "身の回りを見わたすと、半導体はあちこちにあります。",
+   "visual": {
+    "kind": "list",
+    "title": "身の回りの半導体",
+    "items": [
+     "スマホ・パソコン：計算と記憶",
+     "エアコン・冷蔵庫：モーターの細かい調整",
+     "LED照明・テレビ：光",
+     "太陽光パネル：発電",
+     "車：エンジン、ブレーキ、カーナビ、安全装置"
+    ]
+   },
+   "enter": true,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "エアコンや冷蔵庫が、昔よりずっと少ない電気で動くのも、半導体がモーターを細かく調整しているからです。",
+   "visual": {
+    "kind": "list",
+    "title": "身の回りの半導体",
+    "items": [
+     "スマホ・パソコン：計算と記憶",
+     "エアコン・冷蔵庫：モーターの細かい調整",
+     "LED照明・テレビ：光",
+     "太陽光パネル：発電",
+     "車：エンジン、ブレーキ、カーナビ、安全装置"
+    ]
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "車にも、たくさんの半導体が使われています。だから、半導体が足りなくなると、車が作れなくなったんです。",
+   "visual": {
+    "kind": "list",
+    "title": "身の回りの半導体",
+    "items": [
+     "スマホ・パソコン：計算と記憶",
+     "エアコン・冷蔵庫：モーターの細かい調整",
+     "LED照明・テレビ：光",
+     "太陽光パネル：発電",
+     "車：エンジン、ブレーキ、カーナビ、安全装置"
+    ]
+   },
+   "enter": false,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "paper",
+   "text": "第4章。真空管から、200億個へ。",
+   "visual": {
+    "kind": "chapter",
+    "no": 4,
+    "title": "真空管から\n200億個へ"
+   },
+   "enter": true,
+   "speech": "第四章。真空管から、200億個へ。",
+   "chapter": "第4章 真空管から200億個へ"
+  },
+  {
+   "type": "paper",
+   "text": "トランジスタが生まれる前、スイッチの役目をしていたのは、真空管という、電球のような部品でした。",
+   "visual": {
+    "kind": "chapter",
+    "no": 4,
+    "title": "真空管から\n200億個へ"
+   },
+   "enter": false
+  },
+  {
+   "type": "paper",
+   "text": "1945年に完成したコンピューター「ENIAC」には、真空管が17,468本も使われていました。",
+   "visual": {
+    "kind": "stat",
+    "value": 17468,
+    "unit": "本",
+    "label": "ENIAC（1945年）の真空管",
+    "sub": "重さ 約27トン",
+    "color": "#c8442f"
+   },
+   "enter": true,
+   "speech": "千九百四十五年に完成したコンピューター、エニアックには、真空管が、一万七千四百六十八本も使われていました。",
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "paper",
+   "text": "重さは、約27トン。部屋をまるごと占領する大きさでした。",
+   "visual": {
+    "kind": "stat",
+    "value": 17468,
+    "unit": "本",
+    "label": "ENIAC（1945年）の真空管",
+    "sub": "重さ 約27トン",
+    "color": "#c8442f"
+   },
+   "enter": false,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "paper",
+   "text": "真空管は熱くなりやすく、よく切れてしまうのも、悩みのたねでした。",
+   "visual": {
+    "kind": "stat",
+    "value": 17468,
+    "unit": "本",
+    "label": "ENIAC（1945年）の真空管",
+    "sub": "重さ 約27トン",
+    "color": "#c8442f"
+   },
+   "enter": false,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "paper",
+   "text": "ENIACでは、切れた真空管を探して取りかえる作業が、たびたび必要だったといわれています。",
+   "visual": {
+    "kind": "stat",
+    "value": 17468,
+    "unit": "本",
+    "label": "ENIAC（1945年）の真空管",
+    "sub": "重さ 約27トン",
+    "color": "#c8442f"
+   },
+   "enter": false,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "paper",
+   "text": "そこで登場したのが、1947年、アメリカのベル研究所で生まれたトランジスタです。",
+   "visual": {
+    "kind": "timeline",
+    "items": [
+     {
+      "year": "1945",
+      "title": "ENIAC 完成",
+      "sub": "真空管\n17,468本",
+      "color": "#7a6a52"
+     },
+     {
+      "year": "1947",
+      "title": "トランジスタ\n誕生",
+      "sub": "ベル研究所",
+      "color": "#2f5d8a"
+     },
+     {
+      "year": "1971",
+      "title": "Intel 4004",
+      "sub": "2,300個",
+      "color": "#4f8a6b"
+     },
+     {
+      "year": "現在",
+      "title": "最新スマホ",
+      "sub": "約200億個",
+      "color": "#c8442f"
+     }
+    ]
+   },
+   "enter": true,
+   "speech": "そこで登場したのが、千九百四十七年、アメリカのベル研究所で生まれたトランジスタです。",
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "paper",
+   "text": "発明した3人の科学者は、1956年に、ノーベル物理学賞を受けました。",
+   "visual": {
+    "kind": "timeline",
+    "items": [
+     {
+      "year": "1945",
+      "title": "ENIAC 完成",
+      "sub": "真空管\n17,468本",
+      "color": "#7a6a52"
+     },
+     {
+      "year": "1947",
+      "title": "トランジスタ\n誕生",
+      "sub": "ベル研究所",
+      "color": "#2f5d8a"
+     },
+     {
+      "year": "1971",
+      "title": "Intel 4004",
+      "sub": "2,300個",
+      "color": "#4f8a6b"
+     },
+     {
+      "year": "現在",
+      "title": "最新スマホ",
+      "sub": "約200億個",
+      "color": "#c8442f"
+     }
+    ]
+   },
+   "enter": false,
+   "speech": "発明した3人の科学者は、千九百五十六年に、ノーベル物理学賞を受けました。",
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "paper",
+   "text": "そして1971年、ひとつのチップに、計算の頭脳をまるごと詰めこんだ、Intel 4004が登場します。",
+   "visual": {
+    "kind": "timeline",
+    "items": [
+     {
+      "year": "1945",
+      "title": "ENIAC 完成",
+      "sub": "真空管\n17,468本",
+      "color": "#7a6a52"
+     },
+     {
+      "year": "1947",
+      "title": "トランジスタ\n誕生",
+      "sub": "ベル研究所",
+      "color": "#2f5d8a"
+     },
+     {
+      "year": "1971",
+      "title": "Intel 4004",
+      "sub": "2,300個",
+      "color": "#4f8a6b"
+     },
+     {
+      "year": "現在",
+      "title": "最新スマホ",
+      "sub": "約200億個",
+      "color": "#c8442f"
+     }
+    ]
+   },
+   "enter": false,
+   "speech": "そして千九百七十一年、ひとつのチップに、計算の頭脳をまるごと詰めこんだ、インテルのよんまるまるよんが登場します。",
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "paper",
+   "text": "実はこのチップ、日本の電卓メーカー、ビジコンのために作られたものでした。",
+   "visual": {
+    "kind": "timeline",
+    "items": [
+     {
+      "year": "1945",
+      "title": "ENIAC 完成",
+      "sub": "真空管\n17,468本",
+      "color": "#7a6a52"
+     },
+     {
+      "year": "1947",
+      "title": "トランジスタ\n誕生",
+      "sub": "ベル研究所",
+      "color": "#2f5d8a"
+     },
+     {
+      "year": "1971",
+      "title": "Intel 4004",
+      "sub": "2,300個",
+      "color": "#4f8a6b"
+     },
+     {
+      "year": "現在",
+      "title": "最新スマホ",
+      "sub": "約200億個",
+      "color": "#c8442f"
+     }
+    ]
+   },
+   "enter": false,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "paper",
+   "text": "トランジスタの数は、2,300個。",
+   "visual": {
+    "kind": "timeline",
+    "items": [
+     {
+      "year": "1945",
+      "title": "ENIAC 完成",
+      "sub": "真空管\n17,468本",
+      "color": "#7a6a52"
+     },
+     {
+      "year": "1947",
+      "title": "トランジスタ\n誕生",
+      "sub": "ベル研究所",
+      "color": "#2f5d8a"
+     },
+     {
+      "year": "1971",
+      "title": "Intel 4004",
+      "sub": "2,300個",
+      "color": "#4f8a6b"
+     },
+     {
+      "year": "現在",
+      "title": "最新スマホ",
+      "sub": "約200億個",
+      "color": "#c8442f"
+     }
+    ]
+   },
+   "enter": false,
+   "speech": "トランジスタの数は、二千三百個。",
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "paper",
+   "text": "それが今では、スマホのチップ1枚に、約200億個。",
+   "visual": {
+    "kind": "stat",
+    "value": 870,
+    "unit": "万倍",
+    "label": "50年あまりで トランジスタは",
+    "sub": "2,300個 → 約200億個",
+    "color": "#c8442f"
+   },
+   "enter": true,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "paper",
+   "text": "およそ870万倍です。",
+   "visual": {
+    "kind": "stat",
+    "value": 870,
+    "unit": "万倍",
+    "label": "50年あまりで トランジスタは",
+    "sub": "2,300個 → 約200億個",
+    "color": "#c8442f"
+   },
+   "enter": false,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "paper",
+   "text": "もし、ENIACと同じ真空管で200億個のスイッチを作ろうとしたら、ENIACが100万台以上も必要になる計算です。",
+   "visual": {
+    "kind": "stat",
+    "value": 870,
+    "unit": "万倍",
+    "label": "50年あまりで トランジスタは",
+    "sub": "2,300個 → 約200億個",
+    "color": "#c8442f"
+   },
+   "enter": false,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "paper",
+   "text": "トランジスタの数は、およそ2年ごとに2倍になる。この予想は、「ムーアの法則」と呼ばれ、長いあいだ業界の目標になってきました。",
+   "visual": {
+    "kind": "concept",
+    "term": "ムーアの法則",
+    "en": "Moore's Law",
+    "desc": "チップにのせるトランジスタの数は、\nおよそ2年ごとに2倍になる、という予想"
+   },
+   "enter": true,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "paper",
+   "text": "第5章。砂から作られるまで。",
+   "visual": {
+    "kind": "chapter",
+    "no": 5,
+    "title": "砂から作られるまで"
+   },
+   "enter": true,
+   "speech": "第五章。砂から作られるまで。",
+   "chapter": "第5章 砂から作られるまで"
+  },
+  {
+   "type": "paper",
+   "text": "では、200億個ものスイッチを、どうやって作っているのでしょうか。",
+   "visual": {
+    "kind": "scene",
+    "place": "会社の休憩室",
+    "left": {
+     "emoji": "ira_man_question.png",
+     "name": "ユウト",
+     "thought": "どうやって\n作ってるの？",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "サキ先輩",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": true,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "材料は、石や砂に含まれるシリコン。でも、そのままでは使えません。",
+   "visual": {
+    "kind": "list",
+    "title": "半導体ができるまで",
+    "items": [
+     "石からシリコンを取り出し、精製する",
+     "大きな結晶にして、薄い円盤（ウエハー）に切る",
+     "光で、回路の模様を焼きつける",
+     "混ぜ物を入れ、配線を重ねる",
+     "1枚ずつ切り分けて、チップの完成"
+    ]
+   },
+   "enter": true,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "まず、不純物を取りのぞいて、とことん純粋にします。",
+   "visual": {
+    "kind": "list",
+    "title": "半導体ができるまで",
+    "items": [
+     "石からシリコンを取り出し、精製する",
+     "大きな結晶にして、薄い円盤（ウエハー）に切る",
+     "光で、回路の模様を焼きつける",
+     "混ぜ物を入れ、配線を重ねる",
+     "1枚ずつ切り分けて、チップの完成"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "その純度は、99.999999999%。9が11個並ぶので、イレブンナインと呼ばれます。",
+   "visual": {
+    "kind": "concept",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": true,
+   "speech": "その純度は、きゅうじゅうきゅうてん、きゅうきゅうきゅう、きゅうきゅうきゅう、きゅうきゅうきゅうパーセント。9が11個並ぶので、イレブンナインと呼ばれます。",
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "1000億個の原子の中に、ちがう原子が1個あるかないか、というレベルです。",
+   "visual": {
+    "kind": "concept",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": false,
+   "speech": "千億個の原子の中に、ちがう原子が1個あるかないか、というレベルです。",
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "さっき、ほんの少しの混ぜ物で性質が変わると話しました。だからこそ、余計なものは、徹底的に取りのぞくんです。",
+   "visual": {
+    "kind": "concept",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": false,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "この純粋なシリコンを、大きな結晶に育て、薄くスライスしたものが、ウエハーです。",
+   "visual": {
+    "kind": "concept",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": false,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "ウエハーの上に、光を使って、回路の模様を焼きつけます。写真の現像のようなしくみです。",
+   "visual": {
+    "kind": "concept",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": false,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "このとき使う、光に反応する薬「フォトレジスト」は、日本のメーカーが世界の大部分を作っているといわれています。",
+   "visual": {
+    "kind": "concept",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": false,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "今の最先端の回路の線は、数ナノメートル。髪の毛の太さの、何万分の1という細さです。",
+   "visual": {
+    "kind": "concept",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": false,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "ナノメートルは、1ミリの100万分の1。原子が数十個並ぶくらいの長さです。",
+   "visual": {
+    "kind": "concept",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": false,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "そのため工場の中は、空気中のちりを、徹底的に取りのぞいた、クリーンルームになっています。",
+   "visual": {
+    "kind": "concept",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": false,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "目に見えないほど小さなちりでも、回路の上に乗れば、線をふさいで、チップが動かなくなってしまうからです。",
+   "visual": {
+    "kind": "concept",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": false,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "工場で働く人は、全身をおおう服を着て、ちりを持ちこまないようにしています。",
+   "visual": {
+    "kind": "concept",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": false,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "ひとつのチップができあがるまでには、数百もの工程と、何か月もの時間がかかるといわれています。",
+   "visual": {
+    "kind": "concept",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": false,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "paper",
+   "text": "第6章。世界と日本の半導体。",
+   "visual": {
+    "kind": "chapter",
+    "no": 6,
+    "title": "世界と日本の半導体"
+   },
+   "enter": true,
+   "speech": "第六章。世界と日本の半導体。",
+   "chapter": "第6章 世界と日本"
+  },
+  {
+   "type": "paper",
+   "text": "最先端の半導体を作れる会社は、世界でもほんのひとにぎりです。",
+   "visual": {
+    "kind": "chapter",
+    "no": 6,
+    "title": "世界と日本の半導体"
+   },
+   "enter": false
+  },
+  {
+   "type": "paper",
+   "text": "なかでも台湾のTSMCは、半導体の受託生産で、世界の約7割をしめています。",
+   "visual": {
+    "kind": "bars",
+    "title": "半導体の受託生産（ファウンドリ）の世界シェア 2025年",
+    "rows": [
+     {
+      "label": "TSMC（台湾）",
+      "value": 70,
+      "color": "#c8442f"
+     },
+     {
+      "label": "サムスン（韓国）",
+      "value": 7,
+      "color": "#2f5d8a"
+     },
+     {
+      "label": "そのほか",
+      "value": 23,
+      "color": "#9a8a72"
+     }
+    ],
+    "max": 100,
+    "note": "出典：TrendForce（2025年・売上高ベース、概数）"
+   },
+   "enter": true,
+   "speech": "なかでも台湾のティーエスエムシーは、半導体の受託生産で、世界の約7割をしめています。",
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "paper",
+   "text": "ひとつの地域に生産が集中すると、何かあったときに、世界中が困ってしまいます。",
+   "visual": {
+    "kind": "bars",
+    "title": "半導体の受託生産（ファウンドリ）の世界シェア 2025年",
+    "rows": [
+     {
+      "label": "TSMC（台湾）",
+      "value": 70,
+      "color": "#c8442f"
+     },
+     {
+      "label": "サムスン（韓国）",
+      "value": 7,
+      "color": "#2f5d8a"
+     },
+     {
+      "label": "そのほか",
+      "value": 23,
+      "color": "#9a8a72"
+     }
+    ],
+    "max": 100,
+    "note": "出典：TrendForce（2025年・売上高ベース、概数）"
+   },
+   "enter": false,
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "paper",
+   "text": "2021年の半導体不足は、そのことをはっきり見せつけました。",
+   "visual": {
+    "kind": "bars",
+    "title": "半導体の受託生産（ファウンドリ）の世界シェア 2025年",
+    "rows": [
+     {
+      "label": "TSMC（台湾）",
+      "value": 70,
+      "color": "#c8442f"
+     },
+     {
+      "label": "サムスン（韓国）",
+      "value": 7,
+      "color": "#2f5d8a"
+     },
+     {
+      "label": "そのほか",
+      "value": 23,
+      "color": "#9a8a72"
+     }
+    ],
+    "max": 100,
+    "note": "出典：TrendForce（2025年・売上高ベース、概数）"
+   },
+   "enter": false,
+   "speech": "二千二十一年の半導体不足は、そのことをはっきり見せつけました。",
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "paper",
+   "text": "日本も、ふたたび最先端の半導体を作ろうとしています。",
+   "visual": {
+    "kind": "bars",
+    "title": "半導体の受託生産（ファウンドリ）の世界シェア 2025年",
+    "rows": [
+     {
+      "label": "TSMC（台湾）",
+      "value": 70,
+      "color": "#c8442f"
+     },
+     {
+      "label": "サムスン（韓国）",
+      "value": 7,
+      "color": "#2f5d8a"
+     },
+     {
+      "label": "そのほか",
+      "value": 23,
+      "color": "#9a8a72"
+     }
+    ],
+    "max": 100,
+    "note": "出典：TrendForce（2025年・売上高ベース、概数）"
+   },
+   "enter": false,
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "paper",
+   "text": "北海道の千歳市では、ラピダスという会社が、2ナノメートル世代の半導体を、2027年に量産することを目指しています。",
+   "visual": {
+    "kind": "concept",
+    "term": "ラピダス",
+    "en": "Rapidus（北海道・千歳）",
+    "desc": "2ナノメートル世代の半導体の\n2027年の量産を目指して、試作を進めている"
+   },
+   "enter": true,
+   "speech": "北海道の千歳市では、ラピダスという会社が、2ナノメートル世代の半導体を、二千二十七年に量産することを目指しています。",
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "paper",
+   "text": "一方で、材料や、製造装置の分野では、日本の会社が今も世界で大きな役割をはたしています。",
+   "visual": {
+    "kind": "concept",
+    "term": "ラピダス",
+    "en": "Rapidus（北海道・千歳）",
+    "desc": "2ナノメートル世代の半導体の\n2027年の量産を目指して、試作を進めている"
+   },
+   "enter": false,
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "paper",
+   "text": "目立たないけれど、日本の技術がなければ、世界の半導体は作れない。そんな部分がたくさんあるんです。",
+   "visual": {
+    "kind": "concept",
+    "term": "ラピダス",
+    "en": "Rapidus（北海道・千歳）",
+    "desc": "2ナノメートル世代の半導体の\n2027年の量産を目指して、試作を進めている"
+   },
+   "enter": false,
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "paper",
+   "text": "まとめ。",
+   "visual": {
+    "kind": "chapter",
+    "no": 7,
+    "title": "まとめ",
+    "sub": "砂から生まれる 200億個のスイッチ"
+   },
+   "enter": true,
+   "chapter": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "半導体のポイントを、ふり返ってみましょう。",
+   "visual": {
+    "kind": "list",
+    "title": "今日のポイント",
+    "items": [
+     "半導体は、電気を通すかどうかを決められる物質",
+     "ほんの少しの混ぜ物で、電子が動けるようになる",
+     "トランジスタは、電気で動くスイッチ",
+     "スイッチの0と1で、計算も写真も音楽も表せる",
+     "材料は砂。でも作るには、極限の技術がいる"
+    ]
+   },
+   "enter": true,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "ユウトは、もう一度スマホを手に取りました。",
+   "visual": {
+    "kind": "scene",
+    "place": "会社の休憩室",
+    "left": {
+     "emoji": "ira_man_idea.png",
+     "name": "ユウト",
+     "thought": "この中に\n200億個のスイッチ…",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "サキ先輩",
+     "thought": "砂から作られて\nるんだよ",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "「この小さな板の中で、200億個のスイッチが、今も休まず動いてるんですね」",
+   "visual": {
+    "kind": "scene",
+    "place": "会社の休憩室",
+    "left": {
+     "emoji": "ira_man_idea.png",
+     "name": "ユウト",
+     "thought": "この中に\n200億個のスイッチ…",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "サキ先輩",
+     "thought": "砂から作られて\nるんだよ",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "サキ先輩は笑って言いました。「しかも、もとは砂なんだよ」",
+   "visual": {
+    "kind": "scene",
+    "place": "会社の休憩室",
+    "left": {
+     "emoji": "ira_man_idea.png",
+     "name": "ユウト",
+     "thought": "この中に\n200億個のスイッチ…",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "サキ先輩",
+     "thought": "砂から作られて\nるんだよ",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "次にスマホの画面にふれるとき、その中の小さなスイッチたちのことを、少しだけ思い出してみてください。",
+   "visual": {
+    "kind": "scene",
+    "place": "会社の休憩室",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "ユウト",
+     "thought": "すごい…！",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "サキ先輩",
+     "thought": "でしょ？",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "この動画がおもしろかったら、高評価とチャンネル登録をお願いします。",
+   "visual": {
+    "kind": "title",
+    "kicker": "身近な科学を 図解で読み解く",
+    "title": [
+     "最後まで見てくれて",
+     "ありがとう"
+    ],
+    "sub": "次に知りたい「しくみ」を、コメントで教えてください"
+   },
+   "enter": true
+  },
+  {
+   "type": "paper",
+   "text": "次に知りたい身近なしくみも、ぜひコメントで教えてください。",
+   "visual": {
+    "kind": "title",
+    "kicker": "身近な科学を 図解で読み解く",
+    "title": [
+     "最後まで見てくれて",
+     "ありがとう"
+    ],
+    "sub": "次に知りたい「しくみ」を、コメントで教えてください"
+   },
+   "enter": false
+  }
+ ]
+}

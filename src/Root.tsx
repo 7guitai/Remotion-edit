@@ -75,6 +75,21 @@ export const RemotionRoot: React.FC = () => {
           right: { image: "ira_woman_cry.png", thought: "私には\n興味ないんだ…", color: "#d0607a" },
         }}
       />
+      {/* 「半導体のしくみ」ロングのサムネイル（npx remotion still paper-semiconductor-long-thumbnail out/thumb.png） */}
+      <Still
+        id="paper-semiconductor-long-thumbnail"
+        component={PaperPairThumbnail}
+        width={1280}
+        height={720}
+        defaultProps={{
+          kicker: "身近な科学を 図解で読み解く",
+          lines: ["半導体の", "しくみ"],
+          badge: "砂から生まれる200億個のスイッチ",
+          left: { image: "ira_man_question.png", thought: "半導体って\nそもそも何？", color: "#2f5d8a" },
+          right: { image: "ira_woman_smile.png", thought: "スマホの中に\n200億個！", color: "#d0607a" },
+          heart: false,
+        }}
+      />
       {/* 「論文で読み解く心理学」スポットライト効果の回のサムネイル（npx remotion still paper-spotlight-long-thumbnail out/thumb.png） */}
       <Still
         id="paper-spotlight-long-thumbnail"

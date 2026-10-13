@@ -28,6 +28,7 @@ import verifyRainRunShort from "./verify-rain-run-short.json";
 import verifyElevator from "./verify-elevator-short.json";
 import verifyStrap from "./verify-strap-short.json";
 import scienceSemi from "./science-semiconductor-short.json";
+import paperSemiLong from "./paper-semiconductor-long.json";
 import paperLoveLong from "./paper-love-long.json";
 import paperSpotlightLong from "./paper-spotlight-long.json";
 import relaxSleep45m from "./relax-sleep-45m.json";
@@ -310,6 +311,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  paperSemiLong as Episode,
   scienceSemi as Episode,
   paperLoveLong as Episode,
   paperSpotlightLong as Episode,
