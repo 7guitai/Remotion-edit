@@ -21,6 +21,19 @@ loadFont({
   weight: "900",
 });
 
+// 和モダンの見出し用（明朝体・OFL）
+export const minchoFamily = "ShipporiMincho";
+loadFont({
+  family: minchoFamily,
+  url: staticFile("fonts/ShipporiMincho-Bold.ttf"),
+  weight: "700",
+});
+loadFont({
+  family: minchoFamily,
+  url: staticFile("fonts/ShipporiMincho-ExtraBold.ttf"),
+  weight: "800",
+});
+
 export const COLORS = {
   background: "#ffffff",
   text: "#3a3a3a",

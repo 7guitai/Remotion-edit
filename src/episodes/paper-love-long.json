@@ -22,17 +22,71 @@
   "track": 1
  },
  "illustrations": {
-  "fe_man.svg": {
+  "ira_man_smile.png": {
    "emoji": "🙂",
-   "irasutoya": "Fluent Emoji「fe_man.svg」",
-   "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Man/Default/Color/man_color_default.svg",
-   "credit": "Microsoft Fluent Emoji（MIT License）"
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinCa3_I-Cu_oduFEXJgdqLfVVLTpVDzeeKvJU1P7Tmvy0-LJIQn6eLnUde-sOqyUxlU6Kmf_3nN832P3E5_MuqE_VM3ZUP598T9aA9RBjhVVPZm3OC_fuKOQA5qHw61GXMAvDTEmgmtV9n/s800/business_man1_1_smile.png",
+   "credit": "いらすとや"
   },
-  "fe_woman.svg": {
+  "ira_man_laugh.png": {
    "emoji": "🙂",
-   "irasutoya": "Fluent Emoji「fe_woman.svg」",
-   "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Woman/Default/Color/woman_color_default.svg",
-   "credit": "Microsoft Fluent Emoji（MIT License）"
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOHa1uoODoJQKY4lJibxtbHwA7J0MZd_T7NI6Ccay2-Z-73eo10bkIenD9uMbk2n1If4e7m-W58iL_QSMaz1ekU7i0sBSq2ecLUpGrpwWs_farEoAtFI7TfxMIGwqvgmVF1qUJ2nUWsc1o/s800/business_man1_4_laugh.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_shock.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_6HziRfnEDt4hyphenhyphenAYghphhjJh930C5aFyyh31XDYKkS_FIrNOY4liMDdMhU1e6w9wN3hgGgH-mjLmSteUs3jy_t_H2JltQ2VoSx0lH5Yz2BE_iXyysblzC1LkUMb3XNen3Pe0Vj7HXuYdU/s800/business_man2_2_shock.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_think.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4f8UNlNx6rgIq-4BDpGQszhhYthGnl10m47e0hgtvKX3ikrea74r0uu9wm7yI7U9kwe9FT01JCbBLYA0aHOjQaaqYq2hsL2Q_eNgmOG5fzH6V2x_XUxF8mx_mEuzmbhXwQbuSuYx4QrYG/s800/business_man2_4_think.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_question.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgl0KzEZadyAPONwycA4NlT0GpZ3hlafw-DbpxSwzRp2BRgo4iIjacANvbXZW4CPwd7jqhdJI3FWPqhYrboe9bA7rCl7SqLVogwgZaru5rGSIe6iePd3Om-q-tk7O3pJxXwnnZHhAMA6_7b/s800/business_man3_1_question.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_smile.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKIGkR0NAsKhA679VI-_AHno_N3kOZwDEDErKUvypLVOHeDP4mSJAL1BjcGdpQUT3entVehgWv5XUgqmaCT0Bk6JAxMC0KLDQ8ro14IqpaQVGADgeXzmKsvaKYorWY3JtENTkKNC1xaoD4/s800/business_woman1_1_smile.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_cry.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEd-PV9kxYcef_sYh9riNt0_7EKNd4fPmoIC27nJh-syE15Yvpym3hXmmc_6T-7nUvpYyWVk8Zt9micKw-DyRxSru8rqmCTOswxC9HrsHj3U5iXbr4oVQAQWCJa6laFx1Y8KzKT1SnUXTk/s800/business_woman1_3_cry.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_shock.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDCbvH3MnhSwXvCRkMh6oKkuWOl7VavEfSKEmUupkYbjo3rhyGZjmrt6Bn_Qet24e-5WkweqKetj_M2gPTkPVhA5-ACi3soeFXaYO8AJ-M_Tbd7Cgx6dLT_RfikBqaIsgCEfhYY_UJi_g2/s800/business_woman2_2_shock.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_think.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5WZVuN0Tjy3STawu94uzuxEFV3OG_ykTcqeWKgWLQez13ISsOub8G0u_WQfTnjvQes_RXVnJuaiUjjW8NZv9jwGFvfaoXtA7hlapl932SYQsrBO6jZhP-8ZXuAp4IGj1ElpfL1vZXfiqA/s800/business_woman2_4_think.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_question.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgLFi0jmvOC0MaCsAPvncR4IIVJcfHYTqte1gB1JrzuEEM4TK_2LlnEhT8JUu2ey4NMlMsAtwiY6s2-XC-VwvuB7Hu6FLRD0iiJGKFV-9yxYSZtLCsd3TOKrjQguZAyUU6dkhYVBp2YqHGF/s800/business_woman3_1_question.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_heart.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiAKNpwa7jBYdwKUDK525xt98ca4-9PWVJVoNrC9sEMTAfi6wpu_CJSm0EPy__RmWxXKn7pDL5h6xEZa_g795Ckk8Hw_Lo7BFPEwghDrPUNnU92EtQRr29pOTd8OowVNJlmyHQg2y1mOHt4/s800/business_woman3_2_heart.png",
+   "credit": "いらすとや"
   }
  },
  "description": "好意はあるのに、相手が近づいてこない。自分も動けない。その「すれちがい」を、5つの心理学の研究から読み解きます。\n台本・例え話はオリジナルです。研究の数字は、論文や大学の発表で確認できた範囲で紹介しています。\n\n▼ 紹介した研究\n・Hall, Xing & Brooks (2014) Accurately Detecting Flirting. Communication Research.\n・Vorauer & Ratner (1996) Who's going to make the first move? Journal of Social and Personal Relationships.\n・Vorauer, Cameron, Holmes & Pearce (2003) Invisible Overtures. Journal of Personality and Social Psychology.\n・Finkel & Eastwick (2009) Arbitrary Social Norms Influence Sex Differences in Romantic Selectivity. Psychological Science.\n・Boothby, Cooney, Sandstrom & Clark (2018) The Liking Gap in Conversations. Psychological Science.\n・Gilovich & Medvec (1995) The Experience of Regret. Psychological Review.",
@@ -77,16 +131,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_smile.png",
      "name": "ハルト",
      "thought": null,
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_smile.png",
      "name": "ミオ",
      "thought": null,
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": true,
@@ -99,16 +153,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_smile.png",
      "name": "ハルト",
      "thought": null,
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_smile.png",
      "name": "ミオ",
      "thought": null,
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,
@@ -121,16 +175,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_smile.png",
      "name": "ハルト",
      "thought": null,
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_smile.png",
      "name": "ミオ",
      "thought": null,
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,
@@ -143,16 +197,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_think.png",
      "name": "ハルト",
      "thought": "楽しかった…\nでも誘ったら迷惑かな",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_smile.png",
      "name": "ミオ",
      "thought": null,
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     },
     "show": [
      "left"
@@ -168,16 +222,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_think.png",
      "name": "ハルト",
      "thought": "楽しかった…\nでも誘ったら迷惑かな",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_smile.png",
      "name": "ミオ",
      "thought": null,
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     },
     "show": [
      "left"
@@ -193,16 +247,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_think.png",
      "name": "ハルト",
      "thought": "楽しかった…\nでも誘ったら迷惑かな",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_smile.png",
      "name": "ミオ",
      "thought": "映画の話、すごく合ったのに",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     },
     "show": [
      "left",
@@ -219,16 +273,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_think.png",
      "name": "ハルト",
      "thought": "楽しかった…\nでも誘ったら迷惑かな",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_cry.png",
      "name": "ミオ",
      "thought": "何も言ってこない…\n私には興味ないんだ",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": true,
@@ -241,16 +295,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_think.png",
      "name": "ハルト",
      "thought": "楽しかった…\nでも誘ったら迷惑かな",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_cry.png",
      "name": "ミオ",
      "thought": "何も言ってこない…\n私には興味ないんだ",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,
@@ -263,16 +317,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_think.png",
      "name": "ハルト",
      "thought": "楽しかった…\nでも誘ったら迷惑かな",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_cry.png",
      "name": "ミオ",
      "thought": "何も言ってこない…\n私には興味ないんだ",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,
@@ -285,16 +339,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_think.png",
      "name": "ハルト",
      "thought": "楽しかった…\nでも誘ったら迷惑かな",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_cry.png",
      "name": "ミオ",
      "thought": "何も言ってこない…\n私には興味ないんだ",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,
@@ -407,7 +461,7 @@
     "value": 80,
     "unit": "%以上",
     "label": "好意がないことを 正しく見抜けた",
-    "color": "#3fd39a"
+    "color": "#4f8a6b"
    },
    "enter": true,
    "tag": "第1章 気づかれないサイン"
@@ -420,7 +474,7 @@
     "value": 80,
     "unit": "%以上",
     "label": "好意がないことを 正しく見抜けた",
-    "color": "#3fd39a"
+    "color": "#4f8a6b"
    },
    "enter": false,
    "tag": "第1章 気づかれないサイン"
@@ -435,12 +489,12 @@
      {
       "label": "男性",
       "value": 36,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "女性",
       "value": 18,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      }
     ],
     "max": 100,
@@ -460,12 +514,12 @@
      {
       "label": "男性",
       "value": 36,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "女性",
       "value": 18,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      }
     ],
     "max": 100,
@@ -485,12 +539,12 @@
      {
       "label": "男性",
       "value": 36,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "女性",
       "value": 18,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      }
     ],
     "max": 100,
@@ -509,12 +563,12 @@
      {
       "label": "男性",
       "value": 36,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "女性",
       "value": 18,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      }
     ],
     "max": 100,
@@ -533,12 +587,12 @@
      {
       "label": "男性",
       "value": 36,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "女性",
       "value": 18,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      }
     ],
     "max": 100,
@@ -557,12 +611,12 @@
      {
       "label": "男性",
       "value": 36,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "女性",
       "value": 18,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      }
     ],
     "max": 100,
@@ -675,16 +729,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_question.png",
      "name": "ハルト",
      "thought": "（伝わってない…）",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_question.png",
      "name": "ミオ",
      "thought": "（伝わってない…）",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": true,
@@ -918,16 +972,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_shock.png",
      "name": "ハルト",
      "thought": "断られたらどうしよう",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_shock.png",
      "name": "ミオ",
      "thought": "嫌われたらどうしよう",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": true,
@@ -940,16 +994,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_shock.png",
      "name": "ハルト",
      "thought": "断られたらどうしよう",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_shock.png",
      "name": "ミオ",
      "thought": "嫌われたらどうしよう",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,
@@ -962,16 +1016,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_shock.png",
      "name": "ハルト",
      "thought": "断られたらどうしよう",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_shock.png",
      "name": "ミオ",
      "thought": "嫌われたらどうしよう",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,
@@ -1173,16 +1227,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_smile.png",
      "name": "ハルト",
      "thought": null,
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_heart.png",
      "name": "ミオ",
      "thought": "（遠回しに誘ったつもり…）",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     },
     "show": [
      "right"
@@ -1198,16 +1252,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_smile.png",
      "name": "ハルト",
      "thought": null,
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_heart.png",
      "name": "ミオ",
      "thought": "（遠回しに誘ったつもり…）",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     },
     "show": [
      "right"
@@ -1223,16 +1277,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_question.png",
      "name": "ハルト",
      "thought": "（ただの映画トークかな）",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_heart.png",
      "name": "ミオ",
      "thought": "（遠回しに誘ったつもり…）",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": true,
@@ -1245,16 +1299,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_question.png",
      "name": "ハルト",
      "thought": "（ただの映画トークかな）",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_heart.png",
      "name": "ミオ",
      "thought": "（遠回しに誘ったつもり…）",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,
@@ -1351,12 +1405,12 @@
      {
       "label": "出した本人",
       "value": 10,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      },
      {
       "label": "受け取った相手",
       "value": 3,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      }
     ],
     "unit": "",
@@ -1376,12 +1430,12 @@
      {
       "label": "出した本人",
       "value": 10,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      },
      {
       "label": "受け取った相手",
       "value": 3,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      }
     ],
     "unit": "",
@@ -1508,22 +1562,22 @@
      {
       "label": "男性が回る回：男性",
       "value": 50,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "男性が回る回：女性",
       "value": 43,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      },
      {
       "label": "女性が回る回：男性",
       "value": 43,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "女性が回る回：女性",
       "value": 45,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      }
     ],
     "max": 60,
@@ -1542,22 +1596,22 @@
      {
       "label": "男性が回る回：男性",
       "value": 50,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "男性が回る回：女性",
       "value": 43,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      },
      {
       "label": "女性が回る回：男性",
       "value": 43,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "女性が回る回：女性",
       "value": 45,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      }
     ],
     "max": 60,
@@ -1577,22 +1631,22 @@
      {
       "label": "男性が回る回：男性",
       "value": 50,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "男性が回る回：女性",
       "value": 43,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      },
      {
       "label": "女性が回る回：男性",
       "value": 43,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "女性が回る回：女性",
       "value": 45,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      }
     ],
     "max": 60,
@@ -1611,22 +1665,22 @@
      {
       "label": "男性が回る回：男性",
       "value": 50,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "男性が回る回：女性",
       "value": 43,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      },
      {
       "label": "女性が回る回：男性",
       "value": 43,
-      "color": "#47c8e8"
+      "color": "#2f5d8a"
      },
      {
       "label": "女性が回る回：女性",
       "value": 45,
-      "color": "#ff6b8a"
+      "color": "#d0607a"
      }
     ],
     "max": 60,
@@ -1642,16 +1696,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_think.png",
      "name": "ハルト",
      "thought": "（誘うのは自分から？）",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_think.png",
      "name": "ミオ",
      "thought": "（誘われるのを待とう）",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": true,
@@ -1664,16 +1718,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_think.png",
      "name": "ハルト",
      "thought": "（誘うのは自分から？）",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_think.png",
      "name": "ミオ",
      "thought": "（誘われるのを待とう）",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,
@@ -1686,16 +1740,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_think.png",
      "name": "ハルト",
      "thought": "（誘うのは自分から？）",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_think.png",
      "name": "ミオ",
      "thought": "（誘われるのを待とう）",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,
@@ -1708,16 +1762,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_think.png",
      "name": "ハルト",
      "thought": "（誘うのは自分から？）",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_think.png",
      "name": "ミオ",
      "thought": "（誘われるのを待とう）",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,
@@ -1730,16 +1784,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_think.png",
      "name": "ハルト",
      "thought": "（誘うのは自分から？）",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_think.png",
      "name": "ミオ",
      "thought": "（誘われるのを待とう）",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,
@@ -2237,16 +2291,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_laugh.png",
      "name": "ハルト",
      "thought": "また映画の話しよう！",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_heart.png",
      "name": "ミオ",
      "thought": "うん、今度一緒に行こう！",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": true,
@@ -2259,16 +2313,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_laugh.png",
      "name": "ハルト",
      "thought": "また映画の話しよう！",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_heart.png",
      "name": "ミオ",
      "thought": "うん、今度一緒に行こう！",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,
@@ -2281,16 +2335,16 @@
     "kind": "scene",
     "place": "会社帰り・駅のホーム",
     "left": {
-     "emoji": "fe_man.svg",
+     "emoji": "ira_man_laugh.png",
      "name": "ハルト",
      "thought": "また映画の話しよう！",
-     "color": "#47c8e8"
+     "color": "#2f5d8a"
     },
     "right": {
-     "emoji": "fe_woman.svg",
+     "emoji": "ira_woman_heart.png",
      "name": "ミオ",
      "thought": "うん、今度一緒に行こう！",
-     "color": "#ff6b8a"
+     "color": "#d0607a"
     }
    },
    "enter": false,

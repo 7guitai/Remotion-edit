@@ -43,17 +43,27 @@ def say(text, visual=None, speech=None, chapter=None):
 # 読み間違いの直し（読み上げだけ）
 READ = {"出す側": "だすがわ", "「待つ側か、動く側か」": "、まつがわか、うごくがわか、"}
 
-MAN = "fe_man.svg"
-WOMAN = "fe_woman.svg"
-BLUE, PINK = "#47c8e8", "#ff6b8a"
+# 色（和モダン：藍・桜）
+BLUE, PINK = "#2f5d8a", "#d0607a"
+# 登場人物は いらすとや「いろいろな表情のスーツを着た人」（表情を場面で変える）
+FACES = {
+    "smile": "1_1_smile", "cry": "1_3_cry", "laugh": "1_4_laugh", "idea": "2_1_idea", "shock": "2_2_shock",
+    "think": "2_4_think", "question": "3_1_question", "heart": "3_2_heart", "heat": "3_2_heat", "tehe": "3_4_tehe",
+}
 
 
-def scene(left_thought=None, right_thought=None, show=None, place="会社帰り・駅のホーム"):
+def face(who, f):
+    if who == "man" and f == "heart":
+        f = "heat"
+    return f"ira_{who}_{f}.png"
+
+
+def scene(left_thought=None, right_thought=None, show=None, place="会社帰り・駅のホーム", lf="smile", rf="smile"):
     return {
         "kind": "scene",
         "place": place,
-        "left": {"emoji": MAN, "name": "ハルト", "thought": left_thought, "color": BLUE},
-        "right": {"emoji": WOMAN, "name": "ミオ", "thought": right_thought, "color": PINK},
+        "left": {"emoji": face("man", lf), "name": "ハルト", "thought": left_thought, "color": BLUE},
+        "right": {"emoji": face("woman", rf), "name": "ミオ", "thought": right_thought, "color": PINK},
         **({"show": show} if show else {}),
     }
 
@@ -66,10 +76,10 @@ tag("オープニング")
 say("同じ部署の同期、ハルトとミオ。", scene())
 say("残業のあと、たまたま同じ電車で帰ることになりました。")
 say("好きな映画の話で、驚くほど盛り上がる。")
-say("ハルトは思います。「楽しかった。でも、誘ったら迷惑かな」", scene("楽しかった…\nでも誘ったら迷惑かな", None, ["left"]))
+say("ハルトは思います。「楽しかった。でも、誘ったら迷惑かな」", scene("楽しかった…\nでも誘ったら迷惑かな", None, ["left"], lf="think"))
 say("「ミオさんは誰にでも感じがいいし、たぶん俺だけじゃない」")
-say("同じころ、ミオも考えていました。", scene("楽しかった…\nでも誘ったら迷惑かな", "映画の話、すごく合ったのに", ["left", "right"]))
-say("「あんなに話したのに、何も言ってこない。私には興味ないんだ」", scene("楽しかった…\nでも誘ったら迷惑かな", "何も言ってこない…\n私には興味ないんだ"))
+say("同じころ、ミオも考えていました。", scene("楽しかった…\nでも誘ったら迷惑かな", "映画の話、すごく合ったのに", ["left", "right"], lf="think", rf="smile"))
+say("「あんなに話したのに、何も言ってこない。私には興味ないんだ」", scene("楽しかった…\nでも誘ったら迷惑かな", "何も言ってこない…\n私には興味ないんだ", lf="think", rf="cry"))
 say("駅に着いて、2人は「おつかれさま」とだけ言って別れます。")
 say("2人とも、相手は自分に気がないと思っている。")
 say("そして、2人とも間違っています。")
@@ -88,7 +98,7 @@ say("アメリカのカンザス大学で、こんな実験が行われました
 say("初対面の男女52組に、10分ほど、ふたりきりで話してもらいます。", speech="初対面の男女、52組に、10分ほど、ふたりきりで話してもらいます。")
 say("そのあと、自分は好意を見せたか、相手は見せていたかを、こっそり答えてもらいました。")
 say("相手が好意を見せていなかったときは、8割以上の人が正しく見抜けました。",
-    {"kind": "stat", "value": 80, "unit": "%以上", "label": "好意がないことを 正しく見抜けた", "color": "#3fd39a"})
+    {"kind": "stat", "value": 80, "unit": "%以上", "label": "好意がないことを 正しく見抜けた", "color": "#4f8a6b"})
 say("ところが、好意を見せていたときは、どうだったか。")
 say("男性が気づけたのは、わずか36%。",
     {"kind": "bars", "title": "相手の好意のサインに 気づけた割合", "rows": [{"label": "男性", "value": 36, "color": BLUE}, {"label": "女性", "value": 18, "color": PINK}],
@@ -105,7 +115,7 @@ say("受け取る側は、「勘ちがいだったら恥ずかしい」と思っ
 say("もうひとつは、出す側が、はっきり出すのを怖がっていることです。")
 say("ハッキリ出して断られたら、気まずくなる。だから、どうしても控えめになる。")
 say("あいまいなサインを、慎重な相手が受け取る。気づかれないのも、無理はありません。")
-say("ハルトの「楽しかった」も、ミオの「話が合ったね」も、相手には届いていなかったのかもしれません。", scene("（伝わってない…）", "（伝わってない…）"))
+say("ハルトの「楽しかった」も、ミオの「話が合ったね」も、相手には届いていなかったのかもしれません。", scene("（伝わってない…）", "（伝わってない…）", lf="question", rf="question"))
 
 # ───────── 第2章 ─────────
 say("第2章。「自分は怖い、相手は無関心」の思い込み。", {"kind": "chapter", "no": 2, "title": "「自分は怖い」\n「相手は無関心」"},
@@ -131,7 +141,7 @@ say("恋愛でも、これと同じことが起きています。")
 say("ボラウアーたちの研究では、人は自分の「動けない理由」を、とても正確に感じています。")
 say("断られたら、明日から気まずい。周りに知られたら恥ずかしい。今の関係まで壊れるかもしれない。")
 say("ところが、相手も同じことを考えている可能性には、なかなか思い至りません。")
-say("自分の怖さは、自分の内側からよく見えます。", scene("断られたらどうしよう", "嫌われたらどうしよう"))
+say("自分の怖さは、自分の内側からよく見えます。", scene("断られたらどうしよう", "嫌われたらどうしよう", lf="shock", rf="shock"))
 say("でも、相手の怖さは、外からは見えません。")
 say("だから相手の「動かない」は、「興味がない」に見えてしまうんです。")
 say("LINEの返事が短いだけで、「脈なしかも」と思ったことはありませんか？",
@@ -154,9 +164,9 @@ say("自分のサインを、実際より大きく見積もってしまうクセ
 say("これを、シグナル増幅バイアスといいます。", {"kind": "concept", "term": "シグナル増幅バイアス", "en": "Signal Amplification Bias",
                                         "desc": "自分の好意のサインが、\n実際より相手に伝わっていると思い込むクセ"})
 say("しかもこのクセは、断られるのが怖い人ほど、強くなりやすいといわれています。")
-say("たとえば、ミオは電車で、週末に見たい映画の話をしました。", scene(None, "（遠回しに誘ったつもり…）", ["right"]))
+say("たとえば、ミオは電車で、週末に見たい映画の話をしました。", scene(None, "（遠回しに誘ったつもり…）", ["right"], rf="heart"))
 say("ミオにとっては、勇気を出した「遠回しのお誘い」です。")
-say("でもハルトには、ただの映画の話にしか聞こえていませんでした。", scene("（ただの映画トークかな）", "（遠回しに誘ったつもり…）"))
+say("でもハルトには、ただの映画の話にしか聞こえていませんでした。", scene("（ただの映画トークかな）", "（遠回しに誘ったつもり…）", lf="question", rf="heart"))
 say("そしてミオは、「あんなに言ったのに、反応がない」と感じてしまう。")
 say("ここで、すれちがいの悪循環ができあがります。",
     {"kind": "list", "title": "すれちがいの悪循環", "items": ["断られるのが怖いので、サインは控えめになる", "本人は「伝わったはず」と思い込む", "相手は気づかず、反応しない", "「やっぱり興味ないんだ」と、さらに引いてしまう"]})
@@ -189,7 +199,7 @@ say("すると、女性のほうがえり好みする、という差が消えて
 say("つまり、えり好みの差は、男女のちがいというより、「待つ側か、動く側か」で生まれていたんです。")
 say("自分から近づくと、相手への気持ちも、自分への自信も、高まりやすいと考えられています。")
 say("逆に、待つ側にいると、気持ちはあっても、なかなか動けない。")
-say("「誘うのは相手から」という空気があると、好意があっても、待つ側にまわりやすくなります。", scene("（誘うのは自分から？）", "（誘われるのを待とう）"))
+say("「誘うのは相手から」という空気があると、好意があっても、待つ側にまわりやすくなります。", scene("（誘うのは自分から？）", "（誘われるのを待とう）", lf="think", rf="think"))
 say("近づいてこないのは、気持ちがないからではなく、「待つ役」にいるだけなのかもしれません。")
 say("これは、男女どちらにも当てはまります。")
 say("職場の先輩と後輩、サークルの部長と新入生のように、立場の差があるときも、下の立場の人は待つ側になりやすい。")
@@ -253,16 +263,38 @@ say("短い目で見ると、人は「やってしまったこと」を後悔し
 say("でも長い目で見ると、心に残るのは「やらなかったこと」の後悔のほうだそうです。")
 say("あのとき誘っていたら、どうなっていただろう。")
 say("その問いは、答えが出ないまま、ずっと残ってしまいます。")
-say("もし、ハルトが「また映画の話しよう」と、ひとこと言っていたら。", scene("また映画の話しよう！", "うん、今度一緒に行こう！"))
+say("もし、ハルトが「また映画の話しよう」と、ひとこと言っていたら。", scene("また映画の話しよう！", "うん、今度一緒に行こう！", lf="laugh", rf="heart"))
 say("ミオは、きっと笑って「行こう」と答えていたはずです。")
 say("あなたの気になるあの人も、今ごろ、あなたからのひとことを待っているのかもしれません。")
 say("この動画が参考になったら、高評価とチャンネル登録をお願いします。", {"kind": "title", "title": ["最後まで見てくれて", "ありがとう"], "sub": "あなたの「すれちがい体験」、コメントで教えてください"})
 say("あなたの「すれちがい体験」も、ぜひコメントで教えてください。")
 
-ILLS = {
-    MAN: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Man/Default/Color/man_color_default.svg",
-    WOMAN: "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Woman/Default/Color/woman_color_default.svg",
+IRA = {
+    "man": {k: u for k, u in {
+        "1_1_smile": "AVvXsEinCa3_I-Cu_oduFEXJgdqLfVVLTpVDzeeKvJU1P7Tmvy0-LJIQn6eLnUde-sOqyUxlU6Kmf_3nN832P3E5_MuqE_VM3ZUP598T9aA9RBjhVVPZm3OC_fuKOQA5qHw61GXMAvDTEmgmtV9n",
+        "1_4_laugh": "AVvXsEjOHa1uoODoJQKY4lJibxtbHwA7J0MZd_T7NI6Ccay2-Z-73eo10bkIenD9uMbk2n1If4e7m-W58iL_QSMaz1ekU7i0sBSq2ecLUpGrpwWs_farEoAtFI7TfxMIGwqvgmVF1qUJ2nUWsc1o",
+        "2_2_shock": "AVvXsEj_6HziRfnEDt4hyphenhyphenAYghphhjJh930C5aFyyh31XDYKkS_FIrNOY4liMDdMhU1e6w9wN3hgGgH-mjLmSteUs3jy_t_H2JltQ2VoSx0lH5Yz2BE_iXyysblzC1LkUMb3XNen3Pe0Vj7HXuYdU",
+        "2_4_think": "AVvXsEh4f8UNlNx6rgIq-4BDpGQszhhYthGnl10m47e0hgtvKX3ikrea74r0uu9wm7yI7U9kwe9FT01JCbBLYA0aHOjQaaqYq2hsL2Q_eNgmOG5fzH6V2x_XUxF8mx_mEuzmbhXwQbuSuYx4QrYG",
+        "3_1_question": "AVvXsEgl0KzEZadyAPONwycA4NlT0GpZ3hlafw-DbpxSwzRp2BRgo4iIjacANvbXZW4CPwd7jqhdJI3FWPqhYrboe9bA7rCl7SqLVogwgZaru5rGSIe6iePd3Om-q-tk7O3pJxXwnnZHhAMA6_7b",
+    }.items()},
+    "woman": {k: u for k, u in {
+        "1_1_smile": "AVvXsEgKIGkR0NAsKhA679VI-_AHno_N3kOZwDEDErKUvypLVOHeDP4mSJAL1BjcGdpQUT3entVehgWv5XUgqmaCT0Bk6JAxMC0KLDQ8ro14IqpaQVGADgeXzmKsvaKYorWY3JtENTkKNC1xaoD4",
+        "1_3_cry": "AVvXsEhEd-PV9kxYcef_sYh9riNt0_7EKNd4fPmoIC27nJh-syE15Yvpym3hXmmc_6T-7nUvpYyWVk8Zt9micKw-DyRxSru8rqmCTOswxC9HrsHj3U5iXbr4oVQAQWCJa6laFx1Y8KzKT1SnUXTk",
+        "2_2_shock": "AVvXsEhDCbvH3MnhSwXvCRkMh6oKkuWOl7VavEfSKEmUupkYbjo3rhyGZjmrt6Bn_Qet24e-5WkweqKetj_M2gPTkPVhA5-ACi3soeFXaYO8AJ-M_Tbd7Cgx6dLT_RfikBqaIsgCEfhYY_UJi_g2",
+        "2_4_think": "AVvXsEj5WZVuN0Tjy3STawu94uzuxEFV3OG_ykTcqeWKgWLQez13ISsOub8G0u_WQfTnjvQes_RXVnJuaiUjjW8NZv9jwGFvfaoXtA7hlapl932SYQsrBO6jZhP-8ZXuAp4IGj1ElpfL1vZXfiqA",
+        "3_1_question": "AVvXsEgLFi0jmvOC0MaCsAPvncR4IIVJcfHYTqte1gB1JrzuEEM4TK_2LlnEhT8JUu2ey4NMlMsAtwiY6s2-XC-VwvuB7Hu6FLRD0iiJGKFV-9yxYSZtLCsd3TOKrjQguZAyUU6dkhYVBp2YqHGF",
+        "3_2_heart": "AVvXsEiAKNpwa7jBYdwKUDK525xt98ca4-9PWVJVoNrC9sEMTAfi6wpu_CJSm0EPy__RmWxXKn7pDL5h6xEZa_g795Ckk8Hw_Lo7BFPEwghDrPUNnU92EtQRr29pOTd8OowVNJlmyHQg2y1mOHt4",
+    }.items()},
 }
+ILLS = {}
+for who, faces in IRA.items():
+    for code, key in faces.items():
+        name = [k for k, v in FACES.items() if v == code][0]
+        fname = f"business_{who}{code.split('_')[0]}_{'_'.join(code.split('_')[1:])}.png"
+        ILLS[face(who, name)] = f"https://blogger.googleusercontent.com/img/b/R29vZ2xl/{key}/s800/{fname}"
+# 使っている表情がそろっているか確認
+_used = {p[side]["emoji"] for x in S if x["visual"]["kind"] == "scene" for p in [x["visual"]] for side in ("left", "right")}
+assert _used <= set(ILLS), _used - set(ILLS)
 
 episode = {
     "id": "paper-love-long",
@@ -276,7 +308,7 @@ episode = {
     "bgmVolume": 0.07,
     "voice": {"speaker": 13, "speed": 1.2, "name": "青山龍星"},
     "bgm": {"file": "you_and_me.mp3", "title": "You and Me", "credit": "しゃろう", "page": "https://opentracks.com/bgm/detail/13787", "opentracks": 13787, "track": 1},
-    "illustrations": {k: {"emoji": "🙂", "irasutoya": f"Fluent Emoji「{k}」", "url": u, "credit": "Microsoft Fluent Emoji（MIT License）"} for k, u in ILLS.items()},
+    "illustrations": {k: {"emoji": "🙂", "irasutoya": "いろいろな表情のスーツを着た人のイラスト", "url": u, "credit": "いらすとや"} for k, u in ILLS.items()},
     "description": "好意はあるのに、相手が近づいてこない。自分も動けない。その「すれちがい」を、5つの心理学の研究から読み解きます。\n台本・例え話はオリジナルです。研究の数字は、論文や大学の発表で確認できた範囲で紹介しています。\n\n▼ 紹介した研究\n・Hall, Xing & Brooks (2014) Accurately Detecting Flirting. Communication Research.\n・Vorauer & Ratner (1996) Who's going to make the first move? Journal of Social and Personal Relationships.\n・Vorauer, Cameron, Holmes & Pearce (2003) Invisible Overtures. Journal of Personality and Social Psychology.\n・Finkel & Eastwick (2009) Arbitrary Social Norms Influence Sex Differences in Romantic Selectivity. Psychological Science.\n・Boothby, Cooney, Sandstrom & Clark (2018) The Liking Gap in Conversations. Psychological Science.\n・Gilovich & Medvec (1995) The Experience of Regret. Psychological Review.",
     "hashtags": ["恋愛心理学", "心理学", "論文", "雑学"],
     "slides": S,
