@@ -5,6 +5,7 @@ import { WhatIfThumbnail } from "./components/WhatIfThumbnail";
 import { TinyThumbnail } from "./components/TinyThumbnail";
 import { RelaxThumbnail } from "./components/RelaxThumbnail";
 import { PaperThumbnail } from "./components/PaperThumbnail";
+import { PaperPairThumbnail } from "./components/PaperPairThumbnail";
 import { EPISODES } from "./episodes";
 import { calculateMetadata, FPS } from "./slides";
 import { Video } from "./Video";
@@ -58,6 +59,20 @@ export const RemotionRoot: React.FC = () => {
             "relax/bef6d67d-baac-49db-9e7b-a94fd50af4f8.jpg",
             "relax/7a52926a-6ca3-4498-86d7-98cf9e7b48e2.jpg",
           ],
+        }}
+      />
+      {/* 「好意はあるのに近づいてこない人の心理」のサムネイル（npx remotion still paper-love-long-thumbnail out/thumb.png） */}
+      <Still
+        id="paper-love-long-thumbnail"
+        component={PaperPairThumbnail}
+        width={1280}
+        height={720}
+        defaultProps={{
+          kicker: "論文で読み解く 恋愛心理学",
+          lines: ["好意はあるのに", "近づいてこない", "人の心理"],
+          badge: "両思いなのに、すれちがう",
+          left: { image: "ira_man_think.png", thought: "誘ったら\n迷惑かな…", color: "#2f5d8a" },
+          right: { image: "ira_woman_cry.png", thought: "私には\n興味ないんだ…", color: "#d0607a" },
         }}
       />
       {/* 「論文で読み解く心理学」スポットライト効果の回のサムネイル（npx remotion still paper-spotlight-long-thumbnail out/thumb.png） */}
