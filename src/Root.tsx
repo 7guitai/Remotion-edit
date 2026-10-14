@@ -6,6 +6,7 @@ import { TinyThumbnail } from "./components/TinyThumbnail";
 import { RelaxThumbnail } from "./components/RelaxThumbnail";
 import { PaperThumbnail } from "./components/PaperThumbnail";
 import { PaperPairThumbnail } from "./components/PaperPairThumbnail";
+import { TalkThumbnail } from "./components/TalkThumbnail";
 import { EPISODES } from "./episodes";
 import { calculateMetadata, FPS } from "./slides";
 import { Video } from "./Video";
@@ -88,6 +89,24 @@ export const RemotionRoot: React.FC = () => {
           left: { image: "ira_man_question.png", thought: "半導体って\nそもそも何？", color: "#2f5d8a" },
           right: { image: "ira_woman_smile.png", thought: "スマホの中に\n200億個！", color: "#d0607a" },
           heart: false,
+        }}
+      />
+      {/* 掛け合い解説「半導体」の回のサムネイル（npx remotion still talk-semiconductor-long-thumbnail out/thumb.png） */}
+      <Still
+        id="talk-semiconductor-long-thumbnail"
+        component={TalkThumbnail}
+        width={1280}
+        height={720}
+        defaultProps={{
+          kicker: "ソラとコムギの なるほど科学",
+          lines: [
+            { text: "砂がスマホの", color: "#3d6fd1" },
+            { text: "頭脳になる？", color: "#ee5a24" },
+          ],
+          badge: "半導体のしくみ",
+          image: "ira_chip.png",
+          faces: { sora: "smile", komugi: "surprise" },
+          bubble: "えっ、砂から！？",
         }}
       />
       {/* 「論文で読み解く心理学」スポットライト効果の回のサムネイル（npx remotion still paper-spotlight-long-thumbnail out/thumb.png） */}

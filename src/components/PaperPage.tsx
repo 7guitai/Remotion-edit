@@ -20,6 +20,8 @@ export type PaperVisual =
   // 図解パネル（半導体のアニメーション SemiScene を、金の枠の中に）
   | { kind: "semi"; mode: import("./SemiScene").SemiMode; title?: string }
   // 年表（左から順に出てくる）
+  // いらすとや などのイラスト（public/illustrations/）。caption はイラストの下の短い説明
+  | { kind: "image"; src: string; caption?: string; src2?: string; caption2?: string }
   | { kind: "timeline"; items: { year: string; title: string; sub?: string; color?: string }[] };
 
 // emoji は public/illustrations/ の画像（いらすとやの表情など）
@@ -115,15 +117,25 @@ export const WashiBackground: React.FC = () => (
   </AbsoluteFill>
 );
 
+// 見た目の切りかえ：wa＝和モダン（明朝・和紙のカード）、pop＝掛け合い解説（丸ゴシック・白いカード）
+// 1本の動画の中では同じスタイルしか使わないので、ページ（PaperPage / TalkPage）が描く前に設定する
+let SKIN: "wa" | "pop" = "wa";
+export const setPaperSkin = (s: "wa" | "pop") => {
+  SKIN = s;
+};
+
 const mincho = (size: number, color: string = WA.sumi, weight = 800): React.CSSProperties => ({
-  fontFamily: minchoFamily,
+  fontFamily: SKIN === "pop" ? fontFamily : minchoFamily,
   fontWeight: weight,
   fontSize: size,
   color,
 });
 
 // 和紙のカード（藍の線と、内側に金の細線）
-const Card: React.FC<{ children: React.ReactNode; style?: React.CSSProperties; line?: string }> = ({ children, style, line = WA.ai }) => (
+const Card: React.FC<{ children: React.ReactNode; style?: React.CSSProperties; line?: string }> = ({ children, style, line = WA.ai }) =>
+  SKIN === "pop" ? (
+    <div style={{ background: "#fff", border: `6px solid ${line}`, borderRadius: 28, boxShadow: "0 10px 0 rgba(0,0,0,0.12)", ...style }}>{children}</div>
+  ) : (
   <div
     style={{
       background: WA.card,
@@ -140,7 +152,29 @@ const Card: React.FC<{ children: React.ReactNode; style?: React.CSSProperties; l
 );
 
 // 朱色の判子（はんこ）
-const Seal: React.FC<{ children: React.ReactNode; size?: number; round?: boolean }> = ({ children, size = 44, round }) => (
+const Seal: React.FC<{ children: React.ReactNode; size?: number; round?: boolean }> = ({ children, size = 44, round }) =>
+  SKIN === "pop" ? (
+    <div
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: round ? 0 : "6px 22px",
+        width: round ? size * 2.6 : undefined,
+        height: round ? size * 2.6 : undefined,
+        borderRadius: 999,
+        background: "#ff6f61",
+        color: "#fff",
+        fontFamily,
+        fontWeight: 900,
+        fontSize: size,
+        lineHeight: 1.1,
+        boxShadow: "0 5px 0 #c94c40",
+      }}
+    >
+      {children}
+    </div>
+  ) : (
   <div
     style={{
       display: "inline-flex",
@@ -162,7 +196,7 @@ const Seal: React.FC<{ children: React.ReactNode; size?: number; round?: boolean
   </div>
 );
 
-const Visual: React.FC<{ v: PaperVisual; enter: boolean }> = ({ v, enter }) => {
+export const Visual: React.FC<{ v: PaperVisual; enter: boolean }> = ({ v, enter }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const sp = (delay: number) => (enter ? spring({ frame: frame - delay, fps, config: { damping: 18, stiffness: 110 } }) : 1);
@@ -374,6 +408,23 @@ const Visual: React.FC<{ v: PaperVisual; enter: boolean }> = ({ v, enter }) => {
           </div>
         </div>
       );
+    case "image": {
+      const one = (src: string, cap: string | undefined, d: number) => {
+        const t = sp(d);
+        return (
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", opacity: t, transform: `scale(${0.8 + 0.2 * t})` }}>
+            <Img src={staticFile(`illustrations/${src}`)} style={{ height: v.src2 ? 420 : 520, maxWidth: 760, objectFit: "contain" }} />
+            {cap ? <div style={{ ...mincho(48, WA.ai), marginTop: 14 }}>{cap}</div> : null}
+          </div>
+        );
+      };
+      return (
+        <div style={{ display: "flex", gap: 120, alignItems: "flex-end" }}>
+          {one(v.src, v.caption, 0)}
+          {v.src2 ? one(v.src2, v.caption2, 12) : null}
+        </div>
+      );
+    }
     case "timeline": {
       const n = v.items.length;
       const w = 1560;
@@ -419,6 +470,7 @@ const Visual: React.FC<{ v: PaperVisual; enter: boolean }> = ({ v, enter }) => {
 };
 
 export const PaperPage: React.FC<{ slide: PaperSlide; voiceFrames: number }> = ({ slide }) => {
+  setPaperSkin("wa");
   const frame = useCurrentFrame();
   const enter = slide.enter !== false;
   const fadeText = interpolate(frame, [0, 5], [0, 1], { extrapolateRight: "clamp" });

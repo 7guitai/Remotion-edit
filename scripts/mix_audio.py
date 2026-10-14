@@ -55,6 +55,16 @@ def main() -> None:
         e = min(n, s + len(a))
         mix[s:e] += a[: e - s]
 
+    # 掛け合い（talk）の図が切りかわるときの効果音（TalkPage と同じ）
+    pop = ROOT / "public" / "sfx" / "pop.wav"
+    if pop.exists():
+        pa = load(pop) * 0.18
+        for st, sl in zip(starts, ep["slides"]):
+            if sl.get("type") == "talk" and sl.get("enter", True):
+                s0 = f2s(st)
+                e0 = min(n, s0 + len(pa))
+                mix[s0:e0] += pa[: e0 - s0]
+
     # BGM（ループ・フェード・クロスフェード）
     level = ep.get("bgmVolume", 0.1)
     tracks = ep.get("bgmPlaylist") or [dict(ep["bgm"], fromSlide=0)]

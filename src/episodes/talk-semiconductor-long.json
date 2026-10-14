@@ -1,0 +1,1972 @@
+{
+ "id": "talk-semiconductor-long",
+ "title": "【ゆっくり解説風】半導体のしくみ｜砂から生まれる200億個のスイッチ",
+ "format": "landscape",
+ "titleBand": false,
+ "pr": false,
+ "style": "talk",
+ "background": "#fff6e3",
+ "slideGap": 6,
+ "bgmVolume": 0.08,
+ "voice": {
+  "speaker": 14,
+  "speed": 1.2,
+  "name": "冥鳴ひまり"
+ },
+ "replyVoices": [
+  {
+   "speaker": 8,
+   "speed": 1.25,
+   "name": "春日部つむぎ"
+  }
+ ],
+ "bgm": {
+  "file": "gudaguda.mp3",
+  "title": "ぐだぐだな感じ",
+  "credit": "yuki",
+  "page": "https://opentracks.com/bgm/detail/2738",
+  "opentracks": 2738,
+  "track": 1
+ },
+ "illustrations": {
+  "ira_wafer.png": {
+   "emoji": "🖼",
+   "irasutoya": "computer_silicon_wefar.png",
+   "credit": "いらすとや",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjEQeXkChxAmGzZ871pNtlDBIRWwOejFdH2bOMt6hlO_o9UbG3IgFmpe2XRhX2xFiSm1lEHBkhy-2SjpfsaKvp5YBcWAdkC9MhUbSAz-UVf4yiSsMzSYKJPJCJaBtELmwc3-z1vj_0lFheUjN1BJElD9lvC41I0Lz5hOnuZ2Sq4b2HpNoMT5HuI1FlEOATe/s800/computer_silicon_wefar.png"
+  },
+  "ira_chip.png": {
+   "emoji": "🖼",
+   "irasutoya": "computer_chip.png",
+   "credit": "いらすとや",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieydelb8imIrzaJR9p7mfLXNhtpTbZI5IjW9-9vvE9f2ZFHqONSqDPYnofJqj2SyWbllp4wjqLgIIH-rfD8VrAxPjdoyXMGo_ca_4QCuLxZLEUtQms-3INQxQhfhUG5n1p0M8yXzVrK5CQOczLSbZ-eSQMyiouYcAFcW8d9jRUbBewbfOsPZgwhOk-JucN/s800/computer_chip.png"
+  },
+  "ira_tube.png": {
+   "emoji": "🖼",
+   "irasutoya": "music_shinkuukan.png",
+   "credit": "いらすとや",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUQuKYbht8f43EfW4QC8GQnIhumI1x4iipR3HyPEvCnHSHLEjzHmkX0s3MJAmOB6MBS07Uu1DyObU16DcSqmgVyRiR-jwylammibHzg3WmHPRQoAGHd6AGeWD-EDQJpLE5EkGf6ra0hx0/s800/music_shinkuukan.png"
+  },
+  "ira_calc.png": {
+   "emoji": "🖼",
+   "irasutoya": "dentaku_syoumen_big.png",
+   "credit": "いらすとや",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgK616GUIddcEDjdJHGe0eCEvbfifyrLTdf6XL_xTuOtYbDtwZpp5NFdnlPu3hstk8oY_CqRyVCgj80Gn238RgvUC4EUhTkYjUdkr3CCwuZ7zIkokB_oatN8-iT2Y3G9P_7kwZDzeHX3ew/s800/dentaku_syoumen_big.png"
+  },
+  "ira_solar.png": {
+   "emoji": "🖼",
+   "irasutoya": "denryoku_solar_panel.png",
+   "credit": "いらすとや",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_szgXk4iVEZ1TgIY15Xi9LWUYFtEg2ADAFKVpo9Xicxe8IL1w9fW1fjDVZNvyhqUhWSRwi5ev8q3M7rG_j5S8IBwOhht52inC0e6KPuM4trh8QWvTtV0B6erUNCGMMjVJdAkK_jWoWg7A/s800/denryoku_solar_panel.png"
+  },
+  "ira_led.png": {
+   "emoji": "🖼",
+   "irasutoya": "syoumei_led_base_light.png",
+   "credit": "いらすとや",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh3wXeRpCisQ3GouqtajP7h0sqSqQ4I2P-Dq3ZMuICT2ngMy0XthyfR_OyQ2UA3XpfdtgvSo232Ny77mCDssszNslqjJXCWqKiYIiLKPCk1G960n389BlyIaPXggz86eVCMcOyG66bAWOJn/s800/syoumei_led_base_light.png"
+  },
+  "ira_clean.png": {
+   "emoji": "🖼",
+   "irasutoya": "cleanroom_jikken.png",
+   "credit": "いらすとや",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj68j92Aw5hzIeg3p2rypz2siHXsGqUZC4q7sbP-FRcxUXXceVI8EyJQldZ1kTK7JJtRCsS32-yz314rtlxVf4yGVGefWRyCtcnbLQ2gGKGFsQdzLRAqQTdnP9Js4rov-KO9aUaC0p-8iw/s800/cleanroom_jikken.png"
+  },
+  "ira_sand.png": {
+   "emoji": "🖼",
+   "irasutoya": "beach_sunayama.png",
+   "credit": "いらすとや",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2QjMsi-_ASBrwm6E7yk9_ipGVhguWZ7weo2ohypTKwuKiB16p-uoPaHrzD9y0oEX0Meufeqg-KFUpRXwouWymplTsBBFQX0ZgFV9jgxMlc1VSxgcO5nitnxqgrhu7UM5WxP0Ih655l08I/s800/beach_sunayama.png"
+  },
+  "ira_phone.png": {
+   "emoji": "🖼",
+   "irasutoya": "ai_smartphone_tanmatsu.png",
+   "credit": "いらすとや",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgApSdAMCM6Pve5e4DZev5oMuxEFumD7qaVQYHRwY3NgDAnTRS3kHNoCtyJzSktMZdwFE2DTQ4aQB3sSYsPzeapjgAFCSJnT5OVePymS3NkqCzYUNoZk0_Dac1GtqW5U23C4QqOeLWFQVyLlLCg5BU-7WGnZjXi7oxekS-RTNd_WnA4rz0brbqOO5BJE244/s800/ai_smartphone_tanmatsu.png"
+  }
+ },
+ "description": "ソラとコムギの掛け合いで、「半導体」のしくみを解説します。何が「半分」なのか、どうして電気で動くスイッチになるのか、真空管から200億個のスイッチまでの歴史、砂から作られるまで、そして世界と日本の今。\n台本・キャラクターはオリジナルです。数字は公開資料で確認できた範囲で紹介しています（一部は推定値・概数）。\n\n▼ 数字の出典（目安）\n・最新スマホのチップのトランジスタ数 約200億個：Apple A18 Pro の報道値（メーカー非公表の推定）\n・シリコンは地殻の重さの約28%：日本金属学会などの解説\n・ENIAC（1945年）真空管17,468本・約27トン：コンピューター史の資料\n・トランジスタの発明（1947年・ベル研究所）、1956年ノーベル物理学賞\n・Intel 4004（1971年）トランジスタ2,300個、日本のビジコン向け\n・半導体用シリコンの純度 イレブンナイン：早稲田大学の解説\n・ファウンドリ世界シェア TSMC 約70%（2025年）：TrendForce\n・ラピダス 2nm 2027年量産目標：報道\n・フォトレジストは日本の主要メーカーが世界の大部分：報道",
+ "hashtags": [
+  "半導体",
+  "ゆっくり解説",
+  "科学",
+  "解説",
+  "雑学"
+ ],
+ "slides": [
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "ねえソラ、ニュースで「半導体が足りない」ってよく聞くけど、半導体って何なの？",
+   "face": "think",
+   "other": "normal",
+   "visual": {
+    "kind": "title",
+    "kicker": "ソラとコムギの なるほど科学",
+    "title": [
+     "半導体の",
+     "しくみ"
+    ],
+    "sub": "砂から生まれる 200億個のスイッチ"
+   },
+   "enter": true,
+   "speaker": 8,
+   "speed": 1.25,
+   "chapter": "オープニング"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "いい質問だね。実はコムギのスマホの中にも、ぎっしり入ってるよ。",
+   "face": "smile",
+   "other": "surprise",
+   "visual": {
+    "kind": "title",
+    "kicker": "ソラとコムギの なるほど科学",
+    "title": [
+     "半導体の",
+     "しくみ"
+    ],
+    "sub": "砂から生まれる 200億個のスイッチ"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "えっ、このスマホに？",
+   "face": "surprise",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_phone.png",
+    "caption": "スマホ"
+   },
+   "enter": true,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "オープニング"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "最新のスマホの頭脳には、小さなスイッチが約200億個も詰まっているといわれているんだ。",
+   "face": "smile",
+   "other": "surprise",
+   "visual": {
+    "kind": "semi",
+    "mode": "phone"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "オープニング"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "200億！？ 世界の人口より多いじゃん！",
+   "face": "surprise",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "phone"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "オープニング"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "そう。今日は、その正体の「半導体」を、しくみから歴史、作り方まで、まるごと解説していくよ。",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "list",
+    "title": "今日のメニュー",
+    "items": [
+     "半導体って、何が「半分」？",
+     "電気を通すしくみ",
+     "電気で動くスイッチ",
+     "真空管から200億個へ",
+     "砂から作られるまで",
+     "世界と日本の半導体"
+    ]
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "オープニング"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "よろしくお願いしまーす！",
+   "face": "happy",
+   "other": "normal",
+   "visual": {
+    "kind": "list",
+    "title": "今日のメニュー",
+    "items": [
+     "半導体って、何が「半分」？",
+     "電気を通すしくみ",
+     "電気で動くスイッチ",
+     "真空管から200億個へ",
+     "砂から作られるまで",
+     "世界と日本の半導体"
+    ]
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "オープニング"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "まずは、何が「半分」なのか、からいこう。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "chapter",
+    "no": 1,
+    "title": "何が「半分」なの？"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "chapter": "第1章 何が「半分」なの？",
+   "tag": "オープニング"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "物は、電気の通しやすさで、大きく3つに分けられるんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "between"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "金属は、電気をよく通す。電線に銅が使われているのは、そのためだね。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "between"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "ゴムやプラスチックは、電気をほとんど通さない。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "between"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "電線のまわりのビニールだね！",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "between"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "そのとおり。そして半導体は、その間。条件しだいで、通したり、通さなかったりできる物質なんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "between"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "そのとおり。そして半導体は、そのあいだ。条件しだいで、通したり、通さなかったりできる物質なんだ。",
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "じゃあ、電気を「半分だけ」通すってこと？",
+   "face": "think",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "between"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "ちょっとちがう。「通すかどうかを、人が決められる」のがポイントなんだ。",
+   "face": "normal",
+   "other": "surprise",
+   "visual": {
+    "kind": "concept",
+    "label": "キーワード",
+    "term": "半導体",
+    "en": "Semiconductor",
+    "desc": "電気を通す金属と、通さないゴムの中間。\n条件しだいで、通したり止めたりできる物質"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "へえ〜、スイッチみたいだね。",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "concept",
+    "label": "キーワード",
+    "term": "半導体",
+    "en": "Semiconductor",
+    "desc": "電気を通す金属と、通さないゴムの中間。\n条件しだいで、通したり止めたりできる物質"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "まさにそれ。あとで、スイッチの話につながるよ。",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "concept",
+    "label": "キーワード",
+    "term": "半導体",
+    "en": "Semiconductor",
+    "desc": "電気を通す金属と、通さないゴムの中間。\n条件しだいで、通したり止めたりできる物質"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "半導体の代表は、シリコン。日本語では、ケイ素っていうんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "concept",
+    "label": "キーワード",
+    "term": "半導体",
+    "en": "Semiconductor",
+    "desc": "電気を通す金属と、通さないゴムの中間。\n条件しだいで、通したり止めたりできる物質"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "シリコンは、砂や石にたくさん含まれていて、地球の表面の重さの約28%をしめているよ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "stat",
+    "value": 28,
+    "unit": "%",
+    "label": "地殻にしめるシリコンの重さ",
+    "sub": "酸素の次に多い元素",
+    "color": "#3d6fd1"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "シリコンは、砂や石にたくさん含まれていて、地球の表面の重さの約28パーセントをしめているよ。",
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "そんなに！？ 材料はそこら中にあるんだね。",
+   "face": "surprise",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_sand.png",
+    "caption": "砂の中にもシリコン"
+   },
+   "enter": true,
+   "speaker": 8,
+   "speed": 1.25,
+   "speech": "そんなに！？ 材料はそこらじゅうにあるんだね。",
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "次は、電気が流れるしくみだよ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "chapter",
+    "no": 2,
+    "title": "電気を通すしくみ"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "chapter": "第2章 電気を通すしくみ",
+   "tag": "第1章 半導体とは"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "電気が流れるっていうのは、電子っていう、ものすごく小さな粒が動くことなんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "chapter",
+    "no": 2,
+    "title": "電気を通すしくみ"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "シリコンの原子は、となりの原子と、4本の手でしっかりつながっている。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "lattice"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "手をつないで、輪になってるみたい。",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "lattice"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "そう。手をつないでいる電子は、その場から動けない。だから、きれいなシリコンは、電気をほとんど通さないんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "lattice"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "えっ、じゃあ役に立たないじゃん。",
+   "face": "think",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "lattice"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "そこで、ほかの原子を、ほんの少しだけ混ぜるんだ。",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "lattice"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "たとえば、手が5本ある「リン」を混ぜると。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "ntype"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "1本、手が余っちゃう！",
+   "face": "surprise",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "ntype"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "その通り。つなぐ相手のいない電子が1個余って、自由に動き回る。これが電気を運んでくれるんだ。",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "ntype"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "逆に、手が3本しかない「ホウ素」を混ぜると。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "ptype"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "今度は、1本足りない…？",
+   "face": "think",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "ptype"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "そう。電子が1個足りない「空席」ができる。となりの電子がその空席に移ると、また別の場所に空席ができるんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "ptype"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "映画館で、みんなが1席ずつ詰めていく感じ？",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "ptype"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "いいたとえだね。そうやって、電気が流れていくんだ。",
+   "face": "happy",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "ptype"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "混ぜる量は、ほんのわずか。でも、それだけで電気の通しやすさが、がらりと変わるんだよ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "ptype"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "いよいよ、半導体がスイッチになるしくみだよ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "chapter",
+    "no": 3,
+    "title": "電気で動くスイッチ"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "chapter": "第3章 電気で動くスイッチ",
+   "tag": "第2章 電子の動き"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "リンを混ぜたシリコンと、ホウ素を混ぜたシリコンを組み合わせると、トランジスタができる。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchoff"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "上の端子に電圧をかけていないときは、入口から出口へ、電気は流れない。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchoff"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "通せんぼされてるね。",
+   "face": "think",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchoff"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "ところが、電圧をかけると。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchon"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "あっ、流れた！",
+   "face": "surprise",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchon"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "電子が引き寄せられて、通り道ができるんだ。指で押すかわりに、電気で押せるスイッチだね。",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchon"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "電気で押せると、何がうれしいの？",
+   "face": "think",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchon"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "ものすごく速く、何億回でも、オンとオフを切りかえられるんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "switchon"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "そして、流れるを1、止まるを0と決めると。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "bits"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "スイッチの並びで、数字が作れる！",
+   "face": "surprise",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "bits"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "そう。写真も、音楽も、LINEのメッセージも、スマホの中では、ぜんぶ0と1の並びなんだ。",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "bits"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "わたしの自撮りも、0と1…！",
+   "face": "surprise",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "bits"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "ふふ、そういうこと。",
+   "face": "happy",
+   "other": "normal",
+   "visual": {
+    "kind": "semi",
+    "mode": "bits"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "実は、半導体の仕事はスイッチだけじゃないんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "LED（光る）",
+     "body": "電子が空席に入るとき、\nエネルギーが光になる"
+    },
+    "right": {
+     "title": "太陽電池（発電する）",
+     "body": "光が当たると電子が動き出し、\n電気が生まれる"
+    }
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "電子が空席に飛びこむとき、エネルギーが光になる。これがLED。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "LED（光る）",
+     "body": "電子が空席に入るとき、\nエネルギーが光になる"
+    },
+    "right": {
+     "title": "太陽電池（発電する）",
+     "body": "光が当たると電子が動き出し、\n電気が生まれる"
+    }
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "電子が空席に飛びこむとき、エネルギーが光になる。これがエルイーディー。",
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "反対に、光を当てると電子が動いて、電気が生まれる。これが太陽電池だよ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "LED（光る）",
+     "body": "電子が空席に入るとき、\nエネルギーが光になる"
+    },
+    "right": {
+     "title": "太陽電池（発電する）",
+     "body": "光が当たると電子が動き出し、\n電気が生まれる"
+    }
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "同じしくみの、行きと帰りなんだ！",
+   "face": "happy",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_led.png",
+    "caption": "LED照明",
+    "src2": "ira_solar.png",
+    "caption2": "太陽電池"
+   },
+   "enter": true,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "身の回りには、半導体がいっぱいあるんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "list",
+    "title": "身の回りの半導体",
+    "items": [
+     "スマホ・パソコン：計算と記憶",
+     "エアコン・冷蔵庫：モーターの細かい調整",
+     "LED照明・テレビ：光",
+     "太陽光パネル：発電",
+     "車：エンジン、ブレーキ、安全装置"
+    ]
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "車にも入ってるから、足りなくなると車が作れなかったんだね。",
+   "face": "think",
+   "other": "normal",
+   "visual": {
+    "kind": "list",
+    "title": "身の回りの半導体",
+    "items": [
+     "スマホ・パソコン：計算と記憶",
+     "エアコン・冷蔵庫：モーターの細かい調整",
+     "LED照明・テレビ：光",
+     "太陽光パネル：発電",
+     "車：エンジン、ブレーキ、安全装置"
+    ]
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "そういうこと。2021年ごろには、世界中で車の生産が大きく減ったんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "list",
+    "title": "身の回りの半導体",
+    "items": [
+     "スマホ・パソコン：計算と記憶",
+     "エアコン・冷蔵庫：モーターの細かい調整",
+     "LED照明・テレビ：光",
+     "太陽光パネル：発電",
+     "車：エンジン、ブレーキ、安全装置"
+    ]
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "そういうこと。二千二十一年ごろには、世界中で車の生産が大きく減ったんだ。",
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "ここからは、半導体の歴史を見ていこう。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "chapter",
+    "no": 4,
+    "title": "真空管から\n200億個へ"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "chapter": "第4章 真空管から200億個へ",
+   "tag": "第3章 トランジスタ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "トランジスタが生まれる前、スイッチの役目をしていたのは、真空管っていう部品だったんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_tube.png",
+    "caption": "真空管"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "電球みたい！",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_tube.png",
+    "caption": "真空管"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "1945年に完成したコンピューター「ENIAC」には、真空管が17,468本も使われていた。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "stat",
+    "value": 17468,
+    "unit": "本",
+    "label": "ENIAC（1945年）の真空管",
+    "sub": "重さ 約27トン",
+    "color": "#ff6f61"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "千九百四十五年に完成したコンピューター「エニアック」には、真空管が一万七千四百六十八本も使われていた。",
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "重さ27トン！？ 部屋まるごとコンピューター！",
+   "face": "surprise",
+   "other": "normal",
+   "visual": {
+    "kind": "stat",
+    "value": 17468,
+    "unit": "本",
+    "label": "ENIAC（1945年）の真空管",
+    "sub": "重さ 約27トン",
+    "color": "#ff6f61"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "しかも真空管は熱くなりやすくて、よく切れたらしい。切れた真空管を探して取りかえるのも、大変だったといわれているよ。",
+   "face": "think",
+   "other": "normal",
+   "visual": {
+    "kind": "stat",
+    "value": 17468,
+    "unit": "本",
+    "label": "ENIAC（1945年）の真空管",
+    "sub": "重さ 約27トン",
+    "color": "#ff6f61"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "そこで、1947年。アメリカのベル研究所で、トランジスタが生まれたんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "timeline",
+    "items": [
+     {
+      "year": "1945",
+      "title": "ENIAC 完成",
+      "sub": "真空管\n17,468本",
+      "color": "#8a6a4a"
+     },
+     {
+      "year": "1947",
+      "title": "トランジスタ\n誕生",
+      "sub": "ベル研究所",
+      "color": "#3d6fd1"
+     },
+     {
+      "year": "1971",
+      "title": "Intel 4004",
+      "sub": "2,300個",
+      "color": "#2ea36b"
+     },
+     {
+      "year": "現在",
+      "title": "最新スマホ",
+      "sub": "約200億個",
+      "color": "#ff6f61"
+     }
+    ]
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "そこで、千九百四十七年。アメリカのベル研究所で、トランジスタが生まれたんだ。",
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "発明した3人は、1956年に、ノーベル物理学賞を受けたんだよ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "timeline",
+    "items": [
+     {
+      "year": "1945",
+      "title": "ENIAC 完成",
+      "sub": "真空管\n17,468本",
+      "color": "#8a6a4a"
+     },
+     {
+      "year": "1947",
+      "title": "トランジスタ\n誕生",
+      "sub": "ベル研究所",
+      "color": "#3d6fd1"
+     },
+     {
+      "year": "1971",
+      "title": "Intel 4004",
+      "sub": "2,300個",
+      "color": "#2ea36b"
+     },
+     {
+      "year": "現在",
+      "title": "最新スマホ",
+      "sub": "約200億個",
+      "color": "#ff6f61"
+     }
+    ]
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "発明した3人は、千九百五十六年に、ノーベル物理学賞を受けたんだよ。",
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "そして1971年、ひとつのチップに計算の頭脳をまるごと詰めこんだ、Intel 4004が登場する。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_calc.png",
+    "caption": "電卓"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "そして千九百七十一年、ひとつのチップに計算の頭脳をまるごと詰めこんだ、Intel よんまるまるよんが登場する。",
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "あれ、なんで電卓？",
+   "face": "think",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_calc.png",
+    "caption": "電卓"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "実はこのチップ、日本の電卓メーカー、ビジコンのために作られたものなんだ。",
+   "face": "smile",
+   "other": "surprise",
+   "visual": {
+    "kind": "image",
+    "src": "ira_calc.png",
+    "caption": "電卓"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "えっ、日本の電卓から始まってたの！？",
+   "face": "surprise",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_calc.png",
+    "caption": "電卓"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "トランジスタの数は、2,300個。それが今では、スマホのチップ1枚に、約200億個。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "stat",
+    "value": 870,
+    "unit": "万倍",
+    "label": "50年あまりで トランジスタは",
+    "sub": "2,300個 → 約200億個",
+    "color": "#ff6f61"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "トランジスタの数は、二千三百個。それが今では、スマホのチップ1枚に、約200億個。",
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "870万倍…！ 想像できないよ。",
+   "face": "surprise",
+   "other": "normal",
+   "visual": {
+    "kind": "stat",
+    "value": 870,
+    "unit": "万倍",
+    "label": "50年あまりで トランジスタは",
+    "sub": "2,300個 → 約200億個",
+    "color": "#ff6f61"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "もしENIACと同じ真空管で200億個のスイッチを作ろうとしたら、ENIACが100万台以上も必要になる計算だよ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "stat",
+    "value": 870,
+    "unit": "万倍",
+    "label": "50年あまりで トランジスタは",
+    "sub": "2,300個 → 約200億個",
+    "color": "#ff6f61"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "もしエニアックと同じ真空管で200億個のスイッチを作ろうとしたら、エニアックが100万台以上も必要になる計算だよ。",
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "地球が真空管だらけになっちゃう！",
+   "face": "happy",
+   "other": "normal",
+   "visual": {
+    "kind": "stat",
+    "value": 870,
+    "unit": "万倍",
+    "label": "50年あまりで トランジスタは",
+    "sub": "2,300個 → 約200億個",
+    "color": "#ff6f61"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "トランジスタの数は、およそ2年ごとに2倍になる。この予想は「ムーアの法則」と呼ばれていて、長いあいだ業界の目標になってきたんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "concept",
+    "label": "キーワード",
+    "term": "ムーアの法則",
+    "en": "Moore's Law",
+    "desc": "チップにのせるトランジスタの数は、\nおよそ2年ごとに2倍になる、という予想"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "でも、200億個なんて、どうやって作るの？",
+   "face": "think",
+   "other": "normal",
+   "visual": {
+    "kind": "chapter",
+    "no": 5,
+    "title": "砂から作られるまで"
+   },
+   "enter": true,
+   "speaker": 8,
+   "speed": 1.25,
+   "chapter": "第5章 砂から作られるまで",
+   "tag": "第4章 半導体の歴史"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "材料は、石や砂に含まれるシリコン。まずは、不純物をとことん取りのぞくんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "list",
+    "title": "半導体ができるまで",
+    "items": [
+     "石からシリコンを取り出し、精製する",
+     "大きな結晶にして、薄い円盤（ウエハー）に切る",
+     "光で、回路の模様を焼きつける",
+     "混ぜ物を入れ、配線を重ねる",
+     "1枚ずつ切り分けて、チップの完成"
+    ]
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "その純度は、99.999999999%。9が11個並ぶから、イレブンナインと呼ばれているよ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "concept",
+    "label": "キーワード",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "その純度は、きゅうじゅうきゅうてん、きゅうきゅうきゅう、きゅうきゅうきゅう、きゅうきゅうきゅうパーセント。9が11個並ぶから、イレブンナインと呼ばれているよ。",
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "9がいっぱい！",
+   "face": "surprise",
+   "other": "normal",
+   "visual": {
+    "kind": "concept",
+    "label": "キーワード",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "さっき、ほんの少しの混ぜ物で性質が変わるって話したよね。だから、余計なものは徹底的に取りのぞくんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "concept",
+    "label": "キーワード",
+    "term": "99.999999999%",
+    "en": "イレブンナイン（9が11個）",
+    "desc": "1000億個の原子の中に、\nちがう原子が1個あるかないか"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "この純粋なシリコンを大きな結晶に育てて、薄くスライスしたのが、ウエハー。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_wafer.png",
+    "caption": "シリコンウエハー",
+    "src2": "ira_chip.png",
+    "caption2": "半導体チップ"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "ウエハーの上に、光を使って、回路の模様を焼きつける。写真の現像みたいなしくみだよ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_wafer.png",
+    "caption": "シリコンウエハー",
+    "src2": "ira_chip.png",
+    "caption2": "半導体チップ"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "このとき使う、光に反応する薬「フォトレジスト」は、日本のメーカーが世界の大部分を作っているといわれているんだ。",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_wafer.png",
+    "caption": "シリコンウエハー",
+    "src2": "ira_chip.png",
+    "caption2": "半導体チップ"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "日本、すごいじゃん！",
+   "face": "happy",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_wafer.png",
+    "caption": "シリコンウエハー",
+    "src2": "ira_chip.png",
+    "caption2": "半導体チップ"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "今の最先端の回路の線は、数ナノメートル。1ナノメートルは、1ミリの100万分の1だよ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_wafer.png",
+    "caption": "シリコンウエハー",
+    "src2": "ira_chip.png",
+    "caption2": "半導体チップ"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "細すぎて、もう見えないね…。",
+   "face": "think",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_wafer.png",
+    "caption": "シリコンウエハー",
+    "src2": "ira_chip.png",
+    "caption2": "半導体チップ"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "だから、工場の中は、ちりを徹底的に取りのぞいた、クリーンルームになっている。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_clean.png",
+    "caption": "クリーンルーム"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "小さなちりが乗るだけで、回路がふさがって、チップが動かなくなっちゃうからね。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_clean.png",
+    "caption": "クリーンルーム"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "全身おおう服を着てるのは、そのためなんだ。",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_clean.png",
+    "caption": "クリーンルーム"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "そう。ひとつのチップができるまでには、数百もの工程と、何か月もの時間がかかるといわれているよ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_clean.png",
+    "caption": "クリーンルーム"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "最後は、世界と日本の半導体の話だよ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "chapter",
+    "no": 6,
+    "title": "世界と日本の半導体"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "chapter": "第6章 世界と日本",
+   "tag": "第5章 半導体の作り方"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "最先端の半導体を作れる会社は、世界でもほんのひとにぎり。なかでも台湾のTSMCは、受託生産で世界の約7割をしめているんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "bars",
+    "title": "半導体の受託生産（ファウンドリ）の世界シェア 2025年",
+    "rows": [
+     {
+      "label": "TSMC（台湾）",
+      "value": 70,
+      "color": "#ff6f61"
+     },
+     {
+      "label": "サムスン（韓国）",
+      "value": 7,
+      "color": "#3d6fd1"
+     },
+     {
+      "label": "そのほか",
+      "value": 23,
+      "color": "#b0a090"
+     }
+    ],
+    "max": 100,
+    "note": "出典：TrendForce（2025年・売上高ベース、概数）"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "最先端の半導体を作れる会社は、世界でもほんのひとにぎり。なかでも台湾のティーエスエムシーは、受託生産で世界の約7割をしめているんだ。",
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "7割！？ ひとつの会社に集中してるんだ。",
+   "face": "surprise",
+   "other": "normal",
+   "visual": {
+    "kind": "bars",
+    "title": "半導体の受託生産（ファウンドリ）の世界シェア 2025年",
+    "rows": [
+     {
+      "label": "TSMC（台湾）",
+      "value": 70,
+      "color": "#ff6f61"
+     },
+     {
+      "label": "サムスン（韓国）",
+      "value": 7,
+      "color": "#3d6fd1"
+     },
+     {
+      "label": "そのほか",
+      "value": 23,
+      "color": "#b0a090"
+     }
+    ],
+    "max": 100,
+    "note": "出典：TrendForce（2025年・売上高ベース、概数）"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "だから、何かあったときに、世界中が困ってしまう。2021年の半導体不足は、それをはっきり見せつけたんだ。",
+   "face": "think",
+   "other": "normal",
+   "visual": {
+    "kind": "bars",
+    "title": "半導体の受託生産（ファウンドリ）の世界シェア 2025年",
+    "rows": [
+     {
+      "label": "TSMC（台湾）",
+      "value": 70,
+      "color": "#ff6f61"
+     },
+     {
+      "label": "サムスン（韓国）",
+      "value": 7,
+      "color": "#3d6fd1"
+     },
+     {
+      "label": "そのほか",
+      "value": 23,
+      "color": "#b0a090"
+     }
+    ],
+    "max": 100,
+    "note": "出典：TrendForce（2025年・売上高ベース、概数）"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "だから、何かあったときに、世界中が困ってしまう。二千二十一年の半導体不足は、それをはっきり見せつけたんだ。",
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "日本も、ふたたび最先端に挑戦しているよ。北海道の千歳市で、ラピダスという会社が、2ナノメートル世代の半導体の、2027年の量産を目指しているんだ。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "concept",
+    "label": "キーワード",
+    "term": "ラピダス",
+    "en": "Rapidus（北海道・千歳）",
+    "desc": "2ナノメートル世代の半導体の\n2027年の量産を目指して、試作を進めている"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "speech": "日本も、ふたたび最先端に挑戦しているよ。北海道の千歳市で、ラピダスという会社が、2ナノメートル世代の半導体の、二千二十七年の量産を目指しているんだ。",
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "北海道から、世界の最先端！",
+   "face": "happy",
+   "other": "normal",
+   "visual": {
+    "kind": "concept",
+    "label": "キーワード",
+    "term": "ラピダス",
+    "en": "Rapidus（北海道・千歳）",
+    "desc": "2ナノメートル世代の半導体の\n2027年の量産を目指して、試作を進めている"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "材料や製造装置の分野でも、日本の会社は今も大きな役割をはたしているんだ。日本の技術がなければ作れない部分が、たくさんあるんだよ。",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "concept",
+    "label": "キーワード",
+    "term": "ラピダス",
+    "en": "Rapidus（北海道・千歳）",
+    "desc": "2ナノメートル世代の半導体の\n2027年の量産を目指して、試作を進めている"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "それじゃあ、今日のまとめ！",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "chapter",
+    "no": 7,
+    "title": "まとめ",
+    "sub": "砂から生まれる 200億個のスイッチ"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "chapter": "まとめ",
+   "tag": "第6章 世界と日本"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "半導体のポイントを、ふり返ろう。",
+   "face": "normal",
+   "other": "normal",
+   "visual": {
+    "kind": "list",
+    "title": "今日のポイント",
+    "items": [
+     "半導体は、電気を通すかどうかを決められる物質",
+     "ほんの少しの混ぜ物で、電子が動けるようになる",
+     "トランジスタは、電気で動くスイッチ",
+     "スイッチの0と1で、計算も写真も表せる",
+     "材料は砂。でも作るには、極限の技術がいる"
+    ]
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "まとめ"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "このスマホの中で、200億個のスイッチが、今も動いてるんだね。",
+   "face": "smile",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_phone.png",
+    "caption": "200億個のスイッチ"
+   },
+   "enter": true,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "まとめ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "しかも、もとは砂なんだよ。",
+   "face": "smile",
+   "other": "surprise",
+   "visual": {
+    "kind": "image",
+    "src": "ira_phone.png",
+    "caption": "200億個のスイッチ"
+   },
+   "enter": false,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "まとめ"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "なんだか、スマホがちょっと愛おしくなってきた！",
+   "face": "happy",
+   "other": "normal",
+   "visual": {
+    "kind": "image",
+    "src": "ira_phone.png",
+    "caption": "200億個のスイッチ"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "まとめ"
+  },
+  {
+   "type": "talk",
+   "who": "sora",
+   "text": "この動画がおもしろかったら、高評価とチャンネル登録をよろしくね。",
+   "face": "happy",
+   "other": "normal",
+   "visual": {
+    "kind": "title",
+    "kicker": "ソラとコムギの なるほど科学",
+    "title": [
+     "見てくれて",
+     "ありがとう！"
+    ],
+    "sub": "次に知りたい「しくみ」をコメントで教えてね"
+   },
+   "enter": true,
+   "speaker": 14,
+   "speed": 1.2,
+   "tag": "まとめ"
+  },
+  {
+   "type": "talk",
+   "who": "komugi",
+   "text": "次に知りたい身近なしくみも、コメントで教えてね！",
+   "face": "happy",
+   "other": "normal",
+   "visual": {
+    "kind": "title",
+    "kicker": "ソラとコムギの なるほど科学",
+    "title": [
+     "見てくれて",
+     "ありがとう！"
+    ],
+    "sub": "次に知りたい「しくみ」をコメントで教えてね"
+   },
+   "enter": false,
+   "speaker": 8,
+   "speed": 1.25,
+   "tag": "まとめ"
+  }
+ ]
+}

@@ -127,6 +127,13 @@ python3 scripts/generate_voice.py <id>
 - **長い動画は音声で容量切れになる**（Remotion は音声ごとに一時 wav を作り、BGM のループで数GB使う）。
   映像は `--muted` で書き出し → すぐ 720p に圧縮して元を消す → 音声は `python3 scripts/mix_audio.py <id> out/a.m4a`（同じタイミングで自前で重ねる）→ `ffmpeg -c copy` でつなぐ
 
+## 6.6 掛け合い解説（talk スタイル・ゆっくり解説風）
+- 既存キャラ（ゆっくり霊夢・魔理沙など）は使わない。オリジナルの「ソラ」（解説・紺髪メガネ・冥鳴ひまり 14）と「コムギ」（聞き役・小麦色の髪・春日部つむぎ 8）を `TalkCharacter.tsx` の SVG で描く（まばたき・口パク・話す方がはねる）
+- スライドは `type: "talk"`、`who` で話し手、`face`/`other` で表情、`visual` に PaperPage の図解（pop スキン）。声は 1 枚ごとに `speaker`/`speed`（generate_voice.py が対応）
+- 画面：左上に番組名、中央ホワイトボードに図、右下にキャラ2人、下に話し手の色でふちどった字幕。図が切りかわるとき `sfx/pop.wav` を 0.18 で小さく（mix_audio.py も同じタイミングで足す）
+- 台本は `scripts/build_talk_semiconductor_long.py` を雛形に `so()`/`ko()` で交互に。聞き役は「視聴者の疑問」を代弁し、身近な例でつっこむ
+- サムネは `TalkThumbnail`（太いふちどり見出し＋2人の表情＋いらすとや1枚）
+
 ## 7. 品質チェックの手順（毎回やる）
 
 1. `node scripts/render_stills.mjs <id> frames.json <出力フォルダ> 0.5` で各スライドの代表フレームを書き出す

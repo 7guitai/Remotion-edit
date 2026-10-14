@@ -122,6 +122,10 @@ def main() -> None:
             if args.resume and out.exists():
                 continue
             spk, spd = speaker, speed
+            # 掛け合い（talk スタイル）：スライドごとに話者を変える
+            if slide.get("speaker") is not None and args.speaker is None:
+                spk = slide["speaker"]
+                spd = slide.get("speed", speed)
             reply_voices = episode.get("replyVoices") or []
             if "-r" in name and reply_voices and args.speaker is None:
                 v = reply_voices[int(name.split("-r")[1][:-4]) % len(reply_voices)]

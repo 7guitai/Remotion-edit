@@ -29,6 +29,7 @@ import verifyElevator from "./verify-elevator-short.json";
 import verifyStrap from "./verify-strap-short.json";
 import scienceSemi from "./science-semiconductor-short.json";
 import paperSemiLong from "./paper-semiconductor-long.json";
+import talkSemiLong from "./talk-semiconductor-long.json";
 import paperLoveLong from "./paper-love-long.json";
 import paperSpotlightLong from "./paper-spotlight-long.json";
 import paperQuestionLong from "./paper-question-long.json";
@@ -244,6 +245,7 @@ export type ScriptSlide = (
   | IllusionSlide
   | RelaxSlide
   | import("../components/PaperPage").PaperSlide
+  | import("../components/TalkPage").TalkSlide
 ) & {
   chapter?: string;
   no?: number;
@@ -259,7 +261,7 @@ export type Episode = {
   // ショートの上部のタイトル帯（省略時は表示）
   titleBand?: boolean;
   // "flashy" で1ページ1雑学を派手な編集にする（集中線・叩きつけ文字・フラッシュ・揺れ・効果音）
-  style?: "flashy" | "sleep" | "whatif" | "illusion" | "relax" | "paper";
+  style?: "flashy" | "sleep" | "whatif" | "illusion" | "relax" | "paper" | "talk";
   // 目の錯覚クイズの見出し：上の小さな文字と、タイトル横の札（例：上級編）
   kicker?: string;
   badge?: string;
@@ -312,6 +314,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  talkSemiLong as Episode,
   paperSemiLong as Episode,
   scienceSemi as Episode,
   paperLoveLong as Episode,
