@@ -129,7 +129,7 @@ export const TalkPage: React.FC<{ slide: TalkSlide }> = ({ slide }) => {
         <div
           style={{
             fontWeight: 900,
-            fontSize: slide.text.length > 42 ? 54 : 62,
+            fontSize: slide.text.length > 58 ? 46 : slide.text.length > 42 ? 54 : 62,
             lineHeight: 1.35,
             color: "#fff",
             textShadow: outline(color, 6),
