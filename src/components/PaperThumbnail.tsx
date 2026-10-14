@@ -69,7 +69,7 @@ export const PaperThumbnail: React.FC<PaperThumbnailProps> = ({ kicker, lines, b
             style={{
               fontFamily: minchoFamily,
               fontWeight: 800,
-              fontSize: i === lines.length - 1 ? 132 : 92,
+              fontSize: i === lines.length - 1 ? Math.min(132, Math.floor(740 / t.length)) : 92,
               lineHeight: 1.15,
               marginTop: i === 0 ? 26 : 6,
               color: i === lines.length - 1 ? WA.shu : WA.ai,

@@ -157,6 +157,20 @@ export const RemotionRoot: React.FC = () => {
           thought: "それで、\nどうなったんですか？",
         }}
       />
+      {/* 「既読スルーが気になる理由」の回のサムネイル（npx remotion still paper-kidoku-long-thumbnail out/thumb.png） */}
+      <Still
+        id="paper-kidoku-long-thumbnail"
+        component={PaperThumbnail}
+        width={1280}
+        height={720}
+        defaultProps={{
+          kicker: "論文で読み解く心理学",
+          lines: ["既読スルーが", "気になる理由"],
+          badge: "返事待ちの心理",
+          person: "ira_man_think.png",
+          thought: "既読なのに…\nまだ返事がない",
+        }}
+      />
       {/* 「地球の“もしも”10選」のサムネイル（npx remotion still whatif-earth-long-thumbnail out/thumb.png --gl=swangle） */}
       <Still
         id="whatif-earth-long-thumbnail"

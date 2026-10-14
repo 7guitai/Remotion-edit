@@ -7,6 +7,7 @@
 | 2026-10-13 | paper-love-long | 好意はあるのに近づいてこない人の心理 | Hall ほか 2014 / Vorauer & Ratner 1996 / Vorauer ほか 2003 / Finkel & Eastwick 2009 / Boothby ほか 2018 / Gilovich & Medvec 1995 | You and Me（しゃろう, 13787） | ハルト・ミオ |
 | 2026-10-13 | paper-spotlight-long | 人は、あなたが思うほどあなたを見ていない（スポットライト効果） | Gilovich ほか 2000 / Gilovich, Kruger & Medvec 2002 / Gilovich, Savitsky & Medvec 1998 / Savitsky, Epley & Gilovich 2001 / Savitsky & Gilovich 2003 | 自宅にて（KK, 4041） | ソウタ・アカリ |
 | 2026-10-14 | paper-question-long | 話がうまい人より、質問上手が好かれる理由 | Huang ほか 2017 / Tamir & Mitchell 2012 / Aron ほか 1997 / Kardas, Kumar & Epley 2022 / Hart, VanEpps & Schweitzer 2021 | 10℃（しゃろう, 12420） | リク・ナナミ |
+| 2026-10-15 | paper-kidoku-long | 既読スルーがこんなに気になる理由（返事待ちの心理） | Williams, Cheung & Choi 2000 / Eisenberger ほか 2003 / Whitchurch, Wilson & Gilbert 2011 / Wilson ほか 2005 / Hsee & Ruan 2016 / Liu ほか 2023 | HIRAHIRA（もっぴーさうんど, 2307） | ユウキ・サキ |
 
 ## メモ
 - 使った BGM はここに追記する（同じ曲を続けて使わない）
@@ -30,4 +31,13 @@
 - Aron ほか (1997) PSPB 23(4):363-377：36の質問（12問×3セット、だんだん深く）と浅い世間話の比較。解説記事で確認。研究者自身が「忠誠や関わりまで生むわけではない」と注意している点も紹介
 - Kardas, Kumar & Epley (2022) JPSP 122(3):367-398：要旨で確認。深い会話の気まずさを過大に予想、相手の関心を過小評価。友人・家族相手では予想が正確。正しい予想を知ると深い話題を選ぶ
 - Hart, VanEpps & Schweitzer (2021) OBHDP 162:136-154：5実験・1427人。給料など聞きにくい質問をしても、ふつうの質問（通勤など）と同じくらい好印象。Wharton の解説・IDEAS で確認。数値の比較グラフは作らず versus で表示
+
+### paper-kidoku-long（2026-10-15）
+- Williams, Cheung & Choi (2000) JPSP 79(5):748-762：要旨（PubMed）。サイバーボール、62か国1486人。仲間はずれが多いほど気分・所属感・コントロール感が下がる
+- Eisenberger, Lieberman & Williams (2003) Science 302:290-292：要旨。仲間はずれで前帯状皮質（ACC）が活動、体の痛みの研究と並行
+- Whitchurch, Wilson & Gilbert (2011) Psychological Science 22(2):172-175：本文PDF（Harvard）で確認。女子学生が男子学生4人のプロフィールを見る。「とても好き」「ふつう」「どちらか分からない」の3条件で、分からない条件がいちばん惹かれた（考えた量が仲立ち）。初対面の実験で、駆け引きの話ではないと注意
+- Wilson, Centerbar, Kermer & Gilbert (2005) JPSP 88(1):5-21：要旨。1ドル硬貨つきカード、意味が分かりにくい条件のほうがうれしさが長続き。予測者は分かる条件を好む。うれしい出来事での結果であることを台本で明示
+- Hsee & Ruan (2016) Psychological Science 27(5):659-666：要旨＋APS・Chicago Booth の紹介。電気ペン、分からない条件のほうが多くノック。数字（何本など）は使っていない
+- Liu, Rim, Min & Min (2023) JPSP 124(4):754-771：要旨。連絡を受けた側の喜びを、送る側は過小評価。驚きが理由のひとつ。距離のある相手ほどズレが大きい
+- サムネイルの最後の行は、長いとき自動で小さくなるようにした（PaperThumbnail）
 

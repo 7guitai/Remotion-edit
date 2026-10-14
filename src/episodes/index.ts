@@ -33,6 +33,7 @@ import talkSemiLong from "./talk-semiconductor-long.json";
 import paperLoveLong from "./paper-love-long.json";
 import paperSpotlightLong from "./paper-spotlight-long.json";
 import paperQuestionLong from "./paper-question-long.json";
+import paperKidokuLong from "./paper-kidoku-long.json";
 import relaxSleep45m from "./relax-sleep-45m.json";
 import relaxSleep2 from "./relax-sleep2-45m.json";
 import foodRankingShort from "./food-ranking-short.json";
@@ -322,6 +323,7 @@ export const EPISODES: Episode[] = [
   paperLoveLong as Episode,
   paperSpotlightLong as Episode,
   paperQuestionLong as Episode,
+  paperKidokuLong as Episode,
   verifyStrap as Episode,
   relaxSleep45m as Episode,
   verifyElevator as Episode,
