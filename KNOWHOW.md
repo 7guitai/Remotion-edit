@@ -123,6 +123,10 @@ python3 scripts/generate_voice.py <id>
   - **rawpixel は `image_1300` など大きいサイズにすかしが入る**。Openverse の URL（`editor_1024`）をそのまま使う
   - 博物館の古い版画・白黒写真・ロゴ入り（コーラ缶など）・関係ない写真が混ざるので、必ず目で選ぶ
 - YouTube の参考動画はクラウド環境から音声を取れない（ボット確認）。`yt-dlp --extractor-args youtube:player_client=mweb -f sb0` でストーリーボード（サムネ一覧）だけは取れる
+- **2本目以降**：台本を `scripts/relax_sleepN_script.txt` に書き、`fetch_openverse.py <台本> sN_`（キャッシュ名の頭）→ `photo_sheet.py` → 選んだ番号を `scripts/photo_selectN.json` に → `finalize_photos.py <選択> photo_picksN.json photo_creditsN.tsv` → `build_relax_sleepN.py`（`build_relax_sleep.build()` を使う）
+  - 前の回と同じ写真にならないよう、`photo_credits.tsv` の ID と比べて重なりを除く。落ち着いた写真は新しい検索語（CALM_MORE）を足して選ぶ
+  - 「photograph・横長・大きめ」で 0件になる検索語がある（onsen, hygge など）。もっと一般的な英語に言いかえる
+  - 読み間違い（その2で見つけたもの）：お米→オベエ、金星→キンボシ、熟す→コナス、緑や→リョクヤ、細やか→ササヤカ、第8章→ダイワッショウ、8の字・108→「は」が「わ」に。日本→ニッポンになりやすいので「にほん」
 - fps 15 で 45分 ≒ 4万フレーム、4コアで約35分で書き出せる
 - **長い動画は音声で容量切れになる**（Remotion は音声ごとに一時 wav を作り、BGM のループで数GB使う）。
   映像は `--muted` で書き出し → すぐ 720p に圧縮して元を消す → 音声は `python3 scripts/mix_audio.py <id> out/a.m4a`（同じタイミングで自前で重ねる）→ `ffmpeg -c copy` でつなぐ
