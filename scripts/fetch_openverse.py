@@ -3,11 +3,12 @@
 - ライセンスは CC0 とパブリックドメイン（PDM）だけ。横長・大きめの写真に限る
 - 結果は scripts/openverse_cache/<話題番号>.json に保存（2回目からは API を呼ばない）
 - 匿名利用は 1分20回・1日200回までなので、間を空けて呼ぶ
-使い方: python3 scripts/fetch_openverse.py
+使い方: python3 scripts/fetch_openverse.py [台本.txt] [名前の頭（2本目以降: s2_ など）]
 """
 
 import json
 import re
+import sys
 import time
 import urllib.parse
 import urllib.request
@@ -29,6 +30,17 @@ CALM = [
     "sunset sea",
     "reading book cozy",
     "rain window",
+]
+# 2本目以降で増やした「落ち着いた写真」（前の回と同じ写真ばかりにならないように）
+CALM_MORE = [
+    "lantern night",
+    "ocean waves night",
+    "misty mountains morning",
+    "snowy night",
+    "fireplace cozy",
+    "lavender field",
+    "starry sky milky way",
+    "quiet beach dusk",
 ]
 
 
@@ -53,6 +65,10 @@ def search(q: str) -> list[dict]:
                 time.sleep(30 * (attempt + 1))
                 continue
             raise
+        except (urllib.error.URLError, ConnectionError, TimeoutError, OSError):
+            # 接続が切れたときも少し待って取り直す
+            time.sleep(15 * (attempt + 1))
+            continue
     else:
         return []
     out = []
@@ -74,9 +90,9 @@ def search(q: str) -> list[dict]:
     return out
 
 
-def topics() -> list[list[str]]:
+def topics(script: str) -> list[list[str]]:
     qs = []
-    for line in (ROOT / "scripts" / "relax_sleep_script.txt").read_text(encoding="utf-8").splitlines():
+    for line in (ROOT / "scripts" / script).read_text(encoding="utf-8").splitlines():
         if line.startswith("@"):
             qs.append([q.strip() for q in line[1:].split(";") if q.strip()])
     return qs
@@ -103,9 +119,11 @@ def cached(name: str, queries: list[str]) -> None:
 
 def main() -> None:
     CACHE.mkdir(parents=True, exist_ok=True)
-    for i, qs in enumerate(topics()):
-        cached(f"t{i:03d}", qs)
-    for i, q in enumerate(CALM):
+    script = sys.argv[1] if len(sys.argv) > 1 else "relax_sleep_script.txt"
+    prefix = sys.argv[2] if len(sys.argv) > 2 else ""
+    for i, qs in enumerate(topics(script)):
+        cached(f"{prefix}t{i:03d}", qs)
+    for i, q in enumerate(CALM + (CALM_MORE if prefix else [])):
         cached(f"calm{i:02d}", [q])
 
 

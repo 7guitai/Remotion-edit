@@ -34,6 +34,7 @@ import paperLoveLong from "./paper-love-long.json";
 import paperSpotlightLong from "./paper-spotlight-long.json";
 import paperQuestionLong from "./paper-question-long.json";
 import relaxSleep45m from "./relax-sleep-45m.json";
+import relaxSleep2 from "./relax-sleep2-45m.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -314,6 +315,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  relaxSleep2 as Episode,
   talkSemiLong as Episode,
   paperSemiLong as Episode,
   scienceSemi as Episode,

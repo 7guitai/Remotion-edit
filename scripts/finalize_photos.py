@@ -1,7 +1,7 @@
 """選んだ写真（話題ごとの候補番号）を大きいサイズで取ってきて public/photos/relax/ に保存し、
 scripts/photo_picks.json（build_relax_sleep.py が使う）と、出典の一覧 scripts/photo_credits.tsv を作る。
 
-使い方: python3 scripts/finalize_photos.py <選んだ番号の JSON>
+使い方: python3 scripts/finalize_photos.py <選んだ番号の JSON> [photo_picks の出力] [credits の出力]
   JSON の形: {"t001": [5, 11, "t003:7"], ..., "calm": ["calm00:3", ...]}
   数字はその話題の候補番号、"tXXX:n" は別の話題の候補
 """
@@ -75,12 +75,14 @@ def main() -> None:
         if topic == "calm":
             result["calm"].append(entry)
         else:
-            result["topics"].setdefault(str(int(topic[1:])), []).append(entry)
+            result["topics"].setdefault(str(int(topic.rsplit("t", 1)[1])), []).append(entry)
         if f not in seen:
             seen.add(f)
             credits.append("\t".join([f, item["title"], item["creator"], item["license"], item["source"], item["landing"]]))
-    (ROOT / "scripts" / "photo_picks.json").write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
-    (ROOT / "scripts" / "photo_credits.tsv").write_text("\n".join(credits) + "\n", encoding="utf-8")
+    picks_out = sys.argv[2] if len(sys.argv) > 2 else "photo_picks.json"
+    credits_out = sys.argv[3] if len(sys.argv) > 3 else "photo_credits.tsv"
+    (ROOT / "scripts" / picks_out).write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
+    (ROOT / "scripts" / credits_out).write_text("\n".join(credits) + "\n", encoding="utf-8")
     print(f"{len(seen)} photos")
 
 

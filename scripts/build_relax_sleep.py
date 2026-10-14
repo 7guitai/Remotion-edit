@@ -62,10 +62,10 @@ def split_caption(text: str) -> str:
     return "\n".join(best[1]) if best else text
 
 
-def parse() -> list[dict]:
+def parse(script: str = "relax_sleep_script.txt") -> list[dict]:
     items = []
     topic = -1
-    for raw in (ROOT / "scripts" / "relax_sleep_script.txt").read_text(encoding="utf-8").splitlines():
+    for raw in (ROOT / "scripts" / script).read_text(encoding="utf-8").splitlines():
         line = raw.strip()
         if not line or line.startswith("#"):
             continue
@@ -82,10 +82,11 @@ def parse() -> list[dict]:
     return items
 
 
-def main() -> None:
-    pick_file = ROOT / "scripts" / "photo_picks.json"
+def build(script: str, pick_name: str, readings: dict[str, str], intro_card: tuple[str, str]) -> list[dict]:
+    """台本と選んだ写真から slides を作る（2本目以降の build_relax_sleep2.py からも使う）"""
+    pick_file = ROOT / "scripts" / pick_name
     picks = json.loads(pick_file.read_text(encoding="utf-8")) if pick_file.exists() else {"topics": {}, "calm": [{"file": "none.jpg"}]}
-    items = parse()
+    items = parse(script)
     slides = []
     used_calm = 0
     calm = picks["calm"]
@@ -101,8 +102,7 @@ def main() -> None:
                 yomi = ["", "いっ", "に", "さん", "よん", "ご", "ろっ", "なな", "はっ", "きゅう"][int(m.group(1))]
                 slide["speech"] = f"だい{yomi}しょう。{m.group(2)}"
             elif title == "はじめに":
-                slide["card"] = "聞くだけで眠くなる\nやさしい暮らしの雑学"
-                slide["speech"] = "聞くだけで眠くなる、やさしい暮らしの雑学。"
+                slide["card"], slide["speech"] = intro_card
             else:
                 slide["speech"] = title
             slide["chapter"] = title.replace("　", " ")
@@ -126,12 +126,16 @@ def main() -> None:
         if photo.get("focus"):
             slide["focus"] = photo["focus"]
         speech = it["speech"] or it["text"]
-        for a, b in READINGS.items():
+        for a, b in readings.items():
             speech = speech.replace(a, b)
         if speech != slide["text"]:
             slide["speech"] = speech
         slides.append(slide)
+    return slides
 
+
+def main() -> None:
+    slides = build("relax_sleep_script.txt", "photo_picks.json", READINGS, ("聞くだけで眠くなる\nやさしい暮らしの雑学", "聞くだけで眠くなる、やさしい暮らしの雑学。"))
     cards = [i for i, x in enumerate(slides) if x.get("card")]
     # 第1〜3章、第4〜6章、第7章〜おわり で曲を変える（cards[0] は「はじめに」）
     bgm = [dict(b) for b in BGM]
