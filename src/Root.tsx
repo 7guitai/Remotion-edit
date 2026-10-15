@@ -171,6 +171,20 @@ export const RemotionRoot: React.FC = () => {
           thought: "既読なのに…\nまだ返事がない",
         }}
       />
+      {/* 「第一印象は0.1秒で決まる？」の回のサムネイル（npx remotion still paper-impression-long-thumbnail out/thumb.png） */}
+      <Still
+        id="paper-impression-long-thumbnail"
+        component={PaperThumbnail}
+        width={1280}
+        height={720}
+        defaultProps={{
+          kicker: "論文で読み解く心理学",
+          lines: ["第一印象は", "0.1秒"],
+          badge: "でも信じすぎないで",
+          person: "ira_woman_shock.png",
+          thought: "なんだか…\n怖そうな人だな",
+        }}
+      />
       {/* 「地球の“もしも”10選」のサムネイル（npx remotion still whatif-earth-long-thumbnail out/thumb.png --gl=swangle） */}
       <Still
         id="whatif-earth-long-thumbnail"

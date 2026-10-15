@@ -313,7 +313,7 @@ export const Visual: React.FC<{ v: PaperVisual; enter: boolean }> = ({ v, enter 
         <div style={{ textAlign: "center", ...lift(a) }}>
           <div style={{ ...mincho(48, WA.ai), letterSpacing: 4 }}>{v.label}</div>
           <div style={{ ...mincho(270, v.color ?? WA.shu), lineHeight: 1.1 }}>
-            {Math.round(shown)}
+            {Number.isInteger(v.value) ? Math.round(shown) : shown.toFixed(1)}
             <span style={{ fontSize: 110 }}>{v.unit ?? ""}</span>
           </div>
           <div style={{ width: 420, height: 3, background: WA.kin, margin: "0 auto" }} />

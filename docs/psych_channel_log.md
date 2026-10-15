@@ -8,6 +8,7 @@
 | 2026-10-13 | paper-spotlight-long | 人は、あなたが思うほどあなたを見ていない（スポットライト効果） | Gilovich ほか 2000 / Gilovich, Kruger & Medvec 2002 / Gilovich, Savitsky & Medvec 1998 / Savitsky, Epley & Gilovich 2001 / Savitsky & Gilovich 2003 | 自宅にて（KK, 4041） | ソウタ・アカリ |
 | 2026-10-14 | paper-question-long | 話がうまい人より、質問上手が好かれる理由 | Huang ほか 2017 / Tamir & Mitchell 2012 / Aron ほか 1997 / Kardas, Kumar & Epley 2022 / Hart, VanEpps & Schweitzer 2021 | 10℃（しゃろう, 12420） | リク・ナナミ |
 | 2026-10-15 | paper-kidoku-long | 既読スルーがこんなに気になる理由（返事待ちの心理） | Williams, Cheung & Choi 2000 / Eisenberger ほか 2003 / Whitchurch, Wilson & Gilbert 2011 / Wilson ほか 2005 / Hsee & Ruan 2016 / Liu ほか 2023 | HIRAHIRA（もっぴーさうんど, 2307） | ユウキ・サキ |
+| 2026-10-16 | paper-impression-long | 第一印象は0.1秒で決まる？ でも信じすぎてはいけない理由 | Willis & Todorov 2006 / Ambady & Rosenthal 1993 / Kelley 1950 / Babad ほか 1999 / Todorov ほか 2005 / Todorov & Porter 2014 | the opening of a book（ioni, 2859） | タクミ・ハナ |
 
 ## メモ
 - 使った BGM はここに追記する（同じ曲を続けて使わない）
@@ -40,4 +41,13 @@
 - Hsee & Ruan (2016) Psychological Science 27(5):659-666：要旨＋APS・Chicago Booth の紹介。電気ペン、分からない条件のほうが多くノック。数字（何本など）は使っていない
 - Liu, Rim, Min & Min (2023) JPSP 124(4):754-771：要旨。連絡を受けた側の喜びを、送る側は過小評価。驚きが理由のひとつ。距離のある相手ほどズレが大きい
 - サムネイルの最後の行は、長いとき自動で小さくなるようにした（PaperThumbnail）
+
+### paper-impression-long（2026-10-16）
+- Willis & Todorov (2006) Psych Sci 17(7):592-598：要旨（PubMed）。100ms・500ms・1000ms。100msの印象が時間制限なしの印象と高く相関、時間を延ばしても相関は上がらず自信が増える。時間が長いと印象がより細かくなる
+- Ambady & Rosenthal (1993) JPSP 64(3):431-441：本文PDFで確認。大学の先生13人、音なし10秒×3本（計30秒）、学期末評価と r=.76。細かい行動のコードより全体（molar）の印象が予測、魅力を統制しても .74。研究3で6秒・15秒
+- Kelley (1950) J Personality 18(4):431-439：「とてもあたたかい／ややつめたい」の一語ちがいの紹介文。数値（参加率など）は原文未確認なので使っていない
+- Babad, Kaplowitz & Darley (1999) Social Psychology of Education 3:81-102：要旨。会う前の大きな差が30分の授業後に多くが消え、学期末にはほぼ消えた。人は変われると考える学生ほど見直す
+- Todorov, Mandisodza, Goren & Hall (2005) Science 308:1623-1626：要旨。有能さの印象で2004年上院選の68.8%を予測、得票差とも関係、有能さに特有、1秒の提示
+- Todorov & Porter (2014) Psych Sci 25(7):1404-1417：要旨。同じ人の写真間のばらつきが人どうしの差と同等以上、目的（出会い系・選挙）で選ぶ写真が変わる、40msでも
+- PaperPage の stat も小数（0.1・68.8）を表示できるようにした
 
