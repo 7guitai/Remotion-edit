@@ -18,6 +18,8 @@ import {
   TRAIN_KINDS,
   STRAP_KINDS,
   STRAP,
+  LAND_KINDS,
+  LAND,
   GOLD_GONE,
   GOLD_SIDE,
   TANK,
@@ -86,6 +88,10 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       const px = Math.min(RAIN.dist - 1.2, posAt(sim, f, pi)[0]);
       return { pos: [px + 0.6, 2.3, 8.6], look: [px + 0.9, 1.45, -0.6] };
     }
+    case "lknee":
+    case "lmat":
+      // 台・着地する所・2人の全身が入るよう、正面のやや上から
+      return { pos: [0, 2.9, lerp(11.6, 11.2, t)], look: [0, 1.75, 0.3] };
     case "strfeet":
     case "strhold":
       // 2人の全身とつり革が入るよう、正面から少し見下ろす
@@ -1191,7 +1197,7 @@ export const PhysicsScene: React.FC<{
   const overlays: React.ReactNode[] = [];
   const laneX = [width * 0.25, width * 0.75];
   const isRoad = sim.kind === "brake" || sim.kind === "fbrake" || sim.kind === "xbrake";
-  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall", "ice", "trconst", "tracc", "trbrake", "strfeet", "strhold"].includes(sim.kind);
+  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall", "ice", "trconst", "tracc", "trbrake", "strfeet", "strhold", "lknee", "lmat"].includes(sim.kind);
   const isAir = AIR_KINDS.includes(sim.kind);
   // 摩擦ゼロの世界は、摩擦が消えた瞬間からラベルを点滅させる
   const offFrame = Math.round(FRICTION_OFF * fps);
@@ -1210,7 +1216,7 @@ export const PhysicsScene: React.FC<{
             ? [-0.9, 0.9]
             : sim.kind === "ice"
               ? [-1.0, 1.0]
-              : TRAIN_KINDS.includes(sim.kind) || STRAP_KINDS.includes(sim.kind)
+              : TRAIN_KINDS.includes(sim.kind) || STRAP_KINDS.includes(sim.kind) || LAND_KINDS.includes(sim.kind)
                 ? [-1.4, 1.4]
             : sim.kind === "bjump" || sim.kind === "bwall"
               ? [-1.4, 1.4]
@@ -1551,6 +1557,49 @@ export const PhysicsScene: React.FC<{
         {arrived ? "コンビニに到着！" : `コンビニまで ${(RAIN.dist - d).toFixed(1)}m`}
       </Pill>,
     );
+  }
+  if (LAND_KINDS.includes(sim.kind)) {
+    [-1.4, 1.4].forEach((x0, lane) => {
+      // 台の高さ（台の前の面に）
+      const p = project(cam, [x0, LAND.h * 0.55, LAND.z + 0.36], width, height);
+      overlays.push(
+        <Pill key={`h${lane}`} x={p.x} y={p.y} color="#334" size={30}>
+          高さ1m
+        </Pill>,
+      );
+      // 着地したら、衝撃（地面が体を押し返す力のいちばん大きい値）を、体重の何倍かで出す
+      const touch = v(`landed${lane}`);
+      if (touch > 0 && f / fps > touch + 0.12) {
+        const peak = v(`peak${lane}`);
+        const pop = Math.min(1, (f / fps - touch - 0.12) / 0.15);
+        overlays.push(
+          <div
+            key={`pk${lane}`}
+            style={{
+              position: "absolute",
+              left: laneX[lane],
+              top: 172 + T,
+              transform: `translate(-50%, -50%) scale(${0.6 + 0.4 * pop})`,
+              textAlign: "center",
+              fontFamily,
+              fontWeight: 900,
+              color: "#fff",
+              background: peak > 10 ? "#e01b2f" : "#1f8f4e",
+              padding: "10px 26px",
+              borderRadius: 26,
+              border: "6px solid #fff",
+              boxShadow: "0 8px 18px rgba(0,0,0,0.35)",
+              whiteSpace: "nowrap",
+            }}
+          >
+            <div style={{ fontSize: 30 }}>着地の衝撃</div>
+            <div style={{ fontSize: 66, lineHeight: 1.05 }}>
+              体重の{peak.toFixed(1)}倍
+            </div>
+          </div>,
+        );
+      }
+    });
   }
   if (STRAP_KINDS.includes(sim.kind)) {
     const braking = f / fps > STRAP.t0;
@@ -2267,6 +2316,22 @@ export const PhysicsScene: React.FC<{
                 <sphereGeometry args={[b.size[0] * 0.9, 24, 24]} />
                 <meshStandardMaterial color={b.color} roughness={0.35} />
               </mesh>
+            );
+          }
+          if (b.shape === "mat") {
+            // マット：板の上の面までの高さで描く（沈むとうすくなる）
+            const top = Math.max(0.05, pos[1] + 0.03);
+            return (
+              <group key={i}>
+                <mesh position={[pos[0], top / 2, pos[2]]} castShadow receiveShadow>
+                  <boxGeometry args={[b.size[0], top, b.size[2]]} />
+                  <meshStandardMaterial color="#2f6fd6" roughness={0.75} />
+                </mesh>
+                <mesh position={[pos[0], top + 0.002, pos[2]]} rotation={[-Math.PI / 2, 0, 0]}>
+                  <planeGeometry args={[b.size[0] - 0.08, b.size[2] - 0.08]} />
+                  <meshStandardMaterial color="#3f80e6" roughness={0.8} />
+                </mesh>
+              </group>
             );
           }
           if (b.shape === "platform") {

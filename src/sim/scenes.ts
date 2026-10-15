@@ -69,7 +69,10 @@ export type SimKind =
   // 落ちるエレベーター（elevsafe は非常止めで止まる）
   | "elevfall"
   | "elevfloat"
-  | "elevsafe";
+  | "elevsafe"
+  // 高さ1mの台から飛び降りる（lknee：ひざをのばしたまま／ひざを曲げる、lmat：かたい床／マットの上）
+  | "lknee"
+  | "lmat";
 
 export const AIR_KINDS: SimKind[] = ["afeather", "athrow", "arain", "asky", "aplane"];
 // 水そうの大きさ（中心のz、幅、奥行き、高さ、水面の高さ）
@@ -88,6 +91,9 @@ export const TRAIN_KINDS: SimKind[] = ["trconst", "tracc", "trbrake"];
 export const STRAP_KINDS: SimKind[] = ["strfeet", "strhold"];
 export const STRAP = { t0: 1.2, a: 4.5 / 3.6, v: 60 };
 export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
+// 飛び降りの検証：台の高さ（m）、跳び出す時刻（秒）、台の奥行きの中心、衝撃をならす時間（秒）、マットの厚さ
+export const LAND_KINDS: SimKind[] = ["lknee", "lmat"];
+export const LAND = { h: 1.0, t0: 0.7, z: -0.55, win: 0.04, mat: 0.4 };
 export const BOUNCE_KINDS: SimKind[] = ["bjump", "bdrop", "bwall", "bparty"];
 export const TINY_KINDS: SimKind[] = ["tworld", "tlift", "tjump", "tfall", "twind", "train"];
 
@@ -106,7 +112,7 @@ export const FRICTION_OFF = 0.6;
 
 export type SimBody = {
   lane: number;
-  shape: "part" | "box" | "sphere" | "cone" | "car" | "platform" | "ladder" | "wall" | "feather" | "plane" | "barbell" | "coins" | "egg" | "ice";
+  shape: "part" | "mat" | "box" | "sphere" | "cone" | "car" | "platform" | "ladder" | "wall" | "feather" | "plane" | "barbell" | "coins" | "egg" | "ice";
   part?: PartName;
   look?: Look;
   doll?: number;
@@ -1750,6 +1756,132 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
         gone[f] = kind === "goldgone" ? Math.min(1, Math.max(0, (f / fps - GOLD_GONE) / 0.6)) : 0;
       },
     });
+  } else if (LAND_KINDS.includes(kind)) {
+    // 高さ1mの台の上に立ち、前へ跳び出して地面に着地する。
+    // 着地の衝撃（地面が体を押し返す力）は、全身の「上下の勢い（運動量）」の変わり方から求める：
+    //   押し返す力 ＝ 勢いの変化 ÷ 時間 ＋ 体重。0.04秒ごとにならして、いちばん大きい値を「体重の何倍」で記録する
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const x0 = lane === 0 ? -1.4 : 1.4;
+      // 台（動かない箱）
+      const deck = new CANNON.Body({
+        mass: 0,
+        shape: new CANNON.Box(new CANNON.Vec3(0.45, LAND.h / 2, 0.35)),
+        position: new CANNON.Vec3(x0, LAND.h / 2, LAND.z),
+        material: groundMaterial,
+      });
+      world.addBody(deck);
+      bodies.push({ lane, shape: "box", size: [0.9, LAND.h, 0.7], color: "#d9dee5" });
+      tracked.push(deck);
+      // マット（lmat の右）：厚さ40cmの体操用マット。上の板が、マットの押し返す力で支えられている
+      const onMat = kind === "lmat" && lane === 1;
+      let plate: CANNON.Body | null = null;
+      const k = 60000;
+      const c = 2500;
+      const pm = 20;
+      const natural = LAND.mat - 0.03;
+      if (onMat) {
+        plate = new CANNON.Body({
+          mass: pm,
+          shape: new CANNON.Box(new CANNON.Vec3(0.75, 0.03, 0.6)),
+          position: new CANNON.Vec3(x0, LAND.mat - 0.03, 0.8),
+          material: groundMaterial,
+        });
+        plate.linearFactor.set(0, 1, 0);
+        plate.angularFactor.set(0, 0, 0);
+        world.addBody(plate);
+        bodies.push({ lane, shape: "mat", size: [1.5, LAND.mat, 1.2] });
+        tracked.push(plate);
+      }
+      const rd = addDoll(world, lane, lane, [x0, LAND.h, LAND.z + 0.17]);
+      // ひざを曲げて受け止めるのは lknee の右だけ。ほかは、ひざをのばしたまま（関節を強く固める）
+      const soft = kind === "lknee" && lane === 1;
+      const parts = Object.values(rd.bodies);
+      const M = parts.reduce((a, b) => a + b.mass, 0);
+      const force = val(`force${lane}`);
+      const peakV = val(`peak${lane}`);
+      const landed = val(`landed${lane}`);
+      // 勢いの記録（0.04秒前の値と比べる）
+      const hist: number[] = [];
+      const histT: number[] = [];
+      let now = 0;
+      let peak = 0;
+      let touch = -1;
+      let jumped = false;
+      let lastTimes = 1;
+      const feetY = () =>
+        Math.min(lowestY(rd.bodies.footL, rd.sizes.footL), lowestY(rd.bodies.footR, rd.sizes.footR));
+      const control = (t: number, dt: number) => {
+        rd.balance = 1;
+        if (plate) {
+          // ばねの力（板が沈んだ分）とブレーキ。底（厚さ3cm）まで沈んだら、かたい床と同じ
+          // ウレタンのマット：少し沈むと、ほぼ一定の力で押し返しながら つぶれていく（沈むほど少しずつ強く）
+          const y = plate.position.y;
+          const x = Math.max(0, natural - y);
+          // もどるときは押し返す力が弱い（ウレタンはゆっくりもどる）ので、ほとんどはね返らない
+          const back = plate.velocity.y > 0 ? 0.35 : 1;
+          plate.force.y += x > 0 ? back * (2600 * (1 - Math.exp(-x / 0.03)) + 4000 * x) - 600 * plate.velocity.y : 0;
+          plate.force.y += k * Math.min(0, natural - y);
+          if (y < 0.06) {
+            plate.force.y += 400000 * (0.06 - y) - 8000 * plate.velocity.y;
+          }
+        }
+        if (t < LAND.t0) {
+          rd.setPose(POSES.stand);
+        } else if (t < LAND.t0 + 0.25) {
+          // 軽くしゃがんでから、前へ跳び出す
+          rd.setPose(POSES.stand, POSES.crouch, smooth((t - LAND.t0) / 0.2) * 0.35);
+        } else {
+          if (!jumped) {
+            jumped = true;
+            // 前へ 秒速2.4m・上へ 秒速1.4m で跳び出す（着地は台から約1.2m前、落ちる速さ 秒速約4.6m）
+            for (const b of parts) {
+              b.velocity.set(0, 1.4, 2.4);
+              b.angularVelocity.set(0, 0, 0);
+            }
+          }
+          if (touch < 0 && t > LAND.t0 + 0.4 && feetY() < (plate ? plate.position.y + 0.04 : 0.02)) {
+            touch = t;
+          }
+          if (soft) {
+            // 空中でひざを少し曲げておき、足がついたら、ひざ・股関節を曲げながら、ゆっくり受け止める
+            rd.setStrength(touch < 0 ? 1 : 0.22, ["kneeL", "kneeR", "hipL", "hipR", "ankleL", "ankleR"]);
+            rd.setPose(touch < 0 ? POSES.stand : POSES.crouch, touch < 0 ? POSES.land : undefined, touch < 0 ? 0.35 : 0);
+          } else {
+            // ひざをのばしたまま（脚の関節をかたく）
+            rd.setStrength(4, ["kneeL", "kneeR", "hipL", "hipR", "ankleL", "ankleR"]);
+            rd.setPose(POSES.stand);
+          }
+        }
+        applyBalance(rd);
+        // 全身の上下の勢い
+        let P = 0;
+        for (const b of parts) {
+          P += b.mass * b.velocity.y;
+        }
+        now = t + dt;
+        hist.push(P);
+        histT.push(now);
+        while (histT.length > 2 && now - histT[1] >= LAND.win) {
+          hist.shift();
+          histT.shift();
+        }
+        if (now - histT[0] >= LAND.win - 1e-6) {
+          const F = (P - hist[0]) / (now - histT[0]) + M * G;
+          const times = F / (M * G);
+          if (touch >= 0 && t - touch < 0.5) {
+            peak = Math.max(peak, times);
+          }
+          lastTimes = times;
+        }
+      };
+      const record = (f: number) => {
+        force[f] = Math.max(0, lastTimes);
+        peakV[f] = peak;
+        landed[f] = touch;
+      };
+      lanes.push({ world, g: G, dolls: [rd], control, record });
+    });
   } else if (STRAP_KINDS.includes(kind)) {
     // 急ブレーキの電車で立っている人。計算は「電車といっしょに動く目線」で、ブレーキ中は体に前向きの慣性力をかける。
     // 人は窓の方（カメラ）を向いて立つので、ブレーキの力は体の横向きにかかる。
@@ -2219,6 +2351,10 @@ export const simulate = (
                           ? ["足をそろえる", "足を開く"]
                           : kind === "strhold"
                             ? ["何もつかまない", "つり革をつかむ"]
+                            : kind === "lknee"
+                              ? ["ひざをのばす", "ひざを曲げる"]
+                              : kind === "lmat"
+                                ? ["かたい床", "マットの上"]
         : ["いまの地球 1G", gravityLabel(g2)],
   };
   cache.set(key, result);

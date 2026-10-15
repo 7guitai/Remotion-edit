@@ -1,0 +1,98 @@
+{
+  "id": "verify-landing-short",
+  "title": "【検証】高いところから飛び降りるとき、ひざを曲げると衝撃はどれだけ減る？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "ravioli.mp3",
+    "title": "Ravioli",
+    "credit": "MATSU",
+    "page": "https://opentracks.com/bgm/detail/5115",
+    "opentracks": 5115,
+    "track": 1
+  },
+  "headline": [
+    "【検証】飛び降りるとき",
+    "ひざを曲げると？"
+  ],
+  "illustrations": {},
+  "description": "高いところから飛び降りるとき「ひざを曲げて着地しなさい」と言われるのは本当なのか？ひざをのばす・ひざを曲げる・マットの上、の3つを物理エンジンで検証しました。\n\n※条件：高さ1mの台から前へ跳び出して着地（地面に着く速さは 秒速約4.7m）。衝撃は「地面が体を押し返す力」を0.04秒ごとにならした、いちばん大きい値です。数値はシミュレーションの結果で、実際の人では体格や着地のしかたで変わります。\n※高い所から飛び降りるのは危険です。まねをしないでください。\nほかに検証してほしいことは、コメントで教えてください！\n\n#Shorts #検証 #物理 #雑学",
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "高いところから飛び降りるとき、「ひざを曲げて着地しなさい」って言われるよね。本当に衝撃は変わるの？",
+      "effect": "none",
+      "sim": "lknee"
+    },
+    {
+      "type": "whatif",
+      "text": "検証1。高さ1mの台から飛び降りる。ひざをのばしたまま着地する人と、ひざを曲げる人。",
+      "speech": "検証1。高さ1メートルの台から飛び降りる。ひざをのばしたまま着地する人と、ひざを曲げる人。",
+      "effect": "none",
+      "sim": "lknee",
+      "big": "検証1"
+    },
+    {
+      "type": "whatif",
+      "text": "ひざをのばした人は、体重の14倍の衝撃！ひざを曲げた人は、半分以下の6.7倍。",
+      "speech": "ひざをのばした人は、体重の14倍の衝撃！ひざを曲げた人は、半分以下の、6.7倍。",
+      "effect": "none",
+      "sim": "lknee",
+      "simStart": 1.3
+    },
+    {
+      "type": "whatif",
+      "text": "ひざを曲げると、体が止まるまでの時間がのびる。そのぶん、地面から受ける力が小さくなるんだ。",
+      "effect": "none",
+      "sim": "lknee",
+      "simStart": 2.2
+    },
+    {
+      "type": "whatif",
+      "text": "検証2。ひざをのばしたまま、体育のマットの上に落ちると？",
+      "effect": "none",
+      "sim": "lmat",
+      "big": "検証2"
+    },
+    {
+      "type": "whatif",
+      "text": "マットの上なら、5.9倍。かたい床の半分以下だ！",
+      "speech": "マットの上なら、5.9倍。かたい床の、半分以下だ！",
+      "effect": "none",
+      "sim": "lmat",
+      "simStart": 1.3
+    },
+    {
+      "type": "whatif",
+      "text": "マットも、ゆっくりつぶれて、止まるまでの時間をのばしている。スニーカーの底がやわらかいのも、同じ理由だ。",
+      "effect": "none",
+      "sim": "lmat",
+      "simStart": 2.2
+    },
+    {
+      "type": "whatif",
+      "text": "答えは、ひざを曲げて着地！でも、高いところからは、むやみに飛び降りないでね。",
+      "effect": "none",
+      "sim": "lknee",
+      "simStart": 2.0
+    },
+    {
+      "type": "whatif",
+      "text": "ほかに検証してほしいこと、コメントで教えてね！",
+      "effect": "none",
+      "sim": "lmat",
+      "simStart": 2.6,
+      "hold": 1
+    }
+  ]
+}
