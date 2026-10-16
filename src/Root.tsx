@@ -185,6 +185,20 @@ export const RemotionRoot: React.FC = () => {
           thought: "なんだか…\n怖そうな人だな",
         }}
       />
+      {/* 「頼みごとをすると好かれる」の回のサムネイル（npx remotion still paper-favor-long-thumbnail out/thumb.png） */}
+      <Still
+        id="paper-favor-long-thumbnail"
+        component={PaperThumbnail}
+        width={1280}
+        height={720}
+        defaultProps={{
+          kicker: "論文で読み解く心理学",
+          lines: ["頼みごとをすると", "好かれる"],
+          badge: "ベン・フランクリン効果",
+          person: "ira_man_laugh.png",
+          thought: "頼ってくれて\nうれしい！",
+        }}
+      />
       {/* 「地球の“もしも”10選」のサムネイル（npx remotion still whatif-earth-long-thumbnail out/thumb.png --gl=swangle） */}
       <Still
         id="whatif-earth-long-thumbnail"

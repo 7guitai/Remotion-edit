@@ -1,0 +1,2072 @@
+{
+ "id": "paper-favor-long",
+ "title": "頼みごとをすると、なぜか好かれる｜ベン・フランクリン効果【論文で読み解く心理学】",
+ "format": "landscape",
+ "titleBand": false,
+ "pr": false,
+ "style": "paper",
+ "background": "#0b1222",
+ "slideGap": 10,
+ "bgmVolume": 0.07,
+ "voice": {
+  "speaker": 13,
+  "speed": 1.2,
+  "name": "青山龍星"
+ },
+ "bgm": {
+  "file": "south_wind.mp3",
+  "title": "South Wind",
+  "credit": "FLASH☆BEAT",
+  "page": "https://opentracks.com/bgm/detail/9297",
+  "opentracks": 9297,
+  "track": 1
+ },
+ "illustrations": {
+  "ira_man_laugh.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjOHa1uoODoJQKY4lJibxtbHwA7J0MZd_T7NI6Ccay2-Z-73eo10bkIenD9uMbk2n1If4e7m-W58iL_QSMaz1ekU7i0sBSq2ecLUpGrpwWs_farEoAtFI7TfxMIGwqvgmVF1qUJ2nUWsc1o/s800/business_man1_4_laugh.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_smile.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinCa3_I-Cu_oduFEXJgdqLfVVLTpVDzeeKvJU1P7Tmvy0-LJIQn6eLnUde-sOqyUxlU6Kmf_3nN832P3E5_MuqE_VM3ZUP598T9aA9RBjhVVPZm3OC_fuKOQA5qHw61GXMAvDTEmgmtV9n/s800/business_man1_1_smile.png",
+   "credit": "いらすとや"
+  },
+  "ira_man_think.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4f8UNlNx6rgIq-4BDpGQszhhYthGnl10m47e0hgtvKX3ikrea74r0uu9wm7yI7U9kwe9FT01JCbBLYA0aHOjQaaqYq2hsL2Q_eNgmOG5fzH6V2x_XUxF8mx_mEuzmbhXwQbuSuYx4QrYG/s800/business_man2_4_think.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_cry.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEd-PV9kxYcef_sYh9riNt0_7EKNd4fPmoIC27nJh-syE15Yvpym3hXmmc_6T-7nUvpYyWVk8Zt9micKw-DyRxSru8rqmCTOswxC9HrsHj3U5iXbr4oVQAQWCJa6laFx1Y8KzKT1SnUXTk/s800/business_woman1_3_cry.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_idea.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgORBdxfIobbkHZ3KPwdV4p5NHJ73LXkdycGPLPhBZO9w0bzk79tKRZICwa4mmYEkbkZHMP5aQAnq02xuhsxwBb9wD6HhSMjHDMy80iLT_tGvAuUP_Xq5wXeO325YJKtJ7MgkVR5PD64ey9/s800/business_woman2_1_idea.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_laugh.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEieAeI8ijO5STgO5_khv-yLs6YEmCim2YRL0pf2AmPs8n5BrLbNRlAPl2Xr-L0GPMrY2bHy03KwyS0AD5MEDr_cyvOIziLeJ1wE7j1zJOo3vuA2Rxcbhbzlu3OsLUo3CBrW1wCEEtWKWVgv/s800/business_woman1_4_laugh.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_smile.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKIGkR0NAsKhA679VI-_AHno_N3kOZwDEDErKUvypLVOHeDP4mSJAL1BjcGdpQUT3entVehgWv5XUgqmaCT0Bk6JAxMC0KLDQ8ro14IqpaQVGADgeXzmKsvaKYorWY3JtENTkKNC1xaoD4/s800/business_woman1_1_smile.png",
+   "credit": "いらすとや"
+  },
+  "ira_woman_think.png": {
+   "emoji": "🙂",
+   "irasutoya": "いろいろな表情のスーツを着た人のイラスト",
+   "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5WZVuN0Tjy3STawu94uzuxEFV3OG_ykTcqeWKgWLQez13ISsOub8G0u_WQfTnjvQes_RXVnJuaiUjjW8NZv9jwGFvfaoXtA7hlapl932SYQsrBO6jZhP-8ZXuAp4IGj1ElpfL1vZXfiqA/s800/business_woman2_4_think.png",
+   "credit": "いらすとや"
+  }
+ },
+ "description": "「迷惑かな」と思って、頼みごとをためらっていませんか？ 実は、頼みごとを引き受けた相手のことを、人はかえって好きになる。ベン・フランクリン効果と「頼る」ことの心理を、5つの研究から読み解きます。\n台本・例え話はオリジナルです。研究の内容は、論文の要旨や大学・メディアの紹介で確認できた範囲で紹介しています（お礼の実験の割合は、ハーバード大学の記事で紹介された値です）。\n\n▼ 紹介した研究\n・Jecker & Landy (1969) Liking a Person as a Function of Doing Him a Favour. Human Relations, 22(4), 371-378.\n・Niiya (2016) Does a Favor Request Increase Liking Toward the Requester? The Journal of Social Psychology, 156(2), 211-221.\n・Flynn & Lake (2008) If You Need Help, Just Ask: Underestimating Compliance with Direct Requests for Help. Journal of Personality and Social Psychology, 95(1), 128-143.\n・Brooks, Gino & Schweitzer (2015) Smart People Ask for (My) Advice: Seeking Advice Boosts Perceptions of Competence. Management Science, 61(6), 1421-1435.\n・Grant & Gino (2010) A Little Thanks Goes a Long Way. Journal of Personality and Social Psychology, 98(6), 946-955.",
+ "hashtags": [
+  "心理学",
+  "ベンフランクリン効果",
+  "論文",
+  "雑学"
+ ],
+ "slides": [
+  {
+   "type": "paper",
+   "text": "頼みごとをすると、嫌われる。そう思っていませんか？",
+   "visual": {
+    "kind": "title",
+    "kicker": "論文で読み解く 心理学",
+    "title": [
+     "頼みごとをすると",
+     "なぜか好かれる"
+    ],
+    "sub": "5つの研究で読み解く「ベン・フランクリン効果」"
+   },
+   "enter": true,
+   "chapter": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "実は心理学では、その逆のことが、くり返し確かめられています。",
+   "visual": {
+    "kind": "title",
+    "kicker": "論文で読み解く 心理学",
+    "title": [
+     "頼みごとをすると",
+     "なぜか好かれる"
+    ],
+    "sub": "5つの研究で読み解く「ベン・フランクリン効果」"
+   },
+   "enter": false
+  },
+  {
+   "type": "paper",
+   "text": "入社2年目のマイは、表計算ソフトの集計作業で、すっかり手が止まっていました。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "ケンタ",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_think.png",
+     "name": "マイ",
+     "thought": "この関数、\nどう使うんだろう…",
+     "color": "#d0607a"
+    },
+    "show": [
+     "right"
+    ]
+   },
+   "enter": true,
+   "speech": "入社にねんめのマイは、ひょうけいさんソフトの集計作業で、すっかり手が止まっていました。",
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "向かいの席には、表計算が得意な先輩のケンタがいます。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "ケンタ",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_think.png",
+     "name": "マイ",
+     "thought": "この関数、\nどう使うんだろう…",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "speech": "向かいの席には、ひょうけいさんが得意な先輩のケンタがいます。",
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "でも、マイは声をかけられません。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "ケンタ",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_cry.png",
+     "name": "マイ",
+     "thought": "忙しそうだし…\n迷惑かな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "「ケンタさん、忙しそうだし。こんなことも分からないのかって、思われたらどうしよう」",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "ケンタ",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_cry.png",
+     "name": "マイ",
+     "thought": "忙しそうだし…\n迷惑かな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "結局マイは、ネットで調べながら、2時間かけて、ひとりで作業を終えました。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "ケンタ",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_cry.png",
+     "name": "マイ",
+     "thought": "忙しそうだし…\n迷惑かな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "そのころケンタは、こんなことを考えていました。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_think.png",
+     "name": "ケンタ",
+     "thought": "最近マイさんと\nあまり話してないな",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_cry.png",
+     "name": "マイ",
+     "thought": "忙しそうだし…\n迷惑かな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "「マイさん、困ってないかな。何かあったら、頼ってくれればいいのに」",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_think.png",
+     "name": "ケンタ",
+     "thought": "最近マイさんと\nあまり話してないな",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_cry.png",
+     "name": "マイ",
+     "thought": "忙しそうだし…\n迷惑かな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "頼る側は「迷惑かも」と思い、頼られる側は「頼ってほしい」と思っている。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_think.png",
+     "name": "ケンタ",
+     "thought": "最近マイさんと\nあまり話してないな",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_cry.png",
+     "name": "マイ",
+     "thought": "忙しそうだし…\n迷惑かな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "このすれちがいには、心理学の研究で分かっている、いくつかの理由があります。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_think.png",
+     "name": "ケンタ",
+     "thought": "最近マイさんと\nあまり話してないな",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_cry.png",
+     "name": "マイ",
+     "thought": "忙しそうだし…\n迷惑かな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "「人に迷惑をかけてはいけない」。子どものころから、そう教わってきた人も多いはずです。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_think.png",
+     "name": "ケンタ",
+     "thought": "最近マイさんと\nあまり話してないな",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_cry.png",
+     "name": "マイ",
+     "thought": "忙しそうだし…\n迷惑かな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "でも、その教えが、人と仲よくなるチャンスを、知らないうちに減らしているのかもしれません。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_think.png",
+     "name": "ケンタ",
+     "thought": "最近マイさんと\nあまり話してないな",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_cry.png",
+     "name": "マイ",
+     "thought": "忙しそうだし…\n迷惑かな",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "この動画では、頼みごとと人間関係の不思議な関係を、5つの研究から解き明かします。",
+   "visual": {
+    "kind": "list",
+    "title": "この動画で紹介する研究",
+    "items": [
+     "頼みごとを聞いた相手を、好きになる",
+     "日本でも、頼まれると好意が増えた",
+     "人は、思ったより頼みを引き受けてくれる",
+     "相談すると、「できる人」に見える",
+     "「ありがとう」が、次の助けを生む"
+    ]
+   },
+   "enter": true,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "最後に、上手に頼るための3つのルールもお話しします。",
+   "visual": {
+    "kind": "list",
+    "title": "この動画で紹介する研究",
+    "items": [
+     "頼みごとを聞いた相手を、好きになる",
+     "日本でも、頼まれると好意が増えた",
+     "人は、思ったより頼みを引き受けてくれる",
+     "相談すると、「できる人」に見える",
+     "「ありがとう」が、次の助けを生む"
+    ]
+   },
+   "enter": false,
+   "tag": "オープニング"
+  },
+  {
+   "type": "paper",
+   "text": "第1章。頼みごとを聞いた相手を、好きになる。",
+   "visual": {
+    "kind": "chapter",
+    "no": 1,
+    "title": "頼みごとを聞いた相手を\n好きになる"
+   },
+   "enter": true,
+   "speech": "第一章。頼みごとを聞いた相手を、好きになる。",
+   "chapter": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "この現象には、アメリカの政治家の名前がついています。",
+   "visual": {
+    "kind": "chapter",
+    "no": 1,
+    "title": "頼みごとを聞いた相手を\n好きになる"
+   },
+   "enter": false
+  },
+  {
+   "type": "paper",
+   "text": "アメリカ建国の父のひとり、ベンジャミン・フランクリンです。",
+   "visual": {
+    "kind": "concept",
+    "term": "ベン・フランクリン効果",
+    "en": "The Ben Franklin Effect",
+    "desc": "頼みごとを引き受けた相手のことを、\nかえって好きになる現象"
+   },
+   "enter": true,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "フランクリンの自伝には、こんな話が書かれています。",
+   "visual": {
+    "kind": "concept",
+    "term": "ベン・フランクリン効果",
+    "en": "The Ben Franklin Effect",
+    "desc": "頼みごとを引き受けた相手のことを、\nかえって好きになる現象"
+   },
+   "enter": false,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "議会で、自分に冷たい態度をとる、ライバルの議員がいました。",
+   "visual": {
+    "kind": "concept",
+    "term": "ベン・フランクリン効果",
+    "en": "The Ben Franklin Effect",
+    "desc": "頼みごとを引き受けた相手のことを、\nかえって好きになる現象"
+   },
+   "enter": false,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "フランクリンは、その議員が珍しい本を持っていると聞き、「ぜひ読ませてほしい」と手紙を書きます。",
+   "visual": {
+    "kind": "concept",
+    "term": "ベン・フランクリン効果",
+    "en": "The Ben Franklin Effect",
+    "desc": "頼みごとを引き受けた相手のことを、\nかえって好きになる現象"
+   },
+   "enter": false,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "議員は本を貸してくれ、フランクリンは、心のこもったお礼の手紙をそえて返しました。",
+   "visual": {
+    "kind": "list",
+    "title": "フランクリンがしたこと",
+    "items": [
+     "冷たいライバルに「本を貸して」と頼む",
+     "心をこめたお礼の手紙をそえて返す",
+     "→ 相手のほうから、親しげに話しかけてきた"
+    ]
+   },
+   "enter": true,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "すると次に会ったとき、その議員は、初めて親しげに話しかけてきたそうです。",
+   "visual": {
+    "kind": "list",
+    "title": "フランクリンがしたこと",
+    "items": [
+     "冷たいライバルに「本を貸して」と頼む",
+     "心をこめたお礼の手紙をそえて返す",
+     "→ 相手のほうから、親しげに話しかけてきた"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "そして2人は、その後、長く友人になったといわれています。",
+   "visual": {
+    "kind": "list",
+    "title": "フランクリンがしたこと",
+    "items": [
+     "冷たいライバルに「本を貸して」と頼む",
+     "心をこめたお礼の手紙をそえて返す",
+     "→ 相手のほうから、親しげに話しかけてきた"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "この話を、実験で確かめようとした研究があります。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Jecker & Landy",
+    "year": "1969",
+    "journal": "Human Relations",
+    "title": "Liking a Person as a Function of Doing Him a Favour",
+    "points": [
+     "実験でお金をもらった学生に、「返してほしい」と頼む",
+     "頼む人を変えて、研究者への好感を比べた"
+    ]
+   },
+   "enter": true,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "学生たちは、ある実験に参加して、賞金をもらいました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Jecker & Landy",
+    "year": "1969",
+    "journal": "Human Relations",
+    "title": "Liking a Person as a Function of Doing Him a Favour",
+    "points": [
+     "実験でお金をもらった学生に、「返してほしい」と頼む",
+     "頼む人を変えて、研究者への好感を比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "実験が終わったあと、一部の学生は、研究者本人から「研究費が足りなくなったので、返してもらえないか」と頼まれます。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Jecker & Landy",
+    "year": "1969",
+    "journal": "Human Relations",
+    "title": "Liking a Person as a Function of Doing Him a Favour",
+    "points": [
+     "実験でお金をもらった学生に、「返してほしい」と頼む",
+     "頼む人を変えて、研究者への好感を比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "別の学生は、研究室の事務の人から、同じように頼まれました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Jecker & Landy",
+    "year": "1969",
+    "journal": "Human Relations",
+    "title": "Liking a Person as a Function of Doing Him a Favour",
+    "points": [
+     "実験でお金をもらった学生に、「返してほしい」と頼む",
+     "頼む人を変えて、研究者への好感を比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "そして最後に、研究者のことをどれくらい好きかを聞きました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Jecker & Landy",
+    "year": "1969",
+    "journal": "Human Relations",
+    "title": "Liking a Person as a Function of Doing Him a Favour",
+    "points": [
+     "実験でお金をもらった学生に、「返してほしい」と頼む",
+     "頼む人を変えて、研究者への好感を比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "すると、研究者本人に頼まれてお金を返した学生が、いちばん研究者を好きだと答えたんです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "研究者本人に頼まれた",
+     "body": "研究者への好感が\nいちばん高かった"
+    },
+    "right": {
+     "title": "事務の人に頼まれた",
+     "body": "研究者への好感は\n高くならなかった"
+    }
+   },
+   "enter": true,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "自分のお金を手放したのに、頼んだ相手を、むしろ好きになっていたんです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "研究者本人に頼まれた",
+     "body": "研究者への好感が\nいちばん高かった"
+    },
+    "right": {
+     "title": "事務の人に頼まれた",
+     "body": "研究者への好感は\n高くならなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "なぜ、こんなことが起きるのでしょう。ひとつの説明は、「自分の行動に、心が合わせにいく」というものです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "研究者本人に頼まれた",
+     "body": "研究者への好感が\nいちばん高かった"
+    },
+    "right": {
+     "title": "事務の人に頼まれた",
+     "body": "研究者への好感は\n高くならなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "「わざわざ助けたんだから、自分はこの人のことが好きなんだろう」。心が、そう納得しようとするわけです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "研究者本人に頼まれた",
+     "body": "研究者への好感が\nいちばん高かった"
+    },
+    "right": {
+     "title": "事務の人に頼まれた",
+     "body": "研究者への好感は\n高くならなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "ただし、これは1960年代の小さな実験です。そこで、もっと新しい研究も見てみましょう。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "研究者本人に頼まれた",
+     "body": "研究者への好感が\nいちばん高かった"
+    },
+    "right": {
+     "title": "事務の人に頼まれた",
+     "body": "研究者への好感は\n高くならなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第1章 ベン・フランクリン効果"
+  },
+  {
+   "type": "paper",
+   "text": "第2章。日本でも、頼まれると好意が増えた。",
+   "visual": {
+    "kind": "chapter",
+    "no": 2,
+    "title": "日本でも\n頼まれると好意が増えた"
+   },
+   "enter": true,
+   "speech": "第二章。にほんでも、頼まれると好意が増えた。",
+   "chapter": "第2章 日本とアメリカの実験"
+  },
+  {
+   "type": "paper",
+   "text": "2015年、日本の研究者が、この効果を、日本とアメリカの両方で確かめました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Niiya",
+    "year": "2016",
+    "journal": "The Journal of Social Psychology",
+    "title": "Does a Favor Request Increase Liking Toward the Requester?",
+    "points": [
+     "日本とアメリカの大学生が参加",
+     "一緒に課題をする相手から、手伝いを頼まれる"
+    ]
+   },
+   "enter": true,
+   "speech": "にせんじゅうごねん、にほんの研究者が、この効果を、にほんとアメリカの両方で確かめました。",
+   "tag": "第2章 頼まれるうれしさ"
+  },
+  {
+   "type": "paper",
+   "text": "参加者は、ほかの参加者と一緒に、課題に取り組みます。実はこの相手は、研究チームの協力者です。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Niiya",
+    "year": "2016",
+    "journal": "The Journal of Social Psychology",
+    "title": "Does a Favor Request Increase Liking Toward the Requester?",
+    "points": [
+     "日本とアメリカの大学生が参加",
+     "一緒に課題をする相手から、手伝いを頼まれる"
+    ]
+   },
+   "enter": false,
+   "tag": "第2章 頼まれるうれしさ"
+  },
+  {
+   "type": "paper",
+   "text": "あるグループでは、相手が「ちょっと手伝ってもらえませんか」と、直接頼みます。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Niiya",
+    "year": "2016",
+    "journal": "The Journal of Social Psychology",
+    "title": "Does a Favor Request Increase Liking Toward the Requester?",
+    "points": [
+     "日本とアメリカの大学生が参加",
+     "一緒に課題をする相手から、手伝いを頼まれる"
+    ]
+   },
+   "enter": false,
+   "tag": "第2章 頼まれるうれしさ"
+  },
+  {
+   "type": "paper",
+   "text": "別のグループでは、頼まれずに、同じように相手を手伝うことになりました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Niiya",
+    "year": "2016",
+    "journal": "The Journal of Social Psychology",
+    "title": "Does a Favor Request Increase Liking Toward the Requester?",
+    "points": [
+     "日本とアメリカの大学生が参加",
+     "一緒に課題をする相手から、手伝いを頼まれる"
+    ]
+   },
+   "enter": false,
+   "tag": "第2章 頼まれるうれしさ"
+  },
+  {
+   "type": "paper",
+   "text": "すると、直接頼まれたグループでは、日本人もアメリカ人も、その相手への好感が上がりました。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "直接頼まれて手伝った",
+     "body": "相手への好感が上がり\n親しみも増した"
+    },
+    "right": {
+     "title": "頼まれずに手伝った",
+     "body": "好感は\n上がらなかった"
+    }
+   },
+   "enter": true,
+   "speech": "すると、直接頼まれたグループでは、にほん人もアメリカ人も、その相手への好感が上がりました。",
+   "tag": "第2章 頼まれるうれしさ"
+  },
+  {
+   "type": "paper",
+   "text": "相手を「人づきあいのいい人」と感じ、自分との距離も近くなったと感じていたんです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "直接頼まれて手伝った",
+     "body": "相手への好感が上がり\n親しみも増した"
+    },
+    "right": {
+     "title": "頼まれずに手伝った",
+     "body": "好感は\n上がらなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第2章 頼まれるうれしさ"
+  },
+  {
+   "type": "paper",
+   "text": "ここで大事なのは、手伝ったこと自体ではなく、「頼まれた」ことのほうに意味があった、という点です。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "直接頼まれて手伝った",
+     "body": "相手への好感が上がり\n親しみも増した"
+    },
+    "right": {
+     "title": "頼まれずに手伝った",
+     "body": "好感は\n上がらなかった"
+    }
+   },
+   "enter": false,
+   "tag": "第2章 頼まれるうれしさ"
+  },
+  {
+   "type": "paper",
+   "text": "研究者は、日本語の「甘え」という考え方に注目しています。",
+   "visual": {
+    "kind": "concept",
+    "term": "甘え",
+    "en": "Amae",
+    "desc": "相手の好意をあてにして、頼ったり、ゆだねたりすること。\n信頼のしるしとして受け取られることもある"
+   },
+   "enter": true,
+   "speech": "研究者は、にほん語の、あまえ、という考え方に注目しています。",
+   "tag": "第2章 頼まれるうれしさ"
+  },
+  {
+   "type": "paper",
+   "text": "頼みごとをされると、人は「この人は自分を信頼してくれている」と感じます。",
+   "visual": {
+    "kind": "concept",
+    "term": "甘え",
+    "en": "Amae",
+    "desc": "相手の好意をあてにして、頼ったり、ゆだねたりすること。\n信頼のしるしとして受け取られることもある"
+   },
+   "enter": false,
+   "tag": "第2章 頼まれるうれしさ"
+  },
+  {
+   "type": "paper",
+   "text": "その信頼のサインが、2人の距離を、ぐっと縮めてくれるのかもしれません。",
+   "visual": {
+    "kind": "concept",
+    "term": "甘え",
+    "en": "Amae",
+    "desc": "相手の好意をあてにして、頼ったり、ゆだねたりすること。\n信頼のしるしとして受け取られることもある"
+   },
+   "enter": false,
+   "tag": "第2章 頼まれるうれしさ"
+  },
+  {
+   "type": "paper",
+   "text": "ケンタが「頼ってくれればいいのに」と思っていたのも、うなずけますね。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_think.png",
+     "name": "ケンタ",
+     "thought": "頼ってくれれば\nいいのに",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "マイ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": true,
+   "tag": "第2章 頼まれるうれしさ"
+  },
+  {
+   "type": "paper",
+   "text": "部活の後輩に「先輩、ちょっと教えてください」と言われて、うれしかった経験はありませんか。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_think.png",
+     "name": "ケンタ",
+     "thought": "頼ってくれれば\nいいのに",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "マイ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": false,
+   "tag": "第2章 頼まれるうれしさ"
+  },
+  {
+   "type": "paper",
+   "text": "頼られるのは、手間がかかることでもありますが、それ以上に「信頼されている」という、うれしいサインでもあるんです。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_think.png",
+     "name": "ケンタ",
+     "thought": "頼ってくれれば\nいいのに",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "マイ",
+     "thought": null,
+     "color": "#d0607a"
+    },
+    "show": [
+     "left"
+    ]
+   },
+   "enter": false,
+   "tag": "第2章 頼まれるうれしさ"
+  },
+  {
+   "type": "paper",
+   "text": "第3章。人は、思ったより頼みを引き受けてくれる。",
+   "visual": {
+    "kind": "chapter",
+    "no": 3,
+    "title": "人は思ったより\n頼みを引き受けてくれる"
+   },
+   "enter": true,
+   "speech": "第三章。人は、思ったより頼みを引き受けてくれる。",
+   "chapter": "第3章 引き受けてもらえる確率"
+  },
+  {
+   "type": "paper",
+   "text": "それでも、頼みごとをするのは、勇気がいりますよね。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Flynn & Lake",
+    "year": "2008",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "If You Need Help, Just Ask: Underestimating Compliance with Direct Requests for Help",
+    "points": [
+     "知らない人に、ちょっとした頼みごとをしてもらう",
+     "「何人に頼めば引き受けてもらえるか」を予想してから実行"
+    ]
+   },
+   "enter": true,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "スタンフォード大学などの研究チームは、こんな実験をしました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Flynn & Lake",
+    "year": "2008",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "If You Need Help, Just Ask: Underestimating Compliance with Direct Requests for Help",
+    "points": [
+     "知らない人に、ちょっとした頼みごとをしてもらう",
+     "「何人に頼めば引き受けてもらえるか」を予想してから実行"
+    ]
+   },
+   "enter": false,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "学生たちに、キャンパスで知らない人に声をかけて、アンケートに答えてもらうよう頼んでもらいます。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Flynn & Lake",
+    "year": "2008",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "If You Need Help, Just Ask: Underestimating Compliance with Direct Requests for Help",
+    "points": [
+     "知らない人に、ちょっとした頼みごとをしてもらう",
+     "「何人に頼めば引き受けてもらえるか」を予想してから実行"
+    ]
+   },
+   "enter": false,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "その前に、「何人に声をかければ、5人に答えてもらえるか」を予想してもらいました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Flynn & Lake",
+    "year": "2008",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "If You Need Help, Just Ask: Underestimating Compliance with Direct Requests for Help",
+    "points": [
+     "知らない人に、ちょっとした頼みごとをしてもらう",
+     "「何人に頼めば引き受けてもらえるか」を予想してから実行"
+    ]
+   },
+   "enter": false,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "学生たちの予想は、かなり多めでした。断られることを、強く覚悟していたんです。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Flynn & Lake",
+    "year": "2008",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "If You Need Help, Just Ask: Underestimating Compliance with Direct Requests for Help",
+    "points": [
+     "知らない人に、ちょっとした頼みごとをしてもらう",
+     "「何人に頼めば引き受けてもらえるか」を予想してから実行"
+    ]
+   },
+   "enter": false,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "ところが実際には、予想の半分くらいの人数に声をかけただけで、目標に届いてしまいました。",
+   "visual": {
+    "kind": "stat",
+    "value": 50,
+    "unit": "%",
+    "label": "引き受けてもらえる確率の見積もりちがい",
+    "sub": "頼む側は、最大で50%ほど少なく見積もっていた"
+   },
+   "enter": true,
+   "speech": "ところが実際には、予想の半分くらいの人数に声をかけただけで、目標に届いてしまいました。",
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "この研究では、いくつもの場面で、人は「引き受けてもらえる確率」を、最大で半分ほど少なく見積もっていました。",
+   "visual": {
+    "kind": "stat",
+    "value": 50,
+    "unit": "%",
+    "label": "引き受けてもらえる確率の見積もりちがい",
+    "sub": "頼む側は、最大で50%ほど少なく見積もっていた"
+   },
+   "enter": false,
+   "speech": "この研究では、いくつもの場面で、人は、引き受けてもらえる確率を、最大で半分ほど少なく見積もっていました。",
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "なぜ、こんなに低く見積もってしまうのでしょう。",
+   "visual": {
+    "kind": "stat",
+    "value": 50,
+    "unit": "%",
+    "label": "引き受けてもらえる確率の見積もりちがい",
+    "sub": "頼む側は、最大で50%ほど少なく見積もっていた"
+   },
+   "enter": false,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "頼む側は、「引き受けたら、相手は時間や手間がかかる」と、相手の負担ばかり考えます。",
+   "visual": {
+    "kind": "stat",
+    "value": 50,
+    "unit": "%",
+    "label": "引き受けてもらえる確率の見積もりちがい",
+    "sub": "頼む側は、最大で50%ほど少なく見積もっていた"
+   },
+   "enter": false,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "でも、頼まれた側にとっては、「断る」こと自体も、気まずくて、つらいものなんです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "頼む側が考えること",
+     "body": "引き受けるのは\n時間も手間もかかる"
+    },
+    "right": {
+     "title": "頼まれた側の本音",
+     "body": "断るほうが\n気まずくてつらい"
+    }
+   },
+   "enter": true,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "頼む側は、この「断るつらさ」を、見落としがちだったんです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "頼む側が考えること",
+     "body": "引き受けるのは\n時間も手間もかかる"
+    },
+    "right": {
+     "title": "頼まれた側の本音",
+     "body": "断るほうが\n気まずくてつらい"
+    }
+   },
+   "enter": false,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "駅で道を聞かれたとき、多くの人は、つい足を止めて答えてしまいますよね。あれも、同じしくみです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "頼む側が考えること",
+     "body": "引き受けるのは\n時間も手間もかかる"
+    },
+    "right": {
+     "title": "頼まれた側の本音",
+     "body": "断るほうが\n気まずくてつらい"
+    }
+   },
+   "enter": false,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "だから、思っているより多くの人が、頼みを引き受けてくれます。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "頼む側が考えること",
+     "body": "引き受けるのは\n時間も手間もかかる"
+    },
+    "right": {
+     "title": "頼まれた側の本音",
+     "body": "断るほうが\n気まずくてつらい"
+    }
+   },
+   "enter": false,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "マイが「迷惑かも」と思っていた頼みごとも、ケンタにとっては、たぶん5分で済む、うれしいお願いでした。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_think.png",
+     "name": "ケンタ",
+     "thought": "5分で教えられるのに",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_cry.png",
+     "name": "マイ",
+     "thought": "迷惑かも…",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "ただ、この研究は、もうひとつ大切なことも教えてくれます。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_think.png",
+     "name": "ケンタ",
+     "thought": "5分で教えられるのに",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_cry.png",
+     "name": "マイ",
+     "thought": "迷惑かも…",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "断りにくいからこそ、相手が本当は無理をしていないか、気づかう必要もある、ということです。",
+   "visual": {
+    "kind": "scene",
+    "place": "平日の午後のオフィス",
+    "left": {
+     "emoji": "ira_man_think.png",
+     "name": "ケンタ",
+     "thought": "5分で教えられるのに",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_cry.png",
+     "name": "マイ",
+     "thought": "迷惑かも…",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "第3章 頼む側の思いこみ"
+  },
+  {
+   "type": "paper",
+   "text": "第4章。相談すると、「できる人」に見える。",
+   "visual": {
+    "kind": "chapter",
+    "no": 4,
+    "title": "相談すると\n「できる人」に見える"
+   },
+   "enter": true,
+   "speech": "第四章。相談すると、できる人に見える。",
+   "chapter": "第4章 相談とできる人"
+  },
+  {
+   "type": "paper",
+   "text": "マイが頼れなかった、もうひとつの理由。それは「できない人だと思われたくない」という気持ちでした。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Brooks, Gino & Schweitzer",
+    "year": "2015",
+    "journal": "Management Science",
+    "title": "Smart People Ask for (My) Advice: Seeking Advice Boosts Perceptions of Competence",
+    "points": [
+     "一緒に課題をした相手から、アドバイスを求められる",
+     "相手の「有能さ」の印象を比べた"
+    ]
+   },
+   "enter": true,
+   "tag": "第4章 相談の効果"
+  },
+  {
+   "type": "paper",
+   "text": "ハーバード大学などの研究チームは、この心配が本当かどうかを調べました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Brooks, Gino & Schweitzer",
+    "year": "2015",
+    "journal": "Management Science",
+    "title": "Smart People Ask for (My) Advice: Seeking Advice Boosts Perceptions of Competence",
+    "points": [
+     "一緒に課題をした相手から、アドバイスを求められる",
+     "相手の「有能さ」の印象を比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第4章 相談の効果"
+  },
+  {
+   "type": "paper",
+   "text": "参加者は、ペアの相手と一緒に、難しいパズルのような課題に取り組みます。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Brooks, Gino & Schweitzer",
+    "year": "2015",
+    "journal": "Management Science",
+    "title": "Smart People Ask for (My) Advice: Seeking Advice Boosts Perceptions of Competence",
+    "points": [
+     "一緒に課題をした相手から、アドバイスを求められる",
+     "相手の「有能さ」の印象を比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第4章 相談の効果"
+  },
+  {
+   "type": "paper",
+   "text": "途中で、相手から「どうしたらいいと思う？」とアドバイスを求められるグループと、求められないグループに分けました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Brooks, Gino & Schweitzer",
+    "year": "2015",
+    "journal": "Management Science",
+    "title": "Smart People Ask for (My) Advice: Seeking Advice Boosts Perceptions of Competence",
+    "points": [
+     "一緒に課題をした相手から、アドバイスを求められる",
+     "相手の「有能さ」の印象を比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第4章 相談の効果"
+  },
+  {
+   "type": "paper",
+   "text": "すると、アドバイスを求めてきた相手のほうを、「有能な人だ」と評価したんです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "アドバイスを求めた人",
+     "body": "「有能な人」と\n評価された"
+    },
+    "right": {
+     "title": "求めなかった人",
+     "body": "有能さの評価は\nそれほど高くない"
+    }
+   },
+   "enter": true,
+   "tag": "第4章 相談の効果"
+  },
+  {
+   "type": "paper",
+   "text": "ただし、この効果には、いくつか条件がありました。",
+   "visual": {
+    "kind": "list",
+    "title": "相談が「できる人」に見える条件",
+    "items": [
+     "課題がむずかしいとき（かんたんすぎると逆効果）",
+     "「あなたに」直接相談したとき",
+     "相手が得意な分野について相談したとき"
+    ]
+   },
+   "enter": true,
+   "tag": "第4章 相談の効果"
+  },
+  {
+   "type": "paper",
+   "text": "かんたんすぎることを聞いたり、専門外のことを聞いたりすると、この効果は弱くなりました。",
+   "visual": {
+    "kind": "list",
+    "title": "相談が「できる人」に見える条件",
+    "items": [
+     "課題がむずかしいとき（かんたんすぎると逆効果）",
+     "「あなたに」直接相談したとき",
+     "相手が得意な分野について相談したとき"
+    ]
+   },
+   "enter": false,
+   "tag": "第4章 相談の効果"
+  },
+  {
+   "type": "paper",
+   "text": "たとえば、料理が得意な友だちに「おいしい卵焼きのコツ、教えて」と聞くのは、とてもいい相談です。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "いい相談",
+     "body": "料理が得意な友だちに\n「卵焼きのコツ、教えて」"
+    },
+    "right": {
+     "title": "逆効果になりやすい相談",
+     "body": "すぐ調べられることを\n毎回聞く"
+    }
+   },
+   "enter": true,
+   "tag": "第4章 相談の効果"
+  },
+  {
+   "type": "paper",
+   "text": "でも、ネットで1秒で分かることを毎回聞いていると、「自分で調べて」と思われてしまうかもしれません。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "いい相談",
+     "body": "料理が得意な友だちに\n「卵焼きのコツ、教えて」"
+    },
+    "right": {
+     "title": "逆効果になりやすい相談",
+     "body": "すぐ調べられることを\n毎回聞く"
+    }
+   },
+   "enter": false,
+   "tag": "第4章 相談の効果"
+  },
+  {
+   "type": "paper",
+   "text": "相談された側は、「自分の力を認めてくれた」と感じて、うれしくなります。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "いい相談",
+     "body": "料理が得意な友だちに\n「卵焼きのコツ、教えて」"
+    },
+    "right": {
+     "title": "逆効果になりやすい相談",
+     "body": "すぐ調べられることを\n毎回聞く"
+    }
+   },
+   "enter": false,
+   "tag": "第4章 相談の効果"
+  },
+  {
+   "type": "paper",
+   "text": "そして、そんな自分を頼ってくれた相手を、「見る目がある」と評価するのかもしれません。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "いい相談",
+     "body": "料理が得意な友だちに\n「卵焼きのコツ、教えて」"
+    },
+    "right": {
+     "title": "逆効果になりやすい相談",
+     "body": "すぐ調べられることを\n毎回聞く"
+    }
+   },
+   "enter": false,
+   "tag": "第4章 相談の効果"
+  },
+  {
+   "type": "paper",
+   "text": "表計算が得意なケンタに、表計算のことを相談する。マイの頼みごとは、まさに理想的な相談だったんです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "いい相談",
+     "body": "料理が得意な友だちに\n「卵焼きのコツ、教えて」"
+    },
+    "right": {
+     "title": "逆効果になりやすい相談",
+     "body": "すぐ調べられることを\n毎回聞く"
+    }
+   },
+   "enter": false,
+   "speech": "ひょうけいさんが得意なケンタに、ひょうけいさんのことを相談する。マイの頼みごとは、まさに理想的な相談だったんです。",
+   "tag": "第4章 相談の効果"
+  },
+  {
+   "type": "paper",
+   "text": "第5章。「ありがとう」が、次の助けを生む。",
+   "visual": {
+    "kind": "chapter",
+    "no": 5,
+    "title": "「ありがとう」が\n次の助けを生む"
+   },
+   "enter": true,
+   "speech": "第五章。ありがとうが、次の助けを生む。",
+   "chapter": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "最後は、頼みごとを引き受けてもらった、そのあとの話です。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Grant & Gino",
+    "year": "2010",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "A Little Thanks Goes a Long Way: Explaining Why Gratitude Expressions Motivate Prosocial Behavior",
+    "points": [
+     "学生の書類にアドバイスをしてもらう",
+     "そのあとの返事に、お礼の言葉を入れるかどうかで比べた"
+    ]
+   },
+   "enter": true,
+   "tag": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "ペンシルベニア大学のグラントたちは、参加者に、ある学生の就職用の書類にアドバイスをしてもらいました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Grant & Gino",
+    "year": "2010",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "A Little Thanks Goes a Long Way: Explaining Why Gratitude Expressions Motivate Prosocial Behavior",
+    "points": [
+     "学生の書類にアドバイスをしてもらう",
+     "そのあとの返事に、お礼の言葉を入れるかどうかで比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "そのあと、学生からメールが届きます。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Grant & Gino",
+    "year": "2010",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "A Little Thanks Goes a Long Way: Explaining Why Gratitude Expressions Motivate Prosocial Behavior",
+    "points": [
+     "学生の書類にアドバイスをしてもらう",
+     "そのあとの返事に、お礼の言葉を入れるかどうかで比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "半分の人には「アドバイスを受け取りました」とだけ。もう半分の人には、心のこもった「ありがとうございます」が書かれていました。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Grant & Gino",
+    "year": "2010",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "A Little Thanks Goes a Long Way: Explaining Why Gratitude Expressions Motivate Prosocial Behavior",
+    "points": [
+     "学生の書類にアドバイスをしてもらう",
+     "そのあとの返事に、お礼の言葉を入れるかどうかで比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "そして、もう一度、書類を見てほしいという頼みが届きます。",
+   "visual": {
+    "kind": "paper",
+    "authors": "Grant & Gino",
+    "year": "2010",
+    "journal": "Journal of Personality and Social Psychology",
+    "title": "A Little Thanks Goes a Long Way: Explaining Why Gratitude Expressions Motivate Prosocial Behavior",
+    "points": [
+     "学生の書類にアドバイスをしてもらう",
+     "そのあとの返事に、お礼の言葉を入れるかどうかで比べた"
+    ]
+   },
+   "enter": false,
+   "tag": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "報道によると、引き受けた人は、お礼がなかったグループで32%、お礼を言われたグループでは66%。およそ2倍でした。",
+   "visual": {
+    "kind": "bars",
+    "title": "次の頼みも 引き受けた人の割合",
+    "rows": [
+     {
+      "label": "お礼なし",
+      "value": 32,
+      "color": "#2f5d8a"
+     },
+     {
+      "label": "「ありがとう」あり",
+      "value": 66,
+      "color": "#d0607a"
+     }
+    ],
+    "max": 100,
+    "note": "出典：Grant & Gino（2010）の実験を紹介したハーバード大学の記事より"
+   },
+   "enter": true,
+   "speech": "報道によると、引き受けた人は、お礼がなかったグループで、さんじゅうにパーセント、お礼を言われたグループでは、ろくじゅうろくパーセント。およそ2倍でした。",
+   "tag": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "しかも、お礼を言われた人は、ほかの人からの頼みごとまで、引き受けやすくなっていました。",
+   "visual": {
+    "kind": "bars",
+    "title": "次の頼みも 引き受けた人の割合",
+    "rows": [
+     {
+      "label": "お礼なし",
+      "value": 32,
+      "color": "#2f5d8a"
+     },
+     {
+      "label": "「ありがとう」あり",
+      "value": 66,
+      "color": "#d0607a"
+     }
+    ],
+    "max": 100,
+    "note": "出典：Grant & Gino（2010）の実験を紹介したハーバード大学の記事より"
+   },
+   "enter": false,
+   "tag": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "研究チームによると、その理由は「自分は大切にされている」と感じられたからでした。",
+   "visual": {
+    "kind": "concept",
+    "term": "必要とされている感覚",
+    "en": "Social Worth",
+    "desc": "「ありがとう」で、\n自分は大切にされていると感じると、また助けたくなる"
+   },
+   "enter": true,
+   "tag": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "実際の職場でも、上司が「ありがとう」と伝えただけで、電話をかける仕事の件数が増えたそうです。",
+   "visual": {
+    "kind": "concept",
+    "term": "必要とされている感覚",
+    "en": "Social Worth",
+    "desc": "「ありがとう」で、\n自分は大切にされていると感じると、また助けたくなる"
+   },
+   "enter": false,
+   "tag": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "頼みごとは、頼んで終わりではありません。「ありがとう」までが、ひとつのセットなんです。",
+   "visual": {
+    "kind": "concept",
+    "term": "必要とされている感覚",
+    "en": "Social Worth",
+    "desc": "「ありがとう」で、\n自分は大切にされていると感じると、また助けたくなる"
+   },
+   "enter": false,
+   "tag": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "「すみません」ではなく「ありがとう」。同じお礼でも、相手に伝わる気持ちは、ずいぶんちがいます。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "「すみません」",
+     "body": "迷惑をかけたことへの\nおわび"
+    },
+    "right": {
+     "title": "「ありがとう」",
+     "body": "してくれたことへの\n感謝"
+    }
+   },
+   "enter": true,
+   "tag": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "「すみません」は、迷惑をかけたことへのおわび。「ありがとう」は、相手がしてくれたことへの感謝だからです。",
+   "visual": {
+    "kind": "versus",
+    "left": {
+     "title": "「すみません」",
+     "body": "迷惑をかけたことへの\nおわび"
+    },
+    "right": {
+     "title": "「ありがとう」",
+     "body": "してくれたことへの\n感謝"
+    }
+   },
+   "enter": false,
+   "tag": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "ここまでの研究を、まとめてみましょう。",
+   "visual": {
+    "kind": "list",
+    "title": "頼みごとについて分かったこと",
+    "items": [
+     "頼みを引き受けた相手を、好きになる",
+     "直接「頼まれた」ことが、親しさを生む",
+     "人は思ったより、頼みを引き受けてくれる",
+     "得意なことの相談は、「できる人」に見える",
+     "「ありがとう」が、次の助けを生む"
+    ]
+   },
+   "enter": true,
+   "tag": "第5章 ありがとうの力"
+  },
+  {
+   "type": "paper",
+   "text": "第6章。上手に頼るための、3つのルール。",
+   "visual": {
+    "kind": "chapter",
+    "no": 6,
+    "title": "上手に頼るための\n3つのルール"
+   },
+   "enter": true,
+   "speech": "第六章。上手に頼るための、3つのルール。",
+   "chapter": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ルール1。小さく、直接、頼む。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "小さく、直接、頼む",
+    "body": "「5分だけ、教えてもらえませんか？」"
+   },
+   "enter": true,
+   "speech": "ルールいち。小さく、直接、頼む。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "日本とアメリカの実験では、「直接頼まれた」ことが、好意につながっていました。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "小さく、直接、頼む",
+    "body": "「5分だけ、教えてもらえませんか？」"
+   },
+   "enter": false,
+   "speech": "にほんとアメリカの実験では、「直接頼まれた」ことが、好意につながっていました。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "人づてやグループ全体に投げかけるより、「〇〇さん、5分だけいいですか？」と、名前を呼んで頼みましょう。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "小さく、直接、頼む",
+    "body": "「5分だけ、教えてもらえませんか？」"
+   },
+   "enter": false,
+   "speech": "人づてやグループ全体に投げかけるより、なになにさん、5分だけいいですか？と、名前を呼んで頼みましょう。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "最初は、すぐ終わる小さな頼みごとから始めるのがおすすめです。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "小さく、直接、頼む",
+    "body": "「5分だけ、教えてもらえませんか？」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "小さな頼みなら、相手も気軽に引き受けられて、あなたも気軽にお礼が言えます。",
+   "visual": {
+    "kind": "rule",
+    "no": 1,
+    "title": "小さく、直接、頼む",
+    "body": "「5分だけ、教えてもらえませんか？」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ルール2。相手の得意なことを頼る。",
+   "visual": {
+    "kind": "rule",
+    "no": 2,
+    "title": "相手の得意なことを頼る",
+    "body": "「〇〇さん、これ得意ですよね？」"
+   },
+   "enter": true,
+   "speech": "ルールに。相手の得意なことを頼る。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "相談の研究では、相手の得意分野について聞いたとき、いちばん「できる人」に見えていました。",
+   "visual": {
+    "kind": "rule",
+    "no": 2,
+    "title": "相手の得意なことを頼る",
+    "body": "「〇〇さん、これ得意ですよね？」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "「これ、〇〇さんが一番くわしいと思って」。その一言で、相手は自分の力を認められたと感じます。",
+   "visual": {
+    "kind": "rule",
+    "no": 2,
+    "title": "相手の得意なことを頼る",
+    "body": "「〇〇さん、これ得意ですよね？」"
+   },
+   "enter": false,
+   "speech": "これ、なになにさんが一番くわしいと思って。そのひとことで、相手は自分の力を認められたと感じます。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ルール3。「ありがとう」を、言葉にして伝える。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "「ありがとう」を\n言葉にして伝える",
+    "body": "「助かりました。おかげで早く終わりました」"
+   },
+   "enter": true,
+   "speech": "ルールさん。ありがとうを、言葉にして伝える。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "お礼を言われた人は、次の頼みごとも、2倍ほど引き受けやすくなっていました。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "「ありがとう」を\n言葉にして伝える",
+    "body": "「助かりました。おかげで早く終わりました」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "「助かりました」に、「おかげで、〇〇できました」と、どう役に立ったかを添えると、さらに伝わります。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "「ありがとう」を\n言葉にして伝える",
+    "body": "「助かりました。おかげで早く終わりました」"
+   },
+   "enter": false,
+   "speech": "助かりました、に、おかげで、なになにできました、と、どう役に立ったかを添えると、さらに伝わります。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "ひとつだけ注意です。人は、頼みごとを断りにくいものでした。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "「ありがとう」を\n言葉にして伝える",
+    "body": "「助かりました。おかげで早く終わりました」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "だからこそ、「無理だったら、全然いいからね」と、断りやすい一言も添えてあげてください。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "「ありがとう」を\n言葉にして伝える",
+    "body": "「助かりました。おかげで早く終わりました」"
+   },
+   "enter": false,
+   "speech": "だからこそ、「無理だったら、全然いいからね」と、断りやすいひとことも添えてあげてください。",
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "頼りすぎず、でも、ひとりで抱えこみすぎない。そのバランスが大切です。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "「ありがとう」を\n言葉にして伝える",
+    "body": "「助かりました。おかげで早く終わりました」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "そして、頼られたときは、今度はあなたが、気持ちよく引き受けてあげてください。頼り、頼られる関係が、いちばん長続きします。",
+   "visual": {
+    "kind": "rule",
+    "no": 3,
+    "title": "「ありがとう」を\n言葉にして伝える",
+    "body": "「助かりました。おかげで早く終わりました」"
+   },
+   "enter": false,
+   "tag": "第6章 3つのルール"
+  },
+  {
+   "type": "paper",
+   "text": "まとめ。",
+   "visual": {
+    "kind": "chapter",
+    "no": 7,
+    "title": "まとめ",
+    "sub": "頼ることは、信頼を伝えること"
+   },
+   "enter": true,
+   "chapter": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "次の週、マイはまた、表計算で手が止まりました。",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のオフィス",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "ケンタ",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_idea.png",
+     "name": "マイ",
+     "thought": "今日は、\n聞いてみよう",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "speech": "次の週、マイはまた、ひょうけいさんで手が止まりました。",
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "今度は、思いきって声をかけます。「ケンタさん、表計算くわしいですよね。5分だけ、教えてもらえませんか？」",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のオフィス",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "ケンタ",
+     "thought": null,
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "マイ",
+     "thought": "5分だけ、\n教えてもらえませんか？",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "speech": "今度は、思いきって声をかけます。「ケンタさん、ひょうけいさんくわしいですよね。5分だけ、教えてもらえませんか？」",
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "ケンタは、少しうれしそうに答えました。「いいよ。これはね、こうすると一瞬だよ」",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のオフィス",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "ケンタ",
+     "thought": "いいよ！\nこれはね…",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "マイ",
+     "thought": "5分だけ、\n教えてもらえませんか？",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "2時間かかっていた作業は、たった10分で終わりました。",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のオフィス",
+    "left": {
+     "emoji": "ira_man_laugh.png",
+     "name": "ケンタ",
+     "thought": "いいよ！\nこれはね…",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_smile.png",
+     "name": "マイ",
+     "thought": "5分だけ、\n教えてもらえませんか？",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "「ありがとうございます！　おかげで、今日は定時に帰れます」",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のオフィス",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "ケンタ",
+     "thought": "また何でも\n聞いてね",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "マイ",
+     "thought": "ありがとうございます！\n助かりました",
+     "color": "#d0607a"
+    }
+   },
+   "enter": true,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "それからというもの、2人は、ちょっとした雑談もするようになりました。",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のオフィス",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "ケンタ",
+     "thought": "また何でも\n聞いてね",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "マイ",
+     "thought": "ありがとうございます！\n助かりました",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "頼みごとは、相手に迷惑をかけることではなく、「あなたを信頼しています」と伝えることでもあるんです。",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のオフィス",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "ケンタ",
+     "thought": "また何でも\n聞いてね",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "マイ",
+     "thought": "ありがとうございます！\n助かりました",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "あなたも今日、誰かに、小さな頼みごとをしてみませんか。",
+   "visual": {
+    "kind": "scene",
+    "place": "次の週のオフィス",
+    "left": {
+     "emoji": "ira_man_smile.png",
+     "name": "ケンタ",
+     "thought": "また何でも\n聞いてね",
+     "color": "#2f5d8a"
+    },
+    "right": {
+     "emoji": "ira_woman_laugh.png",
+     "name": "マイ",
+     "thought": "ありがとうございます！\n助かりました",
+     "color": "#d0607a"
+    }
+   },
+   "enter": false,
+   "tag": "まとめ"
+  },
+  {
+   "type": "paper",
+   "text": "この動画が参考になったら、高評価とチャンネル登録をお願いします。",
+   "visual": {
+    "kind": "title",
+    "kicker": "論文で読み解く 心理学",
+    "title": [
+     "最後まで見てくれて",
+     "ありがとう"
+    ],
+    "sub": "「頼ってよかった」体験、コメントで教えてください"
+   },
+   "enter": true
+  },
+  {
+   "type": "paper",
+   "text": "頼みごとをして、相手と仲よくなれた体験はありますか？　ぜひコメントで教えてください。",
+   "visual": {
+    "kind": "title",
+    "kicker": "論文で読み解く 心理学",
+    "title": [
+     "最後まで見てくれて",
+     "ありがとう"
+    ],
+    "sub": "「頼ってよかった」体験、コメントで教えてください"
+   },
+   "enter": false
+  }
+ ]
+}

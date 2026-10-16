@@ -9,6 +9,7 @@
 | 2026-10-14 | paper-question-long | 話がうまい人より、質問上手が好かれる理由 | Huang ほか 2017 / Tamir & Mitchell 2012 / Aron ほか 1997 / Kardas, Kumar & Epley 2022 / Hart, VanEpps & Schweitzer 2021 | 10℃（しゃろう, 12420） | リク・ナナミ |
 | 2026-10-15 | paper-kidoku-long | 既読スルーがこんなに気になる理由（返事待ちの心理） | Williams, Cheung & Choi 2000 / Eisenberger ほか 2003 / Whitchurch, Wilson & Gilbert 2011 / Wilson ほか 2005 / Hsee & Ruan 2016 / Liu ほか 2023 | HIRAHIRA（もっぴーさうんど, 2307） | ユウキ・サキ |
 | 2026-10-16 | paper-impression-long | 第一印象は0.1秒で決まる？ でも信じすぎてはいけない理由 | Willis & Todorov 2006 / Ambady & Rosenthal 1993 / Kelley 1950 / Babad ほか 1999 / Todorov ほか 2005 / Todorov & Porter 2014 | the opening of a book（ioni, 2859） | タクミ・ハナ |
+| 2026-10-17 | paper-favor-long | 頼みごとをすると、なぜか好かれる（ベン・フランクリン効果） | Jecker & Landy 1969 / Niiya 2016 / Flynn & Lake 2008 / Brooks, Gino & Schweitzer 2015 / Grant & Gino 2010 | South Wind（FLASH☆BEAT, 9297） | ケンタ・マイ |
 
 ## メモ
 - 使った BGM はここに追記する（同じ曲を続けて使わない）
@@ -50,4 +51,11 @@
 - Todorov, Mandisodza, Goren & Hall (2005) Science 308:1623-1626：要旨。有能さの印象で2004年上院選の68.8%を予測、得票差とも関係、有能さに特有、1秒の提示
 - Todorov & Porter (2014) Psych Sci 25(7):1404-1417：要旨。同じ人の写真間のばらつきが人どうしの差と同等以上、目的（出会い系・選挙）で選ぶ写真が変わる、40msでも
 - PaperPage の stat も小数（0.1・68.8）を表示できるようにした
+
+### paper-favor-long（2026-10-17）
+- Jecker & Landy (1969) Human Relations 22(4):371-378：解説記事で確認（研究者本人に賞金の返金を頼まれた学生が研究者をいちばん好きに。事務の人からの依頼と比較）。小さな古い実験であることを台本で明示
+- Niiya (2016) J Soc Psychol 156(2):211-221：要旨（PubMed）。日本とアメリカ、協力者に直接頼まれると好感・社交的な印象・親しさが増加、頼まれずに手伝った場合は増えない。甘えの理論
+- Flynn & Lake (2008) JPSP 95(1):128-143：要旨。直接の依頼が受け入れられる確率を最大50%過小評価。断る社会的コストを見落とす
+- Brooks, Gino & Schweitzer (2015) Management Science 61(6):1421-1435：要旨（IDEAS）・解説。アドバイスを求める人は有能に見える（課題が難しい・自分に直接・専門分野のとき）
+- Grant & Gino (2010) JPSP 98(6):946-955：要旨。お礼で援助が増え、別の人への援助も増える、社会的価値の感覚が仲立ち、募金係の電話件数も増加。32%→66%はハーバード・ガゼットの記事の値（画面に出典を明記）
 
