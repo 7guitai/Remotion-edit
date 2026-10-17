@@ -20,6 +20,8 @@ import {
   STRAP,
   LAND_KINDS,
   LAND,
+  TOAST_KINDS,
+  TOAST,
   GOLD_GONE,
   GOLD_SIDE,
   TANK,
@@ -88,6 +90,10 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       const px = Math.min(RAIN.dist - 1.2, posAt(sim, f, pi)[0]);
       return { pos: [px + 0.6, 2.3, 8.6], look: [px + 0.9, 1.45, -0.6] };
     }
+    case "tbutter":
+    case "tflick":
+      // テーブルのふちと、トーストが落ちる床が見えるよう、斜め上から
+      return { pos: [0, 3.2, lerp(2.05, 1.95, t)], look: [0, 0.0, 0.08] };
     case "lknee":
     case "lmat":
       // 台・着地する所・2人の全身が入るよう、正面のやや上から
@@ -268,7 +274,7 @@ const useGroundTexture = (kind: SimKind) =>
         ctx.fillStyle = `rgb(${g},${g + 4},${g + 10})`;
         ctx.fillRect((i * 53) % size, (i * 131) % size, 2, 2);
       }
-    } else if (TINY_KINDS.includes(kind)) {
+    } else if (TINY_KINDS.includes(kind) || TOAST_KINDS.includes(kind)) {
       // 木の床（板の幅は 10cmの人の世界で 10cm → 拡大して 1.75m）
       const plank = ["#b98a5a", "#c49464", "#ae8052", "#bf8f5d"];
       plank.forEach((c, i) => {
@@ -1197,7 +1203,7 @@ export const PhysicsScene: React.FC<{
   const overlays: React.ReactNode[] = [];
   const laneX = [width * 0.25, width * 0.75];
   const isRoad = sim.kind === "brake" || sim.kind === "fbrake" || sim.kind === "xbrake";
-  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall", "ice", "trconst", "tracc", "trbrake", "strfeet", "strhold", "lknee", "lmat"].includes(sim.kind);
+  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall", "ice", "trconst", "tracc", "trbrake", "strfeet", "strhold", "lknee", "lmat", "tbutter", "tflick"].includes(sim.kind);
   const isAir = AIR_KINDS.includes(sim.kind);
   // 摩擦ゼロの世界は、摩擦が消えた瞬間からラベルを点滅させる
   const offFrame = Math.round(FRICTION_OFF * fps);
@@ -1218,6 +1224,8 @@ export const PhysicsScene: React.FC<{
               ? [-1.0, 1.0]
               : TRAIN_KINDS.includes(sim.kind) || STRAP_KINDS.includes(sim.kind) || LAND_KINDS.includes(sim.kind)
                 ? [-1.4, 1.4]
+              : TOAST_KINDS.includes(sim.kind)
+                ? TOAST.x
             : sim.kind === "bjump" || sim.kind === "bwall"
               ? [-1.4, 1.4]
             : sim.kind === "asky" || sim.kind === "tfall"
@@ -1557,6 +1565,36 @@ export const PhysicsScene: React.FC<{
         {arrived ? "コンビニに到着！" : `コンビニまで ${(RAIN.dist - d).toFixed(1)}m`}
       </Pill>,
     );
+  }
+  if (TOAST_KINDS.includes(sim.kind)) {
+    [0, 1].forEach((lane) => {
+      const face = sim.kind === "tbutter" && lane === 1 ? "印" : "バター";
+      const dn = v(`down${lane}`);
+      const upN = v(`up${lane}`);
+      overlays.push(
+        <div
+          key={`tc${lane}`}
+          style={{
+            position: "absolute",
+            left: laneX[lane],
+            top: 150 + T,
+            transform: "translate(-50%, 0)",
+            fontFamily,
+            fontWeight: 900,
+            color: "#fff",
+            textAlign: "center",
+            background: "rgba(20,24,32,0.82)",
+            border: `5px solid ${LANE_COLORS[lane]}`,
+            borderRadius: 20,
+            padding: "6px 18px",
+            whiteSpace: "nowrap",
+          }}
+        >
+          <div style={{ fontSize: 34, color: "#ffd166" }}>{`${face}が下 ${dn}枚`}</div>
+          <div style={{ fontSize: 34, color: "#9be7ff" }}>{`${face}が上 ${upN}枚`}</div>
+        </div>,
+      );
+    });
   }
   if (LAND_KINDS.includes(sim.kind)) {
     [-1.4, 1.4].forEach((x0, lane) => {
@@ -2041,7 +2079,7 @@ export const PhysicsScene: React.FC<{
       ? "#b9c7d6"
       : kind === "arain" || kind === "train" || kind === "rwalk" || kind === "rrun"
         ? "#8f9aa8"
-        : TINY_KINDS.includes(kind)
+        : TINY_KINDS.includes(kind) || TOAST_KINDS.includes(kind)
           ? "#ead9bc"
           : TRAIN_KINDS.includes(kind) || STRAP_KINDS.includes(kind)
             ? "#e6eaf0"
@@ -2072,7 +2110,7 @@ export const PhysicsScene: React.FC<{
                 ? "#2b2e33"
                 : kind === "arain" || kind === "train" || kind === "rwalk" || kind === "rrun"
                 ? "linear-gradient(180deg, #4d5866 0%, #7d8896 55%, #a3adb9 100%)"
-                : TINY_KINDS.includes(kind)
+                : TINY_KINDS.includes(kind) || TOAST_KINDS.includes(kind)
                   ? "linear-gradient(180deg, #f3e6d0 0%, #e9d6b8 60%, #d9c09a 100%)"
                   : TRAIN_KINDS.includes(kind) || STRAP_KINDS.includes(kind)
                     ? "linear-gradient(180deg, #eef1f5 0%, #dfe4ea 100%)"
@@ -2316,6 +2354,35 @@ export const PhysicsScene: React.FC<{
                 <sphereGeometry args={[b.size[0] * 0.9, 24, 24]} />
                 <meshStandardMaterial color={b.color} roughness={0.35} />
               </mesh>
+            );
+          }
+          if (b.shape === "toast") {
+            const [L, d] = [b.size[0], b.size[1]];
+            return (
+              <group key={i} position={pos} quaternion={quat}>
+                {/* 耳（まわりの茶色）と、白い中身（上下の面） */}
+                <mesh castShadow receiveShadow>
+                  <boxGeometry args={[L, d, L]} />
+                  <meshStandardMaterial color="#b9783a" roughness={0.8} />
+                </mesh>
+                {[1, -1].map((s) => (
+                  <mesh key={s} position={[0, (s * d) / 2 + s * 0.0006, 0]} rotation={[-s * Math.PI / 2, 0, 0]}>
+                    <planeGeometry args={[L * 0.86, L * 0.86]} />
+                    <meshStandardMaterial color="#f3dfb0" roughness={0.9} />
+                  </mesh>
+                ))}
+                {b.color === "butter" ? (
+                  <mesh position={[0, d / 2 + 0.0014, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+                    <planeGeometry args={[L * 0.72, L * 0.72]} />
+                    <meshStandardMaterial color="#ffd23a" roughness={0.25} />
+                  </mesh>
+                ) : (
+                  <mesh position={[0, d / 2 + 0.0014, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+                    <circleGeometry args={[L * 0.22, 24]} />
+                    <meshStandardMaterial color="#e0263a" roughness={0.5} />
+                  </mesh>
+                )}
+              </group>
             );
           }
           if (b.shape === "mat") {

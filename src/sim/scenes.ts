@@ -72,7 +72,10 @@ export type SimKind =
   | "elevsafe"
   // 高さ1mの台から飛び降りる（lknee：ひざをのばしたまま／ひざを曲げる、lmat：かたい床／マットの上）
   | "lknee"
-  | "lmat";
+  | "lmat"
+  // テーブルからトーストを落とす（tbutter：バターあり／なし（印だけ）、tflick：ゆっくり押す／指ではじく）
+  | "tbutter"
+  | "tflick";
 
 export const AIR_KINDS: SimKind[] = ["afeather", "athrow", "arain", "asky", "aplane"];
 // 水そうの大きさ（中心のz、幅、奥行き、高さ、水面の高さ）
@@ -93,6 +96,10 @@ export const STRAP = { t0: 1.2, a: 4.5 / 3.6, v: 60 };
 export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
 // 飛び降りの検証：台の高さ（m）、跳び出す時刻（秒）、台の奥行きの中心、衝撃をならす時間（秒）、マットの厚さ
 export const LAND_KINDS: SimKind[] = ["lknee", "lmat"];
+// トーストの検証：テーブルの高さ、トーストの大きさ（一辺・厚さ）、1レーンの枚数、テーブルの左右の位置、押す速さ。
+// トーストはテーブルの手前のふち（z = 0）から、カメラの方（+z）へ落ちる
+export const TOAST_KINDS: SimKind[] = ["tbutter", "tflick"];
+export const TOAST = { h: 0.75, size: 0.11, thick: 0.012, n: 5, x: [-0.65, 0.65], push: 0.12, start: 0.3 };
 export const LAND = { h: 1.0, t0: 0.7, z: -0.55, win: 0.04, mat: 0.4 };
 export const BOUNCE_KINDS: SimKind[] = ["bjump", "bdrop", "bwall", "bparty"];
 export const TINY_KINDS: SimKind[] = ["tworld", "tlift", "tjump", "tfall", "twind", "train"];
@@ -112,7 +119,7 @@ export const FRICTION_OFF = 0.6;
 
 export type SimBody = {
   lane: number;
-  shape: "part" | "mat" | "box" | "sphere" | "cone" | "car" | "platform" | "ladder" | "wall" | "feather" | "plane" | "barbell" | "coins" | "egg" | "ice";
+  shape: "part" | "mat" | "toast" | "box" | "sphere" | "cone" | "car" | "platform" | "ladder" | "wall" | "feather" | "plane" | "barbell" | "coins" | "egg" | "ice";
   part?: PartName;
   look?: Look;
   doll?: number;
@@ -1756,6 +1763,141 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
         gone[f] = kind === "goldgone" ? Math.min(1, Math.max(0, (f / fps - GOLD_GONE) / 0.6)) : 0;
       },
     });
+  } else if (TOAST_KINDS.includes(kind)) {
+    // テーブルのふちからトーストを落とす（マシューズの論文と同じ考え方で、運動方程式を細かく計算する）。
+    //  1. トーストを押して、重心がふちを少しこえると、ふちを支点に回り始める
+    //  2. 回るほど前へずり落ちる力が大きくなり、摩擦で支えきれなくなると、すべりながらテーブルをはなれる
+    //  3. はなれたときの回る速さのまま、回りながら床へ落ちる。床につくまでに回った角度で、どちらの面が下かが決まる
+    // 物理エンジンの箱の摩擦は、小さくて軽い物だと大きくなりすぎるので、トーストだけは自分で計算する
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const h = TOAST.h;
+      // 計算はトーストが進む向き（手前 +z）を x として行い、最後に向きを直す
+      const edge = 0;
+      const cx = TOAST.x[lane];
+      const fast = kind === "tflick" && lane === 1;
+      const butter = !(kind === "tbutter" && lane === 1);
+      const table = new CANNON.Body({
+        mass: 0,
+        shape: new CANNON.Box(new CANNON.Vec3(0.5, h / 2, 0.4)),
+        position: new CANNON.Vec3(cx, h / 2, -0.4),
+      });
+      world.addBody(table);
+      bodies.push({ lane, shape: "box", size: [1.0, h, 0.8], color: "#6e4428" });
+      tracked.push(table);
+      const L = TOAST.size;
+      const d = TOAST.thick;
+      const A = L / 2;
+      const I = (L * L + d * d) / 12;
+      // 1枚ごとに、ふちをこえて回り始めるときの はみ出し（m）と、摩擦の強さを少し変える
+      const r0s = [0.003, 0.006, 0.009, 0.012, 0.005];
+      const mus = [0.4, 0.45, 0.5, 0.4, 0.55];
+      const flicks = [1.5, 1.35, 1.65, 1.45, 1.55];
+      type St = { phase: number; x: number; y: number; phi: number; w: number; r: number; u: number; vx: number; vy: number; result: number; z: number };
+      const sts: St[] = [];
+      const dummies: CANNON.Body[] = [];
+      for (let i = 0; i < TOAST.n; i++) {
+        const z = cx - 0.3 + i * 0.15;
+        // phase 0：テーブルの上（押される前・押されている）、1：ふちで回る、2：落ちている、3：床の上
+        sts.push({ phase: 0, x: edge - A - 0.03 - i * 0.008, y: h + d / 2, phi: 0, w: 0, r: 0, u: 0, vx: 0, vy: 0, result: 0, z });
+        const body = new CANNON.Body({ mass: 0 });
+        dummies.push(body);
+        bodies.push({ lane, shape: "toast", size: [L, d, L], color: butter ? "butter" : "mark" });
+        tracked.push(body);
+      }
+      const up = val(`up${lane}`);
+      const down = val(`down${lane}`);
+      const step = (st: St, i: number, t: number, dt: number) => {
+        const t0 = TOAST.start + i * 0.35;
+        const mu = mus[i];
+        if (st.phase === 0) {
+          if (t < t0) {
+            return;
+          }
+          if (fast) {
+            // 指ではじく：テーブルの上をすべる間は、摩擦でブレーキがかかる
+            if (st.vx === 0) {
+              st.vx = flicks[i];
+            }
+            st.vx = Math.max(0, st.vx - mu * G * dt);
+            st.x += st.vx * dt;
+            if (st.x >= edge) {
+              st.phase = 1;
+              st.r = st.x - edge;
+              st.u = st.vx;
+            }
+          } else {
+            // ゆっくり押す（秒速12cm）。重心がふちを r0 こえたら、回り始める
+            st.x += TOAST.push * dt;
+            if (st.x >= edge + r0s[i]) {
+              st.phase = 1;
+              st.r = st.x - edge;
+              st.u = 0;
+            }
+          }
+        } else if (st.phase === 1) {
+          // ふちを支点に回る。重心がふちから r の所にあり、トーストの向きに すべる速さ u
+          const IE = I + st.r * st.r;
+          const acc = (G * st.r * Math.cos(st.phi) - 2 * st.r * st.u * st.w) / IE;
+          const N = (G * Math.cos(st.phi) * I) / IE;
+          const need = st.w * st.w * st.r + G * Math.sin(st.phi);
+          if (st.u <= 1e-9 && need > mu * N) {
+            st.u = 1e-6;
+          }
+          if (st.u > 0) {
+            st.u = Math.max(0, st.u + (G * Math.sin(st.phi) + st.w * st.w * st.r - mu * N) * dt);
+            st.r += st.u * dt;
+          }
+          st.w += acc * dt;
+          st.phi += st.w * dt;
+          st.x = edge + st.r * Math.cos(st.phi) + (d / 2) * Math.sin(st.phi);
+          st.y = h - st.r * Math.sin(st.phi) + (d / 2) * Math.cos(st.phi);
+          if (st.r >= A || st.phi > Math.PI / 2) {
+            st.phase = 2;
+            st.vx = st.w * st.r * Math.sin(st.phi) + st.u * Math.cos(st.phi);
+            st.vy = -st.w * st.r * Math.cos(st.phi) - st.u * Math.sin(st.phi);
+          }
+        } else if (st.phase === 2) {
+          st.vy -= G * dt;
+          st.x += st.vx * dt;
+          st.y += st.vy * dt;
+          st.phi += st.w * dt;
+          const low = A * Math.abs(Math.sin(st.phi)) + (d / 2) * Math.abs(Math.cos(st.phi));
+          if (st.y <= low) {
+            // 床にぶつかった瞬間の向き：上の面（バター）が下を向いていれば「バターが下」
+            const deg = (((st.phi * 180) / Math.PI) % 360 + 360) % 360;
+            st.result = deg > 90 && deg < 270 ? -1 : 1;
+            st.phase = 3;
+            // 近いほうの面を下にして、ぱたんと倒れる
+            st.w = st.result === -1 ? Math.PI : 0;
+          }
+        } else {
+          // 床の上：ぱたんと平らになって止まる
+          st.phi += (st.w - (st.phi % (2 * Math.PI))) * Math.min(1, dt * 18);
+          st.y += (d / 2 - st.y) * Math.min(1, dt * 18);
+          st.vx *= 0.9;
+          st.x += st.vx * dt * 0.3;
+        }
+      };
+      const control = (t: number, dt: number) => {
+        const n = 20;
+        sts.forEach((st, i) => {
+          for (let k = 0; k < n; k++) {
+            step(st, i, t + (k * dt) / n, dt / n);
+          }
+          const body = dummies[i];
+          // 計算の x（進む向き）を手前（+z）に、st.z を左右の位置（x）にする
+          body.position.set(st.z, st.y, st.x);
+          // 手前へ倒れるように、x 軸のまわりに phi 回す
+          body.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), st.phi);
+        });
+      };
+      const record = (f: number) => {
+        up[f] = sts.filter((st) => st.result === 1).length;
+        down[f] = sts.filter((st) => st.result === -1).length;
+      };
+      lanes.push({ world, g: G, dolls: [], control, record });
+    });
   } else if (LAND_KINDS.includes(kind)) {
     // 高さ1mの台の上に立ち、前へ跳び出して地面に着地する。
     // 着地の衝撃（地面が体を押し返す力）は、全身の「上下の勢い（運動量）」の変わり方から求める：
@@ -2355,6 +2497,10 @@ export const simulate = (
                               ? ["ひざをのばす", "ひざを曲げる"]
                               : kind === "lmat"
                                 ? ["かたい床", "マットの上"]
+                                : kind === "tbutter"
+                                  ? ["バターあり", "バターなし"]
+                                  : kind === "tflick"
+                                    ? ["そっと押す", "はじく"]
         : ["いまの地球 1G", gravityLabel(g2)],
   };
   cache.set(key, result);
