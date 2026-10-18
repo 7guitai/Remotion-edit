@@ -73,6 +73,9 @@ export type SimKind =
   // 高さ1mの台から飛び降りる（lknee：ひざをのばしたまま／ひざを曲げる、lmat：かたい床／マットの上）
   | "lknee"
   | "lmat"
+  // 身長17.5mの巨人（ふつうの人を10倍に拡大）。gstand：立っていられる？、gfall：転んだら？
+  | "gstand"
+  | "gfall"
   // テーブルからトーストを落とす（tbutter：バターあり／なし（印だけ）、tflick：ゆっくり押す／指ではじく）
   | "tbutter"
   | "tflick";
@@ -96,6 +99,14 @@ export const STRAP = { t0: 1.2, a: 4.5 / 3.6, v: 60 };
 export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
 // 飛び降りの検証：台の高さ（m）、跳び出す時刻（秒）、台の奥行きの中心、衝撃をならす時間（秒）、マットの厚さ
 export const LAND_KINDS: SimKind[] = ["lknee", "lmat"];
+// 巨人：大きさ10倍。体重は10³＝1000倍、筋肉や骨の強さ（断面積）は10²＝100倍だけ → 体の重さのわりに 1/10 の強さ。
+// 計算はふつうの人の大きさにそろえて行い（筋肉 1/10）、時間は √10 ≒ 3.16倍 ゆっくり進む（重さで動く物のルール）。
+// 描くときは10倍に大きくする。速さは √10 倍になる
+export const GIANT_KINDS: SimKind[] = ["gstand", "gfall"];
+export const GIANT = 10;
+export const GIANT_SPEED = 1 / Math.sqrt(GIANT);
+// 描くときの左右の位置（ふつうの人の位置、巨人の足もと）。gstand は正面向き、gfall は横向きで +x へ倒れる
+export const GIANT_X: Record<string, [number, number]> = { gstand: [-3.2, 6.5], gfall: [-7.5, -3.0] };
 // トーストの検証：テーブルの高さ、トーストの大きさ（一辺・厚さ）、1レーンの枚数、テーブルの左右の位置、押す速さ。
 // トーストはテーブルの手前のふち（z = 0）から、カメラの方（+z）へ落ちる
 export const TOAST_KINDS: SimKind[] = ["tbutter", "tflick"];
@@ -1898,6 +1909,72 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
       };
       lanes.push({ world, g: G, dolls: [], control, record });
     });
+  } else if (GIANT_KINDS.includes(kind)) {
+    // 左：ふつうの人、右：巨人（計算はふつうの大きさ。筋肉と体を支える力は 1/10、時間は √10 倍ゆっくり）
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const giant = lane === 1;
+      const rd = addDoll(world, lane, lane, [giant ? 0 : GIANT_X[kind][0], 0, 0], kind === "gfall" ? Math.PI / 2 : 0);
+      const k = giant ? GIANT_SPEED : 1;
+      const head = val(`head${lane}`);
+      const hitV = val(`hit${lane}`);
+      const downAt = val(`down${lane}`);
+      let hit = 0;
+      let down = -1;
+      let prevVy = 0;
+      if (kind === "gstand") {
+        // しゃがんで、また立ち上がる（スクワット1回）。動きの予定は、それぞれの世界の時間で同じ
+        // （巨人は √10 倍ゆっくりの世界なので、実際の時間では ゆっくり動く）
+        rd.setStrength(giant ? 1 / GIANT : 1);
+        const control = (t: number) => {
+          rd.balance = giant ? 1 / GIANT : 1;
+          if (t < 0.6) {
+            rd.setPose(POSES.stand);
+          } else if (t < 1.6) {
+            rd.setPose(POSES.stand, POSES.crouch, smooth((t - 0.6) / 0.8));
+          } else {
+            rd.setPose(POSES.crouch, POSES.stand, smooth((t - 1.9) / 0.9));
+          }
+          applyBalance(rd);
+          if (down < 0 && rd.bodies.pelvis.position.y < 0.35) {
+            down = t / k;
+          }
+        };
+        const record = (f: number) => {
+          head[f] = rd.bodies.head.position.y * (giant ? GIANT : 1);
+          downAt[f] = down;
+        };
+        lanes.push({ world, g: G, dolls: [rd], control, record, speed: k });
+      } else {
+        // 転ぶ：足をすべらせたように、まっすぐのまま前へ倒れる（どちらも同じ姿勢・同じ強さ）
+        // 頭が地面にぶつかる速さ（巨人は計算の速さ × √10 が本当の速さ）
+        const control = (t: number) => {
+          const tt = t / k;
+          rd.balance = tt < 0.5 ? 1 : 0;
+          rd.setStrength(tt < 0.5 ? 1 : 0.35);
+          rd.setPose(POSES.stand);
+          applyBalance(rd);
+          if (tt >= 0.5 && tt < 0.52) {
+            // 前へ軽く押されたように（上の方ほど速く）
+            for (const b of Object.values(rd.bodies)) {
+              b.velocity.x += 0.25 * (b.position.y / 1.7);
+            }
+          }
+          const vy = rd.bodies.head.velocity.y;
+          if (hit === 0 && prevVy < -1 && vy > prevVy * 0.5 && rd.bodies.head.position.y < 0.3) {
+            hit = -prevVy * (giant ? Math.sqrt(GIANT) : 1);
+            down = tt;
+          }
+          prevVy = vy;
+        };
+        const record = (f: number) => {
+          head[f] = rd.bodies.head.position.y * (giant ? GIANT : 1);
+          hitV[f] = hit * 3.6;
+          downAt[f] = down;
+        };
+        lanes.push({ world, g: G, dolls: [rd], control, record, speed: k });
+      }
+    });
   } else if (LAND_KINDS.includes(kind)) {
     // 高さ1mの台の上に立ち、前へ跳び出して地面に着地する。
     // 着地の衝撃（地面が体を押し返す力）は、全身の「上下の勢い（運動量）」の変わり方から求める：
@@ -2434,11 +2511,14 @@ export const simulate = (
     lanes.forEach((lane, li) => {
       hits[li] = { body: 0, ball: 0, cone: 0 };
       const sp = lane.speed ?? 1;
-      const steps = Math.round(SUB * sp);
+      // 速く進める世界（10cmの人）は1フレームの刻みの回数を増やし、
+      // ゆっくり進む世界（巨人）は1回の刻みを短くする
+      const steps = sp >= 1 ? Math.round(SUB * sp) : SUB;
+      const sdt = sp >= 1 ? dt : dt * sp;
       for (let s = 0; s < steps; s++) {
-        const t = (f / fps) * sp + s * dt;
-        lane.control(t, dt);
-        lane.world.step(dt);
+        const t = (f / fps) * sp + s * sdt;
+        lane.control(t, sdt);
+        lane.world.step(sdt);
       }
       lane.record(f);
       for (const sound of sounds) {
@@ -2497,6 +2577,8 @@ export const simulate = (
                               ? ["ひざをのばす", "ひざを曲げる"]
                               : kind === "lmat"
                                 ? ["かたい床", "マットの上"]
+                                : GIANT_KINDS.includes(kind)
+                                  ? ["ふつうの人", "身長17mの巨人"]
                                 : kind === "tbutter"
                                   ? ["バターあり", "バターなし"]
                                   : kind === "tflick"

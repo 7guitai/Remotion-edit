@@ -22,6 +22,9 @@ import {
   LAND,
   TOAST_KINDS,
   TOAST,
+  GIANT_KINDS,
+  GIANT,
+  GIANT_X,
   GOLD_GONE,
   GOLD_SIDE,
   TANK,
@@ -90,6 +93,11 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       const px = Math.min(RAIN.dist - 1.2, posAt(sim, f, pi)[0]);
       return { pos: [px + 0.6, 2.3, 8.6], look: [px + 0.9, 1.45, -0.6] };
     }
+    case "gstand":
+      // ふつうの人（左）と巨人（右）の全身が入るよう、遠くから
+      return { pos: [1.8, 10.5, lerp(62, 60, t)], look: [1.8, 8.2, 0] };
+    case "gfall":
+      return { pos: [3.0, 10.5, lerp(62, 60, t)], look: [3.0, 8.0, 0] };
     case "tbutter":
     case "tflick":
       // テーブルのふちと、トーストが落ちる床が見えるよう、斜め上から
@@ -1566,6 +1574,46 @@ export const PhysicsScene: React.FC<{
       </Pill>,
     );
   }
+  if (GIANT_KINDS.includes(sim.kind)) {
+    const gx = GIANT_X[sim.kind];
+    const hi = (lane: number) => {
+      const idx = sim.bodies.findIndex((b) => b.part === "head" && b.lane === lane);
+      const p = posAt(sim, f, idx);
+      return lane === 1 ? [gx[1] + p[0] * GIANT, p[1] * GIANT, p[2] * GIANT] : p;
+    };
+    [0, 1].forEach((lane) => {
+      const h = hi(lane);
+      const p = project(cam, [h[0], h[1] + (lane === 1 ? 2.2 : 0.7), h[2]], width, height);
+      overlays.push(
+        <Pill key={`gn${lane}`} x={Math.min(width - 200, Math.max(200, p.x))} y={Math.max(150 + T, p.y)} color={LANE_COLORS[lane]} size={lane === 1 ? 40 : 30}>
+          {lane === 0 ? "ふつうの人 1.75m" : "巨人 17.5m"}
+        </Pill>,
+      );
+    });
+    if (sim.kind === "gstand") {
+      const dn = v("down1");
+      if (dn > 0 && f / fps > dn + 0.3) {
+        const h = hi(1);
+        const p = project(cam, [h[0], h[1] * 0.5, 0], width, height);
+        overlays.push(
+          <Pill key="gres" x={Math.min(width - 230, p.x)} y={p.y} color="#e01b2f" size={46}>
+            立ち上がれない！
+          </Pill>,
+        );
+      }
+    } else {
+      [0, 1].forEach((lane) => {
+        const hit = v(`hit${lane}`);
+        if (hit > 0) {
+          overlays.push(
+            <Pill key={`gh${lane}`} x={width / 2} y={175 + T + lane * 78} color={lane === 1 ? "#e01b2f" : "#334"} size={lane === 1 ? 44 : 34}>
+              {`${lane === 1 ? "巨人" : "ふつうの人"}の頭がぶつかる速さ 時速${Math.round(hit)}km`}
+            </Pill>,
+          );
+        }
+      });
+    }
+  }
   if (TOAST_KINDS.includes(sim.kind)) {
     [0, 1].forEach((lane) => {
       const face = sim.kind === "tbutter" && lane === 1 ? "印" : "バター";
@@ -2284,6 +2332,14 @@ export const PhysicsScene: React.FC<{
                   : b.look === "shoe"
                     ? SHOE
                     : PANTS;
+            if (GIANT_KINDS.includes(sim.kind) && b.lane === 1) {
+              // 巨人：計算はふつうの大きさ。足もとを中心に10倍に大きくして描く
+              return (
+                <group key={i} position={[GIANT_X[sim.kind][1], 0, 0]} scale={GIANT}>
+                  <PersonPart part={b.part!} size={b.size} color={color} pos={pos} quat={quat} />
+                </group>
+              );
+            }
             return <PersonPart key={i} part={b.part!} size={b.size} color={color} pos={pos} quat={quat} />;
           }
           if (b.shape === "ice") {
@@ -2470,6 +2526,12 @@ export const PhysicsScene: React.FC<{
           }
           return null;
         })}
+        {GIANT_KINDS.includes(kind) ? (
+          // 大きさの目安：ふつうの乗用車（長さ4m）
+          <group position={[GIANT_X[kind][0] - (kind === "gstand" ? 3.4 : 2.6), 0.7, kind === "gstand" ? 0.8 : -1.6]} rotation={[0, kind === "gstand" ? 0.5 : 0, 0]}>
+            <Car color="#e8e8e8" />
+          </group>
+        ) : null}
         {kind === "tworld" ? <TinyProps /> : null}
         {kind === "rwalk" || kind === "rrun" ? <RainStreet sim={sim} f={f} /> : null}
         {kind === "elevfall" || kind === "elevsafe" || kind === "elevfloat" ? (
