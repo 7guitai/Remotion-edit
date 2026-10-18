@@ -71,8 +71,33 @@ const quatAt = (sim: SimResult, f: number, i: number): [number, number, number, 
 const findIndex = (sim: SimResult, shape: string, lane: number) =>
   sim.bodies.findIndex((b) => b.shape === shape && b.lane === lane);
 
-// 場面ごとのカメラ
+// 巨人が地面にぶつかった時刻（秒）。カメラのゆれ・土けむりに使う
+const giantHit = (sim: SimResult) => {
+  const d = sim.values["down1"];
+  return d ? d[sim.frames - 1] : -1;
+};
+
+// 場面ごとのカメラ（巨人の場面は、ぶつかった瞬間にゆらす）
 const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
+  const base = cameraBase(sim, f, total);
+  if (!GIANT_KINDS.includes(sim.kind)) {
+    return base;
+  }
+  const hitT = giantHit(sim);
+  const dt = f / sim.fps - hitT;
+  if (hitT < 0 || dt < 0 || dt > 1.2) {
+    return base;
+  }
+  const amp = (sim.kind === "gfallLow" ? 0.55 : sim.kind === "gstand" ? 0.35 : 0.8) * Math.exp(-dt * 5);
+  const sx = Math.sin(dt * 47) * amp;
+  const sy = Math.sin(dt * 61 + 1) * amp * 0.8;
+  return {
+    pos: [base.pos[0] + sx, base.pos[1] + sy, base.pos[2]],
+    look: [base.look[0] + sx * 0.6, base.look[1] + sy * 0.6, base.look[2]],
+  };
+};
+
+const cameraBase = (sim: SimResult, f: number, total: number): Cam => {
   const t = f / Math.max(1, total - 1);
   switch (sim.kind) {
     case "scale":
@@ -98,6 +123,9 @@ const cameraFor = (sim: SimResult, f: number, total: number): Cam => {
       return { pos: [1.8, 10.5, lerp(62, 60, t)], look: [1.8, 8.2, 0] };
     case "gfall":
       return { pos: [3.0, 10.5, lerp(62, 60, t)], look: [3.0, 8.0, 0] };
+    case "gfallLow":
+      // 倒れてくる先の地面すれすれから、巨人を見上げる
+      return { pos: [lerp(44, 42, t), 1.5, 15], look: [8, 6.5, -1.5] };
     case "tbutter":
     case "tflick":
       // テーブルのふちと、トーストが落ちる床が見えるよう、斜め上から
@@ -1113,6 +1141,112 @@ const Car: React.FC<{ color: string }> = ({ color }) => {
   );
 };
 
+// 巨人の場面の町並み（2階建ての家・木・道路）。大きさの目安
+const GiantTown: React.FC = () => {
+  const houses = useMemo(
+    () =>
+      Array.from({ length: 13 }, (_, i) => ({
+        x: -40 + i * 7.6,
+        z: -16 - (i % 3) * 1.5,
+        w: 5.5 + (i % 2) * 1.2,
+        h: 5.6 + ((i * 37) % 5) * 0.4,
+        wall: ["#f2e6d0", "#e9eef2", "#f4dccb", "#e2e8d8"][i % 4],
+        roof: ["#8a3b2e", "#3d4f6b", "#5a4a3a", "#7a2f2f"][i % 4],
+      })),
+    [],
+  );
+  return (
+    <group>
+      {/* 道路 */}
+      <mesh position={[0, 0.01, -7.5]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <planeGeometry args={[200, 6]} />
+        <meshStandardMaterial color="#5b5f66" roughness={0.9} />
+      </mesh>
+      {Array.from({ length: 30 }, (_, i) => (
+        <mesh key={i} position={[-60 + i * 4.5, 0.02, -7.5]} rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[2.2, 0.18]} />
+          <meshBasicMaterial color="#f2f2f2" />
+        </mesh>
+      ))}
+      {houses.map((hs, i) => (
+        <group key={i} position={[hs.x, 0, hs.z]}>
+          <mesh position={[0, hs.h / 2, 0]} castShadow receiveShadow>
+            <boxGeometry args={[hs.w, hs.h, 6]} />
+            <meshStandardMaterial color={hs.wall} roughness={0.85} />
+          </mesh>
+          <mesh position={[0, hs.h + 1.2, 0]} rotation={[0, Math.PI / 4, 0]} castShadow>
+            <coneGeometry args={[hs.w * 0.78, 2.4, 4]} />
+            <meshStandardMaterial color={hs.roof} roughness={0.7} />
+          </mesh>
+          {[-1, 1].map((sx) =>
+            [1.6, hs.h - 1.6].map((wy) => (
+              <mesh key={`${sx}${wy}`} position={[sx * hs.w * 0.25, wy, 3.01]}>
+                <planeGeometry args={[1.1, 1.0]} />
+                <meshStandardMaterial color="#9cc4e4" roughness={0.2} />
+              </mesh>
+            )),
+          )}
+        </group>
+      ))}
+      {Array.from({ length: 9 }, (_, i) => (
+        <group key={`t${i}`} position={[-36 + i * 10.5, 0, -11]}>
+          <mesh position={[0, 1.4, 0]} castShadow>
+            <cylinderGeometry args={[0.22, 0.3, 2.8, 10]} />
+            <meshStandardMaterial color="#6b4a2e" />
+          </mesh>
+          <mesh position={[0, 3.8, 0]} castShadow>
+            <sphereGeometry args={[1.7, 16, 12]} />
+            <meshStandardMaterial color="#4f8f3a" roughness={0.9} />
+          </mesh>
+        </group>
+      ))}
+    </group>
+  );
+};
+
+// 巨人が地面にぶつかったときの土けむりと、地面を走る衝撃の輪
+const GiantDust: React.FC<{ sim: SimResult; f: number }> = ({ sim, f }) => {
+  const hitT = giantHit(sim);
+  if (hitT < 0) {
+    return null;
+  }
+  const dt = f / sim.fps - hitT;
+  if (dt < 0 || dt > 3.5) {
+    return null;
+  }
+  // 土けむりの中心：ぶつかった瞬間の胴体の位置（巨人の大きさに直す）
+  const hitF = Math.min(sim.frames - 1, Math.round(hitT * sim.fps));
+  const ti = sim.bodies.findIndex((b) => b.part === (sim.kind === "gstand" ? "pelvis" : "torso") && b.lane === 1);
+  const tp = posAt(sim, hitF, ti);
+  const cx = GIANT_X[sim.kind][1] + tp[0] * GIANT;
+  const cz = tp[2] * GIANT;
+  const puffs = Array.from({ length: 46 }, (_, i) => {
+    const a = random(`da${i}`) * Math.PI * 2;
+    const sp = 2 + random(`ds${i}`) * 5;
+    const d = sp * (1 - Math.exp(-dt * 1.6)) / 1.6;
+    const r = 0.6 + dt * (0.8 + random(`dr${i}`) * 0.9);
+    const along = (random(`dl${i}`) - 0.5) * (sim.kind === "gstand" ? 4 : 14);
+    return (
+      <mesh key={i} position={[cx + along + Math.cos(a) * d, 0.4 + r * 0.5 + dt * (0.4 + random(`dy${i}`)), cz + Math.sin(a) * d]}>
+        <sphereGeometry args={[r, 10, 8]} />
+        <meshStandardMaterial color="#cbb89a" transparent opacity={Math.max(0, 0.42 * (1 - dt / 3.5))} depthWrite={false} roughness={1} />
+      </mesh>
+    );
+  });
+  const ring = Math.min(1, dt / 0.9);
+  return (
+    <group>
+      {puffs}
+      {dt < 0.9 ? (
+        <mesh position={[cx, 0.05, cz]} rotation={[-Math.PI / 2, 0, 0]}>
+          <ringGeometry args={[2 + ring * 22, 2.8 + ring * 23, 64]} />
+          <meshBasicMaterial color="#ffffff" transparent opacity={0.6 * (1 - ring)} depthWrite={false} />
+        </mesh>
+      ) : null}
+    </group>
+  );
+};
+
 const Cone: React.FC = () => (
   <group>
     <mesh castShadow>
@@ -1574,7 +1708,7 @@ export const PhysicsScene: React.FC<{
       </Pill>,
     );
   }
-  if (GIANT_KINDS.includes(sim.kind)) {
+  if (GIANT_KINDS.includes(sim.kind) && sim.kind !== "gfallLow") {
     const gx = GIANT_X[sim.kind];
     const hi = (lane: number) => {
       const idx = sim.bodies.findIndex((b) => b.part === "head" && b.lane === lane);
@@ -1607,7 +1741,7 @@ export const PhysicsScene: React.FC<{
         if (hit > 0) {
           overlays.push(
             <Pill key={`gh${lane}`} x={width / 2} y={175 + T + lane * 78} color={lane === 1 ? "#e01b2f" : "#334"} size={lane === 1 ? 44 : 34}>
-              {`${lane === 1 ? "巨人" : "ふつうの人"}の頭がぶつかる速さ 時速${Math.round(hit)}km`}
+              {`${lane === 1 ? "巨人" : "ふつうの人"}の頭が落ちてくる速さ 時速${Math.round(hit)}km`}
             </Pill>,
           );
         }
@@ -1989,6 +2123,20 @@ export const PhysicsScene: React.FC<{
       </Sequence>
     );
   });
+
+  // 巨人が地面にぶつかった音（重く低い音。大きさはぶつかる速さに合わせて控えめに）
+  if (GIANT_KINDS.includes(kind)) {
+    const hitT = giantHit(sim);
+    const hf = Math.round(hitT * fps) - offset;
+    if (hitT > 0 && hf >= 0) {
+      const speed = sim.values["hit1"][sim.frames - 1];
+      sounds.push(
+        <Sequence key="boom" from={hf} durationInFrames={40}>
+          <Audio src={staticFile("sfx/impact.wav")} volume={Math.min(0.5, 0.18 + speed / 200)} />
+        </Sequence>,
+      );
+    }
+  }
 
   const isTunnel = kind === "tunnel" || kind === "tunnelzero";
   const isSky = kind === "asky" || kind === "tfall";
@@ -2465,6 +2613,18 @@ export const PhysicsScene: React.FC<{
               </mesh>
             );
           }
+          if (b.shape === "car" && GIANT_KINDS.includes(sim.kind) && b.lane === 1) {
+            // 巨人の世界の車（1/10）を、巨人といっしょに10倍にして描く。つぶれた車は低く平らに
+            const ci = sim.bodies.slice(0, i).filter((x) => x.shape === "car" && x.lane === 1).length;
+            const cr = sim.values[`crush${ci}`]?.[f] ?? 0;
+            return (
+              <group key={i} position={[GIANT_X[sim.kind][1], 0, 0]} scale={GIANT}>
+                <group position={[pos[0], pos[1] - 0.07 * 0.55 * cr, pos[2]]} quaternion={quat} scale={[0.1, 0.1 * (1 - 0.55 * cr), 0.1 * (1 + 0.12 * cr)]}>
+                  <Car color={cr > 0 ? "#cfcfd4" : "#e8e8e8"} />
+                </group>
+              </group>
+            );
+          }
           if (b.shape === "car") {
             return (
               <group key={i} position={pos} quaternion={quat}>
@@ -2532,6 +2692,8 @@ export const PhysicsScene: React.FC<{
             <Car color="#e8e8e8" />
           </group>
         ) : null}
+        {GIANT_KINDS.includes(kind) ? <GiantTown /> : null}
+        {GIANT_KINDS.includes(kind) ? <GiantDust sim={sim} f={f} /> : null}
         {kind === "tworld" ? <TinyProps /> : null}
         {kind === "rwalk" || kind === "rrun" ? <RainStreet sim={sim} f={f} /> : null}
         {kind === "elevfall" || kind === "elevsafe" || kind === "elevfloat" ? (

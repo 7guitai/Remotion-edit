@@ -4,6 +4,7 @@ import {
   createRagdoll,
   Look,
   PartName,
+  Pose,
   POSES,
   Ragdoll,
   ragdollParts,
@@ -76,6 +77,8 @@ export type SimKind =
   // 身長17.5mの巨人（ふつうの人を10倍に拡大）。gstand：立っていられる？、gfall：転んだら？
   | "gstand"
   | "gfall"
+  // gfall と同じ計算で、カメラだけ地面すれすれから見上げる
+  | "gfallLow"
   // テーブルからトーストを落とす（tbutter：バターあり／なし（印だけ）、tflick：ゆっくり押す／指ではじく）
   | "tbutter"
   | "tflick";
@@ -102,11 +105,24 @@ export const LAND_KINDS: SimKind[] = ["lknee", "lmat"];
 // 巨人：大きさ10倍。体重は10³＝1000倍、筋肉や骨の強さ（断面積）は10²＝100倍だけ → 体の重さのわりに 1/10 の強さ。
 // 計算はふつうの人の大きさにそろえて行い（筋肉 1/10）、時間は √10 ≒ 3.16倍 ゆっくり進む（重さで動く物のルール）。
 // 描くときは10倍に大きくする。速さは √10 倍になる
-export const GIANT_KINDS: SimKind[] = ["gstand", "gfall"];
+export const GIANT_KINDS: SimKind[] = ["gstand", "gfall", "gfallLow"];
 export const GIANT = 10;
 export const GIANT_SPEED = 1 / Math.sqrt(GIANT);
 // 描くときの左右の位置（ふつうの人の位置、巨人の足もと）。gstand は正面向き、gfall は横向きで +x へ倒れる
-export const GIANT_X: Record<string, [number, number]> = { gstand: [-3.2, 6.5], gfall: [-7.5, -3.0] };
+export const GIANT_X: Record<string, [number, number]> = { gstand: [-3.2, 6.5], gfall: [-7.5, -3.0], gfallLow: [-7.5, -3.0] };
+// 巨人が倒れる先に止めてある車（巨人の世界で、大きさ・重さとも縮めて置く。x は巨人の足もとから、z は左右）
+const ARMS_UP: Pose = {
+  shoulderL: [-2.4, 0, -0.35],
+  shoulderR: [-2.4, 0, 0.35],
+  elbowL: [-0.2, 0, 0],
+  elbowR: [-0.2, 0, 0],
+};
+export const GIANT_CARS: [number, number, number][] = [
+  [1.1, 0.0, 0.2],
+  [2.05, 0.38, 0.15],
+  [2.02, -0.44, -0.2],
+  [1.85, 0.0, 1.45],
+];
 // トーストの検証：テーブルの高さ、トーストの大きさ（一辺・厚さ）、1レーンの枚数、テーブルの左右の位置、押す速さ。
 // トーストはテーブルの手前のふち（z = 0）から、カメラの方（+z）へ落ちる
 export const TOAST_KINDS: SimKind[] = ["tbutter", "tflick"];
@@ -1914,7 +1930,7 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
     [0, 1].forEach((lane) => {
       const { world } = makeWorld(G);
       const giant = lane === 1;
-      const rd = addDoll(world, lane, lane, [giant ? 0 : GIANT_X[kind][0], 0, 0], kind === "gfall" ? Math.PI / 2 : 0);
+      const rd = addDoll(world, lane, lane, [giant ? 0 : GIANT_X[kind][0], 0, 0], kind === "gstand" ? 0 : Math.PI / 2);
       const k = giant ? GIANT_SPEED : 1;
       const head = val(`head${lane}`);
       const hitV = val(`hit${lane}`);
@@ -1922,6 +1938,7 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
       let hit = 0;
       let down = -1;
       let prevVy = 0;
+      let peakVy = 0;
       if (kind === "gstand") {
         // しゃがんで、また立ち上がる（スクワット1回）。動きの予定は、それぞれの世界の時間で同じ
         // （巨人は √10 倍ゆっくりの世界なので、実際の時間では ゆっくり動く）
@@ -1946,13 +1963,36 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
         };
         lanes.push({ world, g: G, dolls: [rd], control, record, speed: k });
       } else {
+        const cars: CANNON.Body[] = [];
+        const crush: Float32Array[] = [];
+        const crushAt: number[] = [];
+        if (giant) {
+          // 倒れる先の車（ふつうの乗用車 長さ4m・1.2トンを、巨人の世界の大きさ 1/10・重さ 1/1000 にして置く）
+          GIANT_CARS.forEach(([cx, cz, rot], ci) => {
+            const car = new CANNON.Body({
+              mass: 1.2,
+              position: new CANNON.Vec3(cx, 0.07, cz),
+              material: bodyMaterial,
+            });
+            car.addShape(new CANNON.Box(new CANNON.Vec3(0.2, 0.06, 0.085)));
+            car.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), rot);
+            world.addBody(car);
+            bodies.push({ lane, shape: "car", size: [0.4, 0.12, 0.17], color: "#e8e8e8" });
+            tracked.push(car);
+            soundOf.set(car, "cone");
+            cars.push(car);
+            crush.push(val(`crush${ci}`));
+            crushAt.push(-1);
+          });
+        }
         // 転ぶ：足をすべらせたように、まっすぐのまま前へ倒れる（どちらも同じ姿勢・同じ強さ）
         // 頭が地面にぶつかる速さ（巨人は計算の速さ × √10 が本当の速さ）
         const control = (t: number) => {
           const tt = t / k;
           rd.balance = tt < 0.5 ? 1 : 0;
           rd.setStrength(tt < 0.5 ? 1 : 0.35);
-          rd.setPose(POSES.stand);
+          // 倒れ始めたら、あわてて両手を前へ出す（どちらも同じ。腕だけ動かす）
+          rd.setPose(POSES.stand, ARMS_UP, smooth((tt - 0.9) / 0.4));
           applyBalance(rd);
           if (tt >= 0.5 && tt < 0.52) {
             // 前へ軽く押されたように（上の方ほど速く）
@@ -1960,17 +2000,41 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
               b.velocity.x += 0.25 * (b.position.y / 1.7);
             }
           }
+          // 頭が落ちてくる速さのいちばん大きい値（巨人は計算の速さ × √10）
           const vy = rd.bodies.head.velocity.y;
-          if (hit === 0 && prevVy < -1 && vy > prevVy * 0.5 && rd.bodies.head.position.y < 0.3) {
-            hit = -prevVy * (giant ? Math.sqrt(GIANT) : 1);
+          peakVy = Math.max(peakVy, -vy);
+          if (down < 0 && peakVy > 1 && -vy < 0.3 * peakVy) {
+            // 体がどこかにぶつかって、急に止まった瞬間
             down = tt;
           }
           prevVy = vy;
+          hit = peakVy * (giant ? Math.sqrt(GIANT) : 1);
+          // 車にかかる力：巨人の体が車を押す力（接触の力）を合計し、本当の大きさ（力は 10³ 倍）に直す。
+          // 車の屋根が耐えられる力の目安（車の重さの3倍 ≒ 35kN）をこえたら、つぶれ始める
+          cars.forEach((car, ci) => {
+            let F = 0;
+            for (const c of world.contacts) {
+              if (c.bi === car || c.bj === car) {
+                const other = c.bi === car ? c.bj : c.bi;
+                if (other.mass > 0 && other.collisionFilterGroup === 4) {
+                  F += Math.abs(c.multiplier);
+                }
+              }
+            }
+            const real = F * GIANT * GIANT * GIANT;
+            if (crushAt[ci] < 0 && real > 35000) {
+              crushAt[ci] = tt;
+            }
+          });
         };
         const record = (f: number) => {
           head[f] = rd.bodies.head.position.y * (giant ? GIANT : 1);
-          hitV[f] = hit * 3.6;
+          hitV[f] = down >= 0 ? hit * 3.6 : 0;
           downAt[f] = down;
+          // つぶれ具合（0〜1）：屋根の強さをこえてから 0.3秒でつぶれる
+          crushAt.forEach((at, ci) => {
+            crush[ci][f] = at < 0 ? 0 : Math.min(1, Math.max(0, (f / fps - at) / 0.3));
+          });
         };
         lanes.push({ world, g: G, dolls: [rd], control, record, speed: k });
       }
