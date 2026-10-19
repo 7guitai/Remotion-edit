@@ -26,6 +26,8 @@ import {
   GIANT,
   GIANT_X,
   ELEVPACK,
+  BLANKET_KINDS,
+  BLANKETS,
   GOLD_GONE,
   GOLD_SIDE,
   TANK,
@@ -119,6 +121,13 @@ const cameraBase = (sim: SimResult, f: number, total: number): Cam => {
       const px = Math.min(RAIN.dist - 1.2, posAt(sim, f, pi)[0]);
       return { pos: [px + 0.6, 2.3, 8.6], look: [px + 0.9, 1.45, -0.6] };
     }
+    case "bk_silk":
+    case "bk_towel":
+    case "bk_wool":
+    case "bk_down":
+    case "bk_weight":
+      // ベッドの足もと、ななめ上から（ゆっくり近づく）
+      return { pos: [lerp(1.8, 1.65, t), lerp(2.8, 2.6, t), lerp(2.9, 2.65, t)], look: [0, 0.62, -0.35] };
     case "epack":
       // エレベーターの入口の前、少し上から中を見下ろす
       return { pos: [0.45, 7.2, lerp(3.9, 3.7, t)], look: [0.45, 0.0, -0.6] };
@@ -314,7 +323,7 @@ const useGroundTexture = (kind: SimKind) =>
         ctx.fillStyle = `rgb(${g},${g + 4},${g + 10})`;
         ctx.fillRect((i * 53) % size, (i * 131) % size, 2, 2);
       }
-    } else if (TINY_KINDS.includes(kind) || TOAST_KINDS.includes(kind)) {
+    } else if (TINY_KINDS.includes(kind) || TOAST_KINDS.includes(kind) || BLANKET_KINDS.includes(kind)) {
       // 木の床（板の幅は 10cmの人の世界で 10cm → 拡大して 1.75m）
       const plank = ["#b98a5a", "#c49464", "#ae8052", "#bf8f5d"];
       plank.forEach((c, i) => {
@@ -1089,7 +1098,8 @@ const PersonPart: React.FC<{
   color: string;
   pos: [number, number, number];
   quat: [number, number, number, number];
-}> = ({ part, size, color, pos, quat }) => {
+  closed?: boolean;
+}> = ({ part, size, color, pos, quat, closed }) => {
   const geom = useMemo(() => partGeometry(part, size), [part, size]);
   return (
     <group position={pos} quaternion={quat}>
@@ -1103,13 +1113,20 @@ const PersonPart: React.FC<{
             <sphereGeometry args={[size[0] / 2 + 0.008, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.42]} />
             <meshStandardMaterial color={HAIR} roughness={0.8} />
           </mesh>
-          {/* 目 */}
-          {[-1, 1].map((s) => (
-            <mesh key={s} position={[s * 0.042, 0.01, size[0] / 2 - 0.012]}>
-              <sphereGeometry args={[0.017, 12, 12]} />
-              <meshStandardMaterial color="#111" roughness={0.3} />
-            </mesh>
-          ))}
+          {/* 目（眠っているときは、閉じた目＝横線） */}
+          {[-1, 1].map((s) =>
+            closed ? (
+              <mesh key={s} position={[s * 0.042, 0.004, size[0] / 2 - 0.004]} rotation={[0, 0, Math.PI / 2]}>
+                <capsuleGeometry args={[0.005, 0.026, 4, 8]} />
+                <meshStandardMaterial color="#222" roughness={0.5} />
+              </mesh>
+            ) : (
+              <mesh key={s} position={[s * 0.042, 0.01, size[0] / 2 - 0.012]}>
+                <sphereGeometry args={[0.017, 12, 12]} />
+                <meshStandardMaterial color="#111" roughness={0.3} />
+              </mesh>
+            ),
+          )}
         </>
       ) : null}
     </group>
@@ -1144,6 +1161,190 @@ const Car: React.FC<{ color: string }> = ({ color }) => {
     </group>
   );
 };
+
+// 布団の模様（布の種類ごと）
+const useClothTexture = (look: string) =>
+  useMemo(() => {
+    const size = 512;
+    const c = document.createElement("canvas");
+    c.width = size;
+    c.height = size;
+    const x = c.getContext("2d")!;
+    if (look === "silk") {
+      const g = x.createLinearGradient(0, 0, size, size);
+      g.addColorStop(0, "#e9d8ff");
+      g.addColorStop(0.5, "#f6eeff");
+      g.addColorStop(1, "#dcc6fb");
+      x.fillStyle = g;
+      x.fillRect(0, 0, size, size);
+    } else if (look === "towel") {
+      for (let i = 0; i < 16; i++) {
+        x.fillStyle = i % 2 === 0 ? "#bfe3f5" : "#ffffff";
+        x.fillRect(0, (i * size) / 16, size, size / 16);
+      }
+      for (let i = 0; i < 6000; i++) {
+        x.fillStyle = "rgba(0,0,0,0.04)";
+        x.fillRect((i * 53) % size, (i * 131) % size, 2, 2);
+      }
+    } else if (look === "wool") {
+      x.fillStyle = "#b9342f";
+      x.fillRect(0, 0, size, size);
+      x.globalAlpha = 0.55;
+      for (let i = 0; i < 8; i++) {
+        x.fillStyle = "#1f2f5a";
+        x.fillRect((i * size) / 8, 0, size / 24, size);
+        x.fillRect(0, (i * size) / 8, size, size / 24);
+      }
+      x.globalAlpha = 0.35;
+      for (let i = 0; i < 8; i++) {
+        x.fillStyle = "#f2c94c";
+        x.fillRect((i * size) / 8 + size / 16, 0, 4, size);
+        x.fillRect(0, (i * size) / 8 + size / 16, size, 4);
+      }
+      x.globalAlpha = 1;
+    } else if (look === "down") {
+      x.fillStyle = "#fbfbf7";
+      x.fillRect(0, 0, size, size);
+      // キルティング（ふくらんだマス目）
+      const m = 6;
+      for (let i = 0; i < m; i++) {
+        for (let j = 0; j < m; j++) {
+          const g = x.createRadialGradient((i + 0.5) * (size / m), (j + 0.5) * (size / m), 4, (i + 0.5) * (size / m), (j + 0.5) * (size / m), size / m / 1.3);
+          g.addColorStop(0, "#ffffff");
+          g.addColorStop(1, "#dcdcd2");
+          x.fillStyle = g;
+          x.fillRect(i * (size / m), j * (size / m), size / m, size / m);
+        }
+      }
+      x.strokeStyle = "#c8c8bc";
+      x.lineWidth = 3;
+      for (let i = 0; i <= m; i++) {
+        x.beginPath();
+        x.moveTo((i * size) / m, 0);
+        x.lineTo((i * size) / m, size);
+        x.moveTo(0, (i * size) / m);
+        x.lineTo(size, (i * size) / m);
+        x.stroke();
+      }
+    } else {
+      // 加重ブランケット：グレーの布に、つぶが入った小さなマス
+      x.fillStyle = "#6b7280";
+      x.fillRect(0, 0, size, size);
+      x.strokeStyle = "#4b5260";
+      x.lineWidth = 3;
+      const m = 12;
+      for (let i = 0; i <= m; i++) {
+        x.beginPath();
+        x.moveTo((i * size) / m, 0);
+        x.lineTo((i * size) / m, size);
+        x.moveTo(0, (i * size) / m);
+        x.lineTo(size, (i * size) / m);
+        x.stroke();
+      }
+    }
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = 8;
+    return t;
+  }, [look]);
+
+// 布団（布のシミュレーションの点を、つないで面にする）。厚い布団は、うら側の面を少し下に描いて厚みを出す
+const ClothMesh: React.FC<{ sim: SimResult; f: number; look: string }> = ({ sim, f, look }) => {
+  const info = sim.values["clothInfo"];
+  const data = sim.values["clothData"];
+  const nx = info[0];
+  const ny = info[1];
+  const thick = info[2];
+  const n = nx * ny;
+  const tex = useClothTexture(look);
+  const index = useMemo(() => {
+    const idx: number[] = [];
+    for (let j = 0; j < ny - 1; j++) {
+      for (let i = 0; i < nx - 1; i++) {
+        const a = j * nx + i;
+        idx.push(a, a + nx, a + 1, a + 1, a + nx, a + nx + 1);
+      }
+    }
+    return idx;
+  }, [nx, ny]);
+  const uv = useMemo(() => {
+    const u = new Float32Array(n * 2);
+    for (let j = 0; j < ny; j++) {
+      for (let i = 0; i < nx; i++) {
+        u[(j * nx + i) * 2] = i / (nx - 1);
+        u[(j * nx + i) * 2 + 1] = j / (ny - 1);
+      }
+    }
+    return u;
+  }, [n, nx, ny]);
+  const [top, bottom] = useMemo(() => {
+    const pos = data.slice(f * n * 3, (f + 1) * n * 3);
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    g.setAttribute("uv", new THREE.BufferAttribute(uv, 2));
+    g.setIndex(index);
+    g.computeVertexNormals();
+    // 上が外側になるよう、法線が下を向いている点はうら返す
+    const nrm = g.getAttribute("normal") as THREE.BufferAttribute;
+    let sum = 0;
+    for (let k = 0; k < n; k++) sum += nrm.getY(k);
+    const sign = sum >= 0 ? 1 : -1;
+    const pos2 = new Float32Array(pos.length);
+    for (let k = 0; k < n; k++) {
+      pos2[k * 3] = pos[k * 3] - nrm.getX(k) * thick * sign;
+      pos2[k * 3 + 1] = pos[k * 3 + 1] - nrm.getY(k) * thick * sign;
+      pos2[k * 3 + 2] = pos[k * 3 + 2] - nrm.getZ(k) * thick * sign;
+    }
+    const g2 = new THREE.BufferGeometry();
+    g2.setAttribute("position", new THREE.BufferAttribute(pos2, 3));
+    g2.setAttribute("uv", new THREE.BufferAttribute(uv, 2));
+    g2.setIndex(index);
+    g2.computeVertexNormals();
+    return [g, g2];
+  }, [data, f, n, uv, index, thick]);
+  const rough = look === "silk" ? 0.28 : look === "weight" ? 0.75 : 0.95;
+  const metal = look === "silk" ? 0.18 : 0;
+  return (
+    <group>
+      <mesh geometry={top} castShadow receiveShadow>
+        <meshStandardMaterial map={tex} roughness={rough} metalness={metal} side={THREE.DoubleSide} />
+      </mesh>
+      {thick > 0.015 ? (
+        <mesh geometry={bottom} castShadow receiveShadow>
+          <meshStandardMaterial map={tex} roughness={rough} metalness={metal} side={THREE.DoubleSide} color="#d8d8d8" />
+        </mesh>
+      ) : null}
+    </group>
+  );
+};
+
+// 寝室（かべ・ラグ・ナイトテーブル）
+const Bedroom: React.FC = () => (
+  <group>
+    <mesh position={[0, 1.5, -1.25]} receiveShadow>
+      <boxGeometry args={[8, 3, 0.1]} />
+      <meshStandardMaterial color="#efe6d8" roughness={0.95} />
+    </mesh>
+    <mesh position={[-3, 1.5, 1]} receiveShadow>
+      <boxGeometry args={[0.1, 3, 6]} />
+      <meshStandardMaterial color="#f3ebdf" roughness={0.95} />
+    </mesh>
+    <mesh position={[0, 0.006, 0.4]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+      <planeGeometry args={[2.4, 3.0]} />
+      <meshStandardMaterial color="#c9b79c" roughness={1} />
+    </mesh>
+    <group position={[-0.95, 0, -0.85]}>
+      <mesh position={[0, 0.25, 0]} castShadow receiveShadow>
+        <boxGeometry args={[0.45, 0.5, 0.4]} />
+        <meshStandardMaterial color="#9c6b46" roughness={0.7} />
+      </mesh>
+      <mesh position={[0, 0.62, 0]} castShadow>
+        <cylinderGeometry args={[0.1, 0.13, 0.24, 20]} />
+        <meshStandardMaterial color="#f5e6c4" emissive="#ffcf7a" emissiveIntensity={0.35} />
+      </mesh>
+    </group>
+  </group>
+);
 
 // 満員エレベーターのかご（ドアが開いている。かべは断面で、中が見えるように）
 const PackElevator: React.FC<{ full: number; t: number }> = ({ full, t }) => {
@@ -1760,6 +1961,58 @@ export const PhysicsScene: React.FC<{
       <Pill key="dist" x={width / 2} y={250 + T} color={arrived ? "#1f8f4e" : "#334"} size={34}>
         {arrived ? "コンビニに到着！" : `コンビニまで ${(RAIN.dist - d).toFixed(1)}m`}
       </Pill>,
+    );
+  }
+  if (BLANKET_KINDS.includes(sim.kind)) {
+    const bk = BLANKETS[sim.kind];
+    // 寝ている人の頭の上に「Zzz」（ゆっくり上へ浮かぶ）
+    const hi = sim.bodies.findIndex((b) => b.part === "head");
+    const hp = posAt(sim, f, hi);
+    ["Z", "z", "z"].forEach((ch, i) => {
+      const ph = ((f / fps) * 0.6 + i / 3) % 1;
+      const p = project(cam, [hp[0] + 0.12 + ph * 0.25, hp[1] + 0.2 + ph * 0.45, hp[2]], width, height);
+      overlays.push(
+        <div
+          key={`z${i}`}
+          style={{
+            position: "absolute",
+            left: p.x,
+            top: p.y,
+            transform: "translate(-50%, -50%)",
+            fontFamily,
+            fontWeight: 900,
+            fontSize: 44 + ph * 26,
+            color: "#5b6fd6",
+            opacity: Math.sin(ph * Math.PI),
+            WebkitTextStroke: "6px #fff",
+            paintOrder: "stroke fill",
+          }}
+        >
+          {ch}
+        </div>,
+      );
+    });
+    overlays.push(
+      <div
+        key="bk"
+        style={{
+          position: "absolute",
+          left: 28,
+          top: 40 + T,
+          fontFamily,
+          fontWeight: 900,
+          color: "#fff",
+          textAlign: "center",
+          background: "rgba(40,30,22,0.78)",
+          border: "5px solid #fff",
+          borderRadius: 26,
+          padding: "8px 30px",
+          whiteSpace: "nowrap",
+        }}
+      >
+        <div style={{ fontSize: 58, lineHeight: 1.1 }}>{bk.name}</div>
+        <div style={{ fontSize: 34, color: "#ffd98a" }}>{bk.kg}</div>
+      </div>,
     );
   }
   if (sim.kind === "epack") {
@@ -2423,7 +2676,7 @@ export const PhysicsScene: React.FC<{
       ? "#b9c7d6"
       : kind === "arain" || kind === "train" || kind === "rwalk" || kind === "rrun"
         ? "#8f9aa8"
-        : TINY_KINDS.includes(kind) || TOAST_KINDS.includes(kind)
+        : TINY_KINDS.includes(kind) || TOAST_KINDS.includes(kind) || BLANKET_KINDS.includes(kind)
           ? "#ead9bc"
           : TRAIN_KINDS.includes(kind) || STRAP_KINDS.includes(kind)
             ? "#e6eaf0"
@@ -2454,6 +2707,8 @@ export const PhysicsScene: React.FC<{
                 ? "#2b2e33"
                 : kind === "arain" || kind === "train" || kind === "rwalk" || kind === "rrun"
                 ? "linear-gradient(180deg, #4d5866 0%, #7d8896 55%, #a3adb9 100%)"
+                : BLANKET_KINDS.includes(kind)
+                  ? "linear-gradient(180deg, #e9dccb 0%, #e2d2bd 60%, #d6c3a9 100%)"
                 : TINY_KINDS.includes(kind) || TOAST_KINDS.includes(kind)
                   ? "linear-gradient(180deg, #f3e6d0 0%, #e9d6b8 60%, #d9c09a 100%)"
                   : TRAIN_KINDS.includes(kind) || STRAP_KINDS.includes(kind)
@@ -2636,7 +2891,7 @@ export const PhysicsScene: React.FC<{
                 </group>
               );
             }
-            return <PersonPart key={i} part={b.part!} size={b.size} color={color} pos={pos} quat={quat} />;
+            return <PersonPart key={i} part={b.part!} size={b.size} color={color} pos={pos} quat={quat} closed={BLANKET_KINDS.includes(sim.kind)} />;
           }
           if (b.shape === "ice") {
             return (
@@ -2842,6 +3097,8 @@ export const PhysicsScene: React.FC<{
         ) : null}
         {GIANT_KINDS.includes(kind) ? <GiantTown /> : null}
         {kind === "epack" ? <PackElevator full={v("full")} t={f / fps} /> : null}
+        {BLANKET_KINDS.includes(kind) ? <ClothMesh sim={sim} f={f} look={BLANKETS[kind].look} /> : null}
+        {BLANKET_KINDS.includes(kind) ? <Bedroom /> : null}
         {GIANT_KINDS.includes(kind) ? <GiantDust sim={sim} f={f} /> : null}
         {kind === "tworld" ? <TinyProps /> : null}
         {kind === "rwalk" || kind === "rrun" ? <RainStreet sim={sim} f={f} /> : null}

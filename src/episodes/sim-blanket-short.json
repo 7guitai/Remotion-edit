@@ -1,0 +1,79 @@
+{
+  "id": "sim-blanket-short",
+  "title": "【物理エンジン】眠っている人に、いろんな布団をかけてみた",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.12,
+  "voice": { "speaker": 13, "speed": 1.2, "name": "青山龍星" },
+  "bgm": {
+    "file": "futoshita_shunkan.mp3",
+    "title": "ふとした瞬間に",
+    "credit": "のる",
+    "page": "https://opentracks.com/bgm/detail/23000",
+    "opentracks": 23000,
+    "track": 1
+  },
+  "headline": ["あなたは、どの布団で", "寝たい？"],
+  "illustrations": {},
+  "description": "ベッドで眠っている人に、5種類の布団を上から落としてみました。布の動きは、物理エンジン（布のシミュレーション）で計算しています。あなたは、どれで寝たいですか？\n\n※布の軽さ・空気の抵抗・曲がりにくさ・すべりやすさを、布団の種類ごとに変えて計算しています。重さはシングルサイズの目安（商品によって大きく変わります）。\n※加重ブランケットの研究：2020年、スウェーデンのカロリンスカ医科大学が、精神疾患のある患者120人で、重い毛布で不眠が改善したと発表（Journal of Clinical Sleep Medicine）。健康な人への効果は、まだはっきりしていません。\nほかに落としてみてほしい物は、コメントで教えてください！",
+  "hashtags": ["Shorts", "物理エンジン", "シミュレーション", "布団", "睡眠"],
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "眠っている人に、いろんな布団をかけてみた。あなたは、どれで寝たい？",
+      "effect": "none",
+      "sim": "bk_down",
+      "simStart": 0.6
+    },
+    {
+      "type": "whatif",
+      "text": "シルクのシーツ。とても軽くて、ひらひら舞いながら、つるっとすべり落ちる。",
+      "effect": "none",
+      "sim": "bk_silk"
+    },
+    {
+      "type": "whatif",
+      "text": "タオルケット。ふわっと落ちて、体をやさしく包む。夏にぴったり。",
+      "effect": "none",
+      "sim": "bk_towel"
+    },
+    {
+      "type": "whatif",
+      "text": "毛布。少し重くて、体にそって、すとんとたれる。",
+      "effect": "none",
+      "sim": "bk_wool"
+    },
+    {
+      "type": "whatif",
+      "text": "羽毛布団。軽いのに分厚い。中に空気をたくさんためるから、暖かいんだ。",
+      "effect": "none",
+      "sim": "bk_down"
+    },
+    {
+      "type": "whatif",
+      "text": "加重ブランケット。重さは約7kg。空気に負けず、体にぴったり落ちる。",
+      "speech": "加重ブランケット。重さは約7キロ。空気に負けず、体にぴったり落ちる。",
+      "effect": "none",
+      "sim": "bk_weight"
+    },
+    {
+      "type": "whatif",
+      "text": "重い毛布で、不眠がよくなったという研究も、2020年にスウェーデンで発表されたんだ。",
+      "effect": "none",
+      "sim": "bk_weight",
+      "simStart": 2.0
+    },
+    {
+      "type": "whatif",
+      "text": "あなたは、どの布団で寝たい？コメントで教えてね！",
+      "effect": "none",
+      "sim": "bk_towel",
+      "simStart": 0.2,
+      "hold": 1
+    }
+  ]
+}

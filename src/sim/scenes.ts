@@ -1,4 +1,5 @@
 import * as CANNON from "cannon-es";
+import { Collider, ClothSpec, makeCloth } from "./cloth";
 import {
   applyBalance,
   createRagdoll,
@@ -76,6 +77,12 @@ export type SimKind =
   | "lmat"
   // 身長17.5mの巨人（ふつうの人を10倍に拡大）。gstand：立っていられる？、gfall：転んだら？
   | "epack"
+  // 眠っている人に、いろいろな布団をかける（布のシミュレーション）
+  | "bk_silk"
+  | "bk_towel"
+  | "bk_wool"
+  | "bk_down"
+  | "bk_weight"
   | "gstand"
   | "gfall"
   // gfall と同じ計算で、カメラだけ地面すれすれから見上げる
@@ -103,6 +110,21 @@ export const STRAP = { t0: 1.2, a: 4.5 / 3.6, v: 60 };
 export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
 // 飛び降りの検証：台の高さ（m）、跳び出す時刻（秒）、台の奥行きの中心、衝撃をならす時間（秒）、マットの厚さ
 export const LAND_KINDS: SimKind[] = ["lknee", "lmat"];
+// 布団の検証：ベッド（マットレスの上の面の高さ、幅、長さ）と、布団の種類ごとの性質
+export const BED = { top: 0.5, w: 1.0, l: 2.0 };
+export const BLANKET_KINDS: SimKind[] = ["bk_silk", "bk_towel", "bk_wool", "bk_down", "bk_weight"];
+export const BLANKETS: Record<string, ClothSpec & { name: string; kg: string; look: string }> = {
+  // シルク：とても軽くて薄い。空気でふわっと舞い、つるっとすべる
+  bk_silk: { name: "シルクのシーツ", kg: "約0.3kg", look: "silk", w: 1.5, h: 2.1, nx: 30, ny: 42, drag: 9, bend: 0.03, friction: 0.12, thick: 0.006, y0: 1.9, start: 0.3 },
+  // タオルケット：軽くて、やわらかい
+  bk_towel: { name: "タオルケット", kg: "約0.8kg", look: "towel", w: 1.4, h: 2.0, nx: 28, ny: 40, drag: 5, bend: 0.12, friction: 0.5, thick: 0.012, y0: 1.9, start: 0.3 },
+  // 毛布：少し重くて、体にそってたれる
+  bk_wool: { name: "毛布", kg: "約2kg", look: "wool", w: 1.4, h: 2.0, nx: 28, ny: 40, drag: 3, bend: 0.2, friction: 0.6, thick: 0.02, y0: 1.9, start: 0.3 },
+  // 羽毛布団：軽いのに分厚く、ふくらんでいる。空気をたくさんふくむので ゆっくり落ちて、形がくずれにくい
+  bk_down: { name: "羽毛布団", kg: "約1.2kg", look: "down", w: 1.5, h: 2.1, nx: 30, ny: 42, drag: 7, bend: 0.55, friction: 0.5, thick: 0.1, y0: 1.9, start: 0.3 },
+  // 加重ブランケット：重い（中にガラスのつぶなど）。空気の抵抗をほとんど受けず、すとんと落ちて体にぴったり
+  bk_weight: { name: "加重ブランケット", kg: "約7kg", look: "weight", w: 1.35, h: 1.9, nx: 27, ny: 38, drag: 0.5, bend: 0.25, friction: 0.85, thick: 0.03, y0: 1.9, start: 0.3 },
+};
 // 満員エレベーター：11人乗り（積載量750kg）のかご。内のり 幅1.4m × 奥行1.35m、入口の幅0.8m（z = 0 がドアの線）
 export const ELEVPACK = { w: 1.4, d: 1.35, door: 0.8, h: 2.25, n: 18, limit: 750, cap: 11, every: 1.25, start: 0.6 };
 // 巨人：大きさ10倍。体重は10³＝1000倍、筋肉や骨の強さ（断面積）は10²＝100倍だけ → 体の重さのわりに 1/10 の強さ。
@@ -2186,6 +2208,68 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
         lanes.push({ world, g: G, dolls: [rd], control, record, speed: k });
       }
     });
+  } else if (BLANKET_KINDS.includes(kind)) {
+    // ベッドで あおむけに寝ている人に、上から布団を落とす。人はねたまま動かない（布だけが動く）
+    const { world } = makeWorld(G);
+    const spec = BLANKETS[kind];
+    // ベッド（台とマットレス）、まくら
+    const mattress = new CANNON.Body({ mass: 0, shape: new CANNON.Box(new CANNON.Vec3(BED.w / 2, 0.11, BED.l / 2)), position: new CANNON.Vec3(0, BED.top - 0.11, 0), material: groundMaterial });
+    world.addBody(mattress);
+    bodies.push({ lane: 0, shape: "box", size: [BED.w, 0.22, BED.l], color: "#f4f1ea" });
+    tracked.push(mattress);
+    const frame = new CANNON.Body({ mass: 0, shape: new CANNON.Box(new CANNON.Vec3(BED.w / 2 + 0.06, 0.14, BED.l / 2 + 0.06)), position: new CANNON.Vec3(0, 0.14, 0) });
+    world.addBody(frame);
+    bodies.push({ lane: 0, shape: "box", size: [BED.w + 0.12, 0.28, BED.l + 0.12], color: "#8a5a3b" });
+    tracked.push(frame);
+    const pillow = new CANNON.Body({ mass: 0, shape: new CANNON.Box(new CANNON.Vec3(0.3, 0.06, 0.18)), position: new CANNON.Vec3(0, BED.top + 0.06, -BED.l / 2 + 0.24), material: groundMaterial });
+    world.addBody(pillow);
+    bodies.push({ lane: 0, shape: "box", size: [0.6, 0.12, 0.36], color: "#ffffff" });
+    tracked.push(pillow);
+    // 人：立った形で作ってから、あおむけに寝かせる（頭がまくらの方）
+    const rd = addDoll(world, 0, 0, [0, 0, 0]);
+    const R = new CANNON.Quaternion();
+    R.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
+    for (const b of Object.values(rd.bodies)) {
+      const v = R.vmult(b.position);
+      b.position.set(v.x, v.y + BED.top + 0.13, v.z + 0.83);
+      b.quaternion.copy(R.mult(b.quaternion));
+    }
+    rd.balance = 0;
+    rd.setStrength(0.4);
+    rd.setPose({ shoulderL: [0, 0, -0.18], shoulderR: [0, 0, 0.18] });
+    // 体を少しなじませてから、固める（寝ている人は動かない）
+    for (let k = 0; k < 240; k++) {
+      world.step(1 / 240);
+    }
+    for (const b of Object.values(rd.bodies)) {
+      b.velocity.setZero();
+      b.angularVelocity.setZero();
+      b.type = CANNON.Body.STATIC;
+      b.mass = 0;
+      b.updateMassProperties();
+    }
+    const cols: Collider[] = [
+      { kind: "box", body: mattress, half: [BED.w / 2, 0.11, BED.l / 2] },
+      { kind: "box", body: frame, half: [BED.w / 2 + 0.06, 0.14, BED.l / 2 + 0.06] },
+      { kind: "box", body: pillow, half: [0.3, 0.06, 0.18] },
+    ];
+    for (const part of Object.keys(rd.bodies) as PartName[]) {
+      const b = rd.bodies[part];
+      const sz = rd.sizes[part];
+      cols.push(part === "head" ? { kind: "sphere", body: b, r: sz[0] / 2 } : { kind: "box", body: b, half: [sz[0] / 2, sz[1] / 2, sz[2] / 2] });
+    }
+    // 布団（ベッドの真上。顔が出るよう、肩から足の方へ）
+    const cloth = makeCloth(spec, 0, 0.42);
+    const out = new Float32Array(frames * cloth.n * 3);
+    values["clothData"] = out;
+    values["clothInfo"] = new Float32Array([spec.nx, spec.ny, spec.thick]);
+    const control = (t: number, dt: number) => {
+      cloth.step(t, dt, G, cols);
+    };
+    const record = (f: number) => {
+      out.set(cloth.p, f * cloth.n * 3);
+    };
+    lanes.push({ world, g: G, dolls: [rd], control, record });
   } else if (LAND_KINDS.includes(kind)) {
     // 高さ1mの台の上に立ち、前へ跳び出して地面に着地する。
     // 着地の衝撃（地面が体を押し返す力）は、全身の「上下の勢い（運動量）」の変わり方から求める：
@@ -2788,6 +2872,8 @@ export const simulate = (
                               ? ["ひざをのばす", "ひざを曲げる"]
                               : kind === "lmat"
                                 ? ["かたい床", "マットの上"]
+                                : BLANKET_KINDS.includes(kind)
+                                  ? ["", ""]
                                 : kind === "epack"
                                   ? ["", ""]
                                   : GIANT_KINDS.includes(kind)
