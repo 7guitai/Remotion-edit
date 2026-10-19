@@ -75,6 +75,7 @@ export type SimKind =
   | "lknee"
   | "lmat"
   // 身長17.5mの巨人（ふつうの人を10倍に拡大）。gstand：立っていられる？、gfall：転んだら？
+  | "epack"
   | "gstand"
   | "gfall"
   // gfall と同じ計算で、カメラだけ地面すれすれから見上げる
@@ -102,6 +103,8 @@ export const STRAP = { t0: 1.2, a: 4.5 / 3.6, v: 60 };
 export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
 // 飛び降りの検証：台の高さ（m）、跳び出す時刻（秒）、台の奥行きの中心、衝撃をならす時間（秒）、マットの厚さ
 export const LAND_KINDS: SimKind[] = ["lknee", "lmat"];
+// 満員エレベーター：11人乗り（積載量750kg）のかご。内のり 幅1.4m × 奥行1.35m、入口の幅0.8m（z = 0 がドアの線）
+export const ELEVPACK = { w: 1.4, d: 1.35, door: 0.8, h: 2.25, n: 18, limit: 750, cap: 11, every: 1.25, start: 0.6 };
 // 巨人：大きさ10倍。体重は10³＝1000倍、筋肉や骨の強さ（断面積）は10²＝100倍だけ → 体の重さのわりに 1/10 の強さ。
 // 計算はふつうの人の大きさにそろえて行い（筋肉 1/10）、時間は √10 ≒ 3.16倍 ゆっくり進む（重さで動く物のルール）。
 // 描くときは10倍に大きくする。速さは √10 倍になる
@@ -1925,6 +1928,150 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
       };
       lanes.push({ world, g: G, dolls: [], control, record });
     });
+  } else if (kind === "epack") {
+    // 待っている人が1人ずつ、エレベーターに乗りこむ。中の人を押しながら奥へ進み、入ったらドアの方を向く。
+    // 体がドアの線より外に出ている人がいると、ドアが閉まらない（＝もう乗れない）
+    const { world } = makeWorld(G);
+    // 足もとはすべりやすくして、体ごと押して動かす（人どうしの押し合いで、すき間につめていく）
+    for (const cm of world.contactmaterials) {
+      cm.friction = 0.0;
+    }
+    const E = ELEVPACK;
+    const wall = (cx: number, cz: number, hx: number, hz: number) => {
+      const b = new CANNON.Body({ mass: 0, shape: new CANNON.Box(new CANNON.Vec3(hx, 1.2, hz)), position: new CANNON.Vec3(cx, 1.2, cz) });
+      world.addBody(b);
+    };
+    wall(0, -E.d - 0.05, E.w / 2 + 0.1, 0.05);
+    wall(-E.w / 2 - 0.05, -E.d / 2, 0.05, E.d / 2 + 0.1);
+    wall(E.w / 2 + 0.05, -E.d / 2, 0.05, E.d / 2 + 0.1);
+    // 入口の左右の壁（ドアの戸袋）
+    const side = (E.w - E.door) / 2;
+    wall(-E.door / 2 - side / 2, 0.05, side / 2, 0.05);
+    wall(E.door / 2 + side / 2, 0.05, side / 2, 0.05);
+    const people: Ragdoll[] = [];
+    for (let i = 0; i < E.n; i++) {
+      // 右の方に一列に並んで待つ（エレベーターの奥の方を向いて、横へつめていく）
+      const rd = addDoll(world, 0, i, [0.9 + i * 0.62, 0, 0.75], Math.PI);
+      people.push(rd);
+    }
+    const count = val("count");
+    const weight = val("weight");
+    const fullAt = val("full");
+    const whoV = val("who");
+    const turnAt = people.map(() => -1);
+    const lined = people.map(() => false);
+    const placed = people.map(() => false);
+    const startAt = people.map(() => -1);
+    let full = -1;
+    let who = 0;
+    let inside = 0;
+    const partsOf = (rd: Ragdoll) => Object.values(rd.bodies);
+    const pelvisOf = (rd: Ragdoll) => rd.bodies.pelvis.position;
+    const drive = (rd: Ragdoll, tx: number, tz: number, sp: number, gain: number) => {
+      const p = pelvisOf(rd);
+      const dx = tx - p.x;
+      const dz = tz - p.z;
+      const L = Math.hypot(dx, dz);
+      let vx = L > 0.02 ? (dx / L) * Math.min(sp, L * 2) : 0;
+      // 入口のあたりでは、横へずれないように強く真ん中へもどす
+      if (p.z > -0.15 && p.z < 0.75 && tx === 0) {
+        vx = -p.x * 5;
+      }
+      const vz = L > 0.02 ? (dz / L) * Math.min(sp, L * 2) : 0;
+      for (const b of partsOf(rd)) {
+        b.force.x += b.mass * gain * (vx - b.velocity.x);
+        b.force.z += b.mass * gain * (vz - b.velocity.z);
+      }
+    };
+    // 満員電車の立ち方：腕を体の横にぴったりつけて、体をせまくする
+    const crowd: Pose = {
+      shoulderL: [0, 0, 0.16],
+      shoulderR: [0, 0, -0.16],
+      elbowL: [-0.1, 0, 0],
+      elbowR: [-0.1, 0, 0],
+    };
+    // 立つ場所の目安（奥から順に。3列 × 4段 → そのすき間）。実際は押し合いで決まる
+    const slots: [number, number][] = [];
+    // 各段で、左右の端から先に（まん中は通り道として最後まで空けておく）
+    for (const z of [-1.14, -0.84, -0.54, -0.24]) {
+      for (const x of [-0.47, 0.47, 0]) {
+        slots.push([x, z]);
+      }
+    }
+    for (const z of [-0.99, -0.69, -0.39]) {
+      for (const x of [-0.24, 0.24]) {
+        slots.push([x, z]);
+      }
+    }
+    while (slots.length < E.n) {
+      slots.push([0, -0.12]);
+    }
+    const control = (t: number) => {
+      people.forEach((rd, i) => {
+        rd.balance = 1;
+        const st = E.start + i * E.every;
+        if (full >= 0 && startAt[i] < 0) {
+          rd.setPose(POSES.stand);
+          applyBalance(rd);
+          return;
+        }
+        if (t >= st && startAt[i] < 0) {
+          startAt[i] = t;
+        }
+        if (startAt[i] < 0) {
+          rd.setPose(POSES.stand);
+          // 列が前へ進む（前の人が乗ったぶん、つめる）
+          const k = people.findIndex((_, j) => startAt[j] < 0);
+          drive(rd, 0.9 + (i - k) * 0.62, 0.75, 0.8, 10);
+        } else {
+          rd.setPose(POSES.stand, crowd, Math.min(1, (t - startAt[i]) / 0.5));
+          const p = pelvisOf(rd);
+          const since = t - startAt[i];
+          if (!lined[i] && (Math.abs(p.x) > 0.06 || p.z > 0.7) && since < 2.5) {
+            // 入口の正面まで歩く
+            drive(rd, 0, 0.55, 1.1, 14);
+          } else {
+            lined[i] = true;
+            // 入口を通るまではまっすぐ。入ったら、自分の場所へ（中の人を押しながら）
+            const [sx, sz] = slots[i];
+            if (p.z > -0.1) {
+              drive(rd, 0, sz, 0.7, 14);
+            } else if (Math.abs(p.x - sx) > 0.12 && p.z > sz + 0.05 && !placed[i]) {
+              // 中に入ったら、まず横へよけてから奥へ
+              drive(rd, sx, p.z - 0.05, 0.6, 12);
+            } else {
+              placed[i] = true;
+              // 中の人も、自分の場所へ ぐっと寄り続ける（押されてもどる）
+              drive(rd, sx, sz, 0.6, 12);
+            }
+            if (p.z < -0.15 && turnAt[i] < 0) {
+              turnAt[i] = t;
+            }
+            // 満員の中では向きを変えられないので、奥を向いたまま
+            rd.yaw = Math.PI;
+          }
+          // 前の人が全員入ったあと、乗りこもうとして4秒たっても、体がドアの線より外に出ていたら「満員」
+          if (full < 0 && since > 4.0 && inside >= i) {
+            const out = partsOf(rd).some((b) => b.position.z > 0.08);
+            if (out) {
+              full = t;
+              who = i + 1;
+            }
+          }
+        }
+        applyBalance(rd);
+      });
+    };
+    const record = (f: number) => {
+      // かごの中にいる人（骨盤がドアの線より奥）
+      // （いちど乗った人は降りないので、いちばん多かった人数を使う。押し合いでの 10↔11 のちらつきを防ぐ）
+      inside = Math.max(inside, people.filter((rd) => pelvisOf(rd).z < -0.05).length);
+      count[f] = inside;
+      weight[f] = inside * 66;
+      fullAt[f] = full;
+      whoV[f] = who;
+    };
+    lanes.push({ world, g: G, dolls: people, control, record });
   } else if (GIANT_KINDS.includes(kind)) {
     // 左：ふつうの人、右：巨人（計算はふつうの大きさ。筋肉と体を支える力は 1/10、時間は √10 倍ゆっくり）
     [0, 1].forEach((lane) => {
@@ -2641,7 +2788,9 @@ export const simulate = (
                               ? ["ひざをのばす", "ひざを曲げる"]
                               : kind === "lmat"
                                 ? ["かたい床", "マットの上"]
-                                : GIANT_KINDS.includes(kind)
+                                : kind === "epack"
+                                  ? ["", ""]
+                                  : GIANT_KINDS.includes(kind)
                                   ? ["ふつうの人", "身長17mの巨人"]
                                 : kind === "tbutter"
                                   ? ["バターあり", "バターなし"]

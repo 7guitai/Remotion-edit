@@ -25,6 +25,7 @@ import {
   GIANT_KINDS,
   GIANT,
   GIANT_X,
+  ELEVPACK,
   GOLD_GONE,
   GOLD_SIDE,
   TANK,
@@ -118,6 +119,9 @@ const cameraBase = (sim: SimResult, f: number, total: number): Cam => {
       const px = Math.min(RAIN.dist - 1.2, posAt(sim, f, pi)[0]);
       return { pos: [px + 0.6, 2.3, 8.6], look: [px + 0.9, 1.45, -0.6] };
     }
+    case "epack":
+      // エレベーターの入口の前、少し上から中を見下ろす
+      return { pos: [0.45, 7.2, lerp(3.9, 3.7, t)], look: [0.45, 0.0, -0.6] };
     case "gstand":
       // ふつうの人（左）と巨人（右）の全身が入るよう、遠くから
       return { pos: [1.8, 10.5, lerp(62, 60, t)], look: [1.8, 8.2, 0] };
@@ -1141,6 +1145,55 @@ const Car: React.FC<{ color: string }> = ({ color }) => {
   );
 };
 
+// 満員エレベーターのかご（ドアが開いている。かべは断面で、中が見えるように）
+const PackElevator: React.FC<{ full: number; t: number }> = ({ full, t }) => {
+  const E = ELEVPACK;
+  const metal = "#c9ced6";
+  const side = (E.w - E.door) / 2;
+  // かべは腰の高さまでの「断面」で描く（中のようすが見えるように）
+  const WH = 1.0;
+  // 満員になったら、ドアが閉まろうとして、人に当たって開く（くり返す）
+  const shut = full > 0 && t > full ? Math.abs(Math.sin((t - full) * 2.2)) * 0.22 : 0;
+  return (
+    <group>
+      {/* 床 */}
+      <mesh position={[0, 0.006, -E.d / 2]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <planeGeometry args={[E.w, E.d]} />
+        <meshStandardMaterial color="#8d8172" roughness={0.8} />
+      </mesh>
+      {/* 奥の壁と左右の壁 */}
+      <mesh position={[0, WH / 2, -E.d - 0.04]} receiveShadow>
+        <boxGeometry args={[E.w + 0.16, WH, 0.08]} />
+        <meshStandardMaterial color={metal} roughness={0.35} metalness={0.6} />
+      </mesh>
+      {[-1, 1].map((sx) => (
+        <mesh key={sx} position={[sx * (E.w / 2 + 0.04), WH / 2, -E.d / 2]} receiveShadow>
+          <boxGeometry args={[0.08, WH, E.d + 0.08]} />
+          <meshStandardMaterial color={metal} roughness={0.35} metalness={0.6} />
+        </mesh>
+      ))}
+      {/* 入口のまわり（戸袋）と、開いたドア */}
+      {[-1, 1].map((sx) => (
+        <group key={`d${sx}`}>
+          <mesh position={[sx * (E.door / 2 + side / 2), WH / 2, 0.05]}>
+            <boxGeometry args={[side, WH, 0.1]} />
+            <meshStandardMaterial color="#9aa1ab" roughness={0.3} metalness={0.7} />
+          </mesh>
+          <mesh position={[sx * (E.door / 2 + side / 2 - shut * 1.6), WH / 2, 0.13]}>
+            <boxGeometry args={[side + 0.02, WH - 0.05, 0.03]} />
+            <meshStandardMaterial color="#e2b23a" roughness={0.25} metalness={0.5} />
+          </mesh>
+        </group>
+      ))}
+      {/* 床のドアの線 */}
+      <mesh position={[0, 0.008, 0.02]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[E.door, 0.05]} />
+        <meshBasicMaterial color="#ffd23a" />
+      </mesh>
+    </group>
+  );
+};
+
 // 巨人の場面の町並み（2階建ての家・木・道路）。大きさの目安
 const GiantTown: React.FC = () => {
   const houses = useMemo(
@@ -1265,7 +1318,7 @@ const Cone: React.FC = () => (
 );
 
 const shirtColor = (sim: SimResult, doll: number, lane: number) =>
-  sim.kind === "party" || sim.kind === "fchaos" || sim.kind === "gold" || sim.kind === "goldgone" ? PARTY_SHIRTS[doll % PARTY_SHIRTS.length] : LANE_COLORS[lane];
+  sim.kind === "party" || sim.kind === "fchaos" || sim.kind === "gold" || sim.kind === "goldgone" || sim.kind === "epack" ? PARTY_SHIRTS[doll % PARTY_SHIRTS.length] : LANE_COLORS[lane];
 
 const Pill: React.FC<{
   x: number;
@@ -1316,7 +1369,8 @@ export const PhysicsScene: React.FC<{
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const sim = useMemo(
-    () => simulate(kind, durationInFrames + offset, fps, gravity),
+    // 満員エレベーターは計算が重いので、どの場面でも同じ長さ（32秒）を計算して使い回す
+    () => simulate(kind, kind === "epack" ? Math.max(fps * 32, durationInFrames + offset) : durationInFrames + offset, fps, gravity),
     [kind, durationInFrames, fps, gravity, offset],
   );
   const laneNames = labels ?? sim.labels;
@@ -1707,6 +1761,70 @@ export const PhysicsScene: React.FC<{
         {arrived ? "コンビニに到着！" : `コンビニまで ${(RAIN.dist - d).toFixed(1)}m`}
       </Pill>,
     );
+  }
+  if (sim.kind === "epack") {
+    const n = v("count");
+    const kg = n * 66;
+    const full = v("full");
+    const over = kg > ELEVPACK.limit;
+    overlays.push(
+      <div
+        key="cnt"
+        style={{
+          position: "absolute",
+          right: 24,
+          top: 120 + T,
+          width: 300,
+          fontFamily,
+          fontWeight: 900,
+          color: "#fff",
+          background: "rgba(20,24,32,0.85)",
+          border: `5px solid ${over ? "#e01b2f" : "#ffd23a"}`,
+          borderRadius: 22,
+          padding: "10px 16px",
+          textAlign: "center",
+        }}
+      >
+        <div style={{ fontSize: 24, color: "#cfd6df" }}>定員11名・750kg</div>
+        <div style={{ fontSize: 30 }}>乗った人</div>
+        <div style={{ fontSize: 92, lineHeight: 1, color: over ? "#ff6b6b" : "#ffd23a" }}>
+          {n}
+          <span style={{ fontSize: 40 }}>人</span>
+        </div>
+        <div style={{ fontSize: 28, marginTop: 6 }}>{`重さ ${kg}kg / 750kg`}</div>
+        <div style={{ height: 18, background: "#3a3f48", borderRadius: 9, marginTop: 6, overflow: "hidden" }}>
+          <div style={{ width: `${Math.min(100, (kg / ELEVPACK.limit) * 100)}%`, height: "100%", background: over ? "#e01b2f" : "#2fc46b" }} />
+        </div>
+      </div>,
+    );
+    if (full > 0 && f / fps > full) {
+      overlays.push(
+        <div
+          key="full"
+          style={{
+            position: "absolute",
+            right: 24,
+            top: 395 + T,
+            width: 300,
+            fontFamily,
+            fontWeight: 900,
+            fontSize: 34,
+            lineHeight: 1.2,
+            color: "#fff",
+            background: "#e01b2f",
+            border: "5px solid #fff",
+            borderRadius: 22,
+            padding: "8px 10px",
+            textAlign: "center",
+            boxShadow: "0 6px 14px rgba(0,0,0,0.35)",
+          }}
+        >
+          {`${v("who")}人目は`}
+          <br />
+          ドアが閉まらない！
+        </div>,
+      );
+    }
   }
   if (GIANT_KINDS.includes(sim.kind) && sim.kind !== "gfallLow") {
     const gx = GIANT_X[sim.kind];
@@ -2111,7 +2229,7 @@ export const PhysicsScene: React.FC<{
   // 効果音：ぶつかった速さで音量を変える（音の大きさは速さの約1.5乗で増える）。
   // 人の音は高さ違いの3種類を順番に使い、毎回まったく同じ音にならないようにする
   const sounds = sim.impacts
-    .filter((hit) => hit.frame >= offset)
+    .filter((hit) => hit.frame >= offset && kind !== "epack")
     .map((hit, i) => {
     const spec = HIT_SOUNDS[hit.sound];
     const file =
@@ -2123,6 +2241,34 @@ export const PhysicsScene: React.FC<{
       </Sequence>
     );
   });
+
+  // 満員エレベーター：1人乗るたびに小さな音、満員になったらドアが人に当たる音
+  if (kind === "epack") {
+    const c = sim.values["count"];
+    for (let k = Math.max(1, offset); k < Math.min(sim.frames, offset + durationInFrames); k++) {
+      if (c[k] > c[k - 1]) {
+        sounds.push(
+          <Sequence key={`in${k}`} from={k - offset} durationInFrames={12}>
+            <Audio src={staticFile("sfx/pop.wav")} volume={0.16} />
+          </Sequence>,
+        );
+      }
+    }
+    const fullT = sim.values["full"][sim.frames - 1];
+    if (fullT > 0) {
+      for (let j = 0; j < 3; j++) {
+        // ドアがしまりかけて当たる（sin の山のところ）
+        const hf = Math.round((fullT + (Math.PI / 2.2) * (j + 0.5)) * fps) - offset;
+        if (hf >= 0 && hf < durationInFrames) {
+          sounds.push(
+            <Sequence key={`door${j}`} from={hf} durationInFrames={12}>
+              <Audio src={staticFile("sfx/clack.wav")} volume={0.2} />
+            </Sequence>,
+          );
+        }
+      }
+    }
+  }
 
   // 巨人が地面にぶつかった音（重く低い音。大きさはぶつかる速さに合わせて控えめに）
   if (GIANT_KINDS.includes(kind)) {
@@ -2693,6 +2839,7 @@ export const PhysicsScene: React.FC<{
           </group>
         ) : null}
         {GIANT_KINDS.includes(kind) ? <GiantTown /> : null}
+        {kind === "epack" ? <PackElevator full={v("full")} t={f / fps} /> : null}
         {GIANT_KINDS.includes(kind) ? <GiantDust sim={sim} f={f} /> : null}
         {kind === "tworld" ? <TinyProps /> : null}
         {kind === "rwalk" || kind === "rrun" ? <RainStreet sim={sim} f={f} /> : null}
