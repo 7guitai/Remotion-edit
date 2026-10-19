@@ -1821,7 +1821,9 @@ export const PhysicsScene: React.FC<{
         >
           {`${v("who")}人目は`}
           <br />
-          ドアが閉まらない！
+          ドアが
+          <br />
+          閉まらない！
         </div>,
       );
     }
