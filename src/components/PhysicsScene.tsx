@@ -1092,7 +1092,7 @@ const TrainCar: React.FC<{ x0: number; pos: number; grip?: [number, number, numb
   );
 };
 
-const PersonPart: React.FC<{
+export const PersonPart: React.FC<{
   part: string;
   size: [number, number, number];
   color: string;

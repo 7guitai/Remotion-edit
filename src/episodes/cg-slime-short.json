@@ -1,0 +1,65 @@
+{
+  "id": "cg-slime-short",
+  "title": "【3DCG】ねばり気のちがうスライムを、人のまわりに注いでみた",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "cg",
+  "background": "#000",
+  "slideGap": 0,
+  "bgmVolume": 0.22,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "なし"
+  },
+  "bgm": {
+    "file": "shuffle_shuffle.mp3",
+    "title": "shuffle shuffle",
+    "credit": "KK",
+    "page": "https://opentracks.com/bgm/detail/5598",
+    "opentracks": 5598,
+    "track": 1
+  },
+  "illustrations": {},
+  "description": "ねばり気（粘度）だけを変えたスライムを、人のまわりに らせん状に注いでみました。ねばり気が小さいと細い筋に分かれて台いっぱいに広がり、ふちからこぼれます。大きいとロープのように とぐろを巻いて、足もとに積み上がります。\n\n※スライムは約9000個の粒の集まりとして計算しています（近い粒は押し合い・少し離れると引き合い、となりの粒と速さをそろえる強さ＝ねばり気。ねばり気が大きいほど、ゆっくりした力では形がくずれにくくなります）。人は物理エンジンの人形で、スライムに押されると動きます。",
+  "hashtags": [
+    "Shorts",
+    "3DCG",
+    "シミュレーション",
+    "スライム",
+    "物理エンジン"
+  ],
+  "slides": [
+    {
+      "type": "cg",
+      "text": "ねばり気 5%",
+      "speech": "-",
+      "visc": 0.05
+    },
+    {
+      "type": "cg",
+      "text": "ねばり気 20%",
+      "speech": "-",
+      "visc": 0.2
+    },
+    {
+      "type": "cg",
+      "text": "ねばり気 50%",
+      "speech": "-",
+      "visc": 0.5
+    },
+    {
+      "type": "cg",
+      "text": "ねばり気 75%",
+      "speech": "-",
+      "visc": 0.75
+    },
+    {
+      "type": "cg",
+      "text": "ねばり気 100%",
+      "speech": "-",
+      "visc": 1.0
+    }
+  ]
+}

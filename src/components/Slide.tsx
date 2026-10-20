@@ -19,6 +19,7 @@ import { SleepPage } from "./SleepPage";
 import { RelaxPage } from "./RelaxPage";
 import { PaperPage } from "./PaperPage";
 import { TalkPage } from "./TalkPage";
+import { CGPage } from "./CGPage";
 import { WhatIfPage } from "./WhatIfPage";
 import { IllusionPage } from "./IllusionPage";
 import { ThreadPage } from "./ThreadPage";
@@ -150,6 +151,9 @@ export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
   }
   if (slide.type === "sleep") {
     return <SleepPage slide={slide} />;
+  }
+  if (slide.type === "cg") {
+    return <CGPage slide={slide} />;
   }
   if (slide.type === "talk") {
     return <TalkPage slide={slide} />;

@@ -43,6 +43,7 @@ import verifyToast from "./verify-toast-short.json";
 import whatifGiant from "./whatif-giant-short.json";
 import verifyElevPack from "./verify-elevator-pack-short.json";
 import simBlanket from "./sim-blanket-short.json";
+import cgSlime from "./cg-slime-short.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -255,6 +256,7 @@ export type ScriptSlide = (
   | RelaxSlide
   | import("../components/PaperPage").PaperSlide
   | import("../components/TalkPage").TalkSlide
+  | import("../components/CGPage").CGSlide
 ) & {
   chapter?: string;
   no?: number;
@@ -270,7 +272,7 @@ export type Episode = {
   // ショートの上部のタイトル帯（省略時は表示）
   titleBand?: boolean;
   // "flashy" で1ページ1雑学を派手な編集にする（集中線・叩きつけ文字・フラッシュ・揺れ・効果音）
-  style?: "flashy" | "sleep" | "whatif" | "illusion" | "relax" | "paper" | "talk";
+  style?: "flashy" | "sleep" | "whatif" | "illusion" | "relax" | "paper" | "talk" | "cg";
   // 目の錯覚クイズの見出し：上の小さな文字と、タイトル横の札（例：上級編）
   kicker?: string;
   badge?: string;
@@ -323,6 +325,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  cgSlime as Episode,
   simBlanket as Episode,
   verifyElevPack as Episode,
   whatifGiant as Episode,
