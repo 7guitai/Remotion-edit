@@ -90,13 +90,14 @@ def main() -> None:
         lines += ["▼ 目次", *chapters, ""]
     lines += [
         "▼ 使用素材",
-        "音声：" + "、".join(
+        # ナレーションなし（voice.name が「なし」）の動画は音声の行を出さない
+        *([] if ep.get("voice", {}).get("name") == "なし" else ["音声：" + "、".join(
             f"VOICEVOX:{n}"
             for n in dict.fromkeys(
                 [ep.get("voice", {}).get("name", "ずんだもん")]
                 + [v["name"] for v in ep.get("replyVoices", [])]
             )
-        ),
+        )]),
         *(
             [f"BGM：{t['credit']}「{t['title']}」" for t in ep["bgmPlaylist"]]
             if ep.get("bgmPlaylist")
