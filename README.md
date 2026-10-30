@@ -16,9 +16,11 @@
 | `birthday-paradox` | 誕生日のパラドックス（台本・秒単位コンテは [`src/math-shorts/birthday-paradox.md`](src/math-shorts/birthday-paradox.md)） | 約61秒 |
 
 ```bash
-npm run voice -- birthday-paradox
+npm run voice -- birthday-paradox --speaker 13 --speed 1.05   # 青山龍星（ノーマル）
 npx remotion render birthday-paradox out/birthday-paradox.mp4
 ```
+
+ナレーションは VOICEVOX の **青山龍星**。公開時は概要欄に `VOICEVOX:青山龍星` のクレジットが必要です。
 
 ## 使い方
 
