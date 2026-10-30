@@ -2,6 +2,8 @@ import birthdayParadox from "./birthday-paradox.json";
 import { BirthdayParadox } from "./BirthdayParadox";
 import earthRope from "./20261030-pm-earth-rope.json";
 import { EarthRope } from "./EarthRope";
+import paperMoon from "./20261031-am-paper-moon.json";
+import { PaperMoon } from "./PaperMoon";
 import { MathShortProps, Narration } from "./timeline";
 
 // 縦型（9:16）の数学ショート。src/math-shorts/<id>.json がナレーション原稿
@@ -25,5 +27,12 @@ export const MATH_SHORTS: {
     component: EarthRope,
     narration: earthRope.slides,
     bgm: earthRope.bgm.file,
+  },
+  {
+    id: paperMoon.id,
+    title: paperMoon.title,
+    component: PaperMoon,
+    narration: paperMoon.slides,
+    bgm: paperMoon.bgm.file,
   },
 ];
