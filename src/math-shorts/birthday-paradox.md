@@ -35,6 +35,7 @@
 
 時刻は VOICEVOX の青山龍星（ノーマル・話者ID 13・速さ 1.05）で作った音声に合わせた実測値。音声を作り直すと自動で追従する。
 公開時は概要欄に `VOICEVOX:青山龍星` のクレジットが必要。
+BGM は zukisuzuki「Mineral」（フリー素材）。音量 0.06（声より約12dB小さく）、最初と最後だけフェード。
 【白】点灯 / 【灰】減光 / 【金】要素A / 【青】要素B。
 
 | フェーズ | 秒数 | ナレーション | 上部（見出し） | 中央（図解） | 下部（数式・結論） |
@@ -58,4 +59,7 @@
 
 - 中央の図解・見出し・数式は、各フレーズの開始時刻 `at(p, f)`（フレーズ p の f 割の位置）を基準に点灯・減光・消去を指定している。切り替えは 0.3 秒の smoothstep。
 - 数式は KaTeX、日本語は Noto Serif JP（600 / 700、`public/fonts/` に同梱）。
+- BGM は `public/bgm/Mineral.mp3` に置く（Git 管理外。置いていなければ BGM なしで書き出す）。
+- 書き出し後に音量を YouTube の基準（-14 LUFS）にそろえる：
+  `npx remotion render birthday-paradox out/raw.mp4` → `ffmpeg -i out/raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -ar 48000 -c:a aac -b:a 192k out/birthday-paradox.mp4`
 - `subtitles: true` にすると画面最下部にナレーション字幕を出す（既定はオフ）。

@@ -16,6 +16,8 @@ export type MathShortProps = {
   durs: number[];
   voices: (string | null)[];
   subtitles: boolean;
+  // public/bgm/ のファイル名（なければ BGM なし）
+  bgm: string | null;
 };
 
 const exists = async (path: string) => {
@@ -52,6 +54,13 @@ export const calculateMathMetadata: CalculateMetadataFunction<MathShortProps> = 
   }
   return {
     durationInFrames: Math.ceil((t + TAIL) * MATH_FPS),
-    props: { ...props, starts, durs, voices },
+    // BGM は Git 管理外なので、置いていなければ BGM なしで書き出す
+    props: {
+      ...props,
+      starts,
+      durs,
+      voices,
+      bgm: props.bgm && (await exists(`bgm/${props.bgm}`)) ? props.bgm : null,
+    },
   };
 };

@@ -1,6 +1,7 @@
 {
   "id": "birthday-paradox",
   "title": "たった23人で同じ誕生日が半分を超える｜誕生日のパラドックス",
+  "bgm": { "file": "Mineral.mp3", "title": "Mineral", "credit": "zukisuzuki" },
   "readings": {
     "365分の364": "さんびゃくろくじゅうごぶんの、さんびゃくろくじゅうよん",
     "人数分": "にんずうぶん"

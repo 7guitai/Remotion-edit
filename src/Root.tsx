@@ -40,6 +40,7 @@ export const RemotionRoot: React.FC = () => {
             durs: [],
             voices: [],
             subtitles: false,
+            bgm: m.bgm,
           }}
           calculateMetadata={calculateMathMetadata}
         />

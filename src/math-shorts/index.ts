@@ -8,11 +8,13 @@ export const MATH_SHORTS: {
   title: string;
   component: React.FC<MathShortProps>;
   narration: Narration[];
+  bgm: string | null;
 }[] = [
   {
     id: birthdayParadox.id,
     title: birthdayParadox.title,
     component: BirthdayParadox,
     narration: birthdayParadox.slides,
+    bgm: birthdayParadox.bgm.file,
   },
 ];

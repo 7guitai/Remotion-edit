@@ -20,7 +20,8 @@ npm run voice -- birthday-paradox --speaker 13 --speed 1.05   # 青山龍星（�
 npx remotion render birthday-paradox out/birthday-paradox.mp4
 ```
 
-ナレーションは VOICEVOX の **青山龍星**。公開時は概要欄に `VOICEVOX:青山龍星` のクレジットが必要です。
+ナレーションは VOICEVOX の **青山龍星**、BGM は zukisuzuki「Mineral」（`public/bgm/Mineral.mp3` に置く。Git 管理外）。
+公開時は概要欄に `VOICEVOX:青山龍星` と BGM のクレジットを入れてください。
 
 ## 使い方
 

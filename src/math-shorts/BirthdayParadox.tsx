@@ -1,5 +1,13 @@
 import React from "react";
-import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import {
+  AbsoluteFill,
+  Audio,
+  interpolate,
+  Sequence,
+  staticFile,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import {
   C,
   H,
@@ -20,6 +28,9 @@ import { MathShortProps } from "./timeline";
 // 誕生日のパラドックス
 // 要素A（ゴールド）: 自分と比べる相手の数 ∝ n
 // 要素B（シアン）  : 全体のペアの数 ∝ n²
+
+// BGM の音量（ナレーションは 1.0）。Mineral は声より約12dB大きく作られているので小さめ
+const BGM_VOLUME = 0.06;
 
 const DAYS = 365;
 const N = 23;
@@ -151,6 +162,7 @@ export const BirthdayParadox: React.FC<MathShortProps> = ({
   durs,
   voices,
   subtitles,
+  bgm,
 }) => {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
@@ -492,6 +504,20 @@ export const BirthdayParadox: React.FC<MathShortProps> = ({
           </Sequence>
         ) : null,
       )}
+
+      {bgm ? (
+        <Audio
+          src={staticFile(`bgm/${bgm}`)}
+          // 声より十分小さく。最初と最後だけフェード
+          volume={(f) =>
+            interpolate(f, [0, 20, durationInFrames - 45, durationInFrames], [0, BGM_VOLUME, BGM_VOLUME, 0], {
+              extrapolateLeft: "clamp",
+              extrapolateRight: "clamp",
+            })
+          }
+          loop
+        />
+      ) : null}
 
       {subtitles
         ? narration.map((n, i) => (
