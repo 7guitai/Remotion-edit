@@ -21,7 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 EPISODES = ROOT / "src" / "episodes"
 # 数学ショート（src/math-shorts/<id>.json）も同じ形式で読み上げられる
-SOURCES = [EPISODES, ROOT / "src" / "math-shorts"]
+SOURCES = [EPISODES, ROOT / "src" / "math-shorts", ROOT / "src" / "math-long"]
 
 
 def to_speech(text: str, readings: dict[str, str]) -> str:

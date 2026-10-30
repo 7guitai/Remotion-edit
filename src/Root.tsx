@@ -3,6 +3,8 @@ import { Composition } from "remotion";
 import { EPISODES } from "./episodes";
 import { MATH_SHORTS } from "./math-shorts";
 import { calculateMathMetadata, MATH_FPS } from "./math-shorts/timeline";
+import { MATH_LONGS } from "./math-long";
+import { calculateLongMetadata, LONG_FPS } from "./math-long/timeline";
 import { calculateMetadata, FPS } from "./slides";
 import { Video } from "./Video";
 
@@ -43,6 +45,19 @@ export const RemotionRoot: React.FC = () => {
             bgm: m.bgm,
           }}
           calculateMetadata={calculateMathMetadata}
+        />
+      ))}
+      {MATH_LONGS.map((m) => (
+        <Composition
+          key={m.id}
+          id={m.id}
+          component={m.component}
+          durationInFrames={LONG_FPS}
+          fps={LONG_FPS}
+          width={1920}
+          height={1080}
+          defaultProps={{ id: m.id, lines: m.lines, starts: [], durs: [], voices: [], bgm: m.bgm, subtitles: false }}
+          calculateMetadata={calculateLongMetadata}
         />
       ))}
     </>
