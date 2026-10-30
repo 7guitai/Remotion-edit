@@ -29,7 +29,9 @@ npm ci
 
 ### 1. 改善（前回までの振り返り）
 - `channel/lessons.md` と `channel/log.md` の直近の行を読む
-- 環境変数 `YOUTUBE_API_KEY` と `YOUTUBE_CHANNEL_ID` があれば、YouTube Data API で各動画の再生数・高評価・コメント数を取り、`channel/log.md` の数字を更新する。伸びた／伸びなかったテーマ・フックの傾向を `channel/lessons.md` に1〜3行で追記する
+- 環境変数 `YT_CLIENT_ID` `YT_CLIENT_SECRET` `YT_REFRESH_TOKEN` があれば `python3 scripts/youtube_stats.py` で YouTube Studio と同じ数字（再生数・平均視聴率・高評価・登録者増・視聴維持率の曲線）を取る（設定方法は `docs/youtube-setup.md`）
+  - `channel/log.md` の再生数・高評価を更新する（公開リポジトリなので、維持率などの細かい数字は `out/youtube-stats.json` に置いたままにし、コミットしない）
+  - 冒頭（5%地点）で離脱が多い動画はフック、半分で落ちる動画は中盤の図解、が弱い。伸びた／伸びなかったテーマ・フックの傾向を `channel/lessons.md` に1〜3行で追記する
 - 視聴データがない日は、直前の動画の静止画シートを見直し、仕様書と比べて改善点を1つ以上決めて `channel/lessons.md` に追記する
 - 決めた改善は今回の動画に必ず反映する
 
