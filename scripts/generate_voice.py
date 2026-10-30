@@ -20,6 +20,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 EPISODES = ROOT / "src" / "episodes"
+# 数学ショート（src/math-shorts/<id>.json）も同じ形式で読み上げられる
+SOURCES = [EPISODES, ROOT / "src" / "math-shorts"]
 
 
 def to_speech(text: str, readings: dict[str, str]) -> str:
@@ -74,7 +76,7 @@ def synth_openjtalk(text: str, out: Path, speed: float) -> None:
 
 def main() -> None:
     p = argparse.ArgumentParser()
-    p.add_argument("episode", help="src/episodes/ のファイル名（拡張子なし）")
+    p.add_argument("episode", help="src/episodes/ または src/math-shorts/ のファイル名（拡張子なし）")
     p.add_argument("--engine", choices=["auto", "voicevox", "openjtalk"], default="auto")
     p.add_argument("--voicevox-url", default="http://127.0.0.1:50021")
     p.add_argument("--speaker", type=int, default=3, help="VOICEVOX の話者ID（3=ずんだもん ノーマル）")
@@ -88,7 +90,10 @@ def main() -> None:
         sys.exit(f"VOICEVOX エンジンに接続できません: {args.voicevox_url}")
     print(f"engine: {engine}")
 
-    episode = json.loads((EPISODES / f"{args.episode}.json").read_text(encoding="utf-8"))
+    path = next((d / f"{args.episode}.json" for d in SOURCES if (d / f"{args.episode}.json").exists()), None)
+    if path is None:
+        sys.exit(f"エピソードが見つかりません: {args.episode}")
+    episode = json.loads(path.read_text(encoding="utf-8"))
     readings = episode.get("readings", {})
     OUT_DIR = ROOT / "public" / "voice" / episode["id"]
     OUT_DIR.mkdir(parents=True, exist_ok=True)

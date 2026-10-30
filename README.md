@@ -9,6 +9,17 @@
 | `sleep-trivia` | 睡眠の雑学 | 約2分9秒 |
 | `charger-power-split` | PCとスマホを同時充電する充電器の選び方（[OCHA NOTE の記事](https://ochanote.com/articles/laptop-phone-charger-power-split/)を動画化） | 約4分12秒 |
 
+縦型（1080×1920）の数学ショートは `src/math-shorts/` にあります（黒背景・明朝体・KaTeX の数式）。
+
+| id | 内容 | 長さ |
+| --- | --- | --- |
+| `birthday-paradox` | 誕生日のパラドックス（台本・秒単位コンテは [`src/math-shorts/birthday-paradox.md`](src/math-shorts/birthday-paradox.md)） | 約61秒 |
+
+```bash
+npm run voice -- birthday-paradox
+npx remotion render birthday-paradox out/birthday-paradox.mp4
+```
+
 ## 使い方
 
 ```bash
@@ -76,4 +87,4 @@ VOICEVOX が起動していないときは Open JTalk（`pip install pyopenjtalk
 
 ## フォント
 
-`public/fonts/` に M PLUS Rounded 1c を同梱（SIL Open Font License 1.1）。
+`public/fonts/` に M PLUS Rounded 1c と Noto Serif JP を同梱（どちらも SIL Open Font License 1.1）。
