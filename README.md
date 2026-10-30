@@ -10,6 +10,7 @@
 | `charger-power-split` | PCとスマホを同時充電する充電器の選び方（[OCHA NOTE の記事](https://ochanote.com/articles/laptop-phone-charger-power-split/)を動画化） | 約4分12秒 |
 
 縦型（1080×1920）の数学ショートは `src/math-shorts/` にあります（黒背景・明朝体・KaTeX の数式）。
+毎日の制作手順は [`CLAUDE.md`](CLAUDE.md)、制作履歴は [`channel/log.md`](channel/log.md)。1本を作るには `bash scripts/make_math_short.sh <id>`。
 
 | id | 内容 | 長さ |
 | --- | --- | --- |
