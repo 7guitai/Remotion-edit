@@ -4,7 +4,7 @@ import { intArg, parseArgs } from "./args";
 import { ROOT, simulateAndSave } from "./files";
 import { evaluate, passed, printChecks } from "./quality-check";
 import { renderSeed } from "./render-video";
-import { STYLE_IDS } from "../styles/presets";
+import { DEFAULT_STYLE, STYLE_IDS } from "../styles/presets";
 import type { StyleId } from "../styles/types";
 
 /**
@@ -17,7 +17,7 @@ import type { StyleId } from "../styles/types";
 const args = parseArgs();
 const seed = intArg(args, "seed", SIMULATION.seed);
 const defaultName = seed === SIMULATION.seed ? "last-ball-standing.mp4" : `last-ball-standing-${seed}.mp4`;
-const style = (args.style ?? "studio") as StyleId;
+const style = (args.style ?? DEFAULT_STYLE) as StyleId;
 if (!STYLE_IDS.includes(style)) {
   console.error(`--style は ${STYLE_IDS.join(" / ")} のいずれかを指定してください`);
   process.exit(1);

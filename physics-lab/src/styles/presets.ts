@@ -135,4 +135,4 @@ const comic: VisualStyle = {
 
 export const STYLES: Record<StyleId, VisualStyle> = { studio, stairs, candy, noir, comic };
 export const STYLE_IDS = Object.keys(STYLES) as StyleId[];
-export const DEFAULT_STYLE: StyleId = "studio";
+export const DEFAULT_STYLE: StyleId = "stairs";
