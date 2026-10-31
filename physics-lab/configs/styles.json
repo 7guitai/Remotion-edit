@@ -1,0 +1,6 @@
+{
+  "_note": "MVPでは src/config/theme.ts の neon-arena のみ使用。将来のスタイル切り替え用の置き場",
+  "styles": [
+    { "id": "neon-arena", "bg": "#04010d", "primary": "#00f0ff", "accent": "#ff2bd6", "highlight": "#ffe14d", "danger": "#ff3355", "font": "Orbitron" }
+  ]
+}

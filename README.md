@@ -1,5 +1,7 @@
 # ずんだもん解説動画（Remotion）
 
+> 物理シミュレーションShorts「PHYSICS LAB」は別プロジェクトとして [`physics-lab/`](physics-lab/README.md) にあります。
+
 白い背景に **テロップ（上）＋イラストや図（中央）** を置き、**ずんだもん（VOICEVOX）が読み上げ**、**BGM** が流れる解説動画を作るプロジェクトです。
 
 `src/episodes/<id>.json` の1ファイルが1本の動画です（コンポジションIDは `id`）。

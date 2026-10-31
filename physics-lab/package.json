@@ -1,0 +1,34 @@
+{
+  "name": "physics-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PHYSICS LAB — Visual Physics Entertainment (Remotion + Matter.js)",
+  "type": "module",
+  "scripts": {
+    "simulate": "tsx src/pipeline/simulate.ts",
+    "dev": "tsx src/pipeline/simulate.ts && remotion studio src/index.ts",
+    "render": "tsx src/pipeline/render.ts",
+    "check": "tsx src/pipeline/quality-check.ts",
+    "generate": "tsx src/pipeline/generate.ts",
+    "audio": "tsx scripts/generate-audio.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.539",
+    "@remotion/cli": "4.0.539",
+    "@remotion/fonts": "4.0.539",
+    "@remotion/renderer": "4.0.539",
+    "matter-js": "0.20.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.539"
+  },
+  "devDependencies": {
+    "@types/matter-js": "^0.20.2",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  }
+}

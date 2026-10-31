@@ -1,0 +1,29 @@
+{
+  "series": [
+    { "id": "marble-race", "name": "Marble Race", "share": 0.5 },
+    { "id": "physics-challenge", "name": "Physics Challenge", "share": 0.3 },
+    { "id": "chain-reaction", "name": "Chain Reaction", "share": 0.2 }
+  ],
+  "ideas": [
+    { "no": 1, "title": "Last Ball Standing", "series": "physics-challenge", "status": "mvp", "composition": "LastBallStanding" },
+    { "no": 2, "title": "Red vs Blue", "series": "marble-race", "status": "planned" },
+    { "no": 3, "title": "Impossible Marble Race", "series": "marble-race", "status": "idea" },
+    { "no": 4, "title": "Gravity x10", "series": "physics-challenge", "status": "idea" },
+    { "no": 5, "title": "The Giant Ball", "series": "physics-challenge", "status": "planned" },
+    { "no": 6, "title": "1000 Balls Drop", "series": "physics-challenge", "status": "idea" },
+    { "no": 7, "title": "Can It Escape?", "series": "physics-challenge", "status": "idea" },
+    { "no": 8, "title": "Rotating Maze", "series": "marble-race", "status": "planned" },
+    { "no": 9, "title": "Bouncy vs Heavy", "series": "physics-challenge", "status": "idea" },
+    { "no": 10, "title": "The Last Platform", "series": "physics-challenge", "status": "idea" },
+    { "no": 11, "title": "Domino Infinity", "series": "chain-reaction", "status": "planned" },
+    { "no": 12, "title": "One Ball, One World", "series": "chain-reaction", "status": "idea" },
+    { "no": 13, "title": "Perfect Balance", "series": "physics-challenge", "status": "idea" },
+    { "no": 14, "title": "The Funnel Race", "series": "marble-race", "status": "idea" },
+    { "no": 15, "title": "Collision Chaos", "series": "physics-challenge", "status": "idea" },
+    { "no": 16, "title": "Waterless Wave", "series": "physics-challenge", "status": "idea" },
+    { "no": 17, "title": "Magnetic Battle", "series": "physics-challenge", "status": "idea" },
+    { "no": 18, "title": "Impossible Tower", "series": "physics-challenge", "status": "idea" },
+    { "no": 19, "title": "Reverse Gravity", "series": "physics-challenge", "status": "idea" },
+    { "no": 20, "title": "The Ultimate Chain", "series": "chain-reaction", "status": "idea" }
+  ]
+}

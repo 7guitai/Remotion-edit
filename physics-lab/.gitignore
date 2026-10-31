@@ -1,0 +1,7 @@
+node_modules
+out
+renders/*.mp4
+simulations/*.json
+public/simulations/*.json
+analytics/*.local.*
+.DS_Store
