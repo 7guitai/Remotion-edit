@@ -35,6 +35,7 @@ import {
   TINY,
   TINY_KINDS,
   AIR_KINDS,
+  HEAVY_KINDS,
   FRICTION_KINDS,
   FRICTION_OFF,
   HitSound,
@@ -227,6 +228,15 @@ const cameraBase = (sim: SimResult, f: number, total: number): Cam => {
     }
     case "wind":
       return { pos: [-0.2, 1.7, lerp(9.6, 9.0, t)], look: [-0.2, 1.15, 0] };
+    case "hjump":
+      // 高さ3mの台と、2人の全身・着地する所が入るよう、正面のやや上から
+      return { pos: [0, 4.2, lerp(22.5, 22.0, t)], look: [0, 3.2, 0.3] };
+    case "hthrow":
+      return { pos: [0.2, 2.4, lerp(11.0, 10.5, t)], look: [0.2, 1.6, -0.2] };
+    case "hwind":
+    case "hcar":
+      // 風に流される人・車が長く見えるよう、遠くから広く
+      return { pos: [1.2, 3.6, lerp(19.5, 19.0, t)], look: [1.2, 0.9, -0.2] };
     case "fstand":
       return { pos: [0, 1.5, lerp(8.6, 8.0, t)], look: [0, 0.85, 0] };
     case "fpush":
@@ -1552,6 +1562,43 @@ const Pill: React.FC<{
   </div>
 );
 
+// 水と同じ重さの空気の世界（右・奥）を、うすい青いもやと、ただよう小さな粒で見せる（粒は風といっしょに流れる）
+const HeavyAirHaze: React.FC<{ sim: SimResult; f: number }> = ({ sim, f }) => {
+  const t = f / sim.fps;
+  // 風で流れた距離（風速を足し合わせる）
+  let drift = 0;
+  const w = sim.values.wind0;
+  if (w) {
+    for (let k = 0; k < f; k++) drift += w[k] / sim.fps;
+  }
+  // 範囲：[x0, x1], [y0, y1], [z0, z1]
+  const box: [number, number, number, number, number, number] =
+    sim.kind === "hjump" ? [0.75, 3.25, 0, 5.2, -1.4, 2.4] : sim.kind === "hthrow" ? [0.1, 6, 0, 3.4, -1.6, -0.3] : [-6, 10, 0, 2.6, -2.4, -0.6];
+  const [x0, x1, y0, y1, z0, z1] = box;
+  const n = sim.kind === "hjump" ? 110 : 150;
+  const specks = Array.from({ length: n }, (_, i) => {
+    const sx = random(`hx${i}`);
+    const x = x0 + ((((sx * (x1 - x0) + drift + 0.04 * Math.sin(t * 0.9 + i)) % (x1 - x0)) + (x1 - x0)) % (x1 - x0));
+    const y = y0 + random(`hy${i}`) * (y1 - y0) + 0.05 * Math.sin(t * 0.7 + i * 1.3);
+    const z = z0 + random(`hz${i}`) * (z1 - z0);
+    return (
+      <mesh key={i} position={[x, y, z]}>
+        <sphereGeometry args={[0.018, 6, 4]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.55} />
+      </mesh>
+    );
+  });
+  return (
+    <group>
+      <mesh position={[(x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2]}>
+        <boxGeometry args={[x1 - x0, y1 - y0, z1 - z0]} />
+        <meshBasicMaterial color="#5aa8ff" transparent opacity={0.1} depthWrite={false} />
+      </mesh>
+      {specks}
+    </group>
+  );
+};
+
 export const PhysicsScene: React.FC<{
   kind: SimKind;
   width: number;
@@ -1600,7 +1647,7 @@ export const PhysicsScene: React.FC<{
   const overlays: React.ReactNode[] = [];
   const laneX = [width * 0.25, width * 0.75];
   const isRoad = sim.kind === "brake" || sim.kind === "fbrake" || sim.kind === "xbrake";
-  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall", "ice", "trconst", "tracc", "trbrake", "strfeet", "strhold", "lknee", "lmat", "tbutter", "tflick"].includes(sim.kind);
+  const lanesTop = ["jump", "scale", "slip", "fstand", "wind", "afeather", "arain", "asky", "tlift", "tjump", "tfall", "twind", "train", "bjump", "bdrop", "bwall", "ice", "trconst", "tracc", "trbrake", "strfeet", "strhold", "lknee", "lmat", "tbutter", "tflick", "hjump"].includes(sim.kind);
   const isAir = AIR_KINDS.includes(sim.kind);
   // 摩擦ゼロの世界は、摩擦が消えた瞬間からラベルを点滅させる
   const offFrame = Math.round(FRICTION_OFF * fps);
@@ -1621,6 +1668,8 @@ export const PhysicsScene: React.FC<{
               ? [-1.0, 1.0]
               : TRAIN_KINDS.includes(sim.kind) || STRAP_KINDS.includes(sim.kind) || LAND_KINDS.includes(sim.kind)
                 ? [-1.4, 1.4]
+                : sim.kind === "hjump"
+                  ? [-2.0, 2.0]
               : TOAST_KINDS.includes(sim.kind)
                 ? TOAST.x
             : sim.kind === "bjump" || sim.kind === "bwall"
@@ -1647,7 +1696,7 @@ export const PhysicsScene: React.FC<{
         </Pill>,
       );
     });
-  } else if (sim.kind === "throw" || sim.kind === "athrow" || sim.kind === "aplane" || isRoad || sim.kind === "fpush" || sim.kind === "xpush" || sim.kind === "xslide" || sim.kind === "ladder") {
+  } else if (sim.kind === "throw" || sim.kind === "athrow" || sim.kind === "aplane" || sim.kind === "hthrow" || sim.kind === "hwind" || sim.kind === "hcar" || isRoad || sim.kind === "fpush" || sim.kind === "xpush" || sim.kind === "xslide" || sim.kind === "ladder") {
     overlays.push(
       <div key="legend" style={{ position: "absolute", left: 30, top: 34 + T, display: "flex", flexDirection: "column", gap: 12 }}>
         {[0, 1].map((lane) => (
@@ -1669,6 +1718,43 @@ export const PhysicsScene: React.FC<{
         {`風速 ${Math.round(w)}m/s`}
       </Pill>,
     );
+  }
+  if (sim.kind === "hwind" || sim.kind === "hcar") {
+    overlays.push(
+      <Pill key="wind" x={width / 2} y={190 + T} color="#334" size={40}>
+        {`弱い風 秒速${v("wind0").toFixed(1)}m`}
+      </Pill>,
+    );
+  }
+  if (sim.kind === "hjump") {
+    // 跳び出してから着地するまでの時間
+    [0, 1].forEach((lane) => {
+      const time = v(`time${lane}`);
+      const done = v(`landed${lane}`) > 0;
+      overlays.push(
+        <div
+          key={`htime${lane}`}
+          style={{
+            position: "absolute",
+            left: laneX[lane],
+            top: 128 + T,
+            transform: "translate(-50%, 0)",
+            fontFamily,
+            fontWeight: 900,
+            fontSize: 64,
+            color: done ? "#ffe14a" : "#fff",
+            background: "rgba(10,16,28,0.78)",
+            padding: "2px 26px",
+            borderRadius: 14,
+            border: `6px solid ${LANE_COLORS[lane]}`,
+            whiteSpace: "nowrap",
+          }}
+        >
+          {time.toFixed(1)}
+          <span style={{ fontSize: 36 }}>{done ? "秒で着地" : "秒"}</span>
+        </div>,
+      );
+    });
   }
   if (sim.kind === "scale") {
     [0, 1].forEach((lane) => {
@@ -3100,6 +3186,7 @@ export const PhysicsScene: React.FC<{
         {BLANKET_KINDS.includes(kind) ? <ClothMesh sim={sim} f={f} look={BLANKETS[kind].look} /> : null}
         {BLANKET_KINDS.includes(kind) ? <Bedroom /> : null}
         {GIANT_KINDS.includes(kind) ? <GiantDust sim={sim} f={f} /> : null}
+        {HEAVY_KINDS.includes(kind) ? <HeavyAirHaze sim={sim} f={f} /> : null}
         {kind === "tworld" ? <TinyProps /> : null}
         {kind === "rwalk" || kind === "rrun" ? <RainStreet sim={sim} f={f} /> : null}
         {kind === "elevfall" || kind === "elevsafe" || kind === "elevfloat" ? (

@@ -89,9 +89,18 @@ export type SimKind =
   | "gfallLow"
   // テーブルからトーストを落とす（tbutter：バターあり／なし（印だけ）、tflick：ゆっくり押す／指ではじく）
   | "tbutter"
-  | "tflick";
+  | "tflick"
+  // 空気が水と同じ重さ（右・奥の世界）。hjump：高さ3mから飛び降りる、hthrow：ボールを投げる、hwind：そよ風、hcar：そよ風と車
+  | "hjump"
+  | "hthrow"
+  | "hwind"
+  | "hcar";
 
 export const AIR_KINDS: SimKind[] = ["afeather", "athrow", "arain", "asky", "aplane"];
+// 空気が水と同じ重さの世界：空気の密度（kg/m³。いまは1.2）、そよ風の速さ（m/s）、飛び降りる台の高さ（m）。
+// 肺の中の空気も同じように重くなるので、体の密度は「水を吸いこんだ体」と同じ約1050kg/m³として計算する
+export const HEAVY_KINDS: SimKind[] = ["hjump", "hthrow", "hwind", "hcar"];
+export const HEAVY = { rho: 1000, now: 1.2, breeze: 3, deck: 3, body: 1050 };
 // 水そうの大きさ（中心のz、幅、奥行き、高さ、水面の高さ）
 export const TANK = { z: 0.45, w: 0.9, d: 0.5, h: 0.9, level: 0.75 };
 // 金が消える時刻（秒）と、金の立方体の一辺（m）
@@ -822,6 +831,219 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
         speed[f] = windAt(f / fps);
       };
       lanes.push({ world, g: G, dolls: [rd], control, record });
+    });
+  } else if (HEAVY_KINDS.includes(kind)) {
+    // 左（手前）はいまの空気、右（奥）は水と同じ重さの空気。重い空気の中では、物に2つの力がかかる：
+    //  - 浮力 ＝ 空気の密度 × 物の体積 × 重力（押しのけた空気の重さ）
+    //  - 空気の抵抗 ＝ 1/2 × 空気の密度 × 速さ² × 受ける面積 × 抗力係数（1.0）。風があれば、風との速さの差で計算する
+    const heavyAir = (items: { b: CANNON.Body; half: CANNON.Vec3; rho: number }[], air: number, wind: number, dt: number) => {
+      for (const { b, half, rho } of items) {
+        const vol = b.mass / rho;
+        b.force.y += air * vol * G;
+        const rx = b.velocity.x - wind;
+        const ry = b.velocity.y;
+        const rz = b.velocity.z;
+        const sp = Math.hypot(rx, ry, rz);
+        if (sp < 1e-6) continue;
+        // 動きの向きから見た、箱の影の面積
+        const q = b.quaternion;
+        const d = new CANNON.Vec3(rx / sp, ry / sp, rz / sp);
+        const ex = q.vmult(new CANNON.Vec3(1, 0, 0));
+        const ey = q.vmult(new CANNON.Vec3(0, 1, 0));
+        const ez = q.vmult(new CANNON.Vec3(0, 0, 1));
+        const area = 4 * (half.y * half.z * Math.abs(ex.dot(d)) + half.x * half.z * Math.abs(ey.dot(d)) + half.x * half.y * Math.abs(ez.dot(d)));
+        // 1回の刻みで、速さの差より大きくは変えない（重い空気は強いブレーキなので、行き過ぎて逆向きにならないように）
+        const F = Math.min(0.5 * air * area * sp * sp, (b.mass * sp) / dt);
+        b.force.x -= (F * rx) / sp;
+        b.force.y -= (F * ry) / sp;
+        b.force.z -= (F * rz) / sp;
+      }
+    };
+    const dollItems = (rd: Ragdoll) =>
+      (Object.keys(rd.bodies) as PartName[]).map((p) => ({
+        b: rd.bodies[p],
+        half: new CANNON.Vec3(rd.sizes[p][0] / 2, rd.sizes[p][1] / 2, rd.sizes[p][2] / 2),
+        rho: HEAVY.body,
+      }));
+    // 弱い風：2秒から1秒かけて 秒速3m に
+    const breeze = (t: number) => (kind === "hwind" || kind === "hcar" ? HEAVY.breeze * smooth((t - 2.0) / 1.0) : 0);
+    const wind = val("wind0");
+    [0, 1].forEach((lane) => {
+      const { world } = makeWorld(G);
+      const air = lane === 0 ? HEAVY.now : HEAVY.rho;
+      const items: { b: CANNON.Body; half: CANNON.Vec3; rho: number }[] = [];
+      let control: Lane["control"] = () => {};
+      const dolls: Ragdoll[] = [];
+      if (kind === "hjump") {
+        // 高さ3mの台から、前へ跳び出す。着地までの時間を測る
+        const x0 = lane === 0 ? -2.0 : 2.0;
+        const deck = new CANNON.Body({
+          mass: 0,
+          shape: new CANNON.Box(new CANNON.Vec3(0.45, HEAVY.deck / 2, 0.35)),
+          position: new CANNON.Vec3(x0, HEAVY.deck / 2, -0.6),
+          material: groundMaterial,
+        });
+        world.addBody(deck);
+        bodies.push({ lane, shape: "box", size: [0.9, HEAVY.deck, 0.7], color: "#d9dee5" });
+        tracked.push(deck);
+        const rd = addDoll(world, lane, lane, [x0, HEAVY.deck, -0.43]);
+        dolls.push(rd);
+        items.push(...dollItems(rd));
+        const time = val(`time${lane}`);
+        const landed = val(`landed${lane}`);
+        let jumped = false;
+        let touch = -1;
+        // 「飛び降りてみる」と言い終わるころに跳ぶ
+        const t0 = 2.4;
+        control = (t) => {
+          if (t < t0) {
+            rd.balance = 1;
+            rd.setPose(POSES.stand);
+          } else if (t < t0 + 0.25) {
+            rd.setPose(POSES.stand, POSES.crouch, smooth((t - t0) / 0.2) * 0.35);
+          } else {
+            if (!jumped) {
+              jumped = true;
+              for (const b of Object.values(rd.bodies)) {
+                b.velocity.set(0, 1.4, 2.4);
+                b.angularVelocity.set(0, 0, 0);
+              }
+            }
+            // 重い空気の中では、跳んだ瞬間に空気のブレーキで止まってしまう（プールの中で跳ぶのと同じ）。
+            // 台から出られるよう、0.35秒だけ足で押し出し続ける
+            if (lane === 1 && t < t0 + 0.6) {
+              for (const b of Object.values(rd.bodies)) {
+                b.velocity.z = Math.max(b.velocity.z, 1.8);
+                b.velocity.y = Math.max(b.velocity.y, 0.2);
+              }
+            }
+            const feet = Math.min(rd.bodies.footL.position.y, rd.bodies.footR.position.y);
+            if (touch < 0 && feet < 0.08) touch = t;
+            // 空中では手足を広げる（重い空気の中では、水の中のように手でかく）
+            rd.setPose(touch < 0 ? POSES.air : POSES.stand);
+          }
+          applyBalance(rd);
+        };
+        lanes.push({
+          world,
+          g: G,
+          dolls,
+          control: (t, dt) => {
+            control(t, dt);
+            heavyAir(items, air, 0, dt);
+          },
+          record: (f) => {
+            // 跳び出してからの時間（着地したら止める）と、着地したかどうか
+            const s = f / fps - (t0 + 0.25);
+            time[f] = s < 0 ? 0 : touch < 0 ? s : touch - (t0 + 0.25);
+            landed[f] = touch < 0 ? 0 : 1;
+          },
+        });
+        return;
+      }
+      if (kind === "hthrow") {
+        // 野球のボール（145g・直径7.4cm）を、秒速12mで投げる。ボールは中まで詰まっていて、密度は水の約0.7倍
+        // 2人が前後に重ならないよう、奥の人は少し右に立つ
+        const z = lane === 0 ? 0.9 : -0.9;
+        const bx = lane === 0 ? -1.4 : 0.6;
+        const rd = addDoll(world, lane, lane, [bx, 0, z], Math.PI / 2);
+        dolls.push(rd);
+        const ball = new CANNON.Body({
+          mass: 0.145,
+          shape: new CANNON.Sphere(0.037),
+          position: new CANNON.Vec3(bx, 1.3, z),
+          material: bodyMaterial,
+          type: CANNON.Body.KINEMATIC,
+        });
+        ball.collisionFilterGroup = 2;
+        ball.collisionFilterMask = 1;
+        world.addBody(ball);
+        // 見やすいよう、描くときは少し大きく
+        bodies.push({ lane, shape: "sphere", size: [0.14, 0.14, 0.14], color: "#ffffff" });
+        tracked.push(ball);
+        soundOf.set(ball, "ball");
+        const ballItem = { b: ball, half: new CANNON.Vec3(0.037, 0.037, 0.037), rho: 0.145 / ((4 / 3) * Math.PI * 0.037 ** 3) };
+        const dist = val(`land${lane}`);
+        let released = false;
+        let landed = -1;
+        const hand = () => rd.bodies.lowerArmR.pointToWorldFrame(new CANNON.Vec3(0, -0.2, 0));
+        lanes.push({
+          world,
+          g: G,
+          dolls,
+          control: (t, dt) => {
+            applyBalance(rd);
+            if (t < 0.3) {
+              rd.setPose(POSES.stand);
+            } else if (t < 0.75) {
+              rd.setPose(POSES.stand, POSES.windup, smooth((t - 0.3) / 0.3));
+            } else {
+              rd.setPose(POSES.throw);
+              rd.joints.shoulderR.gain = 30;
+            }
+            if (!released) {
+              ball.position.copy(hand());
+              if (t >= 0.86) {
+                released = true;
+                ball.type = CANNON.Body.DYNAMIC;
+                ball.updateMassProperties();
+                ball.velocity.set(10, 6, 0);
+              }
+              return;
+            }
+            heavyAir([ballItem], air, 0, dt);
+            if (landed < 0 && ball.position.y < 0.05) landed = ball.position.x;
+          },
+          record: (f) => {
+            dist[f] = landed;
+          },
+        });
+        return;
+      }
+      // そよ風（hwind：人と段ボール箱、hcar：車と人）。手前がいまの空気、奥が重い空気
+      const z = lane === 0 ? 1.2 : -1.4;
+      const x0 = kind === "hcar" ? -1.6 : -2.8;
+      const rd = addDoll(world, lane, lane, [x0 + (kind === "hcar" ? 2.6 : 0), 0, z + (kind === "hcar" ? 0.4 : 0)], 0.3);
+      dolls.push(rd);
+      rd.balance = 0.6;
+      items.push(...dollItems(rd));
+      const boxes: [number, number][] = kind === "hcar" ? [] : [[x0 + 1.0, z - 0.6], [x0 - 0.6, z + 0.5]];
+      boxes.forEach(([bx, bz]) => {
+        // 荷物の入った段ボール箱（8kg）。密度は水の約0.06倍（中の空気も重いが、箱の中身は入っている物の密度で考える）
+        const box = new CANNON.Body({ mass: 8, shape: new CANNON.Box(new CANNON.Vec3(0.25, 0.25, 0.25)), position: new CANNON.Vec3(bx, 0.25, bz), material: bodyMaterial });
+        world.addBody(box);
+        bodies.push({ lane, shape: "box", size: [0.5, 0.5, 0.5], color: "#c8925a" });
+        tracked.push(box);
+        soundOf.set(box, "body");
+        // 中身（本・食器など）の密度 約1500kg/m³ → 箱全体としては、中の空気を入れて 約1070kg/m³ とする
+        items.push({ b: box, half: new CANNON.Vec3(0.25, 0.25, 0.25), rho: 1070 });
+      });
+      if (kind === "hcar") {
+        // 車（1.3トン）。横向きに止めてあり、横から風を受ける。車の中も重い空気で満たされているので、
+        // 浮力は車の材料（鉄など 約0.2m³）の分だけ → 密度 6500kg/m³ として計算する
+        const car = new CANNON.Body({ mass: 1300, position: new CANNON.Vec3(x0, 0.7, z), material: bodyMaterial });
+        car.addShape(new CANNON.Box(new CANNON.Vec3(2.0, 0.45, 0.85)));
+        car.addShape(new CANNON.Box(new CANNON.Vec3(2.0, 0.13, 0.7)), new CANNON.Vec3(0, -0.57, 0));
+        car.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 1, 0), Math.PI / 2);
+        world.addBody(car);
+        bodies.push({ lane, shape: "car", size: [4.0, 0.9, 1.7], color: lane === 0 ? "#e8333a" : "#2f7bff" });
+        tracked.push(car);
+        soundOf.set(car, "car");
+        items.push({ b: car, half: new CANNON.Vec3(2.0, 0.6, 0.85), rho: 6500 });
+      }
+      lanes.push({
+        world,
+        g: G,
+        dolls,
+        control: (t, dt) => {
+          rd.setPose(POSES.stand, POSES.stance, smooth((t - 0.2) / 0.3));
+          applyBalance(rd);
+          heavyAir(items, air, breeze(t), dt);
+        },
+        record: (f) => {
+          wind[f] = breeze(f / fps);
+        },
+      });
     });
   } else if (kind === "tunnel" || kind === "tunnelzero") {
     // 地面のない世界で、力を抜いた人形が回りながら落ちる（中心付近は重力ゼロでただよう）
@@ -2848,6 +3070,8 @@ export const simulate = (
       ? ["いまの地球", "摩擦ゼロ"]
       : kind === "wind"
         ? ["いまの空気", "空気が2倍"]
+        : HEAVY_KINDS.includes(kind)
+          ? ["いまの空気", "水と同じ重さの空気"]
         : AIR_KINDS.includes(kind)
           ? ["いまの地球", "空気抵抗ゼロ"]
           : TINY_KINDS.includes(kind)

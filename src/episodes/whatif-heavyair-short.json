@@ -1,0 +1,120 @@
+{
+  "id": "whatif-heavyair-short",
+  "title": "もし空気が水と同じ重さだったら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "yume_ippai.mp3",
+    "title": "夢いっぱいをもう一度",
+    "credit": "稿屋 隆",
+    "page": "https://opentracks.com/bgm/detail/114",
+    "opentracks": 114,
+    "track": 1
+  },
+  "headline": [
+    "もし空気が",
+    "水と同じ重さだったら？"
+  ],
+  "illustrations": {
+    "fe_cloud_rain.svg": {
+      "emoji": "🌧️",
+      "irasutoya": "Fluent Emoji「Cloud with rain」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Cloud%20with%20rain/Color/cloud_with_rain_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    }
+  },
+  "description": "もし空気が水と同じくらい重く（いまの約830倍）なったら、風・車・飛び降り・ボール・雨はどうなるのか？\n「もし空気抵抗がなくなったら？」の逆バージョンです。人や物の動きは、物理エンジンでシミュレーションして作りました（浮力＝空気の密度×体積×重力、空気の抵抗＝1/2×空気の密度×速さ²×面積×抗力係数 で計算しています）。\n肺の中の空気も、ボールや車の中の空気も同じように重くなるとして計算しています。人の体は、いつもは息を吸うと水より少し軽く、吐くと少し重くなります。\n※空気の重さ（密度）だけを変えた思考実験です。息ができるかどうかなど、ほかの変化は考えていません。\nほかに知りたい「もしも」は、コメントで教えてください！",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "空気",
+    "物理",
+    "Shorts"
+  ],
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、空気が水と同じくらい重くなったら？秒速3mの弱い風がふいただけで…",
+      "effect": "none",
+      "sim": "hwind",
+      "speech": "もし、空気が水と同じくらい重くなったら？秒速3メートルの弱い風がふいただけで…"
+    },
+    {
+      "type": "whatif",
+      "text": "人が流されていく！",
+      "effect": "none",
+      "sim": "hwind",
+      "simStart": 5.667
+    },
+    {
+      "type": "whatif",
+      "text": "いまの空気は、1立方メートルで約1.2kg。重い空気は、その約830倍。川の水と同じ強さで押してくるんだ。",
+      "effect": "none",
+      "sim": "hcar",
+      "big": "約830倍",
+      "speech": "いまの空気は、1立方メートルで約1.2キロ。重い空気は、その約830倍。川の水と同じ強さで押してくるんだ。"
+    },
+    {
+      "type": "whatif",
+      "text": "弱い風なのに、押す力は、秒速30mの台風の約8倍。止めてある車も、ごろごろ転がってしまう。",
+      "effect": "none",
+      "sim": "hcar",
+      "simStart": 8.4,
+      "big": "台風の約8倍",
+      "speech": "弱い風なのに、押す力は、秒速30メートルの台風の約8倍。止めてある車も、ごろごろ転がってしまう。"
+    },
+    {
+      "type": "whatif",
+      "text": "次は、高さ3mの台から飛び降りてみる。いつもの世界は、1秒もたたずに着地。",
+      "effect": "none",
+      "sim": "hjump",
+      "speech": "次は、高さ3メートルの台から飛び降りてみる。いつもの世界は、1秒もたたずに着地。"
+    },
+    {
+      "type": "whatif",
+      "text": "重い空気の世界では、ふわーっと、ゆっくり沈んでいく。プールに飛びこんだときと同じだ。",
+      "effect": "none",
+      "sim": "hjump",
+      "simStart": 5.867
+    },
+    {
+      "type": "whatif",
+      "text": "人の体の重さは、同じ体積の水とほとんど同じ。だから重い空気の中では、浮力で体がほとんど浮いてしまうんだ。",
+      "effect": "none",
+      "sim": "hjump",
+      "simStart": 11.633
+    },
+    {
+      "type": "whatif",
+      "text": "ボールを投げても、手をはなしたとたんに止まる。野球のボールは水より軽いので、ゆっくり空へ浮かんでいく。",
+      "effect": "none",
+      "sim": "hthrow"
+    },
+    {
+      "type": "whatif",
+      "text": "そして、雨が降らなくなる。雨粒の重さが、まわりの空気と同じなので、雲から落ちてこないんだ。",
+      "effect": "zoom",
+      "image": "fe_cloud_rain.svg",
+      "imageSize": 560,
+      "bg": "night"
+    },
+    {
+      "type": "whatif",
+      "text": "空気が軽いおかげで、ぼくらは歩けるし、跳べる。重い空気の世界、住んでみたい？コメントで教えてね！",
+      "effect": "none",
+      "sim": "hcar",
+      "simStart": 3,
+      "hold": 1
+    }
+  ]
+}
