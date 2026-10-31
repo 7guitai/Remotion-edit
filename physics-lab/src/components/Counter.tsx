@@ -1,27 +1,42 @@
 import React from "react";
 import { interpolate } from "remotion";
-import { THEME, neonText } from "../config/theme";
+import { THEME, cardShadow } from "../config/theme";
+import { TEAMS, type TeamId } from "../physics/teams";
+import { TeamBallIcon } from "./TeamBallIcon";
 
 type Props = {
   alive: number;
   total: number;
+  teamAlive: Record<TeamId, number>;
   /** 直近で残数が減ってからのフレーム数（ポップ演出用） */
   framesSinceChange: number;
-  danger: boolean;
 };
 
-/** 画面上部の残数カウンター */
-export const Counter: React.FC<Props> = ({ alive, total, framesSinceChange, danger }) => {
-  const pop = interpolate(framesSinceChange, [0, 4, 12], [1.35, 1.12, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const color = danger ? THEME.red : alive <= 1 ? THEME.yellow : THEME.white;
-  const glow = danger ? THEME.red : THEME.cyan;
+/** 画面上部: タイトル・残数・色ごとの残数 */
+export const Counter: React.FC<Props> = ({ alive, total, teamAlive, framesSinceChange }) => {
+  const pop = interpolate(framesSinceChange, [0, 4, 12], [1.25, 1.08, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
-    <div style={{ position: "absolute", top: 160, left: 0, right: 0, display: "flex", justifyContent: "center", alignItems: "center", gap: 28 }}>
-      <div style={{ width: 70, height: 70, borderRadius: 35, background: `radial-gradient(circle at 35% 35%, #fff, ${glow} 45%, #001a22)`, boxShadow: `0 0 30px ${glow}` }} />
-      <div style={{ fontFamily: THEME.font, fontWeight: 900, fontSize: 132, lineHeight: 1, color, textShadow: neonText(glow, 0.9), transform: `scale(${pop})`, minWidth: 190, textAlign: "center" }}>
-        {alive}
+    <div style={{ position: "absolute", top: 56, left: 60, right: 60, padding: "26px 40px 30px", borderRadius: 44, background: THEME.card, boxShadow: cardShadow, fontFamily: THEME.font }}>
+      <div style={{ textAlign: "center", fontWeight: 800, fontSize: 46, letterSpacing: 3, color: THEME.text }}>LAST BALL STANDING</div>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 14 }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 10, minWidth: 250 }}>
+          <span style={{ display: "inline-block", fontWeight: 800, fontSize: 112, lineHeight: 1, color: alive <= 1 ? THEME.accent : THEME.text, transform: `scale(${pop})`, transformOrigin: "left bottom" }}>
+            {alive}
+          </span>
+          <span style={{ fontWeight: 800, fontSize: 44, color: THEME.sub }}>/{total}</span>
+        </div>
+        <div style={{ display: "flex", gap: 22 }}>
+          {TEAMS.map((t) => {
+            const n = teamAlive[t.id];
+            return (
+              <div key={t.id} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, opacity: n === 0 ? 0.45 : 1 }}>
+                <TeamBallIcon color={t.color} size={62} dim={n === 0} />
+                <span style={{ fontWeight: 800, fontSize: 38, lineHeight: 1, color: n === 0 ? THEME.sub : THEME.text }}>{n}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <div style={{ fontFamily: THEME.font, fontWeight: 700, fontSize: 52, color: THEME.dim }}>/ {total}</div>
     </div>
   );
 };

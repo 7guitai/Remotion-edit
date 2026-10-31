@@ -5,6 +5,7 @@ import { CAT, DEAD_FILTER, buildCourse, createWorld } from "./engine";
 import { clampSpeed, collideAliveWithWall, collideDeadWithWall, wrapAngle } from "./collision";
 import { buildTimeline, type StepRecord } from "./recorder";
 import { SeededRandom } from "./seeded-random";
+import { TEAMS, type Team } from "./teams";
 import type { BallInfo, Elimination, HitEvent, SimulationConfig, SimulationResult, WinnerInfo } from "./types";
 
 const { Engine, Body, Events } = Matter;
@@ -25,11 +26,9 @@ export const targetAlive = (t: number, config: SimulationConfig): number => {
   return 1 + (config.ballCount - 1) * Math.pow(1 - p, 1.1);
 };
 
-/** 24色のネオンカラー（seedで割り当て順を変える） */
-const ballColors = (count: number, rng: SeededRandom): string[] => {
-  const hues = Array.from({ length: count }, (_, i) => Math.round((i * 360) / count));
-  return rng.shuffle(hues).map((h) => `hsl(${h}, 100%, 60%)`);
-};
+/** 4色のチーム（赤・青・緑・金）に均等に割り当てる。割り当て順はseedで変わる */
+const ballTeams = (count: number, rng: SeededRandom): Team[] =>
+  rng.shuffle(Array.from({ length: count }, (_, i) => TEAMS[i % TEAMS.length]));
 
 /**
  * Last Ball Standing のルール
@@ -43,7 +42,7 @@ const ballColors = (count: number, rng: SeededRandom): string[] => {
 export const runSimulation = (config: SimulationConfig): SimulationResult => {
   const rng = new SeededRandom(config.seed);
   const course = buildCourse(rng);
-  const colors = ballColors(config.ballCount, rng);
+  const teams = ballTeams(config.ballCount, rng);
   const world = createWorld(config, course, rng);
   const { engine, balls, spinner } = world;
   const r = config.ballRadius;
@@ -52,7 +51,8 @@ export const runSimulation = (config: SimulationConfig): SimulationResult => {
   const ballInfo: BallInfo[] = balls.map((_, i) => ({
     id: `ball_${String(i + 1).padStart(3, "0")}`,
     number: i + 1,
-    color: colors[i],
+    team: teams[i].id,
+    color: teams[i].color,
     radius: r,
   }));
 

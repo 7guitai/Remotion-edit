@@ -1,3 +1,5 @@
+import type { TeamId } from "./teams";
+
 export type SimulationConfig = {
   seed: number;
   ballCount: number;
@@ -42,6 +44,7 @@ export type CourseSpec = {
 export type BallInfo = {
   id: string;
   number: number;
+  team: TeamId;
   color: string;
   radius: number;
 };

@@ -82,6 +82,6 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const hb = resultHash(b);
   checks.push({ name: "同じseedで同じ結果（2回実行して比較）", ok: ha === hb, detail: `${ha} / ${hb}`, severity: "error" });
   printChecks(checks);
-  console.log(`勝者: #${a.winner.ballIndex + 1} (${a.balls[a.winner.ballIndex].color})`);
+  console.log(`勝者: #${a.winner.ballIndex + 1} (${a.balls[a.winner.ballIndex].team})`);
   process.exit(passed(checks) ? 0 : 1);
 }

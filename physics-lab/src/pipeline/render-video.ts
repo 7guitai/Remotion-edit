@@ -72,8 +72,8 @@ export const renderSeed = async (opts: {
     sourceCommit: gitCommit(),
     config: sim.config,
     course: sim.course,
-    winner: { ...sim.winner, number: sim.balls[sim.winner.ballIndex].number, color: sim.balls[sim.winner.ballIndex].color, videoSeconds: sim.winnerFrame / sim.fps },
-    eliminationOrder: sim.eliminations.map((e) => ({ place: e.place, number: sim.balls[e.ballIndex].number, t: e.t, reason: e.reason })),
+    winner: { ...sim.winner, number: sim.balls[sim.winner.ballIndex].number, team: sim.balls[sim.winner.ballIndex].team, videoSeconds: sim.winnerFrame / sim.fps },
+    eliminationOrder: sim.eliminations.map((e) => ({ place: e.place, number: sim.balls[e.ballIndex].number, team: sim.balls[e.ballIndex].team, t: e.t, reason: e.reason })),
     qualityChecks: opts.checks,
   };
   fs.writeFileSync(metaFile, JSON.stringify(meta, null, 2));

@@ -3,7 +3,8 @@ import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from "remo
 import { loadFont } from "@remotion/fonts";
 import { bgmVolume, buildSoundCues } from "../audio/sound-design";
 import { Counter } from "../components/Counter";
-import { THEME, neonText } from "../config/theme";
+import { THEME } from "../config/theme";
+import { TEAMS, type TeamId } from "../physics/teams";
 import { frameAtSimTime, useSimulation } from "../data/load-simulation";
 import { Climax } from "../scenes/Climax";
 import { Intro } from "../scenes/Intro";
@@ -13,12 +14,11 @@ import type { SimulationResult } from "../physics/types";
 
 export type LastBallStandingProps = { seed: number };
 
-loadFont({ family: "Orbitron", url: staticFile("fonts/orbitron-latin-700-normal.woff2"), weight: "700" });
-loadFont({ family: "Orbitron", url: staticFile("fonts/orbitron-latin-900-normal.woff2"), weight: "900" });
+loadFont({ family: "MPLUS Rounded", url: staticFile("fonts/MPLUSRounded1c-ExtraBold.ttf"), weight: "800" });
 
 export const LastBallStanding: React.FC<LastBallStandingProps> = ({ seed }) => {
   const sim = useSimulation(seed);
-  if (!sim) return <AbsoluteFill style={{ background: THEME.bg }} />;
+  if (!sim) return <AbsoluteFill style={{ background: THEME.bgCenter }} />;
   return <Video sim={sim} />;
 };
 
@@ -37,30 +37,30 @@ const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
   const lastChange = Math.max(-100, ...elimFrames.filter((f) => f <= frame));
   const framesSinceChange = frame - lastChange;
   const climax = state.alive <= 3 && frame < sim.winnerFrame + 2 && frame > sim.introFrames;
+  const teamAlive = Object.fromEntries(TEAMS.map((t) => [t.id, 0])) as Record<TeamId, number>;
+  sim.balls.forEach((b, i) => {
+    if (frame < deadFrame[i]) teamAlive[b.team]++;
+  });
   const slow = state.speed > 0 && state.speed < 1 ? (1 - state.speed) / 0.65 : 0;
   const zoom = 1 + 0.07 * slow;
   const { cx, cy } = sim.layout.arena;
 
   return (
-    <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 40%, ${THEME.bg2} 0%, ${THEME.bg} 70%)` }}>
-      <BackgroundGrid frame={frame} />
+    <AbsoluteFill style={{ background: `radial-gradient(ellipse at 45% 40%, ${THEME.bgCenter} 0%, ${THEME.bgEdge} 100%)` }}>
 
       <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
         <g transform={`translate(${cx} ${cy}) scale(${zoom}) translate(${-cx} ${-cy})`}>
-          <MainAction sim={sim} frame={frame} deadFrame={deadFrame} elimFrames={elimFrames} danger={climax ? 1 : 0} />
+          <MainAction sim={sim} frame={frame} deadFrame={deadFrame} elimFrames={elimFrames} />
         </g>
       </svg>
 
       {/* HUD */}
-      <div style={{ position: "absolute", top: 70, left: 0, right: 0, textAlign: "center", fontFamily: THEME.font, fontWeight: 900, fontSize: 58, letterSpacing: 4, color: THEME.white, textShadow: neonText(THEME.magenta, 0.8) }}>
-        LAST BALL STANDING
-      </div>
-      <Counter alive={state.alive} total={sim.balls.length} framesSinceChange={framesSinceChange} danger={climax} />
-      <div style={{ position: "absolute", bottom: 40, left: 0, right: 0, textAlign: "center", fontFamily: THEME.font, fontWeight: 700, fontSize: 30, letterSpacing: 6, color: THEME.dim }}>
+      <Counter alive={state.alive} total={sim.balls.length} teamAlive={teamAlive} framesSinceChange={framesSinceChange} />
+      <div style={{ position: "absolute", bottom: 46, left: 0, right: 0, textAlign: "center", fontFamily: THEME.font, fontWeight: 800, fontSize: 28, letterSpacing: 6, color: THEME.sub }}>
         PHYSICS LAB · SEED {sim.config.seed}
       </div>
 
-      {climax && <Climax frame={frame} alive={state.alive} speed={state.speed} framesSinceChange={framesSinceChange} />}
+      {climax && <Climax alive={state.alive} framesSinceChange={framesSinceChange} />}
       <Intro frame={frame} total={sim.balls.length} introFrames={sim.introFrames} />
       <Result sim={sim} frame={frame} />
 
@@ -72,20 +72,5 @@ const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
         </Sequence>
       ))}
     </AbsoluteFill>
-  );
-};
-
-const BackgroundGrid: React.FC<{ frame: number }> = ({ frame }) => {
-  const offset = (frame * 1.5) % 80;
-  return (
-    <AbsoluteFill
-      style={{
-        backgroundImage: `linear-gradient(rgba(0,240,255,0.07) 2px, transparent 2px), linear-gradient(90deg, rgba(0,240,255,0.07) 2px, transparent 2px)`,
-        backgroundSize: "80px 80px",
-        backgroundPosition: `0 ${offset}px`,
-        maskImage: "radial-gradient(ellipse at 50% 45%, black 30%, transparent 85%)",
-        WebkitMaskImage: "radial-gradient(ellipse at 50% 45%, black 30%, transparent 85%)",
-      }}
-    />
   );
 };
