@@ -1,0 +1,41 @@
+{
+  "id": "cg-jenga-short",
+  "title": "【物理エンジン】人が乗った巨大ジェンガ、何本ぬける？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "cg",
+  "background": "#000",
+  "slideGap": 0,
+  "bgmVolume": 0.2,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "なし"
+  },
+  "bgm": {
+    "file": "oyaoya.mp3",
+    "title": "おやおや？",
+    "credit": "KK",
+    "page": "https://opentracks.com/bgm/detail/4639",
+    "opentracks": 4639,
+    "track": 1
+  },
+  "illustrations": {},
+  "description": "本物のジェンガ（54本・18段）を20倍の大きさにして、てっぺんに人を乗せ、鉄の棒でブロックを1本ずつ押し出してみました。ブロック1本は木の重さで約110kgです。\n重さのかかっていない「ゆるいブロック」はするっと抜けますが、上の重さを支えているブロックを押すと、こすれる力（摩擦）で上の段ごと引きずられてしまいます。本物のジェンガでも、まず指で軽くつついて、ゆるいブロックを探すのがコツです。\n\n※ブロックと人は物理エンジン（cannon-es）で計算しています。摩擦は「押しつける力×摩擦係数」になるよう直しています。",
+  "hashtags": [
+    "Shorts",
+    "物理エンジン",
+    "ジェンガ",
+    "シミュレーション",
+    "3DCG"
+  ],
+  "slides": [
+    {
+      "type": "cg",
+      "scene": "jenga",
+      "text": "",
+      "speech": "-"
+    }
+  ]
+}

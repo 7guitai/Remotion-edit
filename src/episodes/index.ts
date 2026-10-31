@@ -44,6 +44,7 @@ import whatifGiant from "./whatif-giant-short.json";
 import verifyElevPack from "./verify-elevator-pack-short.json";
 import simBlanket from "./sim-blanket-short.json";
 import cgSlime from "./cg-slime-short.json";
+import cgJenga from "./cg-jenga-short.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -325,6 +326,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  cgJenga as Episode,
   cgSlime as Episode,
   simBlanket as Episode,
   verifyElevPack as Episode,
