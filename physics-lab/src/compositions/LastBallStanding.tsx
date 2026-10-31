@@ -33,12 +33,13 @@ const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
   const frame = Math.min(useCurrentFrame(), sim.frames.length - 1);
   const state = sim.frames[frame];
 
-  const { elimFrames, deadFrame, cues } = useMemo(() => {
+  const { elimFrames, deadFrame, pulseFrames, cues } = useMemo(() => {
     const frameAt = (t: number) => frameAtSimTime(sim, t);
     const elimFrames = sim.eliminations.map((e) => frameAt(e.t));
     const deadFrame = sim.balls.map(() => Infinity);
     sim.eliminations.forEach((e, k) => (deadFrame[e.ballIndex] = elimFrames[k]));
-    return { elimFrames, deadFrame, cues: buildSoundCues(sim, elimFrames, frameAt) };
+    const pulseFrames = (sim.pulses ?? []).map((t) => frameAt(t));
+    return { elimFrames, deadFrame, pulseFrames, cues: buildSoundCues(sim, elimFrames, frameAt, pulseFrames) };
   }, [sim]);
 
   const lastChange = Math.max(-100, ...elimFrames.filter((f) => f <= frame));
@@ -57,7 +58,7 @@ const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
 
       <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
         <g transform={`translate(${cx} ${cy}) scale(${zoom}) translate(${-cx} ${-cy})`}>
-          <MainAction sim={sim} frame={frame} deadFrame={deadFrame} elimFrames={elimFrames} />
+          <MainAction sim={sim} frame={frame} pulseFrames={pulseFrames} deadFrame={deadFrame} elimFrames={elimFrames} />
         </g>
       </svg>
 

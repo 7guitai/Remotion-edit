@@ -60,6 +60,37 @@ export const buildCourse = (rng: SeededRandom): CourseSpec => {
   };
 };
 
+/** 初期配置の候補（上から順）。回転バーの初期角度・ハブ・バンパー・壁から離れた点だけ */
+const spawnSlots = (config: SimulationConfig, course: CourseSpec): { x: number; y: number }[] => {
+  const { cx, cy, radius: R } = LAYOUT.arena;
+  const r = config.ballRadius;
+  const spacing = r * 2 + 8;
+  const rowH = spacing * 0.866;
+  const s = course.spinner;
+  const armDirs = Array.from({ length: s.arms }, (_, k) => s.initialAngle + (k / s.arms) * Math.PI * 2);
+  const clear = (x: number, y: number) => {
+    const dx = x - cx;
+    const dy = y - cy;
+    if (Math.hypot(dx, dy) > R - r - 8) return false;
+    if (Math.hypot(dx, dy) < course.hubRadius + r + 10) return false;
+    for (const b of course.bumpers) if (Math.hypot(x - b.x, y - b.y) < b.radius + r + 8) return false;
+    for (const a of armDirs) {
+      const ux = Math.cos(a);
+      const uy = Math.sin(a);
+      const along = Math.max(0, Math.min(s.length, dx * ux + dy * uy));
+      if (Math.hypot(dx - ux * along, dy - uy * along) < s.thickness / 2 + r + 10) return false;
+    }
+    return true;
+  };
+  const out: { x: number; y: number }[] = [];
+  for (let row = 0; cy - R + row * rowH < cy + R; row++) {
+    const y = cy - R + r + 12 + row * rowH;
+    const offset = row % 2 === 0 ? 0 : spacing / 2;
+    for (let x = cx - R + offset; x <= cx + R; x += spacing) if (clear(x, y)) out.push({ x, y });
+  }
+  return out;
+};
+
 export const createWorld = (config: SimulationConfig, course: CourseSpec, rng: SeededRandom): World => {
   // Matter内部の乱数もseedで固定しておく
   (Common as unknown as { _seed: number })._seed = config.seed;
@@ -115,18 +146,16 @@ export const createWorld = (config: SimulationConfig, course: CourseSpec, rng: S
     Bodies.rectangle(540, LAYOUT.ceiling - T / 2, 1400, T, trayOpts),
   ];
 
-  // ボールはアリーナ上部に格子状＋ゆらぎで配置
+  // ボールはアリーナ上部から六角格子で詰めて配置（障害物・壁と重なる位置は使わない）
   const r = config.ballRadius;
-  const cols = 6;
-  const spacing = r * 2 + 14;
+  const slots = spawnSlots(config, course).slice(0, config.ballCount);
+  if (slots.length < config.ballCount) throw new Error(`初期配置の場所が足りません (${slots.length}/${config.ballCount})`);
   const order = rng.shuffle(Array.from({ length: config.ballCount }, (_, i) => i));
   const balls: Matter.Body[] = [];
   for (let i = 0; i < config.ballCount; i++) {
-    const slot = order[i];
-    const row = Math.floor(slot / cols);
-    const col = slot % cols;
-    const x = cx + (col - (cols - 1) / 2) * spacing + rng.range(-4, 4);
-    const y = cy - R + 58 + row * spacing + rng.range(-4, 4);
+    const slot = slots[order[i]];
+    const x = slot.x + rng.range(-2, 2);
+    const y = slot.y + rng.range(-2, 2);
     const ball = Bodies.circle(x, y, r, {
       restitution: config.restitution,
       friction: config.friction,

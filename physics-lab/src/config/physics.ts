@@ -9,22 +9,22 @@ export const LAYOUT = {
   ceiling: 330,
 } as const;
 
-export const DEFAULT_SEED = 20261031;
+export const DEFAULT_SEED = 20261034;
 
 export const SIMULATION: SimulationConfig = {
   seed: DEFAULT_SEED,
-  ballCount: 24,
+  ballCount: 60,
   gravity: 0.95,
   restitution: 0.82,
   friction: 0.015,
   airFriction: 0.002,
-  ballRadius: 19,
+  ballRadius: 14,
   durationSeconds: 30,
   fps: 30,
   physicsHz: 60,
   maxSpeed: 22,
   /** この時刻（シミュレーション秒）までに最後の1個にするのが目標 */
-  targetFinishSeconds: 20.5,
+  targetFinishSeconds: 19.5,
   /** この時刻までに決着しなければタイムアウト判定 */
-  deadlineSeconds: 23.5,
+  deadlineSeconds: 22.5,
 };

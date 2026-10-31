@@ -9,6 +9,8 @@ export type StepRecord = {
   gateAngle: number;
   gateHalf: number;
   spinnerAngle: number;
+  /** 重力の傾き（rad, 0 = 真下） */
+  tilt: number;
 };
 
 /** 勝者確定の前後をスローにする区間（シミュレーション秒、勝者確定時刻からの相対） */
@@ -75,6 +77,7 @@ export const buildTimeline = (
       alive: a.alive,
       gate: gateHalf > 0.001 ? [r3(gateAngle - gateHalf), r3(gateAngle + gateHalf)] : null,
       spinnerAngle: r3(lerpAngle(a.spinnerAngle, b.spinnerAngle, p)),
+      tilt: r3(a.tilt + (b.tilt - a.tilt) * p),
       speed: Math.round(speed * 100) / 100,
     });
   }

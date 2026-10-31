@@ -10,13 +10,15 @@ import type { SimulationResult } from "../physics/types";
 type Props = {
   sim: SimulationResult;
   frame: number;
+  /** 衝撃波パルスの動画フレーム */
+  pulseFrames: number[];
   /** ボールごとの脱落フレーム（勝者は Infinity） */
   deadFrame: number[];
   elimFrames: number[];
 };
 
 /** 床・アリーナ・障害物・ボール・脱落エフェクト（ワールド座標 = 動画ピクセル） */
-export const MainAction: React.FC<Props> = ({ sim, frame, deadFrame, elimFrames }) => {
+export const MainAction: React.FC<Props> = ({ sim, frame, pulseFrames, deadFrame, elimFrames }) => {
   const style = useStyle();
   const state = sim.frames[frame];
   const { layout, balls, winner, winnerFrame } = sim;
@@ -32,6 +34,7 @@ export const MainAction: React.FC<Props> = ({ sim, frame, deadFrame, elimFrames 
       <Defs />
       <DropZone layout={layout} />
       <ArenaFloor layout={layout} />
+      <PulseWaves sim={sim} frame={frame} pulseFrames={pulseFrames} />
 
       <g filter={shadowFilter(style)}>
         {balls.map((ball, i) => {
@@ -60,6 +63,7 @@ export const MainAction: React.FC<Props> = ({ sim, frame, deadFrame, elimFrames 
       })}
 
       <ArenaRail layout={layout} gate={state.gate} frame={frame} />
+      {!won && Math.abs(state.tilt ?? 0) > 0.01 && <GravityArrow sim={sim} tilt={state.tilt} />}
 
       {/* 脱落した瞬間の波紋 */}
       {sim.eliminations.map((e, k) => {
@@ -71,6 +75,44 @@ export const MainAction: React.FC<Props> = ({ sim, frame, deadFrame, elimFrames 
       })}
 
       {won && <WinnerSpotlight sim={sim} frame={frame} />}
+    </g>
+  );
+};
+
+/** 終盤の重力の向き（中央の柱から伸びる矢印） */
+const GravityArrow: React.FC<{ sim: SimulationResult; tilt: number }> = ({ sim, tilt }) => {
+  const style = useStyle();
+  const { cx, cy } = sim.layout.arena;
+  const hub = sim.course.hubRadius;
+  const deg = (-tilt * 180) / Math.PI;
+  const len = 120;
+  return (
+    <g transform={`rotate(${deg} ${cx} ${cy})`}>
+      <line x1={cx} y1={cy + hub + 6} x2={cx} y2={cy + hub + len - 26} stroke={style.accent} strokeWidth={14} strokeLinecap="round" />
+      <polygon points={`${cx - 26},${cy + hub + len - 34} ${cx + 26},${cy + hub + len - 34} ${cx},${cy + hub + len}`} fill={style.accent} stroke="#fff" strokeWidth={3} strokeLinejoin="round" />
+    </g>
+  );
+};
+
+/** 衝撃波: 中心から外周へ広がるリング */
+const PulseWaves: React.FC<{ sim: SimulationResult; frame: number; pulseFrames: number[] }> = ({ sim, frame, pulseFrames }) => {
+  const style = useStyle();
+  const { cx, cy, radius: R } = sim.layout.arena;
+  const hub = sim.course.hubRadius;
+  return (
+    <g>
+      {pulseFrames.map((pf, k) => {
+        const age = frame - pf;
+        if (age < 0 || age > 14) return null;
+        const p = age / 14;
+        const rr = hub + (R - hub) * (1 - Math.pow(1 - p, 2));
+        return (
+          <g key={k}>
+            <circle cx={cx} cy={cy} r={rr} fill="none" stroke={style.accent} strokeWidth={22 * (1 - p) + 4} opacity={0.55 * (1 - p)} />
+            <circle cx={cx} cy={cy} r={rr} fill="none" stroke="#ffffff" strokeWidth={4} opacity={0.7 * (1 - p)} />
+          </g>
+        );
+      })}
     </g>
   );
 };

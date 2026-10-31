@@ -117,33 +117,50 @@ export const ArenaRail: React.FC<{ layout: Layout; gate: [number, number] | null
   return (
     <g>
       <path d={path} transform={`translate(${sh.dx} ${sh.dy})`} fill="none" stroke={sh.color} strokeWidth={w} strokeLinecap="round" filter={shadowFilter(style)} />
-      <path d={path} fill="none" stroke={style.rail.outline} strokeWidth={w + 4} strokeLinecap="round" />
-      <path d={path} fill="none" stroke="url(#rail)" strokeWidth={w} strokeLinecap="round" />
-      {!flat && <path d={path} fill="none" stroke="#ffffff" strokeOpacity={0.85} strokeWidth={w * 0.22} strokeLinecap="round" transform="translate(-2 -2)" />}
+      <path d={path} fill="none" stroke={style.rail.outline} strokeWidth={w + 4} strokeLinecap="butt" />
+      <path d={path} fill="none" stroke="url(#rail)" strokeWidth={w} strokeLinecap="butt" />
+      {!flat && <path d={path} fill="none" stroke="#ffffff" strokeOpacity={0.85} strokeWidth={w * 0.22} strokeLinecap="butt" transform="translate(-2 -2)" />}
 
       {gate && (
         <>
-          <path
-            d={(() => {
-              const rr = R + t + 22;
-              const [x0, y0] = polar(cx, cy, rr, gate[0]);
-              const [x1, y1] = polar(cx, cy, rr, gate[1]);
-              return `M ${x0} ${y0} A ${rr} ${rr} 0 0 1 ${x1} ${y1}`;
-            })()}
-            fill="none"
-            stroke={style.accent}
-            strokeOpacity={blink}
-            strokeWidth={6}
-            strokeLinecap="round"
-            strokeDasharray="2 14"
-          />
+          {/* 出口の外側: 色付きの帯と外向きの矢印（すき間が狭いときも常に見える） */}
+          {(() => {
+            const rb = R + t + 10;
+            const pad = 26 / rb;
+            const [bx0, by0] = polar(cx, cy, rb, gate[0] - pad);
+            const [bx1, by1] = polar(cx, cy, rb, gate[1] + pad);
+            const large = gate[1] - gate[0] + pad * 2 > Math.PI ? 1 : 0;
+            return (
+              <path d={`M ${bx0} ${by0} A ${rb} ${rb} 0 ${large} 1 ${bx1} ${by1}`} fill="none" stroke={style.accent} strokeWidth={10} strokeLinecap="round" opacity={0.85} />
+            );
+          })()}
+          {(() => {
+            const mid = (gate[0] + gate[1]) / 2;
+            const open = gate[1] - gate[0] > (2 * 16) / rWall;
+            const r0 = R + t + 22 + (open ? 8 * blink : 0);
+            const [tx, ty] = polar(cx, cy, r0 + 42, mid);
+            const [lx, ly] = polar(cx, cy, r0, mid - 30 / r0);
+            const [rx, ry] = polar(cx, cy, r0, mid + 30 / r0);
+            return (
+              <polygon
+                points={`${tx},${ty} ${lx},${ly} ${rx},${ry}`}
+                fill={style.accent}
+                opacity={open ? 1 : 0.55}
+                stroke={flat ? "#111" : "#ffffff"}
+                strokeWidth={flat ? 4 : 3}
+                strokeLinejoin="round"
+              />
+            );
+          })()}
           {gate.map((a, i) => {
-            const [x, y] = polar(cx, cy, rWall, a);
+            // 支柱は出口のすき間をふさがないよう、壁側に少しずらして置く
+            const post = 12;
+            const [x, y] = polar(cx, cy, rWall, a + (i === 0 ? -1 : 1) * (post / rWall));
             return (
               <g key={i}>
-                <circle cx={x + sh.dx} cy={y + sh.dy} r={15} fill={sh.color} filter={shadowFilter(style)} />
-                <circle cx={x} cy={y} r={15} fill="url(#pillar)" stroke={style.pillar.outline} strokeWidth={flat ? 4 : 2} />
-                {!flat && <circle cx={x - 4} cy={y - 5} r={4} fill="#fff" opacity={0.8} />}
+                <circle cx={x + sh.dx} cy={y + sh.dy} r={post} fill={sh.color} filter={shadowFilter(style)} />
+                <circle cx={x} cy={y} r={post} fill={style.accent} stroke={flat ? "#111" : "#ffffff"} strokeWidth={flat ? 4 : 3} />
+                {!flat && <circle cx={x - 3} cy={y - 4} r={3.5} fill="#fff" opacity={0.85} />}
               </g>
             );
           })}

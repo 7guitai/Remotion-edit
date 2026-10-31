@@ -76,6 +76,8 @@ export type FrameState = {
   /** ゲートの開始角・終了角（rad）。閉じているときは null */
   gate: [number, number] | null;
   spinnerAngle: number;
+  /** 重力の傾き（rad, 0 = 真下）。終盤だけ左右に振れる */
+  tilt: number;
   /** 再生速度（1 = 等速, < 1 = スロー） */
   speed: number;
 };
@@ -102,6 +104,8 @@ export type SimulationResult = {
   balls: BallInfo[];
   eliminations: Elimination[];
   hits: HitEvent[];
+  /** ジャンプパルスが起きたシミュレーション秒 */
+  pulses: number[];
   winner: WinnerInfo;
   /** 勝者確定の瞬間を表示する動画フレーム */
   winnerFrame: number;

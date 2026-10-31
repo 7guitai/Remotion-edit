@@ -76,6 +76,18 @@ const elimination = () => {
   return fadeEdges(d);
 };
 
+// --- pulse: 衝撃波の「ドゥン」（低いキック＋空気の抜ける音） ---
+const pulse = () => {
+  const d = buffer(0.35);
+  let ph = 0;
+  for (let i = 0; i < d.length; i++) {
+    const t = i / SR;
+    ph += (45 + 140 * Math.exp(-t * 25)) / SR;
+    d[i] = Math.sin(TAU * ph) * Math.exp(-t * 9) + 0.18 * noise() * Math.exp(-t * 18) * Math.min(1, t * 400);
+  }
+  return fadeEdges(d);
+};
+
 // --- countdown / go ---
 const beep = (freq: number, seconds: number, chord: number[] = [1]) => {
   const d = buffer(seconds);
@@ -149,6 +161,7 @@ fs.mkdirSync(OUT, { recursive: true });
 console.log("public/audio/ に書き出し:");
 writeWav("collision.wav", collision());
 writeWav("elimination.wav", elimination());
+writeWav("pulse.wav", pulse());
 writeWav("countdown.wav", beep(880, 0.16));
 writeWav("go.wav", beep(1320, 0.45, [1, 1.5, 2]));
 writeWav("victory.wav", victory());
