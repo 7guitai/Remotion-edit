@@ -6,6 +6,8 @@ import paperMoon from "./20261031-am-paper-moon.json";
 import { PaperMoon } from "./PaperMoon";
 import squareCube from "./20261031-pm-square-cube.json";
 import { SquareCube } from "./SquareCube";
+import falsePositive from "./20261101-am-false-positive.json";
+import { FalsePositive } from "./FalsePositive";
 import { MathShortProps, Narration } from "./timeline";
 
 // 縦型（9:16）の数学ショート。src/math-shorts/<id>.json がナレーション原稿
@@ -43,5 +45,12 @@ export const MATH_SHORTS: {
     component: SquareCube,
     narration: squareCube.slides,
     bgm: squareCube.bgm.file,
+  },
+  {
+    id: falsePositive.id,
+    title: falsePositive.title,
+    component: FalsePositive,
+    narration: falsePositive.slides,
+    bgm: falsePositive.bgm.file,
   },
 ];
