@@ -6,6 +6,8 @@ import { renderMedia, selectComposition } from "@remotion/renderer";
 import type { SimulationResult } from "../physics/types";
 import { ROOT } from "./files";
 import type { Check } from "./quality-check";
+import { DEFAULT_STYLE } from "../styles/presets";
+import type { StyleId } from "../styles/types";
 
 const COMPOSITION_ID = "LastBallStanding";
 
@@ -29,10 +31,11 @@ export const renderSeed = async (opts: {
   hash: string;
   checks: Check[];
   outFile: string;
+  style?: StyleId;
 }): Promise<{ outFile: string; metaFile: string }> => {
   const { sim, outFile } = opts;
   const serveUrl = await getBundle();
-  const inputProps = { seed: sim.config.seed };
+  const inputProps = { seed: sim.config.seed, style: opts.style ?? DEFAULT_STYLE };
   // REMOTION_BROWSER_EXECUTABLE を指定すると、既存のChrome/Chromiumを使う（未指定ならRemotionが自動でダウンロード）
   const browserExecutable = process.env.REMOTION_BROWSER_EXECUTABLE || null;
   const composition = await selectComposition({ serveUrl, id: COMPOSITION_ID, inputProps, browserExecutable });
@@ -67,6 +70,7 @@ export const renderSeed = async (opts: {
     renderSeconds: Math.round((Date.now() - started) / 1000),
     video: { width: composition.width, height: composition.height, fps: composition.fps, durationInFrames: composition.durationInFrames, codec: "h264" },
     seed: sim.config.seed,
+    style: inputProps.style,
     simulationHash: opts.hash,
     generatorVersion: sim.generator.version,
     sourceCommit: gitCommit(),

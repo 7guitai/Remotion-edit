@@ -3,7 +3,9 @@ import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from "remo
 import { loadFont } from "@remotion/fonts";
 import { bgmVolume, buildSoundCues } from "../audio/sound-design";
 import { Counter } from "../components/Counter";
-import { THEME } from "../config/theme";
+import { StyleProvider, useStyle } from "../styles/context";
+import { DEFAULT_STYLE, STYLES } from "../styles/presets";
+import type { StyleId } from "../styles/types";
 import { TEAMS, type TeamId } from "../physics/teams";
 import { frameAtSimTime, useSimulation } from "../data/load-simulation";
 import { Climax } from "../scenes/Climax";
@@ -12,17 +14,22 @@ import { MainAction } from "../scenes/MainAction";
 import { Result } from "../scenes/Result";
 import type { SimulationResult } from "../physics/types";
 
-export type LastBallStandingProps = { seed: number };
+export type LastBallStandingProps = { seed: number; style?: StyleId };
 
 loadFont({ family: "MPLUS Rounded", url: staticFile("fonts/MPLUSRounded1c-ExtraBold.ttf"), weight: "800" });
 
-export const LastBallStanding: React.FC<LastBallStandingProps> = ({ seed }) => {
+export const LastBallStanding: React.FC<LastBallStandingProps> = ({ seed, style = DEFAULT_STYLE }) => {
   const sim = useSimulation(seed);
-  if (!sim) return <AbsoluteFill style={{ background: THEME.bgCenter }} />;
-  return <Video sim={sim} />;
+  const visual = STYLES[style] ?? STYLES[DEFAULT_STYLE];
+  return (
+    <StyleProvider style={visual}>
+      {sim ? <Video sim={sim} /> : <AbsoluteFill style={{ background: visual.background }} />}
+    </StyleProvider>
+  );
 };
 
 const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
+  const s = useStyle();
   const frame = Math.min(useCurrentFrame(), sim.frames.length - 1);
   const state = sim.frames[frame];
 
@@ -46,7 +53,7 @@ const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
   const { cx, cy } = sim.layout.arena;
 
   return (
-    <AbsoluteFill style={{ background: `radial-gradient(ellipse at 45% 40%, ${THEME.bgCenter} 0%, ${THEME.bgEdge} 100%)` }}>
+    <AbsoluteFill style={{ background: s.background }}>
 
       <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
         <g transform={`translate(${cx} ${cy}) scale(${zoom}) translate(${-cx} ${-cy})`}>
@@ -56,7 +63,7 @@ const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
 
       {/* HUD */}
       <Counter alive={state.alive} total={sim.balls.length} teamAlive={teamAlive} framesSinceChange={framesSinceChange} />
-      <div style={{ position: "absolute", bottom: 46, left: 0, right: 0, textAlign: "center", fontFamily: THEME.font, fontWeight: 800, fontSize: 28, letterSpacing: 6, color: THEME.sub }}>
+      <div style={{ position: "absolute", bottom: 46, left: 0, right: 0, textAlign: "center", fontFamily: s.font, fontWeight: 800, fontSize: 28, letterSpacing: 6, color: s.sub }}>
         PHYSICS LAB · SEED {sim.config.seed}
       </div>
 

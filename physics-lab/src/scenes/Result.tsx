@@ -2,17 +2,19 @@ import React, { useMemo } from "react";
 import { interpolate } from "remotion";
 import { WinnerDisplay } from "../components/WinnerDisplay";
 import { SeededRandom } from "../physics/seeded-random";
-import { TEAMS, teamById } from "../physics/teams";
-import { THEME } from "../config/theme";
+import { TEAMS } from "../physics/teams";
+import { useStyle } from "../styles/context";
 import type { SimulationResult } from "../physics/types";
 
 /** 勝者確定後: フラッシュ、紙吹雪、勝者カード */
 export const Result: React.FC<{ sim: SimulationResult; frame: number }> = ({ sim, frame }) => {
   const age = frame - sim.winnerFrame;
+  const style = useStyle();
   const w = sim.balls[sim.winner.ballIndex];
+  const wTeam = style.teams[w.team];
   const confetti = useMemo(() => {
     const rng = new SeededRandom(sim.config.seed ^ 0x5eed);
-    const palette = [w.color, w.color, ...TEAMS.map((t) => t.color), THEME.wood, THEME.steel];
+    const palette = [wTeam.color, wTeam.color, ...TEAMS.map((t) => style.teams[t.id].color), style.spinner.mid, style.pillar.mid];
     return Array.from({ length: 90 }, () => ({
       x: rng.range(80, 1000),
       vx: rng.range(-4, 4),
@@ -23,13 +25,13 @@ export const Result: React.FC<{ sim: SimulationResult; frame: number }> = ({ sim
       color: rng.pick(palette),
       delay: rng.int(0, 10),
     }));
-  }, [sim.config.seed, w.color]);
+  }, [sim.config.seed, style, wTeam.color]);
 
   if (age < 0) return null;
   const flash = interpolate(age, [0, 10], [0.7, 0], { extrapolateRight: "clamp" });
   return (
     <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
-      <div style={{ position: "absolute", inset: 0, background: "#fff", opacity: flash }} />
+      <div style={{ position: "absolute", inset: 0, background: style.flash, opacity: flash }} />
       <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
         {confetti.map((c, i) => {
           const t = age - c.delay;
@@ -38,11 +40,11 @@ export const Result: React.FC<{ sim: SimulationResult; frame: number }> = ({ sim
           const y = 1920 + c.vy * t + 0.5 * 0.9 * t * t;
           if (y > 1940) return null;
           return (
-            <rect key={i} x={x} y={y} width={c.size} height={c.size * 0.5} fill={c.color} transform={`rotate(${c.rot + c.vr * t} ${x} ${y})`} opacity={0.9} />
+            <rect key={i} x={x} y={y} width={c.size} height={c.size * 0.5} fill={c.color} stroke={style.ball === "flat" ? "#111" : undefined} strokeWidth={2} transform={`rotate(${c.rot + c.vr * t} ${x} ${y})`} opacity={0.9} />
           );
         })}
       </svg>
-      <WinnerDisplay framesSinceWin={age} color={w.color} teamName={teamById(w.team).name} number={w.number} total={sim.balls.length} timeout={sim.winner.decidedBy === "timeout"} />
+      <WinnerDisplay framesSinceWin={age} color={wTeam.color} teamName={wTeam.name} number={w.number} total={sim.balls.length} timeout={sim.winner.decidedBy === "timeout"} />
     </div>
   );
 };

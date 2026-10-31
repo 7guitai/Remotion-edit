@@ -4,16 +4,24 @@ import { intArg, parseArgs } from "./args";
 import { ROOT, simulateAndSave } from "./files";
 import { evaluate, passed, printChecks } from "./quality-check";
 import { renderSeed } from "./render-video";
+import { STYLE_IDS } from "../styles/presets";
+import type { StyleId } from "../styles/types";
 
 /**
  * npm run render                       → out/last-ball-standing.mp4（既定seed）
  * npm run render -- --seed=42          → out/last-ball-standing-42.mp4
  * npm run render -- --out=renders/x.mp4
+ * npm run render -- --style=noir      見た目のパターン（studio / stairs / candy / noir / comic）
  * npm run render -- --force            品質チェック不合格でも書き出す
  */
 const args = parseArgs();
 const seed = intArg(args, "seed", SIMULATION.seed);
 const defaultName = seed === SIMULATION.seed ? "last-ball-standing.mp4" : `last-ball-standing-${seed}.mp4`;
+const style = (args.style ?? "studio") as StyleId;
+if (!STYLE_IDS.includes(style)) {
+  console.error(`--style は ${STYLE_IDS.join(" / ")} のいずれかを指定してください`);
+  process.exit(1);
+}
 const outFile = path.resolve(ROOT, args.out ?? path.join("out", defaultName));
 
 console.log(`[render] seed=${seed} をシミュレーション中...`);
@@ -25,6 +33,6 @@ if (!passed(checks) && args.force !== "true") {
   process.exit(1);
 }
 console.log(`[render] 勝者 #${result.winner.ballIndex + 1}（動画 ${(result.winnerFrame / result.fps).toFixed(2)}秒で確定）`);
-const { metaFile } = await renderSeed({ sim: result, hash, checks, outFile });
+const { metaFile } = await renderSeed({ sim: result, hash, checks, outFile, style });
 console.log(`[render] 完了: ${path.relative(ROOT, outFile)}`);
 console.log(`[render] メタデータ: ${path.relative(ROOT, metaFile)}`);

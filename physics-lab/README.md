@@ -23,7 +23,7 @@ npm install
 | --- | --- |
 | `npm run dev` | 既定seedをシミュレーションしてから Remotion Studio を起動（プレビュー） |
 | `npm run render` | 既定seedで `out/last-ball-standing.mp4`（+ メタデータ `.json`）を書き出す |
-| `npm run render -- --seed=42` | seed 42 で `out/last-ball-standing-42.mp4` を書き出す（`--out=パス` で出力先指定、`--force` で品質チェック不合格でも書き出す） |
+| `npm run render -- --seed=42 --style=noir` | seed 42・noir スタイルで `out/last-ball-standing-42.mp4` を書き出す（`--out=パス` で出力先指定、`--force` で品質チェック不合格でも書き出す） |
 | `npm run simulate -- --seed=42` | シミュレーションだけ実行し `public/simulations/lbs-42.json` を保存 |
 | `npm run check -- --seed=42` | 品質チェック＋同じseedを2回実行して結果が一致するかを確認 |
 | `npm run generate -- --count=3` | 簡易バッチ: 合格したseedを3本 `renders/` に書き出す（`--start-seed=N`、`--no-render`） |
@@ -32,14 +32,23 @@ npm install
 
 Studio で別のseedを見るには、先に `npm run simulate -- --seed=42` を実行し、Studio の Props で `seed` を `42` に変更します。
 
-## デザイン
+## デザイン（5パターン）
 
-明るいスタジオ撮影風（3DCGレンダー風）の2D表現。
+見た目は `style` で切り替える（物理・ルール・結果は同じ）。定義は `src/styles/presets.ts`。
 
-- 白〜ウォームグレーの床、左上からの光と右下に落ちる柔らかい影
-- ボールはつやのある4色（赤・青・緑・金）× 6個。色ごとの残数を表示し「どの色が残るか」を予想できる
-- 回転バーは木の板、中央の柱・バンパー・ゲートの支柱は淡いブルーの金属、外周は金属の手すり
-- 脱落したボールは下の床（OUT）に散らばる
+| style | 内容 |
+| --- | --- |
+| `studio`（既定） | 白いスタジオ。つやのある4色の球、木の板、淡いブルーの金属 |
+| `stairs` | らせん階段風。木の段板を放射状に並べた床、金属質の球 |
+| `candy` | パステルのおもちゃ風。マットな球、やわらかい色 |
+| `noir` | 黒い床にスポットライト。宝石・金属の球、真鍮のバー |
+| `comic` | 黄色背景のコミック調。太い黒フチ、ベタ塗り、くっきりした影 |
+
+```bash
+npm run render -- --style=noir
+```
+
+Studio では Props の `style` を変更します。どのパターンでも、球は4色×6個で、上部カードに色ごとの残数を表示します。
 
 ## 仕組み: 物理演算と描画の分離
 
