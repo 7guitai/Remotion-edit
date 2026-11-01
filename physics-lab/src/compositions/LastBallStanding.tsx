@@ -11,15 +11,17 @@ import { frameAtSimTime, useSimulation } from "../data/load-simulation";
 import { Climax } from "../scenes/Climax";
 import { Intro } from "../scenes/Intro";
 import { MainAction } from "../scenes/MainAction";
+import { BattleWorld } from "../scenes/worlds/BattleWorld";
+import { CollapseWorld } from "../scenes/worlds/CollapseWorld";
 import { Result } from "../scenes/Result";
-import type { SimulationResult } from "../physics/types";
+import type { GameMode, SimulationResult } from "../physics/types";
 
-export type LastBallStandingProps = { seed: number; style?: StyleId };
+export type LastBallStandingProps = { seed: number; mode?: GameMode; style?: StyleId };
 
 loadFont({ family: "MPLUS Rounded", url: staticFile("fonts/MPLUSRounded1c-ExtraBold.ttf"), weight: "800" });
 
-export const LastBallStanding: React.FC<LastBallStandingProps> = ({ seed, style = DEFAULT_STYLE }) => {
-  const sim = useSimulation(seed);
+export const LastBallStanding: React.FC<LastBallStandingProps> = ({ seed, mode = "gate", style = DEFAULT_STYLE }) => {
+  const sim = useSimulation(seed, mode);
   const visual = STYLES[style] ?? STYLES[DEFAULT_STYLE];
   return (
     <StyleProvider style={visual}>
@@ -58,7 +60,13 @@ const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
 
       <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
         <g transform={`translate(${cx} ${cy}) scale(${zoom}) translate(${-cx} ${-cy})`}>
-          <MainAction sim={sim} frame={frame} pulseFrames={pulseFrames} deadFrame={deadFrame} elimFrames={elimFrames} />
+          {sim.mode === "collapse" ? (
+            <CollapseWorld sim={sim} frame={frame} deadFrame={deadFrame} elimFrames={elimFrames} />
+          ) : sim.mode === "battle" ? (
+            <BattleWorld sim={sim} frame={frame} deadFrame={deadFrame} elimFrames={elimFrames} />
+          ) : (
+            <MainAction sim={sim} frame={frame} pulseFrames={pulseFrames} deadFrame={deadFrame} elimFrames={elimFrames} />
+          )}
         </g>
       </svg>
 

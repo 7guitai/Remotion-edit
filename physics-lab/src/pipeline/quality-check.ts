@@ -1,8 +1,8 @@
 import { pathToFileURL } from "node:url";
-import { SIMULATION } from "../config/physics";
+import { SIMULATION, configFor } from "../config/physics";
 import { runSimulation } from "../physics/simulation";
 import type { SimulationResult } from "../physics/types";
-import { intArg, parseArgs } from "./args";
+import { intArg, modeArg, parseArgs } from "./args";
 import { resultHash } from "./files";
 
 export type Check = { name: string; ok: boolean; detail: string; severity: "error" | "warn" };
@@ -43,14 +43,7 @@ export const evaluate = (res: SimulationResult): Check[] => {
   const winnerSec = res.winnerFrame / fps;
   add("勝者確定が動画の18〜27秒", winnerSec >= 18 && winnerSec <= 27, `${winnerSec.toFixed(2)}s (sim ${res.winner.decidedAt}s)`);
 
-  // 勝者は最後まで内側にいる
-  const { cx, cy, radius } = res.layout.arena;
-  let outside = 0;
-  for (const f of res.frames.slice(res.winnerFrame)) {
-    const i = res.winner.ballIndex;
-    if (Math.hypot(f.b[i * 3] - cx, f.b[i * 3 + 1] - cy) > radius) outside++;
-  }
-  add("勝者は決着後もアリーナ内", outside === 0, outside === 0 ? "OK" : `${outside} frames outside`);
+  add("勝者は決着後も安全な場所にいる", res.winnerSafe, res.winnerSafe ? "OK" : "同時脱落で勝者の位置が飛んだ／落ちた床の上にいる");
 
   // 展開: 最初の脱落が早く、脱落の間隔が空きすぎない
   const times = res.eliminations.map((e) => e.t);
@@ -74,9 +67,10 @@ export const printChecks = (checks: Check[]) => {
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const args = parseArgs();
   const seed = intArg(args, "seed", SIMULATION.seed);
-  console.log(`seed ${seed} をシミュレーションして検査します`);
-  const a = runSimulation({ ...SIMULATION, seed });
-  const b = runSimulation({ ...SIMULATION, seed });
+  const mode = modeArg(args);
+  console.log(`${mode} / seed ${seed} をシミュレーションして検査します`);
+  const a = runSimulation(configFor(mode, seed));
+  const b = runSimulation(configFor(mode, seed));
   const checks = evaluate(a);
   const ha = resultHash(a);
   const hb = resultHash(b);

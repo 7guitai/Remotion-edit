@@ -5,12 +5,13 @@ import { CAT, DEAD_FILTER, buildCourse, createWorld } from "./engine";
 import { clampSpeed, collideAliveWithWall, collideDeadWithWall, wrapAngle } from "./collision";
 import { buildTimeline, type StepRecord } from "./recorder";
 import { SeededRandom } from "./seeded-random";
-import { TEAMS, type Team } from "./teams";
+import { BEAT_SECONDS, GENERATOR_VERSION, ballTeams, round } from "./common";
+import { runBattle } from "./simulation-battle";
+import { runCollapse } from "./simulation-collapse";
 import type { BallInfo, Elimination, HitEvent, SimulationConfig, SimulationResult, WinnerInfo } from "./types";
 
 const { Engine, Body, Events } = Matter;
 
-export const GENERATOR_VERSION = "1.0.0";
 
 /** ゲートが開き始めるシミュレーション秒 */
 const GATE_OPEN_AT = 1.0;
@@ -18,8 +19,6 @@ const GATE_OPEN_AT = 1.0;
 const GATE_RATE = (160 * Math.PI) / 180;
 const GATE_MAX_HALF = (85 * Math.PI) / 180;
 const DEG = Math.PI / 180;
-/** BGM（120BPM）の1拍 */
-const BEAT_SECONDS = 0.5;
 /** 衝撃波パルスを始める時刻 */
 const PULSE_START = 4;
 /** 何拍ごとにパルスを出すか（残数で変える） */
@@ -40,10 +39,6 @@ export const targetAlive = (t: number, config: SimulationConfig): number => {
   return 1 + (config.ballCount - 1) * (1 - p);
 };
 
-/** 4色のチーム（赤・青・緑・金）に均等に割り当てる。割り当て順はseedで変わる */
-const ballTeams = (count: number, rng: SeededRandom): Team[] =>
-  rng.shuffle(Array.from({ length: count }, (_, i) => TEAMS[i % TEAMS.length]));
-
 /**
  * Last Ball Standing のルール
  * - アリーナ外周には回転する出口（ゲート）が1つある。ゲートから外に出たボールは脱落
@@ -53,7 +48,7 @@ const ballTeams = (count: number, rng: SeededRandom): Team[] =>
  * - deadlineSeconds までに決着しなければタイムアウト: アリーナ中心に最も近いボールが勝者、残りはその場で停止して脱落扱い
  * - ゲート幅は「残数の目標カーブ」との差で自動調整し、展開のテンポを保つ
  */
-export const runSimulation = (config: SimulationConfig): SimulationResult => {
+export const runGate = (config: SimulationConfig): SimulationResult => {
   const rng = new SeededRandom(config.seed);
   const course = buildCourse(rng);
   const teams = ballTeams(config.ballCount, rng);
@@ -247,8 +242,16 @@ export const runSimulation = (config: SimulationConfig): SimulationResult => {
 
   const { frames, winnerFrame } = buildTimeline(steps, decided.decidedAt, config);
 
+  // 勝者が決着後もアリーナ内（壁の内側）にいるか
+  const wi = decided.ballIndex;
+  const winnerSafe = steps
+    .filter((st) => st.t >= decided.decidedAt)
+    .every((st) => Math.hypot(st.pos[wi * 3] - cx, st.pos[wi * 3 + 1] - cy) <= R);
+
   return {
     format: "physics-lab/last-ball-standing@1",
+    mode: "gate",
+    winnerSafe,
     generator: { version: GENERATOR_VERSION, createdAt: new Date().toISOString() },
     config,
     course,
@@ -266,7 +269,14 @@ export const runSimulation = (config: SimulationConfig): SimulationResult => {
   };
 };
 
-const round = (v: number, digits: number) => {
-  const m = 10 ** digits;
-  return Math.round(v * m) / m;
+/** モードに応じたシミュレーションを実行する */
+export const runSimulation = (config: SimulationConfig): SimulationResult => {
+  switch (config.mode) {
+    case "collapse":
+      return runCollapse(config);
+    case "battle":
+      return runBattle(config);
+    default:
+      return runGate(config);
+  }
 };

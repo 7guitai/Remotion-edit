@@ -1,40 +1,41 @@
 import { useEffect, useState } from "react";
 import { cancelRender, continueRender, delayRender, staticFile } from "remotion";
 import { simulationStaticPath } from "../config/paths";
-import type { SimulationResult } from "../physics/types";
+import type { GameMode, SimulationResult } from "../physics/types";
 
-const cache = new Map<number, Promise<SimulationResult>>();
+const cache = new Map<string, Promise<SimulationResult>>();
 
-const fetchSimulation = (seed: number): Promise<SimulationResult> => {
-  let p = cache.get(seed);
+const fetchSimulation = (seed: number, mode: GameMode): Promise<SimulationResult> => {
+  const key = `${mode}-${seed}`;
+  let p = cache.get(key);
   if (!p) {
-    const url = staticFile(simulationStaticPath(seed));
+    const url = staticFile(simulationStaticPath(seed, mode));
     p = fetch(url).then(async (res) => {
       if (!res.ok) {
         throw new Error(
-          `シミュレーション結果 public/${simulationStaticPath(seed)} が見つかりません。` +
-            `先に \`npm run simulate -- --seed=${seed}\` を実行してください。`,
+          `シミュレーション結果 public/${simulationStaticPath(seed, mode)} が見つかりません。` +
+            `先に \`npm run simulate -- --seed=${seed} --mode=${mode}\` を実行してください。`,
         );
       }
       return (await res.json()) as SimulationResult;
     });
-    cache.set(seed, p);
+    cache.set(key, p);
   }
   return p;
 };
 
 /** 事前計算済みのシミュレーション結果を読み込む（物理演算はここでは一切行わない） */
-export const useSimulation = (seed: number): SimulationResult | null => {
+export const useSimulation = (seed: number, mode: GameMode): SimulationResult | null => {
   const [data, setData] = useState<SimulationResult | null>(null);
-  const [handle] = useState(() => delayRender(`simulation ${seed}`));
+  const [handle] = useState(() => delayRender(`simulation ${mode} ${seed}`));
   useEffect(() => {
-    fetchSimulation(seed)
+    fetchSimulation(seed, mode)
       .then((d) => {
         setData(d);
         continueRender(handle);
       })
       .catch((err) => cancelRender(err));
-  }, [seed, handle]);
+  }, [seed, mode, handle]);
   return data;
 };
 

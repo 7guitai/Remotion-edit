@@ -1,6 +1,10 @@
 import type { TeamId } from "./teams";
 
+/** ゲームのルール */
+export type GameMode = "gate" | "collapse" | "battle";
+
 export type SimulationConfig = {
+  mode: GameMode;
   seed: number;
   ballCount: number;
   gravity: number;
@@ -26,7 +30,7 @@ export type SpinnerSpec = {
   angularSpeed: number;
   initialAngle: number;
   /** 腕の本数（等間隔に放射状に並ぶ） */
-  arms: 1 | 2 | 3;
+  arms: 1 | 2 | 3 | 4;
 };
 
 /** seedから決まるコース構造 */
@@ -78,6 +82,8 @@ export type FrameState = {
   spinnerAngle: number;
   /** 重力の傾き（rad, 0 = 真下）。終盤だけ左右に振れる */
   tilt: number;
+  /** battle: 安全地帯（壁）の半径 */
+  zone?: number;
   /** 再生速度（1 = 等速, < 1 = スロー） */
   speed: number;
 };
@@ -89,8 +95,21 @@ export type WinnerInfo = {
   decidedBy: "last-standing" | "timeout";
 };
 
+/** collapse: 床のタイル（扇形）。warnAt で点滅し、fallAt で落ちる */
+export type Tile = { r0: number; r1: number; a0: number; a1: number; warnAt: number | null; fallAt: number | null };
+
+/** battle: HPの変化 */
+export type HpEvent = { t: number; ball: number; hp: number; source: "ball" | "spike" | "fence" };
+
 export type SimulationResult = {
   format: "physics-lab/last-ball-standing@1";
+  mode: GameMode;
+  /** collapse のみ */
+  tiles?: Tile[];
+  /** battle のみ */
+  hp?: { max: number; events: HpEvent[]; zoneStart: number };
+  /** 勝者が決着時に安全な場所にいたか（同時脱落で位置が飛んだ場合などは false） */
+  winnerSafe: boolean;
   generator: { version: string; createdAt: string };
   config: SimulationConfig;
   course: CourseSpec;
@@ -104,7 +123,7 @@ export type SimulationResult = {
   balls: BallInfo[];
   eliminations: Elimination[];
   hits: HitEvent[];
-  /** ジャンプパルスが起きたシミュレーション秒 */
+  /** 「ドン」という演出音を鳴らすシミュレーション秒（gate: 衝撃波、collapse: 床の落下） */
   pulses: number[];
   winner: WinnerInfo;
   /** 勝者確定の瞬間を表示する動画フレーム */

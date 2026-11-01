@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { intArg, parseArgs } from "./args";
+import { intArg, modeArg, parseArgs } from "./args";
 import { ROOT, simulateAndSave } from "./files";
 import { evaluate, passed } from "./quality-check";
 import { renderSeed } from "./render-video";
@@ -18,13 +18,14 @@ const args = parseArgs();
 const count = intArg(args, "count", 3);
 const startSeed = intArg(args, "start-seed", Math.floor(Date.now() / 1000) % 1_000_000_000);
 const render = args["no-render"] !== "true";
+const mode = modeArg(args);
 const maxTries = count * 20;
 
 const accepted: { seed: number; signature: string }[] = [];
 const signatures = new Set<string>();
 let tries = 0;
 for (let seed = startSeed; accepted.length < count && tries < maxTries; seed++, tries++) {
-  const { result, hash } = simulateAndSave(seed);
+  const { result, hash } = simulateAndSave(seed, mode);
   const checks = evaluate(result);
   const signature = `${result.course.spinner.arms}arms-${result.course.bumpers.length}bumpers`;
   if (!passed(checks)) {
@@ -40,7 +41,7 @@ for (let seed = startSeed; accepted.length < count && tries < maxTries; seed++, 
   accepted.push({ seed, signature });
   console.log(`[generate] seed ${seed}: 採用（${signature}, 勝者 #${result.winner.ballIndex + 1}）`);
   if (render) {
-    const outFile = path.join(ROOT, "renders", `last-ball-standing-${seed}.mp4`);
+    const outFile = path.join(ROOT, "renders", `last-ball-standing-${mode}-${seed}.mp4`);
     await renderSeed({ sim: result, hash, checks, outFile });
     console.log(`[generate]   → ${path.relative(ROOT, outFile)}`);
   }

@@ -1,4 +1,4 @@
-import type { SimulationConfig } from "../physics/types";
+import type { GameMode, SimulationConfig } from "../physics/types";
 
 /** 画面レイアウト（ワールド座標 = 動画のピクセル座標） */
 export const LAYOUT = {
@@ -11,7 +11,11 @@ export const LAYOUT = {
 
 export const DEFAULT_SEED = 20261034;
 
+export const DEFAULT_MODE: GameMode = "gate";
+export const GAME_MODES: GameMode[] = ["gate", "collapse", "battle"];
+
 export const SIMULATION: SimulationConfig = {
+  mode: "gate",
   seed: DEFAULT_SEED,
   ballCount: 60,
   gravity: 0.95,
@@ -28,3 +32,12 @@ export const SIMULATION: SimulationConfig = {
   /** この時刻までに決着しなければタイムアウト判定 */
   deadlineSeconds: 22.5,
 };
+
+/** モードごとの差分（球の数・大きさなど） */
+const MODE_OVERRIDES: Record<GameMode, Partial<SimulationConfig>> = {
+  gate: {},
+  collapse: { ballCount: 48, ballRadius: 15, restitution: 0.85, airFriction: 0.012, friction: 0.01, maxSpeed: 18 },
+  battle: { ballCount: 24, ballRadius: 26, restitution: 1, airFriction: 0, friction: 0, maxSpeed: 20 },
+};
+
+export const configFor = (mode: GameMode, seed: number): SimulationConfig => ({ ...SIMULATION, ...MODE_OVERRIDES[mode], mode, seed });

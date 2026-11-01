@@ -1,6 +1,6 @@
 import path from "node:path";
 import { SIMULATION } from "../config/physics";
-import { intArg, parseArgs } from "./args";
+import { intArg, modeArg, parseArgs } from "./args";
 import { ROOT, simulateAndSave } from "./files";
 import { evaluate, passed, printChecks } from "./quality-check";
 import { renderSeed } from "./render-video";
@@ -12,11 +12,13 @@ import type { StyleId } from "../styles/types";
  * npm run render -- --seed=42          → out/last-ball-standing-42.mp4
  * npm run render -- --out=renders/x.mp4
  * npm run render -- --style=noir      見た目のパターン（studio / stairs / candy / noir / comic）
+ * npm run render -- --mode=battle     ゲーム（gate / collapse / battle）
  * npm run render -- --force            品質チェック不合格でも書き出す
  */
 const args = parseArgs();
 const seed = intArg(args, "seed", SIMULATION.seed);
-const defaultName = seed === SIMULATION.seed ? "last-ball-standing.mp4" : `last-ball-standing-${seed}.mp4`;
+const mode = modeArg(args);
+const defaultName = `last-ball-standing${mode === "gate" ? "" : `-${mode}`}${seed === SIMULATION.seed ? "" : `-${seed}`}.mp4`;
 const style = (args.style ?? DEFAULT_STYLE) as StyleId;
 if (!STYLE_IDS.includes(style)) {
   console.error(`--style は ${STYLE_IDS.join(" / ")} のいずれかを指定してください`);
@@ -24,8 +26,8 @@ if (!STYLE_IDS.includes(style)) {
 }
 const outFile = path.resolve(ROOT, args.out ?? path.join("out", defaultName));
 
-console.log(`[render] seed=${seed} をシミュレーション中...`);
-const { result, hash } = simulateAndSave(seed);
+console.log(`[render] ${mode} / seed=${seed} をシミュレーション中...`);
+const { result, hash } = simulateAndSave(seed, mode);
 const checks = evaluate(result);
 printChecks(checks);
 if (!passed(checks) && args.force !== "true") {

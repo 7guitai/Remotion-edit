@@ -1,3 +1,6 @@
+import { DEFAULT_MODE, GAME_MODES } from "../config/physics";
+import type { GameMode } from "../physics/types";
+
 /** `--seed=123` / `--seed 123` 形式の簡易パーサ */
 export const parseArgs = (argv: string[] = process.argv.slice(2)): Record<string, string> => {
   const out: Record<string, string> = {};
@@ -21,4 +24,10 @@ export const intArg = (args: Record<string, string>, key: string, fallback: numb
   const v = Number(args[key]);
   if (!Number.isInteger(v)) throw new Error(`--${key} には整数を指定してください: ${args[key]}`);
   return v;
+};
+
+export const modeArg = (args: Record<string, string>): GameMode => {
+  const mode = (args.mode ?? DEFAULT_MODE) as GameMode;
+  if (!GAME_MODES.includes(mode)) throw new Error(`--mode は ${GAME_MODES.join(" / ")} のいずれかを指定してください: ${args.mode}`);
+  return mode;
 };
