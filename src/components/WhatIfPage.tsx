@@ -22,6 +22,7 @@ import { RingSky } from "./RingSky";
 import { EarthCut } from "./EarthCut";
 import { MeteorScene } from "./MeteorScene";
 import { IceScene } from "./IceScene";
+import { FleaScene, SpeedLines } from "./FleaScene";
 import { GoldScene } from "./GoldScene";
 import { RainChart } from "./RainChart";
 import { SemiScene } from "./SemiScene";
@@ -335,8 +336,10 @@ export const WhatIfPage: React.FC<{
     effect === "shake" || effect === "wind" || (effect === "stop" && frame > 20)
       ? 14
       : 0;
-  const shakeX = shakeAmp * Math.sin(frame * 2.3);
-  const shakeY = shakeAmp * Math.cos(frame * 3.1);
+  // 大きな文字（big）がたたきつけられた瞬間：少しゆらして、集中線を出す
+  const slam = slide.big && !slide.card && !landscape ? interpolate(frame, [8, 10, 22], [0, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) : 0;
+  const shakeX = shakeAmp * Math.sin(frame * 2.3) + 12 * slam * Math.sin(frame * 5.1);
+  const shakeY = shakeAmp * Math.cos(frame * 3.1) + 12 * slam * Math.cos(frame * 4.3);
   const dark =
     effect === "dark"
       ? interpolate(frame, [0, durationInFrames * 0.6], [0, 0.75], {
@@ -436,6 +439,9 @@ export const WhatIfPage: React.FC<{
         {slide.gold ? <GoldScene mode={slide.gold} width={width} height={view.height} /> : null}
         {slide.ice ? <IceScene mode={slide.ice} width={width} height={view.height} /> : null}
         {slide.meteor ? <MeteorScene mode={slide.meteor} width={width} height={view.height} /> : null}
+        {slide.flea ? (
+          <FleaScene mode={slide.flea} width={width} height={view.height} offset={Math.round((slide.simStart ?? 0) * fps)} speed={slide.simSpeed} />
+        ) : null}
         {slide.sim ? (
           <PhysicsScene
             kind={slide.sim}
@@ -479,6 +485,7 @@ export const WhatIfPage: React.FC<{
           style={{ background: "#000", opacity: Math.max(dark, vanishDark) }}
         />
         <AbsoluteFill style={{ background: "#fff", opacity: vanishFlash }} />
+        <SpeedLines strength={slam * 0.8} seed={frame} width={width} height={view.height} />
         {slide.big && !slide.card ? (
           <div
             style={{
@@ -526,6 +533,11 @@ export const WhatIfPage: React.FC<{
               "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%)",
           }}
         />
+      ) : null}
+      {slide.big && !slide.card && !landscape ? (
+        <Sequence from={8} durationInFrames={20}>
+          <Audio src={staticFile("sfx/pop.wav")} volume={0.22} />
+        </Sequence>
       ) : null}
       {slide.sfx ? (
         // 読み上げが終わったあとに流す音（例：10cmの人の声のイメージ）

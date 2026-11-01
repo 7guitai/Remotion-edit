@@ -1,0 +1,116 @@
+{
+  "id": "whatif-flea-short",
+  "title": "もし人間が、ノミと同じジャンプ力だったら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "trick_style.mp3",
+    "title": "Trick style",
+    "credit": "まんぼう二等兵",
+    "page": "https://opentracks.com/bgm/detail/10367",
+    "opentracks": 10367,
+    "track": 1
+  },
+  "headline": [
+    "もし人間が",
+    "ノミのジャンプ力だったら？"
+  ],
+  "illustrations": {},
+  "description": "ノミは体の長さの約23倍の高さまで跳びます（ウサギノミの研究より）。もし人間（175cm）が同じジャンプ力を持っていたら、高さは約40m、13階建てのビルを越えるほど。でも、着地は時速100km、跳ぶ瞬間には重力の100倍以上の力がかかります。\n人や車の動きは、物理エンジンでシミュレーションして作りました（空気抵抗は考えていません）。\n参考：Bennet-Clark & Alder (1967) \"The Jump of the Flea\", Journal of Experimental Biology\nほかに知りたい「もしも」は、コメントで教えてください！",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "ノミ",
+    "物理",
+    "Shorts"
+  ],
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし人間が、ノミと同じジャンプ力だったら？",
+      "effect": "none",
+      "flea": "jump",
+      "simStart": 0
+    },
+    {
+      "type": "whatif",
+      "text": "ノミは、体の長さの約23倍の高さまで跳ぶ。人間なら、なんと約40m！",
+      "effect": "none",
+      "flea": "jump",
+      "simStart": 2.95,
+      "simSpeed": 0.45,
+      "big": "約40m",
+      "speech": "ノミは、体の長さの約23倍の高さまで跳ぶ。人間なら、なんと約40メートル！"
+    },
+    {
+      "type": "whatif",
+      "text": "13階建てのビルを、ひと跳びで越える高さ。下の町が、ミニチュアみたいだ。",
+      "effect": "none",
+      "flea": "top",
+      "simStart": 5.2,
+      "simSpeed": 0.15
+    },
+    {
+      "type": "whatif",
+      "text": "でも、問題は着地。時速100kmで、地面に落ちてくる…",
+      "effect": "none",
+      "flea": "land",
+      "simStart": 6.3,
+      "simSpeed": 0.75,
+      "speech": "でも、問題は着地。時速100キロで、地面に落ちてくる…"
+    },
+    {
+      "type": "whatif",
+      "text": "止めてある車の屋根も、ぺしゃんこ。ビルの13階から飛び降りるのと同じなんだ。",
+      "effect": "none",
+      "flea": "land",
+      "simStart": 8.6
+    },
+    {
+      "type": "whatif",
+      "text": "跳ぶ瞬間も大変。ノミは、わずか0.001秒で一気に加速する。その力は、重力の100倍以上！",
+      "effect": "none",
+      "flea": "jump",
+      "simStart": 2.45,
+      "simSpeed": 0.08,
+      "big": "100G以上",
+      "speech": "跳ぶ瞬間も大変。ノミは、わずか1000分の1秒で一気に加速する。その力は、重力の100倍以上！"
+    },
+    {
+      "type": "whatif",
+      "text": "人間なら、体重の100倍、約6.6トン分の力が足にかかる。特別なスーツを着た戦闘機のパイロットでも、9Gくらいが限界なんだ。",
+      "effect": "none",
+      "flea": "jump",
+      "simStart": 2.62,
+      "simSpeed": 0.1,
+      "big": "限界は約9G",
+      "speech": "人間なら、体重の100倍、約6.6トン分の力が足にかかる。特別なスーツを着た戦闘機のパイロットでも、9ジーくらいが限界なんだ。"
+    },
+    {
+      "type": "whatif",
+      "text": "ノミが平気なのは、体がとても小さくて軽いから。小さい生き物ほど、重さのわりに体が丈夫なんだ。",
+      "effect": "none",
+      "flea": "top",
+      "simStart": 5.45,
+      "simSpeed": 0.1
+    },
+    {
+      "type": "whatif",
+      "text": "ノミのジャンプ力、ほしい？コメントで教えてね！",
+      "effect": "none",
+      "flea": "land",
+      "simStart": 9.2,
+      "hold": 1
+    }
+  ]
+}

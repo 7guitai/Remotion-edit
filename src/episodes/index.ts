@@ -46,6 +46,7 @@ import simBlanket from "./sim-blanket-short.json";
 import cgSlime from "./cg-slime-short.json";
 import cgJenga from "./cg-jenga-short.json";
 import whatifHeavyair from "./whatif-heavyair-short.json";
+import whatifFlea from "./whatif-flea-short.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
 import konbiniRankingShort from "./konbini-ranking-short.json";
@@ -231,6 +232,10 @@ export type WhatIfSlide = {
   sfx?: { file: string; volume?: number };
   // 「もし氷が水に沈んだら？」の図解（分子・湖の断面）
   ice?: import("../components/IceScene").IceMode;
+  // ノミのジャンプ力の人（jump：跳ぶ、top：てっぺん、land：車に落ちる）。simStart から見せる
+  flea?: import("../components/FleaScene").FleaMode;
+  // flea の再生の速さ（0.1 なら 10倍スロー）
+  simSpeed?: number;
   // 「もし地球から金がなくなったら？」の図解（スマホの端子・さび・検査キット）
   gold?: import("../components/GoldScene").GoldMode;
   // 雨の検証の図解（内訳の棒グラフ・ぬれ方の2種類）
@@ -327,6 +332,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  whatifFlea as Episode,
   whatifHeavyair as Episode,
   cgJenga as Episode,
   cgSlime as Episode,
