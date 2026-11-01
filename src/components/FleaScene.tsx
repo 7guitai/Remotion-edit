@@ -60,7 +60,8 @@ const Cam: React.FC<{ sim: FleaResult; f: number; mode: FleaMode }> = ({ sim, f,
     // 車の横の地面すれすれから見上げる
     const fallY = Math.max(1.6, p[1]);
     camera.position.set(FLEA.car.x - 5.2 + sx, 0.55 + sy, 7.2);
-    camera.lookAt(FLEA.car.x - 0.4, Math.min(9, 1.4 + (fallY - 1.6) * 0.32), 0);
+    // 落ちてくる人を見上げて追いかけ、近づくと車まで視線が下がる
+    camera.lookAt(FLEA.car.x - 0.4, 1.4 + (fallY - 1.6) * 0.88, 0);
   }
   camera.updateProjectionMatrix();
   return null;
