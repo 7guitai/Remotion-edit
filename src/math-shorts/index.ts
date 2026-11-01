@@ -10,6 +10,8 @@ import falsePositive from "./20261101-am-false-positive.json";
 import { FalsePositive } from "./FalsePositive";
 import bookStack from "./20261101-pm-book-stack.json";
 import { BookStack } from "./BookStack";
+import kochSnowflake from "./20261102-am-koch-snowflake.json";
+import { KochSnowflake } from "./KochSnowflake";
 import { MathShortProps, Narration } from "./timeline";
 
 // 縦型（9:16）の数学ショート。src/math-shorts/<id>.json がナレーション原稿
@@ -61,5 +63,12 @@ export const MATH_SHORTS: {
     component: BookStack,
     narration: bookStack.slides,
     bgm: bookStack.bgm.file,
+  },
+  {
+    id: kochSnowflake.id,
+    title: kochSnowflake.title,
+    component: KochSnowflake,
+    narration: kochSnowflake.slides,
+    bgm: kochSnowflake.bgm.file,
   },
 ];
