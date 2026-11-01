@@ -1,11 +1,11 @@
 import Matter from "matter-js";
 import { LAYOUT } from "../config/physics";
 import { VIDEO } from "../config/video";
-import { BEAT_SECONDS, GENERATOR_VERSION, ballTeams, linearTarget, makeBallInfo, round } from "./common";
+import { BEAT_SECONDS, GENERATOR_VERSION, ballTeams, eventTimes, makeBallInfo, paceTarget, round } from "./common";
 import { clampSpeed, collideAliveWithWall } from "./collision";
 import { buildTimeline, type StepRecord } from "./recorder";
 import { SeededRandom } from "./seeded-random";
-import type { CourseSpec, Elimination, HitEvent, SimulationConfig, SimulationResult, Tile, WinnerInfo } from "./types";
+import type { GameEvent, CourseSpec, Elimination, HitEvent, SimulationConfig, SimulationResult, Tile, WinnerInfo } from "./types";
 
 const { Engine, Bodies, Body, Composite, Events } = Matter;
 
@@ -18,6 +18,11 @@ const RINGS: [number, number, number][] = [
   [58, 215, 8],
   [215, 420, 16],
 ];
+
+/** EARTHQUAKE: 傾きの強さの倍率と、拍ごとの揺れ（px/step）。SPEED UP: 回転の倍率 */
+const QUAKE_TILT = 1.6;
+const QUAKE_KICK = [2, 4] as const;
+const QUAKE_SPEEDUP = 2;
 
 const CAT_BALL = 0x1;
 const CAT_OBSTACLE = 0x4;
@@ -136,6 +141,9 @@ export const runCollapse = (config: SimulationConfig): SimulationResult => {
   const eliminations: Elimination[] = [];
   const hits: HitEvent[] = [];
   const pulses: number[] = [];
+  const events: GameEvent[] = [];
+  const evTimes = eventTimes(config.targetFinishSeconds);
+  const quakeRng = new SeededRandom(config.seed ^ 0x51ed27);
   let winner: WinnerInfo | null = null;
   let simTime = 0;
   const ballIndexById = new Map<number, number>(balls.map((b, i) => [b.id, i]));
@@ -185,9 +193,9 @@ export const runCollapse = (config: SimulationConfig): SimulationResult => {
 
     // --- 崩落の制御 ---
     if (!winner && simTime >= COLLAPSE_START) {
-      const target = linearTarget(simTime, config.ballCount, COLLAPSE_START, config.targetFinishSeconds);
+      const target = paceTarget(simTime, config.ballCount, COLLAPSE_START, config.targetFinishSeconds);
       const behind = aliveCount - target;
-      const interval = behind > 3 ? 0.3 : behind > 0 ? 0.8 : behind > -3 ? 1.3 : 2.0;
+      const interval = behind > 3 ? 0.3 : behind > 0 ? 0.8 : behind > -3 ? 1.3 : 3;
       const standing = tiles.map((t, i) => i).filter((i) => tiles[i].warnAt === null);
       // 拍に合わせて落とす（BGMと同期）
       const onBeat = Math.abs(simTime / (BEAT_SECONDS / 2) - Math.round(simTime / (BEAT_SECONDS / 2))) < dt / (BEAT_SECONDS / 2) / 2;
@@ -198,10 +206,10 @@ export const runCollapse = (config: SimulationConfig): SimulationResult => {
           const ti = tileAt(b.position.x, b.position.y);
           if (ti >= 0) count.set(ti, (count.get(ti) ?? 0) + 1);
         });
-        // 遅れているときはボールの多いタイルを、そうでなければ外側寄りのタイルをランダムに
+        // 遅れているときはボールの多いタイルを、進んでいるときはボールの少ないタイルを（外側寄りを優先）
         const scored = standing.map((i) => ({
           i,
-          score: (behind > 0 ? (count.get(i) ?? 0) * 3 : 0) + (tiles[i].r0 > 100 ? 2 : 0) + rng.next() * 3,
+          score: (count.get(i) ?? 0) * (behind > 0 ? 3 : -3) + (tiles[i].r0 > 100 ? 2 : 0) + rng.next() * 3,
         }));
         scored.sort((a, b) => b.score - a.score);
         const pick = scored[0].i;
@@ -213,8 +221,26 @@ export const runCollapse = (config: SimulationConfig): SimulationResult => {
     for (const t of tiles) if (t.fallAt !== null && Math.abs(t.fallAt - simTime) < dt / 2) pulses.push(round(simTime, 4));
 
     // --- 傾き: 向きがゆっくり回り、終盤ほど強くなる ---
-    tilt = tilt0 + tiltSpeed * simTime;
-    const strength = winner ? 0 : 0.01 + 0.035 * Math.min(1, simTime / config.targetFinishSeconds);
+    // --- 後半のイベント: EARTHQUAKE（拍ごとに床が揺れ、傾きが強くなる）→ SPEED UP（傾きの回転と回転バーが速くなる） ---
+    if (!winner && events.length < 2 && simTime >= evTimes[events.length]) {
+      events.push({ t: round(simTime, 4), label: events.length === 0 ? "EARTHQUAKE" : "SPEED UP" });
+    }
+    const quake = events.length >= 1 && !winner;
+    const speedUp = events.length >= 2 ? QUAKE_SPEEDUP : 1;
+    tilt += tiltSpeed * speedUp * dt;
+    // 進行が目標より速いときは傾きを弱めてブレーキをかける
+    const pace = paceTarget(simTime, config.ballCount, COLLAPSE_START, config.targetFinishSeconds);
+    const brake = aliveCount < pace - 2 ? 0.2 : aliveCount < pace ? 0.7 : 1;
+    const strength = winner ? 0 : (0.01 + 0.035 * Math.min(1, simTime / config.targetFinishSeconds)) * (quake ? QUAKE_TILT : 1) * brake;
+    const beat = Math.round(simTime / BEAT_SECONDS);
+    if (quake && Math.abs(simTime - beat * BEAT_SECONDS) < dt / 2) {
+      for (let i = 0; i < balls.length; i++) {
+        if (!alive[i]) continue;
+        const a = quakeRng.range(0, Math.PI * 2);
+        const k = quakeRng.range(QUAKE_KICK[0], QUAKE_KICK[1]) * Math.max(brake, 0.3);
+        Body.setVelocity(balls[i], { x: balls[i].velocity.x + Math.cos(a) * k, y: balls[i].velocity.y + Math.sin(a) * k });
+      }
+    }
     for (let i = 0; i < balls.length; i++) {
       if (!alive[i]) continue;
       const v = balls[i].velocity;
@@ -223,7 +249,7 @@ export const runCollapse = (config: SimulationConfig): SimulationResult => {
       Body.setVelocity(balls[i], { x: (v.x + Math.cos(tilt) * strength) * k, y: (v.y + Math.sin(tilt) * strength) * k });
     }
 
-    spinnerAngle += s.angularSpeed * dt;
+    spinnerAngle += s.angularSpeed * speedUp * dt;
     (Body.setAngle as (b: Matter.Body, a: number, updateVelocity?: boolean) => void)(spinner, spinnerAngle, true);
 
     Engine.update(engine, dtMs);
@@ -273,6 +299,7 @@ export const runCollapse = (config: SimulationConfig): SimulationResult => {
   return {
     format: "physics-lab/last-ball-standing@1",
     mode: "collapse",
+    events,
     tiles,
     winnerSafe,
     generator: { version: GENERATOR_VERSION, createdAt: new Date().toISOString() },

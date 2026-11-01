@@ -3,6 +3,7 @@ import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from "remo
 import { loadFont } from "@remotion/fonts";
 import { bgmVolume, buildSoundCues } from "../audio/sound-design";
 import { Counter } from "../components/Counter";
+import { EventBanner } from "../components/EventBanner";
 import { StyleProvider, useStyle } from "../styles/context";
 import { DEFAULT_STYLE, STYLES } from "../styles/presets";
 import type { StyleId } from "../styles/types";
@@ -35,13 +36,14 @@ const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
   const frame = Math.min(useCurrentFrame(), sim.frames.length - 1);
   const state = sim.frames[frame];
 
-  const { elimFrames, deadFrame, pulseFrames, cues } = useMemo(() => {
+  const { elimFrames, deadFrame, pulseFrames, eventFrames, cues } = useMemo(() => {
     const frameAt = (t: number) => frameAtSimTime(sim, t);
     const elimFrames = sim.eliminations.map((e) => frameAt(e.t));
     const deadFrame = sim.balls.map(() => Infinity);
     sim.eliminations.forEach((e, k) => (deadFrame[e.ballIndex] = elimFrames[k]));
     const pulseFrames = (sim.pulses ?? []).map((t) => frameAt(t));
-    return { elimFrames, deadFrame, pulseFrames, cues: buildSoundCues(sim, elimFrames, frameAt, pulseFrames) };
+    const eventFrames = (sim.events ?? []).map((e) => frameAt(e.t));
+    return { elimFrames, deadFrame, pulseFrames, eventFrames, cues: buildSoundCues(sim, elimFrames, frameAt, pulseFrames, eventFrames) };
   }, [sim]);
 
   const lastChange = Math.max(-100, ...elimFrames.filter((f) => f <= frame));
@@ -77,6 +79,9 @@ const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
       </div>
 
       {climax && <Climax alive={state.alive} framesSinceChange={framesSinceChange} />}
+      {(sim.events ?? []).map((e, k) => (
+        <EventBanner key={k} label={e.label} age={frame - eventFrames[k]} />
+      ))}
       <Intro frame={frame} total={sim.balls.length} introFrames={sim.introFrames} />
       <Result sim={sim} frame={frame} />
 

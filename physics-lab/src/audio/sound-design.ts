@@ -8,6 +8,7 @@ export const buildSoundCues = (
   elimFrames: number[],
   frameAt: (t: number) => number,
   pulseFrames: number[] = [],
+  eventFrames: number[] = [],
 ): SoundCue[] => {
   const cues: SoundCue[] = [];
   const intro = sim.introFrames;
@@ -41,6 +42,11 @@ export const buildSoundCues = (
 
   for (const f of pulseFrames) {
     if (f < sim.winnerFrame) cues.push({ frame: f, src: "audio/pulse.wav", volume: 0.45 });
+  }
+
+  for (const f of eventFrames) {
+    cues.push({ frame: f, src: "audio/go.wav", volume: 0.75 });
+    cues.push({ frame: f + 4, src: "audio/pulse.wav", volume: 0.6 });
   }
 
   cues.push({ frame: sim.winnerFrame, src: "audio/victory.wav", volume: 0.8 });

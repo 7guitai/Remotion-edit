@@ -1,20 +1,25 @@
 import Matter from "matter-js";
 import { LAYOUT } from "../config/physics";
 import { VIDEO } from "../config/video";
-import { GENERATOR_VERSION, linearTarget, makeBallInfo, round } from "./common";
+import { GENERATOR_VERSION, eventTimes, makeBallInfo, paceTarget, round } from "./common";
 import { buildTimeline, type StepRecord } from "./recorder";
 import { SeededRandom } from "./seeded-random";
 import { TEAMS } from "./teams";
-import type { CourseSpec, Elimination, HitEvent, HpEvent, SimulationConfig, SimulationResult, WinnerInfo } from "./types";
+import type { GameEvent, CourseSpec, Elimination, HitEvent, HpEvent, SimulationConfig, SimulationResult, WinnerInfo } from "./types";
 
 const { Engine, Bodies, Body, Composite, Events } = Matter;
 
-export const MAX_HP = 14;
+export const MAX_HP = 20;
 /** 安全地帯（外周の電気柵）が縮み始める時刻・縮み終わる時刻・最終半径 */
 const ZONE_START = 4;
 const ZONE_END = 18;
 const ZONE_MIN = 230;
 /** ダメージを受けたあとの無敵時間 */
+
+/** SUDDEN DEATH の速さ倍率。ZONE CLOSING の縮む時間と最終半径 */
+const SD_SPEED = 1.25;
+const CLOSE_SECONDS = 3;
+const CLOSE_MIN = 160;
 
 const CAT_BALL = 0x1;
 const CAT_OBSTACLE = 0x4;
@@ -106,6 +111,9 @@ export const runBattle = (config: SimulationConfig): SimulationResult => {
   const eliminations: Elimination[] = [];
   const hits: HitEvent[] = [];
   const hpEvents: HpEvent[] = [];
+  const events: GameEvent[] = [];
+  const evTimes = eventTimes(config.targetFinishSeconds);
+  let closingFrom: { t: number; r: number } | null = null;
   let winner: WinnerInfo | null = null;
   let simTime = 0;
   let zone: number = R;
@@ -122,12 +130,13 @@ export const runBattle = (config: SimulationConfig): SimulationResult => {
 
   /** ダメージ後の無敵時間。進行が目標より速いときは長く、遅いときは短くしてテンポを保つ */
   const invulnerable = () => {
-    const behind = aliveCount - linearTarget(simTime, config.ballCount, 2, config.targetFinishSeconds);
-    return behind > 2 ? 0.25 : behind < -1 ? 2 : 0.5;
+    const behind = aliveCount - paceTarget(simTime, config.ballCount, 2, config.targetFinishSeconds);
+    return behind > 2 ? 0.25 : behind < -1 ? 4 : 0.5;
   };
+  const suddenDeath = () => (events.length >= 1 ? 2 : 1);
   const teamsAlive = () => new Set(teams.filter((_, i) => alive[i]).map((t) => t.id)).size;
   const multiplier = () => {
-    const behind = aliveCount - linearTarget(simTime, config.ballCount, 2, config.targetFinishSeconds);
+    const behind = aliveCount - paceTarget(simTime, config.ballCount, 2, config.targetFinishSeconds);
     return behind > 3 ? 2 : 1;
   };
 
@@ -144,7 +153,7 @@ export const runBattle = (config: SimulationConfig): SimulationResult => {
         const sb = Math.hypot(vb.x, vb.y);
         hits.push({ t: simTime, strength: round(Math.hypot(va.x - vb.x, va.y - vb.y), 1), kind: "ball" });
         if (friendly) continue;
-        const m = multiplier();
+        const m = multiplier() * suddenDeath();
         if (Math.abs(sa - sb) < 0.8) {
           hurt(ia, m, "ball");
           hurt(ib, m, "ball");
@@ -158,7 +167,7 @@ export const runBattle = (config: SimulationConfig): SimulationResult => {
         const other = ia !== undefined ? pair.bodyB : pair.bodyA;
         if (bi === undefined || !alive[bi]) continue;
         if (spikeIds.has(other.id) || spikeIds.has(other.parent.id)) {
-          hurt(bi, 2, "spike");
+          hurt(bi, 2 * suddenDeath(), "spike");
           hits.push({ t: simTime, strength: 12, kind: "obstacle" });
         }
       }
@@ -193,14 +202,24 @@ export const runBattle = (config: SimulationConfig): SimulationResult => {
 
   for (let step = 1; step <= totalSteps; step++) {
     simTime = step / config.physicsHz;
-    zone = zoneRadius(simTime, R);
+    // --- 後半のイベント: SUDDEN DEATH（全ダメージ2倍・加速）→ ZONE CLOSING（電気柵が一気に縮む） ---
+    if (!winner && events.length < 2 && simTime >= evTimes[events.length]) {
+      events.push({ t: round(simTime, 4), label: events.length === 0 ? "SUDDEN DEATH" : "ZONE CLOSING" });
+      if (events.length === 2) closingFrom = { t: simTime, r: zone };
+    }
+    if (closingFrom) {
+      const p = Math.min(1, (simTime - closingFrom.t) / CLOSE_SECONDS);
+      zone = closingFrom.r + (CLOSE_MIN - closingFrom.r) * (p * p * (3 - 2 * p));
+    } else {
+      zone = zoneRadius(simTime, R);
+    }
     pending.clear();
 
     spinnerAngle += s.angularSpeed * dt;
     (Body.setAngle as (b: Matter.Body, a: number, updateVelocity?: boolean) => void)(spinner, spinnerAngle, true);
 
     // 速さを一定に保つ（だんだん速くなる）
-    const targetSpeed = 6 + simTime * 0.12;
+    const targetSpeed = (6 + simTime * 0.12) * (events.length >= 1 ? SD_SPEED : 1);
     for (let i = 0; i < balls.length; i++) {
       if (!alive[i]) continue;
       const v = balls[i].velocity;
@@ -225,7 +244,7 @@ export const runBattle = (config: SimulationConfig): SimulationResult => {
         const v = b.velocity;
         const vn = v.x * nx + v.y * ny;
         if (vn > 0) Body.setVelocity(b, { x: v.x - 2 * vn * nx, y: v.y - 2 * vn * ny });
-        if (simTime >= ZONE_START && !winner) hurt(i, 1, "fence");
+        if (simTime >= ZONE_START && !winner) hurt(i, suddenDeath(), "fence");
       }
       const v = b.velocity;
       const sp = Math.hypot(v.x, v.y);
@@ -271,6 +290,7 @@ export const runBattle = (config: SimulationConfig): SimulationResult => {
   return {
     format: "physics-lab/last-ball-standing@1",
     mode: "battle",
+    events,
     hp: { max: MAX_HP, events: hpEvents, zoneStart: ZONE_START },
     winnerSafe: true,
     generator: { version: GENERATOR_VERSION, createdAt: new Date().toISOString() },

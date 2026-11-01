@@ -63,9 +63,10 @@ export type WallOutcome = "none" | "hit" | "forced-out";
 export const collideAliveWithWall = (
   ball: Matter.Body,
   r: number,
-  gate: GateState,
+  gates: GateState | GateState[],
   isProtected: boolean,
 ): WallOutcome => {
+  const list = Array.isArray(gates) ? gates : [gates];
   const { cx, cy, radius: R, wallThickness: t } = LAYOUT.arena;
   const px = ball.position.x - cx;
   const py = ball.position.y - cy;
@@ -73,10 +74,9 @@ export const collideAliveWithWall = (
   if (d < R - r) return "none";
 
   const phi = Math.atan2(py, px);
-  const delta = wrapAngle(phi - gate.angle);
-  const inGate = gate.halfWidth > 0 && Math.abs(delta) < gate.halfWidth;
+  const gate = list.find((g) => g.halfWidth > 0 && Math.abs(wrapAngle(phi - g.angle)) < g.halfWidth);
 
-  if (inGate && !isProtected) {
+  if (gate && !isProtected) {
     const a = collideGateEdge(ball, gate.angle - gate.halfWidth, r);
     const b = collideGateEdge(ball, gate.angle + gate.halfWidth, r);
     return a || b ? "hit" : "none";

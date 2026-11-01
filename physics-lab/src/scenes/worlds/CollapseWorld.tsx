@@ -46,6 +46,11 @@ export const CollapseWorld: React.FC<Props> = ({ sim, frame, deadFrame, elimFram
       <Defs />
       <Graveyard sim={sim} frame={frame} elimFrames={elimFrames} delay={BALL_FALL_FRAMES} />
 
+      <g transform={(() => {
+        const ev = sim.events?.[0];
+        const quake = ev && T >= ev.t && !won;
+        return quake ? `translate(${Math.sin(frame * 2.9) * 5} ${Math.cos(frame * 2.3) * 4})` : "";
+      })()}>
       {/* 穴（奈落） */}
       <radialGradient id="void" cx="50%" cy="50%" r="50%">
         <stop offset="0%" stopColor="#3a332b" />
@@ -119,6 +124,7 @@ export const CollapseWorld: React.FC<Props> = ({ sim, frame, deadFrame, elimFram
       })}
 
       <ArenaRail layout={sim.layout} gate={null} frame={frame} />
+      </g>
       {won && <Spotlight sim={sim} frame={frame} />}
     </g>
   );

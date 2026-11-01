@@ -5,10 +5,10 @@ import { CAT, DEAD_FILTER, buildCourse, createWorld } from "./engine";
 import { clampSpeed, collideAliveWithWall, collideDeadWithWall, wrapAngle } from "./collision";
 import { buildTimeline, type StepRecord } from "./recorder";
 import { SeededRandom } from "./seeded-random";
-import { BEAT_SECONDS, GENERATOR_VERSION, ballTeams, round } from "./common";
+import { BEAT_SECONDS, GENERATOR_VERSION, ballTeams, eventTimes, paceTarget, round } from "./common";
 import { runBattle } from "./simulation-battle";
 import { runCollapse } from "./simulation-collapse";
-import type { BallInfo, Elimination, HitEvent, SimulationConfig, SimulationResult, WinnerInfo } from "./types";
+import type { GameEvent, BallInfo, Elimination, HitEvent, SimulationConfig, SimulationResult, WinnerInfo } from "./types";
 
 const { Engine, Body, Events } = Matter;
 
@@ -33,11 +33,8 @@ const TILT_BASE = (40 * Math.PI) / 180;
 const TILT_PERIOD = 2.4;
 
 /** 残数の目標カーブ: 開始時 ballCount → targetFinishSeconds で 1 */
-export const targetAlive = (t: number, config: SimulationConfig): number => {
-  if (t <= GATE_OPEN_AT) return config.ballCount;
-  const p = Math.min(1, (t - GATE_OPEN_AT) / (config.targetFinishSeconds - GATE_OPEN_AT));
-  return 1 + (config.ballCount - 1) * (1 - p);
-};
+export const targetAlive = (t: number, config: SimulationConfig): number =>
+  paceTarget(t, config.ballCount, GATE_OPEN_AT, config.targetFinishSeconds);
 
 /**
  * Last Ball Standing のルール
@@ -87,6 +84,8 @@ export const runGate = (config: SimulationConfig): SimulationResult => {
   let tilt = 0;
   let spinnerAngle = course.spinner.initialAngle;
   let simTime = 0;
+  const events: GameEvent[] = [];
+  const evTimes = eventTimes(config.targetFinishSeconds);
 
   Events.on(engine, "collisionStart", (event) => {
     for (const pair of event.pairs) {
@@ -133,7 +132,7 @@ export const runGate = (config: SimulationConfig): SimulationResult => {
       pos[i * 3 + 1] = b.position.y;
       pos[i * 3 + 2] = b.angle;
     });
-    steps.push({ t: simTime, pos, alive: aliveCount, gateAngle, gateHalf, spinnerAngle, tilt });
+    steps.push({ t: simTime, pos, alive: aliveCount, gateAngle, gateHalf, spinnerAngle, tilt, double: events.length >= 1 && !winner });
   };
 
   record();
@@ -141,8 +140,15 @@ export const runGate = (config: SimulationConfig): SimulationResult => {
     simTime = step / config.physicsHz;
     const dt = 1 / config.physicsHz;
 
+    // --- 後半のイベント: DOUBLE EXIT（反対側にも出口）→ SPEED UP（出口と回転バーが2倍速） ---
+    if (!winner && events.length < 2 && simTime >= evTimes[events.length]) {
+      events.push({ t: round(simTime, 4), label: events.length === 0 ? "DOUBLE EXIT" : "SPEED UP" });
+    }
+    const double = events.length >= 1 && !winner;
+    const speedUp = events.length >= 2 ? 2 : 1;
+
     // --- ゲート制御 ---
-    gateAngle = wrapAngle(gateAngle + course.gateAngularSpeed * dt * (1 + simTime / 30));
+    gateAngle = wrapAngle(gateAngle + course.gateAngularSpeed * dt * (1 + simTime / 30) * speedUp);
     // 出口は閉じない。進行が速すぎるときは「球より狭いすき間」まで絞る（出口は常に見えている）
     let desiredHalf = minGateHalf;
     if (!winner && simTime >= GATE_OPEN_AT) {
@@ -158,7 +164,7 @@ export const runGate = (config: SimulationConfig): SimulationResult => {
     // --- 回転バー（速度を使って衝突に回転の勢いを伝える）。残りが少なくなるほど速く回して終盤を盛り上げる ---
     const boostTarget = 1 + 0.8 * Math.min(1, Math.max(0, (8 - aliveCount) / 6));
     spinnerBoost += Math.max(-dt, Math.min(dt, boostTarget - spinnerBoost));
-    spinnerAngle += course.spinner.angularSpeed * spinnerBoost * dt;
+    spinnerAngle += course.spinner.angularSpeed * spinnerBoost * speedUp * dt;
     (Body.setAngle as (b: Matter.Body, a: number, updateVelocity?: boolean) => void)(spinner, spinnerAngle, true);
 
     // --- 衝撃波パルス: BGMの拍（0.5秒）に合わせて中心から衝撃波が出て、生存ボールを外周へはじき飛ばす。
@@ -199,7 +205,7 @@ export const runGate = (config: SimulationConfig): SimulationResult => {
     Engine.update(engine, dtMs);
 
     // --- 外周壁・脱落判定 ---
-    const gate = { angle: gateAngle, halfWidth: gateHalf };
+    const gate = [{ angle: gateAngle, halfWidth: gateHalf }, ...(double ? [{ angle: wrapAngle(gateAngle + Math.PI), halfWidth: gateHalf }] : [])];
     let eliminatedThisStep = false;
     for (let i = 0; i < balls.length; i++) {
       const b = balls[i];
@@ -251,6 +257,7 @@ export const runGate = (config: SimulationConfig): SimulationResult => {
   return {
     format: "physics-lab/last-ball-standing@1",
     mode: "gate",
+    events,
     winnerSafe,
     generator: { version: GENERATOR_VERSION, createdAt: new Date().toISOString() },
     config,

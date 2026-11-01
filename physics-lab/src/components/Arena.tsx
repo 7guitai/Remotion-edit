@@ -7,16 +7,25 @@ type Layout = SimulationResult["layout"];
 
 const polar = (cx: number, cy: number, r: number, a: number) => [cx + Math.cos(a) * r, cy + Math.sin(a) * r] as const;
 
-/** ゲートを除いた外周の円弧パス */
-const arcPath = (cx: number, cy: number, r: number, gate: [number, number] | null) => {
-  if (!gate) {
+/** 出口（複数可）を除いた外周の円弧パス */
+const arcPath = (cx: number, cy: number, r: number, gates: [number, number][]) => {
+  if (gates.length === 0) {
     return `M ${cx - r} ${cy} A ${r} ${r} 0 1 1 ${cx + r} ${cy} A ${r} ${r} 0 1 1 ${cx - r} ${cy}`;
   }
-  const [g0, g1] = gate;
-  const sweep = Math.PI * 2 - (g1 - g0);
-  const [x0, y0] = polar(cx, cy, r, g1);
-  const [x1, y1] = polar(cx, cy, r, g1 + sweep);
-  return `M ${x0} ${y0} A ${r} ${r} 0 ${sweep > Math.PI ? 1 : 0} 1 ${x1} ${y1}`;
+  const TAU = Math.PI * 2;
+  const norm = (a: number) => ((a % TAU) + TAU) % TAU;
+  const gs = gates.map(([g0, g1]) => [norm(g0), norm(g0) + (g1 - g0)] as [number, number]).sort((x, y) => x[0] - y[0]);
+  let d = "";
+  for (let i = 0; i < gs.length; i++) {
+    const start = gs[i][1];
+    const next = i + 1 < gs.length ? gs[i + 1][0] : gs[0][0] + TAU;
+    const sweep = next - start;
+    if (sweep <= 0) continue;
+    const [x0, y0] = polar(cx, cy, r, start);
+    const [x1, y1] = polar(cx, cy, r, next);
+    d += `M ${x0} ${y0} A ${r} ${r} 0 ${sweep > Math.PI ? 1 : 0} 1 ${x1} ${y1} `;
+  }
+  return d;
 };
 
 const wedge = (cx: number, cy: number, r0: number, r1: number, a0: number, a1: number) => {
@@ -105,12 +114,13 @@ export const ArenaFloor: React.FC<{ layout: Layout }> = ({ layout }) => {
 };
 
 /** 外周の手すりとゲートの支柱。ボールより上に描く */
-export const ArenaRail: React.FC<{ layout: Layout; gate: [number, number] | null; frame: number }> = ({ layout, gate, frame }) => {
+export const ArenaRail: React.FC<{ layout: Layout; gate: [number, number] | null; gate2?: [number, number] | null; frame: number }> = ({ layout, gate, gate2, frame }) => {
   const style = useStyle();
   const { cx, cy, radius: R, wallThickness: t } = layout.arena;
   const rWall = R + t / 2;
   const w = style.rail.width;
-  const path = arcPath(cx, cy, rWall, gate);
+  const gates = [gate, gate2].filter((g): g is [number, number] => !!g);
+  const path = arcPath(cx, cy, rWall, gates);
   const blink = 0.55 + 0.45 * Math.sin(frame * 0.35);
   const flat = style.ball === "flat";
   const sh = style.shadow;
@@ -121,8 +131,8 @@ export const ArenaRail: React.FC<{ layout: Layout; gate: [number, number] | null
       <path d={path} fill="none" stroke="url(#rail)" strokeWidth={w} strokeLinecap="butt" />
       {!flat && <path d={path} fill="none" stroke="#ffffff" strokeOpacity={0.85} strokeWidth={w * 0.22} strokeLinecap="butt" transform="translate(-2 -2)" />}
 
-      {gate && (
-        <>
+      {gates.map((gate, gi) => (
+        <g key={gi}>
           {/* 出口の外側: 色付きの帯と外向きの矢印（すき間が狭いときも常に見える） */}
           {(() => {
             const rb = R + t + 10;
@@ -164,8 +174,8 @@ export const ArenaRail: React.FC<{ layout: Layout; gate: [number, number] | null
               </g>
             );
           })}
-        </>
-      )}
+        </g>
+      ))}
     </g>
   );
 };

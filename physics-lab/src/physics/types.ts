@@ -79,6 +79,8 @@ export type FrameState = {
   alive: number;
   /** ゲートの開始角・終了角（rad）。閉じているときは null */
   gate: [number, number] | null;
+  /** gate: DOUBLE EXIT 後の2つ目の出口 */
+  gate2?: [number, number] | null;
   spinnerAngle: number;
   /** 重力の傾き（rad, 0 = 真下）。終盤だけ左右に振れる */
   tilt: number;
@@ -95,6 +97,9 @@ export type WinnerInfo = {
   decidedBy: "last-standing" | "timeout";
 };
 
+/** 後半のイベント（画面にバナー表示） */
+export type GameEvent = { t: number; label: string };
+
 /** collapse: 床のタイル（扇形）。warnAt で点滅し、fallAt で落ちる */
 export type Tile = { r0: number; r1: number; a0: number; a1: number; warnAt: number | null; fallAt: number | null };
 
@@ -104,6 +109,8 @@ export type HpEvent = { t: number; ball: number; hp: number; source: "ball" | "s
 export type SimulationResult = {
   format: "physics-lab/last-ball-standing@1";
   mode: GameMode;
+  /** 後半のイベント */
+  events: GameEvent[];
   /** collapse のみ */
   tiles?: Tile[];
   /** battle のみ */

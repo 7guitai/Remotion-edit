@@ -62,7 +62,7 @@ export const MainAction: React.FC<Props> = ({ sim, frame, pulseFrames, deadFrame
         );
       })}
 
-      <ArenaRail layout={layout} gate={state.gate} frame={frame} />
+      <ArenaRail layout={layout} gate={state.gate} gate2={state.gate2} frame={frame} />
       {!won && Math.abs(state.tilt ?? 0) > 0.01 && <GravityArrow sim={sim} tilt={state.tilt} />}
 
       {/* 脱落した瞬間の波紋 */}
