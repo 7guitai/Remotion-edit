@@ -11,10 +11,12 @@ type Props = {
   number: number;
   total: number;
   timeout: boolean;
+  /** 指定すると「#番号 · 1/総数」の代わりに表示する */
+  subtitle?: string;
 };
 
 /** 勝者カード */
-export const WinnerDisplay: React.FC<Props> = ({ framesSinceWin, color, teamName, number, total, timeout }) => {
+export const WinnerDisplay: React.FC<Props> = ({ framesSinceWin, color, teamName, number, total, timeout, subtitle }) => {
   const s = useStyle();
   const { fps } = useVideoConfig();
   const f = framesSinceWin - 18;
@@ -33,7 +35,7 @@ export const WinnerDisplay: React.FC<Props> = ({ framesSinceWin, color, teamName
           <div style={{ fontWeight: 800, fontSize: 52, lineHeight: 1.15, color: nameColor }}>
             {teamName}{" "}
             <span style={{ color: s.sub, fontSize: 40 }}>
-              #{number} · 1/{total}
+              {subtitle ?? `#${number} · 1/${total}`}
               {timeout ? " · TIME UP" : ""}
             </span>
           </div>

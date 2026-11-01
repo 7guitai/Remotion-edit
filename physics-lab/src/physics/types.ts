@@ -1,7 +1,7 @@
 import type { TeamId } from "./teams";
 
 /** ゲームのルール */
-export type GameMode = "gate" | "collapse" | "battle";
+export type GameMode = "gate" | "collapse" | "battle" | "takeover";
 
 export type SimulationConfig = {
   mode: GameMode;
@@ -113,6 +113,12 @@ export type SimulationResult = {
   events: GameEvent[];
   /** collapse のみ */
   tiles?: Tile[];
+  /** takeover のみ: 色の変化（ball がその時刻から team になる）と巨大化 */
+  takeover?: {
+    conversions: { t: number; ball: number; team: TeamId; by: number }[];
+    giant: { ball: number; start: number; end: number; scale: number } | null;
+    mvpTakeovers: number;
+  };
   /** battle のみ */
   hp?: { max: number; events: HpEvent[]; zoneStart: number };
   /** 勝者が決着時に安全な場所にいたか（同時脱落で位置が飛んだ場合などは false） */

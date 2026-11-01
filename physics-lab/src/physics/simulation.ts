@@ -8,6 +8,7 @@ import { SeededRandom } from "./seeded-random";
 import { BEAT_SECONDS, GENERATOR_VERSION, ballTeams, eventTimes, paceTarget, round } from "./common";
 import { runBattle } from "./simulation-battle";
 import { runCollapse } from "./simulation-collapse";
+import { runTakeover } from "./simulation-takeover";
 import type { GameEvent, BallInfo, Elimination, HitEvent, SimulationConfig, SimulationResult, WinnerInfo } from "./types";
 
 const { Engine, Body, Events } = Matter;
@@ -283,6 +284,8 @@ export const runSimulation = (config: SimulationConfig): SimulationResult => {
       return runCollapse(config);
     case "battle":
       return runBattle(config);
+    case "takeover":
+      return runTakeover(config);
     default:
       return runGate(config);
   }

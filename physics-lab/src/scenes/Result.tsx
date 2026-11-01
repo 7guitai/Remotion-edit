@@ -4,6 +4,7 @@ import { WinnerDisplay } from "../components/WinnerDisplay";
 import { SeededRandom } from "../physics/seeded-random";
 import { TEAMS } from "../physics/teams";
 import { useStyle } from "../styles/context";
+import { finalTeam } from "../data/takeover";
 import type { SimulationResult } from "../physics/types";
 
 /** 勝者確定後: フラッシュ、紙吹雪、勝者カード */
@@ -11,7 +12,8 @@ export const Result: React.FC<{ sim: SimulationResult; frame: number }> = ({ sim
   const age = frame - sim.winnerFrame;
   const style = useStyle();
   const w = sim.balls[sim.winner.ballIndex];
-  const wTeam = style.teams[w.team];
+  const takeover = sim.mode === "takeover";
+  const wTeam = style.teams[takeover ? finalTeam(sim) : w.team];
   const confetti = useMemo(() => {
     const rng = new SeededRandom(sim.config.seed ^ 0x5eed);
     const palette = [wTeam.color, wTeam.color, ...TEAMS.map((t) => style.teams[t.id].color), style.spinner.mid, style.pillar.mid];
@@ -44,7 +46,7 @@ export const Result: React.FC<{ sim: SimulationResult; frame: number }> = ({ sim
           );
         })}
       </svg>
-      <WinnerDisplay framesSinceWin={age} color={wTeam.color} teamName={wTeam.name} number={w.number} total={sim.balls.length} timeout={sim.winner.decidedBy === "timeout"} />
+      <WinnerDisplay framesSinceWin={age} color={wTeam.color} teamName={wTeam.name} number={w.number} total={sim.balls.length} timeout={sim.winner.decidedBy === "timeout"} subtitle={takeover ? `MVP #${w.number} · ${sim.takeover?.mvpTakeovers ?? 0} TAKEOVERS` : undefined} />
     </div>
   );
 };

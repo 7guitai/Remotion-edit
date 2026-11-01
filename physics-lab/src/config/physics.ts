@@ -12,7 +12,7 @@ export const LAYOUT = {
 export const DEFAULT_SEED = 20261034;
 
 export const DEFAULT_MODE: GameMode = "gate";
-export const GAME_MODES: GameMode[] = ["gate", "collapse", "battle"];
+export const GAME_MODES: GameMode[] = ["gate", "collapse", "battle", "takeover"];
 
 export const SIMULATION: SimulationConfig = {
   mode: "gate",
@@ -37,6 +37,7 @@ export const SIMULATION: SimulationConfig = {
 const MODE_OVERRIDES: Record<GameMode, Partial<SimulationConfig>> = {
   gate: {},
   collapse: { ballCount: 48, ballRadius: 15, restitution: 0.85, airFriction: 0.012, friction: 0.01, maxSpeed: 18, targetFinishSeconds: 20.5, deadlineSeconds: 23.5 },
+  takeover: { ballCount: 60, ballRadius: 17, restitution: 1, airFriction: 0, friction: 0, maxSpeed: 20 },
   battle: { ballCount: 24, ballRadius: 26, restitution: 1, airFriction: 0, friction: 0, maxSpeed: 20 },
 };
 

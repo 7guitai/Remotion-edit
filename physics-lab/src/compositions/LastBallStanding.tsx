@@ -14,6 +14,8 @@ import { Intro } from "../scenes/Intro";
 import { MainAction } from "../scenes/MainAction";
 import { BattleWorld } from "../scenes/worlds/BattleWorld";
 import { CollapseWorld } from "../scenes/worlds/CollapseWorld";
+import { TakeoverWorld } from "../scenes/worlds/TakeoverWorld";
+import { teamsAt } from "../data/takeover";
 import { Result } from "../scenes/Result";
 import type { GameMode, SimulationResult } from "../physics/types";
 
@@ -46,13 +48,20 @@ const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
     return { elimFrames, deadFrame, pulseFrames, eventFrames, cues: buildSoundCues(sim, elimFrames, frameAt, pulseFrames, eventFrames) };
   }, [sim]);
 
-  const lastChange = Math.max(-100, ...elimFrames.filter((f) => f <= frame));
+  const takeover = sim.mode === "takeover";
+  // takeover は「残っている色の数」が減った瞬間を変化とみなす
+  const changeFrames = takeover ? sim.frames.map((f, k) => (k > 0 && f.alive < sim.frames[k - 1].alive ? k : -1)).filter((k) => k >= 0) : elimFrames;
+  const lastChange = Math.max(-100, ...changeFrames.filter((f) => f <= frame));
   const framesSinceChange = frame - lastChange;
-  const climax = state.alive <= 3 && frame < sim.winnerFrame + 2 && frame > sim.introFrames;
+  const climax = state.alive <= (takeover ? 2 : 3) && frame < sim.winnerFrame + 2 && frame > sim.introFrames;
   const teamAlive = Object.fromEntries(TEAMS.map((t) => [t.id, 0])) as Record<TeamId, number>;
-  sim.balls.forEach((b, i) => {
-    if (frame < deadFrame[i]) teamAlive[b.team]++;
-  });
+  if (takeover) {
+    for (const t of teamsAt(sim, state.t)) teamAlive[t]++;
+  } else {
+    sim.balls.forEach((b, i) => {
+      if (frame < deadFrame[i]) teamAlive[b.team]++;
+    });
+  }
   const slow = state.speed > 0 && state.speed < 1 ? (1 - state.speed) / 0.65 : 0;
   const zoom = 1 + 0.07 * slow;
   const { cx, cy } = sim.layout.arena;
@@ -64,6 +73,8 @@ const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
         <g transform={`translate(${cx} ${cy}) scale(${zoom}) translate(${-cx} ${-cy})`}>
           {sim.mode === "collapse" ? (
             <CollapseWorld sim={sim} frame={frame} deadFrame={deadFrame} elimFrames={elimFrames} />
+          ) : takeover ? (
+            <TakeoverWorld sim={sim} frame={frame} />
           ) : sim.mode === "battle" ? (
             <BattleWorld sim={sim} frame={frame} deadFrame={deadFrame} elimFrames={elimFrames} />
           ) : (
@@ -73,7 +84,7 @@ const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
       </svg>
 
       {/* HUD */}
-      <Counter alive={state.alive} total={sim.balls.length} teamAlive={teamAlive} framesSinceChange={framesSinceChange} />
+      <Counter alive={state.alive} total={takeover ? TEAMS.length : sim.balls.length} teamAlive={teamAlive} framesSinceChange={framesSinceChange} title={takeover ? "LAST COLOR STANDING" : undefined} />
       <div style={{ position: "absolute", bottom: 46, left: 0, right: 0, textAlign: "center", fontFamily: s.font, fontWeight: 800, fontSize: 28, letterSpacing: 6, color: s.sub }}>
         PHYSICS LAB · SEED {sim.config.seed}
       </div>
@@ -82,7 +93,7 @@ const Video: React.FC<{ sim: SimulationResult }> = ({ sim }) => {
       {(sim.events ?? []).map((e, k) => (
         <EventBanner key={k} label={e.label} age={frame - eventFrames[k]} />
       ))}
-      <Intro frame={frame} total={sim.balls.length} introFrames={sim.introFrames} />
+      <Intro frame={frame} total={takeover ? TEAMS.length : sim.balls.length} introFrames={sim.introFrames} />
       <Result sim={sim} frame={frame} />
 
       {/* 音 */}

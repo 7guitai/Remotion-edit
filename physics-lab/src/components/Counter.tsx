@@ -11,15 +11,16 @@ type Props = {
   teamAlive: Record<TeamId, number>;
   /** 直近で残数が減ってからのフレーム数（ポップ演出用） */
   framesSinceChange: number;
+  title?: string;
 };
 
 /** 画面上部: タイトル・残数・色ごとの残数 */
-export const Counter: React.FC<Props> = ({ alive, total, teamAlive, framesSinceChange }) => {
+export const Counter: React.FC<Props> = ({ alive, total, teamAlive, framesSinceChange, title = "LAST BALL STANDING" }) => {
   const s = useStyle();
   const pop = interpolate(framesSinceChange, [0, 4, 12], [1.25, 1.08, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
     <Card style={{ position: "absolute", top: 56, left: 60, right: 60, padding: "26px 40px 30px" }}>
-      <div style={{ textAlign: "center", fontWeight: 800, fontSize: 46, letterSpacing: 3 }}>LAST BALL STANDING</div>
+      <div style={{ textAlign: "center", fontWeight: 800, fontSize: 46, letterSpacing: 3 }}>{title}</div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 14 }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: 10, minWidth: 250 }}>
           <span style={{ display: "inline-block", fontWeight: 800, fontSize: 112, lineHeight: 1, color: alive <= 1 ? s.accent : s.text, transform: `scale(${pop})`, transformOrigin: "left bottom" }}>
