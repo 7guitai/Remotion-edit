@@ -6,7 +6,8 @@ export const MATH_FPS = 30;
 const LEAD_IN = 0.2;
 const TAIL = 1.4;
 
-export type Narration = { text: string; speech?: string };
+// pause: このフレーズのあとに入れる無音（秒）。強調したい言葉の前後で間をつくる
+export type Narration = { text: string; speech?: string; pause?: number };
 
 export type MathShortProps = {
   id: string;
@@ -48,10 +49,10 @@ export const calculateMathMetadata: CalculateMetadataFunction<MathShortProps> = 
   }
   const starts: number[] = [];
   let t = LEAD_IN;
-  for (const d of durs) {
+  durs.forEach((d, i) => {
     starts.push(t);
-    t += d;
-  }
+    t += d + (props.narration[i].pause ?? 0);
+  });
   return {
     durationInFrames: Math.ceil((t + TAIL) * MATH_FPS),
     // BGM は Git 管理外なので、置いていなければ BGM なしで書き出す
