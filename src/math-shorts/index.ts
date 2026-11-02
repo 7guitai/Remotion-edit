@@ -12,6 +12,8 @@ import bookStack from "./20261101-pm-book-stack.json";
 import { BookStack } from "./BookStack";
 import kochSnowflake from "./20261102-am-koch-snowflake.json";
 import { KochSnowflake } from "./KochSnowflake";
+import ruleOf72 from "./20261102-pm-rule-of-72.json";
+import { RuleOf72 } from "./RuleOf72";
 import { MathShortProps, Narration } from "./timeline";
 
 // 縦型（9:16）の数学ショート。src/math-shorts/<id>.json がナレーション原稿
@@ -70,5 +72,12 @@ export const MATH_SHORTS: {
     component: KochSnowflake,
     narration: kochSnowflake.slides,
     bgm: kochSnowflake.bgm.file,
+  },
+  {
+    id: ruleOf72.id,
+    title: ruleOf72.title,
+    component: RuleOf72,
+    narration: ruleOf72.slides,
+    bgm: ruleOf72.bgm.file,
   },
 ];
