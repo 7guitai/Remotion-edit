@@ -3,6 +3,7 @@ import { Composition, Still } from "remotion";
 import { SleepThumbnail } from "./components/SleepThumbnail";
 import { WhatIfThumbnail } from "./components/WhatIfThumbnail";
 import { TinyThumbnail } from "./components/TinyThumbnail";
+import { AnimalThumbnail } from "./components/AnimalThumbnail";
 import { RelaxThumbnail } from "./components/RelaxThumbnail";
 import { PaperThumbnail } from "./components/PaperThumbnail";
 import { PaperPairThumbnail } from "./components/PaperPairThumbnail";
@@ -221,6 +222,16 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         durationInFrames={30}
         defaultProps={{ offset: 300 }}
+      />
+      {/* 「もし人間が、動物の能力を持っていたら？10選」のサムネイル（npx remotion still whatif-animal-long-thumbnail out/thumb.png --gl=swangle） */}
+      <Composition
+        id="whatif-animal-long-thumbnail"
+        component={AnimalThumbnail}
+        width={1280}
+        height={720}
+        fps={30}
+        durationInFrames={30}
+        defaultProps={{ offset: 70 }}
       />
     </>
   );

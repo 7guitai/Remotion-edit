@@ -578,3 +578,7 @@ export const applyBalance = (rd: Ragdoll) => {
 };
 
 export const ragdollParts = PARTS.map((p) => p.name);
+
+// 部位と関節の寸法（物理を使わずに姿勢から形を計算するとき＝順運動学で使う）
+export const RAGDOLL_PARTS = PARTS;
+export const RAGDOLL_JOINTS = JOINTS;

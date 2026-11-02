@@ -91,7 +91,7 @@ const useWindows = () =>
     return t;
   }, []);
 
-const Town: React.FC = () => {
+export const Town: React.FC = () => {
   const win = useWindows();
   const B = FLEA.building;
   const houses = useMemo(
@@ -257,7 +257,7 @@ export const SpeedLines: React.FC<{ strength: number; seed: number; width: numbe
 };
 
 // 上へ速く動いているときの、たての流れる線
-const Streaks: React.FC<{ strength: number; t: number; width: number; height: number }> = ({ strength, t, width, height }) => {
+export const Streaks: React.FC<{ strength: number; t: number; width: number; height: number }> = ({ strength, t, width, height }) => {
   if (strength <= 0.02) return null;
   return (
     <svg width={width} height={height} style={{ position: "absolute", inset: 0, opacity: strength }}>
@@ -271,7 +271,7 @@ const Streaks: React.FC<{ strength: number; t: number; width: number; height: nu
   );
 };
 
-const Pill: React.FC<{ color: string; children: React.ReactNode; size?: number }> = ({ color, children, size = 44 }) => (
+export const Pill: React.FC<{ color: string; children: React.ReactNode; size?: number }> = ({ color, children, size = 44 }) => (
   <div
     style={{
       fontFamily,
@@ -359,17 +359,17 @@ export const FleaScene: React.FC<{ mode: FleaMode; width: number; height: number
       <SpeedLines strength={lines} seed={Math.floor(t * 12)} width={width} height={height} />
       {/* 高さと速さのメーター（右の人） */}
       {mode !== "top" ? (
-        <div style={{ position: "absolute", top: 24, right: 24, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 10 }}>
+        <div style={{ position: "absolute", top: 24, ...(width > height ? { left: 24, alignItems: "flex-start" } : { right: 24, alignItems: "flex-end" }), display: "flex", flexDirection: "column", gap: 10 }}>
           <Pill color={SHIRTS[1]} size={50}>{`高さ ${h < 10 ? h.toFixed(1) : Math.round(h)}m`}</Pill>
           <Pill color="#ffd23a" size={40}>{`時速 ${Math.round(flying ? sim.speed[f] : 0)}km`}</Pill>
         </div>
       ) : (
-        <div style={{ position: "absolute", top: 24, right: 24 }}>
+        <div style={{ position: "absolute", top: 24, ...(width > height ? { left: 24 } : { right: 24 }) }}>
           <Pill color={SHIRTS[1]} size={50}>{`高さ ${Math.round(h)}m`}</Pill>
         </div>
       )}
       {mode === "jump" && (sim.launch < 0 || t < sim.launch + 0.8) ? (
-        <div style={{ position: "absolute", top: 24, left: 24, display: "flex", flexDirection: "column", gap: 10 }}>
+        <div style={{ position: "absolute", ...(width > height ? { bottom: 210 } : { top: 24 }), left: 24, display: "flex", flexDirection: "column", gap: 10 }}>
           <Pill color={SHIRTS[0]} size={40}>ふつうの人</Pill>
           <Pill color={SHIRTS[1]} size={40}>ノミのジャンプ力</Pill>
         </div>

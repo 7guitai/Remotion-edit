@@ -1,0 +1,637 @@
+{
+ "id": "whatif-animal-long",
+ "title": "もし人間が、動物の能力を持っていたら？10選【物理シミュレーション】",
+ "format": "landscape",
+ "titleBand": false,
+ "pr": false,
+ "style": "whatif",
+ "background": "#000",
+ "slideGap": 8,
+ "bgmVolume": 0.1,
+ "voice": {
+  "speaker": 13,
+  "speed": 1.15,
+  "name": "青山龍星"
+ },
+ "bgmPlaylist": [
+  {
+   "file": "clap.mp3",
+   "title": "CLAP!",
+   "credit": "稿屋 隆",
+   "page": "https://opentracks.com/bgm/detail/182",
+   "opentracks": 182,
+   "track": 1,
+   "fromSlide": 0
+  },
+  {
+   "file": "odore_glocken.mp3",
+   "title": "おどれグロッケンシュピール",
+   "credit": "しゃろう",
+   "page": "https://opentracks.com/bgm/detail/8662",
+   "opentracks": 8662,
+   "track": 1,
+   "fromSlide": 22
+  },
+  {
+   "file": "harikiccyau.mp3",
+   "title": "はりきっちゃう時のテーマ",
+   "credit": "こおろぎ",
+   "page": "https://opentracks.com/bgm/detail/465",
+   "opentracks": 465,
+   "track": 1,
+   "fromSlide": 41
+  }
+ ],
+ "headline": [
+  "もし人間が",
+  "動物の能力を持っていたら？"
+ ],
+ "illustrations": {},
+ "description": "もし人間が、動物のすごい能力を持っていたら？チーター・ノミ・フンコロガシ・ヤモリ・ネコ・ハヤブサ・カメレオン・シャコ・バシリスク・キツツキの10種類を、物理シミュレーションで人間に当てはめてみました。\n人や物の動きは物理エンジン（cannon-es）で計算しています（走る・登るなどの決まった動きは、関節の角度から計算しています）。\n\n▼ 参考にした研究・記録\n・チーター 時速93km：Wilson et al. (2013) Nature「Locomotion dynamics of hunting in wild cheetahs」\n・ノミ 体長の約23倍・100G以上：Bennet-Clark & Alder (1967) J. Exp. Biol.「The Jump of the Flea」\n・フンコロガシ 体重の1141倍：Knell & Simmons (2010) Proc. R. Soc. B（Onthophagus taurus）\n・ヤモリ 足の裏の付着力：Autumn et al. (2000) Nature ほか\n・ネコ 落ちる速さ 時速約100km：立ち直り反射（Cat righting reflex）\n・ハヤブサ 時速389km：ギネス世界記録\n・カメレオン 舌の加速264G：Anderson (2016) Scientific Reports\n・シャコ パンチの加速：Patek et al. (2004) Nature\n・バシリスク 人なら時速約108km：Glasheen & McMahon (1996) の計算をもとにした試算\n・キツツキ 脳にかかる衝撃 最大約400G：Van Wassenbergh et al. (2022) Current Biology\n※人間に当てはめた数字は、体の大きさの比で計算した目安です。\n\nほしい能力を、コメントで教えてください！",
+ "hashtags": [
+  "もしも",
+  "雑学",
+  "動物",
+  "物理",
+  "物理シミュレーション"
+ ],
+ "slides": [
+  {
+   "type": "whatif",
+   "text": "もし人間が、動物の能力を持っていたら？",
+   "effect": "none",
+   "animal": "cheetah",
+   "simStart": 5.5,
+   "chapter": "オープニング"
+  },
+  {
+   "type": "whatif",
+   "text": "ノミのジャンプ力なら、13階建てのビルをひと跳び。",
+   "effect": "none",
+   "flea": "jump",
+   "simStart": 2.4,
+   "simSpeed": 0.7
+  },
+  {
+   "type": "whatif",
+   "text": "シャコのパンチなら、レンガの壁も吹き飛ぶ。",
+   "effect": "none",
+   "animal": "shrimp",
+   "simStart": 1.9,
+   "simSpeed": 0.35
+  },
+  {
+   "type": "whatif",
+   "text": "今回は、10種類の動物の能力を、物理シミュレーションで、人間に当てはめてみた。",
+   "effect": "none",
+   "animal": "cat",
+   "simStart": 0.6,
+   "simSpeed": 0.5
+  },
+  {
+   "type": "whatif",
+   "text": "もし人間が、動物の能力を持っていたら？",
+   "effect": "none",
+   "animal": "falcon",
+   "simStart": 6,
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "もし人間が",
+     "動物の能力を持っていたら？"
+    ],
+    "sub": "物理シミュレーションで検証"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "1つめ。チーターの足。",
+   "effect": "none",
+   "animal": "cheetah",
+   "chapter": "01 チーターの足",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "チーターの",
+     "足"
+    ],
+    "no": 1,
+    "tag": "走る速さ"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "野生のチーターの最高速度は、時速93km。GPSの首輪をつけて、実際に測った記録だ。",
+   "effect": "none",
+   "animal": "cheetah",
+   "simStart": 0,
+   "speech": "野生のチーターの最高速度は、時速93キロ。GPSの首輪をつけて、実際に測った記録だ。"
+  },
+  {
+   "type": "whatif",
+   "text": "もし人間がこの速さで走れたら、時速60kmの車も、あっという間に追い抜いてしまう。",
+   "effect": "none",
+   "animal": "cheetah",
+   "simStart": 2.6,
+   "big": "時速93km",
+   "speech": "もし人間がこの速さで走れたら、時速60キロの車も、あっという間に追い抜いてしまう。"
+  },
+  {
+   "type": "whatif",
+   "text": "100m走のタイムは、約5.4秒。世界記録の9秒58より、4秒も速い。",
+   "effect": "none",
+   "animal": "cheetah",
+   "simStart": 6.4,
+   "speech": "100メートル走のタイムは、約5.4秒。世界記録の9秒58より、4秒も速い。"
+  },
+  {
+   "type": "whatif",
+   "text": "家から1km先の駅までなら、わずか39秒で着いてしまう。",
+   "effect": "none",
+   "animal": "cheetah",
+   "simStart": 4.2,
+   "speech": "家から1キロ先の駅までなら、わずか39秒で着いてしまう。"
+  },
+  {
+   "type": "whatif",
+   "text": "でも、問題は止まるとき。この速さで転んだら…",
+   "effect": "none",
+   "animal": "cheetah",
+   "simStart": 8.0,
+   "simSpeed": 0.45
+  },
+  {
+   "type": "whatif",
+   "text": "体は数十mも転がって、段ボールの山に突っこむ。チーターは、長いしっぽでバランスをとって、急ブレーキや急カーブをしているんだ。",
+   "effect": "none",
+   "animal": "cheetah",
+   "simStart": 9.3,
+   "speech": "体は数十メートルも転がって、段ボールの山に突っこむ。チーターは、長いしっぽでバランスをとって、急ブレーキや急カーブをしているんだ。"
+  },
+  {
+   "type": "whatif",
+   "text": "2つめ。ノミのジャンプ力。",
+   "effect": "none",
+   "flea": "jump",
+   "simStart": 0,
+   "chapter": "02 ノミのジャンプ力",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "ノミの",
+     "ジャンプ力"
+    ],
+    "no": 2,
+    "tag": "跳ぶ高さ"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "ノミは、体の長さの約23倍の高さまで跳ぶ。人間なら、なんと約40m！",
+   "effect": "none",
+   "flea": "jump",
+   "simStart": 2.3,
+   "simSpeed": 0.5,
+   "big": "約40m",
+   "speech": "ノミは、体の長さの約23倍の高さまで跳ぶ。人間なら、なんと約40メートル！"
+  },
+  {
+   "type": "whatif",
+   "text": "13階建てのビルを、ひと跳びで越える高さ。下の町が、ミニチュアみたいだ。",
+   "effect": "none",
+   "flea": "top",
+   "simStart": 5.2,
+   "simSpeed": 0.15
+  },
+  {
+   "type": "whatif",
+   "text": "でも、着地は時速100km。止めてある車の屋根も、ぺしゃんこ。",
+   "effect": "none",
+   "flea": "land",
+   "simStart": 6.3,
+   "simSpeed": 0.75,
+   "speech": "でも、着地は時速100キロ。止めてある車の屋根も、ぺしゃんこ。"
+  },
+  {
+   "type": "whatif",
+   "text": "跳ぶ瞬間には、重力の100倍以上の力。人間の体では、とても耐えられない。",
+   "effect": "none",
+   "flea": "jump",
+   "simStart": 2.45,
+   "simSpeed": 0.08,
+   "big": "100G以上"
+  },
+  {
+   "type": "whatif",
+   "text": "3つめ。フンコロガシの力。",
+   "effect": "none",
+   "animal": "beetle",
+   "chapter": "03 フンコロガシの力",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "フンコロガシの",
+     "力"
+    ],
+    "no": 3,
+    "tag": "引っぱる力"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "ある種類のフンコロガシは、自分の体重の1141倍の重さを、引っぱることができる。",
+   "effect": "none",
+   "animal": "beetle",
+   "simStart": 0
+  },
+  {
+   "type": "whatif",
+   "text": "人間なら、体重66kgの1141倍で、約75トン。バス6台をまとめて引っぱれる。",
+   "effect": "none",
+   "animal": "beetle",
+   "simStart": 1.2,
+   "big": "約75トン",
+   "speech": "人間なら、体重66キロの1141倍で、約75トン。バス6台をまとめて引っぱれる。"
+  },
+  {
+   "type": "whatif",
+   "text": "これは、昆虫の中でもいちばん強い力だといわれている。",
+   "effect": "none",
+   "animal": "beetle",
+   "simStart": 6
+  },
+  {
+   "type": "whatif",
+   "text": "体が小さいほど、重さのわりに力は強くなる。小さな虫だから、できることなんだ。",
+   "effect": "none",
+   "animal": "beetle",
+   "simStart": 10
+  },
+  {
+   "type": "whatif",
+   "text": "4つめ。ヤモリの手足。",
+   "effect": "none",
+   "animal": "gecko",
+   "chapter": "04 ヤモリの手足",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "ヤモリの",
+     "手足"
+    ],
+    "no": 4,
+    "tag": "はりつく力"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "ヤモリの足の裏には、とても細かい毛がびっしり。分子どうしが引き合う力で、壁や天井にはりつく。",
+   "effect": "none",
+   "animal": "gecko",
+   "simStart": 0
+  },
+  {
+   "type": "whatif",
+   "text": "もし人間の手と足に、同じ力があったら、ビルの壁も、すいすい登れてしまう。",
+   "effect": "none",
+   "animal": "gecko",
+   "simStart": 3,
+   "speech": "もし人間の手と足に、おなじちからがあったら、ビルの壁も、すいすい登れてしまう。"
+  },
+  {
+   "type": "whatif",
+   "text": "ヤモリの足は、1平方センチメートルあたり、約2kg分の力でくっつく。人間の手のひらと足の裏なら、合わせて1トン以上を支えられる計算だ。",
+   "effect": "none",
+   "animal": "gecko",
+   "simStart": 7,
+   "big": "1トン以上",
+   "speech": "ヤモリの足は、1平方センチメートルあたり、約2キロ分の力でくっつく。人間の手のひらと足の裏なら、合わせて1トン以上を支えられる計算だ。"
+  },
+  {
+   "type": "whatif",
+   "text": "この仕組みは、何度でもはがせるテープや、壁を登るロボットの研究にも使われているよ。",
+   "effect": "none",
+   "animal": "gecko",
+   "simStart": 11
+  },
+  {
+   "type": "whatif",
+   "text": "5つめ。ネコの着地。",
+   "effect": "none",
+   "animal": "cat",
+   "simStart": 0,
+   "simSpeed": 0.5,
+   "chapter": "05 ネコの着地",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "ネコの",
+     "着地"
+    ],
+    "no": 5,
+    "tag": "空中で体をひねる"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "ネコは、背中から落ちても、空中でくるっと体をひねって、足から着地する。これを、立ち直り反射という。",
+   "effect": "none",
+   "animal": "cat",
+   "simStart": 0.3,
+   "simSpeed": 0.3
+  },
+  {
+   "type": "whatif",
+   "text": "左のふつうの人は、背中から落ちてしまう。右は、空中で体をひねって、足から着地！",
+   "effect": "none",
+   "animal": "cat",
+   "simStart": 0.8,
+   "simSpeed": 0.3
+  },
+  {
+   "type": "whatif",
+   "text": "ネコは体重のわりに面積が広く、落ちる速さは時速100kmくらいで頭打ち。人間は時速200kmくらいまで速くなる。",
+   "effect": "none",
+   "animal": "cat",
+   "simStart": 2.2,
+   "speech": "ネコは体重のわりに面積が広く、落ちる速さは時速100キロくらいで頭打ち。人間は時速200キロくらいまで速くなる。"
+  },
+  {
+   "type": "whatif",
+   "text": "ネコの落ちる速さが最高になるのは、建物の5〜7階くらいの高さから落ちたときだといわれている。",
+   "effect": "none",
+   "animal": "cat",
+   "simStart": 0.9,
+   "simSpeed": 0.3,
+   "speech": "ネコの落ちる速さが最高になるのは、建物の5階から7階くらいの高さから落ちたときだといわれている。"
+  },
+  {
+   "type": "whatif",
+   "text": "6つめ。ハヤブサの急降下。",
+   "effect": "none",
+   "animal": "falcon",
+   "chapter": "06 ハヤブサの急降下",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "ハヤブサの",
+     "急降下"
+    ],
+    "no": 6,
+    "tag": "いちばん速い動物"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "地球でいちばん速い動物は、ハヤブサ。獲物をめがけて急降下するとき、時速389kmを記録したという。",
+   "effect": "none",
+   "animal": "falcon",
+   "simStart": 0,
+   "speech": "地球でいちばん速い動物は、ハヤブサ。獲物をめがけて急降下するとき、時速389キロを記録したという。"
+  },
+  {
+   "type": "whatif",
+   "text": "スカイダイバーは、空気の抵抗で、時速200kmくらいで頭打ちになる。",
+   "effect": "none",
+   "animal": "falcon",
+   "simStart": 5,
+   "speech": "スカイダイバーは、空気の抵抗で、時速200キロくらいで頭打ちになる。"
+  },
+  {
+   "type": "whatif",
+   "text": "ハヤブサは、翼をたたんで矢のような形になり、空気の抵抗を小さくしている。新幹線の最高速度、時速320kmより速いんだ。",
+   "effect": "none",
+   "animal": "falcon",
+   "simStart": 9,
+   "big": "時速389km",
+   "speech": "ハヤブサは、翼をたたんで矢のような形になり、空気の抵抗を小さくしている。新幹線の最高速度、時速320キロより速いんだ。"
+  },
+  {
+   "type": "whatif",
+   "text": "7つめ。カメレオンの舌。",
+   "effect": "none",
+   "animal": "chameleon",
+   "simStart": 0,
+   "chapter": "07 カメレオンの舌",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "カメレオンの",
+     "舌"
+    ],
+    "no": 7,
+    "tag": "のびる速さ"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "カメレオンは、体の長さの約2倍まで、舌を一瞬でのばす。",
+   "effect": "none",
+   "animal": "chameleon",
+   "simStart": 0.8
+  },
+  {
+   "type": "whatif",
+   "text": "人間なら、約3.5m先のリンゴも、口から舌をのばして、パクッ。",
+   "effect": "none",
+   "animal": "chameleon",
+   "simStart": 1.85,
+   "simSpeed": 0.06,
+   "speech": "人間なら、約3.5メートル先のリンゴも、口から舌をのばして、パクッ。"
+  },
+  {
+   "type": "whatif",
+   "text": "その加速は、なんと重力の264倍。100分の1秒で、時速97kmに達する。",
+   "effect": "none",
+   "animal": "chameleon",
+   "simStart": 1.9,
+   "simSpeed": 0.04,
+   "big": "重力の264倍",
+   "speech": "その加速は、なんと重力の264倍。100分の1秒で、時速97キロに達する。"
+  },
+  {
+   "type": "whatif",
+   "text": "舌の中に、ゴムのようにのびる組織があって、ばねのように力をためて、一気に放っているんだ。",
+   "effect": "none",
+   "animal": "chameleon",
+   "simStart": 2.6
+  },
+  {
+   "type": "whatif",
+   "text": "8つめ。シャコのパンチ。",
+   "effect": "none",
+   "animal": "shrimp",
+   "simStart": 0,
+   "chapter": "08 シャコのパンチ",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "シャコの",
+     "パンチ"
+    ],
+    "no": 8,
+    "tag": "最速のパンチ"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "シャコという海の生き物は、ハンマーのような腕で、かたい貝を割って食べる。",
+   "effect": "none",
+   "animal": "shrimp",
+   "simStart": 0.3
+  },
+  {
+   "type": "whatif",
+   "text": "そのパンチは、秒速23m。加速は、重力の約1万倍！",
+   "effect": "none",
+   "animal": "shrimp",
+   "simStart": 1.95,
+   "simSpeed": 0.12,
+   "big": "重力の約1万倍",
+   "speech": "そのパンチは、秒速23メートル。加速は、重力の約1万倍！"
+  },
+  {
+   "type": "whatif",
+   "text": "人間のパンチがこの速さなら、レンガの壁も、こなごなに吹き飛ぶ。",
+   "effect": "none",
+   "animal": "shrimp",
+   "simStart": 2.0,
+   "simSpeed": 0.4
+  },
+  {
+   "type": "whatif",
+   "text": "水の中では、パンチのいきおいで泡ができる。その泡がつぶれる衝撃でも、獲物をたたくんだ。",
+   "effect": "none",
+   "animal": "shrimp",
+   "simStart": 3.5
+  },
+  {
+   "type": "whatif",
+   "text": "大きなシャコは、水そうのガラスを割ってしまうこともあるほど。飼うときは注意が必要だ。",
+   "effect": "none",
+   "animal": "shrimp",
+   "simStart": 2.3,
+   "simSpeed": 0.5
+  },
+  {
+   "type": "whatif",
+   "text": "9つめ。バシリスクの足。",
+   "effect": "none",
+   "animal": "basilisk",
+   "chapter": "09 バシリスクの足",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "バシリスクの",
+     "足"
+    ],
+    "no": 9,
+    "tag": "水の上を走る"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "中南米にすむトカゲ、バシリスクは、水の上を走ることができる。",
+   "effect": "none",
+   "animal": "basilisk",
+   "simStart": 0.5
+  },
+  {
+   "type": "whatif",
+   "text": "人間が同じことをするには、時速108kmで走りつづける必要がある、という計算がある。",
+   "effect": "none",
+   "animal": "basilisk",
+   "simStart": 3.2,
+   "big": "時速108km",
+   "speech": "人間が同じことをするには、時速108キロで走りつづける必要がある、という計算がある。"
+  },
+  {
+   "type": "whatif",
+   "text": "時速108kmは、高速道路を走る車と同じくらい。それで水の上を走りつづけるんだ。",
+   "effect": "none",
+   "animal": "basilisk",
+   "simStart": 4.6,
+   "speech": "時速108キロは、高速道路を走る車と同じくらい。それで水の上を走りつづけるんだ。"
+  },
+  {
+   "type": "whatif",
+   "text": "しかも、少しでも遅くなると…",
+   "effect": "none",
+   "animal": "basilisk",
+   "simStart": 6.0,
+   "simSpeed": 0.6
+  },
+  {
+   "type": "whatif",
+   "text": "ドボン。体の重さを支えきれず、しずんでしまう。必要なパワーは、人間の限界の約15倍だ。",
+   "effect": "none",
+   "animal": "basilisk",
+   "simStart": 7.0
+  },
+  {
+   "type": "whatif",
+   "text": "最後、10こめ。キツツキの頭。",
+   "effect": "none",
+   "animal": "woodpecker",
+   "simStart": 0,
+   "speech": "最後、じゅっこめ。キツツキの頭。",
+   "chapter": "10 キツツキの頭",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "キツツキの",
+     "頭"
+    ],
+    "no": 10,
+    "tag": "つつく速さ"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "キツツキは、1秒に20回ほどの速さで、木をつつく。",
+   "effect": "none",
+   "animal": "woodpecker",
+   "simStart": 1.3,
+   "simSpeed": 0.1
+  },
+  {
+   "type": "whatif",
+   "text": "1回つつくたびに、脳には最大で約400Gの衝撃。人間なら、脳しんとうを起こしてもおかしくない強さだ。",
+   "effect": "none",
+   "animal": "woodpecker",
+   "simStart": 2.0,
+   "big": "約400G",
+   "speech": "1回つつくたびに、脳には最大で約400ジーの衝撃。人間なら、脳しんとうを起こしてもおかしくない強さだ。"
+  },
+  {
+   "type": "whatif",
+   "text": "キツツキが平気なのは、脳がとても小さくて軽いから。小さいほど、同じ衝撃でも、脳への負担が小さいんだ。",
+   "effect": "none",
+   "animal": "woodpecker",
+   "simStart": 3.0
+  },
+  {
+   "type": "whatif",
+   "text": "10種類の動物の能力。あなたは、どれがほしい？",
+   "effect": "none",
+   "animal": "cheetah",
+   "simStart": 4,
+   "chapter": "まとめ"
+  },
+  {
+   "type": "whatif",
+   "text": "実は、動物のすごい能力の多くは、体が小さいからできること。人間の大きさでは、体がもたないものも多いんだ。",
+   "effect": "none",
+   "animal": "beetle",
+   "simStart": 12
+  },
+  {
+   "type": "whatif",
+   "text": "ほしい能力を、コメントで教えてね！",
+   "effect": "none",
+   "animal": "cat",
+   "simStart": 2.5,
+   "hold": 1
+  }
+ ]
+}
