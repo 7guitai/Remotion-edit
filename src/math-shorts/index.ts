@@ -18,6 +18,8 @@ import randomWalk from "./20261103-am-random-walk.json";
 import { RandomWalk } from "./RandomWalk";
 import raindrop from "./20261103-pm-raindrop.json";
 import { Raindrop } from "./Raindrop";
+import pigeonhole from "./20261104-am-pigeonhole.json";
+import { Pigeonhole } from "./Pigeonhole";
 import { MathShortProps, Narration } from "./timeline";
 
 // 縦型（9:16）の数学ショート。src/math-shorts/<id>.json がナレーション原稿
@@ -97,5 +99,12 @@ export const MATH_SHORTS: {
     component: Raindrop,
     narration: raindrop.slides,
     bgm: raindrop.bgm.file,
+  },
+  {
+    id: pigeonhole.id,
+    title: pigeonhole.title,
+    component: Pigeonhole,
+    narration: pigeonhole.slides,
+    bgm: pigeonhole.bgm.file,
   },
 ];
