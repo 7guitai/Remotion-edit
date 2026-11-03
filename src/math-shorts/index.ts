@@ -16,6 +16,8 @@ import ruleOf72 from "./20261102-pm-rule-of-72.json";
 import { RuleOf72 } from "./RuleOf72";
 import randomWalk from "./20261103-am-random-walk.json";
 import { RandomWalk } from "./RandomWalk";
+import raindrop from "./20261103-pm-raindrop.json";
+import { Raindrop } from "./Raindrop";
 import { MathShortProps, Narration } from "./timeline";
 
 // 縦型（9:16）の数学ショート。src/math-shorts/<id>.json がナレーション原稿
@@ -88,5 +90,12 @@ export const MATH_SHORTS: {
     component: RandomWalk,
     narration: randomWalk.slides,
     bgm: randomWalk.bgm.file,
+  },
+  {
+    id: raindrop.id,
+    title: raindrop.title,
+    component: Raindrop,
+    narration: raindrop.slides,
+    bgm: raindrop.bgm.file,
   },
 ];
