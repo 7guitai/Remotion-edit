@@ -1,0 +1,28 @@
+[
+ {
+  "id": "be06d720-c5ca-4bb6-bb32-3a6aad2e3826",
+  "title": "Night",
+  "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3ljYmF0bXM0NTgtaW1hZ2UuanBn.jpg",
+  "thumb": "https://api.openverse.org/v1/images/be06d720-c5ca-4bb6-bb32-3a6aad2e3826/thumb/",
+  "w": 4096,
+  "h": 3319,
+  "license": "cc0",
+  "creator": "",
+  "source": "rawpixel",
+  "landing": "https://www.rawpixel.com/image/9201172/night",
+  "query": "night window moon"
+ },
+ {
+  "id": "cb202910-521e-4c77-bfe2-c40e7270cc69",
+  "title": "Free white cozy bed image",
+  "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4MTA0OTcyMS1pbWFnZS1rd3Z5N3Y4eS5qcGc.jpg",
+  "thumb": "https://api.openverse.org/v1/images/cb202910-521e-4c77-bfe2-c40e7270cc69/thumb/",
+  "w": 5184,
+  "h": 3456,
+  "license": "cc0",
+  "creator": "",
+  "source": "rawpixel",
+  "landing": "https://www.rawpixel.com/image/5925752/photo-image-public-domain-room-wall",
+  "query": "cozy bedroom lamp"
+ }
+]

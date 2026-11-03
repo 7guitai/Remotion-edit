@@ -61,7 +61,7 @@ def search(q: str) -> list[dict]:
                 data = json.load(r)
             break
         except urllib.error.HTTPError as e:
-            if e.code in (403, 429):
+            if e.code in (403, 429, 500, 502, 503, 504):
                 time.sleep(30 * (attempt + 1))
                 continue
             raise
