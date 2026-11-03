@@ -248,3 +248,11 @@ python3 scripts/make_description.py <id>
 - 地震：床と壁を KINEMATIC にして速さで動かす（0.7Hz、5〜7m/s²）。重い物が上の本棚・固定なしのタンスは倒れ、重い物が下・L字金具（PointToPointConstraint）は倒れない
 - 章の札の「もしも 01」は、エピソードの `kicker`（例：「検証」）で文字を変えられる
 - 横長の CompareBars は4行だと字幕にかかる → 3行まで
+
+## 寝落ち雑学 その4（relax-sleep4-45m）
+- **Openverse の検索 API がときどき止まる**（入口 /v1/ は返るのに /v1/images/?q= が60秒以上応答しない）。止まっている間の結果を空として保存しないよう、`fetch_openverse.py` は取れなかったら None を返して保存しない。5xx も待って取り直す。止まったら数分〜数十分あけてループで取り直す
+- Wikimedia Commons は 429（共有の出口 IP で多すぎる）で使えなかった
+- その1・その2と同じ写真は、`photo_credits*.tsv` のファイル名（＝Openverse の ID）と照らして除く。落ち着いた写真（calm00〜19）は未使用のものだけ一覧シートにして選ぶ
+- 読み間違い（その4）：弦→ツル、角（かど）→カク、網→モウ、行（ぎょう）→クダリ、「88あります」→ハチジュウワチ、「29日」→ニジュウクヒ。`READINGS` で直す
+- 音声は `generate_voice.py --resume` で、直した場面の wav だけ消して作り直せる
+- BGM は OpenTracks の作曲者ページ（`/bgm?composers=<id>&page=N`）から、穏やか・ヒーリングの曲を探すと早い

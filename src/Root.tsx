@@ -55,6 +55,21 @@ export const RemotionRoot: React.FC = () => {
           tag: "雨の音",
         }}
       />
+      {/* 寝落ち雑学 その4 のサムネイル（npx remotion still relax-sleep4-45m-thumbnail out/thumb.png） */}
+      <Still
+        id="relax-sleep4-45m-thumbnail"
+        component={RelaxThumbnail}
+        width={1280}
+        height={720}
+        defaultProps={{
+          kicker: "聞くだけで",
+          title: "眠くなる\n雑学 4",
+          minutes: "45分",
+          sub: "雪・灯り・時計・\n昔の暮らし 雑学90",
+          main: "relax/9ef0fc8b-0bc7-4566-8250-6f21e66c47be.jpg",
+          strip: ["relax/d5d1d913-a370-467c-9d5b-f7e666e170b5.jpg", "relax/087ff28f-cc53-45fd-b469-f339ca806e83.jpg", "relax/ddb6624f-5768-46cb-afa3-d4dc3555b730.jpg", "relax/11a79f05-8b14-4fc8-803f-f9236c9173e7.jpg"],
+        }}
+      />
       {/* 寝落ち雑学 その2 のサムネイル（npx remotion still relax-sleep2-45m-thumbnail out/thumb.png） */}
       <Still
         id="relax-sleep2-45m-thumbnail"
