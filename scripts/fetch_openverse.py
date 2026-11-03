@@ -44,7 +44,7 @@ CALM_MORE = [
 ]
 
 
-def search(q: str) -> list[dict]:
+def search(q: str) -> list[dict] | None:
     params = {
         "q": q,
         "license": "cc0,pdm",
@@ -70,7 +70,8 @@ def search(q: str) -> list[dict]:
             time.sleep(15 * (attempt + 1))
             continue
     else:
-        return []
+        # 取れなかった（API が応答しない）ときは None（空の結果として保存しないため）
+        return None
     out = []
     for x in data.get("results", []):
         out.append(
@@ -105,7 +106,11 @@ def cached(name: str, queries: list[str]) -> None:
     results: list[dict] = []
     seen = set()
     for q in queries:
-        for x in search(q):
+        found = search(q)
+        if found is None:
+            print(f"{name}: API が応答しないので、あとで取り直す", flush=True)
+            return
+        for x in found:
             if x["id"] not in seen:
                 seen.add(x["id"])
                 x["query"] = q
