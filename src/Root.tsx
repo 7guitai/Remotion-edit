@@ -6,6 +6,7 @@ import { TinyThumbnail } from "./components/TinyThumbnail";
 import { AnimalThumbnail } from "./components/AnimalThumbnail";
 import { RelaxThumbnail } from "./components/RelaxThumbnail";
 import { HomeScene } from "./components/HomeScene";
+import { HomeThumbnail } from "./components/HomeThumbnail";
 import { PaperThumbnail } from "./components/PaperThumbnail";
 import { PaperPairThumbnail } from "./components/PaperPairThumbnail";
 import { TalkThumbnail } from "./components/TalkThumbnail";
@@ -233,6 +234,16 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         durationInFrames={30}
         defaultProps={{ offset: 300 }}
+      />
+      {/* 「家の中の事故 物理エンジンで検証10選」のサムネイル（npx remotion still verify-home-long-thumbnail out/thumb.png --gl=swangle） */}
+      <Composition
+        id="verify-home-long-thumbnail"
+        component={HomeThumbnail}
+        width={1280}
+        height={720}
+        fps={30}
+        durationInFrames={30}
+        defaultProps={{ offset: 113 }}
       />
       {/* 「もし人間が、動物の能力を持っていたら？10選」のサムネイル（npx remotion still whatif-animal-long-thumbnail out/thumb.png --gl=swangle） */}
       <Composition

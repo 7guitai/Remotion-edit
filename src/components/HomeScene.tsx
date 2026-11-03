@@ -375,14 +375,15 @@ const Half: React.FC<{ r: HomeResult; f: number; lane: number; width: number; he
   </ThreeCanvas>
 );
 
-export const HomeScene: React.FC<{ mode: HomeMode; width: number; height: number; offset?: number; speed?: number; bare?: boolean }> = ({ mode, width, height, offset = 0, speed = 1, bare }) => {
+// only を指定すると、その部屋だけを画面いっぱいに見せる（サムネイル用）
+export const HomeScene: React.FC<{ mode: HomeMode; width: number; height: number; offset?: number; speed?: number; bare?: boolean; only?: number }> = ({ mode, width, height, offset = 0, speed = 1, bare, only }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const r = useMemo(() => simulateHome(mode, fps), [mode, fps]);
   const f = Math.max(0, Math.min(Math.floor(offset + frame * speed), r.frames - 1));
   const t = f / fps;
   const at = (sec: number) => Math.round((sec * fps - offset) / speed);
-  const hw = Math.floor(width / 2);
+  const hw = only !== undefined ? width : Math.floor(width / 2);
   const danger = DANGER[mode];
   const colors = [0, 1].map((l) => (l === danger ? RED : BLUE));
   const quake = mode === "shelf" || mode === "furniture";
@@ -390,7 +391,7 @@ export const HomeScene: React.FC<{ mode: HomeMode; width: number; height: number
   return (
     <AbsoluteFill>
       <AbsoluteFill style={{ background: "#f3ead9" }} />
-      {[0, 1].map((lane) => {
+      {(only !== undefined ? [only] : [0, 1]).map((lane) => {
         const flashE = r.events.filter((e) => e.lane === lane && e.big);
         const flash = flashE.reduce((a, e) => a + interpolate(t - e.t, [0, 0.02, 0.3], [0, 0.8, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }), 0);
         const lines = r.events
@@ -400,7 +401,7 @@ export const HomeScene: React.FC<{ mode: HomeMode; width: number; height: number
         const sd = slam ? t - slam.t : 0;
         const mt = metric(r, lane, t);
         return (
-          <div key={lane} style={{ position: "absolute", left: lane * hw, top: 0, width: hw, height, overflow: "hidden" }}>
+          <div key={lane} style={{ position: "absolute", left: only !== undefined ? 0 : lane * hw, top: 0, width: hw, height, overflow: "hidden" }}>
             <Half r={r} f={f} lane={lane} width={hw} height={height} color={colors[lane]} />
             <SpeedLines strength={lines * 0.8} seed={Math.floor(t * 12) + lane * 7} width={hw} height={height} />
             {slam ? (
@@ -442,7 +443,7 @@ export const HomeScene: React.FC<{ mode: HomeMode; width: number; height: number
         );
       })}
       {/* まん中の仕切り */}
-      <div style={{ position: "absolute", left: hw - 4, top: 0, width: 8, height, background: "#1a1a1a" }} />
+      {only !== undefined ? null : <div style={{ position: "absolute", left: hw - 4, top: 0, width: 8, height, background: "#1a1a1a" }} />}
       {quakeOn && !bare ? (
         <div style={{ position: "absolute", top: 190, left: 0, width: "100%", display: "flex", justifyContent: "center" }}>
           <Pill color="#ff8a00" size={40}>
