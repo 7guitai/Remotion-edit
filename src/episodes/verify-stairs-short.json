@@ -1,0 +1,167 @@
+{
+ "id": "verify-stairs-short",
+ "title": "【検証】階段でつまずいたら、上りと下り どっちが危ない？",
+ "format": "short",
+ "titleBand": false,
+ "pr": false,
+ "style": "whatif",
+ "background": "#000",
+ "slideGap": 6,
+ "bgmVolume": 0.1,
+ "voice": {
+  "speaker": 13,
+  "speed": 1.2,
+  "name": "青山龍星"
+ },
+ "bgm": {
+  "file": "wakuwaku_cooking.mp3",
+  "title": "わくわくクッキングタイム的なBGM",
+  "credit": "鷹尾まさき(タカオマサキ)",
+  "page": "https://opentracks.com/bgm/detail/4503",
+  "opentracks": 4503,
+  "track": 1
+ },
+ "headline": [
+  "【検証】階段でつまずいたら",
+  "上りと下り どっちが危ない？"
+ ],
+ "illustrations": {},
+ "description": "階段でつまずいたとき、上りと下りではどちらが危ないのか？上りでつまずく・下りで踏み外す・手すりを持って下りる、の3つを物理エンジンで検証しました。\n\n※条件：家の階段（1段の高さ20cm・奥行き24cm・14段）。歩く速さ（秒速約1m）で進んでいた人が、上りはつま先を段の角に引っかけ、下りはかかとを段の角からすべらせた場合です。数値はシミュレーションの結果で、実際には体格や転び方で変わります。\n参考：階段で転んだ事故は下りの途中が多いという調査があります（米国の職場の階段事故の調査では約9割が下り。CDC/NIOSH の報告より）。\nほかに検証してほしいことは、コメントで教えてください！",
+ "hashtags": [
+  "Shorts",
+  "検証",
+  "物理",
+  "雑学",
+  "階段"
+ ],
+ "slides": [
+  {
+   "type": "whatif",
+   "text": "階段でつまずいたら、上りと下り、どっちが危ない？物理エンジンで検証！",
+   "effect": "none",
+   "stairs": "down",
+   "simStart": 0.5
+  },
+  {
+   "type": "whatif",
+   "text": "検証1。上りで、つま先が段の角に引っかかったら？",
+   "effect": "none",
+   "stairs": "up",
+   "simStart": 0,
+   "big": "検証1",
+   "speech": "検証1。上りで、つま先が段のかどに引っかかったら？",
+   "simSpeed": 0.25
+  },
+  {
+   "type": "whatif",
+   "text": "ガッ！前の段に手をついて、止まった。落ちた段数は0段。頭も打っていない。",
+   "effect": "none",
+   "stairs": "up",
+   "simStart": 0.85,
+   "simSpeed": 0.5
+  },
+  {
+   "type": "whatif",
+   "text": "上りは、目の前に段がある。倒れても、すぐに体を受け止めてくれるんだ。",
+   "effect": "none",
+   "stairs": "up",
+   "simStart": 2.5
+  },
+  {
+   "type": "whatif",
+   "text": "検証2。下りで、かかとが段の角からすべったら？",
+   "effect": "none",
+   "stairs": "down",
+   "simStart": 0,
+   "big": "検証2",
+   "speech": "検証2。下りで、かかとが段のかどからすべったら？",
+   "simSpeed": 0.25
+  },
+  {
+   "type": "whatif",
+   "text": "スローで見ると…体が前へ投げ出されて、頭から落ちていく！",
+   "effect": "none",
+   "stairs": "down",
+   "simStart": 0.95,
+   "simSpeed": 0.3
+  },
+  {
+   "type": "whatif",
+   "text": "5段も転げ落ちて、頭を打つ速さは、時速23km。",
+   "effect": "none",
+   "stairs": "down",
+   "simStart": 3.7,
+   "big": "時速23km",
+   "speech": "5段も転げ落ちて、頭を打つ速さは、時速23キロ。"
+  },
+  {
+   "type": "whatif",
+   "text": "下りは、目の前が空中。つまずくと、段の高さの分だけ、落ち続けてしまう。",
+   "effect": "none",
+   "stairs": "down",
+   "simStart": 4.0
+  },
+  {
+   "type": "whatif",
+   "text": "アメリカの職場の階段事故を調べた研究では、約9割が下りの途中だったんだ。",
+   "effect": "none",
+   "compare": {
+    "title": "落ちた段数",
+    "rows": [
+     {
+      "label": "上りでつまずく",
+      "value": 0,
+      "unit": "段",
+      "color": "#2fae5a"
+     },
+     {
+      "label": "下りで踏み外す",
+      "value": 5,
+      "unit": "段",
+      "color": "#ff4a3d"
+     },
+     {
+      "label": "下り＋手すり",
+      "value": 1,
+      "unit": "段",
+      "color": "#2f8bff"
+     }
+    ],
+    "max": 5,
+    "note": "物理エンジンの結果"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "検証3。下りで、手すりを持っていたら？",
+   "effect": "none",
+   "stairs": "rail",
+   "simStart": 0,
+   "big": "検証3",
+   "simSpeed": 0.25
+  },
+  {
+   "type": "whatif",
+   "text": "手すりが体を支えて、1段で止まった！頭も打っていない。",
+   "effect": "none",
+   "stairs": "rail",
+   "simStart": 0.85,
+   "simSpeed": 0.5
+  },
+  {
+   "type": "whatif",
+   "text": "答えは、下りのほうが危ない！下りるときは、手すりを持って、足もとを見よう。",
+   "effect": "none",
+   "stairs": "rail",
+   "simStart": 2.5
+  },
+  {
+   "type": "whatif",
+   "text": "ほかに検証してほしいこと、コメントで教えてね！",
+   "effect": "none",
+   "stairs": "down",
+   "simStart": 4.5,
+   "hold": 1
+  }
+ ]
+}

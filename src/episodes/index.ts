@@ -47,6 +47,7 @@ import cgSlime from "./cg-slime-short.json";
 import cgJenga from "./cg-jenga-short.json";
 import whatifHeavyair from "./whatif-heavyair-short.json";
 import whatifFlea from "./whatif-flea-short.json";
+import verifyStairs from "./verify-stairs-short.json";
 import whatifAnimal from "./whatif-animal-long.json";
 import foodRankingShort from "./food-ranking-short.json";
 import bodyRankingShort from "./body-ranking-short.json";
@@ -237,6 +238,8 @@ export type WhatIfSlide = {
   flea?: import("../components/FleaScene").FleaMode;
   // 動物の能力を持った人（sim/animal.ts）。simStart・simSpeed も使える
   animal?: import("../sim/animal").AnimalMode;
+  // 階段でつまずく人（sim/stairs.ts。up：上り、down：下り、rail：手すりあり）。simStart・simSpeed も使える
+  stairs?: import("../sim/stairs").StairsMode;
   // flea・animal の再生の速さ（0.1 なら 10倍スロー）
   simSpeed?: number;
   // 「もし地球から金がなくなったら？」の図解（スマホの端子・さび・検査キット）
@@ -335,6 +338,7 @@ export type Episode = {
 };
 
 export const EPISODES: Episode[] = [
+  verifyStairs as Episode,
   whatifAnimal as Episode,
   whatifFlea as Episode,
   whatifHeavyair as Episode,

@@ -23,6 +23,7 @@ import { EarthCut } from "./EarthCut";
 import { MeteorScene } from "./MeteorScene";
 import { IceScene } from "./IceScene";
 import { FleaScene, SpeedLines } from "./FleaScene";
+import { StairsScene } from "./StairsScene";
 import { AnimalScene } from "./AnimalScene";
 import { GoldScene } from "./GoldScene";
 import { RainChart } from "./RainChart";
@@ -442,6 +443,9 @@ export const WhatIfPage: React.FC<{
         {slide.meteor ? <MeteorScene mode={slide.meteor} width={width} height={view.height} /> : null}
         {slide.animal ? (
           <AnimalScene mode={slide.animal} width={width} height={view.height} offset={Math.round((slide.simStart ?? 0) * fps)} speed={slide.simSpeed} />
+        ) : null}
+        {slide.stairs ? (
+          <StairsScene mode={slide.stairs} width={width} height={view.height} offset={Math.round((slide.simStart ?? 0) * fps)} speed={slide.simSpeed} />
         ) : null}
         {slide.flea ? (
           <FleaScene mode={slide.flea} width={width} height={view.height} offset={Math.round((slide.simStart ?? 0) * fps)} speed={slide.simSpeed} />
