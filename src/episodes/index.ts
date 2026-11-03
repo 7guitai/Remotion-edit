@@ -38,6 +38,7 @@ import paperImpressionLong from "./paper-impression-long.json";
 import paperFavorLong from "./paper-favor-long.json";
 import relaxSleep45m from "./relax-sleep-45m.json";
 import relaxSleep2 from "./relax-sleep2-45m.json";
+import relaxSleep4 from "./relax-sleep4-45m.json";
 import verifyLanding from "./verify-landing-short.json";
 import verifyToast from "./verify-toast-short.json";
 import whatifGiant from "./whatif-giant-short.json";
@@ -354,6 +355,7 @@ export const EPISODES: Episode[] = [
   verifyToast as Episode,
   verifyLanding as Episode,
   relaxSleep2 as Episode,
+  relaxSleep4 as Episode,
   talkSemiLong as Episode,
   paperSemiLong as Episode,
   scienceSemi as Episode,
