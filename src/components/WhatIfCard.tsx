@@ -1,3 +1,4 @@
+import { IllusionHeaderContext } from "./IllusionPage";
 import React from "react";
 import {
   AbsoluteFill,
@@ -18,6 +19,8 @@ export const WhatIfCard: React.FC<{
   card: NonNullable<WhatIfSlide["card"]>;
   total: number;
 }> = ({ card, total }) => {
+  // 章の札の文字（エピソードの kicker。なければ「もしも」）
+  const word = React.useContext(IllusionHeaderContext).kicker ?? "もしも";
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const inNo = spring({ frame, fps, config: { damping: 14, mass: 0.8 } });
@@ -85,7 +88,7 @@ export const WhatIfCard: React.FC<{
                 marginBottom: 6,
               }}
             >
-              もしも
+              {word}
             </div>
             <div
               style={{
@@ -187,7 +190,9 @@ export const ChapterTag: React.FC<{ no: number; tag: string; total: number }> = 
   no,
   tag,
   total,
-}) => (
+}) => {
+  const word = React.useContext(IllusionHeaderContext).kicker ?? "もしも";
+  return (
   <div
     style={{
       position: "absolute",
@@ -213,7 +218,7 @@ export const ChapterTag: React.FC<{ no: number; tag: string; total: number }> = 
         padding: "2px 16px",
       }}
     >
-      {`もしも ${String(no).padStart(2, "0")}`}
+      {`${word} ${String(no).padStart(2, "0")}`}
     </div>
     <div style={{ fontSize: 34, color: "#fff", whiteSpace: "nowrap" }}>{tag}</div>
     <div style={{ display: "flex", gap: 6, marginLeft: 6 }}>
@@ -230,4 +235,5 @@ export const ChapterTag: React.FC<{ no: number; tag: string; total: number }> = 
       ))}
     </div>
   </div>
-);
+  );
+};

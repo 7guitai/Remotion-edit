@@ -64,7 +64,7 @@ export const fk = (rootP: CANNON.Vec3, rootQ: CANNON.Quaternion, pose: Pose): Re
 };
 
 // 2つの姿勢をまぜる（u = 0 で a、1 で b）
-const mix = (a: Pose, b: Pose, u: number): Pose => {
+export const mix = (a: Pose, b: Pose, u: number): Pose => {
   const r: Pose = {};
   const keys = new Set([...Object.keys(a), ...Object.keys(b)]) as Set<keyof Pose>;
   keys.forEach((k) => {
@@ -81,7 +81,7 @@ const smooth = (x: number) => {
 };
 
 // 走る姿勢（phase は 0〜1 でひと回り、k は走りの強さ 0〜1）
-const runPose = (phase: number, k: number): Pose => {
+export const runPose = (phase: number, k: number): Pose => {
   const f = phase * Math.PI * 2;
   const s = Math.sin(f);
   const c = Math.cos(f);
@@ -138,8 +138,8 @@ class Rec {
 }
 
 // 計算した姿勢のまま、物理の人形に入れかえる（そこから先は物理で動く）
-const toRagdoll = (world: CANNON.World, now: Record<PartName, Xf>, prev: Record<PartName, Xf>, dt: number): Ragdoll => {
-  const rd = createRagdoll(world, [0, 0, 0], 0);
+export const toRagdoll = (world: CANNON.World, now: Record<PartName, Xf>, prev: Record<PartName, Xf>, dt: number, material?: CANNON.Material): Ragdoll => {
+  const rd = createRagdoll(world, [0, 0, 0], 0, material);
   PN.forEach((nm) => {
     const b = rd.bodies[nm];
     b.position.copy(now[nm].p);

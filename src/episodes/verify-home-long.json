@@ -1,0 +1,662 @@
+{
+ "id": "verify-home-long",
+ "title": "家の中の事故 物理エンジンで検証10選【階段・お風呂・地震でタンス】",
+ "format": "landscape",
+ "titleBand": false,
+ "pr": false,
+ "style": "whatif",
+ "background": "#000",
+ "slideGap": 8,
+ "bgmVolume": 0.1,
+ "voice": {
+  "speaker": 13,
+  "speed": 1.15,
+  "name": "青山龍星"
+ },
+ "bgmPlaylist": [
+  {
+   "file": "tanoshii_kaerimichi.mp3",
+   "title": "楽しい帰り道",
+   "credit": "GANO",
+   "page": "https://opentracks.com/bgm/detail/3438",
+   "opentracks": 3438,
+   "track": 1,
+   "fromSlide": 0
+  },
+  {
+   "file": "cassette_tape_dream.mp3",
+   "title": "Cassette Tape Dream",
+   "credit": "しゃろう",
+   "page": "https://opentracks.com/bgm/detail/13963",
+   "opentracks": 13963,
+   "track": 1,
+   "fromSlide": 22
+  },
+  {
+   "file": "nine_jack.mp3",
+   "title": "Nine Jack",
+   "credit": "まんぼう二等兵",
+   "page": "https://opentracks.com/bgm/detail/4899",
+   "opentracks": 4899,
+   "track": 1,
+   "fromSlide": 42
+  }
+ ],
+ "headline": [
+  "家の中の事故",
+  "物理エンジンで検証10選"
+ ],
+ "kicker": "検証",
+ "illustrations": {},
+ "description": "家の中で起きる10の事故を、物理エンジン（cannon-es）で再現して検証しました。左右の部屋で条件だけを変えて、どうすれば防げるのかをくらべています。\n階段の下り・お風呂の床・靴下でフローリング・歩きスマホ・踏み台と脚立・ベッド・寝ながらスマホ・ドアのちょうつがい・地震で倒れる本棚とタンス。\n\n▼ 参考にした資料\n・東京消防庁「救急搬送データからみる高齢者の事故」（ころぶ事故が7割以上、その半数は住宅等で発生）\n・東京消防庁「家具類の転倒・落下・移動防止対策」（近年の地震で負傷者の3〜5割が家具類の転倒・落下・移動が原因）\n・NITE（製品評価技術基盤機構）はしご・脚立の事故（2010〜2019年度に脚立の事故287件）\n・消費者庁 子どもの事故防止「ドアでの指はさみ」\n・階段の事故の約9割が下り：米国の職場の階段事故の調査（CDC/NIOSH）\n※数値は物理エンジンでのシミュレーション結果です。実際には体格や転び方、床や家具の状態で変わります。\n※人や物の動きは計算で作っています。実際に試すのは危険なので、まねをしないでください。\n\nほかに検証してほしいことは、コメントで教えてください！",
+ "hashtags": [
+  "検証",
+  "雑学",
+  "防災",
+  "物理",
+  "物理シミュレーション"
+ ],
+ "slides": [
+  {
+   "type": "whatif",
+   "text": "家の中は安全…だと思っていない？",
+   "effect": "none",
+   "home": "bath",
+   "simStart": 0.75,
+   "simSpeed": 0.35,
+   "chapter": "オープニング"
+  },
+  {
+   "type": "whatif",
+   "text": "ぬれたお風呂の床。止まれない靴下。そして、地震で倒れるタンス。",
+   "effect": "none",
+   "home": "socks",
+   "simStart": 1.1,
+   "simSpeed": 0.6
+  },
+  {
+   "type": "whatif",
+   "text": "東京消防庁によると、お年寄りの日常の事故は、7割以上が「ころぶ」事故。その半分は、家の中などで起きているんだ。",
+   "effect": "none",
+   "home": "furniture",
+   "simStart": 2.9,
+   "simSpeed": 0.6
+  },
+  {
+   "type": "whatif",
+   "text": "今回は、家の中の10の事故を、物理エンジンで再現して、どうすれば防げるのか検証した。",
+   "effect": "none",
+   "stairs": "down",
+   "simStart": 0.6,
+   "simSpeed": 0.5
+  },
+  {
+   "type": "whatif",
+   "text": "家の中の事故 物理エンジンで検証10選",
+   "effect": "none",
+   "home": "shelf",
+   "simStart": 3.2,
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "家の中の事故",
+     "物理エンジンで検証10選"
+    ],
+    "sub": "左右の部屋で、条件だけ変えてくらべる"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "1つめ。階段の下り。",
+   "effect": "none",
+   "stairs": "down",
+   "simStart": 0,
+   "simSpeed": 0.25,
+   "chapter": "01 階段の下り",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "階段の",
+     "下り"
+    ],
+    "no": 1,
+    "tag": "踏み外し"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "下りで、かかとが段の角からすべると…体が前へ投げ出されて、頭から落ちていく。",
+   "effect": "none",
+   "stairs": "down",
+   "simStart": 0.9,
+   "simSpeed": 0.3,
+   "speech": "下りで、かかとが段のかどからすべると…体が前へ投げ出されて、頭から落ちていく。"
+  },
+  {
+   "type": "whatif",
+   "text": "5段も転げ落ちて、頭を打つ速さは時速23km。",
+   "effect": "none",
+   "stairs": "down",
+   "simStart": 3.7,
+   "big": "時速23km",
+   "speech": "5段も転げ落ちて、頭を打つ速さは時速23キロ。"
+  },
+  {
+   "type": "whatif",
+   "text": "アメリカの調査では、階段の事故の約9割が、下りの途中で起きていた。",
+   "effect": "none",
+   "stairs": "down",
+   "simStart": 4.2
+  },
+  {
+   "type": "whatif",
+   "text": "でも、手すりを持っていれば…1段で止まった！",
+   "effect": "none",
+   "stairs": "rail",
+   "simStart": 0.85,
+   "simSpeed": 0.5
+  },
+  {
+   "type": "whatif",
+   "text": "下りるときこそ、手すりを持とう。",
+   "effect": "none",
+   "stairs": "rail",
+   "simStart": 3.0
+  },
+  {
+   "type": "whatif",
+   "text": "2つめ。お風呂の床。",
+   "effect": "none",
+   "home": "bath",
+   "simStart": 0,
+   "chapter": "02 お風呂の床",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "お風呂の",
+     "床"
+    ],
+    "no": 2,
+    "tag": "すべる"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "左はせっけんの泡でぬれた床。右はすべり止めマット。同じように一歩ふみ出すと…",
+   "effect": "none",
+   "home": "bath",
+   "simStart": 0.2,
+   "simSpeed": 0.5
+  },
+  {
+   "type": "whatif",
+   "text": "左の人だけ、足がすべって転んだ！頭を打つ速さは時速20km。",
+   "effect": "none",
+   "home": "bath",
+   "simStart": 0.75,
+   "simSpeed": 0.35,
+   "speech": "左の人だけ、足がすべって転んだ！頭を打つ速さは時速20キロ。"
+  },
+  {
+   "type": "whatif",
+   "text": "歩くとき、足はいつも床を前後にこすっている。床がすべりやすいと、その力を支えきれないんだ。",
+   "effect": "none",
+   "home": "bath",
+   "simStart": 2.6
+  },
+  {
+   "type": "whatif",
+   "text": "右の人は平気。お風呂場には、すべり止めマットを敷いて、泡はしっかり流そう。",
+   "effect": "none",
+   "home": "bath",
+   "simStart": 3.0
+  },
+  {
+   "type": "whatif",
+   "text": "3つめ。靴下でフローリング。",
+   "effect": "none",
+   "home": "socks",
+   "simStart": 0,
+   "chapter": "03 靴下でフローリング",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "靴下で",
+     "フローリング"
+    ],
+    "no": 3,
+    "tag": "止まれない"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "走っていて、急に止まろうとすると…",
+   "effect": "none",
+   "home": "socks",
+   "simStart": 0.3,
+   "simSpeed": 0.6
+  },
+  {
+   "type": "whatif",
+   "text": "はだしなら、0.9mで止まれた。でも靴下は、2.3mもすべって…",
+   "effect": "none",
+   "home": "socks",
+   "simStart": 0.9,
+   "simSpeed": 0.5,
+   "speech": "はだしなら、0.9メートルで止まれた。でも靴下は、2.3メートルもすべって…"
+  },
+  {
+   "type": "whatif",
+   "text": "テーブルに激突！",
+   "effect": "none",
+   "home": "socks",
+   "simStart": 1.35,
+   "simSpeed": 0.3,
+   "big": "止まれない！"
+  },
+  {
+   "type": "whatif",
+   "text": "止まるまでの距離は、床との摩擦の強さに反比例する。この検証では、靴下の摩擦を、はだしの約4分の1にしてみた。",
+   "effect": "none",
+   "home": "socks",
+   "simStart": 3.5
+  },
+  {
+   "type": "whatif",
+   "text": "家の中で走るときは、すべり止めのついた靴下やスリッパにしよう。",
+   "effect": "none",
+   "home": "socks",
+   "simStart": 4.0
+  },
+  {
+   "type": "whatif",
+   "text": "4つめ。歩きスマホでつまずく。",
+   "effect": "none",
+   "home": "cord",
+   "simStart": 0.3,
+   "chapter": "04 歩きスマホでつまずく",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "歩きスマホで",
+     "つまずく"
+    ],
+    "no": 4,
+    "tag": "コードに引っかかる"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "床のコードに、足が引っかかった！",
+   "effect": "none",
+   "home": "cord",
+   "simStart": 1.3,
+   "simSpeed": 0.4
+  },
+  {
+   "type": "whatif",
+   "text": "前を見ていた人は、とっさに手をついた。でも、スマホを見ていた人は…",
+   "effect": "none",
+   "home": "cord",
+   "simStart": 1.8,
+   "simSpeed": 0.4
+  },
+  {
+   "type": "whatif",
+   "text": "手が出ずに、頭から落ちた！時速16km。",
+   "effect": "none",
+   "home": "cord",
+   "simStart": 2.5,
+   "simSpeed": 0.5,
+   "big": "手が出ない",
+   "speech": "手が出ずに、頭から落ちた！時速16キロ。"
+  },
+  {
+   "type": "whatif",
+   "text": "スマホを持った手は、とっさに前へ出しにくい。床のコードは、壁ぞいにまとめておこう。",
+   "effect": "none",
+   "home": "cord",
+   "simStart": 4.0
+  },
+  {
+   "type": "whatif",
+   "text": "5つめ。高い所の物をとる。",
+   "effect": "none",
+   "home": "ladder",
+   "simStart": 0,
+   "chapter": "05 高い所の物をとる",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "高い所の",
+     "物をとる"
+    ],
+    "no": 5,
+    "tag": "踏み台と脚立"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "左は高さ45cmの踏み台。右は高さ1.2mの脚立の天板。横へ手をのばして、バランスをくずすと…",
+   "effect": "none",
+   "home": "ladder",
+   "simStart": 0.4,
+   "simSpeed": 0.6,
+   "speech": "左は高さ45センチの踏み台。右は高さ1.2メートルの脚立の天板。横へ手をのばして、バランスをくずすと…"
+  },
+  {
+   "type": "whatif",
+   "text": "踏み台でも、頭を打つ速さは時速16km。脚立の天板からだと、時速25km！",
+   "effect": "none",
+   "home": "ladder",
+   "simStart": 1.6,
+   "simSpeed": 0.45,
+   "speech": "踏み台でも、頭を打つ速さは時速16キロ。脚立の天板からだと、時速25キロ！"
+  },
+  {
+   "type": "whatif",
+   "text": "NITEによると、脚立の事故は10年間で287件。天板に乗ることを禁止している脚立もある。",
+   "effect": "none",
+   "home": "ladder",
+   "simStart": 3.5,
+   "speech": "ナイトによると、脚立の事故は10年間で287件。天板に乗ることを禁止している脚立もある。"
+  },
+  {
+   "type": "whatif",
+   "text": "取りたい物の近くに台を動かして、体をのり出さないようにしよう。",
+   "effect": "none",
+   "home": "ladder",
+   "simStart": 4.5
+  },
+  {
+   "type": "whatif",
+   "text": "6つめ。ベッドから落ちる。",
+   "effect": "none",
+   "home": "bed",
+   "simStart": 0,
+   "chapter": "06 ベッドから落ちる",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "ベッドから",
+     "落ちる"
+    ],
+    "no": 6,
+    "tag": "寝返り"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "ぐっすり寝ていて、大きく寝返りを打つと…",
+   "effect": "none",
+   "home": "bed",
+   "simStart": 0.6,
+   "simSpeed": 0.6
+  },
+  {
+   "type": "whatif",
+   "text": "ベッドの端から、床へドスン！高さは50cmでも、体は受け身をとれない。",
+   "effect": "none",
+   "home": "bed",
+   "simStart": 1.2,
+   "simSpeed": 0.5,
+   "speech": "ベッドのはしから、床へドスン！高さは50センチでも、体は受け身をとれない。"
+  },
+  {
+   "type": "whatif",
+   "text": "右のベッドガードは、転がった体をしっかり止めた。",
+   "effect": "none",
+   "home": "bed",
+   "simStart": 2.5
+  },
+  {
+   "type": "whatif",
+   "text": "寝相が悪い人や、小さな子どもと寝るときは、ガードや低いベッドが安心だ。",
+   "effect": "none",
+   "home": "bed",
+   "simStart": 3.5
+  },
+  {
+   "type": "whatif",
+   "text": "7つめ。寝ながらスマホ。",
+   "effect": "none",
+   "home": "phone",
+   "simStart": 0.4,
+   "chapter": "07 寝ながらスマホ",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "寝ながら",
+     "スマホ"
+    ],
+    "no": 7,
+    "tag": "顔に落とす"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "あおむけでスマホを見ていて、手がすべると…",
+   "effect": "none",
+   "home": "phone",
+   "simStart": 0.7,
+   "simSpeed": 0.4
+  },
+  {
+   "type": "whatif",
+   "text": "ゴツッ！30cmの高さから落ちると、顔に当たる速さは時速8.6km。",
+   "effect": "none",
+   "home": "phone",
+   "simStart": 1.1,
+   "simSpeed": 0.3,
+   "speech": "ゴツッ！30センチの高さから落ちると、顔に当たる速さは、時速8.6キロ。"
+  },
+  {
+   "type": "whatif",
+   "text": "落ちる速さは、重さに関係なく同じ。でも、衝撃のエネルギーは重さに比例する。",
+   "effect": "none",
+   "home": "phone",
+   "simStart": 2.0
+  },
+  {
+   "type": "whatif",
+   "text": "タブレットは、スマホの2.5倍の衝撃。寝ながら見るなら、横向きで持とう。",
+   "effect": "none",
+   "home": "phone",
+   "simStart": 2.5,
+   "big": "2.5倍"
+  },
+  {
+   "type": "whatif",
+   "text": "8つめ。ドアに指をはさむ。",
+   "effect": "none",
+   "home": "door",
+   "simStart": 0.2,
+   "chapter": "08 ドアに指をはさむ",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "ドアに",
+     "指をはさむ"
+    ],
+    "no": 8,
+    "tag": "てこの原理"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "指のかわりに、にんじんをはさんでみる。左はドアノブ側、右はちょうつがい側。",
+   "effect": "none",
+   "home": "door",
+   "simStart": 0.3
+  },
+  {
+   "type": "whatif",
+   "text": "同じ力で閉めると…ちょうつがい側のにんじんだけ、粉々に！",
+   "effect": "none",
+   "home": "door",
+   "simStart": 1.1,
+   "simSpeed": 0.3,
+   "speech": "同じ力で閉めると…ちょうつがい側のにんじんだけ、こなごなに！"
+  },
+  {
+   "type": "whatif",
+   "text": "これは、てこの原理。ちょうつがいの近くでは、ドアノブを押した力の約36倍の力がかかる。",
+   "effect": "none",
+   "home": "door",
+   "simStart": 1.8,
+   "big": "約36倍"
+  },
+  {
+   "type": "whatif",
+   "text": "5kgの力で押しただけで、約184kg分。子どもの指が切断される事故も起きている。",
+   "effect": "none",
+   "home": "door",
+   "simStart": 2.0,
+   "speech": "5キロの力で押しただけで、約184キロ分。子どもの指が切断される事故も起きている。"
+  },
+  {
+   "type": "whatif",
+   "text": "ちょうつがい側には、すき間をふさぐカバーをつけよう。",
+   "effect": "none",
+   "home": "door",
+   "simStart": 2.5
+  },
+  {
+   "type": "whatif",
+   "text": "9つめ。地震で本棚が倒れる。",
+   "effect": "none",
+   "home": "shelf",
+   "simStart": 0.4,
+   "chapter": "09 地震で本棚が倒れる",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "地震で",
+     "本棚が倒れる"
+    ],
+    "no": 9,
+    "tag": "重い物の置き場所"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "左は重い箱を上の段に、右は下の段に入れた本棚。大きな地震の揺れがくると…",
+   "effect": "none",
+   "home": "shelf",
+   "simStart": 1.0,
+   "simSpeed": 0.8
+  },
+  {
+   "type": "whatif",
+   "text": "重い物が上の本棚だけ、倒れた！",
+   "effect": "none",
+   "home": "shelf",
+   "simStart": 3.2,
+   "simSpeed": 0.5,
+   "big": "倒れた！"
+  },
+  {
+   "type": "whatif",
+   "text": "重い物が上にあると、重心が高くなって、少しかたむいただけで倒れてしまうんだ。",
+   "effect": "none",
+   "home": "shelf",
+   "simStart": 4.6
+  },
+  {
+   "type": "whatif",
+   "text": "右の本棚は、揺れても倒れなかった。重い物は下の段にしまおう。",
+   "effect": "none",
+   "home": "shelf",
+   "simStart": 6.0
+  },
+  {
+   "type": "whatif",
+   "text": "最後、10こめ。地震でタンスが倒れる。",
+   "effect": "none",
+   "home": "furniture",
+   "simStart": 0.4,
+   "speech": "最後、じゅっこめ。地震でタンスが倒れる。",
+   "chapter": "10 地震でタンスが倒れる",
+   "hold": 0.8,
+   "card": {
+    "title": [
+     "地震で",
+     "タンスが倒れる"
+    ],
+    "no": 10,
+    "tag": "固定する"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "寝ている人のそばに、背の高いタンス。左は固定なし、右はL字金具で壁に固定。",
+   "effect": "none",
+   "home": "furniture",
+   "simStart": 1.0,
+   "simSpeed": 0.8,
+   "speech": "寝ている人のそばに、背の高いタンス。左は固定なし、右はエルじ金具で壁に固定。"
+  },
+  {
+   "type": "whatif",
+   "text": "固定していないタンスが、寝ている人の上に！",
+   "effect": "none",
+   "home": "furniture",
+   "simStart": 2.9,
+   "simSpeed": 0.5,
+   "big": "ドーン！"
+  },
+  {
+   "type": "whatif",
+   "text": "東京消防庁によると、最近の地震でけがをした人の3割から5割は、家具の転倒や落下などが原因だった。",
+   "effect": "none",
+   "home": "furniture",
+   "simStart": 4.2
+  },
+  {
+   "type": "whatif",
+   "text": "金具で固定したタンスは、倒れなかった。寝る場所の近くには、背の高い家具を置かないようにしよう。",
+   "effect": "none",
+   "home": "furniture",
+   "simStart": 6.0
+  },
+  {
+   "type": "whatif",
+   "text": "家の中の10の事故。気をつけるだけで、防げるものばかりだ。",
+   "effect": "none",
+   "chapter": "まとめ",
+   "compare": {
+    "title": "頭を打つ速さ（時速km）",
+    "rows": [
+     {
+      "label": "脚立の天板から落ちる",
+      "value": 25,
+      "unit": "km",
+      "color": "#ff4a3d"
+     },
+     {
+      "label": "階段の下りで踏み外す",
+      "value": 23,
+      "unit": "km",
+      "color": "#ff8a00"
+     },
+     {
+      "label": "お風呂ですべる",
+      "value": 20,
+      "unit": "km",
+      "color": "#2f8bff"
+     }
+    ],
+    "max": 25,
+    "note": "物理エンジンの結果"
+   }
+  },
+  {
+   "type": "whatif",
+   "text": "あなたの家で、気になる場所はあった？検証してほしいことがあれば、コメントで教えてね！",
+   "effect": "none",
+   "home": "furniture",
+   "simStart": 7.0,
+   "hold": 1
+  }
+ ]
+}

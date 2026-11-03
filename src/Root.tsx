@@ -5,6 +5,7 @@ import { WhatIfThumbnail } from "./components/WhatIfThumbnail";
 import { TinyThumbnail } from "./components/TinyThumbnail";
 import { AnimalThumbnail } from "./components/AnimalThumbnail";
 import { RelaxThumbnail } from "./components/RelaxThumbnail";
+import { HomeScene } from "./components/HomeScene";
 import { PaperThumbnail } from "./components/PaperThumbnail";
 import { PaperPairThumbnail } from "./components/PaperPairThumbnail";
 import { TalkThumbnail } from "./components/TalkThumbnail";
@@ -31,6 +32,16 @@ export const RemotionRoot: React.FC = () => {
         />
       ))}
       {/* 睡眠用動画のサムネイル（npx remotion still sleep-thumbnail out/thumb.png） */}
+      {/* 家の中の事故（HomeScene）の確認用（npx remotion still home-preview out/x.png --props='{"mode":"bath"}' --frame=30） */}
+      <Composition
+        id="home-preview"
+        component={HomeScene}
+        width={1920}
+        height={1080}
+        fps={30}
+        durationInFrames={300}
+        defaultProps={{ mode: "bath" as const, width: 1920, height: 1080 }}
+      />
       <Still
         id="sleep-thumbnail"
         component={SleepThumbnail}
