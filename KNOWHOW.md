@@ -275,3 +275,10 @@ python3 scripts/make_description.py <id>
 - 宇宙の場面でカメラが大気の球（半径1.06）の中にあると、画面全体が灰色になる
 - ナレーションの読み：「日本」→ニッポン になるので「にほん」と書く。「12秒」は「じゅうにびょう」
 - VOICEVOX は `dockerd` を起動してから `docker run -d --rm --network host --name vv mirror.gcr.io/voicevox/voicevox_engine:cpu-latest`
+
+## 断面図×工学の進化（cutaway-*、src/cutaway/、設計は docs/cutaway.md）
+- 金属（真鍮・クローム）は環境マップがないと真っ黒。RoomEnvironment を PMREM で scene.environment に入れる（materials.tsx の Studio）
+- 断面は CylinderGeometry の thetaStart = π/2・thetaLength = π で奥半分を残し、切り口（z = 0 の台形2枚）と上下のふたを足す。切り口は bump のノイズでザラつかせると金属の切断面らしい
+- 紙を大きな床にすると画面の下半分が真っ白になった → 46×30 の1枚の紙にして、暗いスタジオに浮かせる
+- 字幕を画面の60%に置くので、カメラは見る点を少し下にずらして模型を上に出す（camera.tsx の lift）
+- ナレーションは青山龍星（13）を速さ1.32・音程少し低め。1.12 だと64秒になり長すぎた

@@ -8,6 +8,7 @@ import { RelaxThumbnail } from "./components/RelaxThumbnail";
 import { HomeScene } from "./components/HomeScene";
 import { HomeThumbnail } from "./components/HomeThumbnail";
 import { EscalationVideo, escalationDuration } from "./escalation/EscalationVideo";
+import { CutawayVideo, cutawayDuration } from "./cutaway/CutawayVideo";
 import { PaperThumbnail } from "./components/PaperThumbnail";
 import { PaperPairThumbnail } from "./components/PaperPairThumbnail";
 import { TalkThumbnail } from "./components/TalkThumbnail";
@@ -52,6 +53,16 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         durationInFrames={escalationDuration("escalate-lamp-short", 30)}
         defaultProps={{ id: "escalate-lamp-short" }}
+      />
+      {/* 断面図×工学の進化（src/cutaway/） */}
+      <Composition
+        id="cutaway-pen-short"
+        component={CutawayVideo}
+        width={1080}
+        height={1920}
+        fps={30}
+        durationInFrames={cutawayDuration("cutaway-pen-short", 30)}
+        defaultProps={{ id: "cutaway-pen-short" }}
       />
       {/* 家の中の事故（HomeScene）の確認用（npx remotion still home-preview out/x.png --props='{"mode":"bath"}' --frame=30） */}
       <Composition
