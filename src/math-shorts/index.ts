@@ -20,6 +20,8 @@ import raindrop from "./20261103-pm-raindrop.json";
 import { Raindrop } from "./Raindrop";
 import pigeonhole from "./20261104-am-pigeonhole.json";
 import { Pigeonhole } from "./Pigeonhole";
+import pizzaArea from "./20261104-pm-pizza-area.json";
+import { PizzaArea } from "./PizzaArea";
 import { MathShortProps, Narration } from "./timeline";
 
 // 縦型（9:16）の数学ショート。src/math-shorts/<id>.json がナレーション原稿
@@ -106,5 +108,12 @@ export const MATH_SHORTS: {
     component: Pigeonhole,
     narration: pigeonhole.slides,
     bgm: pigeonhole.bgm.file,
+  },
+  {
+    id: pizzaArea.id,
+    title: pizzaArea.title,
+    component: PizzaArea,
+    narration: pizzaArea.slides,
+    bgm: pizzaArea.bgm.file,
   },
 ];
