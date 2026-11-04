@@ -106,7 +106,9 @@ export const EscalationVideo: React.FC<{ id: string }> = ({ id }) => {
 
   return (
     <AbsoluteFill style={{ background: "#000" }}>
-      <ThreeCanvas width={width} height={height} shadows={isTown} camera={{ fov: 55, near: 0.05, far: 20000 }} gl={{ antialias: true }}>
+      {/* 空（3D の背景は透明なので、うしろに空の色をしく） */}
+      <AbsoluteFill style={{ background: isTown ? "linear-gradient(180deg, #4f9be8 0%, #9fd0f7 55%, #dff0fb 100%)" : "#02030a" }} />
+      <ThreeCanvas width={width} height={height} shadows={isTown} camera={{ fov: 55, near: 0.05, far: 20000 }} key={isTown ? "town" : "earth"} gl={{ antialias: true, logarithmicDepthBuffer: isTown }}>
         {isTown ? (
           <>
             <TownCamera kind={shot.kind} u={u} shake={shake} frame={frame} />

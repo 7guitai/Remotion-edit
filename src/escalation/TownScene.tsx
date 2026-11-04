@@ -52,7 +52,10 @@ export const TownCamera: React.FC<{ kind: ShotKind; u: number; shake: number; fr
   const sy = shake * Math.cos(frame * 2.3);
   camera.position.set(c.pos[0] + sx, c.pos[1] + sy, c.pos[2]);
   camera.fov = c.fov;
-  camera.far = 20000;
+  // 近くの場面は near を小さく far も小さく、上空の場面は near を大きく（奥行きの精度を保つ）
+  const height = c.pos[1];
+  camera.near = height > 40 ? height * 0.02 : 0.05;
+  camera.far = height > 40 ? 30000 : 3000;
   camera.lookAt(c.look[0], c.look[1], c.look[2]);
   camera.updateProjectionMatrix();
   return null;
@@ -432,17 +435,19 @@ export const TownScene: React.FC<{ sim: TownSim; t: number; frame: number; ev: T
         shadow-bias={-0.0004}
       />
       {/* 地面：広場の石畳・大通り・遠くの野原 */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-        <planeGeometry args={[20000, 20000]} />
-        <meshStandardMaterial color="#7fb069" roughness={1} />
+      {/* 地面の3枚の板（野原・大通り・広場）。とても大きな三角形は奥行きの計算が狂って、広場の上に野原が描かれるフレームがあった。
+          → 地面は「最初に描いて、奥行きは書きこまない」背景あつかいにし、野原は細かく分割する（上に立つ物は、あとから必ず上に描かれる） */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]} receiveShadow renderOrder={-30}>
+        <planeGeometry args={[20000, 20000, 64, 64]} />
+        <meshStandardMaterial color="#7fb069" roughness={1} depthWrite={false} />
       </mesh>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]} receiveShadow>
-        <planeGeometry args={[440, 9]} />
-        <meshStandardMaterial color="#6b6f76" roughness={0.9} />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow renderOrder={-20}>
+        <planeGeometry args={[440, 9, 40, 1]} />
+        <meshStandardMaterial color="#6b6f76" roughness={0.9} depthWrite={false} />
       </mesh>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]} receiveShadow>
-        <planeGeometry args={[34, 22]} />
-        <meshStandardMaterial color="#d9cfbf" roughness={0.9} />
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.005, 0]} receiveShadow renderOrder={-10}>
+        <planeGeometry args={[34, 22, 8, 8]} />
+        <meshStandardMaterial color="#d9cfbf" roughness={0.9} depthWrite={false} />
       </mesh>
       <Houses />
       <Fan frame={frame} spin={spin} />
