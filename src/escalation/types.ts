@@ -21,7 +21,7 @@ export type SfxCue = {
 };
 
 // 場面（カメラ）の切り替え。scene は 3D の描き方、t からその場面
-export type ShotKind = "closeup" | "plaza" | "street" | "front" | "back" | "rooftop" | "region" | "space" | "spin";
+export type ShotKind = string;
 export type Shot = { t: number; kind: ShotKind };
 
 export type EscalationSpec = {
@@ -46,6 +46,6 @@ export type EscalationSpec = {
   // 声（VOICEVOX の話者と速さ）
   voice: { speaker: number; speed: number; name: string };
   // 群衆の「うわっ」などの声（t, ファイル）
-  shouts: { t: number; file: string }[];
+  shouts: { t: number; file: string; speaker?: number; word?: string }[];
   bgm?: { file: string; title: string; credit: string; page: string; opentracks: number; volume: number };
 };

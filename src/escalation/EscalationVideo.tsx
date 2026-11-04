@@ -1,38 +1,25 @@
 import React, { useMemo } from "react";
-import { ThreeCanvas } from "@remotion/three";
 import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { EscalationSpec, ShotKind } from "./types";
+import { EscalationSpec } from "./types";
 import { makeTimeline, rateAt, realTime, simTime } from "./timeline";
 import { Caption, Countdown, Hud, Note, SpeedTag } from "./Hud";
-import { TownCamera, TownEvents, TownScene } from "./TownScene";
-import { EarthScene } from "./EarthScene";
-import { simulateTown } from "./townSim";
-import { earthAngle, force, omega, pressure, P0, windSpeed } from "./fanPhysics";
-import { FAN_SPEC } from "./fanSpec";
-import fanVoice from "./voice/escalate-fan-short.json";
+import { Theme, VoiceInfo } from "./world";
+import { FAN_THEME } from "./fanWorld";
+import { LAMP_THEME } from "./lamp/lampWorld";
 
 // 「指数関数エスカレーション」動画の本体（9:16 フルスクリーン）。
 // 実時間 → シミュレーション内時間 t をタイムラインで変換し、t から HUD・字幕・場面・音をすべて決める。
+// 3D の場面と環境音はテーマごとの「世界」（world.ts の Theme）にまかせる。
 
-type VoiceInfo = { theme: number; captions: number[]; shouts: number[] };
-export const ESCALATIONS: Record<string, { spec: EscalationSpec; voice: VoiceInfo }> = {
-  [FAN_SPEC.id]: { spec: FAN_SPEC, voice: fanVoice as VoiceInfo },
+export const ESCALATIONS: Record<string, Theme> = {
+  [FAN_THEME.spec.id]: FAN_THEME,
+  [LAMP_THEME.spec.id]: LAMP_THEME,
 };
-
-const TOWN_KINDS: ShotKind[] = ["closeup", "plaza", "street", "front", "back", "rooftop"];
-const EV: TownEvents = { hatT: 3, fleeT: 5, glassT: 8.6, drillT: 12.8, reactionT: 19.3 };
-const BEAM_START = 21.6;
 
 export const escalationDuration = (id: string, fps: number) => Math.ceil(makeTimeline(ESCALATIONS[id].spec.timeline).total * fps) + Math.round(fps * 0.5);
 
 // 揺れ：t のまわりの事件ほど大きく
-const shakeAt = (t: number) => {
-  const bumps: [number, number, number][] = [
-    [12.8, 0.04, 0.8],
-    [16.9, 0.12, 2.5],
-    [19.3, 0.18, 2],
-    [91.7, 0.05, 1.5],
-  ];
+const shakeAt = (bumps: [number, number, number][], t: number) => {
   let s = 0;
   for (const [at, amp, len] of bumps) {
     const d = t - at;
@@ -62,9 +49,9 @@ const voiceSchedule = (spec: EscalationSpec, voice: VoiceInfo, tl: ReturnType<ty
 export const EscalationVideo: React.FC<{ id: string }> = ({ id }) => {
   const frame = useCurrentFrame();
   const { fps, width, height } = useVideoConfig();
-  const { spec, voice } = ESCALATIONS[id];
+  const theme = ESCALATIONS[id];
+  const { spec, voice, World, Ambience } = theme;
   const tl = useMemo(() => makeTimeline(spec.timeline), [spec]);
-  const town = useMemo(() => simulateTown({ force, reactionT: EV.reactionT, t0: 12, t1: 25 }), []);
   const voices = useMemo(() => voiceSchedule(spec, voice, tl), [spec, voice, tl]);
   const r = frame / fps;
   const t = simTime(tl, r);
@@ -82,17 +69,11 @@ export const EscalationVideo: React.FC<{ id: string }> = ({ id }) => {
   const shot = spec.shots[si];
   const next = spec.shots[si + 1];
   const u = next ? Math.min(1, (t - shot.t) / (next.t - shot.t)) : Math.min(1, (t - shot.t) / 10);
-  const isTown = TOWN_KINDS.includes(shot.kind);
-  const P = pressure(t);
-  const strength = Math.min(1, Math.max(0, Math.log2(P / P0) / 20));
-  const v = windSpeed(t);
-  const spin = Math.min(0.9, 0.18 + v * 0.03);
-  const shake = shakeAt(t) * (isTown ? 1 : 0.05);
-  const perFrame = (omega(t) * Math.max(rate, 1)) / fps;
+  const shake = shakeAt(theme.shakes, t) * (theme.shakeScale ? theme.shakeScale(shot.kind) : 1);
   // 場面の切り替わりの白いフラッシュ
   const cutAge = r - realTime(tl, shot.t);
   const cutFlash = si > 1 ? interpolate(cutAge, [0, 0.25], [0.5, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) : 0;
-  const bigFlash = [16.9, 19.3, 91.7].reduce((a, at) => a + interpolate(t - at, [0, 0.05, 0.5], [0, 0.7, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }), 0);
+  const bigFlash = theme.flashes.reduce((a, at) => a + interpolate(t - at, [0, 0.05, 0.5], [0, 0.7, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }), 0);
 
   // 字幕
   const inCountdown = r < tl.countdown;
@@ -106,18 +87,7 @@ export const EscalationVideo: React.FC<{ id: string }> = ({ id }) => {
 
   return (
     <AbsoluteFill style={{ background: "#000" }}>
-      {/* 空（3D の背景は透明なので、うしろに空の色をしく） */}
-      <AbsoluteFill style={{ background: isTown ? "linear-gradient(180deg, #4f9be8 0%, #9fd0f7 55%, #dff0fb 100%)" : "#02030a" }} />
-      <ThreeCanvas width={width} height={height} shadows={isTown} camera={{ fov: 55, near: 0.05, far: 20000 }} key={isTown ? "town" : "earth"} gl={{ antialias: true, logarithmicDepthBuffer: isTown }}>
-        {isTown ? (
-          <>
-            <TownCamera kind={shot.kind} u={u} shake={shake} frame={frame} />
-            <TownScene sim={town} t={t} frame={frame} ev={EV} strength={strength} speed={v} spin={spin} />
-          </>
-        ) : (
-          <EarthScene kind={shot.kind} u={u} T={t} frame={frame} angleAt={earthAngle} perFrame={perFrame} beamStart={BEAM_START} shake={shake} />
-        )}
-      </ThreeCanvas>
+      <World t={t} r={r} rate={rate} frame={frame} fps={fps} width={width} height={height} shot={shot} u={u} shake={shake} />
       <AbsoluteFill style={{ background: "#fff", opacity: Math.min(1, cutFlash + bigFlash), pointerEvents: "none" }} />
       <Hud seconds={`${sec}秒${fast ? "（早送り）" : ""}`} label={spec.label} value={spec.value(t)} sub={spec.sub(t)} badge={inCountdown ? null : spec.badge(t)} />
       <SpeedTag fast={fast} sinceNormal={sinceNormal} />
@@ -134,17 +104,7 @@ export const EscalationVideo: React.FC<{ id: string }> = ({ id }) => {
       <Sequence from={Math.round(tl.countdown * fps)} durationInFrames={Math.round(fps)}>
         <Audio src={staticFile("sfx/esc_go.wav")} volume={0.35} />
       </Sequence>
-      {/* 風の音（町の場面）：強くなるほど大きく、音速をこえると轟音が重なる */}
-      <Sequence from={Math.round(tl.countdown * fps)} durationInFrames={Math.round((realTime(tl, 24.6) - tl.countdown) * fps)}>
-        <Audio loop src={staticFile("sfx/esc_wind.wav")} volume={(f) => 0.05 + 0.3 * Math.min(1, simTime(tl, tl.countdown + f / fps) / 14)} />
-      </Sequence>
-      <Sequence from={Math.round(realTime(tl, 12.8) * fps)} durationInFrames={Math.round((realTime(tl, 24.6) - realTime(tl, 12.8)) * fps)}>
-        <Audio loop src={staticFile("sfx/esc_jet.wav")} volume={(f) => Math.min(0.4, f / fps / 2)} />
-      </Sequence>
-      {/* 宇宙の低いうなり */}
-      <Sequence from={Math.round(realTime(tl, 24.6) * fps)}>
-        <Audio loop src={staticFile("sfx/esc_drone.wav")} volume={0.35} />
-      </Sequence>
+      <Ambience tl={tl} fps={fps} />
       {spec.sfx.map((s, k) => (
         <Sequence key={`s${k}`} from={Math.round(realTime(tl, s.t) * fps)} durationInFrames={Math.round((s.seconds ?? 4) * fps)}>
           <Audio src={staticFile(s.file)} volume={s.volume ?? 0.5} />

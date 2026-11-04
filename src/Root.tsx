@@ -44,6 +44,15 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={escalationDuration("escalate-fan-short", 30)}
         defaultProps={{ id: "escalate-fan-short" }}
       />
+      <Composition
+        id="escalate-lamp-short"
+        component={EscalationVideo}
+        width={1080}
+        height={1920}
+        fps={30}
+        durationInFrames={escalationDuration("escalate-lamp-short", 30)}
+        defaultProps={{ id: "escalate-lamp-short" }}
+      />
       {/* 家の中の事故（HomeScene）の確認用（npx remotion still home-preview out/x.png --props='{"mode":"bath"}' --frame=30） */}
       <Composition
         id="home-preview"

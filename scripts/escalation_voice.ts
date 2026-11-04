@@ -8,8 +8,9 @@ import { writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 import { FAN_SPEC } from "../src/escalation/fanSpec";
 import { EscalationSpec } from "../src/escalation/types";
+import { LAMP_SPEC } from "../src/escalation/lamp/lampSpec";
 
-const SPECS: Record<string, EscalationSpec> = { [FAN_SPEC.id]: FAN_SPEC };
+const SPECS: Record<string, EscalationSpec> = { [FAN_SPEC.id]: FAN_SPEC, [LAMP_SPEC.id]: LAMP_SPEC };
 const URL = "http://127.0.0.1:50021";
 // 群衆の声（台本の shouts の順）：話者と言葉
 const SHOUTS: [number, string][] = [
@@ -53,7 +54,7 @@ const main = async () => {
   }
   const shouts: number[] = [];
   for (const [k, s] of spec.shouts.entries()) {
-    const [sp, word] = SHOUTS[k % SHOUTS.length];
+    const [sp, word] = s.speaker && s.word ? [s.speaker, s.word] : SHOUTS[k % SHOUTS.length];
     const r = await synth(word, sp, 1.1);
     writeFileSync(join(dir, `${s.file}.wav`), r.wav);
     shouts.push(Number(r.seconds.toFixed(3)));

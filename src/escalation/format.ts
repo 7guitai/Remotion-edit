@@ -87,3 +87,23 @@ export const formatJaBig = (x: number) => {
   for (const [u, name] of units) if (x >= u) return `${Math.round(x / u).toLocaleString("ja-JP")}${name}`;
   return Math.round(x).toLocaleString("ja-JP");
 };
+
+// 日本の数の単位で有効数字3桁（5000 → 5000、1.23万、45.6億 … 秭・穣・溝・澗・正まで）
+const JA_UNITS: [number, string][] = [
+  [1e40, "正"],
+  [1e36, "澗"],
+  [1e32, "溝"],
+  [1e28, "穣"],
+  [1e24, "秭"],
+  [1e20, "垓"],
+  [1e16, "京"],
+  [1e12, "兆"],
+  [1e8, "億"],
+  [1e4, "万"],
+];
+export const formatJaSig = (x: number) => {
+  for (const [u, name] of JA_UNITS) if (x >= u) return `${sig(x / u)}${name}`;
+  return x >= 1000 ? Math.round(x).toString() : sig(x);
+};
+// 電力：W → kW → 万kW → 億kW → 兆kW …（発電所や電気の量にくらべやすい）
+export const formatPowerJa = (w: number) => (w < 1e3 ? `${sig(w)} W` : `${formatJaSig(w / 1e3)} kW`);

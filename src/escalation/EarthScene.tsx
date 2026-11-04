@@ -26,7 +26,7 @@ const vnoise = (x: number, y: number, wrap: number) => {
   const h = (a: number, b: number) => hash(((a % wrap) + wrap) % wrap, b);
   return h(xi, yi) * (1 - u) * (1 - v) + h(xi + 1, yi) * u * (1 - v) + h(xi, yi + 1) * (1 - u) * v + h(xi + 1, yi + 1) * u * v;
 };
-const fbm = (x: number, y: number, wrap: number, oct = 6) => {
+export const fbm = (x: number, y: number, wrap: number, oct = 6) => {
   let a = 0;
   let amp = 0.5;
   let f = 1;
@@ -42,7 +42,7 @@ type Maps = { earth: HTMLCanvasElement[]; clouds: HTMLCanvasElement };
 let maps: Maps | null = null;
 const W = 1024;
 const H = 512;
-const buildMaps = (): Maps => {
+export const buildMaps = (): Maps => {
   if (maps) return maps;
   const c = document.createElement("canvas");
   c.width = W;
@@ -112,7 +112,7 @@ const buildMaps = (): Maps => {
   return maps;
 };
 
-const useTextures = () =>
+export const useTextures = () =>
   useMemo(() => {
     const m = buildMaps();
     const make = (cv: HTMLCanvasElement) => {
@@ -125,7 +125,7 @@ const useTextures = () =>
   }, []);
 
 // 大気の光（ふちが青く光る）
-const atmoMat = () =>
+export const atmoMat = () =>
   new THREE.ShaderMaterial({
     uniforms: { color: { value: new THREE.Color("#6fb6ff") } },
     vertexShader: `varying vec3 vN; varying vec3 vV;
@@ -138,7 +138,7 @@ const atmoMat = () =>
     depthWrite: false,
   });
 
-const Stars: React.FC = () => {
+export const Stars: React.FC = () => {
   const geom = useMemo(() => {
     const g = new THREE.BufferGeometry();
     const n = 2500;

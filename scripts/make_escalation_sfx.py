@@ -8,6 +8,12 @@
 - esc_boom.wav   … 音速をこえた「ドーン」
 - esc_rumble.wav … 建物がくずれる「ゴゴゴゴ」
 - esc_drone.wav  … 宇宙の低いうなり（8秒ループ）
+- esc_night.wav  … 夜の虫の声（6秒ループ）
+- esc_hum.wav    … 街灯のジーという音（4秒ループ）
+- esc_crack.wav  … 窓ガラスが熱でひび割れる「ピキピキッ」
+- esc_ignite.wav … 火がつく「ボッ」
+- esc_fire.wav   … 燃える音（6秒ループ）
+- esc_flare.wav  … まぶしく光る「キィーン」
 
 使い方: python3 scripts/make_escalation_sfx.py （numpy が必要）
 """
@@ -98,6 +104,46 @@ def main() -> None:
     drone *= 0.8 + 0.2 * np.sin(2 * np.pi * s / 4)
     drone += fft_filter(rng.standard_normal(len(s)), 100, 800) * 0.25
     save("esc_drone.wav", drone, 0.6)
+    # 夜の虫：4.2kHz のさえずりを、間をあけてくり返す（周期6秒でつながる）
+    s = t(6)
+    night = np.zeros_like(s)
+    for k, (f0, per, ph) in enumerate([(4200, 0.75, 0.0), (3800, 1.0, 0.3), (4600, 1.5, 0.7)]):
+        gate = ((s + ph) % per) < 0.18
+        trill = (np.sin(2 * np.pi * 28 * s) > 0) * gate
+        night += np.sin(2 * np.pi * f0 * s) * trill * (0.6 - 0.15 * k)
+    night += fft_filter(rng.standard_normal(len(s)), 200, 900) * 0.05
+    save("esc_night.wav", night, 0.5)
+    # 街灯のジー：120Hz の倍音（4秒ループ。整数周期なのでつながる）
+    s = t(4)
+    hum = sum(np.sin(2 * np.pi * 120 * k * s) / k for k in range(1, 9)) + fft_filter(rng.standard_normal(len(s)), 2000, 6000) * 0.15
+    save("esc_hum.wav", hum, 0.6)
+    # ひび割れ：短いパルスがパラパラと
+    s = t(1.2)
+    cr = np.zeros_like(s)
+    for _ in range(26):
+        at = rng.uniform(0, 0.8) ** 1.6
+        env = np.where(s > at, np.exp(-(s - at) * rng.uniform(60, 140)), 0)
+        cr += np.sin(2 * np.pi * rng.uniform(1800, 5200) * (s - at)) * env * rng.uniform(0.3, 1)
+    save("esc_crack.wav", cr, 0.7)
+    # 火がつく：低いボッ＋ノイズの立ち上がり
+    s = t(1.5)
+    ig = lowpass(rng.standard_normal(len(s)), 500) * 4 * np.minimum(1, s * 12) * np.exp(-s * 2.5) + np.sin(2 * np.pi * (80 * s - 20 * s * s)) * np.exp(-s * 5)
+    save("esc_ignite.wav", ig, 0.8)
+    # 燃える音：低いゴーと、パチパチ（6秒ループ）
+    s = t(6)
+    fire = fft_filter(rng.standard_normal(len(s)), 80, 700) * 0.8
+    idx = rng.integers(0, len(s), 90)
+    pops = np.zeros_like(s)
+    pops[idx] = rng.uniform(0.5, 1.5, 90)
+    pops = np.real(np.fft.ifft(np.fft.fft(pops) * np.fft.fft(np.exp(-np.arange(len(s)) / RATE * 400) * np.sin(2 * np.pi * 2500 * np.arange(len(s)) / RATE))))
+    fire += pops * 2
+    save("esc_fire.wav", fire, 0.7)
+    # キィーン：高い音が重なって明るくなる
+    s = t(3)
+    fl = sum(np.sin(2 * np.pi * f * s + 3 * np.sin(2 * np.pi * 5 * s)) * a for f, a in [(1320, 1), (1980, 0.6), (2640, 0.4), (660, 0.5)])
+    fl *= np.minimum(1, s * 3) * np.exp(-s * 0.9)
+    fl += fft_filter(rng.standard_normal(len(s)), 3000, 12000) * np.exp(-s * 2) * 0.3
+    save("esc_flare.wav", fl, 0.55)
 
 
 if __name__ == "__main__":
