@@ -1,0 +1,44 @@
+# 指数関数エスカレーション型「もしも」ショートの設計
+
+「〇〇が1秒ごとに2倍になったら？」を、カウントダウン → 街角と見物人 → 段階的なビル破壊 → 地球・宇宙スケール → 光のうずのクライマックス、の4フェーズで見せる 9:16 フルスクリーンの型。
+1本めは `escalate-fan-short`（扇風機の風が1秒ごとに2倍）。
+
+## 既存のパイプラインとの関係
+
+| 役割 | 既存（スライド型） | エスカレーション型（新規 `src/escalation/`） |
+| --- | --- | --- |
+| 動画の登録 | `src/Root.tsx`（エピソード JSON ごとに Composition） | 同じ `Root.tsx` に `escalate-*` を登録 |
+| 進行 | `slides.ts`：1スライド＝1ナレーション、長さは音声で決まる | `timeline.ts`：実時間 → シミュレーション内時間 t。区間ごとに倍速（早送り） |
+| 物理計算 | `src/sim/*.ts`（cannon-es、事前計算して Float32Array に記録） | `townSim.ts`（同じ方式）＋ 物理量の式 `fanPhysics.ts` |
+| 3D 描画 | `@remotion/three` の ThreeCanvas、`PhysicsScene` の `PersonPart`（人）、`sim/animal.ts` の `fk`/`runPose`（関節角から姿勢） | `TownScene.tsx`（それらを再利用）、`EarthScene.tsx` |
+| 字幕・HUD | `WhatIfPage.tsx`（上下の黒帯＋タイトル帯＋集中線） | `Hud.tsx`（左上 HUD・右上の早送り・上中央カウントダウン・下から27%の実況） |
+| 音声 | `scripts/generate_voice.py`（エピソード JSON から） | `scripts/escalation_voice.ts`（台本 TS から、長さを JSON に保存） |
+| 効果音 | `scripts/make_sfx.py` | `scripts/make_escalation_sfx.py`（`public/sfx/esc_*.wav`） |
+| 書き出し | `npx remotion render <id> ...` | 同じ |
+
+## モジュール
+
+- `timeline.ts` … `makeTimeline` / `simTime(r)` / `realTime(t)` / `rateAt(r)`。カウントダウン中は t = 0。区間 `{from, to, rate}` の rate > 1 は「▶▶ 早送り」
+- `format.ts` … 単位の自動切り替え（Pa→kPa→MPa→GPa→×10ⁿ Pa、秒速 m→km→光速の%、1日の長さ、ナノ秒など、兆・京）
+- `types.ts` … `EscalationSpec`：HUD の値（t の関数）、実況字幕、効果音、場面（カメラ）の切り替え、声、BGM
+- `fanPhysics.ts` … 扇風機の物理（下）。新しいテーマは同じ形のファイルを作る
+- `fanSpec.ts` … 1本ぶんの台本（字幕の t は物理の式から逆算した値）
+- `townSim.ts` … 街の破壊。ビルを 1.5m のコンクリートブロックで積み、風を円すい状の61本のレイで表して、いちばん手前に当たったブロックを押す（力 = F(t) ÷ 本数）。F が2倍ずつ増えるので「壁に穴 → 奥のブロック → 上が落ちて全体崩壊」が計算から出る。うしろのビルは反動の時刻にまとめて衝撃を与える
+- `TownScene.tsx` … 広場・扇風機・見物人（逃げる）・窓ガラスの破片・掘削の破片・土けむり・風のすじ→衝撃波→光の柱、町並み（InstancedMesh）、場面ごとのカメラ
+- `EarthScene.tsx` … 地図はコードで描く（大陸・雲・極冠、回転ブラー用に横にずらした地図3段階）、大気のふち光、星、光の柱。放出時刻 τ ごとの点を光速で進めてつなぐので、自転が速くなると自然にアルキメデスのらせんになる
+- `EscalationVideo.tsx` … 本体。t から場面・HUD・字幕・音（カウントダウンのピッ、風→噴射→宇宙のうなり、ナレーションは重ならないよう順番待ち）を決める
+
+## 扇風機の物理（fanPhysics.ts）
+
+- 風の圧力（動圧）P = 9.6 Pa × 2^t（風速4mのそよ風から）
+- 風の速さ：k = 2P/ρc²、β = √(k/(1+k))（ふつうは ½ρv²、光速に近づくと頭打ち）
+- 押す力 F = 2PA（羽根の直径40cm）
+- 地球：扇風機は西へ吹くので、反動で地球は東（自転の向き）に押される。角運動量 R∫F dt を I = 8.04×10³⁷ kg·m² に足す。赤道の速さは x/√(1+x²) で光速の手前で頭打ち
+- 目安：音速 t≈12.8、押す力30トン t≈16.9、第二宇宙速度 t≈22.9、1日が半分 t≈87.7、1日84分（遠心力で地球がこわれる）t≈91.7、1秒に1回転 t≈104.1
+
+## 新しいテーマを作るとき
+
+1. `xxxPhysics.ts` に物理量（t の関数）を書く
+2. `xxxSpec.ts` に台本（タイムライン・HUD・字幕・場面）を書き、`EscalationVideo.tsx` の `ESCALATIONS` と `scripts/escalation_voice.ts` の `SPECS` に足す
+3. 主役や壊れ方が違う場合は `TownScene` の主役（扇風機）と、`townSim` の力のかけ方を差しかえる
+4. `scripts/escalation_voice.ts` で音声、`Root.tsx` に登録して書き出す

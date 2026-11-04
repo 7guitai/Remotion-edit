@@ -54,7 +54,7 @@ const PN: PartName[] = ["footL", "footR", "shinL", "shinR", "thighL", "thighR", 
 const NP = PN.length;
 
 // cannon-es の摩擦は「重さにかかわらず強すぎる」ので、1つ前の計算で出た押しつける力 × μ × 刻み を上限にする（ジェンガと同じ直し方）
-const fixFriction = (world: CANNON.World) => {
+export const fixFriction = (world: CANNON.World) => {
   const load = new Map<number, { sum: number; n: number }>();
   const key = (a: number, b: number) => (a < b ? a * 4096 + b : b * 4096 + a);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

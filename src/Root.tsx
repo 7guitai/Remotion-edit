@@ -7,6 +7,7 @@ import { AnimalThumbnail } from "./components/AnimalThumbnail";
 import { RelaxThumbnail } from "./components/RelaxThumbnail";
 import { HomeScene } from "./components/HomeScene";
 import { HomeThumbnail } from "./components/HomeThumbnail";
+import { EscalationVideo, escalationDuration } from "./escalation/EscalationVideo";
 import { PaperThumbnail } from "./components/PaperThumbnail";
 import { PaperPairThumbnail } from "./components/PaperPairThumbnail";
 import { TalkThumbnail } from "./components/TalkThumbnail";
@@ -33,6 +34,16 @@ export const RemotionRoot: React.FC = () => {
         />
       ))}
       {/* 睡眠用動画のサムネイル（npx remotion still sleep-thumbnail out/thumb.png） */}
+      {/* 指数関数エスカレーション型の「もしも」ショート（src/escalation/） */}
+      <Composition
+        id="escalate-fan-short"
+        component={EscalationVideo}
+        width={1080}
+        height={1920}
+        fps={30}
+        durationInFrames={escalationDuration("escalate-fan-short", 30)}
+        defaultProps={{ id: "escalate-fan-short" }}
+      />
       {/* 家の中の事故（HomeScene）の確認用（npx remotion still home-preview out/x.png --props='{"mode":"bath"}' --frame=30） */}
       <Composition
         id="home-preview"
