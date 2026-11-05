@@ -12,6 +12,10 @@
 - cut_spring.wav  … バネが縮むギュイン
 - cut_bubble.wav  … 空気が入るコポコポ
 - cut_chime.wav   … 完成のキラーン
+- cut_road.wav    … タイヤが道を転がるゴー（3秒ループ）
+- cut_thump.wav   … 段差をこえるゴトン
+- cut_pop.wav     … くぎが刺さるプスッ
+- cut_hiss.wav    … 空気が抜けるシューッ
 
 使い方: python3 scripts/make_cutaway_sfx.py （numpy が必要）
 """
@@ -99,6 +103,18 @@ def main():
     s = T(2.2)
     ch = sum(np.sin(2 * np.pi * f * s) * a * np.exp(-s * d) for f, a, d in [(1568, 1, 2), (2093, 0.7, 2.4), (2637, 0.5, 2.8), (3136, 0.3, 3.5)])
     save("cut_chime.wav", ch, 0.5)
+    s = T(3)
+    road = band(rng.standard_normal(len(s)), 60, 700) * (0.85 + 0.15 * np.sin(2 * np.pi * 3 * s)) + band(rng.standard_normal(len(s)), 1500, 4000) * 0.15
+    save("cut_road.wav", road, 0.5)
+    s = T(0.5)
+    th = np.sin(2 * np.pi * (70 * s - 40 * s * s)) * np.exp(-s * 14) + band(rng.standard_normal(len(s)), 80, 900) * np.exp(-s * 25) * 0.6
+    save("cut_thump.wav", th, 0.8)
+    s = T(0.4)
+    pop = band(rng.standard_normal(len(s)), 600, 6000) * np.exp(-s * 40) + np.sin(2 * np.pi * 300 * s) * np.exp(-s * 30) * 0.5
+    save("cut_pop.wav", pop, 0.7)
+    s = T(2.5)
+    hiss = band(rng.standard_normal(len(s)), 2500, 11000) * np.minimum(1, s * 12) * np.exp(-s * 0.7)
+    save("cut_hiss.wav", hiss, 0.6)
 
 
 if __name__ == "__main__":

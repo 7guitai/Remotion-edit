@@ -113,3 +113,116 @@ export const Spring: React.FC<{ radius: number; wire: number; turns: number; len
   }, [radius, wire, turns, length]);
   return <mesh geometry={geo} material={material} position={position} />;
 };
+
+// ---- 断面のドーナツ形（タイヤ・チューブ・O リング）----
+// 輪は XY 平面（軸は z）。管の奥半分（z ≤ 0）を残し、切り口は z = 0 の輪の帯。
+// deform(p, depth) で頂点を毎フレーム動かせる（depth は外側の面からの深さ：外面 0、内面 = 肉の厚さ）。タイヤが地面でつぶれる表現に使う
+type TorusParts = { outer: THREE.BufferGeometry; inner: THREE.BufferGeometry | null; faces: THREE.BufferGeometry };
+const torusSurface = (R: number, r: number, nu: number, nv: number, depth: number) => {
+  const pos: number[] = [];
+  const dep: number[] = [];
+  const idx: number[] = [];
+  for (let i = 0; i <= nu; i++)
+    for (let j = 0; j <= nv; j++) {
+      const u = (i / nu) * Math.PI * 2;
+      const v = Math.PI + (j / nv) * Math.PI;
+      pos.push((R + r * Math.cos(v)) * Math.cos(u), (R + r * Math.cos(v)) * Math.sin(u), r * Math.sin(v));
+      dep.push(depth);
+    }
+  for (let i = 0; i < nu; i++)
+    for (let j = 0; j < nv; j++) {
+      const a = i * (nv + 1) + j;
+      const b = (i + 1) * (nv + 1) + j;
+      idx.push(a, b, a + 1, b, b + 1, a + 1);
+    }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute("uv", new THREE.Float32BufferAttribute(pos.map((_, k) => (k % 3 === 2 ? 0 : pos[k] * 0.05)).filter((_, k) => k % 3 !== 2), 2));
+  g.setIndex(idx);
+  g.userData.base = Float32Array.from(pos);
+  g.userData.depth = Float32Array.from(dep);
+  return g;
+};
+const torusFaces = (R: number, r: number, thick: number, nu: number) => {
+  const pos: number[] = [];
+  const dep: number[] = [];
+  const idx: number[] = [];
+  const bands: [number, number, number, number][] = thick >= r ? [[R - r, R + r, 0, 0]] : [
+    [R + r - thick, R + r, thick, 0],
+    [R - r, R - r + thick, 0, thick],
+  ];
+  for (const [r0, r1, d0, d1] of bands) {
+    const base = pos.length / 3;
+    for (let i = 0; i <= nu; i++) {
+      const u = (i / nu) * Math.PI * 2;
+      pos.push(r0 * Math.cos(u), r0 * Math.sin(u), 0, r1 * Math.cos(u), r1 * Math.sin(u), 0);
+      // 切り口の深さ：外側の帯は外周が 0、内周（管の内側）が thick。中身のつまった管は外周 0・中心へ深く
+      dep.push(thick >= r ? r : d0, d1);
+    }
+    for (let i = 0; i < nu; i++) {
+      const a = base + i * 2;
+      idx.push(a, a + 1, a + 2, a + 1, a + 3, a + 2);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  const uv: number[] = [];
+  for (let k = 0; k < pos.length / 3; k++) uv.push(pos[k * 3] * 0.05, pos[k * 3 + 1] * 0.05);
+  g.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  g.setIndex(idx);
+  g.userData.base = Float32Array.from(pos);
+  g.userData.depth = Float32Array.from(dep);
+  return g;
+};
+const applyDeform = (g: THREE.BufferGeometry, deform?: (p: THREE.Vector3, depth: number) => void) => {
+  const base = g.userData.base as Float32Array;
+  const dep = g.userData.depth as Float32Array;
+  const attr = g.getAttribute("position") as THREE.BufferAttribute;
+  const p = new THREE.Vector3();
+  for (let k = 0; k < dep.length; k++) {
+    p.set(base[k * 3], base[k * 3 + 1], base[k * 3 + 2]);
+    if (deform) deform(p, dep[k]);
+    attr.setXYZ(k, p.x, p.y, p.z);
+  }
+  attr.needsUpdate = true;
+  g.computeVertexNormals();
+};
+
+export const CutTorus: React.FC<{
+  R: number;
+  r: number;
+  thick: number;
+  material: THREE.Material;
+  cutMaterial?: THREE.Material;
+  innerMaterial?: THREE.Material;
+  segments?: number;
+  tubeSegments?: number;
+  deform?: (p: THREE.Vector3, depth: number) => void;
+  // deform が変わったことを知らせる値（毎フレーム変える）
+  deformKey?: number;
+  position?: [number, number, number];
+  rotation?: [number, number, number];
+}> = ({ R, r, thick, material, cutMaterial, innerMaterial, segments = 160, tubeSegments = 20, deform, deformKey = 0, position, rotation }) => {
+  const geo = useMemo<TorusParts>(() => {
+    const outer = torusSurface(R, r, segments, tubeSegments, 0);
+    const inner = thick < r ? torusSurface(R, r - thick, segments, tubeSegments, thick) : null;
+    return { outer, inner, faces: torusFaces(R, r, thick, segments) };
+  }, [R, r, thick, segments, tubeSegments]);
+  useMemo(() => {
+    applyDeform(geo.outer, deform);
+    if (geo.inner) applyDeform(geo.inner, deform);
+    applyDeform(geo.faces, deform);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [geo, deformKey]);
+  return (
+    <group position={position} rotation={rotation}>
+      <mesh geometry={geo.outer} material={material} />
+      {geo.inner ? (
+        <mesh geometry={geo.inner}>
+          <primitive object={backOf(innerMaterial ?? material)} attach="material" />
+        </mesh>
+      ) : null}
+      <mesh geometry={geo.faces} material={cutMaterial ?? material} />
+    </group>
+  );
+};

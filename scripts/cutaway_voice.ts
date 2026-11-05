@@ -6,8 +6,9 @@ import { writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 import { PEN_SPEC } from "../src/cutaway/pen/penSpec";
 import { CutawaySpec } from "../src/cutaway/types";
+import { TIRE_SPEC } from "../src/cutaway/tire/tireSpec";
 
-const SPECS: Record<string, CutawaySpec> = { [PEN_SPEC.id]: PEN_SPEC };
+const SPECS: Record<string, CutawaySpec> = { [PEN_SPEC.id]: PEN_SPEC, [TIRE_SPEC.id]: TIRE_SPEC };
 const URL = "http://127.0.0.1:50021";
 
 const synth = async (text: string, speaker: number, speed: number) => {

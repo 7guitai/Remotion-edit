@@ -64,6 +64,15 @@ export const RemotionRoot: React.FC = () => {
         durationInFrames={cutawayDuration("cutaway-pen-short", 30)}
         defaultProps={{ id: "cutaway-pen-short" }}
       />
+      <Composition
+        id="cutaway-tire-short"
+        component={CutawayVideo}
+        width={1080}
+        height={1920}
+        fps={30}
+        durationInFrames={cutawayDuration("cutaway-tire-short", 30)}
+        defaultProps={{ id: "cutaway-tire-short" }}
+      />
       {/* 家の中の事故（HomeScene）の確認用（npx remotion still home-preview out/x.png --props='{"mode":"bath"}' --frame=30） */}
       <Composition
         id="home-preview"

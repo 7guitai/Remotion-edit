@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 
 // 「断面図×工学の進化」シリーズの素材（PBR）。金属は映りこみ（環境マップ）がないと黒く見えるので、Studio を必ず置く
-export type MatName = "brass" | "brassCut" | "chrome" | "chromeCut" | "rubber" | "ceramic" | "acrylic" | "plastic" | "plasticCut" | "paper";
+export type MatName = "brass" | "brassCut" | "chrome" | "chromeCut" | "rubber" | "rubberCut" | "ceramic" | "acrylic" | "plastic" | "plasticCut" | "paper";
 
 // 切断面のザラつき：細かいノイズのでこぼこ（bump）
 let grain: THREE.CanvasTexture | null = null;
@@ -33,6 +33,7 @@ export const SPEC: Record<MatName, THREE.MeshPhysicalMaterialParameters> = {
   chrome: { color: "#e5e7eb", metalness: 0.95, roughness: 0.08 },
   chromeCut: { color: "#cfd3d8", metalness: 0.9, roughness: 0.38 },
   rubber: { color: "#222222", metalness: 0, roughness: 0.9 },
+  rubberCut: { color: "#141416", metalness: 0, roughness: 0.95 },
   ceramic: { color: "#f5f5f0", metalness: 0.05, roughness: 0.2, clearcoat: 0.6, clearcoatRoughness: 0.15 },
   // 半透明のゴースト表示（外装を被せたまま中を見せる）
   acrylic: { color: "#dbeafe", metalness: 0, roughness: 0.1, transparent: true, opacity: 0.28, depthWrite: false, side: THREE.DoubleSide, clearcoat: 1, clearcoatRoughness: 0.05, specularIntensity: 1 },

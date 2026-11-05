@@ -291,3 +291,5 @@ python3 scripts/make_description.py <id>
 - **Remotion 公式スキル**（remotion-dev/skills）：`.claude/skills/` に8つ（best-practices・captions・markup・render・docs・multimedia・maps・upgrade）。次のセッションから自動で読まれる。出どころと版は `.claude/skills/REMOTION_SKILLS_SOURCE.txt`。voiceover の例は ElevenLabs（有料・キーは環境変数）なので、このチャンネルでは VOICEVOX を使う
 - **Chrome DevTools MCP**：`.mcp.json` に設定（chrome-devtools-mcp@1.12.0、ヘッドレス、/opt/pw-browsers/chromium）。Remotion Studio の画面を開いて、書き出す前にコンソールのエラーや見た目を確かめる。プロジェクトの MCP なので、セッションの最初に使ってよいか聞かれる
 - 入れていないもの：Blender・Blender MCP・ComfyUI・Chatterbox（GPU や画面つきの Blender が要る／日本語のナレーションは VOICEVOX で足りている）、HyperFrames のスキル（使うたびに利用状況を送る指示があり、「ほかに指定がなければ HyperFrames を使う」と書かれていて Remotion の作り方とぶつかる）
+- タイヤ（cutaway-tire-short）：道の箱を手前（z > 0）までのばすと、断面の切り口より手前に来て、接地部分がかくれた → 道は奥側だけにする。黒いゴムは強いライトで灰色に見えて道と区別できなかった → ゴムは #0b0b0c、切り口は rubberCut（ザラつき）
+- BGM を選ぶ前に、使った曲の番号を全部集める（src・scripts の opentracks 番号）。Nine Jack・2:23 AM は使用済みだった

@@ -7,9 +7,10 @@ import { CenterCaption } from "./Caption";
 import { Studio } from "./materials";
 import { CutawayTheme } from "./theme";
 import { PEN_THEME } from "./pen/penTheme";
+import { TIRE_THEME } from "./tire/tireTheme";
 
 // 「断面図×工学の進化」ショートの本体（9:16）。HUD・帯・タイトルは出さず、中央の模型と、その少し下の字幕だけ。
-export const CUTAWAYS: Record<string, CutawayTheme> = { [PEN_THEME.spec.id]: PEN_THEME };
+export const CUTAWAYS: Record<string, CutawayTheme> = { [PEN_THEME.spec.id]: PEN_THEME, [TIRE_THEME.spec.id]: TIRE_THEME };
 
 export const cutawayDuration = (id: string, fps: number) => {
   const th = CUTAWAYS[id];
