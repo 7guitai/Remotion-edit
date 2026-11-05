@@ -6,12 +6,6 @@ import { PenScene } from "./PenScene";
 import { CutawayTheme } from "../theme";
 
 // ボールペンの回：場面と効果音（機構の動きに合わせる）
-const WRITE: Record<number, [number, number, number][]> = {
-  0: [[1, 0, -1], [2, 0, -1], [3, 0, 0.9]],
-  1: [[6, 0, -1], [7, 0, -1]],
-  2: [[10, 0.6, -1], [11, 0, -1], [12, 0, -1]],
-  3: [[15, 0.4, -1], [17, 0, -1], [18, 0, -1]],
-};
 
 const PenAudio: React.FC<{ starts: number[]; fps: number }> = ({ starts, fps }) => {
   const f = (s: number) => Math.round(s * fps);
@@ -22,19 +16,6 @@ const PenAudio: React.FC<{ starts: number[]; fps: number }> = ({ starts, fps }) 
         <Audio src={staticFile(`sfx/${file}`)} volume={volume} />
       </Sequence>,
     );
-  // 書いている間：紙をこする音（ボールペンは金属の玉が転がる音も）
-  Object.entries(WRITE).forEach(([g, list]) =>
-    list.forEach(([b, a0, a1], k) => {
-      const s = starts[b] + a0;
-      const e = a1 < 0 ? starts[b + 1] ?? s + 4 : starts[b] + a1;
-      items.push(
-        <Sequence key={`w${g}-${k}`} from={f(s)} durationInFrames={Math.max(1, f(e - s))}>
-          <Audio loop src={staticFile("sfx/cut_scratch.wav")} volume={0.16} />
-          {Number(g) > 0 ? <Audio loop src={staticFile("sfx/cut_roll.wav")} volume={0.14} /> : null}
-        </Sequence>,
-      );
-    }),
-  );
   // インクの流れ（ザーッ）
   for (const [b0, b1] of [
     [1, 3],
