@@ -282,3 +282,10 @@ python3 scripts/make_description.py <id>
 - 紙を大きな床にすると画面の下半分が真っ白になった → 46×30 の1枚の紙にして、暗いスタジオに浮かせる
 - 字幕を画面の60%に置くので、カメラは見る点を少し下にずらして模型を上に出す（camera.tsx の lift）
 - ナレーションは青山龍星（13）を速さ1.32・音程少し低め。1.12 だと64秒になり長すぎた
+
+## 使える道具（2026-11 に追加・確認）
+- **GSAP**（npm の gsap）：文字や UI の動きをタイムラインで組む。Remotion では `gsap.timeline({ paused: true })` を作り、毎フレーム `tl.seek(frame / fps)` で時刻を合わせる（Date.now やループ再生は使わない）
+- **faster-whisper**：`python3.13 scripts/check_voice.py public/voice/<id>` でナレーションを文字起こしして、読み間違い・抜けを探す（small は速いが漢字はあてにならない。正確に見たいときは `--model medium`）。PyAV の版が合わないので ffmpeg で 16kHz にしてから numpy で渡す
+- **yt-dlp**：参考動画の題名・長さを調べる（`yt-dlp --flat-playlist "ytsearch20:キーワード" --print "%(title)s %(duration)s"`）。中身をそのまま使わない
+- Python の道具は `pip install -r scripts/requirements-tools.txt`（pip は python3.13 に入る。`python3` は 3.11 なので注意）
+- 入れていないもの：Blender・Blender MCP・ComfyUI・Chatterbox（GPU や画面つきの Blender が要る／日本語のナレーションは VOICEVOX で足りている）、HyperFrames のスキル（使うたびに利用状況を送る指示があり、「ほかに指定がなければ HyperFrames を使う」と書かれていて Remotion の作り方とぶつかる）

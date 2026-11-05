@@ -1,0 +1,6 @@
+# 制作で使う Python の道具（pip install -r scripts/requirements-tools.txt、python3.13 で使う）
+numpy
+pillow
+imageio-ffmpeg
+yt-dlp
+faster-whisper
