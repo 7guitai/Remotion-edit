@@ -24,6 +24,8 @@ import pizzaArea from "./20261104-pm-pizza-area.json";
 import { PizzaArea } from "./PizzaArea";
 import thirtySevenRule from "./20261105-am-37-rule.json";
 import { ThirtySevenRule } from "./ThirtySevenRule";
+import heatDiffusion from "./20261105-pm-heat-diffusion.json";
+import { HeatDiffusion } from "./HeatDiffusion";
 import { MathShortProps, Narration } from "./timeline";
 
 // 縦型（9:16）の数学ショート。src/math-shorts/<id>.json がナレーション原稿
@@ -124,5 +126,12 @@ export const MATH_SHORTS: {
     component: ThirtySevenRule,
     narration: thirtySevenRule.slides,
     bgm: thirtySevenRule.bgm.file,
+  },
+  {
+    id: heatDiffusion.id,
+    title: heatDiffusion.title,
+    component: HeatDiffusion,
+    narration: heatDiffusion.slides,
+    bgm: heatDiffusion.bgm.file,
   },
 ];
