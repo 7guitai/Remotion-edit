@@ -288,4 +288,6 @@ python3 scripts/make_description.py <id>
 - **faster-whisper**：`python3.13 scripts/check_voice.py public/voice/<id>` でナレーションを文字起こしして、読み間違い・抜けを探す（small は速いが漢字はあてにならない。正確に見たいときは `--model medium`）。PyAV の版が合わないので ffmpeg で 16kHz にしてから numpy で渡す
 - **yt-dlp**：参考動画の題名・長さを調べる（`yt-dlp --flat-playlist "ytsearch20:キーワード" --print "%(title)s %(duration)s"`）。中身をそのまま使わない
 - Python の道具は `pip install -r scripts/requirements-tools.txt`（pip は python3.13 に入る。`python3` は 3.11 なので注意）
+- **Remotion 公式スキル**（remotion-dev/skills）：`.claude/skills/` に8つ（best-practices・captions・markup・render・docs・multimedia・maps・upgrade）。次のセッションから自動で読まれる。出どころと版は `.claude/skills/REMOTION_SKILLS_SOURCE.txt`。voiceover の例は ElevenLabs（有料・キーは環境変数）なので、このチャンネルでは VOICEVOX を使う
+- **Chrome DevTools MCP**：`.mcp.json` に設定（chrome-devtools-mcp@1.12.0、ヘッドレス、/opt/pw-browsers/chromium）。Remotion Studio の画面を開いて、書き出す前にコンソールのエラーや見た目を確かめる。プロジェクトの MCP なので、セッションの最初に使ってよいか聞かれる
 - 入れていないもの：Blender・Blender MCP・ComfyUI・Chatterbox（GPU や画面つきの Blender が要る／日本語のナレーションは VOICEVOX で足りている）、HyperFrames のスキル（使うたびに利用状況を送る指示があり、「ほかに指定がなければ HyperFrames を使う」と書かれていて Remotion の作り方とぶつかる）
