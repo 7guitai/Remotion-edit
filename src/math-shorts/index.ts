@@ -26,6 +26,8 @@ import thirtySevenRule from "./20261105-am-37-rule.json";
 import { ThirtySevenRule } from "./ThirtySevenRule";
 import heatDiffusion from "./20261105-pm-heat-diffusion.json";
 import { HeatDiffusion } from "./HeatDiffusion";
+import onePercent from "./20261106-am-one-percent.json";
+import { OnePercent } from "./OnePercent";
 import { MathShortProps, Narration } from "./timeline";
 
 // 縦型（9:16）の数学ショート。src/math-shorts/<id>.json がナレーション原稿
@@ -133,5 +135,12 @@ export const MATH_SHORTS: {
     component: HeatDiffusion,
     narration: heatDiffusion.slides,
     bgm: heatDiffusion.bgm.file,
+  },
+  {
+    id: onePercent.id,
+    title: onePercent.title,
+    component: OnePercent,
+    narration: onePercent.slides,
+    bgm: onePercent.bgm.file,
   },
 ];
