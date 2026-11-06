@@ -54,6 +54,10 @@ export type SimKind =
   | "xpush"
   | "xbrake"
   | "xslide"
+  // 地面がぜんぶ坂道（右・奥は30度の坂）。slball：ボールを置く、slbox：荷物を置く、slfall：つまずく
+  | "slball"
+  | "slbox"
+  | "slfall"
   // 氷が水に浮く・沈む（右・奥は「氷が水より重い」世界）
   | "ice"
   // 金の立方体（約21万トン・一辺約22m）と人。goldgone は金が消える
@@ -117,6 +121,10 @@ export const TRAIN_KINDS: SimKind[] = ["trconst", "tracc", "trbrake"];
 export const STRAP_KINDS: SimKind[] = ["strfeet", "strhold"];
 export const STRAP = { t0: 1.2, a: 4.5 / 3.6, v: 60 };
 export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
+// 坂道の世界：高さ H の台地の上から、手前（lane 0）は平らなまま、奥（lane 1）は角度 A の坂になる。坂は x0 から下り
+export const SLOPE_KINDS: SimKind[] = ["slball", "slbox", "slfall"];
+// 横から見て、上の段が平らな地面（高さ H0）、下の段が坂の世界（高さ H1 から下る）
+export const SLOPE = { H0: 3.7, H1: 1.5, deg: 30, x0: -1.5, z: 0 };
 // 飛び降りの検証：台の高さ（m）、跳び出す時刻（秒）、台の奥行きの中心、衝撃をならす時間（秒）、マットの厚さ
 export const LAND_KINDS: SimKind[] = ["lknee", "lmat"];
 // 布団の検証：ベッド（マットレスの上の面の高さ、幅、長さ）と、布団の種類ごとの性質
@@ -1825,6 +1833,155 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
       };
       lanes.push({ world, g: G, dolls, control, record });
     });
+  } else if (SLOPE_KINDS.includes(kind)) {
+    // 坂道の世界。どちらのレーンも高さ H の台地の上から始まり、奥のレーンだけ x0 から30度の下り坂になる
+    // （tan30° ≒ 0.58。摩擦係数がこれより小さい物は、置いただけですべり出す）
+    const A = (SLOPE.deg * Math.PI) / 180;
+    const { x0 } = SLOPE;
+    [0, 1].forEach((lane) => {
+      const { world, ground } = makeWorld(G);
+      // 坂の世界には平らな地面がない（坂がどこまでも続く）
+      if (lane === 1) world.removeBody(ground);
+      const z = 0;
+      const H = lane === 0 ? SLOPE.H0 : SLOPE.H1;
+      // 草の地面：人との摩擦 0.5（tan30° ≒ 0.58 より小さい）
+      const hill = new CANNON.Material("hill");
+      world.addContactMaterial(new CANNON.ContactMaterial(bodyMaterial, hill, { friction: 0, restitution: 0.02, contactEquationStiffness: 1e7, contactEquationRelaxation: 4 }));
+      const addStatic = (half: [number, number, number], pos: [number, number, number], rot: number, color: string) => {
+        const b = new CANNON.Body({ mass: 0, shape: new CANNON.Box(new CANNON.Vec3(...half)), position: new CANNON.Vec3(...pos), material: hill });
+        b.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 0, 1), rot);
+        world.addBody(b);
+        bodies.push({ lane, shape: "box", size: [half[0] * 2, half[1] * 2, half[2] * 2], color });
+        tracked.push(b);
+      };
+      const W = 0.9;
+      if (lane === 0) {
+        // 平らな地面（うすい台。ずっと続く）
+        addStatic([9, 0.15, W], [3, H - 0.15, z], 0, "#7cb46b");
+      } else {
+        // 台地の上の平らな所（x0 まで）と、30度の坂（厚さ0.4の板。上の面が坂の線になる）
+        addStatic([(x0 + 6) / 2, 0.15, W], [(x0 - 6) / 2, H - 0.15, z], 0, "#7cb46b");
+        const L = 70;
+        const cx = x0 + (L / 2) * Math.cos(A) - 0.2 * Math.sin(A);
+        const cy = H - (L / 2) * Math.sin(A) - 0.2 * Math.cos(A);
+        addStatic([L / 2, 0.2, W], [cx, cy, z], -A, "#b98d55");
+      }
+      const dist = val(`dist${lane}`);
+      const spd = val(`kmh${lane}`);
+      let control: Lane["control"] = () => {};
+      let record: Lane["record"] = () => {};
+      const dolls: Ragdoll[] = [];
+      if (kind === "slball") {
+        // サッカーボール（直径22cm・0.43kg）をそっと置く
+        const ball = new CANNON.Body({ mass: 0.43, shape: new CANNON.Sphere(0.11), position: new CANNON.Vec3(x0 + 0.3, H + 0.11 - 0.3 * Math.tan(A) * lane + 0.02, z) });
+        ball.linearDamping = 0.01;
+        world.addBody(ball);
+        bodies.push({ lane, shape: "sphere", size: [0.22, 0.22, 0.22], color: "#f4f4f4" });
+        tracked.push(ball);
+        soundOf.set(ball, "ball");
+        const bx = ball.position.x;
+        // 空気の抵抗（½ρ Cd A v²、Cd 0.25・断面積 0.038m²）
+        control = () => {
+          const sp = ball.velocity.length();
+          ball.force.vadd(ball.velocity.scale(-0.5 * 1.2 * 0.25 * Math.PI * 0.11 * 0.11 * sp), ball.force);
+        };
+        record = (f) => {
+          dist[f] = (ball.position.x - bx) / (lane === 1 ? Math.cos(A) : 1);
+          spd[f] = ball.velocity.length() * 3.6;
+        };
+      } else if (kind === "slbox") {
+        // 段ボール箱（40cm角・10kg）。地面との摩擦は 0.45（tan30° より小さい）
+        // 物理エンジンの箱の摩擦は強く出すぎるので、摩擦は「摩擦係数 × 面を押す力」で計算して足す（接触の摩擦は0）
+        const boxMat = new CANNON.Material("cardboard");
+        world.addContactMaterial(new CANNON.ContactMaterial(boxMat, hill, { friction: 0, restitution: 0 }));
+        const MU = 0.45;
+        const s2 = 0.2;
+        const px = x0 + 0.6;
+        const py = lane === 0 ? H + s2 : H - 0.6 * Math.tan(A) + s2 / Math.cos(A) + 0.01;
+        const box = new CANNON.Body({ mass: 10, shape: new CANNON.Box(new CANNON.Vec3(s2, s2, s2)), position: new CANNON.Vec3(px, py, z), material: boxMat });
+        if (lane === 1) box.quaternion.setFromAxisAngle(new CANNON.Vec3(0, 0, 1), -A);
+        world.addBody(box);
+        bodies.push({ lane, shape: "box", size: [0.4, 0.4, 0.4], color: "#c8955a" });
+        tracked.push(box);
+        soundOf.set(box, "cone");
+        const tan = lane === 1 ? new CANNON.Vec3(Math.cos(A), -Math.sin(A), 0) : new CANNON.Vec3(1, 0, 0);
+        const cosA = lane === 1 ? Math.cos(A) : 1;
+        control = () => {
+          // 坂の上（または台地の上）にのっている間だけ
+          const onSlope = lane === 1 ? box.position.x > x0 : true;
+          const t2 = onSlope ? tan : new CANNON.Vec3(1, 0, 0);
+          const c2 = onSlope ? cosA : 1;
+          const vt = box.velocity.dot(t2);
+          const maxF = MU * 10 * G * c2;
+          const gT = 10 * G * (onSlope && lane === 1 ? Math.sin(A) : 0);
+          if (Math.abs(vt) > 0.02) box.force.vadd(t2.scale(-Math.sign(vt) * maxF), box.force);
+          else box.force.vadd(t2.scale(-Math.min(gT, maxF)), box.force);
+        };
+        record = (f) => {
+          dist[f] = (box.position.x - px) / (lane === 1 ? Math.cos(A) : 1);
+          spd[f] = box.velocity.length() * 3.6;
+        };
+      } else {
+        // 坂の上の平らな所に立つ人が、つまずいて前（+x）へ倒れる
+        const rd = addDoll(world, lane, lane, [x0 - 0.25, H, z], Math.PI / 2);
+        dolls.push(rd);
+        const x00 = rd.bodies.pelvis.position.x;
+        let tripped = false;
+        // 摩擦は体の部分ごとに「摩擦係数 0.5 × 面を押す力」で計算する（接触の摩擦は0。関節でつながった人形は、物理エンジンの摩擦だと強く引っかかりすぎる）
+        const surface = (p: CANNON.Vec3) => {
+          // いちばん近い面までの距離と、面の向き（法線・坂を下る向き）
+          if (lane === 1 && p.x > x0) {
+            const d = (p.y - (H - (p.x - x0) * Math.tan(A))) * Math.cos(A);
+            return { d, n: new CANNON.Vec3(Math.sin(A), Math.cos(A), 0), cos: Math.cos(A) };
+          }
+          return { d: p.y - H, n: new CANNON.Vec3(0, 1, 0), cos: 1 };
+        };
+        const parts = Object.values(rd.bodies);
+        const total = parts.reduce((m, p) => m + p.mass, 0);
+        const friction = () => {
+          // 体重は、地面にふれている部分で分け合って支える（立っていれば両足、倒れていれば体じゅう）
+          const touching = parts.filter((p) => surface(p.position).d <= 0.16);
+          for (const part of touching) {
+            const sf = surface(part.position);
+            const vn = part.velocity.dot(sf.n);
+            const vt = part.velocity.vsub(sf.n.scale(vn));
+            const sp = vt.length();
+            const maxF = (0.5 * total * G * sf.cos) / touching.length;
+            if (sp > 0.03) part.force.vadd(vt.scale(-maxF / sp), part.force);
+            else {
+              // 止まっている：重力の面にそった力を、μN まで打ち消す
+              const gv = new CANNON.Vec3(0, (-total * G) / touching.length, 0);
+              const gt = gv.vsub(sf.n.scale(gv.dot(sf.n)));
+              const gl = gt.length();
+              if (gl > 1e-6) part.force.vadd(gt.scale(-Math.min(gl, maxF) / gl), part.force);
+            }
+          }
+        };
+        control = (t) => {
+          friction();
+          if (t < 0.9) {
+            rd.setPose(POSES.stand);
+            applyBalance(rd);
+          } else {
+            if (!tripped) {
+              tripped = true;
+              rd.balance = 0;
+              rd.setStrength(0.35);
+              rd.addVelocity([2.0, 0.3, 0]);
+              rd.bodies.footL.velocity.set(-0.6, 0, 0);
+              rd.bodies.footR.velocity.set(-0.6, 0, 0);
+            }
+          }
+        };
+        record = (f) => {
+          // 坂の世界は坂にそった長さ（坂に入るまでは横の長さ）
+          const dx = rd.bodies.pelvis.position.x - x00;
+          dist[f] = lane === 1 && rd.bodies.pelvis.position.x > x0 ? (x0 - x00) + (rd.bodies.pelvis.position.x - x0) / Math.cos(A) : dx;
+          spd[f] = rd.bodies.pelvis.velocity.length() * 3.6;
+        };
+      }
+      lanes.push({ world, g: G, dolls, control, record });
+    });
   } else if (kind === "xslide") {
     // すべり台（角度35度・長さ3.2m）。手前はいまの地球（おしりとすべり台の摩擦 0.25）、奥は10倍の 2.5。
     // tan35° ≒ 0.7 なので、0.25 ならすべり出し、2.5 ならすべらない（すべるには約68度以上が必要）
@@ -3080,6 +3237,8 @@ export const simulate = (
               ? ["ふつうの地面", "トランポリンの地面"]
               : X_KINDS.includes(kind)
                 ? ["いまの地球", "摩擦10倍"]
+              : SLOPE_KINDS.includes(kind)
+                ? ["平らな地面", "30度の坂道"]
                 : kind === "ice"
                   ? ["いまの氷", "もしも 沈む氷"]
                   : kind === "trconst"

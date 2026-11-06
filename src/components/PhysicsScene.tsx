@@ -38,6 +38,8 @@ import {
   HEAVY_KINDS,
   FRICTION_KINDS,
   FRICTION_OFF,
+  SLOPE,
+  SLOPE_KINDS,
   HitSound,
   SimKind,
   SimResult,
@@ -251,6 +253,26 @@ const cameraBase = (sim: SimResult, f: number, total: number): Cam => {
     }
     case "xslide":
       return { pos: [0.4, 2.3, lerp(9.6, 9.1, t)], look: [0.4, 1.35, 0] };
+    case "slbox":
+    case "slfall":
+    case "slball": {
+      // 横から。坂を下っていく物（奥のレーン）を追いかける。はじめは上の段（平らな地面）も入る
+      const bi =
+        sim.kind === "slball"
+          ? sim.bodies.findIndex((b) => b.shape === "sphere" && b.lane === 1)
+          : sim.kind === "slbox"
+            ? sim.bodies.findIndex((b) => b.shape === "box" && b.size[0] < 0.5 && b.lane === 1)
+            : sim.bodies.findIndex((b) => b.part === "pelvis" && b.lane === 1);
+      const bp = posAt(sim, f, bi);
+      // はじめは2つの世界が入るよう遠くから。動き出したら、下っていく物に寄っていく
+      const tt = f / sim.fps;
+      const zoom = Math.min(1, Math.max(0, (tt - 0.8) / 1.6));
+      const k = zoom * zoom * (3 - 2 * zoom);
+      const dist = 18.4 - 9.5 * k;
+      const cx = Math.max(0.6, bp[0] - 1.8 * (1 - k));
+      const cy = Math.min(2.6, bp[1] + 1.4 * (1 - k) + 0.3 * k);
+      return { pos: [cx, cy + 0.6, dist], look: [cx, cy, 0] };
+    }
     case "brake":
     case "fbrake":
     case "xbrake": {
@@ -1696,7 +1718,7 @@ export const PhysicsScene: React.FC<{
         </Pill>,
       );
     });
-  } else if (sim.kind === "throw" || sim.kind === "athrow" || sim.kind === "aplane" || sim.kind === "hthrow" || sim.kind === "hwind" || sim.kind === "hcar" || isRoad || sim.kind === "fpush" || sim.kind === "xpush" || sim.kind === "xslide" || sim.kind === "ladder") {
+  } else if (sim.kind === "throw" || sim.kind === "athrow" || sim.kind === "aplane" || sim.kind === "hthrow" || sim.kind === "hwind" || sim.kind === "hcar" || isRoad || sim.kind === "fpush" || sim.kind === "xpush" || sim.kind === "xslide" || sim.kind === "ladder" || SLOPE_KINDS.includes(sim.kind)) {
     overlays.push(
       <div key="legend" style={{ position: "absolute", left: 30, top: 34 + T, display: "flex", flexDirection: "column", gap: 12 }}>
         {[0, 1].map((lane) => (
@@ -2370,6 +2392,32 @@ export const PhysicsScene: React.FC<{
       <Pill key="ang" x={p.x} y={p.y} color="#334" size={32}>角度35°</Pill>,
     );
   }
+  if (SLOPE_KINDS.includes(sim.kind)) {
+    // それぞれの物の上に「どれだけ動いたか」。坂のそばに角度
+    const pick = (lane: number) =>
+      sim.kind === "slfall"
+        ? sim.bodies.findIndex((b) => b.part === "head" && b.lane === lane)
+        : sim.bodies.findIndex((b) => (sim.kind === "slball" ? b.shape === "sphere" : b.shape === "box" && b.size[0] < 0.5) && b.lane === lane);
+    [0, 1].forEach((lane) => {
+      const bi = pick(lane);
+      if (bi < 0) return;
+      const bp = posAt(sim, f, bi);
+      const d = Math.max(0, v(`dist${lane}`));
+      const p = project(cam, [bp[0], bp[1] + (sim.kind === "slfall" ? 0.5 : 0.45), bp[2]], width, height);
+      const verb = sim.kind === "slball" ? "転がった" : sim.kind === "slbox" ? "すべった" : "すべり落ちた";
+      const text = d < 0.3 || (sim.kind === "slfall" && lane === 0) ? (sim.kind === "slfall" ? "その場で止まる" : "止まったまま") : `${d.toFixed(1)}m ${verb}`;
+      if (f > 0.4 * fps)
+        overlays.push(
+          <Pill key={`sl${lane}`} x={Math.min(width - 160, Math.max(160, p.x))} y={Math.max(190 + T, Math.min(height - 140, p.y))} color={LANE_COLORS[lane]} size={38}>
+            {text}
+          </Pill>,
+        );
+    });
+    const ap = project(cam, [SLOPE.x0 + 2.6, 0.5, 0.9], width, height);
+    overlays.push(
+      <Pill key="ang" x={Math.min(width - 120, Math.max(120, ap.x))} y={Math.min(height - 120, ap.y)} color="#334" size={32}>坂 30°</Pill>,
+    );
+  }
   if (sim.kind === "fpush" || sim.kind === "xpush") {
     [0, 1].forEach((lane) => {
       const bi = findIndex(sim, "box", lane);
@@ -2828,7 +2876,7 @@ export const PhysicsScene: React.FC<{
         >
           <object3D attach="target" position={[cam.look[0], 0, 0]} />
         </directionalLight>
-        {isTunnel || isSky || kind === "elevfall" || kind === "elevsafe" || kind === "elevfloat" ? null : BOUNCE_KINDS.includes(kind) ? (
+        {isTunnel || isSky || SLOPE_KINDS.includes(kind) || kind === "elevfall" || kind === "elevsafe" || kind === "elevfloat" ? null : BOUNCE_KINDS.includes(kind) ? (
           // トランポリンのマットの所だけ、地面に穴をあける（へこんだマットが見えるように）
           (() => {
             const [cx, cz, w, d] = matArea;

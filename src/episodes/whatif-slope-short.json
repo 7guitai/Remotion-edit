@@ -1,0 +1,165 @@
+{
+  "id": "whatif-slope-short",
+  "title": "もし地面がぜんぶ坂道だったら？",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 6,
+  "bgmVolume": 0.1,
+  "voice": {
+    "speaker": 13,
+    "speed": 1.2,
+    "name": "青山龍星"
+  },
+  "bgm": {
+    "file": "hidamari_tronica.mp3",
+    "title": "ヒダマリトロニカ",
+    "credit": "しゃろう",
+    "page": "https://opentracks.com/bgm/detail/8812",
+    "opentracks": 8812,
+    "track": 1
+  },
+  "headline": [
+    "もし地面がぜんぶ",
+    "30度の坂道だったら？"
+  ],
+  "illustrations": {
+    "fe_bicycle.svg": {
+      "emoji": "🚲",
+      "irasutoya": "Fluent Emoji「Bicycle」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Bicycle/Color/bicycle_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_umbrella_rain.svg": {
+      "emoji": "☔",
+      "irasutoya": "Fluent Emoji「Umbrella with rain drops」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Umbrella%20with%20rain%20drops/Color/umbrella_with_rain_drops_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    },
+    "fe_wheelchair.svg": {
+      "emoji": "🦽",
+      "irasutoya": "Fluent Emoji「Manual wheelchair」",
+      "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Manual%20wheelchair/Color/manual_wheelchair_color.svg",
+      "credit": "Microsoft Fluent Emoji（MIT License）"
+    }
+  },
+  "slides": [
+    {
+      "type": "whatif",
+      "text": "もし、地面がぜんぶ30度の坂道だったら？",
+      "effect": "none",
+      "sim": "slball",
+      "simStart": 0
+    },
+    {
+      "type": "whatif",
+      "text": "30度は、日本一急な国道といわれる暗峠（約20度）よりも、ずっと急な坂。",
+      "speech": "30度は、にほんいち急な国道といわれる、くらがりとうげ、約20度よりも、ずっと急な坂。",
+      "effect": "none",
+      "sim": "slball",
+      "simStart": 0.4
+    },
+    {
+      "type": "whatif",
+      "text": "サッカーボールは、置いただけで転がりだす。",
+      "effect": "none",
+      "sim": "slball",
+      "simStart": 0.8
+    },
+    {
+      "type": "whatif",
+      "text": "6秒で、およそ45m先へ。時速50km近くまで速くなる！",
+      "speech": "6秒で、およそ45メートル先へ。時速50キロ近くまで、速くなる！",
+      "effect": "none",
+      "sim": "slball",
+      "simStart": 2.6,
+      "big": "約45m"
+    },
+    {
+      "type": "whatif",
+      "text": "段ボール箱も、置いたとたんに、すべりだす。",
+      "effect": "none",
+      "sim": "slbox",
+      "simStart": 0
+    },
+    {
+      "type": "whatif",
+      "text": "摩擦が0.58より小さい物は、30度の坂では止まっていられない。",
+      "speech": "摩擦が、れいてんごはちより小さい物は、30度の坂では、止まっていられない。",
+      "effect": "none",
+      "sim": "slbox",
+      "simStart": 0.6
+    },
+    {
+      "type": "whatif",
+      "text": "段ボール箱は0.45。6秒で19mもすべり落ちる。",
+      "speech": "段ボール箱は、れいてんよんご。6秒で、19メートルも、すべり落ちる。",
+      "effect": "none",
+      "sim": "slbox",
+      "simStart": 3.4,
+      "big": "19m"
+    },
+    {
+      "type": "whatif",
+      "text": "人がつまずくと…",
+      "effect": "none",
+      "sim": "slfall",
+      "simStart": 0.4
+    },
+    {
+      "type": "whatif",
+      "text": "平らな地面なら、1mちょっとで止まるのに…",
+      "speech": "平らな地面なら、1メートルちょっとで止まるのに、",
+      "effect": "none",
+      "sim": "slfall",
+      "simStart": 0.9
+    },
+    {
+      "type": "whatif",
+      "text": "坂では止まれない。6秒で20mもすべり落ちる！",
+      "speech": "坂では止まれない。6秒で、20メートルも、すべり落ちる！",
+      "effect": "none",
+      "sim": "slfall",
+      "simStart": 3.3,
+      "big": "止まれない"
+    },
+    {
+      "type": "whatif",
+      "text": "自転車でブレーキをかけ忘れたら、100m下るだけで、時速94kmに！",
+      "speech": "自転車でブレーキをかけ忘れたら、100メートル下るだけで、時速94キロに！",
+      "effect": "shake",
+      "image": "fe_bicycle.svg",
+      "imageSize": 560,
+      "bg": "night",
+      "big": "時速94km"
+    },
+    {
+      "type": "whatif",
+      "text": "雨でぬれると、くつの摩擦は0.4くらいまで下がる。立っているだけで、すべりだすかもしれない。",
+      "speech": "雨でぬれると、くつの摩擦は、れいてんよんくらいまで下がる。立っているだけで、すべりだすかもしれない。",
+      "effect": "zoom",
+      "image": "fe_umbrella_rain.svg",
+      "imageSize": 560,
+      "bg": "night"
+    },
+    {
+      "type": "whatif",
+      "text": "車いす用のスロープは、たったの約5度。平らな地面って、ありがたいね。",
+      "effect": "none",
+      "image": "fe_wheelchair.svg",
+      "imageSize": 560,
+      "bg": "night",
+      "hold": 1
+    }
+  ],
+  "description": "もし地面がぜんぶ30度の坂道だったら、ボール・荷物・人・自転車はどうなるのか？\n平らな地面と30度の坂を並べて、物理エンジンでシミュレーションしました（箱と人の摩擦は「摩擦係数 × 面を押す力」で計算しています）。\n・30度の坂の勾配は約58%。日本一急な国道といわれる暗峠（国道308号）の最大勾配は約37%（約20度）\n・置いた物は、摩擦係数が tan30° ≒ 0.58 より小さいとすべり出す\n・自転車は空気抵抗をふくめて計算（体重と自転車で80kg）\n・車いす用スロープはバリアフリー法で勾配12分の1以下（約4.8度）\nほかに知りたい「もしも」は、コメントで教えてください！",
+  "hashtags": [
+    "もしも",
+    "雑学",
+    "坂道",
+    "物理",
+    "Shorts"
+  ]
+}
