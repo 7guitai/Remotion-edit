@@ -28,6 +28,8 @@ import heatDiffusion from "./20261105-pm-heat-diffusion.json";
 import { HeatDiffusion } from "./HeatDiffusion";
 import onePercent from "./20261106-am-one-percent.json";
 import { OnePercent } from "./OnePercent";
+import cardShuffle from "./20261106-pm-card-shuffle.json";
+import { CardShuffle } from "./CardShuffle";
 import { MathShortProps, Narration } from "./timeline";
 
 // 縦型（9:16）の数学ショート。src/math-shorts/<id>.json がナレーション原稿
@@ -142,5 +144,12 @@ export const MATH_SHORTS: {
     component: OnePercent,
     narration: onePercent.slides,
     bgm: onePercent.bgm.file,
+  },
+  {
+    id: cardShuffle.id,
+    title: cardShuffle.title,
+    component: CardShuffle,
+    narration: cardShuffle.slides,
+    bgm: cardShuffle.bgm.file,
   },
 ];
