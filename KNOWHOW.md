@@ -293,3 +293,4 @@ python3 scripts/make_description.py <id>
 - 入れていないもの：Blender・Blender MCP・ComfyUI・Chatterbox（GPU や画面つきの Blender が要る／日本語のナレーションは VOICEVOX で足りている）、HyperFrames のスキル（使うたびに利用状況を送る指示があり、「ほかに指定がなければ HyperFrames を使う」と書かれていて Remotion の作り方とぶつかる）
 - タイヤ（cutaway-tire-short）：道の箱を手前（z > 0）までのばすと、断面の切り口より手前に来て、接地部分がかくれた → 道は奥側だけにする。黒いゴムは強いライトで灰色に見えて道と区別できなかった → ゴムは #0b0b0c、切り口は rubberCut（ザラつき）
 - BGM を選ぶ前に、使った曲の番号を全部集める（src・scripts の opentracks 番号）。Nine Jack・2:23 AM は使用済みだった
+- **ずっと鳴り続けるノイズの環境音は使わない**（タイヤの「ゴー」という転がる音のループが不愉快と言われて削除。ペンの書く音も削除済み）。効果音は「その瞬間だけ鳴る音」（段差のゴトン・パンクのプスッ・しずく など）を中心にする

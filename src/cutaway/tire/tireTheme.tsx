@@ -2,7 +2,7 @@ import React from "react";
 import { Audio, Sequence, staticFile } from "remotion";
 import { TIRE_SPEC } from "./tireSpec";
 import tireVoice from "../voice/cutaway-tire-short.json";
-import { TireScene, rolled, rollIntervals, bumpAt } from "./TireScene";
+import { TireScene, rolled, bumpAt } from "./TireScene";
 import { CutawayTheme } from "../theme";
 
 // タイヤの回：場面と効果音（転がる音・段差・パンク・空気が抜ける音）
@@ -18,14 +18,6 @@ const TireAudio: React.FC<{ starts: number[]; fps: number }> = ({ starts, fps })
         <Audio src={staticFile(`sfx/${file}`)} volume={volume} />
       </Sequence>,
     );
-  // 転がっている間のゴー
-  rollIntervals(starts).forEach(([a, b], k) =>
-    items.push(
-      <Sequence key={`r${k}`} from={f(a)} durationInFrames={Math.max(1, f(b - a))}>
-        <Audio loop src={staticFile("sfx/cut_road.wav")} volume={0.16} />
-      </Sequence>,
-    ),
-  );
   // 段差をこえた瞬間（デコボコの頂上が真下に来た時）：ゴムのかたまりは大きく、空気入り以降は小さく
   const end = starts[starts.length - 1] + 3;
   let prev = 0;
