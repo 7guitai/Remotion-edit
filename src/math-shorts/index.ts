@@ -32,6 +32,8 @@ import cardShuffle from "./20261106-pm-card-shuffle.json";
 import { CardShuffle } from "./CardShuffle";
 import montyHall from "./20261107-am-monty-hall.json";
 import { MontyHall } from "./MontyHall";
+import honeycomb from "./20261107-pm-honeycomb.json";
+import { Honeycomb } from "./Honeycomb";
 import { MathShortProps, Narration } from "./timeline";
 
 // 縦型（9:16）の数学ショート。src/math-shorts/<id>.json がナレーション原稿
@@ -160,5 +162,12 @@ export const MATH_SHORTS: {
     component: MontyHall,
     narration: montyHall.slides,
     bgm: montyHall.bgm.file,
+  },
+  {
+    id: honeycomb.id,
+    title: honeycomb.title,
+    component: Honeycomb,
+    narration: honeycomb.slides,
+    bgm: honeycomb.bgm.file,
   },
 ];
