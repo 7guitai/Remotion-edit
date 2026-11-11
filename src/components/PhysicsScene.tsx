@@ -152,6 +152,7 @@ const cameraBase = (sim: SimResult, f: number, total: number): Cam => {
       return { pos: [0, 2.9, lerp(11.6, 11.2, t)], look: [0, 1.75, 0.3] };
     case "strfeet":
     case "strhold":
+    case "fztrain":
       // 2人の全身とつり革が入るよう、正面から少し見下ろす
       return { pos: [0, 2.0, lerp(8.0, 7.7, t)], look: [0, 1.05, -0.2] };
     case "trconst":
@@ -2316,6 +2317,10 @@ export const PhysicsScene: React.FC<{
       if (fell) {
         overlays.push(
           <Pill key={`r${lane}`} x={laneX[lane]} y={height * 0.5} color="#e01b2f" size={48}>倒れた！</Pill>,
+        );
+      } else if (sim.kind === "fztrain" && lane === 1 && f / fps > STRAP.t0 + 0.4) {
+        overlays.push(
+          <Pill key={`r${lane}`} x={laneX[lane]} y={height * 0.5} color="#e01b2f" size={44}>{`すべって ${(cm / 100).toFixed(1)}m`}</Pill>,
         );
       } else if (f / fps > STRAP.t0 + 2.4) {
         overlays.push(

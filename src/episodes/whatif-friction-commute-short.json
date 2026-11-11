@@ -1,0 +1,29 @@
+{
+  "id": "whatif-friction-commute-short",
+  "title": "もし「摩擦ゼロ」の世界で無理やり会社に行ったら？【物理エンジン】",
+  "format": "short",
+  "titleBand": false,
+  "pr": false,
+  "style": "whatif",
+  "background": "#000",
+  "slideGap": 4,
+  "bgmVolume": 0.1,
+  "voice": { "speaker": 13, "speed": 1.25, "name": "青山龍星" },
+  "bgm": { "file": "canary_skip.mp3", "title": "カナリアスキップ", "credit": "まんぼう二等兵", "page": "https://opentracks.com/bgm/detail/7312", "opentracks": 7312, "track": 1 },
+  "headline": ["摩擦ゼロの世界で", "無理やり通勤したら？"],
+  "illustrations": {
+    "fe_bus.svg": { "emoji": "🚌", "irasutoya": "Fluent Emoji「Bus」", "url": "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets/Bus/Color/bus_color.svg", "credit": "Microsoft Fluent Emoji（MIT License）" }
+  },
+  "slides": [
+    { "type": "whatif", "text": "もし摩擦ゼロの世界で、無理やり会社に行ったら？", "effect": "none", "sim": "fchaos", "simStart": 0.3 },
+    { "type": "whatif", "text": "レベル1、徒歩。一歩ふみ出すと、足がすべって転ぶ。", "effect": "none", "sim": "fstand", "simStart": 0.2, "big": "Lv.1 徒歩" },
+    { "type": "whatif", "text": "壁を押せば進めるけど、動き出したら、もう止まれない。", "effect": "none", "sim": "fpush", "simStart": 1.0 },
+    { "type": "whatif", "text": "レベル2、車。タイヤが空回りして発進できないし、走っている車は、ブレーキをかけても止まれない。", "effect": "none", "sim": "fbrake", "big": "Lv.2 車" },
+    { "type": "whatif", "text": "たった1度の坂でも、車やバスが勝手にすべりだす。街の交差点は、巨大なビリヤード場に。", "effect": "shake", "image": "fe_bus.svg", "imageSize": 560, "bg": "night", "big": "1度でもアウト" },
+    { "type": "whatif", "text": "レベル3、満員電車。つり革も、つかめない。", "effect": "none", "sim": "fztrain", "simStart": 0.4, "big": "Lv.3 満員電車" },
+    { "type": "whatif", "text": "ブレーキのたびに、車両のはしまですべっていく！", "effect": "none", "sim": "fztrain", "simStart": 1.6 },
+    { "type": "whatif", "text": "会社の前に着いても、止まれずに通りすぎる。あなたなら、どうやって止まる？", "effect": "none", "sim": "fchaos", "simStart": 0.3, "hold": 1 }
+  ],
+  "description": "もし摩擦ゼロの世界で、無理やり会社に行ったらどうなる？ 徒歩・車・満員電車の3段階で、物理エンジンでシミュレーションしました。\n・摩擦がないと、足で地面を後ろへ押せないので歩けない（壁などを押した反動でしか進めない）\n・タイヤと道の摩擦がないと、発進もブレーキもできない\n・摩擦がゼロなら、どんなにゆるい坂でも物はすべりだす（すべり出す角度は摩擦係数で決まる）\n・満員電車は、時速60kmからの急ブレーキ（1.25m/s²）で計算\n「もし世界から摩擦が突然なくなったら？？」の続編です。あなたならどうやって止まりますか？コメントで教えてください！",
+  "hashtags": ["もしも", "物理エンジン", "摩擦", "雑学", "Shorts"]
+}

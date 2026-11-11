@@ -69,6 +69,8 @@ export type SimKind =
   | "trbrake"
   | "strfeet"
   | "strhold"
+  // 摩擦ゼロの満員電車（手前はつり革を持てる いまの地球、奥は摩擦ゼロでつり革も床もつるつる）
+  | "fztrain"
   // 雨の中を歩く・走る
   | "rwalk"
   | "rrun"
@@ -118,7 +120,7 @@ export const RAIN = { dist: 10, walk: 1.5, run: 5, n: 600, fall: 7, top: 0.11, f
 export const ELEV = { snap: 0.4, height: 60, floor: 3, slow: 0.25 };
 export const TRAIN_KINDS: SimKind[] = ["trconst", "tracc", "trbrake"];
 // 満員電車の急ブレーキ（つり革の検証）。t0 秒にブレーキ、a は減速（m/s²）、v は最初の時速
-export const STRAP_KINDS: SimKind[] = ["strfeet", "strhold"];
+export const STRAP_KINDS: SimKind[] = ["strfeet", "strhold", "fztrain"];
 export const STRAP = { t0: 1.2, a: 4.5 / 3.6, v: 60 };
 export const X_KINDS: SimKind[] = ["xpush", "xbrake", "xslide"];
 // 坂道の世界：高さ H の台地の上から、手前（lane 0）は平らなまま、奥（lane 1）は角度 A の坂になる。坂は x0 から下り
@@ -2780,11 +2782,13 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
     // 人は窓の方（カメラ）を向いて立つので、ブレーキの力は体の横向きにかかる。
     // 体をまっすぐに保つ力（balance）は弱くして、足の幅・つり革で倒れるかどうかが決まるようにする
     [0, 1].forEach((lane) => {
-      const { world } = makeWorld(G);
+      // fztrain：奥（lane 1）は FRICTION_OFF 秒で床の摩擦がゼロになる（つり革もつかめない）
+      const fw = kind === "fztrain" ? frictionWorld(lane) : null;
+      const world = fw ? fw.world : makeWorld(G).world;
       const x0 = lane === 0 ? -1.4 : 1.4;
       const rd = addDoll(world, lane, lane, [x0, 0, 0]);
       const wide = kind === "strfeet" && lane === 1;
-      const hold = kind === "strhold" && lane === 1;
+      const hold = (kind === "strhold" && lane === 1) || (kind === "fztrain" && lane === 0);
       const stance = wide ? POSES.wide : POSES.narrow;
       let grip: CANNON.PointToPointConstraint | null = null;
       let anchor: CANNON.Body | null = null;
@@ -2799,6 +2803,7 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
       let down = 0;
       let peak = 0;
       const control = (t: number) => {
+        fw?.update(t);
         rd.balance = 0.12;
         rd.setPose(hold ? { ...stance, ...POSES.strap } : stance);
         applyBalance(rd);
@@ -2835,7 +2840,7 @@ const build = (kind: SimKind, frames: number, fps: number, g2: number): Build =>
         pos[f] = v0 * Math.min(t, STRAP.t0) + (v0 * v0 - vb * vb) / (2 * STRAP.a);
         // ブレーキのあと、腰がいちばん大きく動いた幅（ゆれの大きさ）
         // （となりの人が倒れきるブレーキ 2.5秒後までの値で止める）
-        if (t <= STRAP.t0 + 2.5) {
+        if (t <= STRAP.t0 + 2.5 || (kind === "fztrain" && lane === 1)) {
           peak = Math.max(peak, Number.isNaN(x00) ? 0 : Math.abs(rd.bodies.pelvis.position.x - x00));
         }
         moved[f] = peak;
@@ -3247,6 +3252,8 @@ export const simulate = (
                       ? ["一定の速さ", "加速中"]
                       : kind === "trbrake"
                         ? ["一定の速さ", "急ブレーキ中"]
+                        : kind === "fztrain"
+                          ? ["いまの地球（つり革）", "摩擦ゼロ"]
                         : kind === "strfeet"
                           ? ["足をそろえる", "足を開く"]
                           : kind === "strhold"

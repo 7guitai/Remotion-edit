@@ -22,6 +22,7 @@ import whatifTinyLong from "./whatif-tiny-long.json";
 import whatifTrampShort from "./whatif-tramp-short.json";
 import whatifFriction10Short from "./whatif-friction10-short.json";
 import whatifSlopeShort from "./whatif-slope-short.json";
+import whatifFrictionCommute from "./whatif-friction-commute-short.json";
 import whatifIceShort from "./whatif-ice-short.json";
 import whatifGoldShort from "./whatif-gold-short.json";
 import verifyTrainJumpShort from "./verify-train-jump-short.json";
@@ -375,6 +376,7 @@ export const EPISODES: Episode[] = [
   whatifIceShort as Episode,
   whatifFriction10Short as Episode,
   whatifSlopeShort as Episode,
+  whatifFrictionCommute as Episode,
   whatifTrampShort as Episode,
   whatifTinyLong as Episode,
   whatifAirShort as Episode,
