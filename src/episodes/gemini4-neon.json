@@ -32,23 +32,25 @@
     "Carbon": "カーボン",
     "Astra": "アストラ",
     "Fable": "フェイブル",
-    "Xhigh": "エックスハイ"
+    "Xhigh": "エックスハイ",
+    "Google": "グーグル"
   },
   "illustrations": {},
   "slides": [
     {
       "type": "hook",
       "text": "Googleの新AIは\n総合3位って本当なのだ？",
-      "speech": "グーグルの新AI、ジェミニフォー・ネオン。第三者の評価で総合3位って本当なのだ？",
+      "speech": "Gemini 4 Neonが総合3位って本当なのだ？",
       "headline": "Gemini 4 Neon\n総合【3位】は本当？",
-      "emoji": "🤔",
       "expression": "question",
-      "se": "impact_soft"
+      "se": "impact_soft",
+      "voiceSpeed": 1.32,
+      "sub": "公式発表と第三者評価から検証"
     },
     {
       "type": "versus",
       "text": "公式のAPI料金は\n入力$3・出力$15なのだ",
-      "speech": "公式発表のエーピーアイ料金は、100万トークンあたり入力3ドル、出力15ドルなのだ。",
+      "speech": "公式発表のAPI料金は、100万トークンあたり入力3ドル、出力15ドルなのだ。",
       "cite": "Google公式ブログ（2026/11/18）",
       "left": {
         "label": "入力",
@@ -65,7 +67,7 @@
     {
       "type": "ranking",
       "text": "第三者評価で61点の3位！\n上位モデルに迫る実力なのだ",
-      "speech": "第三者機関アーティフィシャル・アナリシスの総合指数では、最高設定で61点の3位。1位の65点、2位の62点に迫っているのだ！",
+      "speech": "第三者機関Artificial Analysisの総合指数では、最高設定で61点の3位。1位の65点、2位の62点に迫っているのだ！",
       "cite": "Artificial Analysis",
       "rows": [
         {
@@ -93,55 +95,66 @@
       "unit": "点",
       "note": "設定はモデルによって異なる",
       "expression": "happy",
-      "se": "chime_up"
+      "se": "chime_up",
+      "title": "Artificial Analysis 総合指数（高いほど優秀）"
     },
     {
       "type": "versus",
       "text": "1タスク$6.44・21.5分\nアストラより高くて遅いのだ",
-      "speech": "ただ、コスパ最強とは言い切れないのだ。評価1タスクあたり6.44ドル・21.5分で、アストラの4ドル・13.7分より高くて遅いのだ。",
-      "cite": "Artificial Analysis",
+      "speech": "ただ、コスパ最強とは言い切れないのだ。評価1タスクあたり6.44ドル・21.5分で、Astraの4ドル・13.7分より高くて遅いのだ。",
+      "cite": "Artificial Analysis／Gemini API 料金表",
       "left": {
-        "label": "Neon（xhigh）",
-        "value": "$6.44",
-        "lines": [
-          "21.5分"
+        "label": "Gemini 4 Neon（xhigh）",
+        "metrics": [
+          {
+            "label": "1タスク費用",
+            "value": "$6.44"
+          },
+          {
+            "label": "処理時間",
+            "value": "21.5分"
+          }
         ],
         "tone": "bad"
       },
       "right": {
-        "label": "Astra（max）",
-        "value": "$4.00",
-        "lines": [
-          "13.7分"
+        "label": "GPT-6.2 Astra（max）",
+        "metrics": [
+          {
+            "label": "1タスク費用",
+            "value": "$4.00"
+          },
+          {
+            "label": "処理時間",
+            "value": "13.7分"
+          }
         ],
         "tone": "neutral"
       },
-      "note": "総合指数の評価1タスクあたりの費用・時間",
+      "note": "Artificial Analysis 総合指数の評価1タスクあたり",
       "expression": "alert",
-      "se": "alert_soft"
+      "se": "alert_soft",
+      "lead": "コスパ最強とは言い切れない",
+      "leadNote": "思考トークンも出力として課金されるため、出力が増えると費用が膨らむ",
+      "leadTone": "bad"
     },
     {
       "type": "flow",
       "text": "公式ではネオンを計画役として\n実行役と組み合わせるのだ",
-      "speech": "公式は、アンチグラビティでネオンを計画役、ハイドロジェンを実行役にする使い方も紹介しているのだ。",
+      "speech": "公式は、AntigravityでNeonを計画役、Hydrogenを実行役にする使い方も紹介しているのだ。",
       "cite": "Google Antigravity 公式ブログ",
       "steps": [
         {
           "label": "Gemini 4 Neon",
-          "sub": "計画役（考える）",
-          "emoji": "🧠",
-          "tone": "neutral"
+          "sub": "計画役（考える）"
         },
         {
           "label": "Gemini 4 Hydrogen",
-          "sub": "実行役（手を動かす）",
-          "emoji": "🛠️",
-          "tone": "neutral"
+          "sub": "実行役（手を動かす）"
         },
         {
-          "label": "オーケストレーターで連携",
-          "sub": "Antigravity",
-          "emoji": "🚀",
+          "label": "Antigravity で連携",
+          "sub": "オーケストレーターが2つを組み合わせる",
           "tone": "good"
         }
       ],
@@ -179,10 +192,9 @@
     "ずんだもん"
   ],
   "look": {
-    "theme": "dark",
-    "layout": "kit",
-    "background": "shorts/gemini4-neon/bg_dark_tech_1080x1920.png",
-    "banner": "shorts/gemini4-neon/title_banner_gemini4_neon.png"
+    "theme": "paper",
+    "layout": "paper",
+    "label": "AIモデル検証レポート"
   },
   "sources": [
     {
@@ -255,5 +267,18 @@
   "soundCredit": {
     "name": "効果音ラボ",
     "page": "https://soundeffect-lab.info/"
-  }
+  },
+  "bgmVolume": 0.067,
+  "voice": {
+    "speed": 1.2,
+    "pre": 0.05,
+    "post": 0.05
+  },
+  "voiceDict": [
+    {
+      "surface": "アンチグラビティ",
+      "pronunciation": "アンチグラビティ",
+      "accent_type": 5
+    }
+  ]
 }

@@ -3,9 +3,14 @@ import { getAudioDurationInSeconds } from "@remotion/media-utils";
 import { getEpisode, Illustration, ScriptSlide } from "./episodes";
 
 export const FPS = 30;
-// ナレーションの前後に入れる間（フレーム）
+// ナレーションの前後に入れる間（フレーム）。ショートはテンポ重視で短くする
 const LEAD_IN = 6;
 const TAIL = 12;
+const SHORT_LEAD_IN = 3;
+const SHORT_TAIL = 6;
+
+// 字幕の1まとまり（音声の頭からの秒数）
+export type CaptionChunk = { text: string; start: number; end: number };
 
 export type ResolvedSlide = {
   slide: ScriptSlide;
@@ -14,6 +19,8 @@ export type ResolvedSlide = {
   voice: string | null;
   voiceStart: number;
   durationInFrames: number;
+  // 発話に合わせて切り替える字幕（scripts/generate_voice.py が書き出す captions.json）
+  captions: CaptionChunk[] | null;
 };
 
 export type VideoProps = {
@@ -32,8 +39,21 @@ const exists = async (path: string) => {
 
 // public/ にある音声・イラストを調べて、各スライドの長さを決める。
 // 音声がないスライドは文字数から長さを見積もる。
+const loadCaptions = async (episodeId: string): Promise<CaptionChunk[][] | null> => {
+  const path = `voice/${episodeId}/captions.json`;
+  if (!(await exists(path))) {
+    return null;
+  }
+  const res = await fetch(staticFile(path));
+  return (await res.json()) as CaptionChunk[][];
+};
+
 const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
   const episode = getEpisode(episodeId);
+  const isShort = episode.format === "short";
+  const lead = isShort ? SHORT_LEAD_IN : LEAD_IN;
+  const tail = isShort ? SHORT_TAIL : TAIL;
+  const captions = isShort ? await loadCaptions(episode.id) : null;
   return Promise.all(
     episode.slides.map(async (slide, i) => {
       const voicePath = `voice/${episode.id}/${String(i).padStart(3, "0")}.wav`;
@@ -50,8 +70,9 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
         illustration,
         hasImage: image ? await exists(`illustrations/${image}`) : false,
         voice: hasVoice ? voicePath : null,
-        voiceStart: LEAD_IN,
-        durationInFrames: LEAD_IN + Math.ceil(seconds * FPS) + TAIL,
+        voiceStart: lead,
+        durationInFrames: lead + Math.ceil(seconds * FPS) + tail,
+        captions: hasVoice ? (captions?.[i] ?? null) : null,
       };
     }),
   );

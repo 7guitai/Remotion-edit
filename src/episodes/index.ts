@@ -53,6 +53,7 @@ export type HookSlide = {
   speech?: string;
   headline: string;
   emoji?: string;
+  sub?: string;
 };
 
 // 引用する資料の紹介カード
@@ -72,6 +73,8 @@ export type VersusSide = {
   label: string;
   value?: string;
   lines?: string[];
+  // 項目ごとの数値（例: 1タスク費用 / 処理時間）。paper では表のように並べる
+  metrics?: { label: string; value: string }[];
   tone?: "good" | "bad" | "neutral";
 };
 export type VersusSlide = {
@@ -81,6 +84,10 @@ export type VersusSlide = {
   left: VersusSide;
   right: VersusSide;
   note?: string;
+  // 比較の上に置く見出しと1行の補足（注意点のカットなど）
+  lead?: string;
+  leadNote?: string;
+  leadTone?: "good" | "bad" | "neutral";
 };
 
 // 矢印でつなぐ流れ図
@@ -107,6 +114,7 @@ export type RankingSlide = {
   type: "ranking";
   text: string;
   speech?: string;
+  title?: string;
   unit?: string;
   max?: number;
   rows: { label: string; sub?: string; value: number; highlight?: boolean }[];
@@ -142,6 +150,8 @@ export type ScriptSlide = (
   cite?: string;
   expression?: string;
   se?: string;
+  // このスライドだけ話速を変える（冒頭のフックを速くするなど）
+  voiceSpeed?: number;
 };
 
 export type Episode = {
@@ -154,8 +164,9 @@ export type Episode = {
   headline?: string;
   // ショートの見た目。素材キットの背景・タイトル帯を使うときは layout: "kit"
   look?: {
-    theme?: "light" | "dark";
-    layout?: "default" | "kit";
+    theme?: "light" | "dark" | "paper";
+    layout?: "default" | "kit" | "paper";
+    label?: string; // paper: ヘッダー上段の小さなラベル
     background?: string; // public/ からのパス
     banner?: string; // public/ からのパス（1080×280、上端に置く）
   };
@@ -175,6 +186,11 @@ export type Episode = {
   // 複数の一次資料（概要欄に一覧で出す）
   sources?: { label: string; url: string }[];
   bgm: { file: string; title: string; credit: string; url: string };
+  // BGM の音量（省略時は theme.ts の BGM_VOLUME）
+  bgmVolume?: number;
+  // 読み上げの設定（話速・前後の無音秒数）と VOICEVOX ユーザー辞書
+  voice?: { speed?: number; pre?: number; post?: number };
+  voiceDict?: { surface: string; pronunciation: string; accent_type?: number }[];
   readings?: Record<string, string>;
   illustrations: Record<string, Illustration>;
   slides: ScriptSlide[];

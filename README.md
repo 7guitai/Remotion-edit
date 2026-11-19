@@ -42,6 +42,14 @@ npx remotion render ai-hallucination out/ai-hallucination.mp4
 
 60秒以内に収めるため、台本は9スライド・読み上げ合計55秒程度を目安にします。
 
+#### 紙面・レポート風（Editorial Paper）
+
+`"look": { "theme": "paper", "layout": "paper", "label": "AIモデル検証レポート" }` で、生成り白の紙面に文字・数字・1px罫線・単色の棒グラフだけで組む質素なデザインになります（`src/components/paper/`）。
+- 字幕は `scripts/generate_voice.py` が書き出す `public/voice/<id>/captions.json` を使い、発話に合わせて2〜3秒ごとのフレーズで切り替わります
+- エピソードの `voice`（話速・前後の無音）、スライドの `voiceSpeed`（冒頭だけ速くする等）、`voiceDict`（VOICEVOX ユーザー辞書。例: アンチグラビティのアクセント）、`bgmVolume` で音を調整できます
+- 読み上げ文（`speech`）は字幕にそのまま出るので、モデル名などは英語表記で書き、読みは `readings` で指定します
+- フォントは Noto Serif JP（タイトル）と Noto Sans JP（本文）を `public/fonts/` に同梱（SIL OFL 1.1）
+
 ### Gemini に制作させる（台本 → エピソード JSON）
 
 台本（Markdown）を `drafts/<id>.md` に書き、Gemini（既定は `gemini-4-hydrogen`）にスライド構成・テロップ・読み上げ文・図表・イラスト選び・読み替え辞書を組み立てさせます。
