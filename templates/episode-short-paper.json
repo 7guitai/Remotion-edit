@@ -1,0 +1,287 @@
+{
+  "_comment": "ひな形: gemini4-neon をもとにしています。id を変えて src/episodes/ に置き、src/episodes/index.ts に登録してください。数値・出典は必ず差し替えること。",
+  "id": "my-new-short",
+  "format": "short",
+  "title": "<動画タイトル>",
+  "series": "AI最新モデル検証",
+  "headline": "<画面上部の見出し（1行）>",
+  "pr": false,
+  "source": {
+    "name": "Google「Introducing Gemini 4 Neon」(2026/11/18)",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+  },
+  "bgm": {
+    "file": "simplestyle.mp3",
+    "title": "シンプルスタイル",
+    "credit": "甘茶の音楽工房",
+    "page": "https://amachamusic.chagasi.com/music_simplestyle.html",
+    "url": "https://amachamusic.chagasi.com/mp3/simplestyle.mp3"
+  },
+  "readings": {
+    "Gemini 4 Neon": "ジェミニフォーネオン",
+    "Gemini 4 Hydrogen": "ジェミニフォーハイドロジェン",
+    "Gemini 4 Carbon": "ジェミニフォーカーボン",
+    "Antigravity": "アンチグラビティ",
+    "Artificial Analysis": "アーティフィシャルアナリシス",
+    "Claude Fable 5.2": "クロードフェイブルゴーテンニ",
+    "GPT-6.2 Astra": "ジーピーティーロクテンニアストラ",
+    "AA": "エーエー",
+    "API": "エーピーアイ",
+    "Gemini": "ジェミニ",
+    "Neon": "ネオン",
+    "Hydrogen": "ハイドロジェン",
+    "Carbon": "カーボン",
+    "Astra": "アストラ",
+    "Fable": "フェイブル",
+    "Xhigh": "エックスハイ",
+    "Google": "グーグル"
+  },
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "hook",
+      "text": "Googleの新AIは\n総合3位って本当なのだ？",
+      "speech": "Gemini 4 Neonが総合3位って本当なのだ？",
+      "headline": "Gemini 4 Neon\n総合【3位】は本当？",
+      "expression": "question",
+      "se": "impact_soft",
+      "voiceSpeed": 1.32,
+      "sub": "公式発表と第三者評価から検証"
+    },
+    {
+      "type": "versus",
+      "text": "公式のAPI料金は\n入力$3・出力$15なのだ",
+      "speech": "公式発表のAPI料金は、100万トークンあたり入力3ドル、出力15ドルなのだ。",
+      "cite": "Google公式ブログ（2026/11/18）",
+      "left": {
+        "label": "入力",
+        "value": "$3"
+      },
+      "right": {
+        "label": "出力",
+        "value": "$15"
+      },
+      "note": "100万トークンあたり・有料枠のみ\n2026年11月18日 一般提供開始\nキャッシュ入力は $0.15",
+      "expression": "normal",
+      "se": "slide_in"
+    },
+    {
+      "type": "ranking",
+      "text": "第三者評価で61点の3位！\n上位モデルに迫る実力なのだ",
+      "speech": "第三者機関Artificial Analysisの総合指数では、最高設定で61点の3位。1位の65点、2位の62点に迫っているのだ！",
+      "cite": "Artificial Analysis",
+      "rows": [
+        {
+          "label": "Claude Fable 5.2",
+          "sub": "max",
+          "value": 65
+        },
+        {
+          "label": "GPT-6.2 Astra",
+          "sub": "max",
+          "value": 62
+        },
+        {
+          "label": "Gemini 4 Neon",
+          "sub": "xhigh",
+          "value": 61,
+          "highlight": true
+        },
+        {
+          "label": "Gemini 4 Carbon",
+          "sub": "high",
+          "value": 60
+        }
+      ],
+      "unit": "点",
+      "note": "設定はモデルによって異なる",
+      "expression": "happy",
+      "se": "chime_up",
+      "title": "Artificial Analysis 総合指数（高いほど優秀）"
+    },
+    {
+      "type": "versus",
+      "text": "1タスク$6.44・21.5分\nアストラより高くて遅いのだ",
+      "speech": "ただ、コスパ最強とは言い切れないのだ。評価1タスクあたり6.44ドル・21.5分で、Astraの4ドル・13.7分より高くて遅いのだ。",
+      "cite": "Artificial Analysis／Gemini API 料金表",
+      "left": {
+        "label": "Gemini 4 Neon（xhigh）",
+        "metrics": [
+          {
+            "label": "1タスク費用",
+            "value": "$6.44"
+          },
+          {
+            "label": "処理時間",
+            "value": "21.5分"
+          }
+        ],
+        "tone": "bad"
+      },
+      "right": {
+        "label": "GPT-6.2 Astra（max）",
+        "metrics": [
+          {
+            "label": "1タスク費用",
+            "value": "$4.00"
+          },
+          {
+            "label": "処理時間",
+            "value": "13.7分"
+          }
+        ],
+        "tone": "neutral"
+      },
+      "note": "Artificial Analysis 総合指数の評価1タスクあたり",
+      "expression": "alert",
+      "se": "alert_soft",
+      "lead": "コスパ最強とは言い切れない",
+      "leadNote": "思考トークンも出力として課金されるため、出力が増えると費用が膨らむ",
+      "leadTone": "bad"
+    },
+    {
+      "type": "flow",
+      "text": "公式ではネオンを計画役として\n実行役と組み合わせるのだ",
+      "speech": "公式は、AntigravityでNeonを計画役、Hydrogenを実行役にする使い方も紹介しているのだ。",
+      "cite": "Google Antigravity 公式ブログ",
+      "steps": [
+        {
+          "label": "Gemini 4 Neon",
+          "sub": "計画役（考える）"
+        },
+        {
+          "label": "Gemini 4 Hydrogen",
+          "sub": "実行役（手を動かす）"
+        },
+        {
+          "label": "Antigravity で連携",
+          "sub": "オーケストレーターが2つを組み合わせる",
+          "tone": "good"
+        }
+      ],
+      "expression": "normal",
+      "se": "slide_in"
+    },
+    {
+      "type": "points",
+      "text": "実力は本物、でも費用は要確認！\n何に使うかコメントで教えてなのだ",
+      "speech": "実力は本物だけど、実コストの確認は必須なのだ！何に使うかコメントで教えてなのだ！",
+      "items": [
+        {
+          "label": "実力",
+          "body": "第三者評価で総合3位（61点）"
+        },
+        {
+          "label": "注意",
+          "body": "1タスクの費用と時間は要確認"
+        },
+        {
+          "label": "使い方",
+          "body": "計画役に Neon、実行役に Hydrogen"
+        }
+      ],
+      "expression": "wink",
+      "se": "outro_chime"
+    }
+  ],
+  "description": "Googleが2026年11月18日に一般提供を始めた「Gemini 4 Neon」の実力と実コストの注意点を、公式発表と第三者評価（Artificial Analysis）に分けて整理したのだ。",
+  "hashtags": [
+    "Gemini4",
+    "Gemini4Neon",
+    "AI解説",
+    "生成AI",
+    "ずんだもん"
+  ],
+  "look": {
+    "theme": "paper",
+    "layout": "paper",
+    "label": "AIモデル検証レポート"
+  },
+  "sources": [
+    {
+      "label": "Google公式ブログ「Introducing Gemini 4 Neon」(2026/11/18)",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+    },
+    {
+      "label": "Google Antigravity公式ブログ「Gemini 4 Neon in Google Antigravity」",
+      "url": "https://antigravity.google/blog/gemini-4-neon-in-google-antigravity/"
+    },
+    {
+      "label": "Artificial Analysis（第三者評価）：Gemini 4 Neon",
+      "url": "https://artificialanalysis.ai/models/gemini-4-neon"
+    }
+  ],
+  "character": {
+    "name": "ずんだもん",
+    "credit": "坂本アヒル「ずんだもん立ち絵素材」",
+    "page": "https://twitter.com/sakamoto_ahr",
+    "howto": "坂本アヒル「ずんだもん立ち絵素材」の PSD をダウンロードして python3 scripts/build_character.py <PSD> を実行",
+    "spriteHeight": 720,
+    "images": {
+      "normal": {
+        "file": "characters/zundamon-ahiru/normal.png",
+        "talk": "characters/zundamon-ahiru/normal_talk.png"
+      },
+      "question": {
+        "file": "characters/zundamon-ahiru/question.png",
+        "talk": "characters/zundamon-ahiru/question_talk.png"
+      },
+      "happy": {
+        "file": "characters/zundamon-ahiru/happy.png",
+        "talk": "characters/zundamon-ahiru/happy_talk.png"
+      },
+      "alert": {
+        "file": "characters/zundamon-ahiru/alert.png",
+        "talk": "characters/zundamon-ahiru/alert_talk.png"
+      },
+      "wink": {
+        "file": "characters/zundamon-ahiru/wink.png",
+        "talk": "characters/zundamon-ahiru/wink_talk.png"
+      }
+    }
+  },
+  "sounds": {
+    "impact_soft": {
+      "file": "se/impact_soft.mp3",
+      "url": "https://soundeffect-lab.info/sound/anime/mp3/question1.mp3",
+      "title": "クイズ出題1"
+    },
+    "slide_in": {
+      "file": "se/slide_in.mp3",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision34.mp3",
+      "title": "決定ボタンを押す34"
+    },
+    "chime_up": {
+      "file": "se/chime_up.mp3",
+      "url": "https://soundeffect-lab.info/sound/anime/mp3/correct2.mp3",
+      "title": "クイズ正解2"
+    },
+    "alert_soft": {
+      "file": "se/alert_soft.mp3",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/warning1.mp3",
+      "title": "警告音1"
+    },
+    "outro_chime": {
+      "file": "se/outro_chime.mp3",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision24.mp3",
+      "title": "決定ボタンを押す24"
+    }
+  },
+  "soundCredit": {
+    "name": "効果音ラボ",
+    "page": "https://soundeffect-lab.info/"
+  },
+  "bgmVolume": 0.067,
+  "voice": {
+    "speed": 1.2,
+    "pre": 0.05,
+    "post": 0.05
+  },
+  "voiceDict": [
+    {
+      "surface": "アンチグラビティ",
+      "pronunciation": "アンチグラビティ",
+      "accent_type": 5
+    }
+  ]
+}

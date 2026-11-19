@@ -160,6 +160,16 @@ def main() -> None:
         engine = "voicevox" if voicevox_available(args.voicevox_url) else "openjtalk"
     if engine == "voicevox" and not voicevox_available(args.voicevox_url):
         sys.exit(f"VOICEVOX エンジンに接続できません: {args.voicevox_url}")
+    if engine == "openjtalk":
+        try:
+            import pyopenjtalk  # noqa: F401
+        except ImportError:
+            # 既存の音声を消す前に止める
+            sys.exit(
+                "VOICEVOX に接続できず、代わりの Open JTalk も入っていません。\n"
+                "VOICEVOX アプリを起動するか（Docker なら docker run -d -p 127.0.0.1:50021:50021 "
+                "voicevox/voicevox_engine:cpu-latest）、pip install pyopenjtalk numpy を実行してください。"
+            )
     print(f"engine: {engine}")
 
     episode = json.loads((EPISODES / f"{args.episode}.json").read_text(encoding="utf-8"))
