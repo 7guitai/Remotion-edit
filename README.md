@@ -27,6 +27,19 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 1. `src/episodes/` に JSON を追加し、`src/episodes/index.ts` の `EPISODES` に登録する
 2. `npm run assets` → `npm run voice -- <id>` → レンダリング
 
+### Gemini に制作させる（台本 → エピソード JSON）
+
+台本（Markdown）を `drafts/<id>.md` に書き、Gemini（既定は `gemini-4-hydrogen`）にスライド構成・テロップ・読み上げ文・図表・イラスト選び・読み替え辞書を組み立てさせます。
+出力は `src/episodes/<id>.json` に書き出され、`src/episodes/index.ts` にも登録されます。
+
+```bash
+GEMINI_API_KEY=<AI Studio のキー> python3 scripts/gemini_produce.py drafts/<id>.md --id <id> --title "動画タイトル"
+```
+
+- 混雑（503）やレート制限（429）のときは自動で待って再試行します。`--model gemini-3.5-flash` などで別モデルも使えます
+- イラストは `irasutoya`（探す画像名）と仮の絵文字だけ入るので、URL は人が確認して入れてください
+- 出力は下書きです。数値・事実が台本どおりかを必ずレビューしてください
+
 ### エピソード JSON
 
 | キー | 内容 |
