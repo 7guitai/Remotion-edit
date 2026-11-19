@@ -108,6 +108,7 @@ SYSTEM_SHORT = """あなたは「ずんだもん解説ショート」（縦型 1
 - "versus": {"left": {"label", "value"?, "lines"?: [...], "tone": "good|bad|neutral"}, "right": {同じ}, "note"?}
 - "flow": {"steps": [{"label", "sub"?, "emoji"?, "tone"?}]}（3〜4段。最後の段が結論）
 - "stacked": {"series": [{"label", "tone"}], "rows": [{"label", "values": [数値...]}], "note"}（values は series と同じ順・合計100）
+- "ranking": {"rows": [{"label", "sub"?: 設定など, "value": 数値, "highlight"?: true}], "unit"?: "点", "note"?}（スコアの高い順。主役の行だけ highlight）
 - "emphasis": {"big": 大きな一言（\\n 可、強調は【】）, "sub"?: 補足}
 - "points": {"items": [{"label", "body"}]}（チェックリスト、2〜3個）
 
@@ -115,6 +116,8 @@ SYSTEM_SHORT = """あなたは「ずんだもん解説ショート」（縦型 1
 - 語尾はずんだもん口調（「〜のだ」「〜なのだ」）
 - 台本の内容・数値・事実を変えない。足さない。台本にない数値を入れない
 - 台本の「画面:」の指示に合う type を選ぶ
+- 字幕 text は1行16文字以内・2行まで
+- 台本の「出典:」はそのスライドの cite にする（"出典：" の語は付けない）
 - good=望ましい（緑）、bad=問題（赤）、neutral=どちらでもない（灰）
 """
 
@@ -196,6 +199,9 @@ def validate(ep: dict) -> list[str]:
             n = len(s.get("series", []))
             if not n or any(len(r.get("values", [])) != n for r in s.get("rows", [])):
                 errors.append(f"slides[{i}] (stacked) の series と values の数が合いません")
+        elif t == "ranking":
+            if not s.get("rows") or any("value" not in r for r in s["rows"]):
+                errors.append(f"slides[{i}] (ranking) の rows に value がありません")
         elif t == "emphasis":
             if not s.get("big"):
                 errors.append(f"slides[{i}] (emphasis) に big がありません")

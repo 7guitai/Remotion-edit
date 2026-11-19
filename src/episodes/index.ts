@@ -1,6 +1,7 @@
 import chargerPowerSplit from "./charger-power-split.json";
 import sleepTrivia from "./sleep-trivia.json";
 import aiHallucination from "./ai-hallucination.json";
+import gemini4Neon from "./gemini4-neon.json";
 
 export type Illustration = {
   emoji: string;
@@ -101,6 +102,17 @@ export type StackedSlide = {
   note?: string;
 };
 
+// 横棒ランキング（スコアの比較。highlight を付けた行を強調）
+export type RankingSlide = {
+  type: "ranking";
+  text: string;
+  speech?: string;
+  unit?: string;
+  max?: number;
+  rows: { label: string; sub?: string; value: number; highlight?: boolean }[];
+  note?: string;
+};
+
 // 大きな数字や一言で強調
 export type EmphasisSlide = {
   type: "emphasis";
@@ -122,6 +134,7 @@ export type ScriptSlide = (
   | VersusSlide
   | FlowSlide
   | StackedSlide
+  | RankingSlide
   | EmphasisSlide
 ) & {
   chapter?: string;
@@ -136,9 +149,18 @@ export type Episode = {
   // ショートの画面上部に出すシリーズ名と見出し
   series?: string;
   headline?: string;
+  // ショートの見た目。素材キットの背景・タイトル帯を使うときは layout: "kit"
+  look?: {
+    theme?: "light" | "dark";
+    layout?: "default" | "kit";
+    background?: string; // public/ からのパス
+    banner?: string; // public/ からのパス（1080×280、上端に置く）
+  };
   // アフィリエイト等を含む動画は画面に「PR」を表示する（ステマ規制対応）
   pr: boolean;
   source?: { name: string; url: string };
+  // 複数の一次資料（概要欄に一覧で出す）
+  sources?: { label: string; url: string }[];
   bgm: { file: string; title: string; credit: string; url: string };
   readings?: Record<string, string>;
   illustrations: Record<string, Illustration>;
@@ -149,6 +171,7 @@ export const EPISODES: Episode[] = [
   sleepTrivia as Episode,
   chargerPowerSplit as Episode,
   aiHallucination as Episode,
+  gemini4Neon as Episode,
 ];
 
 export const getEpisode = (id: string): Episode => {

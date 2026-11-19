@@ -1,5 +1,5 @@
 import React from "react";
-import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { Img, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Episode } from "../../episodes";
 import { fontFamily } from "../../theme";
 import { SHORT } from "./theme";
@@ -11,18 +11,33 @@ export const ShortHeader: React.FC<{ episode: Episode }> = ({ episode }) => {
   const progress = interpolate(frame, [0, durationInFrames - 1], [0, 1], {
     extrapolateRight: "clamp",
   });
+  const bar = (
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        height: 12,
+        width: `${progress * 100}%`,
+        background: episode.look?.banner ? SHORT.good : SHORT.accent,
+      }}
+    />
+  );
+  // 素材キットのタイトル帯（1080×280）を上端に置く
+  if (episode.look?.banner) {
+    return (
+      <>
+        <Img
+          src={staticFile(episode.look.banner)}
+          style={{ position: "absolute", top: 0, left: 0, width: 1080, height: 280 }}
+        />
+        {bar}
+      </>
+    );
+  }
   return (
     <>
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          height: 12,
-          width: `${progress * 100}%`,
-          background: SHORT.accent,
-        }}
-      />
+      {bar}
       <div
         style={{
           position: "absolute",

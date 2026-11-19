@@ -12,7 +12,9 @@ import {
   EmphasisSlide,
   FlowSlide,
   HookSlide,
+  Episode,
   PointsSlide,
+  RankingSlide,
   SourceSlide,
   StackedSlide,
   VersusSide,
@@ -20,39 +22,57 @@ import {
 } from "../../episodes";
 import { ResolvedSlide } from "../../slides";
 import { fontFamily } from "../../theme";
-import { SHORT, toneColor } from "./theme";
+import { LAYOUTS, SHORT, toneColor } from "./theme";
 
-// 縦型ショート1枚: 上に図解カード、下にずんだもんの字幕、最下部に出典
-export const ShortSlide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
+type Look = Episode["look"];
+
+// 縦型ショート1枚: 上に図解カード、下にずんだもんの字幕、出典
+export const ShortSlide: React.FC<{ resolved: ResolvedSlide; look?: Look }> = ({
+  resolved,
+  look,
+}) => {
   const { slide } = resolved;
   const frame = useCurrentFrame();
   const enter = spring({ frame, fps: 30, config: { damping: 200 }, durationInFrames: 14 });
+  const kit = look?.layout === "kit";
+  const L = LAYOUTS[kit ? "kit" : "default"];
 
   return (
     <AbsoluteFill style={{ fontFamily }}>
       <div
         style={{
           position: "absolute",
-          top: SHORT.cardTop,
-          left: SHORT.side,
-          right: SHORT.side,
-          height: SHORT.cardHeight,
-          borderRadius: 44,
+          top: L.cardTop,
+          left: L.cardLeft,
+          right: L.cardRight,
+          height: L.cardHeight,
+          borderRadius: 40,
           background: SHORT.card,
-          boxShadow: "0 18px 50px rgba(30, 50, 90, 0.12)",
+          border: `2px solid ${SHORT.cardBorder}`,
+          boxShadow: "0 18px 50px rgba(10, 20, 40, 0.18)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          padding: 56,
+          padding: kit ? "48px 40px 70px" : 56,
           boxSizing: "border-box",
           opacity: enter,
           transform: `translateY(${interpolate(enter, [0, 1], [40, 0])}px)`,
         }}
       >
         <Visual resolved={resolved} />
+        {kit && slide.cite ? <CardCite text={slide.cite} /> : null}
       </div>
-      <Caption text={slide.text} />
-      {slide.cite ? <Cite text={slide.cite} /> : null}
+      {kit ? (
+        <>
+          <KitCaption text={slide.text} top={L.captionTop} />
+          <Speaker />
+        </>
+      ) : (
+        <>
+          <Caption text={slide.text} top={L.captionTop} />
+          {slide.cite ? <Cite text={slide.cite} /> : null}
+        </>
+      )}
     </AbsoluteFill>
   );
 };
@@ -70,6 +90,8 @@ const Visual: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
       return <Flow slide={slide} />;
     case "stacked":
       return <Stacked slide={slide} />;
+    case "ranking":
+      return <Ranking slide={slide} />;
     case "emphasis":
       return <Emphasis slide={slide} />;
     case "points":
@@ -98,16 +120,16 @@ const useStep = (i: number, delay = 10, start = 8) => {
 // ---- 字幕（ずんだもん） ----
 
 // いちばん長い行が字幕の幅に収まる大きさにする
-const captionSize = (text: string) => {
+const captionSize = (text: string, width = 700, max = 62) => {
   const longest = Math.max(...text.split("\n").map((l) => [...l].length));
-  return Math.min(62, Math.floor(700 / Math.max(longest, 1)));
+  return Math.min(max, Math.floor(width / Math.max(longest, 1)));
 };
 
-const Caption: React.FC<{ text: string }> = ({ text }) => (
+const Caption: React.FC<{ text: string; top: number }> = ({ text, top }) => (
   <div
     style={{
       position: "absolute",
-      top: SHORT.captionTop,
+      top,
       left: SHORT.side,
       right: SHORT.side,
       display: "flex",
@@ -115,22 +137,9 @@ const Caption: React.FC<{ text: string }> = ({ text }) => (
       alignItems: "flex-start",
     }}
   >
-    <Avatar />
+    <Avatar size={116} />
     <div style={{ flex: 1, position: "relative" }}>
-      <div
-        style={{
-          display: "inline-block",
-          fontWeight: 800,
-          fontSize: 26,
-          color: "#fff",
-          background: SHORT.zunda,
-          borderRadius: 999,
-          padding: "4px 20px",
-          marginBottom: 14,
-        }}
-      >
-        ずんだもん
-      </div>
+      <NameChip />
       <div
         style={{
           fontWeight: 800,
@@ -148,15 +157,81 @@ const Caption: React.FC<{ text: string }> = ({ text }) => (
   </div>
 );
 
+// 素材キットの字幕: 白の太字＋緑の縁取り、最大2行（Y=1340..1540）
+const KitCaption: React.FC<{ text: string; top: number }> = ({ text, top }) => {
+  const size = captionSize(text, 800, 64);
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top,
+        left: 40,
+        right: 150,
+        height: 195,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        fontWeight: 800,
+        fontSize: size,
+        lineHeight: 1.32,
+        color: "#ffffff",
+        WebkitTextStroke: `${Math.round(size / 5)}px #2e8b3a`,
+        paintOrder: "stroke fill",
+        textShadow: "0 4px 10px rgba(0, 0, 0, 0.45)",
+        whiteSpace: "pre-line",
+        wordBreak: "keep-all",
+        overflowWrap: "anywhere",
+      }}
+    >
+      {text}
+    </div>
+  );
+};
+
+// キャラクター欄（Y=1540〜）。立ち絵の代わりに名前入りのアイコンを置く
+const Speaker: React.FC = () => (
+  <div
+    style={{
+      position: "absolute",
+      top: 1560,
+      left: 40,
+      display: "flex",
+      alignItems: "center",
+      gap: 18,
+    }}
+  >
+    <Avatar size={92} />
+    <NameChip />
+  </div>
+);
+
+const NameChip: React.FC = () => (
+  <div
+    style={{
+      display: "inline-block",
+      fontWeight: 800,
+      fontSize: 26,
+      color: "#fff",
+      background: SHORT.zunda,
+      borderRadius: 999,
+      padding: "4px 20px",
+      marginBottom: 14,
+    }}
+  >
+    ずんだもん
+  </div>
+);
+
 // 話し手を示す丸いアイコン（キャラクターの絵は使わず、名前の頭文字で表す）
-const Avatar: React.FC = () => {
+const Avatar: React.FC<{ size: number }> = ({ size }) => {
   const frame = useCurrentFrame();
   const bob = Math.sin(frame / 5) * 3;
   return (
     <div
       style={{
-        width: 116,
-        height: 116,
+        width: size,
+        height: size,
         flexShrink: 0,
         borderRadius: "50%",
         background: `radial-gradient(circle at 35% 30%, #a6dd84, ${SHORT.zunda})`,
@@ -166,7 +241,7 @@ const Avatar: React.FC = () => {
         justifyContent: "center",
         alignItems: "center",
         fontWeight: 800,
-        fontSize: 60,
+        fontSize: size * 0.52,
         color: "#fff",
         transform: `translateY(${bob}px)`,
       }}
@@ -190,6 +265,24 @@ const Cite: React.FC<{ text: string }> = ({ text }) => (
     }}
   >
     出典: {text}
+  </div>
+);
+
+// 図解カードの右下に出す出典（素材キットのルール）
+const CardCite: React.FC<{ text: string }> = ({ text }) => (
+  <div
+    style={{
+      position: "absolute",
+      right: 32,
+      bottom: 22,
+      left: 32,
+      textAlign: "right",
+      fontWeight: 500,
+      fontSize: 24,
+      color: SHORT.note,
+    }}
+  >
+    出典：{text}
   </div>
 );
 
@@ -492,6 +585,71 @@ const StackedRow: React.FC<{
   );
 };
 
+const Ranking: React.FC<{ slide: RankingSlide }> = ({ slide }) => {
+  const max = slide.max ?? Math.max(...slide.rows.map((r) => r.value)) * 1.08;
+  return (
+    <div style={{ width: "100%" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 30 }}>
+        {slide.rows.map((row, i) => (
+          <RankingRow key={row.label} row={row} index={i} max={max} unit={slide.unit} />
+        ))}
+      </div>
+      {slide.note ? <Note text={slide.note} /> : null}
+    </div>
+  );
+};
+
+const RankingRow: React.FC<{
+  row: RankingSlide["rows"][number];
+  index: number;
+  max: number;
+  unit?: string;
+}> = ({ row, index, max, unit }) => {
+  const grow = useStep(index, 10);
+  const color = row.highlight ? SHORT.good : SHORT.neutral;
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          gap: 14,
+          marginBottom: 10,
+          color: row.highlight ? SHORT.good : SHORT.text,
+        }}
+      >
+        <span style={{ fontWeight: 800, fontSize: 30, color: SHORT.note }}>{index + 1}位</span>
+        <span style={{ fontWeight: 800, fontSize: 38 }}>{row.label}</span>
+        {row.sub ? (
+          <span style={{ fontWeight: 500, fontSize: 26, color: SHORT.sub }}>{row.sub}</span>
+        ) : null}
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+        <div
+          style={{
+            height: row.highlight ? 76 : 60,
+            width: `${(row.value / max) * 82 * grow}%`,
+            borderRadius: 14,
+            background: color,
+            boxShadow: row.highlight ? `0 0 28px ${SHORT.good}88` : "none",
+          }}
+        />
+        <span
+          style={{
+            fontWeight: 800,
+            fontSize: row.highlight ? 52 : 40,
+            color: row.highlight ? SHORT.good : SHORT.text,
+            opacity: grow,
+          }}
+        >
+          {Math.round(row.value * grow)}
+          {unit ?? ""}
+        </span>
+      </div>
+    </div>
+  );
+};
+
 const Emphasis: React.FC<{ slide: EmphasisSlide }> = ({ slide }) => {
   const s = useStep(0, 0, 4);
   const t = useStep(1, 12, 4);
@@ -605,6 +763,7 @@ const Note: React.FC<{ text: string }> = ({ text }) => (
       lineHeight: 1.45,
       color: SHORT.note,
       textAlign: "center",
+      whiteSpace: "pre-line",
     }}
   >
     {text}

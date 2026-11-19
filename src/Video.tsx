@@ -2,6 +2,7 @@ import React from "react";
 import {
   AbsoluteFill,
   Audio,
+  Img,
   interpolate,
   Sequence,
   Series,
@@ -11,7 +12,7 @@ import {
 import { Slide } from "./components/Slide";
 import { ShortHeader } from "./components/short/ShortHeader";
 import { ShortSlide } from "./components/short/ShortSlide";
-import { SHORT } from "./components/short/theme";
+import { SHORT, themeVars } from "./components/short/theme";
 import { getEpisode } from "./episodes";
 import { VideoProps } from "./slides";
 import { BGM_VOLUME, COLORS, fontFamily } from "./theme";
@@ -32,12 +33,21 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
 
   return (
     <AbsoluteFill
-      style={{ backgroundColor: isShort ? SHORT.background : COLORS.background }}
+      style={{
+        ...(isShort ? themeVars(episode.look?.theme) : {}),
+        backgroundColor: isShort ? SHORT.background : COLORS.background,
+      }}
     >
+      {isShort && episode.look?.background ? (
+        <Img
+          src={staticFile(episode.look.background)}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        />
+      ) : null}
       <Series>
         {slides.map((s, i) => (
           <Series.Sequence key={i} durationInFrames={s.durationInFrames}>
-            {isShort ? <ShortSlide resolved={s} /> : <Slide resolved={s} />}
+            {isShort ? <ShortSlide resolved={s} look={episode.look} /> : <Slide resolved={s} />}
             {s.voice ? (
               <Sequence from={s.voiceStart}>
                 <Audio src={staticFile(s.voice)} />

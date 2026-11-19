@@ -47,7 +47,11 @@ def main() -> None:
         lines += ["【PR】この動画には広告（アフィリエイトリンク）が含まれます。", ""]
     if ep.get("description"):
         lines += [ep["description"], ""]
-    if ep.get("source"):
+    if ep.get("sources"):
+        lines += ["▼ 根拠・一次資料"]
+        lines += [f"・{x['label']}\n  {x['url']}" for x in ep["sources"]]
+        lines += [""]
+    elif ep.get("source"):
         label = "参考資料" if ep.get("format") == "short" else "詳しい解説記事"
         lines += [f"▼ {label}（{ep['source']['name']}）", ep["source"]["url"], ""]
     links = [l for l in ep.get("links", [])]

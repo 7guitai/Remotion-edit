@@ -1,0 +1,189 @@
+{
+  "id": "gemini4-neon",
+  "format": "short",
+  "title": "Gemini 4 Neonは買い？AA総合3位の実力と「実コスト」の注意点",
+  "series": "AI最新モデル検証",
+  "headline": "Gemini 4 Neon 実力と注意点",
+  "pr": false,
+  "source": {
+    "name": "Google「Introducing Gemini 4 Neon」(2026/11/18)",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+  },
+  "bgm": {
+    "file": "simplestyle.mp3",
+    "title": "シンプルスタイル",
+    "credit": "甘茶の音楽工房",
+    "page": "https://amachamusic.chagasi.com/music_simplestyle.html",
+    "url": "https://amachamusic.chagasi.com/mp3/simplestyle.mp3"
+  },
+  "readings": {
+    "Gemini 4 Neon": "ジェミニフォーネオン",
+    "Gemini 4 Hydrogen": "ジェミニフォーハイドロジェン",
+    "Gemini 4 Carbon": "ジェミニフォーカーボン",
+    "Antigravity": "アンチグラビティ",
+    "Artificial Analysis": "アーティフィシャルアナリシス",
+    "Claude Fable 5.2": "クロードフェイブルゴーテンニ",
+    "GPT-6.2 Astra": "ジーピーティーロクテンニアストラ",
+    "AA": "エーエー",
+    "API": "エーピーアイ",
+    "Gemini": "ジェミニ",
+    "Neon": "ネオン",
+    "Hydrogen": "ハイドロジェン",
+    "Carbon": "カーボン",
+    "Astra": "アストラ",
+    "Fable": "フェイブル",
+    "Xhigh": "エックスハイ"
+  },
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "hook",
+      "text": "Googleの新AIは\n総合3位って本当なのだ？",
+      "speech": "グーグルの新AI、ジェミニフォー・ネオン。第三者の評価で総合3位って本当なのだ？",
+      "headline": "Gemini 4 Neon\n総合【3位】は本当？",
+      "emoji": "🤔"
+    },
+    {
+      "type": "versus",
+      "text": "公式のAPI料金は\n入力$3・出力$15なのだ",
+      "speech": "公式発表のエーピーアイ料金は、100万トークンあたり入力3ドル、出力15ドルなのだ。",
+      "cite": "Google公式ブログ（2026/11/18）",
+      "left": {
+        "label": "入力",
+        "value": "$3"
+      },
+      "right": {
+        "label": "出力",
+        "value": "$15"
+      },
+      "note": "100万トークンあたり・有料枠のみ\n2026年11月18日 一般提供開始\nキャッシュ入力は $0.15"
+    },
+    {
+      "type": "ranking",
+      "text": "第三者評価で61点の3位！\n上位モデルに迫る実力なのだ",
+      "speech": "第三者機関アーティフィシャル・アナリシスの総合指数では、最高設定で61点の3位。1位の65点、2位の62点に迫っているのだ！",
+      "cite": "Artificial Analysis",
+      "rows": [
+        {
+          "label": "Claude Fable 5.2",
+          "sub": "max",
+          "value": 65
+        },
+        {
+          "label": "GPT-6.2 Astra",
+          "sub": "max",
+          "value": 62
+        },
+        {
+          "label": "Gemini 4 Neon",
+          "sub": "xhigh",
+          "value": 61,
+          "highlight": true
+        },
+        {
+          "label": "Gemini 4 Carbon",
+          "sub": "high",
+          "value": 60
+        }
+      ],
+      "unit": "点",
+      "note": "設定はモデルによって異なる"
+    },
+    {
+      "type": "versus",
+      "text": "1タスク$6.44・21.5分\nアストラより高くて遅いのだ",
+      "speech": "ただ、コスパ最強とは言い切れないのだ。評価1タスクあたり6.44ドル・21.5分で、アストラの4ドル・13.7分より高くて遅いのだ。",
+      "cite": "Artificial Analysis",
+      "left": {
+        "label": "Neon（xhigh）",
+        "value": "$6.44",
+        "lines": [
+          "21.5分"
+        ],
+        "tone": "bad"
+      },
+      "right": {
+        "label": "Astra（max）",
+        "value": "$4.00",
+        "lines": [
+          "13.7分"
+        ],
+        "tone": "neutral"
+      },
+      "note": "総合指数の評価1タスクあたりの費用・時間"
+    },
+    {
+      "type": "flow",
+      "text": "公式ではネオンを計画役として\n実行役と組み合わせるのだ",
+      "speech": "公式は、アンチグラビティでネオンを計画役、ハイドロジェンを実行役にする使い方も紹介しているのだ。",
+      "cite": "Google Antigravity 公式ブログ",
+      "steps": [
+        {
+          "label": "Gemini 4 Neon",
+          "sub": "計画役（考える）",
+          "emoji": "🧠",
+          "tone": "neutral"
+        },
+        {
+          "label": "Gemini 4 Hydrogen",
+          "sub": "実行役（手を動かす）",
+          "emoji": "🛠️",
+          "tone": "neutral"
+        },
+        {
+          "label": "オーケストレーターで連携",
+          "sub": "Antigravity",
+          "emoji": "🚀",
+          "tone": "good"
+        }
+      ]
+    },
+    {
+      "type": "points",
+      "text": "実力は本物、でも費用は要確認！\n何に使うかコメントで教えてなのだ",
+      "speech": "実力は本物だけど、実コストの確認は必須なのだ！何に使うかコメントで教えてなのだ！",
+      "items": [
+        {
+          "label": "実力",
+          "body": "第三者評価で総合3位（61点）"
+        },
+        {
+          "label": "注意",
+          "body": "1タスクの費用と時間は要確認"
+        },
+        {
+          "label": "使い方",
+          "body": "計画役に Neon、実行役に Hydrogen"
+        }
+      ]
+    }
+  ],
+  "description": "Googleが2026年11月18日に一般提供を始めた「Gemini 4 Neon」の実力と実コストの注意点を、公式発表と第三者評価（Artificial Analysis）に分けて整理したのだ。",
+  "hashtags": [
+    "Gemini4",
+    "Gemini4Neon",
+    "AI解説",
+    "生成AI",
+    "ずんだもん"
+  ],
+  "look": {
+    "theme": "dark",
+    "layout": "kit",
+    "background": "shorts/gemini4-neon/bg_dark_tech_1080x1920.png",
+    "banner": "shorts/gemini4-neon/title_banner_gemini4_neon.png"
+  },
+  "sources": [
+    {
+      "label": "Google公式ブログ「Introducing Gemini 4 Neon」(2026/11/18)",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+    },
+    {
+      "label": "Google Antigravity公式ブログ「Gemini 4 Neon in Google Antigravity」",
+      "url": "https://antigravity.google/blog/gemini-4-neon-in-google-antigravity/"
+    },
+    {
+      "label": "Artificial Analysis（第三者評価）：Gemini 4 Neon",
+      "url": "https://artificialanalysis.ai/models/gemini-4-neon"
+    }
+  ]
+}
