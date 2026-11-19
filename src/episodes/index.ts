@@ -124,6 +124,7 @@ export type EmphasisSlide = {
 
 // chapter を付けたスライドの開始時刻が、概要欄のチャプターになる
 // cite を付けると、ショートでは画面下に出典として表示する
+// expression は立ち絵の表情（character.images のキー）、se は切り替え時の効果音（sounds のキー）
 export type ScriptSlide = (
   | IllustSlide
   | BarsSlide
@@ -139,6 +140,8 @@ export type ScriptSlide = (
 ) & {
   chapter?: string;
   cite?: string;
+  expression?: string;
+  se?: string;
 };
 
 export type Episode = {
@@ -159,6 +162,16 @@ export type Episode = {
   // アフィリエイト等を含む動画は画面に「PR」を表示する（ステマ規制対応）
   pr: boolean;
   source?: { name: string; url: string };
+  // 立ち絵（ショートのキャラクター欄に表示）。画像は public/characters/ に npm run assets で取得
+  character?: {
+    name: string;
+    credit: string;
+    page: string;
+    images: Record<string, { file: string; url: string; note?: string }>;
+  };
+  // 効果音。public/se/ に npm run assets で取得
+  sounds?: Record<string, { file: string; url: string; title: string }>;
+  soundCredit?: { name: string; page: string };
   // 複数の一次資料（概要欄に一覧で出す）
   sources?: { label: string; url: string }[];
   bgm: { file: string; title: string; credit: string; url: string };

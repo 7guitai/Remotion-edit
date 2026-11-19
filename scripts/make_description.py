@@ -66,6 +66,11 @@ def main() -> None:
         "音声：VOICEVOX:ずんだもん",
         f"BGM：{ep['bgm']['credit']}「{ep['bgm']['title']}」",
     ]
+    if ep.get("character"):
+        c = ep["character"]
+        lines += [f"立ち絵：{c['credit']}（{c['page']}）"]
+    if ep.get("soundCredit"):
+        lines += [f"効果音：{ep['soundCredit']['name']}（{ep['soundCredit']['page']}）"]
     if ep.get("illustrations"):
         lines += ["イラスト：いらすとや"]
     lines += [""]

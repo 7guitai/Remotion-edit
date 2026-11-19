@@ -7,3 +7,6 @@ public/illustrations/*
 # フリーBGMも再配布禁止のためコミットしない（npm run assets で取得）
 public/bgm/
 __pycache__/
+# 立ち絵・効果音も配布元から取得する（効果音ラボは再配布禁止。npm run assets で取得）
+public/characters/
+public/se/

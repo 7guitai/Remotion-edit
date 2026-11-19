@@ -29,3 +29,6 @@ export const COLORS = {
 
 // BGM の音量（ナレーションは 1.0）
 export const BGM_VOLUME = 0.12;
+
+// 効果音の音量（ナレーションの邪魔にならない程度）
+export const SE_VOLUME = 0.35;

@@ -15,7 +15,7 @@ import { ShortSlide } from "./components/short/ShortSlide";
 import { SHORT, themeVars } from "./components/short/theme";
 import { getEpisode } from "./episodes";
 import { VideoProps } from "./slides";
-import { BGM_VOLUME, COLORS, fontFamily } from "./theme";
+import { BGM_VOLUME, COLORS, fontFamily, SE_VOLUME } from "./theme";
 
 export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
   const episode = getEpisode(episodeId);
@@ -47,11 +47,14 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
       <Series>
         {slides.map((s, i) => (
           <Series.Sequence key={i} durationInFrames={s.durationInFrames}>
-            {isShort ? <ShortSlide resolved={s} look={episode.look} /> : <Slide resolved={s} />}
+            {isShort ? <ShortSlide resolved={s} look={episode.look} character={episode.character} /> : <Slide resolved={s} />}
             {s.voice ? (
               <Sequence from={s.voiceStart}>
                 <Audio src={staticFile(s.voice)} />
               </Sequence>
+            ) : null}
+            {s.slide.se && episode.sounds?.[s.slide.se] ? (
+              <Audio src={staticFile(episode.sounds[s.slide.se].file)} volume={SE_VOLUME} />
             ) : null}
           </Series.Sequence>
         ))}

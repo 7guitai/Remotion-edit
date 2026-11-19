@@ -41,7 +41,9 @@
       "text": "Googleの新AIは\n総合3位って本当なのだ？",
       "speech": "グーグルの新AI、ジェミニフォー・ネオン。第三者の評価で総合3位って本当なのだ？",
       "headline": "Gemini 4 Neon\n総合【3位】は本当？",
-      "emoji": "🤔"
+      "emoji": "🤔",
+      "expression": "question",
+      "se": "impact_soft"
     },
     {
       "type": "versus",
@@ -56,7 +58,9 @@
         "label": "出力",
         "value": "$15"
       },
-      "note": "100万トークンあたり・有料枠のみ\n2026年11月18日 一般提供開始\nキャッシュ入力は $0.15"
+      "note": "100万トークンあたり・有料枠のみ\n2026年11月18日 一般提供開始\nキャッシュ入力は $0.15",
+      "expression": "normal",
+      "se": "slide_in"
     },
     {
       "type": "ranking",
@@ -87,7 +91,9 @@
         }
       ],
       "unit": "点",
-      "note": "設定はモデルによって異なる"
+      "note": "設定はモデルによって異なる",
+      "expression": "happy",
+      "se": "chime_up"
     },
     {
       "type": "versus",
@@ -110,7 +116,9 @@
         ],
         "tone": "neutral"
       },
-      "note": "総合指数の評価1タスクあたりの費用・時間"
+      "note": "総合指数の評価1タスクあたりの費用・時間",
+      "expression": "alert",
+      "se": "alert_soft"
     },
     {
       "type": "flow",
@@ -136,7 +144,9 @@
           "emoji": "🚀",
           "tone": "good"
         }
-      ]
+      ],
+      "expression": "normal",
+      "se": "slide_in"
     },
     {
       "type": "points",
@@ -155,7 +165,9 @@
           "label": "使い方",
           "body": "計画役に Neon、実行役に Hydrogen"
         }
-      ]
+      ],
+      "expression": "wink",
+      "se": "outro_chime"
     }
   ],
   "description": "Googleが2026年11月18日に一般提供を始めた「Gemini 4 Neon」の実力と実コストの注意点を、公式発表と第三者評価（Artificial Analysis）に分けて整理したのだ。",
@@ -185,5 +197,63 @@
       "label": "Artificial Analysis（第三者評価）：Gemini 4 Neon",
       "url": "https://artificialanalysis.ai/models/gemini-4-neon"
     }
-  ]
+  ],
+  "character": {
+    "name": "ずんだもん",
+    "credit": "東北ずん子・ずんだもんプロジェクト 公式イラスト",
+    "page": "https://zunko.jp/con_illust.html",
+    "images": {
+      "normal": {
+        "file": "characters/zundamon/normal.png",
+        "url": "https://zunko.jp/sozai/zundamon/zunmon003.png"
+      },
+      "happy": {
+        "file": "characters/zundamon/happy.png",
+        "url": "https://zunko.jp/sozai/zundamon/zunmon030.png"
+      },
+      "question": {
+        "file": "characters/zundamon/question.png",
+        "url": "https://zunko.jp/sozai/zundamon/zunmon031.png"
+      },
+      "alert": {
+        "file": "characters/zundamon/alert.png",
+        "url": "https://zunko.jp/sozai/zundamon/zunmon002.png"
+      },
+      "wink": {
+        "file": "characters/zundamon/wink.png",
+        "url": "https://zunko.jp/sozai/zundamon/zunmon004.png"
+      }
+    }
+  },
+  "sounds": {
+    "impact_soft": {
+      "file": "se/impact_soft.mp3",
+      "url": "https://soundeffect-lab.info/sound/anime/mp3/question1.mp3",
+      "title": "クイズ出題1"
+    },
+    "slide_in": {
+      "file": "se/slide_in.mp3",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision34.mp3",
+      "title": "決定ボタンを押す34"
+    },
+    "chime_up": {
+      "file": "se/chime_up.mp3",
+      "url": "https://soundeffect-lab.info/sound/anime/mp3/correct2.mp3",
+      "title": "クイズ正解2"
+    },
+    "alert_soft": {
+      "file": "se/alert_soft.mp3",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/warning1.mp3",
+      "title": "警告音1"
+    },
+    "outro_chime": {
+      "file": "se/outro_chime.mp3",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision24.mp3",
+      "title": "決定ボタンを押す24"
+    }
+  },
+  "soundCredit": {
+    "name": "効果音ラボ",
+    "page": "https://soundeffect-lab.info/"
+  }
 }

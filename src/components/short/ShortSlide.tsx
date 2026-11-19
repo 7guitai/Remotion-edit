@@ -27,10 +27,13 @@ import { LAYOUTS, SHORT, toneColor } from "./theme";
 type Look = Episode["look"];
 
 // 縦型ショート1枚: 上に図解カード、下にずんだもんの字幕、出典
-export const ShortSlide: React.FC<{ resolved: ResolvedSlide; look?: Look }> = ({
-  resolved,
-  look,
-}) => {
+type Character = Episode["character"];
+
+export const ShortSlide: React.FC<{
+  resolved: ResolvedSlide;
+  look?: Look;
+  character?: Character;
+}> = ({ resolved, look, character }) => {
   const { slide } = resolved;
   const frame = useCurrentFrame();
   const enter = spring({ frame, fps: 30, config: { damping: 200 }, durationInFrames: 14 });
@@ -65,7 +68,7 @@ export const ShortSlide: React.FC<{ resolved: ResolvedSlide; look?: Look }> = ({
       {kit ? (
         <>
           <KitCaption text={slide.text} top={L.captionTop} />
-          <Speaker />
+          <Speaker character={character} expression={slide.expression} />
         </>
       ) : (
         <>
@@ -189,22 +192,64 @@ const KitCaption: React.FC<{ text: string; top: number }> = ({ text, top }) => {
   );
 };
 
-// キャラクター欄（Y=1540〜）。立ち絵の代わりに名前入りのアイコンを置く
-const Speaker: React.FC = () => (
-  <div
-    style={{
-      position: "absolute",
-      top: 1560,
-      left: 40,
-      display: "flex",
-      alignItems: "center",
-      gap: 18,
-    }}
-  >
-    <Avatar size={92} />
-    <NameChip />
-  </div>
-);
+// キャラクター欄（Y=1540〜）。立ち絵があれば上半身を表示し、なければ名前入りのアイコン
+const Speaker: React.FC<{ character?: Character; expression?: string }> = ({
+  character,
+  expression,
+}) => {
+  const frame = useCurrentFrame();
+  const img = character?.images[expression ?? "normal"] ?? character?.images.normal;
+  if (!img) {
+    return (
+      <div
+        style={{
+          position: "absolute",
+          top: 1560,
+          left: 40,
+          display: "flex",
+          alignItems: "center",
+          gap: 18,
+        }}
+      >
+        <Avatar size={92} />
+        <NameChip />
+      </div>
+    );
+  }
+  // 表情が変わるたびに少し跳ねて登場し、話している間は小さく揺れる
+  const pop = spring({ frame, fps: 30, config: { damping: 12, stiffness: 160 }, durationInFrames: 18 });
+  const sway = Math.sin(frame / 7) * 1.2;
+  return (
+    <>
+      <div
+        style={{
+          position: "absolute",
+          top: 1530,
+          left: 0,
+          width: 460,
+          height: 390,
+          overflow: "hidden",
+        }}
+      >
+        <Img
+          src={staticFile(img.file)}
+          style={{
+            position: "absolute",
+            top: 10,
+            left: "50%",
+            height: 1150,
+            transform: `translateX(-50%) translateY(${interpolate(pop, [0, 1], [40, 0])}px) rotate(${sway}deg)`,
+            transformOrigin: "50% 100%",
+            filter: "drop-shadow(0 10px 24px rgba(0,0,0,0.45))",
+          }}
+        />
+      </div>
+      <div style={{ position: "absolute", top: 1560, left: 470 }}>
+        <NameChip />
+      </div>
+    </>
+  );
+};
 
 const NameChip: React.FC = () => (
   <div
