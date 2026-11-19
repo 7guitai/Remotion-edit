@@ -1,0 +1,361 @@
+{
+  "id": "gemini4-family",
+  "format": "short",
+  "title": "Gemini 4の4モデル、どれを使う？料金・評価・使い分け",
+  "series": "AIモデル検証レポート",
+  "headline": "Gemini 4 の4モデル 選び方",
+  "pr": false,
+  "bgm": {
+    "file": "simplestyle.mp3",
+    "title": "シンプルスタイル",
+    "credit": "甘茶の音楽工房",
+    "page": "https://amachamusic.chagasi.com/music_simplestyle.html",
+    "url": "https://amachamusic.chagasi.com/mp3/simplestyle.mp3"
+  },
+  "readings": {
+    "Gemini 4": "ジェミニフォー",
+    "Hydrogen": "ハイドロジェン",
+    "Neon": "ネオン",
+    "Argon": "アルゴン",
+    "Carbon": "カーボン",
+    "Artificial Analysis": "アーティフィシャルアナリシス"
+  },
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "hook",
+      "headline": "Gemini 4\n【4兄弟】の選び方",
+      "sub": "公式発表と第三者評価から整理",
+      "text": "Gemini 4は4種類。\nどれを使えばいいのだ？",
+      "speech": "Gemini 4は4種類。どれを使えばいいのだ？",
+      "expression": "question",
+      "se": "impact_soft",
+      "voiceSpeed": 1.32
+    },
+    {
+      "type": "table",
+      "columns": [
+        "モデル",
+        "一般提供",
+        "入力",
+        "出力"
+      ],
+      "rows": [
+        [
+          "Hydrogen",
+          "11/12",
+          "$1.50",
+          "$7.50"
+        ],
+        [
+          "Neon",
+          "11/18",
+          "$3.00",
+          "$15.00"
+        ],
+        [
+          "Argon",
+          "10/13",
+          "$2.00※",
+          "$10.00※"
+        ],
+        [
+          "Carbon",
+          "11/10",
+          "$2.00※",
+          "$10.00※"
+        ]
+      ],
+      "highlightRow": 0,
+      "note": "100万トークンあたり。※導入価格（11月30日まで）\nHydrogen は無料枠でも利用可",
+      "text": "最安はHydrogenで\n入力1.5ドルなのだ",
+      "speech": "公式の料金は、Hydrogenがいちばん安い入力1.5ドル。Neonは3ドル、ArgonとCarbonは今は2ドルなのだ。",
+      "expression": "normal",
+      "se": "slide_in",
+      "cite": "Google公式ブログ（各モデルの発表）"
+    },
+    {
+      "type": "versus",
+      "lead": "11月30日で導入価格が終了",
+      "leadNote": "Argon・Carbon は入力・出力とも2倍に",
+      "leadTone": "bad",
+      "left": {
+        "label": "いま（導入価格）",
+        "metrics": [
+          {
+            "label": "入力",
+            "value": "$2"
+          },
+          {
+            "label": "出力",
+            "value": "$10"
+          }
+        ],
+        "tone": "neutral"
+      },
+      "right": {
+        "label": "11月30日の終了後",
+        "metrics": [
+          {
+            "label": "入力",
+            "value": "$4"
+          },
+          {
+            "label": "出力",
+            "value": "$20"
+          }
+        ],
+        "tone": "bad"
+      },
+      "text": "11月30日で導入価格終了\n料金が2倍になるのだ",
+      "speech": "ただし、ArgonとCarbonは11月30日で導入価格が終わって、入力も出力も2倍になるのだ。",
+      "expression": "alert",
+      "se": "alert_soft",
+      "cite": "Google公式ブログ"
+    },
+    {
+      "type": "ranking",
+      "title": "Artificial Analysis 総合指数（Gemini 4 シリーズ）",
+      "unit": "点",
+      "rows": [
+        {
+          "label": "Neon",
+          "sub": "xhigh",
+          "value": 61,
+          "highlight": true
+        },
+        {
+          "label": "Carbon",
+          "sub": "high",
+          "value": 60
+        },
+        {
+          "label": "Hydrogen",
+          "sub": "xhigh",
+          "value": 54
+        },
+        {
+          "label": "Argon",
+          "sub": "high",
+          "value": 50
+        }
+      ],
+      "note": "設定はモデルによって異なる（Neon・Hydrogen は xhigh、Carbon・Argon は high）",
+      "text": "第三者評価の総合指数は\nNeonが61点で1位なのだ",
+      "speech": "第三者のArtificial Analysisでは、Neonが61点でいちばん高く、Carbonが60点、Hydrogenが54点、Argonが50点なのだ。",
+      "expression": "happy",
+      "se": "chime_up",
+      "cite": "Artificial Analysis",
+      "rankPrefix": "シリーズ内"
+    },
+    {
+      "type": "ranking",
+      "title": "1タスクの時間（短いほど速い・Gemini 4 シリーズ）",
+      "unit": "分",
+      "rows": [
+        {
+          "label": "Hydrogen",
+          "value": 15.2,
+          "highlight": true,
+          "sub": "xhigh"
+        },
+        {
+          "label": "Neon",
+          "value": 21.5,
+          "sub": "xhigh"
+        },
+        {
+          "label": "Argon",
+          "value": 29.5,
+          "sub": "high"
+        },
+        {
+          "label": "Carbon",
+          "value": 36.6,
+          "sub": "high"
+        }
+      ],
+      "text": "速さはHydrogenが最速で\n1タスク15.2分なのだ",
+      "speech": "速さはHydrogenが1タスク15.2分でいちばん速く、Carbonは36.6分かかるのだ。",
+      "expression": "normal",
+      "se": "slide_in",
+      "cite": "Artificial Analysis",
+      "rankPrefix": "シリーズ内",
+      "note": "設定はモデルによって異なる（Artificial Analysis 総合指数の評価より）"
+    },
+    {
+      "type": "points",
+      "items": [
+        {
+          "label": "Argon",
+          "body": "大半の開発・知的作業"
+        },
+        {
+          "label": "Carbon",
+          "body": "知能の限界を試す難問（トークンを多く使う）"
+        },
+        {
+          "label": "Hydrogen",
+          "body": "素早い実行・日常の作業"
+        },
+        {
+          "label": "Neon",
+          "body": "賢さと速さのバランス"
+        }
+      ],
+      "text": "普段はArgon、難問はCarbon\n他2つは速さ重視なのだ",
+      "speech": "公式の説明では、普段の作業はArgon、限界に挑む難問はCarbon、速さ重視ならHydrogenとNeonなのだ。",
+      "expression": "normal",
+      "se": "slide_in",
+      "cite": "Google公式ブログ"
+    },
+    {
+      "type": "points",
+      "items": [
+        {
+          "label": "安く速く",
+          "body": "Hydrogen（無料枠でも利用可）"
+        },
+        {
+          "label": "最高スコア",
+          "body": "Neon（61点）"
+        },
+        {
+          "label": "注意",
+          "body": "Argon・Carbon は11月30日で導入価格終了"
+        }
+      ],
+      "text": "まずは無料のHydrogenから\nコメントで教えてなのだ！",
+      "speech": "まずは無料で試せるHydrogenから使ってみるのだ！どれを使ってるかコメントで教えてなのだ！",
+      "expression": "wink",
+      "se": "outro_chime"
+    }
+  ],
+  "description": "Gemini 4 の4モデル（Argon・Carbon・Hydrogen・Neon）の料金・評価・使い分けを、公式発表と第三者評価（Artificial Analysis）に分けて整理したのだ。Argon と Carbon は2026年11月30日で導入価格が終わるので注意なのだ。",
+  "hashtags": [
+    "Gemini4",
+    "AI解説",
+    "生成AI",
+    "AI比較",
+    "ずんだもん"
+  ],
+  "look": {
+    "theme": "paper",
+    "layout": "paper",
+    "label": "AIモデル検証レポート"
+  },
+  "bgmVolume": 0.067,
+  "voice": {
+    "speed": 1.2,
+    "pre": 0.05,
+    "post": 0.05
+  },
+  "voiceDict": [
+    {
+      "surface": "アンチグラビティ",
+      "pronunciation": "アンチグラビティ",
+      "accent_type": 5
+    }
+  ],
+  "character": {
+    "name": "ずんだもん",
+    "credit": "坂本アヒル「ずんだもん立ち絵素材」",
+    "page": "https://twitter.com/sakamoto_ahr",
+    "howto": "坂本アヒル「ずんだもん立ち絵素材」の PSD をダウンロードして python3 scripts/build_character.py <PSD> を実行",
+    "spriteHeight": 720,
+    "images": {
+      "normal": {
+        "file": "characters/zundamon-ahiru/normal.png",
+        "talk": "characters/zundamon-ahiru/normal_talk.png",
+        "blink": "characters/zundamon-ahiru/normal_blink.png",
+        "blinkTalk": "characters/zundamon-ahiru/normal_blink_talk.png"
+      },
+      "question": {
+        "file": "characters/zundamon-ahiru/question.png",
+        "talk": "characters/zundamon-ahiru/question_talk.png",
+        "blink": "characters/zundamon-ahiru/question_blink.png",
+        "blinkTalk": "characters/zundamon-ahiru/question_blink_talk.png"
+      },
+      "happy": {
+        "file": "characters/zundamon-ahiru/happy.png",
+        "talk": "characters/zundamon-ahiru/happy_talk.png"
+      },
+      "alert": {
+        "file": "characters/zundamon-ahiru/alert.png",
+        "talk": "characters/zundamon-ahiru/alert_talk.png",
+        "blink": "characters/zundamon-ahiru/alert_blink.png",
+        "blinkTalk": "characters/zundamon-ahiru/alert_blink_talk.png"
+      },
+      "wink": {
+        "file": "characters/zundamon-ahiru/wink.png",
+        "talk": "characters/zundamon-ahiru/wink_talk.png"
+      }
+    }
+  },
+  "sounds": {
+    "impact_soft": {
+      "file": "se/impact_soft.mp3",
+      "url": "https://soundeffect-lab.info/sound/anime/mp3/question1.mp3",
+      "title": "クイズ出題1"
+    },
+    "slide_in": {
+      "file": "se/slide_in.mp3",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision34.mp3",
+      "title": "決定ボタンを押す34"
+    },
+    "chime_up": {
+      "file": "se/chime_up.mp3",
+      "url": "https://soundeffect-lab.info/sound/anime/mp3/correct2.mp3",
+      "title": "クイズ正解2"
+    },
+    "alert_soft": {
+      "file": "se/alert_soft.mp3",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/warning1.mp3",
+      "title": "警告音1"
+    },
+    "outro_chime": {
+      "file": "se/outro_chime.mp3",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision24.mp3",
+      "title": "決定ボタンを押す24"
+    }
+  },
+  "soundCredit": {
+    "name": "効果音ラボ",
+    "page": "https://soundeffect-lab.info/"
+  },
+  "bgmDucking": 0.55,
+  "sources": [
+    {
+      "label": "Google公式ブログ「Gemini 4 Argon is now available for everyone」(2026/10/13)",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/"
+    },
+    {
+      "label": "Google公式ブログ「Gemini 4 Carbon is now available」(2026/11/10)",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/"
+    },
+    {
+      "label": "Google公式ブログ「Introducing Gemini 4 Hydrogen」(2026/11/12)",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"
+    },
+    {
+      "label": "Google公式ブログ「Introducing Gemini 4 Neon」(2026/11/18)",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/"
+    },
+    {
+      "label": "Artificial Analysis（第三者評価）：Gemini 4 Argon",
+      "url": "https://artificialanalysis.ai/models/gemini-4-argon"
+    },
+    {
+      "label": "Artificial Analysis（第三者評価）：Gemini 4 Carbon",
+      "url": "https://artificialanalysis.ai/models/gemini-4-carbon"
+    },
+    {
+      "label": "Artificial Analysis（第三者評価）：Gemini 4 Hydrogen",
+      "url": "https://artificialanalysis.ai/models/gemini-4-hydrogen"
+    },
+    {
+      "label": "Artificial Analysis（第三者評価）：Gemini 4 Neon",
+      "url": "https://artificialanalysis.ai/models/gemini-4-neon"
+    }
+  ]
+}

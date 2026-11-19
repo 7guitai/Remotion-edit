@@ -3,6 +3,7 @@ import sleepTrivia from "./sleep-trivia.json";
 import aiHallucination from "./ai-hallucination.json";
 import gemini4Neon from "./gemini4-neon.json";
 import gemini4Hydrogen from "./gemini4-hydrogen.json";
+import gemini4Family from "./gemini4-family.json";
 
 export type Illustration = {
   emoji: string;
@@ -35,6 +36,8 @@ export type TableSlide = {
   columns: string[];
   rows: string[][];
   note?: string;
+  // 紙面デザインで強調する行（0始まり）
+  highlightRow?: number;
 };
 
 // 箇条書き（結論・チェックポイント）
@@ -182,7 +185,11 @@ export type Episode = {
     credit: string;
     page: string;
     // talk は口を開けた差分（あれば話している間に交互に表示する）。url があれば npm run assets で取得
-    images: Record<string, { file: string; url?: string; talk?: string; note?: string }>;
+    // blink / blinkTalk は目を閉じた差分（あれば数秒おきにまばたきする）
+    images: Record<
+      string,
+      { file: string; url?: string; talk?: string; blink?: string; blinkTalk?: string; note?: string }
+    >;
     // 紙面レイアウトでの立ち絵の高さ（px）
     spriteHeight?: number;
     // 画像を取得する方法（URL で取れない素材の案内）
@@ -196,6 +203,8 @@ export type Episode = {
   bgm: { file: string; title: string; credit: string; url: string };
   // BGM の音量（省略時は theme.ts の BGM_VOLUME）
   bgmVolume?: number;
+  // ナレーション中に BGM をこの倍率まで下げる（例: 0.55 ≒ -5dB）。省略時は下げない
+  bgmDucking?: number;
   // 読み上げの設定（話速・前後の無音秒数）と VOICEVOX ユーザー辞書
   voice?: { speed?: number; pre?: number; post?: number };
   voiceDict?: { surface: string; pronunciation: string; accent_type?: number }[];
@@ -210,6 +219,7 @@ export const EPISODES: Episode[] = [
   aiHallucination as Episode,
   gemini4Neon as Episode,
   gemini4Hydrogen as Episode,
+  gemini4Family as Episode,
 ];
 
 export const getEpisode = (id: string): Episode => {

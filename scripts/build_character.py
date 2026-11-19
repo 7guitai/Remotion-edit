@@ -8,6 +8,7 @@
   python3 scripts/build_character.py ~/Downloads/ずんだもん立ち絵素材2.3.psd
 
 public/characters/zundamon-ahiru/<表情>.png（口を閉じた絵）と <表情>_talk.png（口を開けた絵）を書き出す。
+目を開けている表情は、まばたき用の <表情>_blink.png / <表情>_blink_talk.png も書き出す。
 全表情を同じ範囲で切り抜くので、表情を切り替えても位置がずれない。
 """
 
@@ -40,6 +41,9 @@ EXPRESSIONS = {
     "alert": ({"右腕": "指差し", "左腕": "腰", "眉": "上がり眉", "汗": True}, ("んー", "ほあ")),
     "wink": ({"目": "にっこり2", "右腕": "手を挙げる", "顔色": "ほっぺ2"}, ("むふ", "ほあー")),
 }
+
+# まばたきで使う閉じた目
+BLINK_EYES = "UU"
 
 # 「記号など」グループで表示するもの
 SYMBOLS = {"汗": "汗1"}
@@ -85,9 +89,14 @@ def main() -> None:
     for key, (override, mouths) in EXPRESSIONS.items():
         choice = {**BASE, **{k: v for k, v in override.items() if isinstance(v, str)}}
         symbols = {SYMBOLS[k] for k, v in override.items() if v is True}
-        for suffix, mouth in (("", mouths[0]), ("_talk", mouths[1])):
+        variants = [("", choice, mouths[0]), ("_talk", choice, mouths[1])]
+        # 目を開けている表情には、まばたき用（目を閉じた絵）も作る
+        if choice["目"] == "目セット":
+            closed = {**choice, "目": BLINK_EYES}
+            variants += [("_blink", closed, mouths[0]), ("_blink_talk", closed, mouths[1])]
+        for suffix, ch, mouth in variants:
             psd = PSDImage.open(args.psd)
-            apply(psd, choice, mouth, symbols)
+            apply(psd, ch, mouth, symbols)
             images[key + suffix] = psd.composite(force=True)
 
     # 全表情の外接矩形で切り抜く（表情を切り替えても位置がずれない）

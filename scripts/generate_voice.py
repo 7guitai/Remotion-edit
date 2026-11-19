@@ -117,6 +117,41 @@ def caption_chunks(display: str, reading: str, seconds: float, url: str, speaker
     return out
 
 
+def mouth_track(path: Path, fps: int = 30) -> str:
+    """口パク用に、フレームごとに口を開けるか（1）閉じるか（0）を音量から決める。
+
+    フレームごとの RMS が、その音声の最大値の 18% を超えたら開ける。ただし前後2フレームの最大より 28% 以上
+    小さいフレーム（音の切れ目）は閉じる。最後に1フレームだけの開閉は均して、ちらつきを防ぐ。
+    """
+    import array
+    import math
+
+    with wave.open(str(path)) as w:
+        rate, width, channels = w.getframerate(), w.getsampwidth(), w.getnchannels()
+        raw = w.readframes(w.getnframes())
+    if width != 2:
+        return ""
+    samples = array.array("h", raw)[::channels]
+    step = rate / fps
+    levels = []
+    i = 0.0
+    while int(i) < len(samples):
+        chunk = samples[int(i) : int(i + step)]
+        levels.append(math.sqrt(sum(x * x for x in chunk) / max(len(chunk), 1)))
+        i += step
+    peak = max(levels) if levels else 0
+    track = ["1" if peak and v > peak * 0.18 else "0" for v in levels]
+    # 声が続いている間も、前後より音量が下がる瞬間（音の切れ目）は口を閉じる（開けっぱなしを防ぐ）
+    for k in range(len(track)):
+        near = levels[max(0, k - 2) : k + 3]
+        if track[k] == "1" and levels[k] < max(near) * 0.72:
+            track[k] = "0"
+    for k in range(1, len(track) - 1):
+        if track[k - 1] == track[k + 1] != track[k]:
+            track[k] = track[k - 1]
+    return "".join(track)
+
+
 def synth_voicevox(text: str, out: Path, url: str, speaker: int, speed: float,
                    pre: float = 0.05, post: float = 0.1) -> None:
     query = audio_query(text, url, speaker)
@@ -182,9 +217,10 @@ def main() -> None:
     if engine == "voicevox" and episode.get("voiceDict"):
         register_dict(episode["voiceDict"], args.voicevox_url)
     captions = []
+    mouths = []
     OUT_DIR = ROOT / "public" / "voice" / episode["id"]
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    for old in [*OUT_DIR.glob("*.wav"), *OUT_DIR.glob("captions.json")]:
+    for old in [*OUT_DIR.glob("*.wav"), *OUT_DIR.glob("captions.json"), *OUT_DIR.glob("mouth.json")]:
         old.unlink()
 
     for i, slide in enumerate(episode["slides"]):
@@ -198,6 +234,7 @@ def main() -> None:
             synth_openjtalk(text, out, speed)
         with wave.open(str(out)) as w:
             seconds = w.getnframes() / w.getframerate()
+        mouths.append(mouth_track(out))
         if engine == "voicevox":
             captions.append(caption_chunks(display, text, seconds - post, args.voicevox_url,
                                            args.speaker, pre))
@@ -209,6 +246,8 @@ def main() -> None:
     (OUT_DIR / "captions.json").write_text(
         json.dumps(captions, ensure_ascii=False, indent=1), encoding="utf-8"
     )
+    # 口パクのタイミング（音声の頭からのフレームごとに 1=開ける / 0=閉じる）
+    (OUT_DIR / "mouth.json").write_text(json.dumps(mouths), encoding="utf-8")
 
 
 if __name__ == "__main__":

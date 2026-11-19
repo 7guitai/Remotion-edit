@@ -113,6 +113,7 @@ SYSTEM_SHORT = """あなたは「ずんだもん解説ショート」（縦型 1
 - "ranking": {"title"?: 指標名, "rows": [{"label", "sub"?: 設定など, "value": 数値, "highlight"?: true}], "unit"?: "点", "note"?}（スコアの高い順。主役の行だけ highlight）
 - "emphasis": {"big": 大きな一言（\\n 可、強調は【】）, "sub"?: 補足}
 - "points": {"items": [{"label", "body"}]}（チェックリスト、2〜3個）
+- "table": {"columns": [...], "rows": [[...]], "note"?, "highlightRow"?: 強調する行の番号（0始まり）}（一覧表。1列目は名前）
 
 ## ルール
 - 語尾はずんだもん口調（「〜のだ」「〜なのだ」）
@@ -122,6 +123,30 @@ SYSTEM_SHORT = """あなたは「ずんだもん解説ショート」（縦型 1
 - 台本の「出典:」はそのスライドの cite にする（"出典：" の語は付けない）
 - good=望ましい（緑）、bad=問題（赤）、neutral=どちらでもない（灰）
 """
+
+
+USAGE_LOG = ROOT / "logs" / "gemini_usage.jsonl"
+
+
+def log_usage(model: str, usage: dict, attempt: int, error: int | None = None) -> None:
+    """1リクエストごとの使用トークン数（失敗ならステータスコード）を logs/gemini_usage.jsonl に追記する"""
+    USAGE_LOG.parent.mkdir(exist_ok=True)
+    row = {
+        "time": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "model": model,
+        "attempt": attempt + 1,
+        "status": error or 200,
+        "prompt_tokens": usage.get("prompt_tokens"),
+        "completion_tokens": usage.get("completion_tokens"),
+        "total_tokens": usage.get("total_tokens"),
+    }
+    with USAGE_LOG.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(row) + "\n")
+    if not error:
+        print(
+            f"  使用トークン: 入力 {row['prompt_tokens']} / 出力 {row['completion_tokens']} / 合計 {row['total_tokens']}",
+            file=sys.stderr,
+        )
 
 
 def call_gemini(model: str, messages: list, retries: int = 8) -> str:
@@ -142,10 +167,12 @@ def call_gemini(model: str, messages: list, retries: int = 8) -> str:
         try:
             with urllib.request.urlopen(req, timeout=300) as res:
                 data = json.load(res)
+            log_usage(model, data.get("usage") or {}, attempt)
             return data["choices"][0]["message"]["content"]
         except urllib.error.HTTPError as e:
             detail = e.read().decode(errors="replace")[:300]
             # 混雑（503）とレート制限（429）だけ待って再試行する
+            log_usage(model, {}, attempt, error=e.code)
             if e.code in (429, 500, 503) and attempt < retries - 1:
                 wait = min(20 * (attempt + 1), 120)
                 print(f"  {e.code}: 混雑中。{wait}秒後に再試行します（{attempt + 1}/{retries}）", file=sys.stderr)

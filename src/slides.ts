@@ -21,6 +21,8 @@ export type ResolvedSlide = {
   durationInFrames: number;
   // 発話に合わせて切り替える字幕（scripts/generate_voice.py が書き出す captions.json）
   captions: CaptionChunk[] | null;
+  // 口パク（音声の頭からのフレームごとに "1"=開ける / "0"=閉じる。mouth.json）
+  mouth: string | null;
 };
 
 export type VideoProps = {
@@ -48,12 +50,22 @@ const loadCaptions = async (episodeId: string): Promise<CaptionChunk[][] | null>
   return (await res.json()) as CaptionChunk[][];
 };
 
+const loadMouth = async (episodeId: string): Promise<string[] | null> => {
+  const path = `voice/${episodeId}/mouth.json`;
+  if (!(await exists(path))) {
+    return null;
+  }
+  const res = await fetch(staticFile(path));
+  return (await res.json()) as string[];
+};
+
 const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
   const episode = getEpisode(episodeId);
   const isShort = episode.format === "short";
   const lead = isShort ? SHORT_LEAD_IN : LEAD_IN;
   const tail = isShort ? SHORT_TAIL : TAIL;
   const captions = isShort ? await loadCaptions(episode.id) : null;
+  const mouths = isShort ? await loadMouth(episode.id) : null;
   return Promise.all(
     episode.slides.map(async (slide, i) => {
       const voicePath = `voice/${episode.id}/${String(i).padStart(3, "0")}.wav`;
@@ -73,6 +85,7 @@ const resolveSlides = async (episodeId: string): Promise<ResolvedSlide[]> => {
         voiceStart: lead,
         durationInFrames: lead + Math.ceil(seconds * FPS) + tail,
         captions: hasVoice ? (captions?.[i] ?? null) : null,
+        mouth: hasVoice ? (mouths?.[i] || null) : null,
       };
     }),
   );

@@ -16,6 +16,7 @@ import {
   PointsSlide,
   RankingSlide,
   SourceSlide,
+  TableSlide,
   VersusSide,
   VersusSlide,
 } from "../../episodes";
@@ -89,6 +90,8 @@ const Visual: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
       return <Steps items={slide.items.map((s) => ({ label: s.label, body: s.body }))} numbered />;
     case "emphasis":
       return <Emphasis slide={slide} />;
+    case "table":
+      return <PaperTable slide={slide} />;
     case "source":
       return <Source slide={slide} />;
     default:
@@ -148,6 +151,46 @@ const captionSize = (text: string) => {
   return [52, 48, 44, 40].find((s) => Math.ceil((width * s) / PAPER.width) <= 2) ?? 40;
 };
 
+// 字幕の数字（金額・%・点・分・倍など）だけを強調色にする
+// 英字の直後の数字（「Gemini 4」「GPT-6.2」などのモデル名）は対象外。「11月30日」はひとまとまりで
+const NUMBER = /((?<![A-Za-z][\s-]?)(?<![\d.])\$?\d[\d.,]*(?:月\d+日|%|点|分|秒|倍|ドル|億|万|位|年|日)?)(?!タスク)/;
+const Highlighted: React.FC<{ text: string; color: string }> = ({ text, color }) => (
+  <>
+    {text.split(NUMBER).map((part, i) =>
+      i % 2 === 1 ? (
+        <span key={i} style={{ color, ...num }}>
+          {part}
+        </span>
+      ) : (
+        <React.Fragment key={i}>{part}</React.Fragment>
+      ),
+    )}
+  </>
+);
+
+// 大きな数字を 0 から数え上げる（"$6.44" "21.5分" "3.04億" のように前後の文字と小数の桁は保つ）
+const CountUp: React.FC<{ value: string | number; delay?: number }> = ({ value, delay = 4 }) => {
+  const frame = useCurrentFrame();
+  const text = String(value);
+  const m = text.match(/^(\D*?)(\d[\d,]*(?:\.\d+)?)(.*)$/);
+  if (!m) {
+    return <>{text}</>;
+  }
+  const [, pre, digits, post] = m;
+  const target = Number(digits.replace(/,/g, ""));
+  const decimals = (digits.split(".")[1] ?? "").length;
+  const t = interpolate(frame - delay, [0, 18], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const eased = 1 - Math.pow(1 - t, 3);
+  const shown = (target * eased).toFixed(decimals);
+  return (
+    <>
+      {pre}
+      {digits.includes(",") ? Number(shown).toLocaleString("en-US", { minimumFractionDigits: decimals }) : shown}
+      {post}
+    </>
+  );
+};
+
 const Caption: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -188,7 +231,7 @@ const Caption: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
           lineBreak: "strict",
         }}
       >
-        {chunk.text}
+        <Highlighted text={chunk.text} color={resolved.slide.expression === "alert" ? PAPER.alert : PAPER.accent} />
       </div>
     </>
   );
@@ -209,6 +252,10 @@ const isSpeaking = (resolved: ResolvedSlide, frame: number, fps: number) => {
   return chunks.some((c) => t >= c.start && t < c.end - 0.08);
 };
 
+// まばたき: 約3.5秒ごとに3フレームだけ目を閉じる（スライドごとに少しずらす）
+const BLINK_EVERY = 105;
+const isBlinking = (frame: number, seed: number) => (frame + seed) % BLINK_EVERY < 3;
+
 const Sprite: React.FC<{ episode: Episode; resolved: ResolvedSlide }> = ({ episode, resolved }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -218,7 +265,20 @@ const Sprite: React.FC<{ episode: Episode; resolved: ResolvedSlide }> = ({ episo
   if (!character || !img) {
     return null;
   }
-  const talking = img.talk && isSpeaking(resolved, frame, fps) && Math.floor(frame / 4) % 2 === 0;
+  // 口パク: mouth.json（音量から作った開閉）があればそれに合わせ、なければ話している間だけ一定間隔で開閉
+  const v = frame - resolved.voiceStart;
+  const open = resolved.mouth
+    ? resolved.mouth[v] === "1"
+    : isSpeaking(resolved, frame, fps) && Math.floor(frame / 4) % 2 === 0;
+  const blink = Boolean(img.blink) && isBlinking(frame, (resolved.slide.text.length * 37) % BLINK_EVERY);
+  const variants = [
+    { key: "base", src: img.file, show: !open && !blink },
+    { key: "talk", src: img.talk, show: open && !blink },
+    { key: "blink", src: img.blink, show: !open && blink },
+    { key: "blinkTalk", src: img.blinkTalk ?? img.blink, show: open && blink },
+  ].filter((x): x is { key: string; src: string; show: boolean } => Boolean(x.src));
+  // 該当する差分がない組み合わせは基本の絵を出す
+  const any = variants.some((x) => x.show);
   const pop = spring({ frame, fps, config: { damping: 14, stiffness: 170 }, durationInFrames: 16 });
   const height = character.spriteHeight ?? 820;
   return (
@@ -232,16 +292,21 @@ const Sprite: React.FC<{ episode: Episode; resolved: ResolvedSlide }> = ({ episo
         overflow: "hidden",
       }}
     >
-      <Img
-        src={staticFile(talking && img.talk ? img.talk : img.file)}
-        style={{
-          position: "absolute",
-          top: 4,
-          left: "50%",
-          height,
-          transform: `translateX(-50%) translateY(${interpolate(pop, [0, 1], [24, 0])}px)`,
-        }}
-      />
+      {/* 差分をすべて重ねておき、表示だけ切り替える（画像の読み込み待ちによるちらつきを防ぐ） */}
+      {variants.map((x) => (
+        <Img
+          key={x.key}
+          src={staticFile(x.src)}
+          style={{
+            position: "absolute",
+            top: 4,
+            left: "50%",
+            height,
+            opacity: x.show || (!any && x.key === "base") ? 1 : 0,
+            transform: `translateX(-50%) translateY(${interpolate(pop, [0, 1], [24, 0])}px)`,
+          }}
+        />
+      ))}
     </div>
   );
 };
@@ -331,13 +396,16 @@ const VersusColumn: React.FC<{ side: VersusSide; index: number }> = ({ side, ind
         side.metrics.map((m, i) => (
           <div key={m.label} style={{ marginTop: i === 0 ? 0 : 34 }}>
             <Small style={{ fontSize: 28 }}>{m.label}</Small>
-            <div style={{ ...num, fontWeight: 700, fontSize: 104, lineHeight: 1.1, color }}>{m.value}</div>
+            <div style={{ ...num, fontWeight: 700, fontSize: 104, lineHeight: 1.1, color }}>
+              <CountUp value={m.value} delay={8 + i * 6} />
+            </div>
           </div>
         ))
       ) : (
         <>
           {side.value ? (
-            <div style={{ ...num, fontWeight: 700, fontSize: 150, lineHeight: 1.1, color }}>{side.value}</div>
+            <div style={{ ...num, fontWeight: 700, fontSize: 150, lineHeight: 1.1, color }}><CountUp value={side.value} delay={8} />
+            </div>
           ) : null}
           {side.lines?.map((line) => (
             <div key={line} style={{ fontWeight: 500, fontSize: 32, lineHeight: 1.5, marginTop: 10 }}>
@@ -363,7 +431,7 @@ const Ranking: React.FC<{ slide: RankingSlide }> = ({ slide }) => {
         <div style={{ opacity: head }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: 18 }}>
             <span style={{ ...num, fontWeight: 700, fontSize: 150, lineHeight: 1.05, color: PAPER.accent }}>
-              {top.value}
+              <CountUp value={top.value} delay={4} />
             </span>
             <span style={{ fontWeight: 700, fontSize: 48 }}>
               {unit}（{slide.rankPrefix ?? ""}
@@ -416,7 +484,9 @@ const RankRow: React.FC<{
             }}
           />
         </div>
-        <span style={{ ...num, fontWeight: 700, fontSize: 34, width: 96, textAlign: "right", color }}>
+        <span
+          style={{ ...num, fontWeight: 700, fontSize: 34, minWidth: 96, textAlign: "right", whiteSpace: "nowrap", color }}
+        >
           {row.value}
           {unit}
         </span>
@@ -464,6 +534,66 @@ const StepRow: React.FC<{
         </div>
         {item.body ? <Small style={{ fontSize: 32, marginTop: 8 }}>{item.body}</Small> : null}
       </div>
+    </div>
+  );
+};
+
+// 紙面風の表: 見出し行は小さな灰色、1px の罫線だけ。highlightRow の行を強調色に
+const PaperTable: React.FC<{ slide: TableSlide }> = ({ slide }) => (
+  <div>
+    <div style={{ display: "flex", borderBottom: `2px solid ${PAPER.ink}`, paddingBottom: 12 }}>
+      {slide.columns.map((c, j) => (
+        <div
+          key={j}
+          style={{
+            flex: j === 0 ? 1.25 : 1,
+            fontWeight: 500,
+            fontSize: 26,
+            color: PAPER.muted,
+            textAlign: j === 0 ? "left" : "right",
+          }}
+        >
+          {c}
+        </div>
+      ))}
+    </div>
+    {slide.rows.map((row, i) => (
+      <TableRow key={i} row={row} index={i} highlight={slide.highlightRow === i} />
+    ))}
+    {slide.note ? <Small style={{ marginTop: 18, fontSize: 26 }}>{slide.note}</Small> : null}
+  </div>
+);
+
+const TableRow: React.FC<{ row: string[]; index: number; highlight: boolean }> = ({ row, index, highlight }) => {
+  const s = useStep(index, 8);
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "baseline",
+        padding: "24px 0",
+        borderBottom: `1px solid ${PAPER.rule}`,
+        opacity: s,
+        transform: `translateY(${interpolate(s, [0, 1], [12, 0])}px)`,
+        color: highlight ? PAPER.accent : PAPER.ink,
+      }}
+    >
+      {row.map((cell, j) => (
+        <div
+          key={j}
+          style={{
+            ...num,
+            flex: j === 0 ? 1.25 : 1,
+            fontWeight: 700,
+            fontSize: j === 0 ? 36 : 34,
+            lineHeight: 1.3,
+            textAlign: j === 0 ? "left" : "right",
+            whiteSpace: "pre-line",
+          }}
+        >
+          {cell}
+        </div>
+      ))}
     </div>
   );
 };
