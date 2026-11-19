@@ -114,7 +114,7 @@
 | `hook` | 冒頭の問い | `headline`（`\n` 改行、`【】` で強調）, `sub` |
 | `source` | 資料の紹介 | `org`, `date`, `title`, `titleJa`, `summary` |
 | `versus` | 2つの比較 | `left`/`right`: `{label, value, lines, metrics:[{label,value}], tone}`, `lead`, `leadNote`, `leadTone`, `note` |
-| `ranking` | スコアの順位 | `title`, `rows:[{label, sub, value, highlight}]`, `unit`, `note` |
+| `ranking` | スコアの順位 | `title`, `rows:[{label, sub, value, highlight}]`, `unit`, `note`, `rankPrefix`（全体順位でない表は「シリーズ内」などを必ず付ける） |
 | `stacked` | 100% 積み上げ横棒 | `series:[{label,tone}]`, `rows:[{label, values}]`, `note` |
 | `flow` | 流れ図 | `steps:[{label, sub, tone}]` |
 | `emphasis` | 大きな一言 | `big`（`【】` 強調）, `sub` |
@@ -241,3 +241,5 @@ python3 scripts/generate_voice.py <id> --speaker 1     # ずんだもん（あ�
 - **装飾を減らすほど数字が伝わる。** 紙面デザインでは影・枠・絵文字をやめ、主役の数字だけを大きく・色付きにした。
 - **注意点のカットには「なぜそうなるか」を1行添える。**（例: 思考トークンも出力として課金されるため、出力が増えると費用が膨らむ）
 - 静止画を数枚書き出して並べて見ると、崩れに早く気づける。
+- **表の中の順位を「総合◯位」と誤読させない。** 一部のモデルだけを並べた表では `rankPrefix: "シリーズ内"` を付ける（Hydrogen の回で「54点（3位）」が総合3位に見えたため直した）。
+- **公式と第三者で評価が食い違う言葉は使わない。** 公式は「同クラスより速いことが多い」、第三者は「1タスクは平均より遅い」としていたため、見出しから「速い」を外した。

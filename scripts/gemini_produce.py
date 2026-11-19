@@ -99,16 +99,18 @@ SYSTEM_SHORT = """あなたは「ずんだもん解説ショート」（縦型 1
 ## スライド（台本の見出し1つ＝1スライド）
 全スライド共通:
 - "text": 画面下部のずんだもんの字幕。読み上げ文を短く言い切った形で、全角32文字以内、改行 \\n は1つまで
-- "speech": 読み上げ文（台本の「ずんだもん:」をそのまま。字幕と同じなら省略）
+- "speech": 読み上げ文（台本の「ずんだもん:」をそのまま。字幕にも出るので、モデル名などは英語表記のまま書き、読みは readings で指定）
+- "expression": 台本の「表情:」（normal / question / happy / alert / wink）
+- "se": 台本の「効果音:」（impact_soft / slide_in / chime_up / alert_soft / outro_chime）
 - "cite": 資料の内容やデータを扱うスライドにだけ付ける短い出典表記（例: "OpenAI「Why language models hallucinate」(2025)"）
 - "chapter": 不要
 図解の種類（"type"）:
-- "hook": {"headline": 大きな問い（\\n で2〜3行、強調したい語を【】で囲む）, "emoji": 絵文字1つ}
+- "hook": {"headline": 大きな問い（\\n で2〜3行、強調したい語を【】で囲む）, "sub"?: 小見出し}
 - "source": {"org", "date", "title": 原題, "titleJa": 日本語訳, "summary": 一言の補足}
-- "versus": {"left": {"label", "value"?, "lines"?: [...], "tone": "good|bad|neutral"}, "right": {同じ}, "note"?}
+- "versus": {"left": {"label", "value"?, "lines"?: [...], "metrics"?: [{"label", "value"}], "tone": "good|bad|neutral"}, "right": {同じ}, "note"?, "lead"?: 見出し, "leadNote"?: 1行の補足, "leadTone"?: "bad" など}（項目ごとの数値は metrics で並べる）
 - "flow": {"steps": [{"label", "sub"?, "emoji"?, "tone"?}]}（3〜4段。最後の段が結論）
 - "stacked": {"series": [{"label", "tone"}], "rows": [{"label", "values": [数値...]}], "note"}（values は series と同じ順・合計100）
-- "ranking": {"rows": [{"label", "sub"?: 設定など, "value": 数値, "highlight"?: true}], "unit"?: "点", "note"?}（スコアの高い順。主役の行だけ highlight）
+- "ranking": {"title"?: 指標名, "rows": [{"label", "sub"?: 設定など, "value": 数値, "highlight"?: true}], "unit"?: "点", "note"?}（スコアの高い順。主役の行だけ highlight）
 - "emphasis": {"big": 大きな一言（\\n 可、強調は【】）, "sub"?: 補足}
 - "points": {"items": [{"label", "body"}]}（チェックリスト、2〜3個）
 

@@ -258,7 +258,7 @@ const Hook: React.FC<{ slide: HookSlide }> = ({ slide }) => {
         style={{
           fontFamily: serif,
           fontWeight: 700,
-          fontSize: 104,
+          fontSize: hookSize(slide.headline),
           lineHeight: 1.28,
           marginTop: 24,
           whiteSpace: "pre-line",
@@ -271,6 +271,17 @@ const Hook: React.FC<{ slide: HookSlide }> = ({ slide }) => {
       <div style={{ height: 3, background: PAPER.ink, width: `${b * 100}%`, marginTop: 48 }} />
     </div>
   );
+};
+
+// 大見出しのいちばん長い行が1行に収まる大きさ（欧文は和文の約0.58文字分）
+const hookSize = (text: string) => {
+  const longest = Math.max(
+    ...text
+      .replace(/[【】]/g, "")
+      .split("\n")
+      .map((l) => [...l].reduce((w, ch) => w + (/[\x20-\x7e]/.test(ch) ? 0.58 : 1), 0)),
+  );
+  return Math.min(104, Math.floor(PAPER.width / Math.max(longest, 1)));
 };
 
 const Versus: React.FC<{ slide: VersusSlide }> = ({ slide }) => {
@@ -355,7 +366,8 @@ const Ranking: React.FC<{ slide: RankingSlide }> = ({ slide }) => {
               {top.value}
             </span>
             <span style={{ fontWeight: 700, fontSize: 48 }}>
-              {unit}（{hi + 1}位）
+              {unit}（{slide.rankPrefix ?? ""}
+              {hi + 1}位）
             </span>
           </div>
           {hi > 0 ? (

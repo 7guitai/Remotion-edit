@@ -2,6 +2,7 @@ import chargerPowerSplit from "./charger-power-split.json";
 import sleepTrivia from "./sleep-trivia.json";
 import aiHallucination from "./ai-hallucination.json";
 import gemini4Neon from "./gemini4-neon.json";
+import gemini4Hydrogen from "./gemini4-hydrogen.json";
 
 export type Illustration = {
   emoji: string;
@@ -115,6 +116,8 @@ export type RankingSlide = {
   text: string;
   speech?: string;
   title?: string;
+  // 順位の前に付ける語（例: "シリーズ内"）。表が全体の順位でないときは必ず付ける
+  rankPrefix?: string;
   unit?: string;
   max?: number;
   rows: { label: string; sub?: string; value: number; highlight?: boolean }[];
@@ -206,6 +209,7 @@ export const EPISODES: Episode[] = [
   chargerPowerSplit as Episode,
   aiHallucination as Episode,
   gemini4Neon as Episode,
+  gemini4Hydrogen as Episode,
 ];
 
 export const getEpisode = (id: string): Episode => {

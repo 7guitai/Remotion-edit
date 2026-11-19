@@ -11,6 +11,8 @@
 | `sleep-trivia` | 睡眠の雑学 | 約2分9秒 |
 | `charger-power-split` | PCとスマホを同時充電する充電器の選び方（[OCHA NOTE の記事](https://ochanote.com/articles/laptop-phone-charger-power-split/)を動画化） | 約4分12秒 |
 | `ai-hallucination` | 【縦型ショート】AIはなぜ自信満々にウソをつく？（[OpenAI の論文](https://openai.com/index/why-language-models-hallucinate/)を図解） | 約58秒 |
+| `gemini4-neon` | 【縦型ショート・紙面風】Gemini 4 Neon の実力と注意点 | 約46秒 |
+| `gemini4-hydrogen` | 【縦型ショート・紙面風】無料でも使える Gemini 4 Hydrogen の実力と注意点 | 約54秒 |
 
 ## 使い方
 

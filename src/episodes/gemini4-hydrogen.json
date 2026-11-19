@@ -1,0 +1,331 @@
+{
+  "id": "gemini4-hydrogen",
+  "format": "short",
+  "title": "無料でも使えるGemini 4 Hydrogenの実力と注意点",
+  "series": "AIモデル検証レポート",
+  "headline": "Gemini 4 Hydrogen 実力と注意点",
+  "pr": false,
+  "source": {
+    "name": "Google「Introducing Gemini 4 Hydrogen」",
+    "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"
+  },
+  "bgm": {
+    "file": "simplestyle.mp3",
+    "title": "シンプルスタイル",
+    "credit": "甘茶の音楽工房",
+    "page": "https://amachamusic.chagasi.com/music_simplestyle.html",
+    "url": "https://amachamusic.chagasi.com/mp3/simplestyle.mp3"
+  },
+  "readings": {
+    "Gemini 4 Hydrogen": "ジェミニフォーハイドロジェン",
+    "Gemini API": "ジェミニエーピーアイ",
+    "AI Studio": "エーアイスタジオ",
+    "Artificial Analysis": "アーティフィシャルアナリシス",
+    "Argon": "アルゴン",
+    "Neon": "ネオン",
+    "Carbon": "カーボン",
+    "Hydrogen": "ハイドロジェン",
+    "API": "エーピーアイ"
+  },
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "hook",
+      "headline": "Gemini 4 Hydrogen\n【無料】でも\n実力は本物？",
+      "sub": "公式発表と第三者評価から検証",
+      "text": "無料でも使えるHydrogen\n実力は本物なのだ？",
+      "speech": "Gemini 4 Hydrogen、無料でも実力は本物なのだ？",
+      "expression": "question",
+      "se": "impact_soft",
+      "voiceSpeed": 1.32
+    },
+    {
+      "type": "versus",
+      "left": {
+        "label": "無料枠",
+        "metrics": [
+          {
+            "label": "Gemini API・AI Studio",
+            "value": "利用可"
+          }
+        ],
+        "tone": "good"
+      },
+      "right": {
+        "label": "有料枠",
+        "metrics": [
+          {
+            "label": "入力",
+            "value": "$1.50"
+          },
+          {
+            "label": "出力",
+            "value": "$7.50"
+          }
+        ],
+        "tone": "neutral"
+      },
+      "note": "100万トークンあたり（Gemini API・AI Studio）",
+      "text": "すべての枠で利用可能なのだ\n有料は入力$1.5・出力$7.5",
+      "speech": "公式発表では、APIとAI Studioのすべての枠で使えるのだ。有料なら入力1.5ドル、出力7.5ドルなのだ。",
+      "expression": "normal",
+      "se": "slide_in",
+      "cite": "Google公式ブログ（2026/11/12）"
+    },
+    {
+      "type": "ranking",
+      "title": "Artificial Analysis 総合指数（Gemini 4 シリーズ）",
+      "rows": [
+        {
+          "label": "Gemini 4 Neon",
+          "sub": "xhigh",
+          "value": 61
+        },
+        {
+          "label": "Gemini 4 Carbon",
+          "sub": "high",
+          "value": 60
+        },
+        {
+          "label": "Gemini 4 Hydrogen",
+          "sub": "xhigh",
+          "value": 54,
+          "highlight": true
+        },
+        {
+          "label": "Gemini 4 Argon",
+          "sub": "high",
+          "value": 50
+        }
+      ],
+      "unit": "点",
+      "note": "設定はモデルによって異なる。標準（high）設定では Hydrogen 51、Argon 50",
+      "text": "最高設定で54点！標準でも\nArgonの50点を上回ったのだ",
+      "speech": "Artificial Analysisの総合指数では、最高設定で54点。標準設定の51点でも、上位モデルのArgonを上回ったのだ！",
+      "expression": "happy",
+      "se": "chime_up",
+      "cite": "Artificial Analysis／Google公式ブログ",
+      "rankPrefix": "シリーズ内"
+    },
+    {
+      "type": "versus",
+      "lead": "安いけれど、多弁で遅め",
+      "leadNote": "考える量（出力）が多く、1タスクは平均より遅い",
+      "leadTone": "bad",
+      "left": {
+        "label": "Gemini 4 Hydrogen（xhigh）",
+        "metrics": [
+          {
+            "label": "評価全体の出力（トークン）",
+            "value": "3.04億"
+          },
+          {
+            "label": "1タスクの時間",
+            "value": "15.2分"
+          }
+        ],
+        "tone": "bad"
+      },
+      "right": {
+        "label": "同程度のモデルの中央値",
+        "metrics": [
+          {
+            "label": "評価全体の出力（トークン）",
+            "value": "6510万"
+          },
+          {
+            "label": "1タスクの時間",
+            "value": "12.1分"
+          }
+        ],
+        "tone": "neutral"
+      },
+      "text": "出力は中央値の約4.7倍で\n1タスクも平均より遅いのだ",
+      "speech": "ただし、とてもおしゃべりなのだ。出力は中央値の約4.7倍で、1タスクも平均より遅いのだ。",
+      "expression": "alert",
+      "se": "alert_soft",
+      "cite": "Artificial Analysis",
+      "note": "Artificial Analysis 総合指数（xhigh）の評価より"
+    },
+    {
+      "type": "versus",
+      "left": {
+        "label": "Gemini 4 Hydrogen（xhigh）",
+        "metrics": [
+          {
+            "label": "1タスクの費用",
+            "value": "$3.16"
+          },
+          {
+            "label": "総合指数",
+            "value": "54点"
+          }
+        ],
+        "tone": "good"
+      },
+      "right": {
+        "label": "Gemini 4 Neon（xhigh）",
+        "metrics": [
+          {
+            "label": "1タスクの費用",
+            "value": "$6.44"
+          },
+          {
+            "label": "総合指数",
+            "value": "61点"
+          }
+        ],
+        "tone": "neutral"
+      },
+      "text": "1タスクの費用は$3.16で\nNeonの約半分なのだ",
+      "speech": "それでも1タスクの費用は3.16ドルで、Neonの6.44ドルの約半分なのだ。",
+      "expression": "happy",
+      "se": "slide_in",
+      "cite": "Artificial Analysis"
+    },
+    {
+      "type": "flow",
+      "steps": [
+        {
+          "label": "Gemini 4 Carbon",
+          "sub": "設計・判断（考える）"
+        },
+        {
+          "label": "Gemini 4 Hydrogen",
+          "sub": "実行・テスト（手を動かす）"
+        },
+        {
+          "label": "Orchestrator で連携",
+          "sub": "Carbonに近い成功率で、使用量24%減・19%速い\n（Terminal-Bench 4.0）",
+          "tone": "good"
+        }
+      ],
+      "text": "Carbonと組み合わせると\n使用量24%減・19%速いのだ",
+      "speech": "公式は、Carbonに考えさせてHydrogenに手を動かさせる使い方を勧めているのだ。使用量は24%減、19%速くなったそうなのだ。",
+      "expression": "normal",
+      "se": "slide_in",
+      "cite": "Google公式ブログ"
+    },
+    {
+      "type": "points",
+      "items": [
+        {
+          "label": "実力",
+          "body": "標準設定で Argon 超え（51点）"
+        },
+        {
+          "label": "注意",
+          "body": "出力が多く、処理は遅め"
+        },
+        {
+          "label": "使い方",
+          "body": "実行役に Hydrogen"
+        }
+      ],
+      "text": "まずは実行役で使ってみるのだ！\n何を作らせたいか教えてなのだ！",
+      "speech": "まずは実行役として試してみるのだ！何を作らせたいかコメントで教えてなのだ！",
+      "expression": "wink",
+      "se": "outro_chime"
+    }
+  ],
+  "description": "Googleが2026年11月12日に公開した「Gemini 4 Hydrogen」の実力と注意点を、公式発表と第三者評価（Artificial Analysis）に分けて整理したのだ。",
+  "hashtags": [
+    "Gemini4",
+    "Gemini4Hydrogen",
+    "AI解説",
+    "生成AI",
+    "ずんだもん"
+  ],
+  "look": {
+    "theme": "paper",
+    "layout": "paper",
+    "label": "AIモデル検証レポート"
+  },
+  "bgmVolume": 0.067,
+  "voice": {
+    "speed": 1.2,
+    "pre": 0.05,
+    "post": 0.05
+  },
+  "voiceDict": [
+    {
+      "surface": "アンチグラビティ",
+      "pronunciation": "アンチグラビティ",
+      "accent_type": 5
+    }
+  ],
+  "character": {
+    "name": "ずんだもん",
+    "credit": "坂本アヒル「ずんだもん立ち絵素材」",
+    "page": "https://twitter.com/sakamoto_ahr",
+    "howto": "坂本アヒル「ずんだもん立ち絵素材」の PSD をダウンロードして python3 scripts/build_character.py <PSD> を実行",
+    "spriteHeight": 720,
+    "images": {
+      "normal": {
+        "file": "characters/zundamon-ahiru/normal.png",
+        "talk": "characters/zundamon-ahiru/normal_talk.png"
+      },
+      "question": {
+        "file": "characters/zundamon-ahiru/question.png",
+        "talk": "characters/zundamon-ahiru/question_talk.png"
+      },
+      "happy": {
+        "file": "characters/zundamon-ahiru/happy.png",
+        "talk": "characters/zundamon-ahiru/happy_talk.png"
+      },
+      "alert": {
+        "file": "characters/zundamon-ahiru/alert.png",
+        "talk": "characters/zundamon-ahiru/alert_talk.png"
+      },
+      "wink": {
+        "file": "characters/zundamon-ahiru/wink.png",
+        "talk": "characters/zundamon-ahiru/wink_talk.png"
+      }
+    }
+  },
+  "sounds": {
+    "impact_soft": {
+      "file": "se/impact_soft.mp3",
+      "url": "https://soundeffect-lab.info/sound/anime/mp3/question1.mp3",
+      "title": "クイズ出題1"
+    },
+    "slide_in": {
+      "file": "se/slide_in.mp3",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision34.mp3",
+      "title": "決定ボタンを押す34"
+    },
+    "chime_up": {
+      "file": "se/chime_up.mp3",
+      "url": "https://soundeffect-lab.info/sound/anime/mp3/correct2.mp3",
+      "title": "クイズ正解2"
+    },
+    "alert_soft": {
+      "file": "se/alert_soft.mp3",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/warning1.mp3",
+      "title": "警告音1"
+    },
+    "outro_chime": {
+      "file": "se/outro_chime.mp3",
+      "url": "https://soundeffect-lab.info/sound/button/mp3/decision24.mp3",
+      "title": "決定ボタンを押す24"
+    }
+  },
+  "soundCredit": {
+    "name": "効果音ラボ",
+    "page": "https://soundeffect-lab.info/"
+  },
+  "sources": [
+    {
+      "label": "Google公式ブログ「Introducing Gemini 4 Hydrogen」(2026/11/12)",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"
+    },
+    {
+      "label": "Artificial Analysis（第三者評価）：Gemini 4 Hydrogen",
+      "url": "https://artificialanalysis.ai/models/gemini-4-hydrogen"
+    },
+    {
+      "label": "Artificial Analysis（第三者評価）：Gemini 4 Neon",
+      "url": "https://artificialanalysis.ai/models/gemini-4-neon"
+    }
+  ]
+}
