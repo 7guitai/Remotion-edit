@@ -82,7 +82,7 @@ export const Slide: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
           <Table slide={slide} />
         ) : slide.type === "points" ? (
           <Points slide={slide} />
-        ) : resolved.hasImage ? (
+        ) : resolved.hasImage && "image" in slide ? (
           <Img
             src={staticFile(`illustrations/${slide.image}`)}
             style={{ maxWidth: 900, maxHeight: 560, objectFit: "contain" }}

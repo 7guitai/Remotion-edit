@@ -1,0 +1,201 @@
+{
+  "id": "ai-hallucination",
+  "format": "short",
+  "title": "AIはなぜ自信満々にウソをつく？【ハルシネーション】",
+  "series": "AIのウラ側",
+  "headline": "AIが自信満々にウソをつく理由",
+  "pr": false,
+  "source": {
+    "name": "OpenAI「Why language models hallucinate」2025年9月5日",
+    "url": "https://openai.com/index/why-language-models-hallucinate/"
+  },
+  "bgm": {
+    "file": "simplestyle.mp3",
+    "title": "シンプルスタイル",
+    "credit": "甘茶の音楽工房",
+    "page": "https://amachamusic.chagasi.com/music_simplestyle.html",
+    "url": "https://amachamusic.chagasi.com/mp3/simplestyle.mp3"
+  },
+  "readings": {
+    "OpenAI": "オープンエーアイ",
+    "o4-mini": "オーフォーミニ",
+    "gpt-5-thinking-mini": "ジーピーティーファイブシンキングミニ",
+    "SimpleQA": "シンプルキューエー",
+    "0点": "れいてん"
+  },
+  "illustrations": {},
+  "slides": [
+    {
+      "type": "hook",
+      "headline": "AIはなぜ\n【自信満々に】\nウソをつく？",
+      "emoji": "🤖",
+      "text": "AIが自信満々にウソをつくのは\nなぜか知ってるのだ？",
+      "speech": "AIが自信満々にウソをつくのはなぜか、知ってるのだ？"
+    },
+    {
+      "type": "source",
+      "org": "OpenAI",
+      "date": "2025年9月5日",
+      "title": "Why language models hallucinate",
+      "titleJa": "なぜ言語モデルは\nハルシネーションを起こすのか",
+      "summary": "ハルシネーション＝AIがもっともらしい間違いを答えること",
+      "text": "2025年9月、OpenAIが\n分析論文を出したのだ。",
+      "speech": "2025年9月、OpenAIがその理由を分析した論文を出したのだ。",
+      "cite": "OpenAI「Why language models hallucinate」(2025)"
+    },
+    {
+      "type": "versus",
+      "left": {
+        "label": "分からないけど\n適当に書く",
+        "value": "25%",
+        "lines": [
+          "4回に1回は当たる"
+        ],
+        "tone": "good"
+      },
+      "right": {
+        "label": "分からないから\n白紙で出す",
+        "value": "0点",
+        "lines": [
+          "必ず0点"
+        ],
+        "tone": "bad"
+      },
+      "note": "4択テストのたとえ（記事の説明より）",
+      "text": "4択なら、適当に書いても\n4回に1回は当たるのだ。",
+      "speech": "4択テストを想像してほしいのだ。分からなくても適当に書けば4回に1回は当たるけど、白紙なら必ず0点なのだ。",
+      "cite": "OpenAI「Why language models hallucinate」(2025)"
+    },
+    {
+      "type": "flow",
+      "steps": [
+        {
+          "label": "正答率だけで採点",
+          "sub": "正解の数で点をつける",
+          "emoji": "📝",
+          "tone": "neutral"
+        },
+        {
+          "label": "「分かりません」は0点",
+          "sub": "正直に答えても点にならない",
+          "emoji": "🙅",
+          "tone": "neutral"
+        },
+        {
+          "label": "当てずっぽうが得",
+          "sub": "推測すれば当たるかも",
+          "emoji": "🎲",
+          "tone": "bad"
+        },
+        {
+          "label": "自信満々の誤答",
+          "sub": "ハルシネーション",
+          "emoji": "😤",
+          "tone": "bad"
+        }
+      ],
+      "text": "正解数だけの採点だと\n当てずっぽうが得になるのだ。",
+      "speech": "AIの評価も、正解の数だけで点をつけることが多いのだ。だから「分かりません」より、当てずっぽうで答えるほうが得になってしまうのだ。",
+      "cite": "OpenAI「Why language models hallucinate」(2025)"
+    },
+    {
+      "type": "stacked",
+      "series": [
+        {
+          "label": "正解",
+          "tone": "good"
+        },
+        {
+          "label": "誤答",
+          "tone": "bad"
+        },
+        {
+          "label": "回答を控えた",
+          "tone": "neutral"
+        }
+      ],
+      "rows": [
+        {
+          "label": "o4-mini",
+          "values": [
+            24,
+            75,
+            1
+          ]
+        },
+        {
+          "label": "gpt-5-thinking-mini",
+          "values": [
+            22,
+            26,
+            52
+          ]
+        }
+      ],
+      "note": "SimpleQA評価。数値はOpenAIの記事の表より",
+      "text": "正解率はほぼ同じなのに\n誤答は75%→26%なのだ。",
+      "speech": "実際のデータを見るのだ。正解率はほぼ同じなのに、間違いは75%から26%に減っているのだ。",
+      "cite": "OpenAI「Why language models hallucinate」(2025)"
+    },
+    {
+      "type": "emphasis",
+      "big": "正解率はほぼ同じ\nでも誤答は\n【約3分の1】",
+      "sub": "「分からない」と\n言えるかが大事",
+      "text": "違いは「分からない」と\n言えるかどうかなのだ。",
+      "speech": "違いは「分からないときに、分からないと言えるか」なのだ。",
+      "cite": "OpenAI「Why language models hallucinate」(2025)"
+    },
+    {
+      "type": "versus",
+      "left": {
+        "label": "いまの採点",
+        "lines": [
+          "正解＝1点",
+          "分からない＝0点",
+          "誤答＝0点"
+        ],
+        "tone": "bad"
+      },
+      "right": {
+        "label": "論文の提案",
+        "lines": [
+          "正解＝1点",
+          "分からない＝部分点",
+          "誤答＝減点"
+        ],
+        "tone": "good"
+      },
+      "text": "自信満々の誤答は減点、\n正直なら部分点にするのだ。",
+      "speech": "だから論文は、自信満々の間違いには罰を、分からないと正直に言ったら部分点をあげる採点にしようと提案しているのだ。",
+      "cite": "OpenAI「Why language models hallucinate」(2025)"
+    },
+    {
+      "type": "points",
+      "items": [
+        {
+          "label": "「分からなければ\n分からないと答えて」",
+          "body": "と頼んでみる"
+        },
+        {
+          "label": "数字や出典は\n自分で確かめる",
+          "body": "そのまま信じない"
+        }
+      ],
+      "text": "AIの答えの数字や出典は\n自分で確かめるのだ。",
+      "speech": "ぼくたちも、AIの答えの数字や出典は自分で確かめるクセをつけるのだ。"
+    },
+    {
+      "type": "emphasis",
+      "big": "フォローして\n【AIのウラ側】を\n一緒に学ぶのだ！",
+      "text": "フォローして、\n一緒に学ぶのだ！",
+      "speech": "フォローして、AIのウラ側を一緒に学ぶのだ！"
+    }
+  ],
+  "description": "AIがもっともらしいウソ（ハルシネーション）をつく理由を、OpenAIの論文をもとにずんだもんが解説するのだ。正答率重視の採点が生む仕組みと、使う側のコツも紹介するのだ。",
+  "hashtags": [
+    "AI",
+    "ChatGPT",
+    "ハルシネーション",
+    "ずんだもん"
+  ]
+}

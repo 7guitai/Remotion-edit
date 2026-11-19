@@ -10,6 +10,7 @@
 | --- | --- | --- |
 | `sleep-trivia` | 睡眠の雑学 | 約2分9秒 |
 | `charger-power-split` | PCとスマホを同時充電する充電器の選び方（[OCHA NOTE の記事](https://ochanote.com/articles/laptop-phone-charger-power-split/)を動画化） | 約4分12秒 |
+| `ai-hallucination` | 【縦型ショート】AIはなぜ自信満々にウソをつく？（[OpenAI の論文](https://openai.com/index/why-language-models-hallucinate/)を図解） | 約58秒 |
 
 ## 使い方
 
@@ -26,6 +27,20 @@ npm run description -- charger-power-split   # 概要欄（目次・クレジッ
 
 1. `src/episodes/` に JSON を追加し、`src/episodes/index.ts` の `EPISODES` に登録する
 2. `npm run assets` → `npm run voice -- <id>` → レンダリング
+
+### 縦型ショート（AI解説シリーズ「AIのウラ側」）
+
+エピソード JSON に `"format": "short"` を付けると 1080×1920 の縦型になります。
+画面上部にシリーズ名（`series`）と見出し（`headline`）、中央に図解カード、下にずんだもんの字幕、最下部に出典（スライドごとの `cite`）が出ます。
+図解の種類は `hook`（問いかけ）・`source`（資料カード）・`versus`（2つの比較）・`flow`（流れ図）・`stacked`（100%積み上げ横棒）・`emphasis`（強調）・`points`（チェックリスト）です（型は `src/episodes/index.ts`）。
+
+```bash
+python3 scripts/gemini_produce.py drafts/ai-hallucination.md --id ai-hallucination --format short --title "..."
+python3 scripts/generate_voice.py ai-hallucination --speed 1.3   # ショートは少し速め
+npx remotion render ai-hallucination out/ai-hallucination.mp4
+```
+
+60秒以内に収めるため、台本は9スライド・読み上げ合計55秒程度を目安にします。
 
 ### Gemini に制作させる（台本 → エピソード JSON）
 

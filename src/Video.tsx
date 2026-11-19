@@ -9,6 +9,9 @@ import {
   useVideoConfig,
 } from "remotion";
 import { Slide } from "./components/Slide";
+import { ShortHeader } from "./components/short/ShortHeader";
+import { ShortSlide } from "./components/short/ShortSlide";
+import { SHORT } from "./components/short/theme";
 import { getEpisode } from "./episodes";
 import { VideoProps } from "./slides";
 import { BGM_VOLUME, COLORS, fontFamily } from "./theme";
@@ -25,12 +28,16 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
       { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
     );
 
+  const isShort = episode.format === "short";
+
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.background }}>
+    <AbsoluteFill
+      style={{ backgroundColor: isShort ? SHORT.background : COLORS.background }}
+    >
       <Series>
         {slides.map((s, i) => (
           <Series.Sequence key={i} durationInFrames={s.durationInFrames}>
-            <Slide resolved={s} />
+            {isShort ? <ShortSlide resolved={s} /> : <Slide resolved={s} />}
             {s.voice ? (
               <Sequence from={s.voiceStart}>
                 <Audio src={staticFile(s.voice)} />
@@ -39,6 +46,7 @@ export const Video: React.FC<VideoProps> = ({ episodeId, slides }) => {
           </Series.Sequence>
         ))}
       </Series>
+      {isShort ? <ShortHeader episode={episode} /> : null}
       {episode.pr ? <PrBadge /> : null}
       <Audio
         src={staticFile(`bgm/${episode.bgm.file}`)}

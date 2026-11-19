@@ -48,7 +48,8 @@ def main() -> None:
     if ep.get("description"):
         lines += [ep["description"], ""]
     if ep.get("source"):
-        lines += [f"▼ 詳しい解説記事（{ep['source']['name']}）", ep["source"]["url"], ""]
+        label = "参考資料" if ep.get("format") == "short" else "詳しい解説記事"
+        lines += [f"▼ {label}（{ep['source']['name']}）", ep["source"]["url"], ""]
     links = [l for l in ep.get("links", [])]
     if links:
         lines += ["▼ 紹介した製品"]
@@ -60,9 +61,10 @@ def main() -> None:
         "▼ 使用素材",
         "音声：VOICEVOX:ずんだもん",
         f"BGM：{ep['bgm']['credit']}「{ep['bgm']['title']}」",
-        "イラスト：いらすとや",
-        "",
     ]
+    if ep.get("illustrations"):
+        lines += ["イラスト：いらすとや"]
+    lines += [""]
     if ep.get("hashtags"):
         lines += [" ".join(f"#{t}" for t in ep["hashtags"])]
 

@@ -80,6 +80,45 @@ SYSTEM = """あなたは「ずんだもん解説動画」（Remotion）の制作
 """
 
 
+SYSTEM_SHORT = """あなたは「ずんだもん解説ショート」（縦型 1080×1920・60秒以内・Remotion）の制作担当です。
+渡された台本を、ショート1本分のエピソード JSON に変換してください。出力は JSON オブジェクト1つだけ。
+
+## 出力する JSON のキー
+- "title": 動画タイトル（指定があればそれを使う）
+- "series": 画面上部のシリーズ名（台本にあればそれ）
+- "headline": 画面上部に常に出す短い見出し（全角14文字以内）
+- "pr": 真偽値（指定どおり）
+- "source": 引用資料 {"name", "url"}
+- "bgm": BGM候補から雰囲気に合う1つを選び、"mood" 以外のキーをそのまま入れる
+- "readings": 読み上げで誤読しそうな英字・記号・モデル名の読み替え {"表記": "カタカナ読み"}（例: "o4-mini": "オーフォーミニ"）
+- "illustrations": {}（ショートでは使わない）
+- "slides": スライドの配列（下記）
+- "description": 概要欄の紹介文（2文）
+- "hashtags": ハッシュタグ3〜5個（# なし、"ずんだもん" を含める）
+
+## スライド（台本の見出し1つ＝1スライド）
+全スライド共通:
+- "text": 画面下部のずんだもんの字幕。読み上げ文を短く言い切った形で、全角32文字以内、改行 \\n は1つまで
+- "speech": 読み上げ文（台本の「ずんだもん:」をそのまま。字幕と同じなら省略）
+- "cite": 資料の内容やデータを扱うスライドにだけ付ける短い出典表記（例: "OpenAI「Why language models hallucinate」(2025)"）
+- "chapter": 不要
+図解の種類（"type"）:
+- "hook": {"headline": 大きな問い（\\n で2〜3行、強調したい語を【】で囲む）, "emoji": 絵文字1つ}
+- "source": {"org", "date", "title": 原題, "titleJa": 日本語訳, "summary": 一言の補足}
+- "versus": {"left": {"label", "value"?, "lines"?: [...], "tone": "good|bad|neutral"}, "right": {同じ}, "note"?}
+- "flow": {"steps": [{"label", "sub"?, "emoji"?, "tone"?}]}（3〜4段。最後の段が結論）
+- "stacked": {"series": [{"label", "tone"}], "rows": [{"label", "values": [数値...]}], "note"}（values は series と同じ順・合計100）
+- "emphasis": {"big": 大きな一言（\\n 可、強調は【】）, "sub"?: 補足}
+- "points": {"items": [{"label", "body"}]}（チェックリスト、2〜3個）
+
+## ルール
+- 語尾はずんだもん口調（「〜のだ」「〜なのだ」）
+- 台本の内容・数値・事実を変えない。足さない。台本にない数値を入れない
+- 台本の「画面:」の指示に合う type を選ぶ
+- good=望ましい（緑）、bad=問題（赤）、neutral=どちらでもない（灰）
+"""
+
+
 def call_gemini(model: str, messages: list, retries: int = 8) -> str:
     key = os.environ.get("GEMINI_API_KEY", "proxy-injected")
     body = json.dumps(
@@ -140,6 +179,26 @@ def validate(ep: dict) -> list[str]:
         elif t == "bars":
             if not s.get("bars"):
                 errors.append(f"slides[{i}] (bars) に bars がありません")
+        elif t == "hook":
+            if not s.get("headline"):
+                errors.append(f"slides[{i}] (hook) に headline がありません")
+        elif t == "source":
+            for k in ("org", "date", "title"):
+                if not s.get(k):
+                    errors.append(f"slides[{i}] (source) に {k} がありません")
+        elif t == "versus":
+            if not (s.get("left") and s.get("right")):
+                errors.append(f"slides[{i}] (versus) に left / right がありません")
+        elif t == "flow":
+            if not s.get("steps"):
+                errors.append(f"slides[{i}] (flow) に steps がありません")
+        elif t == "stacked":
+            n = len(s.get("series", []))
+            if not n or any(len(r.get("values", [])) != n for r in s.get("rows", [])):
+                errors.append(f"slides[{i}] (stacked) の series と values の数が合いません")
+        elif t == "emphasis":
+            if not s.get("big"):
+                errors.append(f"slides[{i}] (emphasis) に big がありません")
         else:
             errors.append(f"slides[{i}] の type '{t}' は使えません")
     return errors
@@ -158,7 +217,7 @@ def register(episode_id: str) -> None:
     last = imports[-1]
     src = src.replace(last, last + f'import {var} from "./{episode_id}.json";\n', 1)
     # 既存の並びの最後に追加する
-    src = re.sub(r"(export const EPISODES: Episode\[\] = \[\n(?:  .+\n)*)", rf"\1  {var} as Episode,\n", src, 1)
+    src = re.sub(r"(export const EPISODES: Episode\[\] = \[\n(?:  .+\n)*)", rf"\1  {var} as Episode,\n", src, count=1)
     INDEX.write_text(src, encoding="utf-8")
     print(f"  {INDEX.relative_to(ROOT)} に登録しました")
 
@@ -171,6 +230,7 @@ def main() -> None:
     p.add_argument("--title")
     p.add_argument("--pr", action="store_true", help="アフィリエイトなどを含む（画面に PR 表示）")
     p.add_argument("--force", action="store_true", help="既存の JSON を上書きする")
+    p.add_argument("--format", choices=["wide", "short"], default="wide", help="short は縦型ショート")
     args = p.parse_args()
 
     out = EPISODES / f"{args.id}.json"
@@ -179,14 +239,15 @@ def main() -> None:
 
     draft = args.draft.read_text(encoding="utf-8")
     sample = json.loads((EPISODES / "charger-power-split.json").read_text(encoding="utf-8"))
-    sample_slides = sample["slides"][:6]
+    sample_slides = [] if args.format == "short" else sample["slides"][:6]
     user = (
         f"## 指定\n- title: {args.title or '（台本から考える）'}\n- pr: {str(args.pr).lower()}\n\n"
         f"## BGM候補\n{json.dumps(BGM_CHOICES, ensure_ascii=False, indent=1)}\n\n"
         f"## 既存動画のスライド例（書き方の参考）\n{json.dumps(sample_slides, ensure_ascii=False, indent=1)}\n\n"
         f"## 台本\n{draft}"
     )
-    messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user}]
+    system = SYSTEM_SHORT if args.format == "short" else SYSTEM
+    messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
 
     print(f"Gemini（{args.model}）に制作を依頼しています…", file=sys.stderr)
     episode = parse_json(call_gemini(args.model, messages))
@@ -204,7 +265,8 @@ def main() -> None:
         if errors:
             sys.exit("形式の誤りが残りました:\n - " + "\n - ".join(errors))
 
-    episode = {"id": args.id, **{k: v for k, v in episode.items() if k != "id"}}
+    episode = {"id": args.id, "format": args.format, **{k: v for k, v in episode.items() if k not in ("id", "format")}}
+    episode.setdefault("illustrations", {})
     if args.title:
         episode["title"] = args.title
     episode["pr"] = args.pr
