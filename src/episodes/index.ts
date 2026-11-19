@@ -178,7 +178,12 @@ export type Episode = {
     name: string;
     credit: string;
     page: string;
-    images: Record<string, { file: string; url: string; note?: string }>;
+    // talk は口を開けた差分（あれば話している間に交互に表示する）。url があれば npm run assets で取得
+    images: Record<string, { file: string; url?: string; talk?: string; note?: string }>;
+    // 紙面レイアウトでの立ち絵の高さ（px）
+    spriteHeight?: number;
+    // 画像を取得する方法（URL で取れない素材の案内）
+    howto?: string;
   };
   // 効果音。public/se/ に npm run assets で取得
   sounds?: Record<string, { file: string; url: string; title: string }>;

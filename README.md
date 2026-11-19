@@ -50,6 +50,18 @@ npx remotion render ai-hallucination out/ai-hallucination.mp4
 - 読み上げ文（`speech`）は字幕にそのまま出るので、モデル名などは英語表記で書き、読みは `readings` で指定します
 - フォントは Noto Serif JP（タイトル）と Noto Sans JP（本文）を `public/fonts/` に同梱（SIL OFL 1.1）
 
+#### 立ち絵（坂本アヒル「ずんだもん立ち絵素材」）
+
+`gemini4-neon` は坂本アヒルさんのデフォルメ立ち絵を使います（公式ガイドラインに準じて商用利用・改変可、クレジット任意）。
+再配布はしないため Git には含めません。pixiv の配布ページから PSD をダウンロードし、表情ごとの PNG（口を閉じた絵と開けた絵）を書き出してください。
+
+```bash
+pip install psd-tools
+python3 scripts/build_character.py <ダウンロードした ずんだもん立ち絵素材2.3.psd>
+```
+
+表情（normal / question / happy / alert / wink）とレイヤーの組み合わせは `scripts/build_character.py` の `EXPRESSIONS` で変えられます。話している間は口を開けた絵と交互に表示します（口パク）。
+
 ### Gemini に制作させる（台本 → エピソード JSON）
 
 台本（Markdown）を `drafts/<id>.md` に書き、Gemini（既定は `gemini-4-hydrogen`）にスライド構成・テロップ・読み上げ文・図表・イラスト選び・読み替え辞書を組み立てさせます。

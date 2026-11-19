@@ -212,28 +212,30 @@
   ],
   "character": {
     "name": "ずんだもん",
-    "credit": "東北ずん子・ずんだもんプロジェクト 公式イラスト",
-    "page": "https://zunko.jp/con_illust.html",
+    "credit": "坂本アヒル「ずんだもん立ち絵素材」",
+    "page": "https://twitter.com/sakamoto_ahr",
+    "howto": "坂本アヒル「ずんだもん立ち絵素材」の PSD をダウンロードして python3 scripts/build_character.py <PSD> を実行",
+    "spriteHeight": 720,
     "images": {
       "normal": {
-        "file": "characters/zundamon/normal.png",
-        "url": "https://zunko.jp/sozai/zundamon/zunmon003.png"
-      },
-      "happy": {
-        "file": "characters/zundamon/happy.png",
-        "url": "https://zunko.jp/sozai/zundamon/zunmon030.png"
+        "file": "characters/zundamon-ahiru/normal.png",
+        "talk": "characters/zundamon-ahiru/normal_talk.png"
       },
       "question": {
-        "file": "characters/zundamon/question.png",
-        "url": "https://zunko.jp/sozai/zundamon/zunmon031.png"
+        "file": "characters/zundamon-ahiru/question.png",
+        "talk": "characters/zundamon-ahiru/question_talk.png"
+      },
+      "happy": {
+        "file": "characters/zundamon-ahiru/happy.png",
+        "talk": "characters/zundamon-ahiru/happy_talk.png"
       },
       "alert": {
-        "file": "characters/zundamon/alert.png",
-        "url": "https://zunko.jp/sozai/zundamon/zunmon002.png"
+        "file": "characters/zundamon-ahiru/alert.png",
+        "talk": "characters/zundamon-ahiru/alert_talk.png"
       },
       "wink": {
-        "file": "characters/zundamon/wink.png",
-        "url": "https://zunko.jp/sozai/zundamon/zunmon004.png"
+        "file": "characters/zundamon-ahiru/wink.png",
+        "talk": "characters/zundamon-ahiru/wink_talk.png"
       }
     }
   },

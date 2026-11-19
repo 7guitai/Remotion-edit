@@ -64,6 +64,10 @@ def main() -> None:
         if character:
             for expression, info in character["images"].items():
                 out = ROOT / "public" / info["file"]
+                if not info.get("url"):
+                    if not out.exists():
+                        print(f"  (URLなし) {out.relative_to(ROOT)}  … {character.get('howto', '配布元から取得してください')}")
+                    continue
                 if download(info["url"], out, f"{character['name']}（{expression}）"):
                     fit_character(out)
 

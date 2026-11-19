@@ -69,7 +69,7 @@ export const PaperSlide: React.FC<{ resolved: ResolvedSlide; episode: Episode }>
         </div>
       ) : null}
       <Caption resolved={resolved} />
-      <Sprite episode={episode} expression={slide.expression} />
+      <Sprite episode={episode} resolved={resolved} />
     </AbsoluteFill>
   );
 };
@@ -196,32 +196,49 @@ const Caption: React.FC<{ resolved: ResolvedSlide }> = ({ resolved }) => {
 
 // ---- 立ち絵（左下。顔が Y=1720 より下に掛からない高さで切り取る） ----
 
-const Sprite: React.FC<{ episode: Episode; expression?: string }> = ({ episode, expression }) => {
+// 口パク: 話している間（字幕のまとまりの範囲）だけ、口を開けた絵と閉じた絵を交互に出す
+const isSpeaking = (resolved: ResolvedSlide, frame: number, fps: number) => {
+  if (!resolved.voice) {
+    return false;
+  }
+  const t = (frame - resolved.voiceStart) / fps;
+  const chunks = resolved.captions;
+  if (!chunks) {
+    return t >= 0;
+  }
+  return chunks.some((c) => t >= c.start && t < c.end - 0.08);
+};
+
+const Sprite: React.FC<{ episode: Episode; resolved: ResolvedSlide }> = ({ episode, resolved }) => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
   const character = episode.character;
-  const img = character?.images[expression ?? "normal"] ?? character?.images.normal;
-  if (!img) {
+  const expression = resolved.slide.expression ?? "normal";
+  const img = character?.images[expression] ?? character?.images.normal;
+  if (!character || !img) {
     return null;
   }
-  const pop = spring({ frame, fps: 30, config: { damping: 14, stiffness: 170 }, durationInFrames: 16 });
+  const talking = img.talk && isSpeaking(resolved, frame, fps) && Math.floor(frame / 4) % 2 === 0;
+  const pop = spring({ frame, fps, config: { damping: 14, stiffness: 170 }, durationInFrames: 16 });
+  const height = character.spriteHeight ?? 820;
   return (
     <div
       style={{
         position: "absolute",
-        top: PAPER.spriteTop,
+        top: PAPER.spriteTop - 24,
         left: 24,
-        width: 340,
-        height: 1920 - PAPER.spriteTop,
+        width: 380,
+        height: 1920 - PAPER.spriteTop + 24,
         overflow: "hidden",
       }}
     >
       <Img
-        src={staticFile(img.file)}
+        src={staticFile(talking && img.talk ? img.talk : img.file)}
         style={{
           position: "absolute",
-          top: 8,
+          top: 4,
           left: "50%",
-          height: 820,
+          height,
           transform: `translateX(-50%) translateY(${interpolate(pop, [0, 1], [24, 0])}px)`,
         }}
       />
