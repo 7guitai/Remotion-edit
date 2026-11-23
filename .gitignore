@@ -7,3 +7,5 @@ public/illustrations/*
 # フリーBGMも再配布禁止のためコミットしない（npm run assets で取得）
 public/bgm/
 __pycache__/
+# ずんだもん・四国めたんの立ち絵も再配布禁止（scripts/download_short_assets.py で取得）
+public/shorts/*/chars/

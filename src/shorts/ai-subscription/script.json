@@ -1,0 +1,142 @@
+{
+  "id": "ai-subscription-short",
+  "title": "【2026年11月版】いま契約するべきAIはこれ！目的別3選",
+  "note": "料金は2026年11月時点の目安（税込）。最新は各公式サイトで確認してください",
+  "bgm": {
+    "file": "picopicodisco.mp3",
+    "title": "ピコピコディスコ",
+    "credit": "甘茶の音楽工房",
+    "page": "https://amachamusic.chagasi.com/music_picopicodisco.html",
+    "url": "https://amachamusic.chagasi.com/mp3/picopicodisco.mp3"
+  },
+  "characters": {
+    "zundamon": {
+      "name": "ずんだもん",
+      "speaker": 3,
+      "color": "#5bbd3c",
+      "images": {
+        "normal": "zunmon031",
+        "happy": "zunmon030",
+        "explain": "zunmon033"
+      }
+    },
+    "metan": {
+      "name": "四国めたん",
+      "speaker": 2,
+      "color": "#e0569a",
+      "images": {
+        "normal": "met007",
+        "think": "met011",
+        "happy": "met007"
+      }
+    }
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "lines": [
+        { "who": "metan", "face": "think", "text": "AIを契約したいけど\nどれがいいかわからない…", "speech": "AIを契約したいけど、どれがいいのかわからない。" },
+        { "who": "metan", "face": "normal", "text": "そんな人向けの話よ", "speech": "そんな人向けの話よ。" },
+        { "who": "zundamon", "face": "happy", "text": "結論、目的別に\n1つだけ選べばいいのだ！", "speech": "結論、目的別に、1つだけ選べばいいのだ！" }
+      ]
+    },
+    {
+      "type": "pain",
+      "lines": [
+        { "who": "metan", "face": "think", "text": "でもどれも\n月3,000円くらいするのよね", "speech": "でも、どれも月3000円くらいするのよね。" },
+        { "who": "zundamon", "face": "explain", "text": "全部入れたら\n月9,000円超えなのだ！", "speech": "全部入れたら、月9000円超えなのだ！" },
+        { "who": "metan", "face": "normal", "text": "機能もかぶるし\nもったいないわね", "speech": "機能もかぶるし、もったいないわね。" }
+      ]
+    },
+    {
+      "type": "intro",
+      "lines": [
+        { "who": "zundamon", "face": "explain", "text": "そこで今契約するべきAIを\n目的別に3つ紹介するのだ", "speech": "そこで、今契約するべきAIを、目的別に3つ紹介するのだ。" }
+      ]
+    },
+    {
+      "type": "pick",
+      "pick": "chatgpt",
+      "lines": [
+        { "who": "zundamon", "face": "explain", "text": "1つ目は\nChatGPT Plus", "speech": "1つ目は、チャットジーピーティープラス。" },
+        { "who": "zundamon", "face": "normal", "text": "調べもの・画像づくり・音声会話\nこれ1つでだいたいこなせるのだ", "speech": "調べものも、画像づくりも、音声での会話も、これ1つでだいたいこなせるのだ。" },
+        { "who": "metan", "face": "happy", "text": "最初の1つなら\nこれで失敗しないわね", "speech": "最初の1つなら、これを選べば失敗しないわね。" }
+      ]
+    },
+    {
+      "type": "pick",
+      "pick": "claude",
+      "lines": [
+        { "who": "zundamon", "face": "explain", "text": "2つ目は\nClaude Pro", "speech": "2つ目は、クロードプロ。" },
+        { "who": "zundamon", "face": "normal", "text": "長い文章・資料づくり・プログラミングが\nとくに得意なのだ", "speech": "長い文章や資料づくり、プログラミングが、とくに得意なのだ。" },
+        { "who": "metan", "face": "happy", "text": "日本語が自然だから\n仕事で文章を書く人向けね", "speech": "日本語が自然だから、仕事で文章を書く人向けね。" }
+      ]
+    },
+    {
+      "type": "pick",
+      "pick": "gemini",
+      "lines": [
+        { "who": "zundamon", "face": "explain", "text": "3つ目は\nGoogle AI Pro", "speech": "3つ目は、グーグルエーアイプロ。" },
+        { "who": "zundamon", "face": "normal", "text": "GmailやドキュメントでGeminiが使えて\nストレージまで付いてくるのだ", "speech": "ジーメールやドキュメントの中でジェミニが使えて、ストレージまで付いてくるのだ。" },
+        { "who": "metan", "face": "happy", "text": "Googleを毎日使うなら\nいちばんお得ね", "speech": "グーグルを毎日使う人なら、いちばんお得ね。" }
+      ]
+    },
+    {
+      "type": "budget",
+      "lines": [
+        { "who": "metan", "face": "think", "text": "もっと安く\n試したい人は？", "speech": "もっと安く試したい人は？" },
+        { "who": "zundamon", "face": "happy", "text": "Google AI Plusなら\n月725円から始められるのだ", "speech": "グーグルエーアイプラスなら、月725円から始められるのだ。" }
+      ]
+    },
+    {
+      "type": "who",
+      "lines": [
+        { "who": "metan", "face": "think", "text": "でも全員が契約するべき\nってわけじゃないわよね", "speech": "でも、全員が契約するべきってわけじゃないわよね。" },
+        { "who": "zundamon", "face": "explain", "text": "毎日・仕事で使う人は契約\n週に数回なら無料版で十分なのだ", "speech": "毎日使う人や、仕事で使う人は契約。週に数回聞くだけなら、無料版で十分なのだ。" }
+      ]
+    },
+    {
+      "type": "summary",
+      "lines": [
+        { "who": "zundamon", "face": "explain", "text": "迷ったらChatGPT\n仕事の文章ならClaude\nGoogle派ならGemini", "speech": "迷ったらチャットジーピーティー、仕事の文章ならクロード、グーグル派ならジェミニ。" },
+        { "who": "metan", "face": "normal", "text": "まず1か月試して\n合わなければ乗り換えればOKよ", "speech": "まずは1か月だけ試して、合わなければ乗り換えればいいのよ。" },
+        { "who": "zundamon", "face": "happy", "text": "保存して\n契約するときに見返すのだ！", "speech": "保存して、契約するときに見返すのだ！" }
+      ]
+    }
+  ],
+  "picks": {
+    "chatgpt": {
+      "rank": 1,
+      "name": "ChatGPT Plus",
+      "maker": "OpenAI",
+      "icon": "openai",
+      "color": "#10a37f",
+      "price": "¥3,000",
+      "priceSub": "/月",
+      "badge": "迷ったらコレ",
+      "tags": ["調べもの", "画像生成", "音声会話"]
+    },
+    "claude": {
+      "rank": 2,
+      "name": "Claude Pro",
+      "maker": "Anthropic",
+      "icon": "claude",
+      "color": "#d97757",
+      "price": "$20",
+      "priceSub": "/月（約3,300円）",
+      "badge": "仕事で書く人に",
+      "tags": ["長文・資料", "自然な日本語", "プログラミング"]
+    },
+    "gemini": {
+      "rank": 3,
+      "name": "Google AI Pro",
+      "maker": "Google",
+      "icon": "googlegemini",
+      "color": "#4f7ef0",
+      "price": "¥2,900",
+      "priceSub": "/月",
+      "badge": "Googleユーザーに",
+      "tags": ["Gmail連携", "大容量ストレージ", "動画生成"]
+    }
+  }
+}

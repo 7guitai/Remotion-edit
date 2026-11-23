@@ -11,6 +11,26 @@
 | `sleep-trivia` | 睡眠の雑学 | 約2分9秒 |
 | `charger-power-split` | PCとスマホを同時充電する充電器の選び方（[OCHA NOTE の記事](https://ochanote.com/articles/laptop-phone-charger-power-split/)を動画化） | 約4分12秒 |
 
+## 縦型ショート（掛け合い形式）
+
+`src/shorts/<id>/script.json` の1ファイルが1本の縦型ショート（1080×1920）。ずんだもん＋四国めたんの掛け合いで、テロップ・カード演出・効果音つき。
+
+| id | 内容 | 長さ |
+| --- | --- | --- |
+| `ai-subscription-short` | いま契約するべきAI 目的別3選（2026年11月版） | 約72秒 |
+
+```bash
+python3 scripts/download_short_assets.py ai-subscription   # 立ち絵（zunko.jp 公式）と BGM を取得
+python3 scripts/generate_short_voice.py ai-subscription    # VOICEVOX で音声＋timing.json を作成
+python3 scripts/make_sfx.py ai-subscription                # 効果音を合成（コミット済み）
+npx remotion render ai-subscription-short out/ai-subscription-short.mp4
+# ショート向けに音量を -14 LUFS にそろえる
+ffmpeg -i out/ai-subscription-short.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k out/ai-subscription-short-final.mp4
+```
+
+クレジット（概要欄）: `VOICEVOX:ずんだもん` `VOICEVOX:四国めたん` / 立ち絵: 東北ずん子・ずんだもんプロジェクト / BGM: 甘茶の音楽工房「ピコピコディスコ」/ ロゴ: Simple Icons。
+立ち絵は再配布禁止のため Git に含めない。料金は `script.json` に直書きなので、公開前に各公式サイトで最新か確認すること。
+
 ## 使い方
 
 ```bash
