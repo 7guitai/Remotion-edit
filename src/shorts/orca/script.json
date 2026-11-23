@@ -1,0 +1,232 @@
+{
+  "id": "orca-short",
+  "title": "AIエージェントを何体も同時に動かせる「Orca」を解説",
+  "bgm": {
+    "file": "happytime.mp3",
+    "title": "ハッピータイム",
+    "credit": "甘茶の音楽工房",
+    "page": "https://amachamusic.chagasi.com/music_happytime.html",
+    "url": "https://amachamusic.chagasi.com/mp3/happytime.mp3"
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "chapter": "つかみ",
+      "lines": [
+        {
+          "who": "metan",
+          "face": "think",
+          "text": "AIエージェント\n1つずつ動かして待ってない？",
+          "speech": "エーアイエージェント、ひとつずつ動かして、待ってない？"
+        },
+        {
+          "who": "zundamon",
+          "face": "happy",
+          "text": "Orcaなら\n何体も同時に動かせるのだ！",
+          "speech": "オルカなら、何体も同時に動かせるのだ！"
+        }
+      ]
+    },
+    {
+      "type": "pain",
+      "chapter": "悩み",
+      "lines": [
+        {
+          "who": "metan",
+          "face": "think",
+          "text": "頼んで、待って\nまた次を頼んで…",
+          "speech": "頼んで、待って、また次を頼んで。"
+        },
+        {
+          "who": "zundamon",
+          "face": "explain",
+          "text": "ターミナルが増えて\nどれが何してるか分からなくなるのだ",
+          "speech": "ターミナルが増えて、どれが何してるか、分からなくなるのだ。"
+        }
+      ]
+    },
+    {
+      "type": "intro",
+      "chapter": "Orcaとは",
+      "lines": [
+        {
+          "who": "metan",
+          "face": "normal",
+          "text": "そもそもOrcaって何なの？",
+          "speech": "そもそも、オルカって何なの？"
+        },
+        {
+          "who": "zundamon",
+          "face": "explain",
+          "text": "AIエージェントをまとめて動かす\n無料のオープンソースアプリなのだ",
+          "speech": "エーアイエージェントをまとめて動かす、無料のオープンソースアプリなのだ。"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "chapter": "機能",
+      "no": 1,
+      "title": "並列ワークツリー",
+      "video": "parallel-worktrees",
+      "zoom": {
+        "x": 0,
+        "y": 0,
+        "w": 0.62
+      },
+      "points": [
+        "作業ごとに独立したgitワークツリー",
+        "エージェントを横に並べて同時進行",
+        "変更どうしがぶつからない"
+      ],
+      "lines": [
+        {
+          "who": "zundamon",
+          "face": "explain",
+          "text": "作業ごとにワークツリーを分けて\nエージェントを並べて走らせられるのだ",
+          "speech": "作業ごとにワークツリーを分けて、エージェントを並べて走らせられるのだ。"
+        },
+        {
+          "who": "metan",
+          "face": "happy",
+          "text": "お互いの変更が\nぶつからないのね",
+          "speech": "お互いの変更が、ぶつからないのね。"
+        }
+      ]
+    },
+    {
+      "type": "orchestrate",
+      "chapter": "機能",
+      "no": 2,
+      "title": "オーケストレーション",
+      "video": "orchestration",
+      "lines": [
+        {
+          "who": "zundamon",
+          "face": "explain",
+          "text": "大きな仕事を1体に渡すと\n分担して部下のエージェントに配るのだ",
+          "speech": "大きな仕事を1体に渡すと、分担して、部下のエージェントに配るのだ。"
+        },
+        {
+          "who": "metan",
+          "face": "think",
+          "text": "AIがAIに\n指示を出すってこと？",
+          "speech": "エーアイが、エーアイに、指示を出すってこと？"
+        },
+        {
+          "who": "zundamon",
+          "face": "happy",
+          "text": "結果もまとめて\n報告してくれるのだ",
+          "speech": "結果も、まとめて報告してくれるのだ。"
+        }
+      ]
+    },
+    {
+      "type": "agents",
+      "chapter": "機能",
+      "no": 3,
+      "title": "好きなエージェントで",
+      "lines": [
+        {
+          "who": "zundamon",
+          "face": "explain",
+          "text": "Claude CodeもCodexも\nターミナルで動くなら何でも使えるのだ",
+          "speech": "クロードコードも、コーデックスも、ターミナルで動くエージェントなら、何でも使えるのだ。"
+        }
+      ]
+    },
+    {
+      "type": "feature",
+      "chapter": "機能",
+      "no": 4,
+      "title": "スマホから操作",
+      "video": "mobile-companion",
+      "zoom": {
+        "x": 0.215,
+        "y": 0.04,
+        "w": 0.55
+      },
+      "points": [
+        "確認が必要になったら通知",
+        "チャットでその場で返事",
+        "外出中も作業が止まらない"
+      ],
+      "lines": [
+        {
+          "who": "metan",
+          "face": "think",
+          "text": "席を離れたら\n止まっちゃわない？",
+          "speech": "席を離れたら、止まっちゃわない？"
+        },
+        {
+          "who": "zundamon",
+          "face": "explain",
+          "text": "スマホに通知が来て\nその場で返事できるのだ",
+          "speech": "スマホに通知が来て、その場で返事できるのだ。"
+        }
+      ],
+      "layout": "side"
+    },
+    {
+      "type": "feature",
+      "chapter": "機能",
+      "no": 5,
+      "title": "レビューからPRまで",
+      "video": "annotate-ai-diffs",
+      "zoom": {
+        "x": 0,
+        "y": 0,
+        "w": 0.7
+      },
+      "points": [
+        "差分の行に直接メモ",
+        "そのままエージェントへ修正依頼",
+        "コミット・PRの文面も下書き"
+      ],
+      "lines": [
+        {
+          "who": "zundamon",
+          "face": "normal",
+          "text": "差分にコメントして直させたり\nプルリクエストも作れるのだ",
+          "speech": "差分に直接コメントして直させたり、プルリクエストまで作れるのだ。"
+        }
+      ]
+    },
+    {
+      "type": "who",
+      "chapter": "向き不向き",
+      "lines": [
+        {
+          "who": "metan",
+          "face": "think",
+          "text": "でも誰にでも\n必要なわけじゃないわよね",
+          "speech": "でも、誰にでも必要なわけじゃないわよね。"
+        },
+        {
+          "who": "zundamon",
+          "face": "explain",
+          "text": "毎日エージェントを回す人向け\nたまに使うだけなら今のままでOKなのだ",
+          "speech": "毎日エージェントを何本も回す人向けなのだ。たまに使うだけなら、今のままで十分なのだ。"
+        }
+      ]
+    },
+    {
+      "type": "summary",
+      "chapter": "まとめ",
+      "lines": [
+        {
+          "who": "metan",
+          "face": "happy",
+          "text": "無料だし\nまず入れて試すのがいいわね",
+          "speech": "無料だし、まず入れて試してみるのがいいわね。"
+        },
+        {
+          "who": "zundamon",
+          "face": "happy",
+          "text": "保存して\nあとで試すのだ！",
+          "speech": "保存して、あとで試すのだ！"
+        }
+      ]
+    }
+  ]
+}

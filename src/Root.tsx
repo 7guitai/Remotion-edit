@@ -5,6 +5,8 @@ import { calculateMetadata, FPS } from "./slides";
 import { Video } from "./Video";
 import { AiSubscriptionShort } from "./shorts/ai-subscription/Short";
 import { FPS as SHORT_FPS, HEIGHT, TIMELINE, WIDTH } from "./shorts/ai-subscription/timeline";
+import { OrcaShort } from "./shorts/orca/Short";
+import { TIMELINE as ORCA_TIMELINE } from "./shorts/orca/theme";
 
 // src/episodes/*.json の1ファイル＝1本の動画（コンポジションIDはエピソードの id）
 export const RemotionRoot: React.FC = () => {
@@ -29,6 +31,14 @@ export const RemotionRoot: React.FC = () => {
         id="ai-subscription-short"
         component={AiSubscriptionShort}
         durationInFrames={TIMELINE.total}
+        fps={SHORT_FPS}
+        width={WIDTH}
+        height={HEIGHT}
+      />
+      <Composition
+        id="orca-short"
+        component={OrcaShort}
+        durationInFrames={ORCA_TIMELINE.total}
         fps={SHORT_FPS}
         width={WIDTH}
         height={HEIGHT}

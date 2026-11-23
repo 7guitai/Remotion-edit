@@ -1,4 +1,4 @@
-"""縦型ショート（src/shorts/<id>/script.json）の掛け合い音声を作る。
+"""縦型ショート（src/shorts/<id>/script.json）の掛け合い音声を作る（話者は src/shorts/common/characters.json）。
 
 各セリフを VOICEVOX で読み上げて public/shorts/<id>/voice/NNN.wav に保存し、
 長さを src/shorts/<id>/timing.json に書き出す（Remotion はこれを見て尺を決める）。
@@ -84,6 +84,7 @@ def main() -> None:
 
     src = ROOT / "src" / "shorts" / args.short
     script = json.loads((src / "script.json").read_text(encoding="utf-8"))
+    characters = json.loads((ROOT / "src" / "shorts" / "common" / "characters.json").read_text(encoding="utf-8"))
     out_dir = ROOT / "public" / "shorts" / args.short / "voice"
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -92,7 +93,7 @@ def main() -> None:
     n = 0
     for scene in script["scenes"]:
         for line in scene["lines"]:
-            ch = script["characters"][line["who"]]
+            ch = characters[line["who"]]
             out = out_dir / f"{n:03d}.wav"
             text = line.get("speech") or line["text"].replace("\n", "")
             if args.force or not out.exists():

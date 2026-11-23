@@ -18,14 +18,18 @@
 | id | 内容 | 長さ |
 | --- | --- | --- |
 | `ai-subscription-short` | いま契約するべきAI 目的別3選（2026年11月版） | 約72秒 |
+| `orca-short` | AIエージェントを並列で動かすアプリ「Orca」の解説 | 約61秒 |
+
+共通部品（立ち絵・テロップ・タイムライン・効果音・ロゴ）は `src/shorts/common/` と `public/shorts/common/` にある。
 
 ```bash
 python3 scripts/download_short_assets.py ai-subscription   # BGM を取得
 pip install psd-tools
-python3 scripts/export_psd_parts.py ai-subscription <ずんだもん立ち絵素材2.3.zip> <四国めたん立ち絵素材2.1.zip>  # 立ち絵パーツを書き出し
+python3 scripts/export_psd_parts.py <ずんだもん立ち絵素材2.3.zip> <四国めたん立ち絵素材2.1.zip>  # 立ち絵パーツを書き出し（全短編共通）
 python3 scripts/generate_short_voice.py ai-subscription    # VOICEVOX で音声＋timing.json を作成
-python3 scripts/make_sfx.py ai-subscription                # 効果音を合成（コミット済み）
+python3 scripts/make_sfx.py                                # 効果音を合成（コミット済み）
 node scripts/capture_pricing.js ai-subscription            # 各社の公式料金ページを撮影（背景・プラン紹介で使用）
+python3 scripts/fetch_orca_assets.py                       # orca-short 用：Orca 公式リポジトリ（MIT）の画面素材とデモ動画
 npx remotion render ai-subscription-short out/ai-subscription-short.mp4
 # ショート向けに音量を -14 LUFS にそろえる
 ffmpeg -i out/ai-subscription-short.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k out/ai-subscription-short-final.mp4

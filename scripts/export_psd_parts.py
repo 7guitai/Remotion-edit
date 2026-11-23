@@ -1,14 +1,14 @@
 """坂本アヒルさんの立ち絵 PSD（ずんだもん／四国めたん）から、ショートで使うパーツだけを書き出す。
 
-script.json の characters.<id>.psd に書いたレイヤー（体・腕・口・目・眉など）を、
-全キャラ共通の切り抜き範囲の PNG として public/shorts/<id>/chars/<キャラ>/ に保存し、
+src/shorts/common/characters.json の <キャラ>.psd に書いたレイヤー（体・腕・口・目・眉など）を、
+パーツ共通の切り抜き範囲の PNG として public/shorts/common/chars/<キャラ>/ に保存し、
 Remotion 側で重ねて口パク・まばたき・表情切り替えをする。
 
 使い方:
   pip install psd-tools
-  python3 scripts/export_psd_parts.py ai-subscription <ずんだもん立ち絵素材2.3.zip または .psd> <四国めたん立ち絵素材2.1.zip または .psd>
+  python3 scripts/export_psd_parts.py <ずんだもん立ち絵素材2.3.zip または .psd> <四国めたん立ち絵素材2.1.zip または .psd>
 
-立ち絵素材は Git に含めない（public/shorts/*/chars/ は .gitignore 済み）。
+立ち絵素材は Git に含めない（public/shorts/common/chars/ は .gitignore 済み）。
 """
 
 import io
@@ -92,13 +92,13 @@ def export(char_id: str, spec: dict, psd_path: Path, out_dir: Path) -> dict:
 
 
 def main() -> None:
-    short, zunda, metan = sys.argv[1], Path(sys.argv[2]), Path(sys.argv[3])
-    src = ROOT / "src" / "shorts" / short
-    script = json.loads((src / "script.json").read_text(encoding="utf-8"))
-    out = ROOT / "public" / "shorts" / short / "chars"
+    zunda, metan = Path(sys.argv[1]), Path(sys.argv[2])
+    src = ROOT / "src" / "shorts" / "common"
+    characters = json.loads((src / "characters.json").read_text(encoding="utf-8"))
+    out = ROOT / "public" / "shorts" / "common" / "chars"
     parts = {}
     for cid, path in [("zundamon", zunda), ("metan", metan)]:
-        parts[cid] = export(cid, script["characters"][cid]["psd"], path, out / cid)
+        parts[cid] = export(cid, characters[cid]["psd"], path, out / cid)
     (src / "parts.json").write_text(json.dumps(parts, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 

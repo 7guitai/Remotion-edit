@@ -1,10 +1,9 @@
-"""ショート用の効果音（ポン・シュッ・キラーン・ドン・レジ音）を合成して public/shorts/<id>/sfx/ に書き出す。
+"""ショート用の効果音（ポン・シュッ・キラーン・ドン・レジ音）を合成して public/shorts/common/sfx/ に書き出す。
 外部素材を使わずに作るので、ライセンスを気にせずコミットできる。
 
-使い方: python3 scripts/make_sfx.py ai-subscription
+使い方: python3 scripts/make_sfx.py
 """
 
-import sys
 import wave
 from pathlib import Path
 
@@ -83,7 +82,7 @@ def register() -> np.ndarray:
 
 
 def main() -> None:
-    out = ROOT / "public" / "shorts" / sys.argv[1] / "sfx"
+    out = ROOT / "public" / "shorts" / "common" / "sfx"
     out.mkdir(parents=True, exist_ok=True)
     for name, fn in [("pop", pop), ("whoosh", whoosh), ("ding", ding), ("stamp", stamp), ("register", register)]:
         save(name, fn(), out)
