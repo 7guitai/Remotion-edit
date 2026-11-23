@@ -13,14 +13,16 @@
 
 ## 縦型ショート（掛け合い形式）
 
-`src/shorts/<id>/script.json` の1ファイルが1本の縦型ショート（1080×1920）。ずんだもん＋四国めたんの掛け合いで、テロップ・カード演出・効果音つき。
+`src/shorts/<id>/script.json` の1ファイルが1本の縦型ショート（1080×1920）。ずんだもん＋四国めたんの掛け合いで、テロップ・カード演出・効果音つき。立ち絵は PSD のパーツを重ねて、口パク（音量連動）・まばたき・表情／ポーズ切り替えをしている（表情は `script.json` の `characters.*.psd.faces`）。
 
 | id | 内容 | 長さ |
 | --- | --- | --- |
 | `ai-subscription-short` | いま契約するべきAI 目的別3選（2026年11月版） | 約72秒 |
 
 ```bash
-python3 scripts/download_short_assets.py ai-subscription   # 立ち絵（zunko.jp 公式）と BGM を取得
+python3 scripts/download_short_assets.py ai-subscription   # BGM を取得
+pip install psd-tools
+python3 scripts/export_psd_parts.py ai-subscription <ずんだもん立ち絵素材2.3.zip> <四国めたん立ち絵素材2.1.zip>  # 立ち絵パーツを書き出し
 python3 scripts/generate_short_voice.py ai-subscription    # VOICEVOX で音声＋timing.json を作成
 python3 scripts/make_sfx.py ai-subscription                # 効果音を合成（コミット済み）
 npx remotion render ai-subscription-short out/ai-subscription-short.mp4
@@ -28,7 +30,7 @@ npx remotion render ai-subscription-short out/ai-subscription-short.mp4
 ffmpeg -i out/ai-subscription-short.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k out/ai-subscription-short-final.mp4
 ```
 
-クレジット（概要欄）: `VOICEVOX:ずんだもん` `VOICEVOX:四国めたん` / 立ち絵: 東北ずん子・ずんだもんプロジェクト / BGM: 甘茶の音楽工房「ピコピコディスコ」/ ロゴ: Simple Icons。
+クレジット（概要欄）: `VOICEVOX:ずんだもん` `VOICEVOX:四国めたん` / 立ち絵: 坂本アヒル（ずんだもん立ち絵素材2.3・四国めたん立ち絵素材2.1）/ BGM: 甘茶の音楽工房「ピコピコディスコ」/ ロゴ: Simple Icons。
 立ち絵は再配布禁止のため Git に含めない。料金は `script.json` に直書きなので、公開前に各公式サイトで最新か確認すること。
 
 ## 使い方

@@ -461,7 +461,7 @@ export const BudgetScene: React.FC<{ scene: TimedScene }> = ({ scene }) => {
       <div style={{ ...center, top: 190, transform: `translateY(${(1 - enter) * 600}px)` }}>
         <div
           style={{
-            width: 820,
+            width: 900,
             background: C.card,
             borderRadius: 48,
             padding: "40px 40px 46px",
@@ -473,12 +473,12 @@ export const BudgetScene: React.FC<{ scene: TimedScene }> = ({ scene }) => {
             <LogoBubble icon="googlegemini" color="#4f7ef0" size={120} filled />
             <div style={{ fontFamily: HEAD_FONT, fontSize: 66, color: C.ink, whiteSpace: "nowrap" }}>Google AI Plus</div>
           </div>
-          <div style={{ marginTop: 10, opacity: reveal ? 1 : 0.15 }}>
+          <div style={{ marginTop: 10, opacity: reveal ? 1 : 0.15, whiteSpace: "nowrap" }}>
             <span
               style={{
                 display: "inline-block",
                 fontFamily: HEAD_FONT,
-                fontSize: 190,
+                fontSize: 150,
                 color: "#4f7ef0",
                 transform: `scale(${1 + (frame >= at + 22 ? (1 - done) * 0.3 : 0)})`,
               }}

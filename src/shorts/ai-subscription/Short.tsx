@@ -12,6 +12,7 @@ import {
   useVideoConfig,
 } from "remotion";
 import envelope from "./envelope.json";
+import partsJson from "./parts.json";
 import { Outlined, textWidth } from "./parts";
 import { SCENES } from "./scenes";
 import { ASSET, BGM_VOLUME, BODY_FONT, C, HEAD_FONT } from "./theme";
@@ -161,38 +162,47 @@ const Header: React.FC = () => {
 
 // ---------------- キャラクター ----------------
 
-// 画像ごとの「頭の中心」の横位置（0〜1）。立ち絵の頭をそろえるために使う
-const HEAD_X: Record<string, number> = {
-  zunmon030: 0.4,
-  zunmon031: 0.43,
-  zunmon033: 0.44,
-  met007: 0.55,
-  met011: 0.5,
-};
-const IMG_ASPECT: Record<string, number> = {
-  zunmon030: 913 / 2400,
-  zunmon031: 943 / 2400,
-  zunmon033: 966 / 2400,
-  met007: 1206 / 2400,
-  met011: 963 / 2400,
+type CharParts = { width: number; height: number; eyeX: number; eyeY: number; files: Record<string, string> };
+type FaceSpec = { arms: string[]; eyes: string[]; brow: string; noBlink?: boolean };
+type PsdSpec = {
+  base: string[];
+  under: string[];
+  top: string[];
+  mouth: { closed: string; half: string; open: string };
+  blink: string[];
+  faces: Record<string, FaceSpec>;
 };
 
-const CHAR_LAYOUT: Record<CharacterId, { x: number; flip: boolean }> = {
-  metan: { x: 250, flip: false },
-  zundamon: { x: 835, flip: true },
+const CHAR_LAYOUT: Record<CharacterId, { x: number; flip: boolean; blinkCycle: number }> = {
+  metan: { x: 265, flip: false, blinkCycle: 127 },
+  zundamon: { x: 815, flip: true, blinkCycle: 104 },
+};
+// 立ち絵の表示倍率と、目の高さ（画面上の y）
+const CHAR_SCALE = 0.86;
+const EYE_Y = 1520;
+
+// 口パク：声の大きさで 閉じ／半開き／開き を切り替える
+const mouthState = (env: number[] | undefined, f: number): "closed" | "half" | "open" => {
+  if (!env || f < 0 || f >= env.length) return "closed";
+  const v = Math.max(env[f] ?? 0, (env[f - 1] ?? 0) * 0.7);
+  if (v > 0.5) return "open";
+  if (v > 0.18) return "half";
+  return "closed";
 };
 
 const Character: React.FC<{ id: CharacterId }> = ({ id }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const ch = SCRIPT.characters[id];
+  const psd = (ch as unknown as { psd: PsdSpec }).psd;
+  const parts = (partsJson as Record<string, CharParts>)[id];
   const line = currentLine(frame);
   const speaking = line.who === id;
 
   // 直近の自分のセリフの表情
   const mine = TIMELINE.lines.filter((l) => l.who === id && l.from <= frame);
   const last = mine[mine.length - 1];
-  const face = ch.images[last?.face ?? "normal"] ?? ch.images.normal;
+  const face = psd.faces[last?.face ?? "normal"] ?? psd.faces.normal;
 
   // 話し手の切り替えをなめらかに
   const prev = TIMELINE.lines[line.index - 1];
@@ -202,31 +212,51 @@ const Character: React.FC<{ id: CharacterId }> = ({ id }) => {
 
   // セリフ頭のぴょこん＋声の大きさで上下
   const hop = speaking ? spring({ frame: frame - line.from, fps, config: { damping: 8, stiffness: 260 } }) : 1;
-  const env = speaking ? ((envelope as number[][])[line.index]?.[frame - line.from] ?? 0) : 0;
-  const bob = Math.sin(hop * Math.PI) * 26 + env * 10;
+  const envs = (envelope as number[][])[line.index];
+  const env = speaking ? (envs?.[frame - line.from] ?? 0) : 0;
+  const bob = Math.sin(hop * Math.PI) * 26 + env * 8;
   const breathe = Math.sin(frame / 18 + (id === "metan" ? 1.5 : 0)) * 4;
 
-  const height = 1560;
-  const width = height * (IMG_ASPECT[face] ?? 0.4);
-  const headX = (HEAD_X[face] ?? 0.45) * width;
-  const { x, flip } = CHAR_LAYOUT[id];
-  const left = flip ? x - (width - headX) : x - headX;
+  const mouth = speaking ? mouthState(envs, frame - line.from) : "closed";
+  const { x, flip, blinkCycle } = CHAR_LAYOUT[id];
+  const blinking = !face.noBlink && (frame + (id === "metan" ? 40 : 0)) % blinkCycle < 4;
+
+  const stack = [
+    ...psd.base,
+    ...face.arms,
+    ...psd.under,
+    psd.mouth[mouth],
+    ...(blinking ? psd.blink : face.eyes),
+    face.brow,
+    ...psd.top,
+  ];
+
+  const width = parts.width * CHAR_SCALE;
+  const height = parts.height * CHAR_SCALE;
+  const eyeX = parts.eyeX * CHAR_SCALE;
+  const left = flip ? x - (width - eyeX) : x - eyeX;
 
   return (
     <div
       style={{
         position: "absolute",
         left,
-        top: 1290 + (1 - active) * 50 - bob + breathe,
+        top: EYE_Y - parts.eyeY * CHAR_SCALE + (1 - active) * 50 - bob + breathe,
         width,
         height,
         transform: `scaleX(${flip ? -1 : 1}) scale(${0.94 + active * 0.06})`,
-        transformOrigin: "50% 30%",
+        transformOrigin: "50% 25%",
         filter: `brightness(${0.55 + active * 0.45}) saturate(${0.7 + active * 0.3}) drop-shadow(0 0 ${active * 18}px ${ch.color}aa)`,
         zIndex: speaking ? 2 : 1,
       }}
     >
-      <Img src={ASSET(`chars/${face}.png`)} style={{ width: "100%", height: "100%" }} />
+      {stack.map((p, i) => (
+        <Img
+          key={`${i}-${p}`}
+          src={ASSET(`chars/${id}/${parts.files[p]}`)}
+          style={{ position: "absolute", left: 0, top: 0, width: "100%", height: "100%" }}
+        />
+      ))}
     </div>
   );
 };

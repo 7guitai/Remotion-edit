@@ -57,7 +57,7 @@ export const SCRIPT = script as unknown as {
   bgm: { file: string; title: string; credit: string; url: string };
   characters: Record<
     CharacterId,
-    { name: string; speaker: number; color: string; images: Record<string, string> }
+    { name: string; speaker: number; color: string; psd: unknown }
   >;
   scenes: { type: SceneType; pick?: string; lines: Line[] }[];
   picks: Record<string, Pick>;
