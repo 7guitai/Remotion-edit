@@ -1,0 +1,54 @@
+{
+  "id": "__ID__-short",
+  "title": "（動画タイトル）",
+  "header": { "kicker": "（ヘッダー上段の小見出し）", "title": "（ヘッダーのタイトル）", "badge": "（茶色ラベル：出典や時点など）" },
+  "bgm": {
+    "file": "happytime.mp3",
+    "title": "ハッピータイム",
+    "credit": "甘茶の音楽工房",
+    "page": "https://amachamusic.chagasi.com/music_happytime.html",
+    "url": "https://amachamusic.chagasi.com/mp3/happytime.mp3"
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "chapter": "つかみ",
+      "question": "〇〇、まだ△△してない？",
+      "answer": "□□なら一発",
+      "lines": [
+        { "who": "metan", "face": "think", "text": "〇〇したいけど\nどれがいいかわからない…", "speech": "〇〇したいけど、どれがいいのかわからない。" },
+        { "who": "zundamon", "face": "happy", "text": "結論、□□で\n解決するのだ！", "speech": "結論、□□で解決するのだ！" }
+      ]
+    },
+    {
+      "type": "points",
+      "chapter": "ポイント",
+      "no": 1,
+      "title": "ポイントの見出し",
+      "points": ["要点その1", "要点その2", "要点その3"],
+      "lines": [
+        { "who": "zundamon", "face": "explain", "text": "1つ目は\n〇〇なのだ", "speech": "1つ目は、〇〇なのだ。" },
+        { "who": "metan", "face": "happy", "text": "それは便利ね", "speech": "それは便利ね。" }
+      ]
+    },
+    {
+      "type": "compare",
+      "chapter": "向き不向き",
+      "left": { "title": "向いてる人", "items": ["毎日使う", "仕事で使う"] },
+      "right": { "title": "今のままでOK", "items": ["たまに使うだけ", "無料で足りる"] },
+      "lines": [
+        { "who": "metan", "face": "think", "text": "でも誰にでも\n必要なわけじゃないわよね", "speech": "でも、誰にでも必要なわけじゃないわよね。" },
+        { "who": "zundamon", "face": "explain", "text": "毎日使う人向け\nたまになら今のままでOKなのだ", "speech": "毎日使う人向けなのだ。たまになら、今のままで十分なのだ。" }
+      ]
+    },
+    {
+      "type": "summary",
+      "chapter": "まとめ",
+      "message": "まずは無料で試そう",
+      "lines": [
+        { "who": "metan", "face": "happy", "text": "まず試してみるのがいいわね", "speech": "まず試してみるのがいいわね。" },
+        { "who": "zundamon", "face": "happy", "text": "保存して\nあとで見返すのだ！", "speech": "保存して、あとで見返すのだ！" }
+      ]
+    }
+  ]
+}

@@ -21,6 +21,7 @@
 | `orca-short` | AIエージェントを並列で動かすアプリ「Orca」の解説 | 約61秒 |
 
 共通部品（立ち絵・テロップ・タイムライン・効果音・ロゴ）は `src/shorts/common/` と `public/shorts/common/` にある。
+新しく作るときは `python3 scripts/new_short.py <id>`。作り方は [`.claude/skills/zunda-metan-short/作り方ガイド.md`](.claude/skills/zunda-metan-short/作り方ガイド.md)（Claude Code 用のスキルも同じ場所）。
 
 ```bash
 python3 scripts/download_short_assets.py ai-subscription   # BGM を取得
