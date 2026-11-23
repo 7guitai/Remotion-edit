@@ -25,10 +25,13 @@ pip install psd-tools
 python3 scripts/export_psd_parts.py ai-subscription <ずんだもん立ち絵素材2.3.zip> <四国めたん立ち絵素材2.1.zip>  # 立ち絵パーツを書き出し
 python3 scripts/generate_short_voice.py ai-subscription    # VOICEVOX で音声＋timing.json を作成
 python3 scripts/make_sfx.py ai-subscription                # 効果音を合成（コミット済み）
+node scripts/capture_pricing.js ai-subscription            # 各社の公式料金ページを撮影（背景・プラン紹介で使用）
 npx remotion render ai-subscription-short out/ai-subscription-short.mp4
 # ショート向けに音量を -14 LUFS にそろえる
 ffmpeg -i out/ai-subscription-short.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k out/ai-subscription-short-final.mp4
 ```
+
+デザインは参考動画にならい、明るい背景（撮影した公式ページをぼかして敷く）＋白カード＋暗色のテロップ枠＋画面下に小さく立つキャラ。フォントは Noto Sans JP（OFL）。
 
 クレジット（概要欄）: `VOICEVOX:ずんだもん` `VOICEVOX:四国めたん` / 立ち絵: 坂本アヒル（ずんだもん立ち絵素材2.3・四国めたん立ち絵素材2.1）/ BGM: 甘茶の音楽工房「ピコピコディスコ」/ ロゴ: Simple Icons。
 立ち絵は再配布禁止のため Git に含めない。料金は `script.json` に直書きなので、公開前に各公式サイトで最新か確認すること。

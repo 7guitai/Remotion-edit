@@ -1,34 +1,20 @@
 import React from "react";
-import {
-  Audio,
-  interpolate,
-  Sequence,
-  spring,
-  useCurrentFrame,
-  useVideoConfig,
-} from "remotion";
-import { ASSET, BODY_FONT, C, HEAD_FONT } from "./theme";
+import { Audio, Img, interpolate, Sequence, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import shots from "./shots.json";
+import { ASSET, C, FONT, SHADOW } from "./theme";
 
 // ---- アニメーション補助 ----
 
 export const useSpring = (delay: number, config?: { damping?: number; stiffness?: number; mass?: number }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  return spring({ frame: frame - delay, fps, config: { damping: 14, stiffness: 180, ...config } });
+  return spring({ frame: frame - delay, fps, config: { damping: 18, stiffness: 170, ...config } });
 };
 
-// 「ドン！」と押されるスタンプ用（大きい→ぴったり）
-export const useSlam = (delay: number) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const s = spring({ frame: frame - delay, fps, config: { damping: 11, stiffness: 260, mass: 0.7 } });
-  return {
-    visible: frame >= delay,
-    scale: interpolate(s, [0, 1], [2.4, 1]),
-    opacity: interpolate(frame - delay, [0, 3], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
-    // 着地の瞬間に画面が少し揺れる
-    shake: frame >= delay + 3 && frame < delay + 11 ? Math.sin((frame - delay) * 2.4) * (11 - (frame - delay)) * 1.6 : 0,
-  };
+// フェード＋少し下から上がってくる登場
+export const useRise = (delay: number, distance = 40) => {
+  const s = useSpring(delay);
+  return { opacity: s, transform: `translateY(${(1 - s) * distance}px)` } as React.CSSProperties;
 };
 
 // ---- 効果音 ----
@@ -36,7 +22,7 @@ export const useSlam = (delay: number) => {
 export const Sfx: React.FC<{ at: number; name: "pop" | "whoosh" | "ding" | "stamp" | "register"; volume?: number }> = ({
   at,
   name,
-  volume = 0.5,
+  volume = 0.4,
 }) => (
   <Sequence from={Math.max(0, Math.round(at))} durationInFrames={45} layout="none">
     <Audio src={ASSET(`sfx/${name}.wav`)} volume={volume} />
@@ -45,12 +31,7 @@ export const Sfx: React.FC<{ at: number; name: "pop" | "whoosh" | "ding" | "stam
 
 // ---- ロゴ（simple-icons の SVG をマスクにして好きな色で塗る） ----
 
-export const Logo: React.FC<{ icon: string; size: number; color: string; style?: React.CSSProperties }> = ({
-  icon,
-  size,
-  color,
-  style,
-}) => {
+export const Logo: React.FC<{ icon: string; size: number; color: string }> = ({ icon, size, color }) => {
   const url = `url(${ASSET(`icons/${icon}.svg`)})`;
   return (
     <div
@@ -66,86 +47,51 @@ export const Logo: React.FC<{ icon: string; size: number; color: string; style?:
         maskRepeat: "no-repeat",
         WebkitMaskPosition: "center",
         maskPosition: "center",
-        ...style,
       }}
     />
   );
 };
 
-// ロゴを白丸に入れたバッジ
-export const LogoBubble: React.FC<{ icon: string; color: string; size: number; filled?: boolean; style?: React.CSSProperties }> = ({
-  icon,
-  color,
-  size,
-  filled,
-  style,
-}) => (
+// 角丸スクエアのアプリアイコン風
+export const AppIcon: React.FC<{ icon: string; color: string; size: number }> = ({ icon, color, size }) => (
   <div
     style={{
       width: size,
       height: size,
-      borderRadius: "50%",
-      background: filled ? color : C.white,
+      borderRadius: size * 0.26,
+      background: color,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      boxShadow: `0 ${size * 0.06}px ${size * 0.18}px rgba(0,0,0,0.35), inset 0 0 0 ${Math.max(3, size * 0.03)}px ${filled ? "rgba(255,255,255,0.35)" : color}`,
-      ...style,
+      boxShadow: `inset 0 -${size * 0.05}px 0 rgba(0,0,0,0.12)`,
+      flexShrink: 0,
     }}
   >
-    <Logo icon={icon} size={size * 0.56} color={filled ? C.white : color} />
+    <Logo icon={icon} size={size * 0.58} color={C.white} />
   </div>
 );
 
 // ---- 文字 ----
 
-// 縁取り付きの見出し文字
-export const Outlined: React.FC<{
-  children: React.ReactNode;
-  size: number;
-  color?: string;
-  stroke?: string;
-  strokeWidth?: number;
-  font?: string;
-  style?: React.CSSProperties;
-}> = ({ children, size, color = C.white, stroke = C.ink, strokeWidth, font = HEAD_FONT, style }) => (
-  <div
-    style={{
-      fontFamily: font,
-      fontWeight: font === BODY_FONT ? 900 : 400,
-      fontSize: size,
-      lineHeight: 1.15,
-      color,
-      WebkitTextStroke: `${strokeWidth ?? Math.round(size * 0.16)}px ${stroke}`,
-      paintOrder: "stroke fill",
-      textAlign: "center",
-      whiteSpace: "pre-line",
-      letterSpacing: "0.02em",
-      ...style,
-    }}
-  >
-    {children}
-  </div>
-);
-
-// 「迷ったらコレ」などのリボン
-export const Chip: React.FC<{ children: React.ReactNode; bg: string; color?: string; size?: number; style?: React.CSSProperties }> = ({
+export const Pill: React.FC<{ children: React.ReactNode; bg: string; color?: string; size?: number; style?: React.CSSProperties }> = ({
   children,
   bg,
   color = C.white,
-  size = 40,
+  size = 36,
   style,
 }) => (
   <div
     style={{
-      display: "inline-block",
+      display: "inline-flex",
+      alignItems: "center",
+      gap: size * 0.3,
       background: bg,
       color,
-      fontFamily: BODY_FONT,
+      fontFamily: FONT,
       fontWeight: 900,
       fontSize: size,
-      padding: `${size * 0.22}px ${size * 0.6}px`,
-      borderRadius: size,
+      padding: `${size * 0.2}px ${size * 0.55}px ${size * 0.26}px`,
+      borderRadius: size * 0.4,
       lineHeight: 1.2,
       whiteSpace: "nowrap",
       ...style,
@@ -155,6 +101,129 @@ export const Chip: React.FC<{ children: React.ReactNode; bg: string; color?: str
   </div>
 );
 
-// 全角1・半角0.55として文字幅を見積もる
-export const textWidth = (s: string) =>
-  [...s].reduce((w, ch) => w + (/[ -~]/.test(ch) ? 0.58 : 1), 0);
+export const Panel: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({ children, style }) => (
+  <div style={{ background: C.white, borderRadius: 28, boxShadow: SHADOW, ...style }}>{children}</div>
+);
+
+// 全角1・半角0.58として文字幅を見積もる
+export const textWidth = (s: string) => [...s].reduce((w, ch) => w + (/[ -~]/.test(ch) ? 0.58 : 1), 0);
+
+// ---- 公式ページのスクリーンショット（枠付き・ズーム・強調枠） ----
+
+type Box = { x: number; y: number; w: number; h: number };
+const SHOT_ASPECT = 1280 / 860;
+
+export const ShotFrame: React.FC<{
+  shot: "chatgpt" | "claude" | "google";
+  focus?: string;
+  width: number;
+  height: number;
+  zoomAt?: number; // ズームを始めるフレーム
+  highlightAt?: number;
+  color?: string;
+  label?: string;
+}> = ({ shot, focus, width, height, zoomAt = 10, highlightAt = 18, color = C.red, label }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const meta = (shots as Record<string, { url: string; boxes: Record<string, Box> }>)[shot];
+  const box = focus ? meta.boxes[focus] : undefined;
+
+  // 表示範囲（画像に対する割合）。最初は横幅いっぱい → 強調するカードへ寄る
+  const aspect = height / width; // 枠の縦横比
+  const fullView = { x: 0, y: 0, w: 1 };
+  let target = fullView;
+  if (box) {
+    const w = Math.min(1, box.w * 2.5);
+    const visH = w * aspect * SHOT_ASPECT; // 表示できる高さ（画像比）
+    const cx = box.x + box.w / 2;
+    const x = Math.min(Math.max(cx - w / 2, 0), 1 - w);
+    // カードの上端が少し下に見える位置
+    const y = Math.min(Math.max(box.y - visH * 0.08, 0), Math.max(0, 1 - visH));
+    target = { x, y, w };
+  }
+  const z = spring({ frame: frame - zoomAt, fps, config: { damping: 200, stiffness: 40 } });
+  const view = {
+    x: interpolate(z, [0, 1], [fullView.x, target.x]),
+    y: interpolate(z, [0, 1], [fullView.y, target.y]),
+    w: interpolate(z, [0, 1], [fullView.w, target.w]),
+  };
+  const imgW = width / view.w;
+  const imgH = imgW / SHOT_ASPECT;
+  const hl = spring({ frame: frame - highlightAt, fps, config: { damping: 14, stiffness: 160 } });
+  const host = meta.url.replace(/^https?:\/\//, "").split("/")[0];
+
+  return (
+    <div
+      style={{
+        width,
+        borderRadius: 22,
+        overflow: "hidden",
+        background: C.white,
+        boxShadow: SHADOW,
+        border: `6px solid ${C.white}`,
+      }}
+    >
+      {/* ブラウザ風のアドレスバー */}
+      <div
+        style={{
+          height: 52,
+          background: "#f1f2f5",
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+          padding: "0 18px",
+          borderBottom: `2px solid ${C.line}`,
+        }}
+      >
+        {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
+          <div key={c} style={{ width: 16, height: 16, borderRadius: 8, background: c }} />
+        ))}
+        <div
+          style={{
+            marginLeft: 14,
+            flex: 1,
+            height: 34,
+            borderRadius: 17,
+            background: C.white,
+            display: "flex",
+            alignItems: "center",
+            padding: "0 18px",
+            fontFamily: FONT,
+            fontWeight: 700,
+            fontSize: 22,
+            color: C.sub,
+          }}
+        >
+          {host}
+        </div>
+        {label ? (
+          <Pill bg={C.brown} size={22}>
+            {label}
+          </Pill>
+        ) : null}
+      </div>
+      <div style={{ position: "relative", width, height: height - 52, overflow: "hidden" }}>
+        <Img
+          src={ASSET(`shots/${shot}.png`)}
+          style={{ position: "absolute", left: -view.x * imgW, top: -view.y * imgH, width: imgW, height: imgH }}
+        />
+        {box ? (
+          <div
+            style={{
+              position: "absolute",
+              left: (box.x - view.x) * imgW - 6,
+              top: (box.y - view.y) * imgH - 6,
+              width: box.w * imgW + 12,
+              height: Math.min(box.h * imgH + 12, height),
+              border: `7px solid ${color}`,
+              borderRadius: 18,
+              opacity: hl,
+              transform: `scale(${1.06 - hl * 0.06})`,
+              boxShadow: `0 0 0 9999px rgba(15,18,28,${0.28 * hl})`,
+            }}
+          />
+        ) : null}
+      </div>
+    </div>
+  );
+};

@@ -1,7 +1,7 @@
 {
   "id": "ai-subscription-short",
   "title": "【2026年11月版】いま契約するべきAIはこれ！目的別3選",
-  "note": "料金は2026年11月時点の目安（税込）。最新は各公式サイトで確認してください",
+  "note": "料金は2026年11月時点の公式ページより",
   "bgm": {
     "file": "picopicodisco.mp3",
     "title": "ピコピコディスコ",
@@ -331,14 +331,16 @@
       "maker": "OpenAI",
       "icon": "openai",
       "color": "#10a37f",
-      "price": "¥3,000",
-      "priceSub": "/月",
+      "price": "$20",
+      "priceSub": "/月（約¥3,000）",
       "badge": "迷ったらコレ",
       "tags": [
         "調べもの",
         "画像生成",
         "音声会話"
-      ]
+      ],
+      "shot": "chatgpt",
+      "focus": "Plus"
     },
     "claude": {
       "rank": 2,
@@ -347,13 +349,15 @@
       "icon": "claude",
       "color": "#d97757",
       "price": "$20",
-      "priceSub": "/月（約3,300円）",
+      "priceSub": "/月（年払いなら $17）",
       "badge": "仕事で書く人に",
       "tags": [
         "長文・資料",
         "自然な日本語",
         "プログラミング"
-      ]
+      ],
+      "shot": "claude",
+      "focus": "Pro"
     },
     "gemini": {
       "rank": 3,
@@ -365,10 +369,12 @@
       "priceSub": "/月",
       "badge": "Googleユーザーに",
       "tags": [
-        "Gmail連携",
-        "大容量ストレージ",
+        "Gmail・ドキュメント連携",
+        "5TBストレージ",
         "動画生成"
-      ]
+      ],
+      "shot": "google",
+      "focus": "Google AI Pro"
     }
   }
 }
