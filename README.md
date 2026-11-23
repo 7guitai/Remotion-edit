@@ -37,6 +37,8 @@ ffmpeg -i out/ai-subscription-short.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA
 
 デザインは参考動画にならい、明るい背景（撮影した公式ページをぼかして敷く）＋白カード＋暗色のテロップ枠＋画面下に小さく立つキャラ。フォントは Noto Sans JP（OFL）。
 
+タイトル案と概要欄は各短編の `src/shorts/<id>/description.txt`。
+
 クレジット（概要欄）: `VOICEVOX:ずんだもん` `VOICEVOX:四国めたん` / 立ち絵: 坂本アヒル（ずんだもん立ち絵素材2.3・四国めたん立ち絵素材2.1）/ BGM: 甘茶の音楽工房「ピコピコディスコ」/ ロゴ: Simple Icons。
 立ち絵は再配布禁止のため Git に含めない。料金は `script.json` に直書きなので、公開前に各公式サイトで最新か確認すること。
 
