@@ -7,24 +7,27 @@ import timing from "./timing.json";
 
 export { FONT, SHADOW, text } from "../common/theme";
 
-// Gemini の「青→紫→ピンク」のグラデーションを主役にした、夜明けのオーロラ配色
+// 白ベース＋薄い緑の、さわやかで落ち着いた配色（ユーザーの希望：白・薄い緑）
+// ※ キー名は以前の配色のまま（blue/purple/pink/sky）だが、中身はすべて緑系
 export const C = {
-  bg: "#efeef9",
-  ice: "#f8f7fd",
-  ink: "#191a33",
-  sub: "#5f6180",
-  line: "#e6e4f2",
+  bg: "#f5faf6",
+  ice: "#ffffff",
+  ink: "#1c2a23",
+  sub: "#5b6d63",
+  line: "#e2eee6",
   white: "#ffffff",
-  deep: "#1b1a38",
-  blue: "#4f7ef0",
-  purple: "#9168f0",
-  pink: "#e46aa6",
-  sky: "#8fd3ff",
+  deep: "#1f3a2f", // テロップ枠・暗色パネル（深い緑）
+  blue: "#43b07c", // 緑
+  purple: "#2e9c62", // メインの緑
+  pink: "#8fd6a8", // 薄い緑（ミント）
+  sky: "#b4f0c9", // 暗色の上での強調（明るい緑）
   red: "#e5484d",
   green: "#2f9e6b",
-  gray: "#8d8fa8",
+  gray: "#8c9a92",
 };
-export const GRAD = `linear-gradient(90deg, ${C.blue}, ${C.purple} 55%, ${C.pink})`;
+// 帯・バー用（明るめ）と、文字用（白背景で読める濃さ）のグラデーション
+export const GRAD = `linear-gradient(90deg, ${C.purple}, ${C.blue} 55%, ${C.pink})`;
+export const GRAD_TEXT = "linear-gradient(90deg, #23885a, #3aa66b)";
 
 export const ASSET = (p: string) => staticFile(`shorts/gemini-mac/${p}`);
 

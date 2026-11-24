@@ -5,19 +5,19 @@ import timing from "./timing.json";
 
 export { FONT, SHADOW, text } from "../common/theme";
 
-// ★ 動画ごとにここの色を変えて、オリジナリティを出す（明るい背景＋白カード＋暗色テロップ枠は共通）
+// ★ 白ベース＋淡い色が基本（ユーザーの好み：白・薄い緑）。動画ごとにアクセント色を変えてオリジナリティを出す
 export const C = {
-  bg: "#e9ecf2", // 背景
-  ice: "#f6f8fb", // 背景グラデーションの上側
-  ink: "#1b2030", // 文字
-  sub: "#5e6678", // 補足文字
-  line: "#e2e6ee", // 区切り線
+  bg: "#f5faf6", // 背景（ほぼ白）
+  ice: "#ffffff", // 背景グラデーションの上側
+  ink: "#1c2a23", // 文字
+  sub: "#5b6d63", // 補足文字
+  line: "#e2eee6", // 区切り線
   white: "#ffffff",
-  deep: "#1c2233", // 暗色パネル・テロップ枠
-  accent: "#e8484f", // 強調色（タイトルの強調・番号など）
-  accent2: "#ffcf4a", // 2つ目の強調色（暗色パネル上の強調）
-  good: "#2f9e5b",
-  gray: "#8c93a4",
+  deep: "#1f3a2f", // 暗色パネル・テロップ枠（真っ黒にしない）
+  accent: "#2e9c62", // 強調色（タイトルの強調・番号など）
+  accent2: "#b4f0c9", // 2つ目の強調色（暗色パネル上の強調）
+  good: "#2f9e6b",
+  gray: "#8c9a92",
 };
 
 export const ASSET = (p: string) => staticFile(`shorts/__ID__/${p}`);

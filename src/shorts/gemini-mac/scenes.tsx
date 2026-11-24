@@ -3,7 +3,7 @@ import { interpolate, OffthreadVideo, useCurrentFrame } from "remotion";
 import { Pill, Sfx, useProgress, useRise, useSpring } from "../common/parts";
 import { ShotFrame } from "../common/ShotFrame";
 import { TimedScene } from "../common/timeline";
-import { ASSET, C, FONT, GRAD, Scene, SHADOW, SHOTS, text } from "./theme";
+import { ASSET, C, GRAD, GRAD_TEXT, Scene, SHADOW, SHOTS, text } from "./theme";
 
 type S = TimedScene<Scene>;
 
@@ -31,7 +31,7 @@ const GradText: React.FC<{ children: React.ReactNode; size: number; style?: Reac
   <span
     style={{
       ...text(size, C.ink),
-      background: GRAD,
+      background: GRAD_TEXT,
       WebkitBackgroundClip: "text",
       backgroundClip: "text",
       color: "transparent",
@@ -171,7 +171,6 @@ export const HookScene: React.FC<{ scene: S }> = ({ scene }) => {
         </Center>
       ) : null}
       <Sfx at={8} name="pop" volume={0.25} />
-      <Sfx at={ansAt + 2} name="whoosh" volume={0.3} />
       <Sfx at={ansAt + 6} name="ding" volume={0.3} />
     </Stage>
   );
@@ -284,7 +283,6 @@ export const NewsScene: React.FC<{ scene: S }> = ({ scene }) => {
           </Card>
         </Center>
       ) : null}
-      <Sfx at={0} name="whoosh" volume={0.3} />
       <Sfx at={nameAt} name="ding" volume={0.3} />
     </Stage>
   );
@@ -321,7 +319,7 @@ const BackgroundWorkMock: React.FC<{ from: number }> = ({ from }) => {
         </div>
       </div>
       {/* Gemini の裏ウィンドウ（ライブプレビュー） */}
-      <div style={{ position: "absolute", left: 620, top: 30, width: 350, height: 470, borderRadius: 16, background: C.deep, padding: 16, boxShadow: "0 10px 30px rgba(27,26,56,0.35)" }}>
+      <div style={{ position: "absolute", left: 620, top: 30, width: 350, height: 470, borderRadius: 16, background: C.deep, padding: 16, boxShadow: "0 10px 30px rgba(31,58,47,0.30)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 14, height: 14, borderRadius: 7, background: frame % 20 < 10 ? C.pink : C.purple }} />
           <div style={text(22, C.white, 700)}>Gemini が作業中</div>
@@ -385,9 +383,7 @@ export const DemoScene: React.FC<{ scene: S }> = ({ scene }) => {
           )}
         </Pill>
       </Center>
-      <Sfx at={0} name="whoosh" volume={0.3} />
       <Sfx at={l1} name="pop" volume={0.25} />
-      <Sfx at={l2} name="whoosh" volume={0.3} />
     </Stage>
   );
 };
@@ -404,7 +400,7 @@ const ICONS: React.ReactNode[] = [
   // タグ
   <svg key="t" width={56} height={56} viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z" fill="none" stroke="#fff" strokeWidth="2" strokeLinejoin="round" /><circle cx="7.5" cy="8.5" r="1.6" fill="#fff" /></svg>,
 ];
-const ICON_BG = [C.blue, C.purple, "#b462d8", C.pink];
+const ICON_BG = [C.blue, C.purple, "#5fbf8f", "#3a8f6a"];
 
 export const ExamplesScene: React.FC<{ scene: S }> = ({ scene }) => {
   const items = scene.examples ?? [];
@@ -579,7 +575,6 @@ export const CaveatScene: React.FC<{ scene: S }> = ({ scene }) => {
           </Pill>
         </div>
       ) : null}
-      <Sfx at={0} name="whoosh" volume={0.3} />
       {REQS.map((_, i) => (
         <Sfx key={i} at={at + 2 + i * 7} name="pop" volume={0.18} />
       ))}
@@ -634,7 +629,6 @@ export const PrepareScene: React.FC<{ scene: S }> = ({ scene }) => {
           );
         })}
       </div>
-      <Sfx at={0} name="whoosh" volume={0.3} />
       {TODO.map((_, i) => (
         <Sfx key={i} at={at + 4 + (span * 0.7 * i) / TODO.length} name="pop" volume={0.22} />
       ))}

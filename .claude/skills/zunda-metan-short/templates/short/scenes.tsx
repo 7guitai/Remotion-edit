@@ -98,7 +98,6 @@ export const PointsScene: React.FC<{ scene: S }> = ({ scene }) => {
           })}
         </Card>
       </Center>
-      <Sfx at={0} name="whoosh" volume={0.3} />
       {items.map((_, i) => (
         <Sfx key={i} at={from + (span * i) / items.length} name="pop" volume={0.22} />
       ))}
@@ -149,7 +148,6 @@ export const CompareScene: React.FC<{ scene: S }> = ({ scene }) => {
           );
         })}
       </Center>
-      <Sfx at={0} name="whoosh" volume={0.3} />
     </Stage>
   );
 };
@@ -176,7 +174,6 @@ export const SummaryScene: React.FC<{ scene: S }> = ({ scene }) => {
           </div>
         </Center>
       ) : null}
-      <Sfx at={0} name="whoosh" volume={0.3} />
       <Sfx at={saveAt + 2} name="ding" volume={0.35} />
     </Stage>
   );

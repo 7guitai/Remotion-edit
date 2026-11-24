@@ -3,7 +3,6 @@ import { AbsoluteFill, Sequence, spring, useCurrentFrame, useVideoConfig } from 
 import { ShortAudio } from "../common/audio";
 import { Character } from "../common/Character";
 import { Subtitle } from "../common/Subtitle";
-import { SceneWipes } from "../common/Transition";
 import envelope from "./envelope.json";
 import { SCENES } from "./scenes";
 import { ASSET, C, FONT, SCRIPT, TIMELINE, TIMING } from "./theme";
@@ -82,8 +81,6 @@ export const __Component__: React.FC = () => (
     <Subtitle lines={TIMELINE.lines} top={1108} background={C.deep} highlight={C.accent2} />
     <Character id="metan" lines={TIMELINE.lines} envelope={envelope as number[][]} />
     <Character id="zundamon" lines={TIMELINE.lines} envelope={envelope as number[][]} />
-    {/* シーンの切り替わりのワイプ */}
-    <SceneWipes starts={TIMELINE.scenes.map((s) => s.from)} colors={[C.accent, C.deep]} />
     {/* セリフ音声＋BGM（BGM は小さめ＋セリフ中はさらに下げる。音声が無いセリフは鳴らさない） */}
     <ShortAudio
       lines={TIMELINE.lines}
