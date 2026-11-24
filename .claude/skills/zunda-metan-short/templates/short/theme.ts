@@ -21,7 +21,6 @@ export const C = {
 };
 
 export const ASSET = (p: string) => staticFile(`shorts/__ID__/${p}`);
-export const BGM_VOLUME = 0.12;
 
 export type Scene = {
   type: "hook" | "points" | "compare" | "summary";

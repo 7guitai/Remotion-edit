@@ -14,14 +14,16 @@ export const Subtitle: React.FC<{
   // 話者名ラベルの形（短編ごとに見た目を変えられる）
   renderName?: (name: string, color: string) => React.ReactNode;
   boxStyle?: React.CSSProperties;
-}> = ({ lines, top = 1100, background = "rgba(27,30,41,0.94)", textColor = "#fff", renderName, boxStyle }) => {
+  // { } で囲んだ強調部分の色
+  highlight?: string;
+}> = ({ lines, top = 1100, background = "rgba(27,30,41,0.94)", textColor = "#fff", renderName, boxStyle, highlight = "#ffd54a" }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const line = lineAt(lines, frame);
   const ch = CHARACTERS[line.who];
   const s = spring({ frame: frame - line.from, fps, config: { damping: 20, stiffness: 260 } });
   const rows = line.text.split("\n");
-  const longest = Math.max(...rows.map(textWidth));
+  const longest = Math.max(...rows.map((r) => textWidth(r.replace(/[{}]/g, ""))));
   const size = Math.min(68, Math.floor(940 / longest));
   return (
     <div style={{ position: "absolute", top, left: 24, width: 1032, zIndex: 5 }}>
@@ -73,7 +75,7 @@ export const Subtitle: React.FC<{
                 whiteSpace: "nowrap",
               }}
             >
-              {r}
+              {renderEmphasis(r, highlight, frame - line.from, fps)}
             </div>
           ))}
         </div>
@@ -81,3 +83,24 @@ export const Subtitle: React.FC<{
     </div>
   );
 };
+
+// "{強調}" を色付きの span にする。強調部分はセリフ頭から少し遅れて「ポン」と大きくなる
+const renderEmphasis = (row: string, color: string, f: number, fps: number) =>
+  row.split(/(\{[^}]*\})/).map((part, i) => {
+    if (!part.startsWith("{")) return <React.Fragment key={i}>{part}</React.Fragment>;
+    const pop = spring({ frame: f - 4 - i, fps, config: { damping: 9, stiffness: 300 } });
+    return (
+      <span
+        key={i}
+        style={{
+          color,
+          display: "inline-block",
+          transform: `scale(${0.8 + pop * 0.2})`,
+          background: `linear-gradient(transparent 70%, ${color}33 70%)`,
+          padding: "0 2px",
+        }}
+      >
+        {part.slice(1, -1)}
+      </span>
+    );
+  });

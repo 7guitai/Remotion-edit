@@ -1,0 +1,47 @@
+{
+ "blog": {
+  "url": "https://blog.google/innovation-and-ai/products/gemini-app/computer-use-mac/",
+  "boxes": {
+   "Let Gemini tackle repetitive chores on your Mac": {
+    "x": 0.20728759765625,
+    "y": 0.06976744186046512,
+    "w": 0.58541259765625,
+    "h": 0.16744186046511628
+   },
+   "Nov 19, 2026": {
+    "x": 0.20728759765625,
+    "y": 0.2651162790697674,
+    "w": 0.0671875,
+    "h": 0.027906976744186046
+   }
+  }
+ },
+ "blog_avail": {
+  "url": "https://blog.google/innovation-and-ai/products/gemini-app/computer-use-mac/",
+  "boxes": {
+   "Computer use is rolling out in English in the U.S.": {
+    "x": 0.2828125,
+    "y": 0.15870276162790697,
+    "w": 0.434375,
+    "h": 0.06046511627906977
+   }
+  }
+ },
+ "blog_req": {
+  "url": "https://blog.google/innovation-and-ai/products/gemini-app/computer-use-mac/",
+  "boxes": {
+   "Computer use is rolling out in English in the U.S.": {
+    "x": 0.2828125,
+    "y": 0.07033066860465116,
+    "w": 0.434375,
+    "h": 0.06046511627906977
+   },
+   "Requires an Apple Silicon Mac": {
+    "x": 0.3203125,
+    "y": 0.4854469476744186,
+    "w": 0.38304443359375,
+    "h": 0.05116279069767442
+   }
+  }
+ }
+}

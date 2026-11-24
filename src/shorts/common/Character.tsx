@@ -89,7 +89,47 @@ export const Character: React.FC<{
   const eyeX = parts.eyeX * scale;
   const left = flip ? x - (width - eyeX) : x - eyeX;
 
+  // 感情マーク（セリフの頭で頭上にポンと出て、少しして消える）
+  const markT = frame - line.from;
+  const markS = spring({ frame: markT - 2, fps, config: { damping: 8, stiffness: 280 } });
+  const markOpacity = markT < 0 ? 0 : markT > line.duration - 6 ? 0 : 1;
+  const headTop = feetY - height - bob + breathe + parts.eyeY * scale * 0.15;
+  const mark = speaking && line.mark ? (
+    <div
+      style={{
+        position: "absolute",
+        left: flip ? x - 150 : x + 60,
+        top: headTop - 30,
+        zIndex: 4,
+        opacity: markOpacity,
+        transform: `scale(${markS}) rotate(${flip ? -12 : 12}deg)`,
+        width: 86,
+        height: 86,
+        borderRadius: 43,
+        background: "#fff",
+        boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "NotoSansJP",
+        fontWeight: 900,
+        fontSize: line.mark === "汗" ? 40 : 56,
+        color: line.mark === "!" ? "#ef3a4f" : line.mark === "?" ? "#2f6fdf" : "#f2a400",
+      }}
+    >
+      {line.mark === "汗" ? (
+        <svg width={46} height={46} viewBox="0 0 24 24">
+          <path d="M12 2C9 7 6 10.5 6 14a6 6 0 0 0 12 0c0-3.5-3-7-6-12z" fill="#3aa0d8" />
+        </svg>
+      ) : (
+        line.mark
+      )}
+    </div>
+  ) : null;
+
   return (
+    <>
+    {mark}
     <div
       style={{
         position: "absolute",
@@ -110,5 +150,6 @@ export const Character: React.FC<{
         />
       ))}
     </div>
+    </>
   );
 };

@@ -16,8 +16,8 @@
       "question": "〇〇、まだ△△してない？",
       "answer": "□□なら一発",
       "lines": [
-        { "who": "metan", "face": "think", "text": "〇〇したいけど\nどれがいいかわからない…", "speech": "〇〇したいけど、どれがいいのかわからない。" },
-        { "who": "zundamon", "face": "happy", "text": "結論、□□で\n解決するのだ！", "speech": "結論、□□で解決するのだ！" }
+        { "who": "metan", "face": "think", "text": "〇〇したいけど\n{どれがいいか}わからない…", "speech": "〇〇したいけど、どれがいいのかわからない。", "mark": "?" },
+        { "who": "zundamon", "face": "happy", "text": "結論、{□□}で\n解決するのだ！", "speech": "結論、□□で解決するのだ！", "mark": "!" }
       ]
     },
     {

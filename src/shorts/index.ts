@@ -4,6 +4,8 @@ import { AiSubscriptionShort } from "./ai-subscription/Short";
 import { TIMELINE as AI_SUBSCRIPTION_TIMELINE } from "./ai-subscription/timeline";
 import { OrcaShort } from "./orca/Short";
 import { TIMELINE as ORCA_TIMELINE } from "./orca/theme";
+import { GeminiMacShort } from "./gemini-mac/Short";
+import { TIMELINE as GEMINI_MAC_TIMELINE } from "./gemini-mac/theme";
 // <new-short-imports>
 
 export type ShortEntry = { id: string; component: React.FC; durationInFrames: number };
@@ -11,5 +13,6 @@ export type ShortEntry = { id: string; component: React.FC; durationInFrames: nu
 export const SHORTS: ShortEntry[] = [
   { id: "ai-subscription-short", component: AiSubscriptionShort, durationInFrames: AI_SUBSCRIPTION_TIMELINE.total },
   { id: "orca-short", component: OrcaShort, durationInFrames: ORCA_TIMELINE.total },
+  { id: "gemini-mac-short", component: GeminiMacShort, durationInFrames: GEMINI_MAC_TIMELINE.total },
   // <new-short-entries>
 ];

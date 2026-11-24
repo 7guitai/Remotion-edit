@@ -16,8 +16,11 @@ export type CharacterId = "zundamon" | "metan";
 export type Line = {
   who: CharacterId;
   face: string;
+  // テロップ。{ } で囲んだ部分は強調色になる（例: "{無料}で使えるのだ"）
   text: string;
   speech?: string;
+  // キャラの頭の上に出す感情マーク
+  mark?: "!" | "?" | "♪" | "汗";
 };
 
 export type TimedLine = Line & {

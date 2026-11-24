@@ -1,0 +1,40 @@
+【タイトル】
+GeminiがMacを自動操作！新機能「computer use」で何ができる？【日本はまだ】
+
+（ほかの候補）
+・AIがMacを勝手に操作してくれる時代に…Gemini「computer use」を1分で解説
+・クリックも入力もAIにお任せ！Mac版Geminiの新機能がすごい【2026年11月】
+
+【概要欄】
+Googleが2026年11月19日に発表した、Mac版Geminiの新機能「computer use」を1分で解説します。
+やりたいことを書くだけで、Geminiが裏のウィンドウでアプリやWebサイトを操作し、クリック・入力・フォーム記入までこなしてくれます。
+
+▼ できること（公式ブログの例）
+・PDFの住所や寸法を読み取って、見積もりフォームに入力
+・デザインアプリで写真をまとめて色補正
+・ダッシュボードの数字からGoogle スライドの資料を作成
+・服の写真から相場を調べて、フリマの出品を下書き
+
+▼ 安全のしくみ
+・Geminiが使えるアプリは自分で選べる
+・作業はライブで見られて、いつでも一時停止できる
+・大事な操作は実行前に承認
+
+▼ 使える条件（2026年11月24日時点）
+・米国・英語のみ（日本ではまだ使えません）
+・Google AI Plus / Pro / Ultra
+・Apple シリコンの Mac（macOS Sequoia 15.0 以降）
+・18歳以上の個人の Google アカウント
+
+▼ 出典
+Google 公式ブログ「Let Gemini tackle repetitive chores on your Mac」（2026/11/19）
+https://blog.google/innovation-and-ai/products/gemini-app/computer-use-mac/
+※動画内のデモ映像・画面は上記の公式ブログより。
+
+▼ クレジット
+VOICEVOX:ずんだもん
+VOICEVOX:四国めたん
+立ち絵：坂本アヒル 様（ずんだもん立ち絵素材2.3／四国めたん立ち絵素材2.1）
+BGM：甘茶の音楽工房「ネオンパープル」
+
+#Gemini #Google #Mac #AIエージェント #生成AI #AIニュース #ずんだもん #Shorts

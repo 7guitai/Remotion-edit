@@ -7,7 +7,8 @@
 | BGM（甘茶の音楽工房） | `python3 scripts/download_short_assets.py <id>`（script.json の `bgm`） | `public/bgm/` | 入れない | 任意（入れる）。Content ID 登録は禁止 |
 | 効果音 | `python3 scripts/make_sfx.py`（自前で合成） | `public/shorts/common/sfx/` | 入れる | 不要 |
 | ロゴ | Simple Icons（CC0）の SVG：`https://cdn.jsdelivr.net/npm/simple-icons@<版>/icons/<名前>.svg`（新しい版で消えたロゴは古い版を探す） | `public/shorts/common/icons/` | 入れる | 任意 |
-| 公式サイトの画面 | Playwright で撮影（`scripts/capture_pricing.js` が例。固定ヘッダーや Cookie バナーは消してから撮る） | `public/shorts/<id>/shots/` | 入れない | 「公式ページより」と明記 |
+| 公式サイトの画面 | `node scripts/capture_page.js <id> <名前> <URL> …`（Playwright。固定ヘッダーや Cookie バナーは消してから撮る。強調位置は `src/shorts/<id>/shots.json`） | `public/shorts/<id>/shots/` | 入れない | 「公式ページより」と明記 |
+| 公式ブログのデモ動画 | ページ内の `<video>` の mp4 を `public/shorts/<id>/media/` に保存（解説・紹介の範囲で、出典を明記） | `public/shorts/<id>/media/` | 入れない | 概要欄に出典 |
 | OSS のデモ素材 | 公式リポジトリの `docs/assets` など（ライセンス確認。animated WebP は `scripts/fetch_orca_assets.py` の方法で mp4 に変換） | `public/shorts/<id>/media/` | 入れない | 概要欄に出典 |
 | フォント | Noto Sans JP（OFL）同梱 | `public/fonts/` | 入れる | 不要 |
 

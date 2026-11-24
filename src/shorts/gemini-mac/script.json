@@ -1,0 +1,94 @@
+{
+  "id": "gemini-mac-short",
+  "title": "GeminiがMacを自動操作！新機能「computer use」を解説",
+  "header": { "kicker": "11月19日発表・Googleの新機能", "title": "AIがMacを操作する時代", "badge": "公式ブログより（2026年11月時点）" },
+  "bgm": {
+    "file": "neonpurple.mp3",
+    "title": "ネオンパープル",
+    "credit": "甘茶の音楽工房",
+    "page": "https://amachamusic.chagasi.com/music_neonpurple.html",
+    "url": "https://amachamusic.chagasi.com/mp3/neonpurple.mp3"
+  },
+  "scenes": [
+    {
+      "type": "hook",
+      "chapter": "つかみ",
+      "lines": [
+        { "who": "metan", "face": "think", "text": "毎日の{同じ作業}\nAIにやってほしくない？", "speech": "毎日の同じ作業、エーアイにやってほしくない？", "mark": "?" },
+        { "who": "zundamon", "face": "happy", "text": "GeminiがMacを\n{代わりに操作}してくれるのだ！", "speech": "ジェミニが、マックを、代わりに操作してくれるのだ！", "mark": "!" }
+      ]
+    },
+    {
+      "type": "pain",
+      "chapter": "悩み",
+      "lines": [
+        { "who": "metan", "face": "think", "text": "PDFを見ながら\nフォームに{打ち込んで}…", "speech": "ピーディーエフを見ながら、フォームに打ち込んで。", "mark": "汗" },
+        { "who": "zundamon", "face": "explain", "text": "そういう{くり返し作業}こそ\nAIに任せたいのだ", "speech": "そういう、くり返し作業こそ、エーアイに任せたいのだ。" }
+      ]
+    },
+    {
+      "type": "news",
+      "chapter": "新機能",
+      "lines": [
+        { "who": "metan", "face": "normal", "text": "それって何の話？", "speech": "それって、何の話？" },
+        { "who": "zundamon", "face": "explain", "text": "GoogleがMac版Geminiに\n{computer use}を追加したのだ", "speech": "グーグルが、マック版ジェミニに、コンピューターユースを追加したのだ。" }
+      ]
+    },
+    {
+      "type": "demo",
+      "chapter": "使い方",
+      "lines": [
+        { "who": "zundamon", "face": "explain", "text": "やりたいことを書いて\n{@Computer use}を付けるだけなのだ", "speech": "やりたいことを書いて、アットコンピューターユースを付けるだけなのだ。" },
+        { "who": "zundamon", "face": "happy", "text": "クリックも入力も\nアプリの操作も{自動}なのだ", "speech": "クリックも、入力も、アプリの操作も、自動なのだ。" },
+        { "who": "metan", "face": "think", "text": "その間\nMacは{使えなくなる}の？", "speech": "その間、マックは使えなくなるの？", "mark": "?" },
+        { "who": "zundamon", "face": "happy", "text": "{裏のウィンドウ}で動くから\n自分の作業は止まらないのだ", "speech": "裏のウィンドウで動くから、自分の作業は止まらないのだ。" }
+      ]
+    },
+    {
+      "type": "examples",
+      "chapter": "できること",
+      "examples": [
+        { "title": "フォーム入力", "body": "PDFの住所や寸法を\n見積もりフォームへ" },
+        { "title": "写真の一括補正", "body": "デザインアプリで\nまとめて色調整" },
+        { "title": "資料づくり", "body": "ダッシュボードの数字から\nGoogle スライドを作成" },
+        { "title": "出品の下準備", "body": "服の写真から相場を調べ\nフリマに下書き" }
+      ],
+      "lines": [
+        { "who": "zundamon", "face": "explain", "text": "PDFから{フォーム入力}や\n写真の{一括補正}もできるのだ", "speech": "ピーディーエフからフォーム入力や、写真の一括補正もできるのだ。" },
+        { "who": "metan", "face": "happy", "text": "{スライド作り}まで\nやってくれるのね", "speech": "スライド作りまで、やってくれるのね。", "mark": "♪" }
+      ]
+    },
+    {
+      "type": "safety",
+      "chapter": "安全性",
+      "lines": [
+        { "who": "metan", "face": "think", "text": "勝手に変なことされたら\n{怖い}わ", "speech": "勝手に変なことされたら、怖いわ。", "mark": "汗" },
+        { "who": "zundamon", "face": "explain", "text": "使うアプリは{自分で選べて}\n大事な操作は{承認制}なのだ", "speech": "使うアプリは自分で選べて、大事な操作は承認制なのだ。" }
+      ]
+    },
+    {
+      "type": "caveat",
+      "chapter": "注意点",
+      "lines": [
+        { "who": "metan", "face": "normal", "text": "日本でも\nもう使えるの？", "speech": "日本でも、もう使えるの？", "mark": "?" },
+        { "who": "zundamon", "face": "explain", "text": "今は{米国・英語のみ}\nしかも{有料プラン}限定なのだ", "speech": "今は、米国の英語版だけ。しかも、有料プラン限定なのだ。", "mark": "汗" }
+      ]
+    },
+    {
+      "type": "prepare",
+      "chapter": "今やること",
+      "lines": [
+        { "who": "metan", "face": "think", "text": "じゃあ今は\n待つしかないのね", "speech": "じゃあ、今は待つしかないのね。" },
+        { "who": "zundamon", "face": "explain", "text": "日本に来たらすぐ使えるよう\n{対応Macか}確認しておくのだ", "speech": "日本に来たらすぐ使えるよう、対応マックか、確認しておくのだ。" }
+      ]
+    },
+    {
+      "type": "summary",
+      "chapter": "まとめ",
+      "lines": [
+        { "who": "metan", "face": "happy", "text": "AIがパソコンを操作する時代\nもう来てるのね", "speech": "エーアイがパソコンを操作する時代、もう来てるのね。" },
+        { "who": "zundamon", "face": "happy", "text": "保存して\n{続報}を待つのだ！", "speech": "保存して、続報を待つのだ！", "mark": "!" }
+      ]
+    }
+  ]
+}
